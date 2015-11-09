@@ -1262,12 +1262,11 @@
 
 <span class="sd">    - slicing not implemented</span>
 
-<span class="sd">    - :attr:`time` will not necessarily return the true time but just</span>
-<span class="sd">      number of frames times a provided time between frames (from the</span>
-<span class="sd">      keyword *delta*)</span>
-
 <span class="sd">    .. versionchanged:: 0.11.0</span>
 <span class="sd">       Frames now 0-based instead of 1-based</span>
+<span class="sd">    .. versionchanged:: 0.13.0</span>
+<span class="sd">       :attr:`time` now reports the time summed over each trajectory&#39;s</span>
+<span class="sd">       frames and individual :attr:`dt`. </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">format</span> <span class="o">=</span> <span class="s">&#39;CHAIN&#39;</span>
 
@@ -1290,11 +1289,13 @@
 <span class="sd">               skip step (also passed on to the individual trajectory</span>
 <span class="sd">               readers); must be same for all trajectories</span>
 
-<span class="sd">           *delta*</span>
-<span class="sd">               The time between frames in MDAnalysis time units if no</span>
-<span class="sd">               other information is available. If this is not set then</span>
-<span class="sd">               any call to :attr:`~ChainReader.time` will raise a</span>
-<span class="sd">               :exc:`ValueError`.</span>
+<span class="sd">           *dt*</span>
+<span class="sd">               Passed to individual trajectory readers to enforce a common</span>
+<span class="sd">               time difference between frames, in MDAnalysis time units. If</span>
+<span class="sd">               not set, each reader&#39;s *dt* will be used (either inferred from</span>
+<span class="sd">               the trajectory files, or set to the reader&#39;s default) when</span>
+<span class="sd">               reporting frame times; note that this might mean an inconstant</span>
+<span class="sd">               time difference between frames.</span>
 
 <span class="sd">           *kwargs*</span>
 <span class="sd">               all other keyword arguments are passed on to each</span>
@@ -1302,13 +1303,24 @@
 
 <span class="sd">        .. versionchanged:: 0.8</span>
 <span class="sd">           The *delta* keyword was added.</span>
+<span class="sd">        .. versionchanged:: 0.13</span>
+<span class="sd">           The *delta* keyword was deprecated in favor of using *dt*.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s">&#39;delta&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&quot;Keyword &#39;delta&#39; is now deprecated &quot;</span>
+                          <span class="s">&quot;(from version 0.13); &quot;</span>
+                          <span class="s">&quot;use &#39;dt&#39; instead&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+            <span class="n">delta</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;delta&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s">&#39;dt&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;dt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">delta</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">filenames</span> <span class="o">=</span> <span class="n">asiterable</span><span class="p">(</span><span class="n">filenames</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">readers</span> <span class="o">=</span> <span class="p">[</span><span class="n">core</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">filenames</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__active_reader_index</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c"># pointer to &quot;active&quot; trajectory index into self.readers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">readers</span> <span class="o">=</span> <span class="p">[</span><span class="n">core</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">filenames</span><span class="p">]</span>
+        <span class="c"># pointer to &quot;active&quot; trajectory index into self.readers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__active_reader_index</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">skip</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;skip&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_default_delta</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;delta&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_atoms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_same</span><span class="p">(</span><span class="s">&#39;n_atoms&#39;</span><span class="p">)</span>
         <span class="c">#self.fixed = self._get_same(&#39;fixed&#39;)</span>
 
@@ -1332,6 +1344,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__start_frames</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">([</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">n_frames</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">n_frames</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s">&#39;dt&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">total_times</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dts</span> <span class="o">*</span> <span class="n">n_frames</span>
 
         <span class="c">#: source for trajectories frame (fakes trajectory)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__chained_trajectories_iter</span> <span class="o">=</span> <span class="bp">None</span>
@@ -1419,11 +1433,12 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">time</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Cumulative time of the current frame in MDAnalysis time units (typically ps).&quot;&quot;&quot;</span>
-        <span class="c"># currently a hack, should really use a list of trajectory lengths and delta * local_frame</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">frame</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_default_delta</span>
-        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;No timestep information available. Set delta to fake a constant time step.&quot;</span><span class="p">)</span>
+        <span class="c"># Before 0.13 we had to distinguish between enforcing a common dt or</span>
+        <span class="c">#  summing over each reader&#39;s times.</span>
+        <span class="c"># Now each reader is either already instantiated with a common dt, or</span>
+        <span class="c">#  left at its default dt. In any case, we sum over individual times.</span>
+        <span class="n">trajindex</span><span class="p">,</span> <span class="n">subframe</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_local_frame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frame</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_times</span><span class="p">[:</span><span class="n">trajindex</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">subframe</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dts</span><span class="p">[</span><span class="n">trajindex</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Execute *method* with *kwargs* for all readers.&quot;&quot;&quot;</span>

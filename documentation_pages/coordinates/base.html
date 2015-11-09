@@ -648,12 +648,13 @@ the first trajectory in the list; <code class="xref py py-attr docutils literal"
 <code class="xref py py-attr docutils literal"><span class="pre">ChainReader.n_atoms</span></code>, and <code class="xref py py-attr docutils literal"><span class="pre">ChainReader.fixed</span></code> are
 properly set, though</li>
 <li>slicing not implemented</li>
-<li><a class="reference internal" href="#MDAnalysis.coordinates.base.ChainReader.time" title="MDAnalysis.coordinates.base.ChainReader.time"><code class="xref py py-attr docutils literal"><span class="pre">time</span></code></a> will not necessarily return the true time but just
-number of frames times a provided time between frames (from the
-keyword <em>delta</em>)</li>
 </ul>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Frames now 0-based instead of 1-based</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.13.0: </span><a class="reference internal" href="#MDAnalysis.coordinates.base.ChainReader.time" title="MDAnalysis.coordinates.base.ChainReader.time"><code class="xref py py-attr docutils literal"><span class="pre">time</span></code></a> now reports the time summed over each trajectory&#8217;s
+frames and individual <code class="xref py py-attr docutils literal"><span class="pre">dt</span></code>.</p>
 </div>
 <p>Set up the chain reader.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -672,10 +673,12 @@ format or (filename,format) tuple combination</p>
 </li>
 <li><strong>*skip*</strong> &#8211; skip step (also passed on to the individual trajectory
 readers); must be same for all trajectories</li>
-<li><strong>*delta*</strong> &#8211; The time between frames in MDAnalysis time units if no
-other information is available. If this is not set then
-any call to <a class="reference internal" href="#MDAnalysis.coordinates.base.ChainReader.time" title="MDAnalysis.coordinates.base.ChainReader.time"><code class="xref py py-attr docutils literal"><span class="pre">time</span></code></a> will raise a
-<code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code>.</li>
+<li><strong>*dt*</strong> &#8211; Passed to individual trajectory readers to enforce a common
+time difference between frames, in MDAnalysis time units. If
+not set, each reader&#8217;s <em>dt</em> will be used (either inferred from
+the trajectory files, or set to the reader&#8217;s default) when
+reporting frame times; note that this might mean an inconstant
+time difference between frames.</li>
 <li><strong>*kwargs*</strong> &#8211; all other keyword arguments are passed on to each
 trajectory reader unchanged</li>
 </ul>
@@ -685,6 +688,9 @@ trajectory reader unchanged</li>
 </table>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.8: </span>The <em>delta</em> keyword was added.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.13: </span>The <em>delta</em> keyword was deprecated in favor of using <em>dt</em>.</p>
 </div>
 <dl class="method">
 <dt id="MDAnalysis.coordinates.base.ChainReader.__iter__">
