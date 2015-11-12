@@ -105,9 +105,36 @@
 <p>Fast C-routines to calculate distance arrays from coordinate arrays.</p>
 <div class="section" id="functions">
 <h2>9.1.1. Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<p>All functions take the optional keyword <em>backend</em>, which determines
+the type of acceleration. Currently, the following choices are
+implemented (<em>backend</em> is case-insensitive):</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="33%" />
+<col width="53%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><em>backend</em></th>
+<th class="head">module</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>&#8220;serial&#8221;</td>
+<td><code class="xref py py-mod docutils literal"><span class="pre">_distances</span></code></td>
+<td>serial implementation in C/Cython</td>
+</tr>
+<tr class="row-odd"><td>&#8220;OpenMP&#8221;</td>
+<td><code class="xref py py-mod docutils literal"><span class="pre">_distances_openmp</span></code></td>
+<td>parallel implementation in C/Cython
+with OpenMP</td>
+</tr>
+</tbody>
+</table>
 <dl class="function">
 <dt id="MDAnalysis.lib.distances.distance_array">
-<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">distance_array</code><span class="sig-paren">(</span><em>reference</em>, <em>configuation</em><span class="optional">[</span>, <em>box</em><span class="optional">[</span>, <em>result</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#distance_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.distances.distance_array" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">distance_array</code><span class="sig-paren">(</span><em>reference</em>, <em>configuration</em><span class="optional">[</span>, <em>box</em><span class="optional">[</span>, <em>result</em><span class="optional">[</span>, <em>backend</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#distance_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.distances.distance_array" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate all distances between a reference set and another configuration.</p>
 <p>If there are <em>i</em> positions in reference, and <em>j</em> positions in configuration,
 will calculate a <em>i</em> x <em>j</em> array of distances
@@ -133,6 +160,8 @@ by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coord
 shape (len(ref), len(conf)) and dtype=numpy.float64.
 Avoids creating the array which saves time when the function
 is called repeatedly. [<code class="docutils literal"><span class="pre">None</span></code>]</li>
+<li><strong>*backend*</strong> &#8211; select the type of acceleration; &#8220;serial&#8221; is always available. Other
+possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
@@ -152,7 +181,7 @@ make copies of the ref and conf arrays.</p>
 
 <dl class="function">
 <dt id="MDAnalysis.lib.distances.self_distance_array">
-<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">self_distance_array</code><span class="sig-paren">(</span><em>reference</em><span class="optional">[</span>, <em>box</em><span class="optional">[</span>, <em>result</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#self_distance_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.distances.self_distance_array" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">self_distance_array</code><span class="sig-paren">(</span><em>reference</em><span class="optional">[</span>, <em>box</em><span class="optional">[</span>, <em>result</em><span class="optional">[</span>, <em>backend</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#self_distance_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.distances.self_distance_array" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate all distances within a configuration <em>reference</em>.</p>
 <p>If a <em>box</em> is supplied then a minimum image convention is used before
 calculating distances.</p>
@@ -174,6 +203,8 @@ by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coord
 (N*(N-1)/2,) and dtype <code class="docutils literal"><span class="pre">numpy.float64</span></code>. Avoids creating
 the array which saves time when the function is called
 repeatedly. [<code class="docutils literal"><span class="pre">None</span></code>]</li>
+<li><strong>*backend*</strong> &#8211; select the type of acceleration; &#8220;serial&#8221; is always available. Other
+possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
@@ -200,7 +231,7 @@ make copies of the coordinate arrays.</p>
 
 <dl class="function">
 <dt id="MDAnalysis.lib.distances.calc_bonds">
-<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">calc_bonds</code><span class="sig-paren">(</span><em>atom1</em>, <em>atom2</em><span class="optional">[</span>, <em>box</em><span class="optional">[</span>, <em>result</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#calc_bonds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.distances.calc_bonds" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">calc_bonds</code><span class="sig-paren">(</span><em>atom1</em>, <em>atom2</em><span class="optional">[</span>, <em>box</em><span class="optional">[</span>, <em>result</em><span class="optional">[</span>, <em>backend</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#calc_bonds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.distances.calc_bonds" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate all distances between a pair of atoms.  <em>atom1</em> and <em>atom2</em> are both
 arrays of coordinates, where atom1[i] and atom2[i] represent a bond.</p>
 <p>In comparison to distance_array and self_distance_array which calculate distances
@@ -229,6 +260,8 @@ by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coord
 <li><strong>*result*</strong> &#8211; optional preallocated result array which must be same length as coord
 arrays and dtype=numpy.float64. Avoids creating the
 array which saves time when the function is called repeatedly. [None]</li>
+<li><strong>*backend*</strong> &#8211; select the type of acceleration; &#8220;serial&#8221; is always available. Other
+possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
@@ -245,7 +278,7 @@ numpy array with the length between each pair in coords1 and coords2</p>
 
 <dl class="function">
 <dt id="MDAnalysis.lib.distances.calc_angles">
-<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">calc_angles</code><span class="sig-paren">(</span><em>atom1</em>, <em>atom2</em>, <em>atom3</em><span class="optional">[</span>, <em>box</em><span class="optional">[</span>, <em>result</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#calc_angles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.distances.calc_angles" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">calc_angles</code><span class="sig-paren">(</span><em>atom1</em>, <em>atom2</em>, <em>atom3</em><span class="optional">[</span>, <em>box</em><span class="optional">[</span>, <em>result</em><span class="optional">[</span>, <em>backend</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#calc_angles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.distances.calc_angles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the angle formed between three atoms, over a list of coordinates.
 All <em>atom</em> inputs are lists of coordinates of equal length, with <em>atom2</em>
 representing the apex of the angle.</p>
@@ -272,6 +305,8 @@ by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coord
 [lx, ly, lz, alpha, beta, gamma]</li>
 <li><strong>*result*</strong> &#8211; optional preallocated results array which must have same length as coordinate
 array and dtype=numpy.float64.</li>
+<li><strong>*backend*</strong> &#8211; select the type of acceleration; &#8220;serial&#8221; is always available. Other
+possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
@@ -291,7 +326,7 @@ A numpy.array of angles in radians</p>
 
 <dl class="function">
 <dt id="MDAnalysis.lib.distances.calc_dihedrals">
-<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">calc_dihedrals</code><span class="sig-paren">(</span><em>atom1</em>, <em>atom2</em>, <em>atom3</em>, <em>atom4</em><span class="optional">[</span>, <em>box</em><span class="optional">[</span>, <em>result</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#calc_dihedrals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.distances.calc_dihedrals" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">calc_dihedrals</code><span class="sig-paren">(</span><em>atom1</em>, <em>atom2</em>, <em>atom3</em>, <em>atom4</em><span class="optional">[</span>, <em>box</em><span class="optional">[</span>, <em>result</em><span class="optional">[</span>, <em>backend</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#calc_dihedrals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.distances.calc_dihedrals" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the dihedral angle formed by four atoms, over a list of coordinates.</p>
 <p>Dihedral angle around axis connecting atoms 1 and 2 (i.e. the angle
 between the planes spanned by atoms (0,1,2) and (1,2,3)):</p>
@@ -307,8 +342,10 @@ provided in <em>result</em> then this preallocated array is filled. This can spe
 up calculations.</p>
 <p>The optional argument <code class="docutils literal"><span class="pre">box</span></code> ensures that periodic boundaries are taken into
 account when constructing the connecting vectors between atoms, ie that the vector
-between atoms 1 &amp; 2 goes between coordinates in the same image.</p>
-<p>angles = calc_dihedrals(coords1, coords2, coords3, coords4 [,box=box, result=angles])</p>
+between atoms 1 &amp; 2 goes between coordinates in the same image:</p>
+<div class="highlight-python"><div class="highlight"><pre>angles = calc_dihedrals(coords1, coords2, coords3, coords4 [,box=box, result=angles])
+</pre></div>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -326,6 +363,8 @@ by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coord
 [lx, ly, lz, alpha, beta, gamma]</li>
 <li><strong>*result*</strong> &#8211; optional preallocated results array which must have same length as
 coordinate array and dtype=numpy.float64.</li>
+<li><strong>*backend*</strong> &#8211; select the type of acceleration; &#8220;serial&#8221; is always available. Other
+possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
@@ -348,7 +387,7 @@ A numpy.array of angles in radians</p>
 
 <dl class="function">
 <dt id="MDAnalysis.lib.distances.apply_PBC">
-<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">apply_PBC</code><span class="sig-paren">(</span><em>coordinates</em>, <em>box</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#apply_PBC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.distances.apply_PBC" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">apply_PBC</code><span class="sig-paren">(</span><em>coordinates</em>, <em>box</em><span class="optional">[</span>, <em>backend</em><span class="optional">]</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#apply_PBC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.distances.apply_PBC" title="Permalink to this definition">¶</a></dt>
 <dd><p>Moves a set of coordinates to all be within the primary unit cell</p>
 <p>newcoords = apply_PBC(coords, box)</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -361,6 +400,8 @@ A numpy.array of angles in radians</p>
 Cell dimensions must be in an identical to format to those returned
 by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>,
 [lx, ly, lz, alpha, beta, gamma]</li>
+<li><strong>*backend*</strong> &#8211; select the type of acceleration; &#8220;serial&#8221; is always available. Other
+possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
@@ -378,7 +419,7 @@ as defined by box</p>
 
 <dl class="function">
 <dt id="MDAnalysis.lib.distances.transform_RtoS">
-<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">transform_RtoS</code><span class="sig-paren">(</span><em>coordinates</em>, <em>box</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#transform_RtoS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.distances.transform_RtoS" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">transform_RtoS</code><span class="sig-paren">(</span><em>coordinates</em>, <em>box</em><span class="optional">[</span>, <em>backend</em><span class="optional">]</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#transform_RtoS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.distances.transform_RtoS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform an array of coordinates from real space to S space (aka lambda space)</p>
 <p>S space represents fractional space within the unit cell for this system</p>
 <p>Reciprocal operation to <a class="reference internal" href="#MDAnalysis.lib.distances.transform_StoR" title="MDAnalysis.lib.distances.transform_StoR"><code class="xref py py-meth docutils literal"><span class="pre">transform_StoR()</span></code></a></p>
@@ -392,6 +433,8 @@ as defined by box</p>
 Cell dimensions must be in an identical to format to those returned
 by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>,
 [lx, ly, lz, alpha, beta, gamma]</li>
+<li><strong>*backend*</strong> &#8211; select the type of acceleration; &#8220;serial&#8221; is always available. Other
+possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
@@ -405,7 +448,7 @@ An n x 3 array of fractional coordiantes</p>
 
 <dl class="function">
 <dt id="MDAnalysis.lib.distances.transform_StoR">
-<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">transform_StoR</code><span class="sig-paren">(</span><em>coordinates</em>, <em>box</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#transform_StoR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.distances.transform_StoR" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">transform_StoR</code><span class="sig-paren">(</span><em>coordinates</em>, <em>box</em><span class="optional">[</span>, <em>backend</em><span class="optional">]</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#transform_StoR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.distances.transform_StoR" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform an array of coordinates from S space into real space.</p>
 <p>S space represents fractional space within the unit cell for this system</p>
 <p>Reciprocal operation to <a class="reference internal" href="#MDAnalysis.lib.distances.transform_RtoS" title="MDAnalysis.lib.distances.transform_RtoS"><code class="xref py py-meth docutils literal"><span class="pre">transform_RtoS()</span></code></a></p>
@@ -419,6 +462,8 @@ An n x 3 array of fractional coordiantes</p>
 Cell dimensions must be in an identical to format to those returned
 by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>,
 [lx, ly, lz, alpha, beta, gamma]</li>
+<li><strong>*backend*</strong> &#8211; select the type of acceleration; &#8220;serial&#8221; is always available. Other
+possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
@@ -432,7 +477,7 @@ An n x 3 array of fracional coordiantes</p>
 
 <dl class="function">
 <dt>
-<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">apply_PBC</code><span class="sig-paren">(</span><em>incoords</em>, <em>box</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#apply_PBC"><span class="viewcode-link">[source]</span></a></dt>
+<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">apply_PBC</code><span class="sig-paren">(</span><em>incoords</em>, <em>box</em>, <em>backend='serial'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#apply_PBC"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Moves a set of coordinates to all be within the primary unit cell</p>
 <p>newcoords = apply_PBC(coords, box)</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -445,6 +490,8 @@ An n x 3 array of fracional coordiantes</p>
 Cell dimensions must be in an identical to format to those returned
 by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>,
 [lx, ly, lz, alpha, beta, gamma]</li>
+<li><strong>*backend*</strong> &#8211; select the type of acceleration; &#8220;serial&#8221; is always available. Other
+possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
@@ -462,7 +509,7 @@ as defined by box</p>
 
 <dl class="function">
 <dt>
-<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">calc_angles</code><span class="sig-paren">(</span><em>coords1</em>, <em>coords2</em>, <em>coords3</em>, <em>box=None</em>, <em>result=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#calc_angles"><span class="viewcode-link">[source]</span></a></dt>
+<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">calc_angles</code><span class="sig-paren">(</span><em>coords1</em>, <em>coords2</em>, <em>coords3</em>, <em>box=None</em>, <em>result=None</em>, <em>backend='serial'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#calc_angles"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Calculates the angle formed between three atoms, over a list of coordinates.
 All <em>atom</em> inputs are lists of coordinates of equal length, with <em>atom2</em>
 representing the apex of the angle.</p>
@@ -489,6 +536,8 @@ by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coord
 [lx, ly, lz, alpha, beta, gamma]</li>
 <li><strong>*result*</strong> &#8211; optional preallocated results array which must have same length as coordinate
 array and dtype=numpy.float64.</li>
+<li><strong>*backend*</strong> &#8211; select the type of acceleration; &#8220;serial&#8221; is always available. Other
+possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
@@ -508,7 +557,7 @@ A numpy.array of angles in radians</p>
 
 <dl class="function">
 <dt>
-<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">calc_bonds</code><span class="sig-paren">(</span><em>coords1</em>, <em>coords2</em>, <em>box=None</em>, <em>result=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#calc_bonds"><span class="viewcode-link">[source]</span></a></dt>
+<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">calc_bonds</code><span class="sig-paren">(</span><em>coords1</em>, <em>coords2</em>, <em>box=None</em>, <em>result=None</em>, <em>backend='serial'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#calc_bonds"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Calculate all distances between a pair of atoms.  <em>atom1</em> and <em>atom2</em> are both
 arrays of coordinates, where atom1[i] and atom2[i] represent a bond.</p>
 <p>In comparison to distance_array and self_distance_array which calculate distances
@@ -537,6 +586,8 @@ by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coord
 <li><strong>*result*</strong> &#8211; optional preallocated result array which must be same length as coord
 arrays and dtype=numpy.float64. Avoids creating the
 array which saves time when the function is called repeatedly. [None]</li>
+<li><strong>*backend*</strong> &#8211; select the type of acceleration; &#8220;serial&#8221; is always available. Other
+possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
@@ -553,7 +604,7 @@ numpy array with the length between each pair in coords1 and coords2</p>
 
 <dl class="function">
 <dt>
-<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">calc_dihedrals</code><span class="sig-paren">(</span><em>coords1</em>, <em>coords2</em>, <em>coords3</em>, <em>coords4</em>, <em>box=None</em>, <em>result=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#calc_dihedrals"><span class="viewcode-link">[source]</span></a></dt>
+<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">calc_dihedrals</code><span class="sig-paren">(</span><em>coords1</em>, <em>coords2</em>, <em>coords3</em>, <em>coords4</em>, <em>box=None</em>, <em>result=None</em>, <em>backend='serial'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#calc_dihedrals"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Calculate the dihedral angle formed by four atoms, over a list of coordinates.</p>
 <p>Dihedral angle around axis connecting atoms 1 and 2 (i.e. the angle
 between the planes spanned by atoms (0,1,2) and (1,2,3)):</p>
@@ -569,8 +620,10 @@ provided in <em>result</em> then this preallocated array is filled. This can spe
 up calculations.</p>
 <p>The optional argument <code class="docutils literal"><span class="pre">box</span></code> ensures that periodic boundaries are taken into
 account when constructing the connecting vectors between atoms, ie that the vector
-between atoms 1 &amp; 2 goes between coordinates in the same image.</p>
-<p>angles = calc_dihedrals(coords1, coords2, coords3, coords4 [,box=box, result=angles])</p>
+between atoms 1 &amp; 2 goes between coordinates in the same image:</p>
+<div class="highlight-python"><div class="highlight"><pre>angles = calc_dihedrals(coords1, coords2, coords3, coords4 [,box=box, result=angles])
+</pre></div>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -588,6 +641,8 @@ by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coord
 [lx, ly, lz, alpha, beta, gamma]</li>
 <li><strong>*result*</strong> &#8211; optional preallocated results array which must have same length as
 coordinate array and dtype=numpy.float64.</li>
+<li><strong>*backend*</strong> &#8211; select the type of acceleration; &#8220;serial&#8221; is always available. Other
+possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
@@ -610,7 +665,7 @@ A numpy.array of angles in radians</p>
 
 <dl class="function">
 <dt>
-<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">distance_array</code><span class="sig-paren">(</span><em>reference</em>, <em>configuration</em>, <em>box=None</em>, <em>result=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#distance_array"><span class="viewcode-link">[source]</span></a></dt>
+<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">distance_array</code><span class="sig-paren">(</span><em>reference</em>, <em>configuration</em>, <em>box=None</em>, <em>result=None</em>, <em>backend='serial'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#distance_array"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Calculate all distances between a reference set and another configuration.</p>
 <p>If there are <em>i</em> positions in reference, and <em>j</em> positions in configuration,
 will calculate a <em>i</em> x <em>j</em> array of distances
@@ -636,6 +691,8 @@ by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coord
 shape (len(ref), len(conf)) and dtype=numpy.float64.
 Avoids creating the array which saves time when the function
 is called repeatedly. [<code class="docutils literal"><span class="pre">None</span></code>]</li>
+<li><strong>*backend*</strong> &#8211; select the type of acceleration; &#8220;serial&#8221; is always available. Other
+possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
@@ -655,7 +712,7 @@ make copies of the ref and conf arrays.</p>
 
 <dl class="function">
 <dt>
-<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">self_distance_array</code><span class="sig-paren">(</span><em>reference</em>, <em>box=None</em>, <em>result=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#self_distance_array"><span class="viewcode-link">[source]</span></a></dt>
+<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">self_distance_array</code><span class="sig-paren">(</span><em>reference</em>, <em>box=None</em>, <em>result=None</em>, <em>backend='serial'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#self_distance_array"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Calculate all distances within a configuration <em>reference</em>.</p>
 <p>If a <em>box</em> is supplied then a minimum image convention is used before
 calculating distances.</p>
@@ -677,6 +734,8 @@ by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coord
 (N*(N-1)/2,) and dtype <code class="docutils literal"><span class="pre">numpy.float64</span></code>. Avoids creating
 the array which saves time when the function is called
 repeatedly. [<code class="docutils literal"><span class="pre">None</span></code>]</li>
+<li><strong>*backend*</strong> &#8211; select the type of acceleration; &#8220;serial&#8221; is always available. Other
+possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
@@ -703,7 +762,7 @@ make copies of the coordinate arrays.</p>
 
 <dl class="function">
 <dt>
-<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">transform_RtoS</code><span class="sig-paren">(</span><em>inputcoords</em>, <em>box</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#transform_RtoS"><span class="viewcode-link">[source]</span></a></dt>
+<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">transform_RtoS</code><span class="sig-paren">(</span><em>inputcoords</em>, <em>box</em>, <em>backend='serial'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#transform_RtoS"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Transform an array of coordinates from real space to S space (aka lambda space)</p>
 <p>S space represents fractional space within the unit cell for this system</p>
 <p>Reciprocal operation to <a class="reference internal" href="#MDAnalysis.lib.distances.transform_StoR" title="MDAnalysis.lib.distances.transform_StoR"><code class="xref py py-meth docutils literal"><span class="pre">transform_StoR()</span></code></a></p>
@@ -717,6 +776,8 @@ make copies of the coordinate arrays.</p>
 Cell dimensions must be in an identical to format to those returned
 by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>,
 [lx, ly, lz, alpha, beta, gamma]</li>
+<li><strong>*backend*</strong> &#8211; select the type of acceleration; &#8220;serial&#8221; is always available. Other
+possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
@@ -730,7 +791,7 @@ An n x 3 array of fractional coordiantes</p>
 
 <dl class="function">
 <dt>
-<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">transform_StoR</code><span class="sig-paren">(</span><em>inputcoords</em>, <em>box</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#transform_StoR"><span class="viewcode-link">[source]</span></a></dt>
+<code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">transform_StoR</code><span class="sig-paren">(</span><em>inputcoords</em>, <em>box</em>, <em>backend='serial'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#transform_StoR"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Transform an array of coordinates from S space into real space.</p>
 <p>S space represents fractional space within the unit cell for this system</p>
 <p>Reciprocal operation to <a class="reference internal" href="#MDAnalysis.lib.distances.transform_RtoS" title="MDAnalysis.lib.distances.transform_RtoS"><code class="xref py py-meth docutils literal"><span class="pre">transform_RtoS()</span></code></a></p>
@@ -744,6 +805,8 @@ An n x 3 array of fractional coordiantes</p>
 Cell dimensions must be in an identical to format to those returned
 by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.dimensions" title="MDAnalysis.coordinates.base.Timestep.dimensions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.dimensions</span></code></a>,
 [lx, ly, lz, alpha, beta, gamma]</li>
+<li><strong>*backend*</strong> &#8211; select the type of acceleration; &#8220;serial&#8221; is always available. Other
+possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>

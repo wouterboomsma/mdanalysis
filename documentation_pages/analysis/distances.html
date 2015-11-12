@@ -104,7 +104,7 @@ have to be from the same <a class="reference internal" href="../core/AtomGroup.h
 </div>
 <dl class="function">
 <dt id="MDAnalysis.analysis.distances.distance_array">
-<code class="descclassname">MDAnalysis.analysis.distances.</code><code class="descname">distance_array</code><span class="sig-paren">(</span><em>reference</em>, <em>configuration</em>, <em>box=None</em>, <em>result=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#distance_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.distances.distance_array" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">MDAnalysis.analysis.distances.</code><code class="descname">distance_array</code><span class="sig-paren">(</span><em>reference</em>, <em>configuration</em>, <em>box=None</em>, <em>result=None</em>, <em>backend='serial'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#distance_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.distances.distance_array" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate all distances between a reference set and another configuration.</p>
 <p>If there are <em>i</em> positions in reference, and <em>j</em> positions in configuration,
 will calculate a <em>i</em> x <em>j</em> array of distances
@@ -130,6 +130,8 @@ by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coord
 shape (len(ref), len(conf)) and dtype=numpy.float64.
 Avoids creating the array which saves time when the function
 is called repeatedly. [<code class="docutils literal"><span class="pre">None</span></code>]</li>
+<li><strong>*backend*</strong> &#8211; select the type of acceleration; &#8220;serial&#8221; is always available. Other
+possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>
@@ -149,7 +151,7 @@ make copies of the ref and conf arrays.</p>
 
 <dl class="function">
 <dt id="MDAnalysis.analysis.distances.self_distance_array">
-<code class="descclassname">MDAnalysis.analysis.distances.</code><code class="descname">self_distance_array</code><span class="sig-paren">(</span><em>reference</em>, <em>box=None</em>, <em>result=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#self_distance_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.distances.self_distance_array" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">MDAnalysis.analysis.distances.</code><code class="descname">self_distance_array</code><span class="sig-paren">(</span><em>reference</em>, <em>box=None</em>, <em>result=None</em>, <em>backend='serial'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#self_distance_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.distances.self_distance_array" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate all distances within a configuration <em>reference</em>.</p>
 <p>If a <em>box</em> is supplied then a minimum image convention is used before
 calculating distances.</p>
@@ -171,6 +173,8 @@ by <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coord
 (N*(N-1)/2,) and dtype <code class="docutils literal"><span class="pre">numpy.float64</span></code>. Avoids creating
 the array which saves time when the function is called
 repeatedly. [<code class="docutils literal"><span class="pre">None</span></code>]</li>
+<li><strong>*backend*</strong> &#8211; select the type of acceleration; &#8220;serial&#8221; is always available. Other
+possibilities are &#8220;OpenMP&#8221; (OpenMP).</li>
 </ul>
 </td>
 </tr>

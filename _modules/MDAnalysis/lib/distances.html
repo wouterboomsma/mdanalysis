@@ -89,8 +89,7 @@
 <span class="c">#     doi:10.1002/jcc.21787</span>
 <span class="c">#</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Fast distance array computation --- :mod:`MDAnalysis.lib.distances`</span>
+<span class="sd">&quot;&quot;&quot;Fast distance array computation --- :mod:`MDAnalysis.lib.distances`</span>
 <span class="sd">====================================================================</span>
 
 <span class="sd">Fast C-routines to calculate distance arrays from coordinate arrays.</span>
@@ -98,19 +97,63 @@
 <span class="sd">Functions</span>
 <span class="sd">---------</span>
 
-<span class="sd">.. autofunction:: distance_array(reference, configuation [, box [,result]])</span>
-<span class="sd">.. autofunction:: self_distance_array(reference [, box [,result]])</span>
-<span class="sd">.. autofunction:: calc_bonds(atom1, atom2 [, box, [,result]])</span>
-<span class="sd">.. autofunction:: calc_angles(atom1, atom2, atom3 [,box [, result]])</span>
-<span class="sd">.. autofunction:: calc_dihedrals(atom1, atom2, atom3, atom4 [,box [, result]])</span>
-<span class="sd">.. autofunction:: apply_PBC(coordinates, box)</span>
-<span class="sd">.. autofunction:: transform_RtoS(coordinates, box)</span>
-<span class="sd">.. autofunction:: transform_StoR(coordinates, box)</span>
+<span class="sd">All functions take the optional keyword *backend*, which determines</span>
+<span class="sd">the type of acceleration. Currently, the following choices are</span>
+<span class="sd">implemented (*backend* is case-insensitive):</span>
+
+<span class="sd">========== ======================== ======================================</span>
+<span class="sd">*backend*  module                   description</span>
+<span class="sd">========== ======================== ======================================</span>
+<span class="sd">&quot;serial&quot;   :mod:`_distances`        serial implementation in C/Cython</span>
+
+<span class="sd">&quot;OpenMP&quot;   :mod:`_distances_openmp` parallel implementation in C/Cython</span>
+<span class="sd">                                    with OpenMP</span>
+<span class="sd">========== ======================== ======================================</span>
+
+<span class="sd">.. autofunction:: distance_array(reference, configuration [, box [, result [, backend]]])</span>
+<span class="sd">.. autofunction:: self_distance_array(reference [, box [,result [, backend]]])</span>
+<span class="sd">.. autofunction:: calc_bonds(atom1, atom2 [, box, [, result [, backend]]])</span>
+<span class="sd">.. autofunction:: calc_angles(atom1, atom2, atom3 [,box [, result [, backend]]])</span>
+<span class="sd">.. autofunction:: calc_dihedrals(atom1, atom2, atom3, atom4 [,box [, result [, backend]]])</span>
+<span class="sd">.. autofunction:: apply_PBC(coordinates, box [, backend])</span>
+<span class="sd">.. autofunction:: transform_RtoS(coordinates, box [, backend])</span>
+<span class="sd">.. autofunction:: transform_StoR(coordinates, box [,backend])</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">numpy.lib.utils</span> <span class="kn">import</span> <span class="n">deprecate</span>
 
 <span class="kn">from</span> <span class="nn">.mdamath</span> <span class="kn">import</span> <span class="n">triclinic_vectors</span><span class="p">,</span> <span class="n">triclinic_box</span>
+
+
+<span class="c"># hack to select backend with backend=&lt;backend&gt; kwarg. Note that</span>
+<span class="c"># the cython parallel code (prange) in parallel.distances is</span>
+<span class="c"># independent from the OpenMP code</span>
+<span class="kn">import</span> <span class="nn">importlib</span>
+<span class="n">_distances</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">_distances</span><span class="p">[</span><span class="s">&#39;serial&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s">&quot;._distances&quot;</span><span class="p">,</span>
+                                         <span class="n">package</span><span class="o">=</span><span class="s">&quot;MDAnalysis.lib&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">_distances</span><span class="p">[</span><span class="s">&#39;openmp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s">&quot;._distances_openmp&quot;</span><span class="p">,</span>
+                                          <span class="n">package</span><span class="o">=</span><span class="s">&quot;MDAnalysis.lib&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="k">pass</span>
+<span class="k">del</span> <span class="n">importlib</span>
+
+<span class="k">def</span> <span class="nf">_run</span><span class="p">(</span><span class="n">funcname</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s">&quot;serial&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Helper function to select a backend function *funcname*.&quot;&quot;&quot;</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">args</span> <span class="k">if</span> <span class="n">args</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="nb">tuple</span><span class="p">()</span>
+    <span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span> <span class="k">if</span> <span class="n">kwargs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">backend</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">_distances</span><span class="p">[</span><span class="n">backend</span><span class="p">],</span> <span class="n">funcname</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Function {0} not available with backend {1}; try one of: {2}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">funcname</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="s">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_distances</span><span class="o">.</span><span class="n">keys</span><span class="p">())))</span>
+    <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="c"># serial versions are always available (and are typically used within</span>
+<span class="c"># the core and topology modules)</span>
 <span class="kn">from</span> <span class="nn">._distances</span> <span class="kn">import</span> <span class="p">(</span><span class="n">calc_distance_array</span><span class="p">,</span>
                          <span class="n">calc_distance_array_ortho</span><span class="p">,</span>
                          <span class="n">calc_distance_array_triclinic</span><span class="p">,</span>
@@ -211,7 +254,7 @@
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Input arrays must all be same shape&quot;</span>
                          <span class="s">&quot;Got {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">arrays</span><span class="p">]))</span>
 
-<div class="viewcode-block" id="distance_array"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.distance_array">[docs]</a><span class="k">def</span> <span class="nf">distance_array</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="distance_array"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.distance_array">[docs]</a><span class="k">def</span> <span class="nf">distance_array</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s">&quot;serial&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Calculate all distances between a reference set and another configuration.</span>
 
 <span class="sd">    If there are *i* positions in reference, and *j* positions in configuration,</span>
@@ -241,6 +284,9 @@
 <span class="sd">             shape (len(ref), len(conf)) and dtype=numpy.float64.</span>
 <span class="sd">             Avoids creating the array which saves time when the function</span>
 <span class="sd">             is called repeatedly. [``None``]</span>
+<span class="sd">        *backend*</span>
+<span class="sd">             select the type of acceleration; &quot;serial&quot; is always available. Other</span>
+<span class="sd">             possibilities are &quot;OpenMP&quot; (OpenMP).</span>
 <span class="sd">    :Returns:</span>
 <span class="sd">         *d*</span>
 <span class="sd">             (len(reference),len(configuration)) numpy array with the distances d[i,j]</span>
@@ -274,16 +320,22 @@
 
     <span class="k">if</span> <span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">boxtype</span> <span class="o">==</span> <span class="s">&#39;ortho&#39;</span><span class="p">:</span>
-            <span class="n">calc_distance_array_ortho</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">conf</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">distances</span><span class="p">)</span>
+            <span class="n">_run</span><span class="p">(</span><span class="s">&quot;calc_distance_array_ortho&quot;</span><span class="p">,</span>
+                   <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">conf</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">distances</span><span class="p">),</span>
+                   <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">calc_distance_array_triclinic</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">conf</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">distances</span><span class="p">)</span>
+            <span class="n">_run</span><span class="p">(</span><span class="s">&quot;calc_distance_array_triclinic&quot;</span><span class="p">,</span>
+                   <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">conf</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">distances</span><span class="p">),</span>
+                   <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">calc_distance_array</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">conf</span><span class="p">,</span> <span class="n">distances</span><span class="p">)</span>
+        <span class="n">_run</span><span class="p">(</span><span class="s">&quot;calc_distance_array&quot;</span><span class="p">,</span>
+               <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">conf</span><span class="p">,</span> <span class="n">distances</span><span class="p">),</span>
+               <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">distances</span>
 
 </div>
-<div class="viewcode-block" id="self_distance_array"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.self_distance_array">[docs]</a><span class="k">def</span> <span class="nf">self_distance_array</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="self_distance_array"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.self_distance_array">[docs]</a><span class="k">def</span> <span class="nf">self_distance_array</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s">&quot;serial&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Calculate all distances within a configuration *reference*.</span>
 
 <span class="sd">    If a *box* is supplied then a minimum image convention is used before</span>
@@ -307,6 +359,9 @@
 <span class="sd">             (N*(N-1)/2,) and dtype ``numpy.float64``. Avoids creating</span>
 <span class="sd">             the array which saves time when the function is called</span>
 <span class="sd">             repeatedly. [``None``]</span>
+<span class="sd">        *backend*</span>
+<span class="sd">             select the type of acceleration; &quot;serial&quot; is always available. Other</span>
+<span class="sd">             possibilities are &quot;OpenMP&quot; (OpenMP).</span>
 <span class="sd">    :Returns:</span>
 <span class="sd">        *d*</span>
 <span class="sd">             N*(N-1)/2 numpy 1D array with the distances dist[i,j] between ref</span>
@@ -344,16 +399,22 @@
 
     <span class="k">if</span> <span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">boxtype</span> <span class="o">==</span> <span class="s">&#39;ortho&#39;</span><span class="p">:</span>
-            <span class="n">calc_self_distance_array_ortho</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">distances</span><span class="p">)</span>
+            <span class="n">_run</span><span class="p">(</span><span class="s">&quot;calc_self_distance_array_ortho&quot;</span><span class="p">,</span>
+                   <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">distances</span><span class="p">),</span>
+                   <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">calc_self_distance_array_triclinic</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">distances</span><span class="p">)</span>
+            <span class="n">_run</span><span class="p">(</span><span class="s">&quot;calc_self_distance_array_triclinic&quot;</span><span class="p">,</span>
+                   <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">distances</span><span class="p">),</span>
+                   <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">calc_self_distance_array</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">distances</span><span class="p">)</span>
+        <span class="n">_run</span><span class="p">(</span><span class="s">&quot;calc_self_distance_array&quot;</span><span class="p">,</span>
+               <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">distances</span><span class="p">),</span>
+               <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">distances</span>
 
 </div>
-<div class="viewcode-block" id="transform_RtoS"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.transform_RtoS">[docs]</a><span class="k">def</span> <span class="nf">transform_RtoS</span><span class="p">(</span><span class="n">inputcoords</span><span class="p">,</span> <span class="n">box</span><span class="p">):</span>
+<div class="viewcode-block" id="transform_RtoS"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.transform_RtoS">[docs]</a><span class="k">def</span> <span class="nf">transform_RtoS</span><span class="p">(</span><span class="n">inputcoords</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s">&quot;serial&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Transform an array of coordinates from real space to S space (aka lambda space)</span>
 
 <span class="sd">    S space represents fractional space within the unit cell for this system</span>
@@ -368,6 +429,9 @@
 <span class="sd">          Cell dimensions must be in an identical to format to those returned</span>
 <span class="sd">          by :attr:`MDAnalysis.coordinates.base.Timestep.dimensions`,</span>
 <span class="sd">          [lx, ly, lz, alpha, beta, gamma]</span>
+<span class="sd">      *backend*</span>
+<span class="sd">          select the type of acceleration; &quot;serial&quot; is always available. Other</span>
+<span class="sd">          possibilities are &quot;OpenMP&quot; (OpenMP).</span>
 
 <span class="sd">    :Returns:</span>
 <span class="sd">       *outcoords*</span>
@@ -391,12 +455,14 @@
     <span class="c"># need order C here</span>
     <span class="n">inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">box</span><span class="p">)</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s">&#39;C&#39;</span><span class="p">)</span>
 
-    <span class="n">coord_transform</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">inv</span><span class="p">)</span>
+    <span class="n">_run</span><span class="p">(</span><span class="s">&quot;coord_transform&quot;</span><span class="p">,</span>
+           <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">inv</span><span class="p">),</span>
+           <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">coords</span>
 
 </div>
-<div class="viewcode-block" id="transform_StoR"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.transform_StoR">[docs]</a><span class="k">def</span> <span class="nf">transform_StoR</span><span class="p">(</span><span class="n">inputcoords</span><span class="p">,</span> <span class="n">box</span><span class="p">):</span>
+<div class="viewcode-block" id="transform_StoR"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.transform_StoR">[docs]</a><span class="k">def</span> <span class="nf">transform_StoR</span><span class="p">(</span><span class="n">inputcoords</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s">&quot;serial&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Transform an array of coordinates from S space into real space.</span>
 
 <span class="sd">    S space represents fractional space within the unit cell for this system</span>
@@ -411,6 +477,9 @@
 <span class="sd">           Cell dimensions must be in an identical to format to those returned</span>
 <span class="sd">           by :attr:`MDAnalysis.coordinates.base.Timestep.dimensions`,</span>
 <span class="sd">           [lx, ly, lz, alpha, beta, gamma]</span>
+<span class="sd">      *backend*</span>
+<span class="sd">          select the type of acceleration; &quot;serial&quot; is always available. Other</span>
+<span class="sd">          possibilities are &quot;OpenMP&quot; (OpenMP).</span>
 
 <span class="sd">    :Returns:</span>
 <span class="sd">       *outcoords*</span>
@@ -428,12 +497,14 @@
                         <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">box</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mf">0.0</span><span class="p">],</span>
                         <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">box</span><span class="p">[</span><span class="mi">2</span><span class="p">]]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 
-    <span class="n">coord_transform</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">box</span><span class="p">)</span>
+    <span class="n">_run</span><span class="p">(</span><span class="s">&quot;coord_transform&quot;</span><span class="p">,</span>
+           <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">box</span><span class="p">),</span>
+           <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">coords</span>
 
 </div>
-<div class="viewcode-block" id="calc_bonds"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.calc_bonds">[docs]</a><span class="k">def</span> <span class="nf">calc_bonds</span><span class="p">(</span><span class="n">coords1</span><span class="p">,</span> <span class="n">coords2</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="calc_bonds"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.calc_bonds">[docs]</a><span class="k">def</span> <span class="nf">calc_bonds</span><span class="p">(</span><span class="n">coords1</span><span class="p">,</span> <span class="n">coords2</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s">&quot;serial&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate all distances between a pair of atoms.  *atom1* and *atom2* are both</span>
 <span class="sd">    arrays of coordinates, where atom1[i] and atom2[i] represent a bond.</span>
@@ -467,6 +538,9 @@
 <span class="sd">          optional preallocated result array which must be same length as coord</span>
 <span class="sd">          arrays and dtype=numpy.float64. Avoids creating the</span>
 <span class="sd">          array which saves time when the function is called repeatedly. [None]</span>
+<span class="sd">       *backend*</span>
+<span class="sd">          select the type of acceleration; &quot;serial&quot; is always available. Other</span>
+<span class="sd">          possibilities are &quot;OpenMP&quot; (OpenMP).</span>
 
 <span class="sd">    :Returns:</span>
 <span class="sd">       *bondlengths*</span>
@@ -499,16 +573,22 @@
 
     <span class="k">if</span> <span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">boxtype</span> <span class="o">==</span> <span class="s">&#39;ortho&#39;</span><span class="p">:</span>
-            <span class="n">calc_bond_distance_ortho</span><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">distances</span><span class="p">)</span>
+            <span class="n">_run</span><span class="p">(</span><span class="s">&quot;calc_bond_distance_ortho&quot;</span><span class="p">,</span>
+                   <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">distances</span><span class="p">),</span>
+                   <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">calc_bond_distance_triclinic</span><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">distances</span><span class="p">)</span>
+            <span class="n">_run</span><span class="p">(</span><span class="s">&quot;calc_bond_distance_triclinic&quot;</span><span class="p">,</span>
+                   <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">distances</span><span class="p">),</span>
+                   <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">calc_bond_distance</span><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">,</span> <span class="n">distances</span><span class="p">)</span>
+        <span class="n">_run</span><span class="p">(</span><span class="s">&quot;calc_bond_distance&quot;</span><span class="p">,</span>
+               <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">,</span> <span class="n">distances</span><span class="p">),</span>
+               <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">distances</span>
 
 </div>
-<div class="viewcode-block" id="calc_angles"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.calc_angles">[docs]</a><span class="k">def</span> <span class="nf">calc_angles</span><span class="p">(</span><span class="n">coords1</span><span class="p">,</span> <span class="n">coords2</span><span class="p">,</span> <span class="n">coords3</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="calc_angles"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.calc_angles">[docs]</a><span class="k">def</span> <span class="nf">calc_angles</span><span class="p">(</span><span class="n">coords1</span><span class="p">,</span> <span class="n">coords2</span><span class="p">,</span> <span class="n">coords3</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s">&quot;serial&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculates the angle formed between three atoms, over a list of coordinates.</span>
 <span class="sd">    All *atom* inputs are lists of coordinates of equal length, with *atom2*</span>
@@ -541,6 +621,9 @@
 <span class="sd">        *result*</span>
 <span class="sd">            optional preallocated results array which must have same length as coordinate</span>
 <span class="sd">            array and dtype=numpy.float64.</span>
+<span class="sd">        *backend*</span>
+<span class="sd">            select the type of acceleration; &quot;serial&quot; is always available. Other</span>
+<span class="sd">            possibilities are &quot;OpenMP&quot; (OpenMP).</span>
 
 <span class="sd">    :Returns:</span>
 <span class="sd">        *angles*</span>
@@ -576,16 +659,23 @@
 
     <span class="k">if</span> <span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">boxtype</span> <span class="o">==</span> <span class="s">&#39;ortho&#39;</span><span class="p">:</span>
-            <span class="n">calc_angle_ortho</span><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">,</span> <span class="n">atom3</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">angles</span><span class="p">)</span>
+            <span class="n">_run</span><span class="p">(</span><span class="s">&quot;calc_angle_ortho&quot;</span><span class="p">,</span>
+                   <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">,</span> <span class="n">atom3</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">angles</span><span class="p">),</span>
+                   <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">calc_angle_triclinic</span><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">,</span> <span class="n">atom3</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">angles</span><span class="p">)</span>
+            <span class="n">_run</span><span class="p">(</span><span class="s">&quot;calc_angle_triclinic&quot;</span><span class="p">,</span>
+                   <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">,</span> <span class="n">atom3</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">angles</span><span class="p">),</span>
+                   <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">calc_angle</span><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">,</span> <span class="n">atom3</span><span class="p">,</span> <span class="n">angles</span><span class="p">)</span>
+        <span class="n">_run</span><span class="p">(</span><span class="s">&quot;calc_angle&quot;</span><span class="p">,</span>
+               <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">,</span> <span class="n">atom3</span><span class="p">,</span> <span class="n">angles</span><span class="p">),</span>
+               <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">angles</span>
 
 </div>
-<div class="viewcode-block" id="calc_dihedrals"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.calc_dihedrals">[docs]</a><span class="k">def</span> <span class="nf">calc_dihedrals</span><span class="p">(</span><span class="n">coords1</span><span class="p">,</span> <span class="n">coords2</span><span class="p">,</span> <span class="n">coords3</span><span class="p">,</span> <span class="n">coords4</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="calc_dihedrals"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.calc_dihedrals">[docs]</a><span class="k">def</span> <span class="nf">calc_dihedrals</span><span class="p">(</span><span class="n">coords1</span><span class="p">,</span> <span class="n">coords2</span><span class="p">,</span> <span class="n">coords3</span><span class="p">,</span> <span class="n">coords4</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                   <span class="n">backend</span><span class="o">=</span><span class="s">&quot;serial&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate the dihedral angle formed by four atoms, over a list of coordinates.</span>
 
@@ -604,9 +694,9 @@
 
 <span class="sd">    The optional argument ``box`` ensures that periodic boundaries are taken into</span>
 <span class="sd">    account when constructing the connecting vectors between atoms, ie that the vector</span>
-<span class="sd">    between atoms 1 &amp; 2 goes between coordinates in the same image.</span>
+<span class="sd">    between atoms 1 &amp; 2 goes between coordinates in the same image::</span>
 
-<span class="sd">    angles = calc_dihedrals(coords1, coords2, coords3, coords4 [,box=box, result=angles])</span>
+<span class="sd">      angles = calc_dihedrals(coords1, coords2, coords3, coords4 [,box=box, result=angles])</span>
 
 <span class="sd">    :Arguments:</span>
 <span class="sd">        *coords1*</span>
@@ -627,6 +717,9 @@
 <span class="sd">        *result*</span>
 <span class="sd">            optional preallocated results array which must have same length as</span>
 <span class="sd">            coordinate array and dtype=numpy.float64.</span>
+<span class="sd">        *backend*</span>
+<span class="sd">            select the type of acceleration; &quot;serial&quot; is always available. Other</span>
+<span class="sd">            possibilities are &quot;OpenMP&quot; (OpenMP).</span>
 
 <span class="sd">    :Returns:</span>
 <span class="sd">        *angles*</span>
@@ -667,11 +760,17 @@
 
     <span class="k">if</span> <span class="n">box</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">boxtype</span> <span class="o">==</span> <span class="s">&#39;ortho&#39;</span><span class="p">:</span>
-            <span class="n">calc_dihedral_ortho</span><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">,</span> <span class="n">atom3</span><span class="p">,</span> <span class="n">atom4</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">angles</span><span class="p">)</span>
+            <span class="n">_run</span><span class="p">(</span><span class="s">&quot;calc_dihedral_ortho&quot;</span><span class="p">,</span>
+                   <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">,</span> <span class="n">atom3</span><span class="p">,</span> <span class="n">atom4</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">angles</span><span class="p">),</span>
+                   <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">calc_dihedral_triclinic</span><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">,</span> <span class="n">atom3</span><span class="p">,</span> <span class="n">atom4</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">angles</span><span class="p">)</span>
+            <span class="n">_run</span><span class="p">(</span><span class="s">&quot;calc_dihedral_triclinic&quot;</span><span class="p">,</span>
+                   <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">,</span> <span class="n">atom3</span><span class="p">,</span> <span class="n">atom4</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">angles</span><span class="p">),</span>
+                   <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">calc_dihedral</span><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">,</span> <span class="n">atom3</span><span class="p">,</span> <span class="n">atom4</span><span class="p">,</span> <span class="n">angles</span><span class="p">)</span>
+        <span class="n">_run</span><span class="p">(</span><span class="s">&quot;calc_dihedral&quot;</span><span class="p">,</span>
+               <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">atom1</span><span class="p">,</span> <span class="n">atom2</span><span class="p">,</span> <span class="n">atom3</span><span class="p">,</span> <span class="n">atom4</span><span class="p">,</span> <span class="n">angles</span><span class="p">),</span>
+               <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">angles</span>
 </div>
@@ -679,7 +778,7 @@
                           <span class="n">new_name</span><span class="o">=</span><span class="s">&#39;calc_dihedrals&#39;</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="apply_PBC"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.apply_PBC">[docs]</a><span class="k">def</span> <span class="nf">apply_PBC</span><span class="p">(</span><span class="n">incoords</span><span class="p">,</span> <span class="n">box</span><span class="p">):</span>
+<div class="viewcode-block" id="apply_PBC"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.apply_PBC">[docs]</a><span class="k">def</span> <span class="nf">apply_PBC</span><span class="p">(</span><span class="n">incoords</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s">&quot;serial&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Moves a set of coordinates to all be within the primary unit cell</span>
 
 <span class="sd">    newcoords = apply_PBC(coords, box)</span>
@@ -692,6 +791,9 @@
 <span class="sd">           Cell dimensions must be in an identical to format to those returned</span>
 <span class="sd">           by :attr:`MDAnalysis.coordinates.base.Timestep.dimensions`,</span>
 <span class="sd">           [lx, ly, lz, alpha, beta, gamma]</span>
+<span class="sd">        *backend*</span>
+<span class="sd">           select the type of acceleration; &quot;serial&quot; is always available. Other</span>
+<span class="sd">           possibilities are &quot;OpenMP&quot; (OpenMP).</span>
 
 <span class="sd">    :Returns:</span>
 <span class="sd">        *newcoords*</span>
@@ -719,12 +821,16 @@
         <span class="n">box_inv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">box</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">box_inv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">box</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">box_inv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">box</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-        <span class="n">ortho_pbc</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">box_inv</span><span class="p">)</span>
+        <span class="n">_run</span><span class="p">(</span><span class="s">&quot;ortho_pbc&quot;</span><span class="p">,</span>
+               <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">box_inv</span><span class="p">),</span>
+               <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">box_inv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">box</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">box_inv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">box</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">box_inv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">box</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
-        <span class="n">triclinic_pbc</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">box_inv</span><span class="p">)</span>
+        <span class="n">_run</span><span class="p">(</span><span class="s">&quot;triclinic_pbc&quot;</span><span class="p">,</span>
+               <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">box_inv</span><span class="p">),</span>
+               <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">coords</span>
 </div>
