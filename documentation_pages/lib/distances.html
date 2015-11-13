@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>9.1. Fast distance array computation — MDAnalysis.lib.distances &mdash; MDAnalysis 0.13.0-dev0 documentation</title>
+    <title>9.2.1. Fast distance array computation — MDAnalysis.lib.distances &mdash; MDAnalysis 0.13.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -29,9 +29,9 @@
           href="../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
     <link rel="top" title="MDAnalysis 0.13.0-dev0 documentation" href="../../index.html" />
-    <link rel="up" title="9. MDAnalysis library" href="../lib_modules.html" />
-    <link rel="next" title="9.2. Distance calculation library — MDAnalysis.lib._distances" href="_distances.html" />
-    <link rel="prev" title="9. MDAnalysis library" href="../lib_modules.html" /> 
+    <link rel="up" title="9. Library functions — MDAnalysis.lib" href="../lib_modules.html" />
+    <link rel="next" title="9.2.2.1. Distance calculation library — MDAnalysis.lib._distances" href="_distances.html" />
+    <link rel="prev" title="9. Library functions — MDAnalysis.lib" href="../lib_modules.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -44,13 +44,13 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="_distances.html" title="9.2. Distance calculation library — MDAnalysis.lib._distances"
+          <a href="_distances.html" title="9.2.2.1. Distance calculation library — MDAnalysis.lib._distances"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../lib_modules.html" title="9. MDAnalysis library"
+          <a href="../lib_modules.html" title="9. Library functions — MDAnalysis.lib"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.13.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../lib_modules.html" accesskey="U">9. MDAnalysis library</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="../lib_modules.html" accesskey="U">9. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -60,18 +60,20 @@
             </a></p>
   <h3><a href="../../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">9.1. Fast distance array computation &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib.distances</span></code></a><ul>
-<li><a class="reference internal" href="#functions">9.1.1. Functions</a></li>
+<li><a class="reference internal" href="#">9.2.1. Fast distance array computation &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib.distances</span></code></a><ul>
+<li><a class="reference internal" href="#selection-of-acceleration-backend">9.2.1.1. Selection of acceleration (&#8220;backend&#8221;)</a></li>
+<li><a class="reference internal" href="#functions">9.2.1.2. Functions</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#low-level-modules-for-mdanalysis-lib-distances">9.2.2. Low-level modules for <code class="docutils literal"><span class="pre">MDAnalysis.lib.distances</span></code></a></li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="../lib_modules.html"
-                        title="previous chapter">9. MDAnalysis library</a></p>
+                        title="previous chapter">9. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="_distances.html"
-                        title="next chapter">9.2. Distance calculation library &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib._distances</span></code></a></p>
+                        title="next chapter">9.2.2.1. Distance calculation library &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib._distances</span></code></a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -101,10 +103,12 @@
           <div class="body" role="main">
             
   <span class="target" id="module-MDAnalysis.lib.distances"></span><div class="section" id="fast-distance-array-computation-mdanalysis-lib-distances">
-<h1>9.1. Fast distance array computation &#8212; <a class="reference internal" href="#module-MDAnalysis.lib.distances" title="MDAnalysis.lib.distances"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.lib.distances</span></code></a><a class="headerlink" href="#fast-distance-array-computation-mdanalysis-lib-distances" title="Permalink to this headline">¶</a></h1>
-<p>Fast C-routines to calculate distance arrays from coordinate arrays.</p>
-<div class="section" id="functions">
-<h2>9.1.1. Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<h1>9.2.1. Fast distance array computation &#8212; <a class="reference internal" href="#module-MDAnalysis.lib.distances" title="MDAnalysis.lib.distances"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.lib.distances</span></code></a><a class="headerlink" href="#fast-distance-array-computation-mdanalysis-lib-distances" title="Permalink to this headline">¶</a></h1>
+<p>Fast C-routines to calculate distance arrays from coordinate
+arrays. Many of the functions also exist in parallel versions, that
+typically provide higher performance than the serial code.</p>
+<div class="section" id="selection-of-acceleration-backend">
+<h2>9.2.1.1. Selection of acceleration (&#8220;backend&#8221;)<a class="headerlink" href="#selection-of-acceleration-backend" title="Permalink to this headline">¶</a></h2>
 <p>All functions take the optional keyword <em>backend</em>, which determines
 the type of acceleration. Currently, the following choices are
 implemented (<em>backend</em> is case-insensitive):</p>
@@ -132,6 +136,12 @@ with OpenMP</td>
 </tr>
 </tbody>
 </table>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.13.0.</span></p>
+</div>
+</div>
+<div class="section" id="functions">
+<h2>9.2.1.2. Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="MDAnalysis.lib.distances.distance_array">
 <code class="descclassname">MDAnalysis.lib.distances.</code><code class="descname">distance_array</code><span class="sig-paren">(</span><em>reference</em>, <em>configuration</em><span class="optional">[</span>, <em>box</em><span class="optional">[</span>, <em>result</em><span class="optional">[</span>, <em>backend</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/distances.html#distance_array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.distances.distance_array" title="Permalink to this definition">¶</a></dt>
@@ -176,6 +186,9 @@ between reference coordinates i and configuration coordinates j</p>
 <p class="first admonition-title">Note</p>
 <p class="last">This method is slower than it could be because internally we need to
 make copies of the ref and conf arrays.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.13.0: </span>Added <em>backend</em> keyword.</p>
 </div>
 </dd></dl>
 
@@ -227,6 +240,9 @@ coordinates i and j at position d[k]. Loop through d:</p>
 <p class="last">This method is slower than it could be because internally we need to
 make copies of the coordinate arrays.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.13.0: </span>Added <em>backend</em> keyword.</p>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -273,6 +289,9 @@ numpy array with the length between each pair in coords1 and coords2</p>
 </table>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.8.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.13.0: </span>Added <em>backend</em> keyword.</p>
 </div>
 </dd></dl>
 
@@ -321,6 +340,9 @@ A numpy.array of angles in radians</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.9.0: </span>Added optional box argument to account for periodic boundaries in calculation</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.13.0: </span>Added <em>backend</em> keyword.</p>
 </div>
 </dd></dl>
 
@@ -383,6 +405,9 @@ A numpy.array of angles in radians</p>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Renamed from calc_torsions to calc_dihedrals</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.13.0: </span>Added <em>backend</em> keyword.</p>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -415,6 +440,9 @@ as defined by box</p>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.8.</span></p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.13.0: </span>Added <em>backend</em> keyword.</p>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -444,6 +472,9 @@ An n x 3 array of fractional coordiantes</p>
 </tr>
 </tbody>
 </table>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.13.0: </span>Added <em>backend</em> keyword.</p>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -473,6 +504,9 @@ An n x 3 array of fracional coordiantes</p>
 </tr>
 </tbody>
 </table>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.13.0: </span>Added <em>backend</em> keyword.</p>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -504,6 +538,9 @@ as defined by box</p>
 </table>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.8.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.13.0: </span>Added <em>backend</em> keyword.</p>
 </div>
 </dd></dl>
 
@@ -553,6 +590,9 @@ A numpy.array of angles in radians</p>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.9.0: </span>Added optional box argument to account for periodic boundaries in calculation</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.13.0: </span>Added <em>backend</em> keyword.</p>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -599,6 +639,9 @@ numpy array with the length between each pair in coords1 and coords2</p>
 </table>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.8.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.13.0: </span>Added <em>backend</em> keyword.</p>
 </div>
 </dd></dl>
 
@@ -661,6 +704,9 @@ A numpy.array of angles in radians</p>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Renamed from calc_torsions to calc_dihedrals</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.13.0: </span>Added <em>backend</em> keyword.</p>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -707,6 +753,9 @@ between reference coordinates i and configuration coordinates j</p>
 <p class="first admonition-title">Note</p>
 <p class="last">This method is slower than it could be because internally we need to
 make copies of the ref and conf arrays.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.13.0: </span>Added <em>backend</em> keyword.</p>
 </div>
 </dd></dl>
 
@@ -758,6 +807,9 @@ coordinates i and j at position d[k]. Loop through d:</p>
 <p class="last">This method is slower than it could be because internally we need to
 make copies of the coordinate arrays.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.13.0: </span>Added <em>backend</em> keyword.</p>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -787,6 +839,9 @@ An n x 3 array of fractional coordiantes</p>
 </tr>
 </tbody>
 </table>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.13.0: </span>Added <em>backend</em> keyword.</p>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -816,8 +871,25 @@ An n x 3 array of fracional coordiantes</p>
 </tr>
 </tbody>
 </table>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.13.0: </span>Added <em>backend</em> keyword.</p>
+</div>
 </dd></dl>
 
+</div>
+</div>
+<div class="section" id="low-level-modules-for-mdanalysis-lib-distances">
+<h1>9.2.2. Low-level modules for <a class="reference internal" href="#module-MDAnalysis.lib.distances" title="MDAnalysis.lib.distances"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.lib.distances</span></code></a><a class="headerlink" href="#low-level-modules-for-mdanalysis-lib-distances" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="_distances.html#module-MDAnalysis.lib._distances" title="MDAnalysis.lib._distances"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.lib._distances</span></code></a> contains low level access to the
+<em>serial</em> MDAnalysis Cython functions in <cite>distances</cite>.  These have
+little to no error checking done on inputs so should be used with
+caution. Similarly, <a class="reference internal" href="_distances_openmp.html#module-MDAnalysis.lib._distances_openmp" title="MDAnalysis.lib._distances_openmp"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.lib._distances_openmp</span></code></a> contains
+the OpenMP-enable functions.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="_distances.html">9.2.2.1. Distance calculation library &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib._distances</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="_distances_openmp.html">9.2.2.2. Parallel distance calculation library &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib._distances_openmp</span></code></a></li>
+</ul>
 </div>
 </div>
 
@@ -837,13 +909,13 @@ An n x 3 array of fracional coordiantes</p>
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="_distances.html" title="9.2. Distance calculation library — MDAnalysis.lib._distances"
+          <a href="_distances.html" title="9.2.2.1. Distance calculation library — MDAnalysis.lib._distances"
              >next</a> |</li>
         <li class="right" >
-          <a href="../lib_modules.html" title="9. MDAnalysis library"
+          <a href="../lib_modules.html" title="9. Library functions — MDAnalysis.lib"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.13.0-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../lib_modules.html" >9. MDAnalysis library</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="../lib_modules.html" >9. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

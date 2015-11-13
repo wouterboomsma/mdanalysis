@@ -100,7 +100,7 @@ atoms or groups of atoms.</p>
 have to be from the same <a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.Universe" title="MDAnalysis.core.AtomGroup.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a>.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="../lib/distances.html#module-MDAnalysis.lib.distances" title="MDAnalysis.lib.distances"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.lib.distances</span></code></a> and <a class="reference internal" href="../lib/parallel.html#module-MDAnalysis.lib.parallel.distances" title="MDAnalysis.lib.parallel.distances"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.lib.parallel.distances</span></code></a></p>
+<p class="last"><a class="reference internal" href="../lib/distances.html#module-MDAnalysis.lib.distances" title="MDAnalysis.lib.distances"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.lib.distances</span></code></a> and <code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.lib.parallel.distances</span></code></p>
 </div>
 <dl class="function">
 <dt id="MDAnalysis.analysis.distances.distance_array">
@@ -146,6 +146,9 @@ between reference coordinates i and configuration coordinates j</p>
 <p class="first admonition-title">Note</p>
 <p class="last">This method is slower than it could be because internally we need to
 make copies of the ref and conf arrays.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.13.0: </span>Added <em>backend</em> keyword.</p>
 </div>
 </dd></dl>
 
@@ -196,6 +199,9 @@ coordinates i and j at position d[k]. Loop through d:</p>
 <p class="first admonition-title">Note</p>
 <p class="last">This method is slower than it could be because internally we need to
 make copies of the coordinate arrays.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.13.0: </span>Added <em>backend</em> keyword.</p>
 </div>
 </dd></dl>
 

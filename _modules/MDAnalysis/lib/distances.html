@@ -90,12 +90,14 @@
 <span class="c">#</span>
 
 <span class="sd">&quot;&quot;&quot;Fast distance array computation --- :mod:`MDAnalysis.lib.distances`</span>
-<span class="sd">====================================================================</span>
+<span class="sd">===================================================================</span>
 
-<span class="sd">Fast C-routines to calculate distance arrays from coordinate arrays.</span>
+<span class="sd">Fast C-routines to calculate distance arrays from coordinate</span>
+<span class="sd">arrays. Many of the functions also exist in parallel versions, that</span>
+<span class="sd">typically provide higher performance than the serial code.</span>
 
-<span class="sd">Functions</span>
-<span class="sd">---------</span>
+<span class="sd">Selection of acceleration (&quot;backend&quot;)</span>
+<span class="sd">-------------------------------------</span>
 
 <span class="sd">All functions take the optional keyword *backend*, which determines</span>
 <span class="sd">the type of acceleration. Currently, the following choices are</span>
@@ -109,6 +111,11 @@
 <span class="sd">&quot;OpenMP&quot;   :mod:`_distances_openmp` parallel implementation in C/Cython</span>
 <span class="sd">                                    with OpenMP</span>
 <span class="sd">========== ======================== ======================================</span>
+
+<span class="sd">.. versionadded:: 0.13.0</span>
+
+<span class="sd">Functions</span>
+<span class="sd">---------</span>
 
 <span class="sd">.. autofunction:: distance_array(reference, configuration [, box [, result [, backend]]])</span>
 <span class="sd">.. autofunction:: self_distance_array(reference [, box [,result [, backend]]])</span>
@@ -293,7 +300,10 @@
 <span class="sd">             between reference coordinates i and configuration coordinates j</span>
 
 <span class="sd">    .. Note:: This method is slower than it could be because internally we need to</span>
-<span class="sd">          make copies of the ref and conf arrays.</span>
+<span class="sd">              make copies of the ref and conf arrays.</span>
+
+<span class="sd">    .. versionchanged:: 0.13.0</span>
+<span class="sd">       Added *backend* keyword.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ref</span> <span class="o">=</span> <span class="n">reference</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s">&#39;C&#39;</span><span class="p">)</span>
     <span class="n">conf</span> <span class="o">=</span> <span class="n">configuration</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s">&#39;C&#39;</span><span class="p">)</span>
@@ -374,6 +384,9 @@
 
 <span class="sd">    .. Note:: This method is slower than it could be because internally we need to</span>
 <span class="sd">              make copies of the coordinate arrays.</span>
+
+<span class="sd">    .. versionchanged:: 0.13.0</span>
+<span class="sd">       Added *backend* keyword.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ref</span> <span class="o">=</span> <span class="n">reference</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s">&#39;C&#39;</span><span class="p">)</span>
 
@@ -436,6 +449,9 @@
 <span class="sd">    :Returns:</span>
 <span class="sd">       *outcoords*</span>
 <span class="sd">          An n x 3 array of fractional coordiantes</span>
+
+<span class="sd">    .. versionchanged:: 0.13.0</span>
+<span class="sd">       Added *backend* keyword.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">coords</span> <span class="o">=</span> <span class="n">inputcoords</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s">&#39;C&#39;</span><span class="p">)</span>
     <span class="n">numcoords</span> <span class="o">=</span> <span class="n">coords</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -484,6 +500,9 @@
 <span class="sd">    :Returns:</span>
 <span class="sd">       *outcoords*</span>
 <span class="sd">            An n x 3 array of fracional coordiantes</span>
+
+<span class="sd">    .. versionchanged:: 0.13.0</span>
+<span class="sd">       Added *backend* keyword.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">coords</span> <span class="o">=</span> <span class="n">inputcoords</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s">&#39;C&#39;</span><span class="p">)</span>
     <span class="n">numcoords</span> <span class="o">=</span> <span class="n">coords</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -547,6 +566,8 @@
 <span class="sd">          numpy array with the length between each pair in coords1 and coords2</span>
 
 <span class="sd">    .. versionadded:: 0.8</span>
+<span class="sd">    .. versionchanged:: 0.13.0</span>
+<span class="sd">       Added *backend* keyword.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">atom1</span> <span class="o">=</span> <span class="n">coords1</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s">&#39;C&#39;</span><span class="p">)</span>
     <span class="n">atom2</span> <span class="o">=</span> <span class="n">coords2</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s">&#39;C&#39;</span><span class="p">)</span>
@@ -632,6 +653,8 @@
 <span class="sd">    .. versionadded:: 0.8</span>
 <span class="sd">    .. versionchanged:: 0.9.0</span>
 <span class="sd">       Added optional box argument to account for periodic boundaries in calculation</span>
+<span class="sd">    .. versionchanged:: 0.13.0</span>
+<span class="sd">       Added *backend* keyword.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">atom1</span> <span class="o">=</span> <span class="n">coords1</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s">&#39;C&#39;</span><span class="p">)</span>
     <span class="n">atom2</span> <span class="o">=</span> <span class="n">coords2</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s">&#39;C&#39;</span><span class="p">)</span>
@@ -730,6 +753,8 @@
 <span class="sd">       Added optional box argument to account for periodic boundaries in calculation</span>
 <span class="sd">    .. versionchanged:: 0.11.0</span>
 <span class="sd">       Renamed from calc_torsions to calc_dihedrals</span>
+<span class="sd">    .. versionchanged:: 0.13.0</span>
+<span class="sd">       Added *backend* keyword.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">atom1</span> <span class="o">=</span> <span class="n">coords1</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s">&#39;C&#39;</span><span class="p">)</span>
     <span class="n">atom2</span> <span class="o">=</span> <span class="n">coords2</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s">&#39;C&#39;</span><span class="p">)</span>
@@ -801,6 +826,8 @@
 <span class="sd">           as defined by box</span>
 
 <span class="sd">    .. versionadded:: 0.8</span>
+<span class="sd">    .. versionchanged:: 0.13.0</span>
+<span class="sd">       Added *backend* keyword.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">coords</span> <span class="o">=</span> <span class="n">incoords</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s">&#39;C&#39;</span><span class="p">)</span>
 
