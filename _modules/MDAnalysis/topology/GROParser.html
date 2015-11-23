@@ -125,11 +125,13 @@
 <span class="sd">        .. SeeAlso:: The *structure* dict is defined in</span>
 <span class="sd">                     :func:`MDAnalysis.topology.base`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">atom_iter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">segid</span> <span class="o">=</span> <span class="s">&quot;SYSTEM&quot;</span>
         <span class="n">atoms</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">with</span> <span class="n">openany</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">grofile</span><span class="p">:</span>
-            <span class="n">segid</span> <span class="o">=</span> <span class="s">&quot;SYSTEM&quot;</span>
-            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">grofile</span><span class="p">:</span>
+            <span class="n">grofile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+            <span class="n">natoms</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">grofile</span><span class="o">.</span><span class="n">readline</span><span class="p">())</span>
+            <span class="k">for</span> <span class="n">atom_iter</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">natoms</span><span class="p">):</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">grofile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">resid</span><span class="p">,</span> <span class="n">resname</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]),</span> <span class="n">line</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">line</span><span class="p">[</span><span class="mi">10</span><span class="p">:</span><span class="mi">15</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
                     <span class="c"># guess based on atom name</span>
@@ -139,25 +141,6 @@
                     <span class="n">charge</span> <span class="o">=</span> <span class="n">guess_atom_charge</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
                     <span class="c"># segid = &quot;SYSTEM&quot;</span>
                     <span class="c"># ignore coords and velocities, they can be read by coordinates.GRO</span>
-                <span class="c"># Not currently doing anything with other lines</span>
-                <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">IndexError</span><span class="p">):</span>
-                    <span class="k">pass</span>
-                    <span class="c">#                    if linenum == 0:</span>
-                        <span class="c"># Header comment</span>
-                        <span class="c">#hdr_cmt = line</span>
-                        <span class="c">#pass</span>
-                    <span class="c">#elif linenum == 1:</span>
-                        <span class="c"># Header: number of particles</span>
-                        <span class="c">#hdr_np = int(line)</span>
-                        <span class="c"># A bit dodgy; should find a better way</span>
-                        <span class="c"># of locating the box_vectors line</span>
-                        <span class="c"># pass</span>
-                    <span class="c">#else:</span>
-                        <span class="c">#ftr_box = line If the line can&#39;t</span>
-                        <span class="c"># otherwise be read properly, then this</span>
-                        <span class="c"># probably indicates a problem with the</span>
-                        <span class="c"># gro line, and an error will be raised</span>
-                    <span class="c">#  pass</span>
                 <span class="k">except</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s">&quot;Couldn&#39;t read the following line of the .gro file:</span><span class="se">\n</span><span class="s">&quot;</span>
                                   <span class="s">&quot;{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
@@ -166,7 +149,6 @@
                     <span class="c"># the number in the .gro file (which wraps at 99999)</span>
                     <span class="n">atoms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Atom</span><span class="p">(</span><span class="n">atom_iter</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">atype</span><span class="p">,</span> <span class="n">resname</span><span class="p">,</span> <span class="n">resid</span><span class="p">,</span>
                                       <span class="n">segid</span><span class="p">,</span> <span class="n">mass</span><span class="p">,</span> <span class="n">charge</span><span class="p">,</span> <span class="n">universe</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="p">))</span>
-                    <span class="n">atom_iter</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">structure</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;atoms&#39;</span><span class="p">:</span> <span class="n">atoms</span><span class="p">}</span>
 
         <span class="k">return</span> <span class="n">structure</span></div></div>
