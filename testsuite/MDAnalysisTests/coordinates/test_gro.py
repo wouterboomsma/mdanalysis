@@ -188,6 +188,17 @@ class TestGROWriter(TestCase, tempdir.TempDir):
                             err_msg="Writing GRO file with GROWriter does "
                             "not reproduce original coordinates")
 
+    def test_huge_writer(self):
+        fmt = mda.coordinates.GRO.GROWriter.fmt
+        large_index = 1200000982
+        fmt_result = fmt['xyz'].format(resid=1, resname='rname', name='name',
+                                    index= large_index, pos=(1.0, 1.0, 1.0))
+        assert_equal(fmt_result,
+            '    1rname name{truncated_index}   1.000   1.000   1.000\n'.format(
+                            truncated_index=str(large_index)[-5:]),
+                            "Failed to properly truncate huge GRO file index.")
+
+
     @dec.slow
     def test_timestep_not_modified_by_writer(self):
         ts = self.universe.trajectory.ts
