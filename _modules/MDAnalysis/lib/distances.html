@@ -106,9 +106,9 @@
 <span class="sd">========== ======================== ======================================</span>
 <span class="sd">*backend*  module                   description</span>
 <span class="sd">========== ======================== ======================================</span>
-<span class="sd">&quot;serial&quot;   :mod:`_distances`        serial implementation in C/Cython</span>
+<span class="sd">&quot;serial&quot;   :mod:`c_distances`        serial implementation in C/Cython</span>
 
-<span class="sd">&quot;OpenMP&quot;   :mod:`_distances_openmp` parallel implementation in C/Cython</span>
+<span class="sd">&quot;OpenMP&quot;   :mod:`c_distances_openmp` parallel implementation in C/Cython</span>
 <span class="sd">                                    with OpenMP</span>
 <span class="sd">========== ======================== ======================================</span>
 
@@ -138,10 +138,10 @@
 <span class="c"># independent from the OpenMP code</span>
 <span class="kn">import</span> <span class="nn">importlib</span>
 <span class="n">_distances</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">_distances</span><span class="p">[</span><span class="s">&#39;serial&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s">&quot;._distances&quot;</span><span class="p">,</span>
+<span class="n">_distances</span><span class="p">[</span><span class="s">&#39;serial&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s">&quot;.c_distances&quot;</span><span class="p">,</span>
                                          <span class="n">package</span><span class="o">=</span><span class="s">&quot;MDAnalysis.lib&quot;</span><span class="p">)</span>
 <span class="k">try</span><span class="p">:</span>
-    <span class="n">_distances</span><span class="p">[</span><span class="s">&#39;openmp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s">&quot;._distances_openmp&quot;</span><span class="p">,</span>
+    <span class="n">_distances</span><span class="p">[</span><span class="s">&#39;openmp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s">&quot;.c_distances_openmp&quot;</span><span class="p">,</span>
                                           <span class="n">package</span><span class="o">=</span><span class="s">&quot;MDAnalysis.lib&quot;</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
     <span class="k">pass</span>
@@ -161,24 +161,24 @@
 
 <span class="c"># serial versions are always available (and are typically used within</span>
 <span class="c"># the core and topology modules)</span>
-<span class="kn">from</span> <span class="nn">._distances</span> <span class="kn">import</span> <span class="p">(</span><span class="n">calc_distance_array</span><span class="p">,</span>
-                         <span class="n">calc_distance_array_ortho</span><span class="p">,</span>
-                         <span class="n">calc_distance_array_triclinic</span><span class="p">,</span>
-                         <span class="n">calc_self_distance_array</span><span class="p">,</span>
-                         <span class="n">calc_self_distance_array_ortho</span><span class="p">,</span>
-                         <span class="n">calc_self_distance_array_triclinic</span><span class="p">,</span>
-                         <span class="n">coord_transform</span><span class="p">,</span>
-                         <span class="n">calc_bond_distance</span><span class="p">,</span>
-                         <span class="n">calc_bond_distance_ortho</span><span class="p">,</span>
-                         <span class="n">calc_bond_distance_triclinic</span><span class="p">,</span>
-                         <span class="n">calc_angle</span><span class="p">,</span>
-                         <span class="n">calc_angle_ortho</span><span class="p">,</span>
-                         <span class="n">calc_angle_triclinic</span><span class="p">,</span>
-                         <span class="n">calc_dihedral</span><span class="p">,</span>
-                         <span class="n">calc_dihedral_ortho</span><span class="p">,</span>
-                         <span class="n">calc_dihedral_triclinic</span><span class="p">,</span>
-                         <span class="n">ortho_pbc</span><span class="p">,</span>
-                         <span class="n">triclinic_pbc</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.c_distances</span> <span class="kn">import</span> <span class="p">(</span><span class="n">calc_distance_array</span><span class="p">,</span>
+                          <span class="n">calc_distance_array_ortho</span><span class="p">,</span>
+                          <span class="n">calc_distance_array_triclinic</span><span class="p">,</span>
+                          <span class="n">calc_self_distance_array</span><span class="p">,</span>
+                          <span class="n">calc_self_distance_array_ortho</span><span class="p">,</span>
+                          <span class="n">calc_self_distance_array_triclinic</span><span class="p">,</span>
+                          <span class="n">coord_transform</span><span class="p">,</span>
+                          <span class="n">calc_bond_distance</span><span class="p">,</span>
+                          <span class="n">calc_bond_distance_ortho</span><span class="p">,</span>
+                          <span class="n">calc_bond_distance_triclinic</span><span class="p">,</span>
+                          <span class="n">calc_angle</span><span class="p">,</span>
+                          <span class="n">calc_angle_ortho</span><span class="p">,</span>
+                          <span class="n">calc_angle_triclinic</span><span class="p">,</span>
+                          <span class="n">calc_dihedral</span><span class="p">,</span>
+                          <span class="n">calc_dihedral_ortho</span><span class="p">,</span>
+                          <span class="n">calc_dihedral_triclinic</span><span class="p">,</span>
+                          <span class="n">ortho_pbc</span><span class="p">,</span>
+                          <span class="n">triclinic_pbc</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">_box_check</span><span class="p">(</span><span class="n">box</span><span class="p">):</span>

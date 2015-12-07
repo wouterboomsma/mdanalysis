@@ -30,7 +30,7 @@
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
     <link rel="top" title="MDAnalysis 0.13.0-dev0 documentation" href="../../index.html" />
     <link rel="up" title="9. Library functions — MDAnalysis.lib" href="../lib_modules.html" />
-    <link rel="next" title="9.2.2.1. Distance calculation library — MDAnalysis.lib._distances" href="_distances.html" />
+    <link rel="next" title="&lt;no title&gt;" href="c_distances.html" />
     <link rel="prev" title="9. Library functions — MDAnalysis.lib" href="../lib_modules.html" /> 
   </head>
   <body role="document">
@@ -44,7 +44,7 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="_distances.html" title="9.2.2.1. Distance calculation library — MDAnalysis.lib._distances"
+          <a href="c_distances.html" title="&lt;no title&gt;"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="../lib_modules.html" title="9. Library functions — MDAnalysis.lib"
@@ -72,8 +72,8 @@
   <p class="topless"><a href="../lib_modules.html"
                         title="previous chapter">9. Library functions &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib</span></code></a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="_distances.html"
-                        title="next chapter">9.2.2.1. Distance calculation library &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib._distances</span></code></a></p>
+  <p class="topless"><a href="c_distances.html"
+                        title="next chapter">&lt;no title&gt;</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -112,30 +112,6 @@ typically provide higher performance than the serial code.</p>
 <p>All functions take the optional keyword <em>backend</em>, which determines
 the type of acceleration. Currently, the following choices are
 implemented (<em>backend</em> is case-insensitive):</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="14%" />
-<col width="33%" />
-<col width="53%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head"><em>backend</em></th>
-<th class="head">module</th>
-<th class="head">description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>&#8220;serial&#8221;</td>
-<td><code class="xref py py-mod docutils literal"><span class="pre">_distances</span></code></td>
-<td>serial implementation in C/Cython</td>
-</tr>
-<tr class="row-odd"><td>&#8220;OpenMP&#8221;</td>
-<td><code class="xref py py-mod docutils literal"><span class="pre">_distances_openmp</span></code></td>
-<td>parallel implementation in C/Cython
-with OpenMP</td>
-</tr>
-</tbody>
-</table>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.13.0.</span></p>
 </div>
@@ -880,15 +856,13 @@ An n x 3 array of fracional coordiantes</p>
 </div>
 <div class="section" id="low-level-modules-for-mdanalysis-lib-distances">
 <h1>9.2.2. Low-level modules for <a class="reference internal" href="#module-MDAnalysis.lib.distances" title="MDAnalysis.lib.distances"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.lib.distances</span></code></a><a class="headerlink" href="#low-level-modules-for-mdanalysis-lib-distances" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference internal" href="_distances.html#module-MDAnalysis.lib._distances" title="MDAnalysis.lib._distances"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.lib._distances</span></code></a> contains low level access to the
+<p><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.lib._distances</span></code> contains low level access to the
 <em>serial</em> MDAnalysis Cython functions in <cite>distances</cite>.  These have
 little to no error checking done on inputs so should be used with
-caution. Similarly, <a class="reference internal" href="_distances_openmp.html#module-MDAnalysis.lib._distances_openmp" title="MDAnalysis.lib._distances_openmp"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.lib._distances_openmp</span></code></a> contains
+caution. Similarly, <code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.lib._distances_openmp</span></code> contains
 the OpenMP-enable functions.</p>
 <div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="_distances.html">9.2.2.1. Distance calculation library &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib._distances</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="_distances_openmp.html">9.2.2.2. Parallel distance calculation library &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.lib._distances_openmp</span></code></a></li>
+<ul class="simple">
 </ul>
 </div>
 </div>
@@ -909,7 +883,7 @@ the OpenMP-enable functions.</p>
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="_distances.html" title="9.2.2.1. Distance calculation library — MDAnalysis.lib._distances"
+          <a href="c_distances.html" title="&lt;no title&gt;"
              >next</a> |</li>
         <li class="right" >
           <a href="../lib_modules.html" title="9. Library functions — MDAnalysis.lib"
