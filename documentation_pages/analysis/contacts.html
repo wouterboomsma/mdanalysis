@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3.1.2. Native contacts analysis — MDAnalysis.analysis.contacts &mdash; MDAnalysis 0.13.0-dev0 documentation</title>
+    <title>3.2.2. Native contacts analysis — MDAnalysis.analysis.contacts &mdash; MDAnalysis 0.13.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -30,8 +30,8 @@
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
     <link rel="top" title="MDAnalysis 0.13.0-dev0 documentation" href="../../index.html" />
     <link rel="up" title="3. Analysis modules" href="../analysis_modules.html" />
-    <link rel="next" title="3.1.3. Distance analysis — MDAnalysis.analysis.distances" href="distances.html" />
-    <link rel="prev" title="3.1.1. Coordinate fitting and alignment — MDAnalysis.analysis.align" href="align.html" /> 
+    <link rel="next" title="3.2.3. Distance analysis — MDAnalysis.analysis.distances" href="distances.html" />
+    <link rel="prev" title="3.2.1. Coordinate fitting and alignment — MDAnalysis.analysis.align" href="align.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -44,10 +44,10 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="distances.html" title="3.1.3. Distance analysis — MDAnalysis.analysis.distances"
+          <a href="distances.html" title="3.2.3. Distance analysis — MDAnalysis.analysis.distances"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="align.html" title="3.1.1. Coordinate fitting and alignment — MDAnalysis.analysis.align"
+          <a href="align.html" title="3.2.1. Coordinate fitting and alignment — MDAnalysis.analysis.align"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.13.0-dev0 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../analysis_modules.html" accesskey="U">3. Analysis modules</a> &raquo;</li> 
@@ -60,10 +60,10 @@
             </a></p>
   <h3><a href="../../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">3.1.2. Native contacts analysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.contacts</span></code></a><ul>
-<li><a class="reference internal" href="#one-dimensional-contact-analysis">3.1.2.1. One-dimensional contact analysis</a></li>
-<li><a class="reference internal" href="#two-dimensional-contact-analysis-q1-q2">3.1.2.2. Two-dimensional contact analysis (q1-q2)</a><ul>
-<li><a class="reference internal" href="#classes">3.1.2.2.1. Classes</a></li>
+<li><a class="reference internal" href="#">3.2.2. Native contacts analysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.contacts</span></code></a><ul>
+<li><a class="reference internal" href="#one-dimensional-contact-analysis">3.2.2.1. One-dimensional contact analysis</a></li>
+<li><a class="reference internal" href="#two-dimensional-contact-analysis-q1-q2">3.2.2.2. Two-dimensional contact analysis (q1-q2)</a><ul>
+<li><a class="reference internal" href="#classes">3.2.2.2.1. Classes</a></li>
 </ul>
 </li>
 </ul>
@@ -72,10 +72,10 @@
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="align.html"
-                        title="previous chapter">3.1.1. Coordinate fitting and alignment &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.align</span></code></a></p>
+                        title="previous chapter">3.2.1. Coordinate fitting and alignment &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.align</span></code></a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="distances.html"
-                        title="next chapter">3.1.3. Distance analysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.distances</span></code></a></p>
+                        title="next chapter">3.2.3. Distance analysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.distances</span></code></a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -105,7 +105,7 @@
           <div class="body" role="main">
             
   <span class="target" id="module-MDAnalysis.analysis.contacts"></span><div class="section" id="native-contacts-analysis-mdanalysis-analysis-contacts">
-<h1>3.1.2. Native contacts analysis &#8212; <a class="reference internal" href="#module-MDAnalysis.analysis.contacts" title="MDAnalysis.analysis.contacts"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.contacts</span></code></a><a class="headerlink" href="#native-contacts-analysis-mdanalysis-analysis-contacts" title="Permalink to this headline">¶</a></h1>
+<h1>3.2.2. Native contacts analysis &#8212; <a class="reference internal" href="#module-MDAnalysis.analysis.contacts" title="MDAnalysis.analysis.contacts"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.contacts</span></code></a><a class="headerlink" href="#native-contacts-analysis-mdanalysis-analysis-contacts" title="Permalink to this headline">¶</a></h1>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -154,7 +154,7 @@ very good illustrative example).</p>
 </div>
 <p class="rubric">Examples</p>
 <div class="section" id="one-dimensional-contact-analysis">
-<h2>3.1.2.1. One-dimensional contact analysis<a class="headerlink" href="#one-dimensional-contact-analysis" title="Permalink to this headline">¶</a></h2>
+<h2>3.2.2.1. One-dimensional contact analysis<a class="headerlink" href="#one-dimensional-contact-analysis" title="Permalink to this headline">¶</a></h2>
 <p>As an example we analyze the opening (&#8220;unzipping&#8221;) of salt bridges
 when the AdK enzyme opens up; this is one of the example trajectories
 in MDAnalysis.</p>
@@ -202,7 +202,7 @@ but is is included for illustration.</p>
 <p>See the docs for <a class="reference internal" href="#MDAnalysis.analysis.contacts.ContactAnalysis1" title="MDAnalysis.analysis.contacts.ContactAnalysis1"><code class="xref py py-class docutils literal"><span class="pre">ContactAnalysis1</span></code></a> for another example.</p>
 </div>
 <div class="section" id="two-dimensional-contact-analysis-q1-q2">
-<h2>3.1.2.2. Two-dimensional contact analysis (q1-q2)<a class="headerlink" href="#two-dimensional-contact-analysis-q1-q2" title="Permalink to this headline">¶</a></h2>
+<h2>3.2.2.2. Two-dimensional contact analysis (q1-q2)<a class="headerlink" href="#two-dimensional-contact-analysis-q1-q2" title="Permalink to this headline">¶</a></h2>
 <p>Analyze a single DIMS transition of AdK between its closed and open
 conformation and plot the trajectory projected on q1-q2:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">MDAnalysis.analysis.contacts</span>
@@ -214,7 +214,7 @@ conformation and plot the trajectory projected on q1-q2:</p>
 </div>
 <p>Compare the resulting pathway to the <a class="reference external" href="http://lorentz.dynstr.pasteur.fr/joel/adenylate.php">MinActionPath result for AdK</a>.</p>
 <div class="section" id="classes">
-<h3>3.1.2.2.1. Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h3>
+<h3>3.2.2.2.1. Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="MDAnalysis.analysis.contacts.ContactAnalysis">
 <em class="property">class </em><code class="descclassname">MDAnalysis.analysis.contacts.</code><code class="descname">ContactAnalysis</code><span class="sig-paren">(</span><em>topology</em>, <em>trajectory</em>, <em>ref1=None</em>, <em>ref2=None</em>, <em>radius=8.0</em>, <em>targetdir='.'</em>, <em>infix=''</em>, <em>force=False</em>, <em>selection='name CA'</em>, <em>centroids=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/contacts.html#ContactAnalysis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.contacts.ContactAnalysis" title="Permalink to this definition">¶</a></dt>
@@ -569,10 +569,10 @@ data file.
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="distances.html" title="3.1.3. Distance analysis — MDAnalysis.analysis.distances"
+          <a href="distances.html" title="3.2.3. Distance analysis — MDAnalysis.analysis.distances"
              >next</a> |</li>
         <li class="right" >
-          <a href="align.html" title="3.1.1. Coordinate fitting and alignment — MDAnalysis.analysis.align"
+          <a href="align.html" title="3.2.1. Coordinate fitting and alignment — MDAnalysis.analysis.align"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.13.0-dev0 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../analysis_modules.html" >3. Analysis modules</a> &raquo;</li> 

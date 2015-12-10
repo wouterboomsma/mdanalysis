@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>3.6.1. Polymer analysis — MDAnalysis.analysis.polymer &mdash; MDAnalysis 0.13.0-dev0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.13.0-dev0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within MDAnalysis 0.13.0-dev0 documentation"
+          href="../../_static/opensearch.xml"/>
+    <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
+    <link rel="top" title="MDAnalysis 0.13.0-dev0 documentation" href="../../index.html" />
+    <link rel="up" title="3. Analysis modules" href="../analysis_modules.html" />
+    <link rel="next" title="3.7.1. Elastic network analysis of MD trajectories — MDAnalysis.analysis.gnm" href="gnm.html" />
+    <link rel="prev" title="3.5.2. Generation and Analysis of X3DNA helicoidal parameter profiles — MDAnalysis.analysis.x3dna" href="x3dna.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="gnm.html" title="3.7.1. Elastic network analysis of MD trajectories — MDAnalysis.analysis.gnm"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="x3dna.html" title="3.5.2. Generation and Analysis of X3DNA helicoidal parameter profiles — MDAnalysis.analysis.x3dna"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.13.0-dev0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../analysis_modules.html" accesskey="U">3. Analysis modules</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/mdanalysis-logo-200x150.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="x3dna.html"
+                        title="previous chapter">3.5.2. Generation and Analysis of X3DNA helicoidal parameter profiles &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.x3dna</span></code></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gnm.html"
+                        title="next chapter">3.7.1. Elastic network analysis of MD trajectories &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.gnm</span></code></a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/documentation_pages/analysis/polymer.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-MDAnalysis.analysis.polymer"></span><div class="section" id="polymer-analysis-mdanalysis-analysis-polymer">
+<h1>3.6.1. Polymer analysis &#8212; <a class="reference internal" href="#module-MDAnalysis.analysis.polymer" title="MDAnalysis.analysis.polymer"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.polymer</span></code></a><a class="headerlink" href="#polymer-analysis-mdanalysis-analysis-polymer" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Richard J. Gowers</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Year:</th><td class="field-body">2015</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Copyright:</th><td class="field-body">GNU Public License v3</td>
+</tr>
+</tbody>
+</table>
+<p>This module contains various commonly used tools in analysing polymers.</p>
+<dl class="class">
+<dt id="MDAnalysis.analysis.polymer.PersistenceLength">
+<em class="property">class </em><code class="descclassname">MDAnalysis.analysis.polymer.</code><code class="descname">PersistenceLength</code><span class="sig-paren">(</span><em>atomgroups</em>, <em>start=None</em>, <em>stop=None</em>, <em>step=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/polymer.html#PersistenceLength"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.polymer.PersistenceLength" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the persistence length for polymer chains</p>
+<p>The persistence length is the length at which two points on the polymer
+chain become decorrelated.</p>
+<p class="rubric">Notes</p>
+<p>This analysis requires that the trajectory supports indexing</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.13.0.</span></p>
+</div>
+<p>Calculate the persistence length for polymer chains</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>atomgroups</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; List of atomgroups.  Each atomgroup should represent a single
+polymer chain, ordered in the correct order.</li>
+<li><strong>start</strong> (<em>int, optional</em>) &#8211; First frame of trajectory to analyse, Default: 0</li>
+<li><strong>stop</strong> (<em>int, optional</em>) &#8211; Last frame of trajectory to analyse, Default: -1</li>
+<li><strong>step</strong> (<em>int, optional</em>) &#8211; Step between frames to analyse, Default: 1</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="MDAnalysis.analysis.polymer.PersistenceLength.perform_fit">
+<code class="descname">perform_fit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/polymer.html#PersistenceLength.perform_fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.polymer.PersistenceLength.perform_fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit the results to an exponential decay</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.analysis.polymer.PersistenceLength.plot">
+<code class="descname">plot</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/polymer.html#PersistenceLength.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.polymer.PersistenceLength.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Oooh fancy</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="MDAnalysis.analysis.polymer.fit_exponential_decay">
+<code class="descclassname">MDAnalysis.analysis.polymer.</code><code class="descname">fit_exponential_decay</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/polymer.html#fit_exponential_decay"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.polymer.fit_exponential_decay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit a function to an exponential decay</p>
+<div class="math">
+\[y = \exp(-x/a)\]</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>y</strong> (<em>x,</em>) &#8211; The two arrays of data</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>a</strong> &#8211;
+The coefficient <em>a</em> for this decay</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This function assumes that data starts at 1.0 and decays to 0.0</p>
+<p>Requires scipy</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="gnm.html" title="3.7.1. Elastic network analysis of MD trajectories — MDAnalysis.analysis.gnm"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="x3dna.html" title="3.5.2. Generation and Analysis of X3DNA helicoidal parameter profiles — MDAnalysis.analysis.x3dna"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.13.0-dev0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../analysis_modules.html" >3. Analysis modules</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Joshua
+    Adelman, Jonathan Barnoud, Christian Beckstein (logo), Alejandro
+    Bernardin, Sébastien Buchoux, David Caplan, Matthieu Chavent,
+    Xavier Deupi, Jan Domański, David L. Dotson, Lennard van der
+    Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas
+    Grossar, Benjamin Hall, Joe Jordan, Max Linke, Jinju Lu, Robert
+    McGibbon, Alex Nesterenko, Manuel Nuno Melo, Hai Nguyen,
+    Caio S. Souza, Danny Parton, Joshua L. Phillips, Tyler Reddy,
+    Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl, 
+    Gorman Stock, Isaac Virshup, Zhuyi Xue, Carlos Yáñez S.,
+    and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

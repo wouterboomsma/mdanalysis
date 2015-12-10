@@ -713,7 +713,12 @@
         <span class="n">valdipList</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">totalFrames</span><span class="o">/</span><span class="n">dt</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-            <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getOneDeltaPoint</span><span class="p">(</span><span class="n">universe</span><span class="p">,</span><span class="n">repInd</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">sumsdt</span><span class="p">,</span><span class="n">dt</span><span class="p">)</span>
+            <span class="c"># If the selection of atoms is too small, there will be a division by zero in the next line.</span>
+            <span class="c"># The except clause avoid the use of the result of _getOneDeltaPoint() on the mean.</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getOneDeltaPoint</span><span class="p">(</span><span class="n">universe</span><span class="p">,</span><span class="n">repInd</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">sumsdt</span><span class="p">,</span><span class="n">dt</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+                <span class="k">continue</span>
             <span class="n">sumDeltaOH</span> <span class="o">+=</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">sumDeltaHH</span> <span class="o">+=</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
             <span class="n">sumDeltadip</span> <span class="o">+=</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>

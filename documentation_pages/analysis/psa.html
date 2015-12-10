@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>3.1.5. Calculating path similarity — MDAnalysis.analysis.psa &mdash; MDAnalysis 0.13.0-dev0 documentation</title>
+    <title>3.2.5. Calculating path similarity — MDAnalysis.analysis.psa &mdash; MDAnalysis 0.13.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -30,8 +30,8 @@
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
     <link rel="top" title="MDAnalysis 0.13.0-dev0 documentation" href="../../index.html" />
     <link rel="up" title="3. Analysis modules" href="../analysis_modules.html" />
-    <link rel="next" title="3.2.1. Hydrogen Bond analysis — MDAnalysis.analysis.hbonds.hbond_analysis" href="hbond_analysis.html" />
-    <link rel="prev" title="3.1.4. Calculating root mean square quantities — MDAnalysis.analysis.rms" href="rms.html" /> 
+    <link rel="next" title="3.3.1. Hydrogen Bond analysis — MDAnalysis.analysis.hbonds.hbond_analysis" href="hbond_analysis.html" />
+    <link rel="prev" title="3.2.4. Calculating root mean square quantities — MDAnalysis.analysis.rms" href="rms.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -44,10 +44,10 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="hbond_analysis.html" title="3.2.1. Hydrogen Bond analysis — MDAnalysis.analysis.hbonds.hbond_analysis"
+          <a href="hbond_analysis.html" title="3.3.1. Hydrogen Bond analysis — MDAnalysis.analysis.hbonds.hbond_analysis"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="rms.html" title="3.1.4. Calculating root mean square quantities — MDAnalysis.analysis.rms"
+          <a href="rms.html" title="3.2.4. Calculating root mean square quantities — MDAnalysis.analysis.rms"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.13.0-dev0 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../analysis_modules.html" accesskey="U">3. Analysis modules</a> &raquo;</li> 
@@ -60,19 +60,19 @@
             </a></p>
   <h3><a href="../../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">3.1.5. Calculating path similarity &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.psa</span></code></a><ul>
-<li><a class="reference internal" href="#helper-functions-and-variables">3.1.5.1. Helper functions and variables</a></li>
-<li><a class="reference internal" href="#classes-methods-and-functions">3.1.5.2. Classes, methods, and functions</a></li>
+<li><a class="reference internal" href="#">3.2.5. Calculating path similarity &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.psa</span></code></a><ul>
+<li><a class="reference internal" href="#helper-functions-and-variables">3.2.5.1. Helper functions and variables</a></li>
+<li><a class="reference internal" href="#classes-methods-and-functions">3.2.5.2. Classes, methods, and functions</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="rms.html"
-                        title="previous chapter">3.1.4. Calculating root mean square quantities &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.rms</span></code></a></p>
+                        title="previous chapter">3.2.4. Calculating root mean square quantities &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.rms</span></code></a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="hbond_analysis.html"
-                        title="next chapter">3.2.1. Hydrogen Bond analysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.hbonds.hbond_analysis</span></code></a></p>
+                        title="next chapter">3.3.1. Hydrogen Bond analysis &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.analysis.hbonds.hbond_analysis</span></code></a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -102,7 +102,7 @@
           <div class="body" role="main">
             
   <span class="target" id="module-MDAnalysis.analysis.psa"></span><div class="section" id="calculating-path-similarity-mdanalysis-analysis-psa">
-<h1>3.1.5. Calculating path similarity &#8212; <a class="reference internal" href="#module-MDAnalysis.analysis.psa" title="MDAnalysis.analysis.psa"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.psa</span></code></a><a class="headerlink" href="#calculating-path-similarity-mdanalysis-analysis-psa" title="Permalink to this headline">¶</a></h1>
+<h1>3.2.5. Calculating path similarity &#8212; <a class="reference internal" href="#module-MDAnalysis.analysis.psa" title="MDAnalysis.analysis.psa"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.psa</span></code></a><a class="headerlink" href="#calculating-path-similarity-mdanalysis-analysis-psa" title="Permalink to this headline">¶</a></h1>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -156,7 +156,7 @@ doi: <a class="reference external" href="http://dx.doi.org/10.1371/journal.pcbi.
 </tbody>
 </table>
 <div class="section" id="helper-functions-and-variables">
-<h2>3.1.5.1. Helper functions and variables<a class="headerlink" href="#helper-functions-and-variables" title="Permalink to this headline">¶</a></h2>
+<h2>3.2.5.1. Helper functions and variables<a class="headerlink" href="#helper-functions-and-variables" title="Permalink to this headline">¶</a></h2>
 <p>The following convenience functions are used by other functions in this module.</p>
 <dl class="function">
 <dt id="MDAnalysis.analysis.psa.sqnorm">
@@ -245,7 +245,7 @@ atom.</li>
 
 </div>
 <div class="section" id="classes-methods-and-functions">
-<h2>3.1.5.2. Classes, methods, and functions<a class="headerlink" href="#classes-methods-and-functions" title="Permalink to this headline">¶</a></h2>
+<h2>3.2.5.2. Classes, methods, and functions<a class="headerlink" href="#classes-methods-and-functions" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="MDAnalysis.analysis.psa.get_path_metric_func">
 <code class="descclassname">MDAnalysis.analysis.psa.</code><code class="descname">get_path_metric_func</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/psa.html#get_path_metric_func"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.psa.get_path_metric_func" title="Permalink to this definition">¶</a></dt>
@@ -839,7 +839,7 @@ nearest neighbor distances for each path in <em>this</em> <a class="reference in
 
 <dl class="class">
 <dt id="MDAnalysis.analysis.psa.PSAnalysis">
-<em class="property">class </em><code class="descclassname">MDAnalysis.analysis.psa.</code><code class="descname">PSAnalysis</code><span class="sig-paren">(</span><em>universes</em>, <em>reference=None</em>, <em>ref_select='name CA'</em>, <em>ref_frame=0</em>, <em>path_select=None</em>, <em>labels=None</em>, <em>targetdir=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/psa.html#PSAnalysis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.psa.PSAnalysis" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">MDAnalysis.analysis.psa.</code><code class="descname">PSAnalysis</code><span class="sig-paren">(</span><em>universes</em>, <em>reference=None</em>, <em>ref_select='name CA'</em>, <em>ref_frame=0</em>, <em>path_select=None</em>, <em>labels=None</em>, <em>targetdir='.'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/psa.html#PSAnalysis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.psa.PSAnalysis" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform Path Similarity Analysis (PSA) on a set of trajectories.</p>
 <p>The analysis is performed with <a class="reference internal" href="#MDAnalysis.analysis.psa.PSAnalysis.run" title="MDAnalysis.analysis.psa.PSAnalysis.run"><code class="xref py py-meth docutils literal"><span class="pre">PSAnalysis.run()</span></code></a> and stores the result
 in the <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> distance matrix <a class="reference internal" href="#MDAnalysis.analysis.psa.PSAnalysis.D" title="MDAnalysis.analysis.psa.PSAnalysis.D"><code class="xref py py-attr docutils literal"><span class="pre">PSAnalysis.D</span></code></a>.
@@ -1406,10 +1406,10 @@ file and text file.</p>
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="hbond_analysis.html" title="3.2.1. Hydrogen Bond analysis — MDAnalysis.analysis.hbonds.hbond_analysis"
+          <a href="hbond_analysis.html" title="3.3.1. Hydrogen Bond analysis — MDAnalysis.analysis.hbonds.hbond_analysis"
              >next</a> |</li>
         <li class="right" >
-          <a href="rms.html" title="3.1.4. Calculating root mean square quantities — MDAnalysis.analysis.rms"
+          <a href="rms.html" title="3.2.4. Calculating root mean square quantities — MDAnalysis.analysis.rms"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.13.0-dev0 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../analysis_modules.html" >3. Analysis modules</a> &raquo;</li> 
