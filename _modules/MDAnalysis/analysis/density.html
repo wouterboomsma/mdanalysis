@@ -229,7 +229,7 @@
 <span class="sd">    1. From a histogram (i.e. counts on a grid)::</span>
 
 <span class="sd">        h,edges = numpy.histogramdd(...)</span>
-<span class="sd">        D = Density(h,edges)</span>
+<span class="sd">        D = Density(h, edges, parameters={&#39;isDensity&#39;: False}, units={&#39;length&#39;: &#39;A&#39;})</span>
 <span class="sd">        D.make_density()</span>
 
 <span class="sd">    2. From a saved density file (e.g. in OpenDX format), where the lengths are</span>

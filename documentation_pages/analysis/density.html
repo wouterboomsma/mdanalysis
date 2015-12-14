@@ -177,7 +177,7 @@ that the data are in fact a density.</p>
 <ol class="arabic">
 <li><p class="first">From a histogram (i.e. counts on a grid):</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">h</span><span class="p">,</span><span class="n">edges</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">histogramdd</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="n">D</span> <span class="o">=</span> <span class="n">Density</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="n">edges</span><span class="p">)</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">Density</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;isDensity&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">},</span> <span class="n">units</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;length&#39;</span><span class="p">:</span> <span class="s">&#39;A&#39;</span><span class="p">})</span>
 <span class="n">D</span><span class="o">.</span><span class="n">make_density</span><span class="p">()</span>
 </pre></div>
 </div>
