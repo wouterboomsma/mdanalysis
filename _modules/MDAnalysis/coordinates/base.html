@@ -339,7 +339,7 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Must specify at least one set of data&quot;</span><span class="p">)</span>
         <span class="n">n_atoms</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">lens</span><span class="p">)</span>
         <span class="c"># Check arrays are matched length?</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">([</span><span class="n">val</span> <span class="o">==</span> <span class="n">n_atoms</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">lens</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span> <span class="n">val</span> <span class="o">==</span> <span class="n">n_atoms</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">lens</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Lengths of input data mismatched&quot;</span><span class="p">)</span>
 
         <span class="n">ts</span> <span class="o">=</span> <span class="n">cls</span><span class="p">(</span><span class="n">n_atoms</span><span class="p">,</span>
