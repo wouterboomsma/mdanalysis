@@ -1195,7 +1195,7 @@
         <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">((</span><span class="s">&quot;Couldn&#39;t find a suitable Universe to unpickle AtomGroup &quot;</span>
                 <span class="s">&quot;onto. (needed a universe with {}{} atoms, topology filename: &#39;{}&#39;, and &quot;</span>
                 <span class="s">&quot;trajectory filename: &#39;{}&#39;)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                        <span class="s">&quot;anchor_name: &#39;{}&#39;, &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">anchor_name</span><span class="p">)</span> <span class="k">if</span> <span class="n">anchor_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+                        <span class="s">&quot;anchor_name: &#39;{0}&#39;, &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">anchor_name</span><span class="p">)</span> <span class="k">if</span> <span class="n">anchor_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
                         <span class="o">*</span><span class="n">state</span><span class="p">[</span><span class="mi">2</span><span class="p">:]))</span>
 
     <span class="nd">@property</span>
