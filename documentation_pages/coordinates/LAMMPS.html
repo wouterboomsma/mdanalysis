@@ -270,35 +270,101 @@ according to the CHARMM format. The time between two frames would be
 <dd></dd></dl>
 
 <dl class="method">
+<dt id="MDAnalysis.coordinates.LAMMPS.DCDReader.check_slice_indices">
+<code class="descname">check_slice_indices</code><span class="sig-paren">(</span><em>start</em>, <em>stop</em>, <em>step</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDReader.check_slice_indices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check frame indices are valid and clip to fit trajectory</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>stop, step</strong> (<em>start,</em>) &#8211; Values representing the slice indices.
+Can use <cite>None</cite> to use defaults of (0, -1, and 1)
+respectively.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>start, stop, step</strong> &#8211;
+Integers representing the slice</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDReader.convert_forces_from_native">
 <code class="descname">convert_forces_from_native</code><span class="sig-paren">(</span><em>force</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDReader.convert_forces_from_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>In-place conversion of forces array <em>force</em> from native units to base units.</p>
+<dd><p>Conversion of forces array <em>force</em> from native to base units</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>force</em> is modified in place and also returned.</p>
-<div class="versionadded">
+<div class="last versionadded">
 <p><span class="versionmodified">New in version 0.7.7.</span></p>
+</div>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDReader.convert_forces_to_native">
 <code class="descname">convert_forces_to_native</code><span class="sig-paren">(</span><em>force</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDReader.convert_forces_to_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>In-place conversion of force array <em>force</em> from base units to native units.</p>
+<dd><p>Conversion of force array <em>force</em> from base to native units.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>force</em> is modified in place and also returned.</p>
-<div class="versionadded">
+<div class="last versionadded">
 <p><span class="versionmodified">New in version 0.7.7.</span></p>
+</div>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDReader.convert_pos_from_native">
 <code class="descname">convert_pos_from_native</code><span class="sig-paren">(</span><em>x</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDReader.convert_pos_from_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>In-place conversion of coordinate array x from native units to base units.</p>
+<dd><p>Conversion of coordinate array x from native units to base units.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>x</em> is modified in place and also returned.</p>
-<div class="versionchanged">
+<div class="last versionchanged">
 <p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
 modified copy is returned <em>unless</em> no conversion takes
 place, in which case the reference to the unmodified <em>x</em> is
 returned.</p>
+</div>
 </div>
 </dd></dl>
 
@@ -306,12 +372,27 @@ returned.</p>
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDReader.convert_pos_to_native">
 <code class="descname">convert_pos_to_native</code><span class="sig-paren">(</span><em>x</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDReader.convert_pos_to_native" title="Permalink to this definition">¶</a></dt>
 <dd><p>Conversion of coordinate array x from base units to native units.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>x</em> is modified in place and also returned.</p>
-<div class="versionchanged">
+<div class="last versionchanged">
 <p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
 modified copy is returned <em>unless</em> no conversion takes
 place, in which case the reference to the unmodified <em>x</em> is
 returned.</p>
+</div>
 </div>
 </dd></dl>
 
@@ -319,15 +400,30 @@ returned.</p>
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDReader.convert_time_from_native">
 <code class="descname">convert_time_from_native</code><span class="sig-paren">(</span><em>t</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDReader.convert_time_from_native" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert time <em>t</em> from native units to base units.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>t</em> is modified in place and also
 returned (although note that scalar values <em>t</em> are passed by
 value in Python and hence an in-place modification has no
 effect on the caller.)</p>
-<div class="versionchanged">
+<div class="last versionchanged">
 <p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
 modified copy is returned <em>unless</em> no conversion takes
 place, in which case the reference to the unmodified <em>x</em> is
 returned.</p>
+</div>
 </div>
 </dd></dl>
 
@@ -335,35 +431,80 @@ returned.</p>
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDReader.convert_time_to_native">
 <code class="descname">convert_time_to_native</code><span class="sig-paren">(</span><em>t</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDReader.convert_time_to_native" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert time <em>t</em> from base units to native units.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>t</em> is modified in place and also
 returned. (Also note that scalar values <em>t</em> are passed by
 value in Python and hence an in-place modification has no
 effect on the caller.)</p>
-<div class="versionchanged">
+<div class="last versionchanged">
 <p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
 modified copy is returned <em>unless</em> no conversion takes
 place, in which case the reference to the unmodified <em>x</em> is
 returned.</p>
+</div>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDReader.convert_velocities_from_native">
 <code class="descname">convert_velocities_from_native</code><span class="sig-paren">(</span><em>v</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDReader.convert_velocities_from_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>In-place conversion of velocities array <em>v</em> from native units to base units.</p>
+<dd><p>Conversion of velocities array <em>v</em> from native to base units</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>v</em> is modified in place and also returned.</p>
-<div class="versionadded">
+<div class="last versionadded">
 <p><span class="versionmodified">New in version 0.7.5.</span></p>
+</div>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDReader.convert_velocities_to_native">
 <code class="descname">convert_velocities_to_native</code><span class="sig-paren">(</span><em>v</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDReader.convert_velocities_to_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>In-place conversion of coordinate array <em>v</em> from base units to native units.</p>
+<dd><p>Conversion of coordinate array <em>v</em> from base to native units</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>v</em> is modified in place and also returned.</p>
-<div class="versionadded">
+<div class="last versionadded">
 <p><span class="versionmodified">New in version 0.7.5.</span></p>
+</div>
 </div>
 </dd></dl>
 
@@ -528,33 +669,78 @@ values.</p>
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDWriter.convert_forces_from_native">
 <code class="descname">convert_forces_from_native</code><span class="sig-paren">(</span><em>force</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDWriter.convert_forces_from_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>In-place conversion of forces array <em>force</em> from native units to base units.</p>
+<dd><p>Conversion of forces array <em>force</em> from native to base units</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>force</em> is modified in place and also returned.</p>
-<div class="versionadded">
+<div class="last versionadded">
 <p><span class="versionmodified">New in version 0.7.7.</span></p>
+</div>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDWriter.convert_forces_to_native">
 <code class="descname">convert_forces_to_native</code><span class="sig-paren">(</span><em>force</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDWriter.convert_forces_to_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>In-place conversion of force array <em>force</em> from base units to native units.</p>
+<dd><p>Conversion of force array <em>force</em> from base to native units.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>force</em> is modified in place and also returned.</p>
-<div class="versionadded">
+<div class="last versionadded">
 <p><span class="versionmodified">New in version 0.7.7.</span></p>
+</div>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDWriter.convert_pos_from_native">
 <code class="descname">convert_pos_from_native</code><span class="sig-paren">(</span><em>x</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDWriter.convert_pos_from_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>In-place conversion of coordinate array x from native units to base units.</p>
+<dd><p>Conversion of coordinate array x from native units to base units.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>x</em> is modified in place and also returned.</p>
-<div class="versionchanged">
+<div class="last versionchanged">
 <p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
 modified copy is returned <em>unless</em> no conversion takes
 place, in which case the reference to the unmodified <em>x</em> is
 returned.</p>
+</div>
 </div>
 </dd></dl>
 
@@ -562,12 +748,27 @@ returned.</p>
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDWriter.convert_pos_to_native">
 <code class="descname">convert_pos_to_native</code><span class="sig-paren">(</span><em>x</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDWriter.convert_pos_to_native" title="Permalink to this definition">¶</a></dt>
 <dd><p>Conversion of coordinate array x from base units to native units.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>x</em> is modified in place and also returned.</p>
-<div class="versionchanged">
+<div class="last versionchanged">
 <p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
 modified copy is returned <em>unless</em> no conversion takes
 place, in which case the reference to the unmodified <em>x</em> is
 returned.</p>
+</div>
 </div>
 </dd></dl>
 
@@ -575,15 +776,30 @@ returned.</p>
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDWriter.convert_time_from_native">
 <code class="descname">convert_time_from_native</code><span class="sig-paren">(</span><em>t</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDWriter.convert_time_from_native" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert time <em>t</em> from native units to base units.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>t</em> is modified in place and also
 returned (although note that scalar values <em>t</em> are passed by
 value in Python and hence an in-place modification has no
 effect on the caller.)</p>
-<div class="versionchanged">
+<div class="last versionchanged">
 <p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
 modified copy is returned <em>unless</em> no conversion takes
 place, in which case the reference to the unmodified <em>x</em> is
 returned.</p>
+</div>
 </div>
 </dd></dl>
 
@@ -591,35 +807,80 @@ returned.</p>
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDWriter.convert_time_to_native">
 <code class="descname">convert_time_to_native</code><span class="sig-paren">(</span><em>t</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDWriter.convert_time_to_native" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert time <em>t</em> from base units to native units.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>t</em> is modified in place and also
 returned. (Also note that scalar values <em>t</em> are passed by
 value in Python and hence an in-place modification has no
 effect on the caller.)</p>
-<div class="versionchanged">
+<div class="last versionchanged">
 <p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
 modified copy is returned <em>unless</em> no conversion takes
 place, in which case the reference to the unmodified <em>x</em> is
 returned.</p>
+</div>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDWriter.convert_velocities_from_native">
 <code class="descname">convert_velocities_from_native</code><span class="sig-paren">(</span><em>v</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDWriter.convert_velocities_from_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>In-place conversion of velocities array <em>v</em> from native units to base units.</p>
+<dd><p>Conversion of velocities array <em>v</em> from native to base units</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>v</em> is modified in place and also returned.</p>
-<div class="versionadded">
+<div class="last versionadded">
 <p><span class="versionmodified">New in version 0.7.5.</span></p>
+</div>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDWriter.convert_velocities_to_native">
 <code class="descname">convert_velocities_to_native</code><span class="sig-paren">(</span><em>v</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDWriter.convert_velocities_to_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>In-place conversion of coordinate array <em>v</em> from base units to native units.</p>
+<dd><p>Conversion of coordinate array <em>v</em> from base to native units</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>v</em> is modified in place and also returned.</p>
-<div class="versionadded">
+<div class="last versionadded">
 <p><span class="versionmodified">New in version 0.7.5.</span></p>
+</div>
 </div>
 </dd></dl>
 
@@ -699,7 +960,7 @@ available). <em>n_atoms</em> is always set from <code class="xref py py-attr doc
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DATAReader.Writer">
 <code class="descname">Writer</code><span class="sig-paren">(</span><em>filename</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DATAReader.Writer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a trajectory writer with the same properties as this trajectory.</p>
+<dd><p>A trajectory writer with the same properties as this trajectory.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -755,35 +1016,101 @@ available). <em>n_atoms</em> is always set from <code class="xref py py-attr doc
 <dd></dd></dl>
 
 <dl class="method">
+<dt id="MDAnalysis.coordinates.LAMMPS.DATAReader.check_slice_indices">
+<code class="descname">check_slice_indices</code><span class="sig-paren">(</span><em>start</em>, <em>stop</em>, <em>step</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DATAReader.check_slice_indices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check frame indices are valid and clip to fit trajectory</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>stop, step</strong> (<em>start,</em>) &#8211; Values representing the slice indices.
+Can use <cite>None</cite> to use defaults of (0, -1, and 1)
+respectively.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>start, stop, step</strong> &#8211;
+Integers representing the slice</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DATAReader.convert_forces_from_native">
 <code class="descname">convert_forces_from_native</code><span class="sig-paren">(</span><em>force</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DATAReader.convert_forces_from_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>In-place conversion of forces array <em>force</em> from native units to base units.</p>
+<dd><p>Conversion of forces array <em>force</em> from native to base units</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>force</em> is modified in place and also returned.</p>
-<div class="versionadded">
+<div class="last versionadded">
 <p><span class="versionmodified">New in version 0.7.7.</span></p>
+</div>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DATAReader.convert_forces_to_native">
 <code class="descname">convert_forces_to_native</code><span class="sig-paren">(</span><em>force</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DATAReader.convert_forces_to_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>In-place conversion of force array <em>force</em> from base units to native units.</p>
+<dd><p>Conversion of force array <em>force</em> from base to native units.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>force</em> is modified in place and also returned.</p>
-<div class="versionadded">
+<div class="last versionadded">
 <p><span class="versionmodified">New in version 0.7.7.</span></p>
+</div>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DATAReader.convert_pos_from_native">
 <code class="descname">convert_pos_from_native</code><span class="sig-paren">(</span><em>x</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DATAReader.convert_pos_from_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>In-place conversion of coordinate array x from native units to base units.</p>
+<dd><p>Conversion of coordinate array x from native units to base units.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>x</em> is modified in place and also returned.</p>
-<div class="versionchanged">
+<div class="last versionchanged">
 <p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
 modified copy is returned <em>unless</em> no conversion takes
 place, in which case the reference to the unmodified <em>x</em> is
 returned.</p>
+</div>
 </div>
 </dd></dl>
 
@@ -791,12 +1118,27 @@ returned.</p>
 <dt id="MDAnalysis.coordinates.LAMMPS.DATAReader.convert_pos_to_native">
 <code class="descname">convert_pos_to_native</code><span class="sig-paren">(</span><em>x</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DATAReader.convert_pos_to_native" title="Permalink to this definition">¶</a></dt>
 <dd><p>Conversion of coordinate array x from base units to native units.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>x</em> is modified in place and also returned.</p>
-<div class="versionchanged">
+<div class="last versionchanged">
 <p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
 modified copy is returned <em>unless</em> no conversion takes
 place, in which case the reference to the unmodified <em>x</em> is
 returned.</p>
+</div>
 </div>
 </dd></dl>
 
@@ -804,15 +1146,30 @@ returned.</p>
 <dt id="MDAnalysis.coordinates.LAMMPS.DATAReader.convert_time_from_native">
 <code class="descname">convert_time_from_native</code><span class="sig-paren">(</span><em>t</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DATAReader.convert_time_from_native" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert time <em>t</em> from native units to base units.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>t</em> is modified in place and also
 returned (although note that scalar values <em>t</em> are passed by
 value in Python and hence an in-place modification has no
 effect on the caller.)</p>
-<div class="versionchanged">
+<div class="last versionchanged">
 <p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
 modified copy is returned <em>unless</em> no conversion takes
 place, in which case the reference to the unmodified <em>x</em> is
 returned.</p>
+</div>
 </div>
 </dd></dl>
 
@@ -820,35 +1177,80 @@ returned.</p>
 <dt id="MDAnalysis.coordinates.LAMMPS.DATAReader.convert_time_to_native">
 <code class="descname">convert_time_to_native</code><span class="sig-paren">(</span><em>t</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DATAReader.convert_time_to_native" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert time <em>t</em> from base units to native units.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>t</em> is modified in place and also
 returned. (Also note that scalar values <em>t</em> are passed by
 value in Python and hence an in-place modification has no
 effect on the caller.)</p>
-<div class="versionchanged">
+<div class="last versionchanged">
 <p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
 modified copy is returned <em>unless</em> no conversion takes
 place, in which case the reference to the unmodified <em>x</em> is
 returned.</p>
+</div>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DATAReader.convert_velocities_from_native">
 <code class="descname">convert_velocities_from_native</code><span class="sig-paren">(</span><em>v</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DATAReader.convert_velocities_from_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>In-place conversion of velocities array <em>v</em> from native units to base units.</p>
+<dd><p>Conversion of velocities array <em>v</em> from native to base units</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>v</em> is modified in place and also returned.</p>
-<div class="versionadded">
+<div class="last versionadded">
 <p><span class="versionmodified">New in version 0.7.5.</span></p>
+</div>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DATAReader.convert_velocities_to_native">
 <code class="descname">convert_velocities_to_native</code><span class="sig-paren">(</span><em>v</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DATAReader.convert_velocities_to_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>In-place conversion of coordinate array <em>v</em> from base units to native units.</p>
+<dd><p>Conversion of coordinate array <em>v</em> from base to native units</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>v</em> is modified in place and also returned.</p>
-<div class="versionadded">
+<div class="last versionadded">
 <p><span class="versionmodified">New in version 0.7.5.</span></p>
+</div>
 </div>
 </dd></dl>
 

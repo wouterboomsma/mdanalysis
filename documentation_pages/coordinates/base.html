@@ -108,36 +108,22 @@ module. The derived classes must follow the Trajectory API in
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*n_atoms*</strong> &#8211; The total number of atoms this Timestep describes</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Keywords:</th><td class="field-body"><dl class="first last docutils">
-<dt><em>positions</em></dt>
-<dd><p class="first last">Whether this Timestep has position information [<code class="docutils literal"><span class="pre">True</span></code>]</p>
-</dd>
-<dt><em>velocities</em></dt>
-<dd><p class="first last">Whether this Timestep has velocity information [<code class="docutils literal"><span class="pre">False</span></code>]</p>
-</dd>
-<dt><em>forces</em></dt>
-<dd><p class="first last">Whether this Timestep has force information [<code class="docutils literal"><span class="pre">False</span></code>]</p>
-</dd>
-<dt><em>dt</em></dt>
-<dd><p class="first last">The time difference between frames (ps).  If <a class="reference internal" href="#MDAnalysis.coordinates.base.Timestep.time" title="MDAnalysis.coordinates.base.Timestep.time"><code class="xref py py-attr docutils literal"><span class="pre">time</span></code></a>
-is set, then <cite>dt</cite> will be ignored.</p>
-</dd>
-<dt><em>time_offset</em></dt>
-<dd><p class="first last">The starting time from which to calculate time (ps)</p>
-</dd>
-</dl>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>n_atoms</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The total number of atoms this Timestep describes</li>
+<li><strong>positions</strong> (<em>bool, optional</em>) &#8211; Whether this Timestep has position information [<code class="docutils literal"><span class="pre">True</span></code>]</li>
+<li><strong>velocities</strong> (<em>bool, optional</em>) &#8211; Whether this Timestep has velocity information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
+<li><strong>forces</strong> (<em>bool, optional</em>) &#8211; Whether this Timestep has force information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
+<li><strong>dt</strong> (<em>float, optional</em>) &#8211; The time difference between frames (ps).  If <a class="reference internal" href="#MDAnalysis.coordinates.base.Timestep.time" title="MDAnalysis.coordinates.base.Timestep.time"><code class="xref py py-attr docutils literal"><span class="pre">time</span></code></a>
+is set, then <cite>dt</cite> will be ignored.</li>
+<li><strong>time_offset</strong> (<em>float, optional</em>) &#8211; The starting time from which to calculate time (ps)</li>
+<li><strong>versionchanged</strong> (<em>.</em>) &#8211; Added keywords for positions, velocities and forces
+Can add and remove position/velocity/force information by using
+the has_* attribute</li>
+</ul>
 </td>
 </tr>
 </tbody>
 </table>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Added keywords for positions, velocities and forces
-Can add and remove position/velocity/force information by using
-the has_* attribute</p>
-</div>
 </dd></dl>
 
 <dl class="classmethod">
@@ -197,10 +183,10 @@ the has_* attribute</p>
 <dd><p>The time difference in ps between timesteps</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This defaults to 1.0 ps in the absence of time data</p>
-</div>
-<div class="versionadded">
+<p>This defaults to 1.0 ps in the absence of time data</p>
+<div class="last versionadded">
 <p><span class="versionmodified">New in version 0.11.0.</span></p>
+</div>
 </div>
 </dd></dl>
 
@@ -214,12 +200,18 @@ weren&#8217;t originally present.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A numpy.ndarray of shape (n_atoms, 3) of position data for each
-atom</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><ul class="simple">
+<li><em>A numpy.ndarray of shape (n_atoms, 3) of position data for each</em></li>
+<li><em>atom</em></li>
+</ul>
+</p>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">:class</span></code> &#8211;
-<cite>MDAnalysis.exceptions.NoDataError</cite>
-If the Timestep has no position data</td>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li>class:<cite>MDAnalysis.exceptions.NoDataError</cite></li>
+<li><strong>If the Timestep has no position data</strong> &#8211;</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -238,12 +230,18 @@ weren&#8217;t originally present.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A numpy.ndarray of shape (n_atoms, 3) of velocity data for each
-atom</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><ul class="simple">
+<li><em>A numpy.ndarray of shape (n_atoms, 3) of velocity data for each</em></li>
+<li><em>atom</em></li>
+</ul>
+</p>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">:class</span></code> &#8211;
-<cite>MDAnalysis.exceptions.NoDataError</cite>
-When the Timestep does not contain velocity information</td>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li>class:<cite>MDAnalysis.exceptions.NoDataError</cite></li>
+<li><strong>When the Timestep does not contain velocity information</strong> &#8211;</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -262,18 +260,22 @@ weren&#8217;t originally present.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A numpy.ndarray of shape (n_atoms, 3) of force data for each
-atom</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><ul class="simple">
+<li><em>A numpy.ndarray of shape (n_atoms, 3) of force data for each</em></li>
+<li><em>atom</em></li>
+</ul>
+</p>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">:class</span></code> &#8211;
-<cite>MDAnalysis.NoDataError</cite>
-When the Timestep does not contain force information</td>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li>class:<cite>MDAnalysis.NoDataError</cite></li>
+<li><strong>When the Timestep does not contain force information</strong> &#8211;</li>
+<li><strong>.. versionadded</strong> (<em>: 0.11.0</em>) &#8211;</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.11.0.</span></p>
-</div>
 </dd></dl>
 
 <dl class="attribute">
@@ -379,11 +381,16 @@ description of box dimensions</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A (3, 3) numpy.ndarray of unit cell vectors</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">A (3, 3) numpy.ndarray of unit cell vectors</td>
 </tr>
 </tbody>
 </table>
-<p>For example:</p>
+<p class="rubric">Examples</p>
+<p>The unitcell for a given system can be queried as either three
+vectors lengths followed by their respective angle, or as three
+triclinic vectors.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span><span class="o">.</span><span class="n">dimensions</span>
 <span class="go">array([ 13.,  14.,  15.,  90.,  90.,  90.], dtype=float32)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span><span class="o">.</span><span class="n">triclinic_dimensions</span>
@@ -502,33 +509,78 @@ copy official attributes of the Timestep.</p>
 <dl class="method">
 <dt id="MDAnalysis.coordinates.base.IObase.convert_forces_from_native">
 <code class="descname">convert_forces_from_native</code><span class="sig-paren">(</span><em>force</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#IObase.convert_forces_from_native"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.IObase.convert_forces_from_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>In-place conversion of forces array <em>force</em> from native units to base units.</p>
+<dd><p>Conversion of forces array <em>force</em> from native to base units</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>force</em> is modified in place and also returned.</p>
-<div class="versionadded">
+<div class="last versionadded">
 <p><span class="versionmodified">New in version 0.7.7.</span></p>
+</div>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.base.IObase.convert_forces_to_native">
 <code class="descname">convert_forces_to_native</code><span class="sig-paren">(</span><em>force</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#IObase.convert_forces_to_native"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.IObase.convert_forces_to_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>In-place conversion of force array <em>force</em> from base units to native units.</p>
+<dd><p>Conversion of force array <em>force</em> from base to native units.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>force</strong> (<em>array_like</em>) &#8211; Forces to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>force</em> is modified in place and also returned.</p>
-<div class="versionadded">
+<div class="last versionadded">
 <p><span class="versionmodified">New in version 0.7.7.</span></p>
+</div>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.base.IObase.convert_pos_from_native">
 <code class="descname">convert_pos_from_native</code><span class="sig-paren">(</span><em>x</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#IObase.convert_pos_from_native"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.IObase.convert_pos_from_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>In-place conversion of coordinate array x from native units to base units.</p>
+<dd><p>Conversion of coordinate array x from native units to base units.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>x</em> is modified in place and also returned.</p>
-<div class="versionchanged">
+<div class="last versionchanged">
 <p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
 modified copy is returned <em>unless</em> no conversion takes
 place, in which case the reference to the unmodified <em>x</em> is
 returned.</p>
+</div>
 </div>
 </dd></dl>
 
@@ -536,12 +588,27 @@ returned.</p>
 <dt id="MDAnalysis.coordinates.base.IObase.convert_pos_to_native">
 <code class="descname">convert_pos_to_native</code><span class="sig-paren">(</span><em>x</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#IObase.convert_pos_to_native"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.IObase.convert_pos_to_native" title="Permalink to this definition">¶</a></dt>
 <dd><p>Conversion of coordinate array x from base units to native units.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> (<em>array_like</em>) &#8211; Positions to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>x</em> is modified in place and also returned.</p>
-<div class="versionchanged">
+<div class="last versionchanged">
 <p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
 modified copy is returned <em>unless</em> no conversion takes
 place, in which case the reference to the unmodified <em>x</em> is
 returned.</p>
+</div>
 </div>
 </dd></dl>
 
@@ -549,15 +616,30 @@ returned.</p>
 <dt id="MDAnalysis.coordinates.base.IObase.convert_time_from_native">
 <code class="descname">convert_time_from_native</code><span class="sig-paren">(</span><em>t</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#IObase.convert_time_from_native"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.IObase.convert_time_from_native" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert time <em>t</em> from native units to base units.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>t</em> is modified in place and also
 returned (although note that scalar values <em>t</em> are passed by
 value in Python and hence an in-place modification has no
 effect on the caller.)</p>
-<div class="versionchanged">
+<div class="last versionchanged">
 <p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
 modified copy is returned <em>unless</em> no conversion takes
 place, in which case the reference to the unmodified <em>x</em> is
 returned.</p>
+</div>
 </div>
 </dd></dl>
 
@@ -565,35 +647,80 @@ returned.</p>
 <dt id="MDAnalysis.coordinates.base.IObase.convert_time_to_native">
 <code class="descname">convert_time_to_native</code><span class="sig-paren">(</span><em>t</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#IObase.convert_time_to_native"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.IObase.convert_time_to_native" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert time <em>t</em> from base units to native units.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>t</strong> (<em>array_like</em>) &#8211; Time values to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>t</em> is modified in place and also
 returned. (Also note that scalar values <em>t</em> are passed by
 value in Python and hence an in-place modification has no
 effect on the caller.)</p>
-<div class="versionchanged">
+<div class="last versionchanged">
 <p><span class="versionmodified">Changed in version 0.7.5: </span>Keyword <em>inplace</em> can be set to <code class="docutils literal"><span class="pre">False</span></code> so that a
 modified copy is returned <em>unless</em> no conversion takes
 place, in which case the reference to the unmodified <em>x</em> is
 returned.</p>
+</div>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.base.IObase.convert_velocities_from_native">
 <code class="descname">convert_velocities_from_native</code><span class="sig-paren">(</span><em>v</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#IObase.convert_velocities_from_native"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.IObase.convert_velocities_from_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>In-place conversion of velocities array <em>v</em> from native units to base units.</p>
+<dd><p>Conversion of velocities array <em>v</em> from native to base units</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>v</em> is modified in place and also returned.</p>
-<div class="versionadded">
+<div class="last versionadded">
 <p><span class="versionmodified">New in version 0.7.5.</span></p>
+</div>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.base.IObase.convert_velocities_to_native">
 <code class="descname">convert_velocities_to_native</code><span class="sig-paren">(</span><em>v</em>, <em>inplace=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#IObase.convert_velocities_to_native"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.IObase.convert_velocities_to_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>In-place conversion of coordinate array <em>v</em> from base units to native units.</p>
+<dd><p>Conversion of coordinate array <em>v</em> from base to native units</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>v</strong> (<em>array_like</em>) &#8211; Velocities to transform</li>
+<li><strong>inplace</strong> (<em>bool, optional</em>) &#8211; Whether to modify the array inplace, overwriting previous data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
 <p>By default, the input <em>v</em> is modified in place and also returned.</p>
-<div class="versionadded">
+<div class="last versionadded">
 <p><span class="versionmodified">New in version 0.7.5.</span></p>
+</div>
 </div>
 </dd></dl>
 

@@ -134,36 +134,22 @@ allocate space for both coordinates and velocities;</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*n_atoms*</strong> &#8211; The total number of atoms this Timestep describes</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Keywords:</th><td class="field-body"><dl class="first last docutils">
-<dt><em>positions</em></dt>
-<dd><p class="first last">Whether this Timestep has position information [<code class="docutils literal"><span class="pre">True</span></code>]</p>
-</dd>
-<dt><em>velocities</em></dt>
-<dd><p class="first last">Whether this Timestep has velocity information [<code class="docutils literal"><span class="pre">False</span></code>]</p>
-</dd>
-<dt><em>forces</em></dt>
-<dd><p class="first last">Whether this Timestep has force information [<code class="docutils literal"><span class="pre">False</span></code>]</p>
-</dd>
-<dt><em>dt</em></dt>
-<dd><p class="first last">The time difference between frames (ps).  If <code class="xref py py-attr docutils literal"><span class="pre">time</span></code>
-is set, then <cite>dt</cite> will be ignored.</p>
-</dd>
-<dt><em>time_offset</em></dt>
-<dd><p class="first last">The starting time from which to calculate time (ps)</p>
-</dd>
-</dl>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>n_atoms</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The total number of atoms this Timestep describes</li>
+<li><strong>positions</strong> (<em>bool, optional</em>) &#8211; Whether this Timestep has position information [<code class="docutils literal"><span class="pre">True</span></code>]</li>
+<li><strong>velocities</strong> (<em>bool, optional</em>) &#8211; Whether this Timestep has velocity information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
+<li><strong>forces</strong> (<em>bool, optional</em>) &#8211; Whether this Timestep has force information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
+<li><strong>dt</strong> (<em>float, optional</em>) &#8211; The time difference between frames (ps).  If <code class="xref py py-attr docutils literal"><span class="pre">time</span></code>
+is set, then <cite>dt</cite> will be ignored.</li>
+<li><strong>time_offset</strong> (<em>float, optional</em>) &#8211; The starting time from which to calculate time (ps)</li>
+<li><strong>versionchanged</strong> (<em>.</em>) &#8211; Added keywords for positions, velocities and forces
+Can add and remove position/velocity/force information by using
+the has_* attribute</li>
+</ul>
 </td>
 </tr>
 </tbody>
 </table>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Added keywords for positions, velocities and forces
-Can add and remove position/velocity/force information by using
-the has_* attribute</p>
-</div>
 <dl class="attribute">
 <dt id="MDAnalysis.coordinates.TRJ.Timestep._pos">
 <code class="descname">_pos</code><a class="headerlink" href="#MDAnalysis.coordinates.TRJ.Timestep._pos" title="Permalink to this definition">¶</a></dt>

@@ -226,22 +226,21 @@
 <div class="viewcode-block" id="Timestep.__init__"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.Timestep.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_atoms</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a Timestep, representing a frame of a trajectory</span>
 
-<span class="sd">        :Arguments:</span>
-<span class="sd">          *n_atoms*</span>
-<span class="sd">            The total number of atoms this Timestep describes</span>
-
-<span class="sd">        :Keywords:</span>
-<span class="sd">          *positions*</span>
-<span class="sd">            Whether this Timestep has position information [``True``]</span>
-<span class="sd">          *velocities*</span>
-<span class="sd">            Whether this Timestep has velocity information [``False``]</span>
-<span class="sd">          *forces*</span>
-<span class="sd">            Whether this Timestep has force information [``False``]</span>
-<span class="sd">          *dt*</span>
-<span class="sd">            The time difference between frames (ps).  If :attr:`time`</span>
-<span class="sd">            is set, then `dt` will be ignored.</span>
-<span class="sd">          *time_offset*</span>
-<span class="sd">            The starting time from which to calculate time (ps)</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        n_atoms : int</span>
+<span class="sd">          The total number of atoms this Timestep describes</span>
+<span class="sd">        positions : bool, optional</span>
+<span class="sd">          Whether this Timestep has position information [``True``]</span>
+<span class="sd">        velocities : bool, optional</span>
+<span class="sd">          Whether this Timestep has velocity information [``False``]</span>
+<span class="sd">        forces : bool, optional</span>
+<span class="sd">          Whether this Timestep has force information [``False``]</span>
+<span class="sd">        dt : float, optional</span>
+<span class="sd">          The time difference between frames (ps).  If :attr:`time`</span>
+<span class="sd">          is set, then `dt` will be ignored.</span>
+<span class="sd">        time_offset : float, optional</span>
+<span class="sd">          The starting time from which to calculate time (ps)</span>
 
 <span class="sd">        .. versionchanged:: 0.11.0</span>
 <span class="sd">           Added keywords for positions, velocities and forces</span>
@@ -554,13 +553,15 @@
 <span class="sd">        Setting this attribute will add positions to the Timestep if they</span>
 <span class="sd">        weren&#39;t originally present.</span>
 
-<span class="sd">        :Returns:</span>
-<span class="sd">           A numpy.ndarray of shape (n_atoms, 3) of position data for each</span>
-<span class="sd">           atom</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">          A numpy.ndarray of shape (n_atoms, 3) of position data for each</span>
+<span class="sd">          atom</span>
 
-<span class="sd">        :Raises:</span>
-<span class="sd">           :class:`MDAnalysis.exceptions.NoDataError`</span>
-<span class="sd">              If the Timestep has no position data</span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">          :class:`MDAnalysis.exceptions.NoDataError`</span>
+<span class="sd">          If the Timestep has no position data</span>
 
 <span class="sd">        .. versionchanged:: 0.11.0</span>
 <span class="sd">           Now can raise NoDataError when no position data present</span>
@@ -629,13 +630,15 @@
 <span class="sd">        Setting this attribute will add velocities to the Timestep if they</span>
 <span class="sd">        weren&#39;t originally present.</span>
 
-<span class="sd">        :Returns:</span>
-<span class="sd">           A numpy.ndarray of shape (n_atoms, 3) of velocity data for each</span>
-<span class="sd">           atom</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">          A numpy.ndarray of shape (n_atoms, 3) of velocity data for each</span>
+<span class="sd">          atom</span>
 
-<span class="sd">        :Raises:</span>
-<span class="sd">           :class:`MDAnalysis.exceptions.NoDataError`</span>
-<span class="sd">              When the Timestep does not contain velocity information</span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">          :class:`MDAnalysis.exceptions.NoDataError`</span>
+<span class="sd">          When the Timestep does not contain velocity information</span>
 
 <span class="sd">        .. versionadded:: 0.11.0</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -676,13 +679,15 @@
 <span class="sd">        Setting this attribute will add forces to the Timestep if they</span>
 <span class="sd">        weren&#39;t originally present.</span>
 
-<span class="sd">        :Returns:</span>
-<span class="sd">           A numpy.ndarray of shape (n_atoms, 3) of force data for each</span>
-<span class="sd">           atom</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        A numpy.ndarray of shape (n_atoms, 3) of force data for each</span>
+<span class="sd">        atom</span>
 
-<span class="sd">        :Raises:</span>
-<span class="sd">           :class:`MDAnalysis.NoDataError`</span>
-<span class="sd">              When the Timestep does not contain force information</span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        :class:`MDAnalysis.NoDataError`</span>
+<span class="sd">        When the Timestep does not contain force information</span>
 
 <span class="sd">        .. versionadded:: 0.11.0</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -725,10 +730,15 @@
     <span class="k">def</span> <span class="nf">triclinic_dimensions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;The unitcell dimensions represented as triclinic vectors</span>
 
-<span class="sd">        :Returns:</span>
-<span class="sd">           A (3, 3) numpy.ndarray of unit cell vectors</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        A (3, 3) numpy.ndarray of unit cell vectors</span>
 
-<span class="sd">        For example::</span>
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        The unitcell for a given system can be queried as either three</span>
+<span class="sd">        vectors lengths followed by their respective angle, or as three</span>
+<span class="sd">        triclinic vectors.</span>
 
 <span class="sd">          &gt;&gt;&gt; ts.dimensions</span>
 <span class="sd">          array([ 13.,  14.,  15.,  90.,  90.,  90.], dtype=float32)</span>
@@ -763,8 +773,9 @@
     <span class="k">def</span> <span class="nf">dt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;The time difference in ps between timesteps</span>
 
-<span class="sd">        .. Note::</span>
-<span class="sd">           This defaults to 1.0 ps in the absence of time data</span>
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">        This defaults to 1.0 ps in the absence of time data</span>
 
 <span class="sd">        .. versionadded:: 0.11.0</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -831,8 +842,17 @@
     <span class="n">units</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;time&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&#39;length&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&#39;velocity&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">}</span>
 
 <div class="viewcode-block" id="IObase.convert_pos_from_native"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IObase.convert_pos_from_native">[docs]</a>    <span class="k">def</span> <span class="nf">convert_pos_from_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;In-place conversion of coordinate array x from native units to base units.</span>
+        <span class="sd">&quot;&quot;&quot;Conversion of coordinate array x from native units to base units.</span>
 
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x : array_like</span>
+<span class="sd">          Positions to transform</span>
+<span class="sd">        inplace : bool, optional</span>
+<span class="sd">          Whether to modify the array inplace, overwriting previous data</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
 <span class="sd">        By default, the input *x* is modified in place and also returned.</span>
 
 <span class="sd">        .. versionchanged:: 0.7.5</span>
@@ -842,7 +862,8 @@
 <span class="sd">           returned.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">f</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">get_conversion_factor</span><span class="p">(</span><span class="s">&#39;length&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s">&#39;length&#39;</span><span class="p">],</span> <span class="n">flags</span><span class="p">[</span><span class="s">&#39;length_unit&#39;</span><span class="p">])</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">get_conversion_factor</span><span class="p">(</span>
+            <span class="s">&#39;length&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s">&#39;length&#39;</span><span class="p">],</span> <span class="n">flags</span><span class="p">[</span><span class="s">&#39;length_unit&#39;</span><span class="p">])</span>
         <span class="k">if</span> <span class="n">f</span> <span class="o">==</span> <span class="mf">1.</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">x</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">inplace</span><span class="p">:</span>
@@ -851,13 +872,23 @@
         <span class="k">return</span> <span class="n">x</span>
 </div>
 <div class="viewcode-block" id="IObase.convert_velocities_from_native"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IObase.convert_velocities_from_native">[docs]</a>    <span class="k">def</span> <span class="nf">convert_velocities_from_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;In-place conversion of velocities array *v* from native units to base units.</span>
+        <span class="sd">&quot;&quot;&quot;Conversion of velocities array *v* from native to base units</span>
 
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        v : array_like</span>
+<span class="sd">          Velocities to transform</span>
+<span class="sd">        inplace : bool, optional</span>
+<span class="sd">          Whether to modify the array inplace, overwriting previous data</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
 <span class="sd">        By default, the input *v* is modified in place and also returned.</span>
 
 <span class="sd">        .. versionadded:: 0.7.5</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">f</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">get_conversion_factor</span><span class="p">(</span><span class="s">&#39;speed&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s">&#39;velocity&#39;</span><span class="p">],</span> <span class="n">flags</span><span class="p">[</span><span class="s">&#39;speed_unit&#39;</span><span class="p">])</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">get_conversion_factor</span><span class="p">(</span>
+            <span class="s">&#39;speed&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s">&#39;velocity&#39;</span><span class="p">],</span> <span class="n">flags</span><span class="p">[</span><span class="s">&#39;speed_unit&#39;</span><span class="p">])</span>
         <span class="k">if</span> <span class="n">f</span> <span class="o">==</span> <span class="mf">1.</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">v</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">inplace</span><span class="p">:</span>
@@ -866,13 +897,23 @@
         <span class="k">return</span> <span class="n">v</span>
 </div>
 <div class="viewcode-block" id="IObase.convert_forces_from_native"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IObase.convert_forces_from_native">[docs]</a>    <span class="k">def</span> <span class="nf">convert_forces_from_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;In-place conversion of forces array *force* from native units to base units.</span>
+        <span class="sd">&quot;&quot;&quot;Conversion of forces array *force* from native to base units</span>
 
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        force : array_like</span>
+<span class="sd">          Forces to transform</span>
+<span class="sd">        inplace : bool, optional</span>
+<span class="sd">          Whether to modify the array inplace, overwriting previous data</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
 <span class="sd">        By default, the input *force* is modified in place and also returned.</span>
 
 <span class="sd">        .. versionadded:: 0.7.7</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">f</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">get_conversion_factor</span><span class="p">(</span><span class="s">&#39;force&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s">&#39;force&#39;</span><span class="p">],</span> <span class="n">flags</span><span class="p">[</span><span class="s">&#39;force_unit&#39;</span><span class="p">])</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">get_conversion_factor</span><span class="p">(</span>
+            <span class="s">&#39;force&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s">&#39;force&#39;</span><span class="p">],</span> <span class="n">flags</span><span class="p">[</span><span class="s">&#39;force_unit&#39;</span><span class="p">])</span>
         <span class="k">if</span> <span class="n">f</span> <span class="o">==</span> <span class="mf">1.</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">force</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">inplace</span><span class="p">:</span>
@@ -883,6 +924,15 @@
 <div class="viewcode-block" id="IObase.convert_time_from_native"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IObase.convert_time_from_native">[docs]</a>    <span class="k">def</span> <span class="nf">convert_time_from_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Convert time *t* from native units to base units.</span>
 
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        t : array_like</span>
+<span class="sd">          Time values to transform</span>
+<span class="sd">        inplace : bool, optional</span>
+<span class="sd">          Whether to modify the array inplace, overwriting previous data</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
 <span class="sd">        By default, the input *t* is modified in place and also</span>
 <span class="sd">        returned (although note that scalar values *t* are passed by</span>
 <span class="sd">        value in Python and hence an in-place modification has no</span>
@@ -895,7 +945,8 @@
 <span class="sd">           returned.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">f</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">get_conversion_factor</span><span class="p">(</span><span class="s">&#39;time&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s">&#39;time&#39;</span><span class="p">],</span> <span class="n">flags</span><span class="p">[</span><span class="s">&#39;time_unit&#39;</span><span class="p">])</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">get_conversion_factor</span><span class="p">(</span>
+            <span class="s">&#39;time&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s">&#39;time&#39;</span><span class="p">],</span> <span class="n">flags</span><span class="p">[</span><span class="s">&#39;time_unit&#39;</span><span class="p">])</span>
         <span class="k">if</span> <span class="n">f</span> <span class="o">==</span> <span class="mf">1.</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">t</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">inplace</span><span class="p">:</span>
@@ -906,6 +957,15 @@
 <div class="viewcode-block" id="IObase.convert_pos_to_native"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IObase.convert_pos_to_native">[docs]</a>    <span class="k">def</span> <span class="nf">convert_pos_to_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Conversion of coordinate array x from base units to native units.</span>
 
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x : array_like</span>
+<span class="sd">          Positions to transform</span>
+<span class="sd">        inplace : bool, optional</span>
+<span class="sd">          Whether to modify the array inplace, overwriting previous data</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
 <span class="sd">        By default, the input *x* is modified in place and also returned.</span>
 
 <span class="sd">        .. versionchanged:: 0.7.5</span>
@@ -915,7 +975,8 @@
 <span class="sd">           returned.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">f</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">get_conversion_factor</span><span class="p">(</span><span class="s">&#39;length&#39;</span><span class="p">,</span> <span class="n">flags</span><span class="p">[</span><span class="s">&#39;length_unit&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s">&#39;length&#39;</span><span class="p">])</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">get_conversion_factor</span><span class="p">(</span>
+            <span class="s">&#39;length&#39;</span><span class="p">,</span> <span class="n">flags</span><span class="p">[</span><span class="s">&#39;length_unit&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s">&#39;length&#39;</span><span class="p">])</span>
         <span class="k">if</span> <span class="n">f</span> <span class="o">==</span> <span class="mf">1.</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">x</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">inplace</span><span class="p">:</span>
@@ -924,13 +985,23 @@
         <span class="k">return</span> <span class="n">x</span>
 </div>
 <div class="viewcode-block" id="IObase.convert_velocities_to_native"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IObase.convert_velocities_to_native">[docs]</a>    <span class="k">def</span> <span class="nf">convert_velocities_to_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;In-place conversion of coordinate array *v* from base units to native units.</span>
+        <span class="sd">&quot;&quot;&quot;Conversion of coordinate array *v* from base to native units</span>
 
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        v : array_like</span>
+<span class="sd">          Velocities to transform</span>
+<span class="sd">        inplace : bool, optional</span>
+<span class="sd">          Whether to modify the array inplace, overwriting previous data</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
 <span class="sd">        By default, the input *v* is modified in place and also returned.</span>
 
 <span class="sd">        .. versionadded:: 0.7.5</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">f</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">get_conversion_factor</span><span class="p">(</span><span class="s">&#39;speed&#39;</span><span class="p">,</span> <span class="n">flags</span><span class="p">[</span><span class="s">&#39;speed_unit&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s">&#39;velocity&#39;</span><span class="p">])</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">get_conversion_factor</span><span class="p">(</span>
+            <span class="s">&#39;speed&#39;</span><span class="p">,</span> <span class="n">flags</span><span class="p">[</span><span class="s">&#39;speed_unit&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s">&#39;velocity&#39;</span><span class="p">])</span>
         <span class="k">if</span> <span class="n">f</span> <span class="o">==</span> <span class="mf">1.</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">v</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">inplace</span><span class="p">:</span>
@@ -939,13 +1010,23 @@
         <span class="k">return</span> <span class="n">v</span>
 </div>
 <div class="viewcode-block" id="IObase.convert_forces_to_native"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IObase.convert_forces_to_native">[docs]</a>    <span class="k">def</span> <span class="nf">convert_forces_to_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;In-place conversion of force array *force* from base units to native units.</span>
+        <span class="sd">&quot;&quot;&quot;Conversion of force array *force* from base to native units.</span>
 
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        force : array_like</span>
+<span class="sd">          Forces to transform</span>
+<span class="sd">        inplace : bool, optional</span>
+<span class="sd">          Whether to modify the array inplace, overwriting previous data</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
 <span class="sd">        By default, the input *force* is modified in place and also returned.</span>
 
 <span class="sd">        .. versionadded:: 0.7.7</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">f</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">get_conversion_factor</span><span class="p">(</span><span class="s">&#39;force&#39;</span><span class="p">,</span> <span class="n">flags</span><span class="p">[</span><span class="s">&#39;force_unit&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s">&#39;force&#39;</span><span class="p">])</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">get_conversion_factor</span><span class="p">(</span>
+            <span class="s">&#39;force&#39;</span><span class="p">,</span> <span class="n">flags</span><span class="p">[</span><span class="s">&#39;force_unit&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s">&#39;force&#39;</span><span class="p">])</span>
         <span class="k">if</span> <span class="n">f</span> <span class="o">==</span> <span class="mf">1.</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">force</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">inplace</span><span class="p">:</span>
@@ -956,6 +1037,15 @@
 <div class="viewcode-block" id="IObase.convert_time_to_native"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IObase.convert_time_to_native">[docs]</a>    <span class="k">def</span> <span class="nf">convert_time_to_native</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Convert time *t* from base units to native units.</span>
 
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        t : array_like</span>
+<span class="sd">          Time values to transform</span>
+<span class="sd">        inplace : bool, optional</span>
+<span class="sd">          Whether to modify the array inplace, overwriting previous data</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
 <span class="sd">        By default, the input *t* is modified in place and also</span>
 <span class="sd">        returned. (Also note that scalar values *t* are passed by</span>
 <span class="sd">        value in Python and hence an in-place modification has no</span>
@@ -968,7 +1058,8 @@
 <span class="sd">           returned.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">f</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">get_conversion_factor</span><span class="p">(</span><span class="s">&#39;time&#39;</span><span class="p">,</span> <span class="n">flags</span><span class="p">[</span><span class="s">&#39;time_unit&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s">&#39;time&#39;</span><span class="p">])</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">get_conversion_factor</span><span class="p">(</span>
+            <span class="s">&#39;time&#39;</span><span class="p">,</span> <span class="n">flags</span><span class="p">[</span><span class="s">&#39;time_unit&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">[</span><span class="s">&#39;time&#39;</span><span class="p">])</span>
         <span class="k">if</span> <span class="n">f</span> <span class="o">==</span> <span class="mf">1.</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">t</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">inplace</span><span class="p">:</span>
@@ -979,8 +1070,7 @@
 <div class="viewcode-block" id="IObase.close"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.IObase.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Close the trajectory file.&quot;&quot;&quot;</span>
         <span class="k">pass</span>
-
-    <span class="c"># experimental:  context manager protocol</span></div>
+</div>
     <span class="k">def</span> <span class="nf">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span>
 
@@ -1052,9 +1142,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">time</span>
 
     <span class="k">def</span> <span class="nf">Writer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a trajectory writer with the same properties as this trajectory.&quot;&quot;&quot;</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&quot;Sorry, there is no Writer for this format in MDAnalysis. &quot;</span>
-                <span class="s">&quot;Please file an enhancement request at https://github.com/MDAnalysis/mdanalysis/issues&quot;</span><span class="p">)</span>
+        <span class="sd">&quot;&quot;&quot;A trajectory writer with the same properties as this trajectory.&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+            <span class="s">&quot;Sorry, there is no Writer for this format in MDAnalysis. &quot;</span>
+            <span class="s">&quot;Please file an enhancement request at &quot;</span>
+            <span class="s">&quot;https://github.com/MDAnalysis/mdanalysis/issues&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">OtherWriter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns a writer appropriate for *filename*.</span>
@@ -1072,12 +1164,14 @@
             <span class="k">pass</span>
         <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_read_next_timestep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_read_next_timestep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>  <span class="c"># pragma: no cover</span>
         <span class="c"># Example from DCDReader:</span>
-        <span class="c">#     if ts is None: ts = self.ts</span>
-        <span class="c">#     ts.frame = self._read_next_frame(ts._x, ts._y, ts._z, ts._unitcell, self.skip)</span>
+        <span class="c">#     if ts is None:</span>
+        <span class="c">#         ts = self.ts</span>
+        <span class="c">#     ts.frame = self._read_next_frame(etc)</span>
         <span class="c">#     return ts</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&quot;BUG: Override _read_next_timestep() in the trajectory reader!&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+            <span class="s">&quot;BUG: Override _read_next_timestep() in the trajectory reader!&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_reopen</span><span class="p">()</span>
@@ -1104,7 +1198,9 @@
 <span class="sd">        If frame is a :class:`slice` then an iterator is returned that</span>
 <span class="sd">        allows iteration over that part of the trajectory.</span>
 
-<span class="sd">        .. Note:: *frame* is a 0-based frame index.</span>
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">        *frame* is a 0-based frame index.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">def</span> <span class="nf">apply_limits</span><span class="p">(</span><span class="n">frame</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">frame</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -1125,7 +1221,7 @@
                     <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_frame</span><span class="p">(</span><span class="n">apply_limits</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
             <span class="k">return</span> <span class="n">listiter</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
-            <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_slice_indices</span><span class="p">(</span>
+            <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_slice_indices</span><span class="p">(</span>
                 <span class="n">frame</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">frame</span><span class="o">.</span><span class="n">stop</span><span class="p">,</span> <span class="n">frame</span><span class="o">.</span><span class="n">step</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">start</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">stop</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="ow">and</span> <span class="n">step</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__iter__</span><span class="p">()</span>
@@ -1142,7 +1238,7 @@
         <span class="c"># Example implementation in the DCDReader:</span>
         <span class="c">#self._jump_to_frame(frame)</span>
         <span class="c">#ts = self.ts</span>
-        <span class="c">#ts.frame = self._read_next_frame(ts._x, ts._y, ts._z, ts._unitcell, 1) # XXX required!!</span>
+        <span class="c">#ts.frame = self._read_next_frame(ts._x, ts._y, ts._z, ts._unitcell, 1)</span>
         <span class="c">#return ts</span>
 
     <span class="k">def</span> <span class="nf">_sliced_iter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
@@ -1156,54 +1252,70 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c"># override with an appropriate implementation e.g. using self[i] might</span>
         <span class="c"># be much slower than skipping steps in a next() loop</span>
-        <span class="k">def</span> <span class="nf">_iter</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">):</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
-                    <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_frame</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>  <span class="c"># if _read_frame not implemented</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;{0} does not support slicing.&quot;</span>
-                                <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">_iter</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+                <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_frame</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>  <span class="c"># if _read_frame not implemented</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;{0} does not support slicing.&quot;</span>
+                            <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">_check_slice_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Unpack the slice object and do checks</span>
+    <span class="k">def</span> <span class="nf">check_slice_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check frame indices are valid and clip to fit trajectory</span>
 
-<span class="sd">        Return the start stop and step indices</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        start, stop, step : int or None</span>
+<span class="sd">          Values representing the slice indices.</span>
+<span class="sd">          Can use `None` to use defaults of (0, -1, and 1)</span>
+<span class="sd">          respectively.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        start, stop, step : int</span>
+<span class="sd">          Integers representing the slice</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="p">(((</span><span class="nb">type</span><span class="p">(</span><span class="n">start</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">start</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">))</span> <span class="ow">and</span>
-                <span class="p">((</span><span class="nb">type</span><span class="p">(</span><span class="n">stop</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">stop</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">))</span> <span class="ow">and</span>
-                <span class="p">((</span><span class="nb">type</span><span class="p">(</span><span class="n">step</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">step</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">))):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;Slice indices are not integers&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">var</span><span class="p">,</span> <span class="n">varname</span> <span class="ow">in</span> <span class="p">(</span>
+                <span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="s">&#39;start&#39;</span><span class="p">),</span>
+                <span class="p">(</span><span class="n">stop</span><span class="p">,</span> <span class="s">&#39;stop&#39;</span><span class="p">),</span>
+                <span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="s">&#39;step&#39;</span><span class="p">)</span>
+        <span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">var</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">)):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;{0} is not an integer&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">varname</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">step</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Step size is zero&quot;</span><span class="p">)</span>
 
-        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">nframes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">step</span> <span class="o">=</span> <span class="n">step</span> <span class="ow">or</span> <span class="mi">1</span>
 
-        <span class="k">if</span> <span class="n">start</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">start</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">start</span> <span class="o">+=</span> <span class="n">n</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">step</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">start</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">step</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">nframes</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">start</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">+=</span> <span class="n">nframes</span>
 
         <span class="k">if</span> <span class="n">stop</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">stop</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">stop</span> <span class="o">+=</span> <span class="n">n</span>
-            <span class="k">elif</span> <span class="n">stop</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">:</span>
-                <span class="n">stop</span> <span class="o">=</span> <span class="n">n</span>
+                <span class="n">stop</span> <span class="o">+=</span> <span class="n">nframes</span>
+            <span class="k">elif</span> <span class="n">stop</span> <span class="o">&gt;</span> <span class="n">nframes</span><span class="p">:</span>
+                <span class="n">stop</span> <span class="o">=</span> <span class="n">nframes</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">stop</span> <span class="o">=</span> <span class="n">n</span> <span class="k">if</span> <span class="n">step</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="n">stop</span> <span class="o">=</span> <span class="n">nframes</span> <span class="k">if</span> <span class="n">step</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
 
         <span class="k">if</span> <span class="n">step</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">stop</span> <span class="o">&lt;=</span> <span class="n">start</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s">&quot;Stop frame is lower than start frame&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="p">((</span><span class="n">start</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">start</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">stop</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">)):</span>
-            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s">&quot;Frame start/stop outside of the range of the trajectory.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">start</span> <span class="o">&lt;</span> <span class="n">nframes</span><span class="p">)</span> <span class="ow">or</span> <span class="n">stop</span> <span class="o">&gt;</span> <span class="n">nframes</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span>
+                <span class="s">&quot;Frame start/stop outside of the range of the trajectory.&quot;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&quot;&lt; </span><span class="si">%s</span><span class="s"> </span><span class="si">%r</span><span class="s"> with </span><span class="si">%d</span><span class="s"> frames of </span><span class="si">%d</span><span class="s"> atoms&gt;&quot;</span> <span class="o">%</span> \
-               <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s">&quot;&lt;{cls} {fname} with {nframes} frames of {natoms} atoms&gt;&quot;</span>
+                <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">cls</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>
+                    <span class="n">fname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span>
+                    <span class="n">nframes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span><span class="p">,</span>
+                    <span class="n">natoms</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_atoms</span>
+                <span class="p">))</span>
 
 
 <div class="viewcode-block" id="Reader"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.Reader">[docs]</a><span class="k">class</span> <span class="nc">Reader</span><span class="p">(</span><span class="n">ProtoReader</span><span class="p">):</span>
@@ -1340,7 +1452,7 @@
         <span class="c"># build map &#39;start_frames&#39;, which is used by _get_local_frame()</span>
         <span class="n">n_frames</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s">&#39;n_frames&#39;</span><span class="p">)</span>
         <span class="c"># [0]: frames are 0-indexed internally</span>
-        <span class="c"># (see Timestep._check_slice_indices())</span>
+        <span class="c"># (see Timestep.check_slice_indices())</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__start_frames</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">([</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">n_frames</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">n_frames</span><span class="p">)</span>
