@@ -3332,16 +3332,24 @@ difference between the centers of geometry (centroid) of B and A:</p>
 <dl class="attribute">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.ts">
 <code class="descname">ts</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.ts" title="Permalink to this definition">¶</a></dt>
-<dd><p>Temporary Timestep that contains the selection coordinates.</p>
-<p>A <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep" title="MDAnalysis.coordinates.base.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a> instance,
-which can be passed to a trajectory writer.</p>
-<p>If <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup.ts" title="MDAnalysis.core.AtomGroup.AtomGroup.ts"><code class="xref py py-attr docutils literal"><span class="pre">ts</span></code></a> is modified then these modifications
-will be present until the frame number changes (which
-typically happens when the underlying trajectory frame
-changes).</p>
-<p>It is not possible to assign a new
-<a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep" title="MDAnalysis.coordinates.base.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a> to the
-<a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup.ts" title="MDAnalysis.core.AtomGroup.AtomGroup.ts"><code class="xref py py-attr docutils literal"><span class="pre">AtomGroup.ts</span></code></a> attribute; change attributes of the object.</p>
+<dd><p>Returns a Timestep that contains only the group&#8217;s coordinates.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
+<li><strong>A</strong> (class:<cite>~MDAnalysis.coordinates.base.Timestep</cite> instance,)</li>
+<li><em>which can be passed to a trajectory writer.</em></li>
+<li><em>If the returned timestep is modified the modifications</em></li>
+<li><em>will not be reflected in the base timestep. Likewise,</em></li>
+<li><em>when the underlying timestep changes (either by loading a</em></li>
+<li><em>new frame or by setting new positions by hand) the returned</em></li>
+<li><em>timestep will not reflect those changes.</em></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">

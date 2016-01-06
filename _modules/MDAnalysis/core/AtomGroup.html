@@ -940,9 +940,6 @@
             <span class="c"># empty AtomGroup</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__atoms</span> <span class="o">=</span> <span class="p">[]</span>
 
-        <span class="c"># managed timestep object</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_ts</span> <span class="o">=</span> <span class="bp">None</span>
-
         <span class="c"># caches:</span>
         <span class="c"># - built on the fly when they are needed</span>
         <span class="c"># - delete entry to invalidate</span>
@@ -3093,26 +3090,20 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">ts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Temporary Timestep that contains the selection coordinates.</span>
+        <span class="sd">&quot;&quot;&quot;Returns a Timestep that contains only the group&#39;s coordinates.</span>
 
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
 <span class="sd">        A :class:`~MDAnalysis.coordinates.base.Timestep` instance,</span>
 <span class="sd">        which can be passed to a trajectory writer.</span>
 
-<span class="sd">        If :attr:`~AtomGroup.ts` is modified then these modifications</span>
-<span class="sd">        will be present until the frame number changes (which</span>
-<span class="sd">        typically happens when the underlying trajectory frame</span>
-<span class="sd">        changes).</span>
-
-<span class="sd">        It is not possible to assign a new</span>
-<span class="sd">        :class:`~MDAnalysis.coordinates.base.Timestep` to the</span>
-<span class="sd">        :attr:`AtomGroup.ts` attribute; change attributes of the object.</span>
+<span class="sd">        If the returned timestep is modified the modifications</span>
+<span class="sd">        will not be reflected in the base timestep. Likewise,</span>
+<span class="sd">        when the underlying timestep changes (either by loading a</span>
+<span class="sd">        new frame or by setting new positions by hand) the returned</span>
+<span class="sd">        timestep will not reflect those changes.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">trj_ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span>  <span class="c"># original time step</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ts</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ts</span><span class="o">.</span><span class="n">frame</span> <span class="o">!=</span> <span class="n">trj_ts</span><span class="o">.</span><span class="n">frame</span><span class="p">:</span>
-            <span class="c"># create a timestep of same type as the underlying trajectory</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_ts</span> <span class="o">=</span> <span class="n">trj_ts</span><span class="o">.</span><span class="n">copy_slice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ts</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">copy_slice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">)</span>
 
 </div>
 <div class="viewcode-block" id="Residue"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.Residue">[docs]</a><span class="k">class</span> <span class="nc">Residue</span><span class="p">(</span><span class="n">AtomGroup</span><span class="p">):</span>
