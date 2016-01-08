@@ -73,7 +73,7 @@
             
   <h1>Source code for MDAnalysis.lib.util</h1><div class="highlight"><pre>
 <span class="c"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
-<span class="c"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 </span>
+<span class="c"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
 <span class="c">#</span>
 <span class="c"># MDAnalysis --- http://www.MDAnalysis.org</span>
 <span class="c"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
@@ -435,7 +435,26 @@
 
 
 <div class="viewcode-block" id="greedy_splitext"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.greedy_splitext">[docs]</a><span class="k">def</span> <span class="nf">greedy_splitext</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Split extension in path *p* at the left-most separator.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Split extension in path *p* at the left-most separator.</span>
+
+<span class="sd">    Extensions are taken to be separated from the filename with the</span>
+<span class="sd">    separator :data:`os.extsep` (as used by :func:`os.path.splitext`).</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ---------</span>
+<span class="sd">    p : path, string</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Tuple ``(root, extension)`` where ``root`` is the full path and</span>
+<span class="sd">    filename with all extensions removed whereas ``extension`` is the</span>
+<span class="sd">    string of all extensions.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; greedy_splitext(&quot;/home/joe/protein.pdb.bz2&quot;)</span>
+<span class="sd">    (&#39;/home/joe/protein&#39;, &#39;.pdb.bz2&#39;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">path</span><span class="p">,</span> <span class="n">root</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
     <span class="n">extension</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
     <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
@@ -443,7 +462,7 @@
         <span class="n">extension</span> <span class="o">=</span> <span class="n">ext</span> <span class="o">+</span> <span class="n">extension</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">ext</span><span class="p">:</span>
             <span class="k">break</span>
-    <span class="k">return</span> <span class="n">root</span><span class="p">,</span> <span class="n">extension</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">root</span><span class="p">),</span> <span class="n">extension</span>
 
 </div>
 <div class="viewcode-block" id="hasmethod"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.hasmethod">[docs]</a><span class="k">def</span> <span class="nf">hasmethod</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
@@ -1242,7 +1261,7 @@
 </div>
 <span class="k">def</span> <span class="nf">blocks_of</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Extract a view of (n, m) blocks along the diagonal of the array `a`</span>
-<span class="sd"> </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    a : array_like</span>
@@ -1252,10 +1271,10 @@
 <span class="sd">    m : int</span>
 <span class="sd">        size of block in second dimension</span>
 
-<span class="sd"> </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">      (nblocks, n, m) view of the original array. </span>
+<span class="sd">      (nblocks, n, m) view of the original array.</span>
 <span class="sd">      Where nblocks is the number of times the miniblock fits in the original.</span>
 
 <span class="sd">    Raises</span>
@@ -1263,7 +1282,7 @@
 <span class="sd">      ValueError</span>
 <span class="sd">        If the supplied `n` and `m` don&#39;t divide `a` into an integer number</span>
 <span class="sd">        of blocks.</span>
-<span class="sd"> </span>
+
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; arr = np.arange(16).reshape(4, 4)</span>
@@ -1278,29 +1297,29 @@
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
 <span class="sd">      n, m must divide a into an identical integer number of blocks.</span>
-<span class="sd"> </span>
+
 <span class="sd">      Uses strides so probably requires that the array is C contiguous</span>
-<span class="sd"> </span>
+
 <span class="sd">      Returns a view, so editing this modifies the original array</span>
 
 <span class="sd">    .. versionadded:: 0.12.0</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c"># based on: </span>
+    <span class="c"># based on:</span>
     <span class="c"># http://stackoverflow.com/a/10862636</span>
     <span class="c"># but generalised to handle non square blocks.</span>
 
     <span class="n">nblocks</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">n</span>
     <span class="n">nblocks2</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">m</span>
- 
+
     <span class="k">if</span> <span class="ow">not</span> <span class="n">nblocks</span> <span class="o">==</span> <span class="n">nblocks2</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Must divide into same number of blocks in both&quot;</span>
                          <span class="s">&quot; directions.  Got {} by {}&quot;</span>
                          <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nblocks</span><span class="p">,</span> <span class="n">nblocks2</span><span class="p">))</span>
- 
+
     <span class="n">new_shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">nblocks</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
     <span class="n">new_strides</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">a</span><span class="o">.</span><span class="n">strides</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">m</span> <span class="o">*</span> <span class="n">a</span><span class="o">.</span><span class="n">strides</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
                    <span class="n">a</span><span class="o">.</span><span class="n">strides</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">a</span><span class="o">.</span><span class="n">strides</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
- 
+
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">stride_tricks</span><span class="o">.</span><span class="n">as_strided</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">new_shape</span><span class="p">,</span> <span class="n">new_strides</span><span class="p">)</span>
 </pre></div>
 
