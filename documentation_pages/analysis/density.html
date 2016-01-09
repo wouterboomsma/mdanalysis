@@ -517,10 +517,23 @@ regenerated from the saved data with</p>
 
 <dl class="function">
 <dt id="MDAnalysis.analysis.density.density_from_Universe">
-<code class="descclassname">MDAnalysis.analysis.density.</code><code class="descname">density_from_Universe</code><span class="sig-paren">(</span><em>universe</em>, <em>delta=1.0</em>, <em>atomselection='name OH2'</em>, <em>metadata=None</em>, <em>padding=2.0</em>, <em>cutoff=0</em>, <em>soluteselection=None</em>, <em>use_kdtree=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/density.html#density_from_Universe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.density.density_from_Universe" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a density grid from a MDAnalysis.Universe object.</p>
-<blockquote>
-<div>density_from_Universe(universe, delta=1.0, atomselection=&#8217;name OH2&#8217;, ...) &#8211;&gt; density</div></blockquote>
+<code class="descclassname">MDAnalysis.analysis.density.</code><code class="descname">density_from_Universe</code><span class="sig-paren">(</span><em>universe</em>, <em>delta=1.0</em>, <em>atomselection='name OH2'</em>, <em>start=None</em>, <em>stop=None</em>, <em>step=None</em>, <em>metadata=None</em>, <em>padding=2.0</em>, <em>cutoff=0</em>, <em>soluteselection=None</em>, <em>use_kdtree=True</em>, <em>update_selection=False</em>, <em>quiet=False</em>, <em>interval=1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/density.html#density_from_Universe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.density.density_from_Universe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a density grid from a <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code> object.</p>
+<p>The trajectory is read, frame by frame, and the atoms selected with <em>atomselection</em> are
+histogrammed on a grid with spacing <em>delta</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre>density_from_Universe(universe, delta=1.0, atomselection=&#39;name OH2&#39;, ...) --&gt; density
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By default, the <em>atomselection</em> is static, i.e., atoms are only
+selected once at the beginning. If you want dynamically changing
+selections (such as &#8220;name OW and around 4.0 (protein and not name
+H*)&#8221;) then set <code class="docutils literal"><span class="pre">update_selection=True</span></code>. For the special case of
+calculating a density of the &#8220;bulk&#8221; solvent away from a solute
+use the optimized selections with keywords <em>cutoff</em> and
+<em>soluteselection</em>.</p>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -536,6 +549,10 @@ regenerated from the saved data with</p>
 <dt>delta</dt>
 <dd><p class="first last">bin size for the density grid in Angstroem (same in x,y,z) [1.0]</p>
 </dd>
+<dt>start, stop, step</dt>
+<dd><p class="first last">Slice the trajectory as <code class="docutils literal"><span class="pre">trajectory[start&quot;stop:step]</span></code>; default
+is to read the whole trajectory.</p>
+</dd>
 <dt>metadata</dt>
 <dd><p class="first last">dictionary of additional data to be saved with the object</p>
 </dd>
@@ -547,8 +564,25 @@ in Angstroem [2.0]</p>
 <dd><p class="first last">MDAnalysis selection for the solute, e.g. &#8220;protein&#8221; [<code class="docutils literal"><span class="pre">None</span></code>]</p>
 </dd>
 <dt>cutoff</dt>
-<dd><p class="first last">With <em>cutoff</em>, select &#8216;&lt;atomsel&gt; NOT WITHIN &lt;cutoff&gt; OF &lt;soluteselection&gt;&#8217;
-(Special routines that are faster than the standard AROUND selection) [0]</p>
+<dd><p class="first last">With <em>cutoff</em>, select &#8220;&lt;atomsel&gt; NOT WITHIN &lt;cutoff&gt; OF &lt;soluteselection&gt;&#8221;
+(Special routines that are faster than the standard <code class="docutils literal"><span class="pre">AROUND</span></code> selection)
+[0]</p>
+</dd>
+<dt>update_selection</dt>
+<dd><p class="first last">Should the selection of atoms be updated for every step? [<code class="docutils literal"><span class="pre">False</span></code>]
+- <code class="docutils literal"><span class="pre">True</span></code>: atom selection is updated for each frame, can be slow
+- <code class="docutils literal"><span class="pre">False</span></code>: atoms are only selected at the beginning</p>
+</dd>
+<dt>quiet</dt>
+<dd><p class="first">Print status update to the screen for every <em>interval</em> frame? [<code class="docutils literal"><span class="pre">False</span></code>]
+- <code class="docutils literal"><span class="pre">True</span></code>: no status updates when a new frame is processed
+- <code class="docutils literal"><span class="pre">False</span></code>: status update every frame (including number of atoms</p>
+<blockquote class="last">
+<div><p>processed, which is interesting with <code class="docutils literal"><span class="pre">update_selection=True</span></code>)</p>
+</div></blockquote>
+</dd>
+<dt>interval</dt>
+<dd><p class="first last">Show status update every <em>interval</em> frame [1]</p>
 </dd>
 <dt>parameters</dt>
 <dd><p class="first last">dict with some special parameters for <a class="reference internal" href="#MDAnalysis.analysis.density.Density" title="MDAnalysis.analysis.density.Density"><code class="xref py py-class docutils literal"><span class="pre">Density</span></code></a> (see doc)</p>
@@ -564,62 +598,8 @@ in Angstroem [2.0]</p>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
-<dl class="function">
-<dt id="MDAnalysis.analysis.density.density_from_trajectory">
-<code class="descclassname">MDAnalysis.analysis.density.</code><code class="descname">density_from_trajectory</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/density.html#density_from_trajectory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.density.density_from_trajectory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a density grid from a trajectory.</p>
-<blockquote>
-<div>density_from_trajectory(PSF, DCD, delta=1.0, atomselection=&#8217;name OH2&#8217;, ...) &#8211;&gt; density</div></blockquote>
-<p>or</p>
-<blockquote>
-<div>density_from_trajectory(PDB, XTC, delta=1.0, atomselection=&#8217;name OH2&#8217;, ...) &#8211;&gt; density</div></blockquote>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>file</strong> (<em>topology</em>) &#8211; any topology file understood by MDAnalysis</li>
-<li><strong>trajectory</strong> &#8211; any trajectory (coordinate) file understood by MDAnalysis;
-if reading a single PDB file it is sufficient to just
-provide it once as a single argument</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Keywords:</th><td class="field-body"><dl class="first docutils">
-<dt>atomselection</dt>
-<dd><p class="first last">selection string (MDAnalysis syntax) for the species to be analyzed
-[&#8220;name OH2&#8221;]</p>
-</dd>
-<dt>delta</dt>
-<dd><p class="first last">bin size for the density grid in Angstroem (same in x,y,z) [1.0]</p>
-</dd>
-<dt>metadata</dt>
-<dd><p class="first last">dictionary of additional data to be saved with the object</p>
-</dd>
-<dt>padding</dt>
-<dd><p class="first last">increase histogram dimensions by padding (on top of initial box size)
-in Angstroem [2.0]</p>
-</dd>
-<dt>soluteselection</dt>
-<dd><p class="first last">MDAnalysis selection for the solute, e.g. &#8220;protein&#8221; [<code class="docutils literal"><span class="pre">None</span></code>]</p>
-</dd>
-<dt>cutoff</dt>
-<dd><p class="first last">With <em>cutoff</em>, select &#8216;&lt;atomsel&gt; NOT WITHIN &lt;cutoff&gt; OF &lt;soluteselection&gt;&#8217;
-(Special routines that are faster than the standard AROUND selection) [0]</p>
-</dd>
-</dl>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#MDAnalysis.analysis.density.Density" title="MDAnalysis.analysis.density.Density"><code class="xref py py-class docutils literal"><span class="pre">Density</span></code></a></p>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last">docs for <a class="reference internal" href="#MDAnalysis.analysis.density.density_from_Universe" title="MDAnalysis.analysis.density.density_from_Universe"><code class="xref py py-func docutils literal"><span class="pre">density_from_Universe()</span></code></a> (defaults for kwargs are defined there).</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.13.0: </span><em>update_selection</em> and <em>quite</em> keywords added</p>
 </div>
 </dd></dl>
 
@@ -987,14 +967,14 @@ regenerated from the saved data with</p>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Joshua
-    Adelman, Jonathan Barnoud, Christian Beckstein (logo), Alejandro
+    Adelman, Balasubramanian, Jonathan Barnoud, Christian Beckstein (logo), Alejandro
     Bernardin, Sébastien Buchoux, David Caplan, Matthieu Chavent,
     Xavier Deupi, Jan Domański, David L. Dotson, Lennard van der
     Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas
     Grossar, Benjamin Hall, Joe Jordan, Max Linke, Jinju Lu, Robert
     McGibbon, Alex Nesterenko, Manuel Nuno Melo, Hai Nguyen,
     Caio S. Souza, Danny Parton, Joshua L. Phillips, Tyler Reddy,
-    Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl, 
+    Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl,
     Gorman Stock, Isaac Virshup, Zhuyi Xue, Carlos Yáñez S.,
     and Oliver Beckstein.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.

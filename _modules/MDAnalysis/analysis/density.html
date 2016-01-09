@@ -73,7 +73,7 @@
             
   <h1>Source code for MDAnalysis.analysis.density</h1><div class="highlight"><pre>
 <span class="c"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
-<span class="c"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 </span>
+<span class="c"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
 <span class="c">#</span>
 <span class="c"># MDAnalysis --- http://www.MDAnalysis.org</span>
 <span class="c"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
@@ -146,7 +146,6 @@
 <span class="sd">   :inherited-members:</span>
 <span class="sd">   :show-inheritance:</span>
 <span class="sd">.. autofunction:: density_from_Universe</span>
-<span class="sd">.. autofunction:: density_from_trajectory</span>
 <span class="sd">.. autofunction:: density_from_PDB</span>
 <span class="sd">.. autofunction:: Bfactor2RMSF</span>
 <span class="sd">.. autoclass:: BfactorDensityCreator</span>
@@ -187,10 +186,14 @@
     <span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">MDAnalysis</span>
+<span class="kn">import</span> <span class="nn">MDAnalysis.core.AtomGroup</span>
 <span class="kn">from</span> <span class="nn">MDAnalysis.lib.util</span> <span class="kn">import</span> <span class="n">fixedwidth_bins</span><span class="p">,</span> <span class="n">iterable</span><span class="p">,</span> <span class="n">asiterable</span>
 <span class="kn">from</span> <span class="nn">MDAnalysis.lib</span> <span class="kn">import</span> <span class="n">NeighborSearch</span> <span class="k">as</span> <span class="n">NS</span>
 <span class="kn">from</span> <span class="nn">MDAnalysis</span> <span class="kn">import</span> <span class="n">NoDataError</span><span class="p">,</span> <span class="n">MissingDataWarning</span>
 <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">units</span>
+<span class="kn">from</span> <span class="nn">MDAnalysis.lib.log</span> <span class="kn">import</span> <span class="n">ProgressMeter</span>
+
+<span class="kn">import</span> <span class="nn">MDAnalysis.analysis.distances</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
 
@@ -454,55 +457,27 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">grid_type</span> <span class="o">=</span> <span class="s">&#39;histogram&#39;</span>
         <span class="k">return</span> <span class="s">&#39;&lt;Density &#39;</span> <span class="o">+</span> <span class="n">grid_type</span> <span class="o">+</span> <span class="s">&#39; with &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39; bins&gt;&#39;</span>
-
-</div>
-<div class="viewcode-block" id="density_from_trajectory"><a class="viewcode-back" href="../../../documentation_pages/analysis/density.html#MDAnalysis.analysis.density.density_from_trajectory">[docs]</a><span class="k">def</span> <span class="nf">density_from_trajectory</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create a density grid from a trajectory.</span>
-
-<span class="sd">         density_from_trajectory(PSF, DCD, delta=1.0, atomselection=&#39;name OH2&#39;, ...) --&gt; density</span>
-
-<span class="sd">    or</span>
-
-<span class="sd">         density_from_trajectory(PDB, XTC, delta=1.0, atomselection=&#39;name OH2&#39;, ...) --&gt; density</span>
-
-<span class="sd">    :Arguments:</span>
-<span class="sd">      topology file</span>
-<span class="sd">            any topology file understood by MDAnalysis</span>
-<span class="sd">      trajectory</span>
-<span class="sd">            any trajectory (coordinate) file understood by MDAnalysis;</span>
-<span class="sd">            if reading a single PDB file it is sufficient to just</span>
-<span class="sd">            provide it once as a single argument</span>
-
-<span class="sd">    :Keywords:</span>
-<span class="sd">      atomselection</span>
-<span class="sd">            selection string (MDAnalysis syntax) for the species to be analyzed</span>
-<span class="sd">            [&quot;name OH2&quot;]</span>
-<span class="sd">      delta</span>
-<span class="sd">            bin size for the density grid in Angstroem (same in x,y,z) [1.0]</span>
-<span class="sd">      metadata</span>
-<span class="sd">            dictionary of additional data to be saved with the object</span>
-<span class="sd">      padding</span>
-<span class="sd">            increase histogram dimensions by padding (on top of initial box size)</span>
-<span class="sd">            in Angstroem [2.0]</span>
-<span class="sd">      soluteselection</span>
-<span class="sd">            MDAnalysis selection for the solute, e.g. &quot;protein&quot; [``None``]</span>
-<span class="sd">      cutoff</span>
-<span class="sd">            With *cutoff*, select &#39;&lt;atomsel&gt; NOT WITHIN &lt;cutoff&gt; OF &lt;soluteselection&gt;&#39;</span>
-<span class="sd">            (Special routines that are faster than the standard AROUND selection) [0]</span>
-
-<span class="sd">    :Returns: :class:`Density`</span>
-
-<span class="sd">    .. SeeAlso:: docs for :func:`density_from_Universe` (defaults for kwargs are defined there).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">density_from_Universe</span><span class="p">(</span><span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
 </div>
 <div class="viewcode-block" id="density_from_Universe"><a class="viewcode-back" href="../../../documentation_pages/analysis/density.html#MDAnalysis.analysis.density.density_from_Universe">[docs]</a><span class="k">def</span> <span class="nf">density_from_Universe</span><span class="p">(</span><span class="n">universe</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">atomselection</span><span class="o">=</span><span class="s">&#39;name OH2&#39;</span><span class="p">,</span>
+                          <span class="n">start</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                           <span class="n">metadata</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">soluteselection</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                          <span class="n">use_kdtree</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create a density grid from a MDAnalysis.Universe object.</span>
+                          <span class="n">use_kdtree</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">update_selection</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                          <span class="n">quiet</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                          <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create a density grid from a :class:`MDAnalysis.Universe` object.</span>
+
+<span class="sd">    The trajectory is read, frame by frame, and the atoms selected with *atomselection* are</span>
+<span class="sd">    histogrammed on a grid with spacing *delta*::</span>
 
 <span class="sd">      density_from_Universe(universe, delta=1.0, atomselection=&#39;name OH2&#39;, ...) --&gt; density</span>
+
+<span class="sd">    .. Note:: By default, the *atomselection* is static, i.e., atoms are only</span>
+<span class="sd">              selected once at the beginning. If you want dynamically changing</span>
+<span class="sd">              selections (such as &quot;name OW and around 4.0 (protein and not name</span>
+<span class="sd">              H*)&quot;) then set ``update_selection=True``. For the special case of</span>
+<span class="sd">              calculating a density of the &quot;bulk&quot; solvent away from a solute</span>
+<span class="sd">              use the optimized selections with keywords *cutoff* and</span>
+<span class="sd">              *soluteselection*.</span>
 
 <span class="sd">    :Arguments:</span>
 <span class="sd">      universe</span>
@@ -514,6 +489,9 @@
 <span class="sd">            [&quot;name OH2&quot;]</span>
 <span class="sd">      delta</span>
 <span class="sd">            bin size for the density grid in Angstroem (same in x,y,z) [1.0]</span>
+<span class="sd">      start, stop, step</span>
+<span class="sd">            Slice the trajectory as ``trajectory[start&quot;stop:step]``; default</span>
+<span class="sd">            is to read the whole trajectory.</span>
 <span class="sd">      metadata</span>
 <span class="sd">            dictionary of additional data to be saved with the object</span>
 <span class="sd">      padding</span>
@@ -522,14 +500,29 @@
 <span class="sd">      soluteselection</span>
 <span class="sd">            MDAnalysis selection for the solute, e.g. &quot;protein&quot; [``None``]</span>
 <span class="sd">      cutoff</span>
-<span class="sd">            With *cutoff*, select &#39;&lt;atomsel&gt; NOT WITHIN &lt;cutoff&gt; OF &lt;soluteselection&gt;&#39;</span>
-<span class="sd">            (Special routines that are faster than the standard AROUND selection) [0]</span>
+<span class="sd">            With *cutoff*, select &quot;&lt;atomsel&gt; NOT WITHIN &lt;cutoff&gt; OF &lt;soluteselection&gt;&quot;</span>
+<span class="sd">            (Special routines that are faster than the standard ``AROUND`` selection)</span>
+<span class="sd">            [0]</span>
+<span class="sd">      update_selection</span>
+<span class="sd">            Should the selection of atoms be updated for every step? [``False``]</span>
+<span class="sd">            - ``True``: atom selection is updated for each frame, can be slow</span>
+<span class="sd">            - ``False``: atoms are only selected at the beginning</span>
+<span class="sd">      quiet</span>
+<span class="sd">            Print status update to the screen for every *interval* frame? [``False``]</span>
+<span class="sd">            - ``True``: no status updates when a new frame is processed</span>
+<span class="sd">            - ``False``: status update every frame (including number of atoms</span>
+<span class="sd">              processed, which is interesting with ``update_selection=True``)</span>
+<span class="sd">      interval</span>
+<span class="sd">           Show status update every *interval* frame [1]</span>
 <span class="sd">      parameters</span>
 <span class="sd">            dict with some special parameters for :class:`Density` (see doc)</span>
 <span class="sd">      kwargs</span>
 <span class="sd">            metadata, parameters are modified and passed on to :class:`Density`</span>
 
 <span class="sd">    :Returns: :class:`Density`</span>
+
+<span class="sd">    .. versionchanged:: 0.13.0</span>
+<span class="sd">       *update_selection* and *quite* keywords added</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
@@ -542,7 +535,6 @@
         <span class="c"># special fast selection for &#39;&lt;atomsel&gt; not within &lt;cutoff&gt; of &lt;solutesel&gt;&#39;</span>
         <span class="n">notwithin_coordinates</span> <span class="o">=</span> <span class="n">notwithin_coordinates_factory</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">atomselection</span><span class="p">,</span> <span class="n">soluteselection</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">,</span>
                                                               <span class="n">use_kdtree</span><span class="o">=</span><span class="n">use_kdtree</span><span class="p">)</span>
-
         <span class="k">def</span> <span class="nf">current_coordinates</span><span class="p">():</span>
             <span class="k">return</span> <span class="n">notwithin_coordinates</span><span class="p">()</span>
     <span class="k">else</span><span class="p">:</span>
@@ -582,15 +574,22 @@
     <span class="n">grid</span> <span class="o">*=</span> <span class="mf">0.0</span>
     <span class="n">h</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-    <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Histograming </span><span class="si">%6d</span><span class="s"> atoms in frame </span><span class="si">%5d</span><span class="s">/</span><span class="si">%d</span><span class="s">  [</span><span class="si">%5.1f%%</span><span class="s">]</span><span class="se">\r</span><span class="s">&quot;</span> <span class="o">%</span> \
-              <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">coord</span><span class="p">),</span> <span class="n">ts</span><span class="o">.</span><span class="n">frame</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">n_frames</span><span class="p">,</span> <span class="mf">100.0</span> <span class="o">*</span> <span class="n">ts</span><span class="o">.</span><span class="n">frame</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">n_frames</span><span class="p">),)</span>
-        <span class="n">coord</span> <span class="o">=</span> <span class="n">current_coordinates</span><span class="p">()</span>
+    <span class="n">pm</span> <span class="o">=</span> <span class="n">ProgressMeter</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">n_frames</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="n">interval</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="n">quiet</span><span class="p">,</span>
+                       <span class="n">format</span><span class="o">=</span><span class="s">&quot;Histogramming </span><span class="si">%(n_atoms)6d</span><span class="s"> atoms in frame &quot;</span>
+                       <span class="s">&quot;</span><span class="si">%(step)5d</span><span class="s">/</span><span class="si">%(numsteps)d</span><span class="s">  [</span><span class="si">%(percentage)5.1f%%</span><span class="s">]</span><span class="se">\r</span><span class="s">&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">:</span><span class="n">step</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">update_selection</span><span class="p">:</span>
+           <span class="n">group</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">atomselection</span><span class="p">)</span>
+           <span class="n">coord</span><span class="o">=</span><span class="n">group</span><span class="o">.</span><span class="n">positions</span>
+        <span class="k">else</span><span class="p">:</span>
+           <span class="n">coord</span> <span class="o">=</span> <span class="n">current_coordinates</span><span class="p">()</span>
+
+        <span class="n">pm</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span><span class="p">,</span> <span class="n">n_atoms</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">coord</span><span class="p">))</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">continue</span>
+
         <span class="n">h</span><span class="p">[:],</span> <span class="n">edges</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogramdd</span><span class="p">(</span><span class="n">coord</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="n">arange</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
         <span class="n">grid</span> <span class="o">+=</span> <span class="n">h</span>  <span class="c"># accumulate average histogram</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span>
     <span class="n">n_frames</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">n_frames</span>
     <span class="n">grid</span> <span class="o">/=</span> <span class="nb">float</span><span class="p">(</span><span class="n">n_frames</span><span class="p">)</span>
 
@@ -663,8 +662,6 @@
     <span class="n">protein</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">sel2</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">use_kdtree</span><span class="p">:</span>
         <span class="c"># using faster hand-coded &#39;not within&#39; selection with kd-tree</span>
-        <span class="kn">import</span> <span class="nn">MDAnalysis.core.AtomGroup</span>
-
         <span class="n">set_solvent</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">solvent</span><span class="p">)</span>  <span class="c"># need sets to do bulk = allsolvent - selection</span>
         <span class="k">if</span> <span class="n">not_within</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">:</span>  <span class="c"># default</span>
             <span class="k">def</span> <span class="nf">notwithin_coordinates</span><span class="p">(</span><span class="n">cutoff</span><span class="o">=</span><span class="n">cutoff</span><span class="p">):</span>
@@ -682,8 +679,6 @@
                 <span class="k">return</span> <span class="n">group</span><span class="o">.</span><span class="n">coordinates</span><span class="p">()</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="c"># slower distance matrix based (calculate all with all distances first)</span>
-        <span class="kn">import</span> <span class="nn">MDAnalysis.analysis.distances</span>
-
         <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">solvent</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">protein</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="n">box</span> <span class="o">=</span> <span class="bp">None</span>  <span class="c"># as long as s_coor is not minimum-image remapped</span>
         <span class="k">if</span> <span class="n">not_within</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">:</span>  <span class="c"># default</span>
@@ -827,9 +822,7 @@
 <span class="sd">        that can be easily matched to a broader density distribution.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">MDAnalysis</span> <span class="kn">import</span> <span class="n">as_Universe</span>
-
-        <span class="n">u</span> <span class="o">=</span> <span class="n">as_Universe</span><span class="p">(</span><span class="n">pdb</span><span class="p">)</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">as_Universe</span><span class="p">(</span><span class="n">pdb</span><span class="p">)</span>
         <span class="n">group</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">atomselection</span><span class="p">)</span>
         <span class="n">coord</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">coordinates</span><span class="p">()</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Selected </span><span class="si">%d</span><span class="s"> atoms (</span><span class="si">%s</span><span class="s">) out of </span><span class="si">%d</span><span class="s"> total.&quot;</span> <span class="o">%</span>
@@ -953,14 +946,14 @@
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Joshua
-    Adelman, Jonathan Barnoud, Christian Beckstein (logo), Alejandro
+    Adelman, Balasubramanian, Jonathan Barnoud, Christian Beckstein (logo), Alejandro
     Bernardin, Sébastien Buchoux, David Caplan, Matthieu Chavent,
     Xavier Deupi, Jan Domański, David L. Dotson, Lennard van der
     Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas
     Grossar, Benjamin Hall, Joe Jordan, Max Linke, Jinju Lu, Robert
     McGibbon, Alex Nesterenko, Manuel Nuno Melo, Hai Nguyen,
     Caio S. Souza, Danny Parton, Joshua L. Phillips, Tyler Reddy,
-    Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl, 
+    Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl,
     Gorman Stock, Isaac Virshup, Zhuyi Xue, Carlos Yáñez S.,
     and Oliver Beckstein.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
