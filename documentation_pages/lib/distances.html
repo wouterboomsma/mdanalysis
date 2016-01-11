@@ -112,6 +112,31 @@ typically provide higher performance than the serial code.</p>
 <p>All functions take the optional keyword <em>backend</em>, which determines
 the type of acceleration. Currently, the following choices are
 implemented (<em>backend</em> is case-insensitive):</p>
+<table border="1" class="docutils" id="id1">
+<caption><span class="caption-text">Available <em>backends</em> for accelerated distance functions.</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="14%" />
+<col width="34%" />
+<col width="52%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><em>backend</em></th>
+<th class="head">module</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>&#8220;serial&#8221;</td>
+<td><code class="xref py py-mod docutils literal"><span class="pre">c_distances</span></code></td>
+<td>serial implementation in C/Cython</td>
+</tr>
+<tr class="row-odd"><td>&#8220;OpenMP&#8221;</td>
+<td><code class="xref py py-mod docutils literal"><span class="pre">c_distances_openmp</span></code></td>
+<td>parallel implementation in C/Cython
+with OpenMP</td>
+</tr>
+</tbody>
+</table>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.13.0.</span></p>
 </div>
