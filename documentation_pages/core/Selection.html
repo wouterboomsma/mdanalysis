@@ -95,10 +95,32 @@
   <span class="target" id="module-MDAnalysis.core.Selection"></span><div class="section" id="atom-selection-hierarchy-mdanalysis-core-selection">
 <h1>7.3. Atom selection Hierarchy &#8212; <a class="reference internal" href="#module-MDAnalysis.core.Selection" title="MDAnalysis.core.Selection"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.core.Selection</span></code></a><a class="headerlink" href="#atom-selection-hierarchy-mdanalysis-core-selection" title="Permalink to this headline">¶</a></h1>
 <p>These objects are constructed and applied to the group</p>
-<p>Currently all atom arrays are handled internally as sets, but returned as AtomGroups</p>
+<p>In general, Parser.parse() creates a Selection object
+from a selection string.</p>
+<p>This Selection object is then passed an AtomGroup through its
+apply method to apply the Selection to the AtomGroup.</p>
+<p>This is all invisible to the user through ag.select_atoms</p>
+<dl class="class">
+<dt id="MDAnalysis.core.Selection.AltlocSelection">
+<em class="property">class </em><code class="descclassname">MDAnalysis.core.Selection.</code><code class="descname">AltlocSelection</code><span class="sig-paren">(</span><em>parser</em>, <em>tokens</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/Selection.html#AltlocSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.Selection.AltlocSelection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select atoms based on &#8216;altLoc&#8217; attribute</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="MDAnalysis.core.Selection.AtomNameSelection">
+<em class="property">class </em><code class="descclassname">MDAnalysis.core.Selection.</code><code class="descname">AtomNameSelection</code><span class="sig-paren">(</span><em>parser</em>, <em>tokens</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/Selection.html#AtomNameSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.Selection.AtomNameSelection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select atoms based on &#8216;names&#8217; attribute</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="MDAnalysis.core.Selection.AtomTypeSelection">
+<em class="property">class </em><code class="descclassname">MDAnalysis.core.Selection.</code><code class="descname">AtomTypeSelection</code><span class="sig-paren">(</span><em>parser</em>, <em>tokens</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/Selection.html#AtomTypeSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.Selection.AtomTypeSelection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select atoms based on &#8216;types&#8217; attribute</p>
+</dd></dl>
+
 <dl class="class">
 <dt id="MDAnalysis.core.Selection.BackboneSelection">
-<em class="property">class </em><code class="descclassname">MDAnalysis.core.Selection.</code><code class="descname">BackboneSelection</code><a class="reference internal" href="../../_modules/MDAnalysis/core/Selection.html#BackboneSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.Selection.BackboneSelection" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">MDAnalysis.core.Selection.</code><code class="descname">BackboneSelection</code><span class="sig-paren">(</span><em>parser</em>, <em>tokens</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/Selection.html#BackboneSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.Selection.BackboneSelection" title="Permalink to this definition">¶</a></dt>
 <dd><p>A BackboneSelection contains all atoms with name &#8216;N&#8217;, &#8216;CA&#8217;, &#8216;C&#8217;, &#8216;O&#8217;.</p>
 <p>This excludes OT* on C-termini
 (which are included by, eg VMD&#8217;s backbone selection).</p>
@@ -106,7 +128,7 @@
 
 <dl class="class">
 <dt id="MDAnalysis.core.Selection.BaseSelection">
-<em class="property">class </em><code class="descclassname">MDAnalysis.core.Selection.</code><code class="descname">BaseSelection</code><a class="reference internal" href="../../_modules/MDAnalysis/core/Selection.html#BaseSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.Selection.BaseSelection" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">MDAnalysis.core.Selection.</code><code class="descname">BaseSelection</code><span class="sig-paren">(</span><em>parser</em>, <em>tokens</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/Selection.html#BaseSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.Selection.BaseSelection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Selection of atoms in nucleobases.</p>
 <p>Recognized atom names (from CHARMM):</p>
 <blockquote>
@@ -125,7 +147,7 @@
 <li>&#8216;use_periodic_selections&#8217;</li>
 </ul>
 </dd>
-<dt>Populates the <cite>_apply</cite> method with either</dt>
+<dt>Populates the <cite>apply</cite> method with either</dt>
 <dd><ul class="first last simple">
 <li>_apply_KDTree</li>
 <li>_apply_distmat</li>
@@ -136,7 +158,7 @@
 
 <dl class="class">
 <dt id="MDAnalysis.core.Selection.NucleicBackboneSelection">
-<em class="property">class </em><code class="descclassname">MDAnalysis.core.Selection.</code><code class="descname">NucleicBackboneSelection</code><a class="reference internal" href="../../_modules/MDAnalysis/core/Selection.html#NucleicBackboneSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.Selection.NucleicBackboneSelection" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">MDAnalysis.core.Selection.</code><code class="descname">NucleicBackboneSelection</code><span class="sig-paren">(</span><em>parser</em>, <em>tokens</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/Selection.html#NucleicBackboneSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.Selection.NucleicBackboneSelection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Contains all atoms with name &#8220;P&#8221;, &#8220;C5&#8217;&#8221;, C3&#8217;&#8221;, &#8220;O3&#8217;&#8221;, &#8220;O5&#8217;&#8221;.</p>
 <p>These atoms are only recognized if they are in a residue matched
 by the <a class="reference internal" href="#MDAnalysis.core.Selection.NucleicSelection" title="MDAnalysis.core.Selection.NucleicSelection"><code class="xref py py-class docutils literal"><span class="pre">NucleicSelection</span></code></a>.</p>
@@ -144,8 +166,8 @@ by the <a class="reference internal" href="#MDAnalysis.core.Selection.NucleicSel
 
 <dl class="class">
 <dt id="MDAnalysis.core.Selection.NucleicSelection">
-<em class="property">class </em><code class="descclassname">MDAnalysis.core.Selection.</code><code class="descname">NucleicSelection</code><a class="reference internal" href="../../_modules/MDAnalysis/core/Selection.html#NucleicSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.Selection.NucleicSelection" title="Permalink to this definition">¶</a></dt>
-<dd><p>A nucleic selection consists of all atoms in nucleic acid residues with  recognized residue names.</p>
+<em class="property">class </em><code class="descclassname">MDAnalysis.core.Selection.</code><code class="descname">NucleicSelection</code><span class="sig-paren">(</span><em>parser</em>, <em>tokens</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/Selection.html#NucleicSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.Selection.NucleicSelection" title="Permalink to this definition">¶</a></dt>
+<dd><p>All atoms in nucleic acid residues with recognized residue names.</p>
 <p>Recognized residue names:</p>
 <ul>
 <li><dl class="first docutils">
@@ -166,22 +188,22 @@ by the <a class="reference internal" href="#MDAnalysis.core.Selection.NucleicSel
 
 <dl class="class">
 <dt id="MDAnalysis.core.Selection.NucleicSugarSelection">
-<em class="property">class </em><code class="descclassname">MDAnalysis.core.Selection.</code><code class="descname">NucleicSugarSelection</code><a class="reference internal" href="../../_modules/MDAnalysis/core/Selection.html#NucleicSugarSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.Selection.NucleicSugarSelection" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">MDAnalysis.core.Selection.</code><code class="descname">NucleicSugarSelection</code><span class="sig-paren">(</span><em>parser</em>, <em>tokens</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/Selection.html#NucleicSugarSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.Selection.NucleicSugarSelection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Contains all atoms with name C1&#8217;, C2&#8217;, C3&#8217;, C4&#8217;, O2&#8217;, O4&#8217;, O3&#8217;.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="MDAnalysis.core.Selection.PropertySelection">
-<em class="property">class </em><code class="descclassname">MDAnalysis.core.Selection.</code><code class="descname">PropertySelection</code><span class="sig-paren">(</span><em>prop</em>, <em>operator</em>, <em>value</em>, <em>abs=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/Selection.html#PropertySelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.Selection.PropertySelection" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">MDAnalysis.core.Selection.</code><code class="descname">PropertySelection</code><span class="sig-paren">(</span><em>parser</em>, <em>tokens</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/Selection.html#PropertySelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.Selection.PropertySelection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Some of the possible properties:
 x, y, z, radius, mass,</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="MDAnalysis.core.Selection.ProteinSelection">
-<em class="property">class </em><code class="descclassname">MDAnalysis.core.Selection.</code><code class="descname">ProteinSelection</code><a class="reference internal" href="../../_modules/MDAnalysis/core/Selection.html#ProteinSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.Selection.ProteinSelection" title="Permalink to this definition">¶</a></dt>
-<dd><p>A protein selection consists of all residues with  recognized residue names.</p>
-<p>Recognized residue names in <a class="reference internal" href="#MDAnalysis.core.Selection.ProteinSelection.prot_res" title="MDAnalysis.core.Selection.ProteinSelection.prot_res"><code class="xref py py-attr docutils literal"><span class="pre">ProteinSelection.prot_res</span></code></a>.</p>
+<em class="property">class </em><code class="descclassname">MDAnalysis.core.Selection.</code><code class="descname">ProteinSelection</code><span class="sig-paren">(</span><em>parser</em>, <em>tokens</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/Selection.html#ProteinSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.Selection.ProteinSelection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Consists of all residues with  recognized residue names.</p>
+<p>Recognized residue names in <code class="xref py py-attr docutils literal"><span class="pre">ProteinSelection.prot_res</span></code>.</p>
 <blockquote>
 <div><ul>
 <li><dl class="first docutils">
@@ -200,12 +222,28 @@ x, y, z, radius, mass,</p>
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="../lib/util.html#MDAnalysis.lib.util.convert_aa_code" title="MDAnalysis.lib.util.convert_aa_code"><code class="xref py py-func docutils literal"><span class="pre">MDAnalysis.lib.util.convert_aa_code()</span></code></a></p>
 </div>
-<dl class="attribute">
-<dt id="MDAnalysis.core.Selection.ProteinSelection.prot_res">
-<code class="descname">prot_res</code><em class="property"> = {'GLH': None, 'ILE': None, 'ALAD': None, 'GLUH': None, 'GLN': None, 'HISH': None, 'ASN1': None, 'HYP': None, 'GLY': None, 'HIP': None, 'ARGN': None, 'MSE': None, 'CYS1': None, 'GLU': None, 'CYS2': None, 'CYS': None, 'HISE': None, 'ASP': None, 'SER': None, 'HSD': None, 'HSE': None, 'PRO': None, 'CYX': None, 'ASPH': None, 'ORN': None, 'HSP': None, 'HID': None, 'HIE': None, 'LYN': None, 'DAB': None, 'ASN': None, 'CYM': None, 'HISD': None, 'VAL': None, 'THR': None, 'HISB': None, 'HIS': None, 'HIS1': None, 'HIS2': None, 'TRP': None, 'HISA': None, 'ACE': None, 'ASH': None, 'CYSH': None, 'PGLU': None, 'LYS': None, 'PHE': None, 'ALA': None, 'QLN': None, 'MET': None, 'LYSH': None, 'NME': None, 'LEU': None, 'ARG': None, 'TYR': None}</em><a class="headerlink" href="#MDAnalysis.core.Selection.ProteinSelection.prot_res" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dictionary of recognized residue names (3- or 4-letter).</p>
 </dd></dl>
 
+<dl class="class">
+<dt id="MDAnalysis.core.Selection.RangeSelection">
+<em class="property">class </em><code class="descclassname">MDAnalysis.core.Selection.</code><code class="descname">RangeSelection</code><span class="sig-paren">(</span><em>parser</em>, <em>tokens</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/Selection.html#RangeSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.Selection.RangeSelection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select atoms based on numerical fields</p>
+<p>Allows the use of &#8216;:&#8217; and &#8216;-&#8216; to specify a range of values
+For example</p>
+<blockquote>
+<div>resid 1:10</div></blockquote>
+</dd></dl>
+
+<dl class="class">
+<dt id="MDAnalysis.core.Selection.ResidueNameSelection">
+<em class="property">class </em><code class="descclassname">MDAnalysis.core.Selection.</code><code class="descname">ResidueNameSelection</code><span class="sig-paren">(</span><em>parser</em>, <em>tokens</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/Selection.html#ResidueNameSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.Selection.ResidueNameSelection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select atoms based on &#8216;resnames&#8217; attribute</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="MDAnalysis.core.Selection.SegmentNameSelection">
+<em class="property">class </em><code class="descclassname">MDAnalysis.core.Selection.</code><code class="descname">SegmentNameSelection</code><span class="sig-paren">(</span><em>parser</em>, <em>tokens</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/Selection.html#SegmentNameSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.Selection.SegmentNameSelection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select atoms based on &#8216;segids&#8217; attribute</p>
 </dd></dl>
 
 <dl class="class">
@@ -228,6 +266,54 @@ T(erms) --&gt;     segid [value]
                 | type [value]
 </pre></div>
 </div>
+<dl class="method">
+<dt id="MDAnalysis.core.Selection.SelectionParser.expect">
+<code class="descname">expect</code><span class="sig-paren">(</span><em>token</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/Selection.html#SelectionParser.expect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.Selection.SelectionParser.expect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Anticipate and remove a given token</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.core.Selection.SelectionParser.parse">
+<code class="descname">parse</code><span class="sig-paren">(</span><em>selectstr</em>, <em>selgroups</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/Selection.html#SelectionParser.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.Selection.SelectionParser.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Selection object from a string.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>selectstr</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The string that describes the selection</li>
+<li><strong>selgroups</strong> (<em>AtomGroups</em>) &#8211; AtomGroups to be used in <cite>group</cite> selections</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><ul class="simple">
+<li><em>The appropriate Selection object.  Use the .apply method on</em></li>
+<li><em>this to perform the selection.</em></li>
+</ul>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">SelectionError</span></code> &#8211;
+If anything goes wrong in creating the Selection object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="MDAnalysis.core.Selection.StringSelection">
+<em class="property">class </em><code class="descclassname">MDAnalysis.core.Selection.</code><code class="descname">StringSelection</code><span class="sig-paren">(</span><em>parser</em>, <em>tokens</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/Selection.html#StringSelection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.Selection.StringSelection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Selections based on text attributes</p>
+<p>Supports the use of wildcards at the end of strings</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="MDAnalysis.core.Selection.unique">
+<code class="descclassname">MDAnalysis.core.Selection.</code><code class="descname">unique</code><span class="sig-paren">(</span><em>ag</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/Selection.html#unique"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.Selection.unique" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the unique elements of ag</p>
 </dd></dl>
 
 </div>
