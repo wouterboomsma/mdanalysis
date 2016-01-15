@@ -173,7 +173,8 @@
 <span class="sd">    &quot;Angstrom&quot;. See :mod:`MDAnalysis.units` for other recognized</span>
 <span class="sd">    values.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">format</span> <span class="o">=</span> <span class="s">&#39;DCD&#39;</span>
+    <span class="n">format</span> <span class="o">=</span> <span class="s">&#39;LAMMPS&#39;</span>
+    <span class="n">multiframe</span> <span class="o">=</span> <span class="bp">True</span>
     <span class="n">flavor</span> <span class="o">=</span> <span class="s">&#39;LAMMPS&#39;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -199,7 +200,7 @@
 
 <span class="sd">    .. _units style: http://lammps.sandia.gov/doc/units.html</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">format</span> <span class="o">=</span> <span class="s">&#39;DCD&#39;</span>
+    <span class="n">format</span> <span class="o">=</span> <span class="s">&#39;LAMMPS&#39;</span>
     <span class="n">flavor</span> <span class="o">=</span> <span class="s">&#39;LAMMPS&#39;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dcdfilename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>

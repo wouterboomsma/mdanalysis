@@ -165,7 +165,7 @@ Native frame number now stored as <cite>_frame</cite>, was <cite>step</cite></p>
 <dt id="MDAnalysis.coordinates.xdrfile.core.TrjReader">
 <em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.xdrfile.core.</code><code class="descname">TrjReader</code><span class="sig-paren">(</span><em>filename</em>, <em>sub=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/MDAnalysis/coordinates/xdrfile/core.html#TrjReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.xdrfile.core.TrjReader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic base class for reading Gromacs trajectories inside MDAnalysis.</p>
-<p>Derive classes and set <a class="reference internal" href="#MDAnalysis.coordinates.xdrfile.core.TrjReader.format" title="MDAnalysis.coordinates.xdrfile.core.TrjReader.format"><code class="xref py py-attr docutils literal"><span class="pre">TrjReader.format</span></code></a>, <code class="xref py py-attr docutils literal"><span class="pre">TrjReader._read_trj</span></code> and <code class="xref py py-attr docutils literal"><span class="pre">TrjReader._read_trj_atoms</span></code>.</p>
+<p>Derive classes and set <code class="xref py py-attr docutils literal"><span class="pre">TrjReader.format</span></code>, <code class="xref py py-attr docutils literal"><span class="pre">TrjReader._read_trj</span></code> and <code class="xref py py-attr docutils literal"><span class="pre">TrjReader._read_trj_atoms</span></code>.</p>
 <p class="rubric">Example</p>
 <p>reader = TrjReader(&#8220;file.trj&#8221;)
 for ts in reader:</p>
@@ -243,12 +243,6 @@ for TRR) [1000.0]</p>
 <dt id="MDAnalysis.coordinates.xdrfile.core.TrjReader.close">
 <code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/MDAnalysis/coordinates/xdrfile/core.html#TrjReader.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.xdrfile.core.TrjReader.close" title="Permalink to this definition">¶</a></dt>
 <dd><p>Close xdr trajectory file if it was open.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.coordinates.xdrfile.core.TrjReader.format">
-<code class="descname">format</code><em class="property"> = None</em><a class="headerlink" href="#MDAnalysis.coordinates.xdrfile.core.TrjReader.format" title="Permalink to this definition">¶</a></dt>
-<dd><p>override to define trajectory format of the reader (XTC or TRR)</p>
 </dd></dl>
 
 <dl class="method">
@@ -431,12 +425,6 @@ depending on the properties available in the <a class="reference internal" href=
 <dt id="MDAnalysis.coordinates.xdrfile.core.TrjWriter.convert_dimensions_to_unitcell">
 <code class="descname">convert_dimensions_to_unitcell</code><span class="sig-paren">(</span><em>ts</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/MDAnalysis/coordinates/xdrfile/core.html#TrjWriter.convert_dimensions_to_unitcell"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.xdrfile.core.TrjWriter.convert_dimensions_to_unitcell" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read dimensions from timestep <em>ts</em> and return Gromacs box vectors</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.coordinates.xdrfile.core.TrjWriter.format">
-<code class="descname">format</code><em class="property"> = None</em><a class="headerlink" href="#MDAnalysis.coordinates.xdrfile.core.TrjWriter.format" title="Permalink to this definition">¶</a></dt>
-<dd><p>override to define trajectory format of the reader (XTC or TRR)</p>
 </dd></dl>
 
 <dl class="attribute">

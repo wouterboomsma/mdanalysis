@@ -286,7 +286,11 @@
 <span class="sd">    .. _Gromacs: http://www.gromacs.org</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">format</span> <span class="o">=</span> <span class="s">&quot;TRR&quot;</span>
-    <span class="n">units</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;time&#39;</span><span class="p">:</span> <span class="s">&#39;ps&#39;</span><span class="p">,</span> <span class="s">&#39;length&#39;</span><span class="p">:</span> <span class="s">&#39;nm&#39;</span><span class="p">,</span> <span class="s">&#39;velocity&#39;</span><span class="p">:</span> <span class="s">&#39;nm/ps&#39;</span><span class="p">,</span> <span class="s">&#39;force&#39;</span><span class="p">:</span> <span class="s">&#39;kJ/(mol*nm)&#39;</span><span class="p">}</span>
+    <span class="n">multiframe</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">units</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;time&#39;</span><span class="p">:</span> <span class="s">&#39;ps&#39;</span><span class="p">,</span>
+             <span class="s">&#39;length&#39;</span><span class="p">:</span> <span class="s">&#39;nm&#39;</span><span class="p">,</span>
+             <span class="s">&#39;velocity&#39;</span><span class="p">:</span> <span class="s">&#39;nm/ps&#39;</span><span class="p">,</span>
+             <span class="s">&#39;force&#39;</span><span class="p">:</span> <span class="s">&#39;kJ/(mol*nm)&#39;</span><span class="p">}</span>
 
 </div>
 <div class="viewcode-block" id="TRRReader"><a class="viewcode-back" href="../../../../documentation_pages/coordinates/xdrfile/TRR.html#MDAnalysis.coordinates.TRR.TRRReader">[docs]</a><span class="k">class</span> <span class="nc">TRRReader</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">TrjReader</span><span class="p">):</span>
@@ -307,7 +311,10 @@
     <span class="n">format</span> <span class="o">=</span> <span class="s">&quot;TRR&quot;</span>
     <span class="n">_Timestep</span> <span class="o">=</span> <span class="n">Timestep</span>
     <span class="n">_Writer</span> <span class="o">=</span> <span class="n">TRRWriter</span>
-    <span class="n">units</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;time&#39;</span><span class="p">:</span> <span class="s">&#39;ps&#39;</span><span class="p">,</span> <span class="s">&#39;length&#39;</span><span class="p">:</span> <span class="s">&#39;nm&#39;</span><span class="p">,</span> <span class="s">&#39;velocity&#39;</span><span class="p">:</span> <span class="s">&#39;nm/ps&#39;</span><span class="p">,</span> <span class="s">&#39;force&#39;</span><span class="p">:</span> <span class="s">&#39;kJ/(mol*nm)&#39;</span><span class="p">}</span>
+    <span class="n">units</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;time&#39;</span><span class="p">:</span> <span class="s">&#39;ps&#39;</span><span class="p">,</span>
+             <span class="s">&#39;length&#39;</span><span class="p">:</span> <span class="s">&#39;nm&#39;</span><span class="p">,</span>
+             <span class="s">&#39;velocity&#39;</span><span class="p">:</span> <span class="s">&#39;nm/ps&#39;</span><span class="p">,</span>
+             <span class="s">&#39;force&#39;</span><span class="p">:</span> <span class="s">&#39;kJ/(mol*nm)&#39;</span><span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">_allocate_sub</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">DIM</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_pos_buf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_trr_n_atoms</span><span class="p">,</span> <span class="n">DIM</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s">&#39;C&#39;</span><span class="p">)</span>

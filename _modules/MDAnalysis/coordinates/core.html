@@ -105,6 +105,11 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">_READERS</span><span class="p">,</span>
+    <span class="n">_SINGLEFRAME_WRITERS</span><span class="p">,</span>
+    <span class="n">_MULTIFRAME_WRITERS</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="kn">from</span> <span class="nn">..lib</span> <span class="kn">import</span> <span class="n">util</span>
 <span class="kn">from</span> <span class="nn">..lib.mdamath</span> <span class="kn">import</span> <span class="n">triclinic_box</span><span class="p">,</span> <span class="n">triclinic_vectors</span><span class="p">,</span> <span class="n">box_volume</span>
 
@@ -112,18 +117,32 @@
 <div class="viewcode-block" id="get_reader_for"><a class="viewcode-back" href="../../../documentation_pages/coordinates/core.html#MDAnalysis.coordinates.core.get_reader_for">[docs]</a><span class="k">def</span> <span class="nf">get_reader_for</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">permissive</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return the appropriate trajectory reader class for *filename*.</span>
 
-<span class="sd">    Automatic detection is disabled when an explicit *format* is</span>
-<span class="sd">    provided.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">_trajectory_readers</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename : str</span>
+<span class="sd">        filename of the input trajectory or coordinate file</span>
+<span class="sd">    permissive : bool</span>
+<span class="sd">        If set to ``True``, a reader is selected that is more tolerant of the</span>
+<span class="sd">        input (currently only implemented for PDB). [``False``]</span>
+<span class="sd">    kwargs</span>
+<span class="sd">        Keyword arguments for the selected Reader class.</span>
 
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    A Reader object</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">        Automatic detection is disabled when an explicit *format* is</span>
+<span class="sd">        provided.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">format</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">format</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">guess_format</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
     <span class="n">format</span> <span class="o">=</span> <span class="n">format</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">permissive</span> <span class="ow">and</span> <span class="n">format</span> <span class="o">==</span> <span class="s">&#39;PDB&#39;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">_trajectory_readers</span><span class="p">[</span><span class="s">&#39;Permissive_PDB&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">_READERS</span><span class="p">[</span><span class="s">&#39;Permissive_PDB&#39;</span><span class="p">]</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">_trajectory_readers</span><span class="p">[</span><span class="n">format</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">_READERS</span><span class="p">[</span><span class="n">format</span><span class="p">]</span>
     <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="s">&quot;Unknown coordinate trajectory format &#39;{0}&#39; for &#39;{1}&#39;. The FORMATs </span><span class="se">\n</span><span class="s">&quot;</span>
@@ -133,7 +152,7 @@
             <span class="s">&quot;           Use the format keyword to explicitly set the format: &#39;Universe(...,format=FORMAT)&#39;</span><span class="se">\n</span><span class="s">&quot;</span>
             <span class="s">&quot;           For missing formats, raise an issue at &quot;</span>
             <span class="s">&quot;http://issues.mdanalysis.org&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="n">format</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">_trajectory_readers</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+                <span class="n">format</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">_READERS</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
 
 </div>
 <div class="viewcode-block" id="reader"><a class="viewcode-back" href="../../../documentation_pages/coordinates/core.html#MDAnalysis.coordinates.core.reader">[docs]</a><span class="k">def</span> <span class="nf">reader</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -149,26 +168,34 @@
 <span class="sd">    All other keywords are passed on to the underlying Reader classes; see</span>
 <span class="sd">    their documentation for details.</span>
 
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename : str or tuple</span>
+<span class="sd">        filename (or tuple of filenames) of the input coordinate file</span>
+<span class="sd">    permissive : bool</span>
+<span class="sd">        If set to ``True``, a reader is selected that is more tolerant of the</span>
+<span class="sd">        input (currently only implemented for PDB). [``False``]</span>
+<span class="sd">    kwargs</span>
+<span class="sd">        Keyword arguments for the selected Reader class.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    A Reader object</span>
+
 <span class="sd">    .. SeeAlso:: For trajectory formats: :class:`~DCD.DCDReader`,</span>
 <span class="sd">       :class:`~XTC.XTCReader`, :class:`~TRR.TRRReader`,</span>
 <span class="sd">       :class:`~XYZ.XYZReader`.  For single frame formats:</span>
 <span class="sd">       :class:`~CRD.CRDReader`, :class:`~PDB.PDBReader` and</span>
 <span class="sd">       :class:`~PDB.PrimitivePDBReader`, :class:`~GRO.GROReader`,</span>
-
-<span class="sd">    :Arguments:</span>
-<span class="sd">       *filename*</span>
-<span class="sd">          filename of the input trajectory or coordinate file</span>
-<span class="sd">       *permissive*</span>
-<span class="sd">          If set to ``True``, a reader is selected that is more tolerant of the</span>
-<span class="sd">          input (currently only implemented for PDB). [``False``]</span>
-<span class="sd">       *kwargs*</span>
-<span class="sd">           Keyword arguments for the selected Reader class.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-        <span class="n">Reader</span> <span class="o">=</span> <span class="n">get_reader_for</span><span class="p">(</span><span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">permissive</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;permissive&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span> <span class="n">format</span><span class="o">=</span><span class="n">filename</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">Reader</span> <span class="o">=</span> <span class="n">get_reader_for</span><span class="p">(</span><span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                <span class="n">permissive</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;permissive&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
+                                <span class="n">format</span><span class="o">=</span><span class="n">filename</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">Reader</span><span class="p">(</span><span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">Reader</span> <span class="o">=</span> <span class="n">get_reader_for</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">permissive</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;permissive&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">))</span>
+        <span class="n">Reader</span> <span class="o">=</span> <span class="n">get_reader_for</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span>
+                                <span class="n">permissive</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;permissive&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">Reader</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 </div>
@@ -181,80 +208,92 @@
 <span class="sd">    :class:`cStringIO.StringIO` instance then the *format* argument must be</span>
 <span class="sd">    used.</span>
 
-<span class="sd">    :Arguments:</span>
-<span class="sd">      *filename*</span>
-<span class="sd">         The filename for the trajectory is examined for its extension and</span>
-<span class="sd">         the Writer is chosen accordingly.</span>
-<span class="sd">      *format*</span>
-<span class="sd">         If no *filename* is supplied then the format can be explicitly set;</span>
-<span class="sd">         possible values are &quot;DCD&quot;, &quot;XTC&quot;, &quot;TRR&quot;; &quot;PDB&quot;, &quot;CRD&quot;, &quot;GRO&quot;.</span>
-<span class="sd">      *multiframe*</span>
-<span class="sd">         ``True``: write multiple frames to the trajectory; ``False``: only</span>
-<span class="sd">         write a single coordinate frame; ``None``: first try trajectory (multi</span>
-<span class="sd">         frame writers), then the single frame ones. Default is ``None``.</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename : str</span>
+<span class="sd">        The filename for the trajectory is examined for its extension and</span>
+<span class="sd">        the Writer is chosen accordingly.</span>
+<span class="sd">    format : str</span>
+<span class="sd">        If no *filename* is supplied then the format can be explicitly set</span>
+<span class="sd">    multiframe : bool</span>
+<span class="sd">        ``True``: write multiple frames to the trajectory; ``False``: only</span>
+<span class="sd">        write a single coordinate frame; ``None``: first try trajectory (multi</span>
+<span class="sd">        frame writers), then the single frame ones. Default is ``None``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    A Writer object</span>
 
 <span class="sd">    .. versionchanged:: 0.7.6</span>
 <span class="sd">       Added *multiframe* keyword; the default ``None`` reflects the previous</span>
 <span class="sd">       behaviour.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">_trajectory_writers</span><span class="p">,</span> <span class="n">_frame_writers</span>
-
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">)</span> <span class="ow">and</span> <span class="n">filename</span><span class="p">:</span>
         <span class="n">root</span><span class="p">,</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">get_ext</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
         <span class="n">format</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">check_compressed_format</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">ext</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">multiframe</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">_trajectory_writers</span><span class="p">[</span><span class="n">format</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">_MULTIFRAME_WRITERS</span><span class="p">[</span><span class="n">format</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">_frame_writers</span><span class="p">[</span><span class="n">format</span><span class="p">]</span>
+                <span class="k">return</span> <span class="n">_SINGLEFRAME_WRITERS</span><span class="p">[</span><span class="n">format</span><span class="p">]</span>
             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;No trajectory or frame writer for format </span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">format</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                    <span class="s">&quot;No trajectory or frame writer for format {0}&quot;</span>
+                    <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">format</span><span class="p">))</span>
     <span class="k">elif</span> <span class="n">multiframe</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">_trajectory_writers</span><span class="p">[</span><span class="n">format</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">_MULTIFRAME_WRITERS</span><span class="p">[</span><span class="n">format</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;No trajectory  writer for format </span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">format</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s">&quot;No trajectory writer for format {0}&quot;</span>
+                <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">format</span><span class="p">))</span>
     <span class="k">elif</span> <span class="n">multiframe</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">_frame_writers</span><span class="p">[</span><span class="n">format</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">_SINGLEFRAME_WRITERS</span><span class="p">[</span><span class="n">format</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;No single frame writer for format </span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">format</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s">&quot;No single frame writer for format {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">format</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Unknown value </span><span class="si">%r</span><span class="s"> for multiframe, only True, False, None allowed&quot;</span> <span class="o">%</span> <span class="n">multiframe</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Unknown value &#39;{0}&#39; for multiframe,&quot;</span>
+                         <span class="s">&quot; only True, False, None allowed&quot;</span>
+                         <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">multiframe</span><span class="p">))</span>
 
 </div>
 <div class="viewcode-block" id="writer"><a class="viewcode-back" href="../../../documentation_pages/coordinates/core.html#MDAnalysis.coordinates.core.writer">[docs]</a><span class="k">def</span> <span class="nf">writer</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">n_atoms</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Initialize a trajectory writer instance for *filename*.</span>
 
-<span class="sd">    :Arguments:</span>
-<span class="sd">       *filename*</span>
-<span class="sd">            Output filename of the trajectory; the extension determines the</span>
-<span class="sd">            format.</span>
-<span class="sd">       *n_atoms*</span>
-<span class="sd">            The number of atoms in the output trajectory; can be ommitted</span>
-<span class="sd">            for single-frame writers.</span>
-<span class="sd">       *multiframe*</span>
-<span class="sd">            ``True``: write a trajectory with multiple frames; ``False``</span>
-<span class="sd">            only write a single frame snapshot; ``None`` first try to get</span>
-<span class="sd">            a multiframe writer and then fall back to single frame [``None``]</span>
-<span class="sd">       *kwargs*</span>
-<span class="sd">            Keyword arguments for the writer; all trajectory Writers accept</span>
-<span class="sd">            at least</span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    -----------</span>
+<span class="sd">    filename : str</span>
+<span class="sd">        Output filename of the trajectory; the extension determines the</span>
+<span class="sd">        format.</span>
+<span class="sd">    n_atoms : int, optional</span>
+<span class="sd">        The number of atoms in the output trajectory; can be ommitted</span>
+<span class="sd">        for single-frame writers.</span>
+<span class="sd">    multiframe : bool, optional</span>
+<span class="sd">        ``True``: write a trajectory with multiple frames; ``False``</span>
+<span class="sd">        only write a single frame snapshot; ``None`` first try to get</span>
+<span class="sd">        a multiframe writer and then fall back to single frame [``None``]</span>
+<span class="sd">    kwargs : optional</span>
+<span class="sd">        Keyword arguments for the writer; all trajectory Writers accept</span>
+<span class="sd">        at least</span>
+<span class="sd">            *start*</span>
+<span class="sd">                starting time [0]</span>
+<span class="sd">            *step*</span>
+<span class="sd">                step size in frames [1]</span>
+<span class="sd">            *dt*</span>
+<span class="sd">                length of time between two frames, in ps [1.0]</span>
+<span class="sd">       Some readers accept additional arguments, which need to be looked</span>
+<span class="sd">       up in the documentation of the reader.</span>
 
-<span class="sd">               *start*</span>
-<span class="sd">                   starting time [0]</span>
-<span class="sd">               *step*</span>
-<span class="sd">                   step size in frames [1]</span>
-<span class="sd">               *dt*</span>
-<span class="sd">                   length of time between two frames, in ps [1.0]</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    A Writer object</span>
 
-<span class="sd">            Some readers accept additional arguments, which need to be looked</span>
-<span class="sd">            up in the documentation of the reader.</span>
-
-<span class="sd">            .. SeeAlso:: :class:`~MDAnalysis.coordinates.DCD.DCDWriter` for DCD</span>
-<span class="sd">               trajectories or :class:`~MDAnalysis.coordinates.XTC.XTCWriter`</span>
-<span class="sd">               and :class:`~MDAnalysis.coordinates.TRR.TRRWriter` for Gromacs.</span>
+<span class="sd">    .. SeeAlso:: :class:`~MDAnalysis.coordinates.DCD.DCDWriter` for DCD</span>
+<span class="sd">                 trajectories or :class:`~MDAnalysis.coordinates.XTC.XTCWriter`</span>
+<span class="sd">                 and :class:`~MDAnalysis.coordinates.TRR.TRRWriter` for Gromacs.</span>
 
 <span class="sd">    .. versionchanged:: 0.7.6</span>
 <span class="sd">       Added *multiframe* keyword. See also :func:`get_writer_for`.</span>

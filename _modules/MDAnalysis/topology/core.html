@@ -107,6 +107,7 @@
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">izip</span>
 
 <span class="c"># Local imports</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">_PARSERS</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">tables</span>
 <span class="kn">from</span> <span class="nn">..lib</span> <span class="kn">import</span> <span class="n">distances</span>
 <span class="kn">from</span> <span class="nn">..lib.util</span> <span class="kn">import</span> <span class="n">cached</span>
@@ -194,16 +195,14 @@
 <span class="sd">      *ValueError*</span>
 <span class="sd">        If no appropriate parser could be found.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">_topology_parsers</span>
-
     <span class="k">if</span> <span class="n">format</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">format</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">guess_format</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
     <span class="n">format</span> <span class="o">=</span> <span class="n">format</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">format</span> <span class="o">==</span> <span class="s">&#39;PDB&#39;</span> <span class="ow">and</span> <span class="n">permissive</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">_topology_parsers</span><span class="p">[</span><span class="s">&#39;Permissive_PDB&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">_PARSERS</span><span class="p">[</span><span class="s">&#39;Permissive_PDB&#39;</span><span class="p">]</span>
 
     <span class="k">try</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">_topology_parsers</span><span class="p">[</span><span class="n">format</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">_PARSERS</span><span class="p">[</span><span class="n">format</span><span class="p">]</span>
     <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="s">&quot;Cannot autodetect topology type for file &#39;{0}&#39; &quot;</span>
@@ -214,7 +213,7 @@
             <span class="s">&quot;           {1}</span><span class="se">\n</span><span class="s">&quot;</span>
             <span class="s">&quot;           See http://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats</span><span class="se">\n</span><span class="s">&quot;</span>
             <span class="s">&quot;           For missing formats, raise an issue at &quot;</span>
-            <span class="s">&quot;http://issues.mdanalysis.org&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">_topology_parsers</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+            <span class="s">&quot;http://issues.mdanalysis.org&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">_PARSERS</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
 
 
 <span class="c"># following guess_* used by PDB parser</span></div>
