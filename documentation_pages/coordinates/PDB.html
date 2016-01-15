@@ -392,12 +392,6 @@ of integers (typically starting at 1 or 0).</p>
 </table>
 </dd></dl>
 
-<dl class="method">
-<dt id="MDAnalysis.coordinates.PDB.PrimitivePDBReader.get_occupancy">
-<code class="descname">get_occupancy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/PDB.html#PrimitivePDBReader.get_occupancy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.PDB.PrimitivePDBReader.get_occupancy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return an array of occupancies in atom order.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -530,25 +524,6 @@ have been written.)</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="MDAnalysis.coordinates.PDB.PrimitivePDBWriter.ATOM">
-<code class="descname">ATOM</code><span class="sig-paren">(</span><em>serial=None</em>, <em>name=None</em>, <em>altLoc=None</em>, <em>resName=None</em>, <em>chainID=None</em>, <em>resSeq=None</em>, <em>iCode=None</em>, <em>x=None</em>, <em>y=None</em>, <em>z=None</em>, <em>occupancy=1.0</em>, <em>tempFactor=0.0</em>, <em>segID=None</em>, <em>element=None</em>, <em>charge=0</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/PDB.html#PrimitivePDBWriter.ATOM"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.PDB.PrimitivePDBWriter.ATOM" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write <a class="reference external" href="http://www.wwpdb.org/documentation/format32/sect9.html">ATOM</a> record.</p>
-<p>Only some keword args are optional (<em>altLoc</em>, <em>iCode</em>, <em>chainID</em>), for
-some defaults are set.</p>
-<p>All inputs are cut to the maximum allowed length. For integer numbers
-the highest-value digits are chopped (so that the <em>serial</em> and <em>reSeq</em>
-wrap); for strings the trailing characters are chopped. The <em>last</em>
-character of <em>chainID</em> becomes the PDB <em>chainID</em> (unless it has the
-special value &#8220;SYSTEM&#8221; (assigned by MDAnalysis if neither <em>segID</em> nor
-<em>chainID</em> were available), in which case the PDB will have an empty
-<em>chainID</em>).</p>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.6: </span>If the <em>chainID</em> has the special value &#8220;SYSTEM&#8221; (case insensitive)
-then the chain is set to the empty string &#8220;&#8221;.</p>
-</div>
-</dd></dl>
-
-<dl class="method">
 <dt id="MDAnalysis.coordinates.PDB.PrimitivePDBWriter.CONECT">
 <code class="descname">CONECT</code><span class="sig-paren">(</span><em>conect</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/PDB.html#PrimitivePDBWriter.CONECT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.PDB.PrimitivePDBWriter.CONECT" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write <a class="reference external" href="http://www.wwpdb.org/documentation/format32/sect10.html#CONECT">CONECT</a> record.</p>
@@ -623,7 +598,7 @@ record.</p>
 <a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>) or a whole
 <a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.Universe" title="MDAnalysis.core.AtomGroup.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a>.</p>
 <p>The last letter of the <a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.Atom.segid" title="MDAnalysis.core.AtomGroup.Atom.segid"><code class="xref py py-attr docutils literal"><span class="pre">segid</span></code></a> is
-used as the PDB chainID (but see <a class="reference internal" href="#MDAnalysis.coordinates.PDB.PrimitivePDBWriter.ATOM" title="MDAnalysis.coordinates.PDB.PrimitivePDBWriter.ATOM"><code class="xref py py-meth docutils literal"><span class="pre">ATOM()</span></code></a> for
+used as the PDB chainID (but see <code class="xref py py-meth docutils literal"><span class="pre">ATOM()</span></code> for
 details).</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -809,12 +784,6 @@ always requires a <code class="xref py py-class docutils literal"><span class="p
 not optional anymore when the Writer is obtained through
 this method of <a class="reference internal" href="#MDAnalysis.coordinates.PDB.PDBReader" title="MDAnalysis.coordinates.PDB.PDBReader"><code class="xref py py-class docutils literal"><span class="pre">PDBReader</span></code></a> .)</p>
 </div>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.coordinates.PDB.PDBReader.get_bfactors">
-<code class="descname">get_bfactors</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/PDB.html#PDBReader.get_bfactors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.PDB.PDBReader.get_bfactors" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return an array of bfactors (tempFactor) in atom order.</p>
 </dd></dl>
 
 </dd></dl>

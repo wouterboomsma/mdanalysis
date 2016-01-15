@@ -336,13 +336,6 @@
         <span class="c"># metadata</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdb</span><span class="o">.</span><span class="n">header</span>
 
-<div class="viewcode-block" id="PDBReader.get_bfactors"><a class="viewcode-back" href="../../../documentation_pages/coordinates/PDB.html#MDAnalysis.coordinates.PDB.PDBReader.get_bfactors">[docs]</a>    <span class="k">def</span> <span class="nf">get_bfactors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return an array of bfactors (tempFactor) in atom order.&quot;&quot;&quot;</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&quot;get_bfactors() will be removed in MDAnalysis 0.8; &quot;</span>
-                      <span class="s">&quot;use AtomGroup.bfactors [which will become AtomGroup.bfactors()]&quot;</span><span class="p">,</span>
-                      <span class="ne">DeprecationWarning</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">get_bfactor</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdb</span><span class="o">.</span><span class="n">get_atoms</span><span class="p">()])</span>
-</div>
 <div class="viewcode-block" id="PDBReader.Writer"><a class="viewcode-back" href="../../../documentation_pages/coordinates/PDB.html#MDAnalysis.coordinates.PDB.PDBReader.Writer">[docs]</a>    <span class="k">def</span> <span class="nf">Writer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns a strict PDBWriter for *filename*.</span>
 
@@ -625,10 +618,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">frames</span> <span class="o">=</span> <span class="n">frames</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">frames</span><span class="p">)</span> <span class="k">if</span> <span class="n">frames</span> <span class="k">else</span> <span class="mi">1</span>
 
-<div class="viewcode-block" id="PrimitivePDBReader.get_occupancy"><a class="viewcode-back" href="../../../documentation_pages/coordinates/PDB.html#MDAnalysis.coordinates.PDB.PrimitivePDBReader.get_occupancy">[docs]</a>    <span class="k">def</span> <span class="nf">get_occupancy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return an array of occupancies in atom order.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_occupancy</span><span class="p">)</span>
-</div>
 <div class="viewcode-block" id="PrimitivePDBReader.Writer"><a class="viewcode-back" href="../../../documentation_pages/coordinates/PDB.html#MDAnalysis.coordinates.PDB.PrimitivePDBReader.Writer">[docs]</a>    <span class="k">def</span> <span class="nf">Writer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns a permissive (simple) PDBWriter for *filename*.</span>
 
@@ -765,18 +754,23 @@
     <span class="c"># x)8.3f%(y)8.3f%(z)8.3f%(occupancy)6.2f%(tempFactor)6.2f          %(element)2s%(charge)2d\n&quot;,</span>
     <span class="c"># PDB format as used by NAMD/CHARMM: 4-letter resnames and segID, altLoc ignored</span>
     <span class="n">fmt</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s">&#39;ATOM&#39;</span><span class="p">:</span> <span class="s">&quot;ATOM  </span><span class="si">%(serial)5d</span><span class="s"> </span><span class="si">%(name)-4s%(altLoc)-1s%(resName)-4s%(chainID)1s%(resSeq)4d%(iCode)1s</span><span class="s">   </span><span class="si">%(x)8.3f</span><span class="s">%(&quot;</span>
-                <span class="s">&quot;y)8.3f</span><span class="si">%(z)8.3f%(occupancy)6.2f%(tempFactor)6.2f</span><span class="s">      </span><span class="si">%(segID)-4s%(element)2s%(charge)2d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
-        <span class="s">&#39;REMARK&#39;</span><span class="p">:</span> <span class="s">&quot;REMARK     </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
-        <span class="s">&#39;COMPND&#39;</span><span class="p">:</span> <span class="s">&quot;COMPND    </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
-        <span class="s">&#39;HEADER&#39;</span><span class="p">:</span> <span class="s">&quot;HEADER    </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
-        <span class="s">&#39;TITLE&#39;</span><span class="p">:</span> <span class="s">&quot;TITLE     </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
-        <span class="s">&#39;MODEL&#39;</span><span class="p">:</span> <span class="s">&quot;MODEL     </span><span class="si">%5d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
-        <span class="s">&#39;NUMMDL&#39;</span><span class="p">:</span> <span class="s">&quot;NUMMDL    </span><span class="si">%5d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+        <span class="s">&#39;ATOM&#39;</span><span class="p">:</span> <span class="p">(</span>
+            <span class="s">&quot;ATOM  {serial:5d} {name:&lt;4s}{altLoc:&lt;1s}{resName:&lt;4s}&quot;</span>
+            <span class="s">&quot;{chainID:1s}{resSeq:4d}{iCode:1s}&quot;</span>
+            <span class="s">&quot;   {pos[0]:8.3f}{pos[1]:8.3f}{pos[2]:8.3f}{occupancy:6.2f}&quot;</span>
+            <span class="s">&quot;{tempFactor:6.2f}      {segID:&lt;4s}{element:2s}{charge:.2f}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">),</span>
+        <span class="s">&#39;REMARK&#39;</span><span class="p">:</span> <span class="s">&quot;REMARK     {0}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+        <span class="s">&#39;COMPND&#39;</span><span class="p">:</span> <span class="s">&quot;COMPND    {0}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+        <span class="s">&#39;HEADER&#39;</span><span class="p">:</span> <span class="s">&quot;HEADER    {0}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+        <span class="s">&#39;TITLE&#39;</span><span class="p">:</span> <span class="s">&quot;TITLE     {0}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+        <span class="s">&#39;MODEL&#39;</span><span class="p">:</span> <span class="s">&quot;MODEL     {0:5d}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+        <span class="s">&#39;NUMMDL&#39;</span><span class="p">:</span> <span class="s">&quot;NUMMDL    {0:5d}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
         <span class="s">&#39;ENDMDL&#39;</span><span class="p">:</span> <span class="s">&quot;ENDMDL</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
         <span class="s">&#39;END&#39;</span><span class="p">:</span> <span class="s">&quot;END</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
-        <span class="s">&#39;CRYST1&#39;</span><span class="p">:</span> <span class="s">&quot;CRYST1</span><span class="si">%9.3f%9.3f%9.3f%7.2f%7.2f%7.2f</span><span class="s"> </span><span class="si">%-11s%4d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
-        <span class="s">&#39;CONECT&#39;</span><span class="p">:</span> <span class="s">&quot;CONECT</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="s">&#39;CRYST1&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&quot;CRYST1{box[0]:9.3f}{box[1]:9.3f}{box[2]:9.3f}&quot;</span>
+                   <span class="s">&quot;{ang[0]:7.2f}{ang[1]:7.2f}{ang[2]:7.2f} &quot;</span>
+                   <span class="s">&quot;{spacegroup:&lt;11s}{zvalue:4d}</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">),</span>
+        <span class="s">&#39;CONECT&#39;</span><span class="p">:</span> <span class="s">&quot;CONECT{0}</span><span class="se">\n</span><span class="s">&quot;</span>
     <span class="p">}</span>
     <span class="n">format</span> <span class="o">=</span> <span class="s">&#39;PDB&#39;</span>
     <span class="n">units</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;time&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&#39;length&#39;</span><span class="p">:</span> <span class="s">&#39;Angstrom&#39;</span><span class="p">}</span>
@@ -837,7 +831,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
         <span class="k">if</span> <span class="n">convert_units</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">convert_units</span> <span class="o">=</span> <span class="n">flags</span><span class="p">[</span><span class="s">&#39;convert_lengths&#39;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">convert_units</span> <span class="o">=</span> <span class="n">convert_units</span>  <span class="c"># convert length and time to base units</span>
+        <span class="c"># convert length and time to base units</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convert_units</span> <span class="o">=</span> <span class="n">convert_units</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_multiframe</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiframe</span> <span class="k">if</span> <span class="n">multiframe</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">multiframe</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bonds</span> <span class="o">=</span> <span class="n">bonds</span>
 
@@ -858,15 +853,18 @@
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_END</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">END</span><span class="p">()</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&quot;END record has already been written before the final closing of the file&quot;</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&quot;END record has already been written&quot;</span>
+                            <span class="s">&quot; before the final closing of the file&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span> <span class="o">=</span> <span class="bp">None</span>
 </div>
     <span class="k">def</span> <span class="nf">_write_pdb_title</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multiframe</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">TITLE</span><span class="p">(</span><span class="s">&quot;MDANALYSIS FRAMES FROM {0:d}, SKIP {1:d}: {2!s}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">remarks</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">TITLE</span><span class="p">(</span><span class="s">&quot;MDANALYSIS FRAMES FROM {0:d}, SKIP {1:d}: {2!s}&quot;</span>
+                       <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">remarks</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">TITLE</span><span class="p">(</span><span class="s">&quot;MDANALYSIS FRAME {0:d}: {1!s}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">remarks</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">TITLE</span><span class="p">(</span><span class="s">&quot;MDANALYSIS FRAME {0:d}: {1!s}&quot;</span>
+                       <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">remarks</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">_write_pdb_header</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">,</span> <span class="s">&#39;universe&#39;</span><span class="p">):</span>
@@ -878,7 +876,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_write_pdb_title</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">COMPND</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="c"># currently inconsistent: DCDReader gives a string, PDB*Reader a list, so always get a list</span>
+            <span class="c"># currently inconsistent: DCDReader gives a string,</span>
+            <span class="c"># PDB*Reader a list, so always get a list</span>
             <span class="c"># split long single lines into chunks of 66 chars</span>
             <span class="n">remarks</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">util</span><span class="o">.</span><span class="n">asiterable</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">remarks</span><span class="p">):</span>
@@ -898,7 +897,8 @@
 <span class="sd">        Raises :exc:`ValueError` if the coordinates fail the check.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">atoms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">atoms</span>  <span class="c"># make sure to use atoms (Issue 46)</span>
-        <span class="n">coor</span> <span class="o">=</span> <span class="n">atoms</span><span class="o">.</span><span class="n">coordinates</span><span class="p">()</span>  <span class="c"># can write from selection == Universe (Issue 49)</span>
+        <span class="c"># can write from selection == Universe (Issue 49)</span>
+        <span class="n">coor</span> <span class="o">=</span> <span class="n">atoms</span><span class="o">.</span><span class="n">positions</span>
 
         <span class="c"># check if any coordinates are illegal (coordinates are already in Angstroem per package default)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_valid_coordinates</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdb_coor_limits</span><span class="p">,</span> <span class="n">coor</span><span class="p">):</span>
@@ -1151,35 +1151,39 @@
 <span class="sd">           have been written.)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="n">traj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trajectory</span>
         <span class="n">atoms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">atoms</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">atoms</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">positions</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_units</span><span class="p">:</span>
-            <span class="n">coor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_pos_to_native</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">_pos</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">coor</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">_pos</span>
-
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">,</span> <span class="s">&quot;indices&quot;</span><span class="p">):</span>
-            <span class="n">coor</span> <span class="o">=</span> <span class="n">coor</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">indices</span><span class="p">]</span>
-
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">coor</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s">&quot;Length of the atoms array is {0:d}, this is different form the Timestep coordinate array {1:d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="nb">len</span><span class="p">(</span><span class="n">atoms</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">_pos</span><span class="p">)))</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_pos_to_native</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">multiframe</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">MODEL</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frames_written</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">atom</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">atoms</span><span class="p">):</span>
-            <span class="c"># TODO Jan: see description in ATOM for why this check has to be made</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">atom</span><span class="o">.</span><span class="n">bfactor</span><span class="p">:</span>
-                <span class="n">atom</span><span class="o">.</span><span class="n">bfactor</span> <span class="o">=</span> <span class="mf">0.</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">ATOM</span><span class="p">(</span><span class="n">serial</span><span class="o">=</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">atom</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">resName</span><span class="o">=</span><span class="n">atom</span><span class="o">.</span><span class="n">resname</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
-                      <span class="n">resSeq</span><span class="o">=</span><span class="n">atom</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">chainID</span><span class="o">=</span><span class="n">atom</span><span class="o">.</span><span class="n">segid</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">segID</span><span class="o">=</span><span class="n">atom</span><span class="o">.</span><span class="n">segid</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
-                      <span class="n">tempFactor</span><span class="o">=</span><span class="n">atom</span><span class="o">.</span><span class="n">bfactor</span><span class="p">,</span> <span class="n">altLoc</span><span class="o">=</span><span class="n">atom</span><span class="o">.</span><span class="n">altLoc</span><span class="p">,</span>
-                      <span class="n">x</span><span class="o">=</span><span class="n">coor</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">coor</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">z</span><span class="o">=</span><span class="n">coor</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-            <span class="c"># get bfactor, too, and add to output?</span>
-            <span class="c"># &#39;element&#39; is auto-guessed from atom.name in ATOM()</span>
+            <span class="n">segid</span> <span class="o">=</span> <span class="n">atom</span><span class="o">.</span><span class="n">segid</span> <span class="k">if</span> <span class="n">atom</span><span class="o">.</span><span class="n">segid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="s">&quot;SYSTEM&quot;</span> <span class="k">else</span> <span class="s">&quot; &quot;</span>
+
+            <span class="n">vals</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">vals</span><span class="p">[</span><span class="s">&#39;serial&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)[</span><span class="o">-</span><span class="mi">5</span><span class="p">:])</span>  <span class="c"># check for overflow here?</span>
+            <span class="n">vals</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">atom</span><span class="o">.</span><span class="n">name</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+            <span class="n">vals</span><span class="p">[</span><span class="s">&#39;altLoc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">atom</span><span class="o">.</span><span class="n">altLoc</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">atom</span><span class="o">.</span><span class="n">altLoc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="s">&quot; &quot;</span>
+            <span class="n">vals</span><span class="p">[</span><span class="s">&#39;resName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">atom</span><span class="o">.</span><span class="n">resname</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+            <span class="n">vals</span><span class="p">[</span><span class="s">&#39;chainID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">segid</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">vals</span><span class="p">[</span><span class="s">&#39;resSeq&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">resid</span><span class="p">)[</span><span class="o">-</span><span class="mi">4</span><span class="p">:])</span>
+            <span class="n">vals</span><span class="p">[</span><span class="s">&#39;iCode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot; &quot;</span>
+            <span class="n">vals</span><span class="p">[</span><span class="s">&#39;pos&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="c"># don&#39;t take off atom so conversion works</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">occ</span> <span class="o">=</span> <span class="n">atom</span><span class="o">.</span><span class="n">occupancy</span>
+            <span class="k">except</span> <span class="n">NoDataError</span><span class="p">:</span>
+                <span class="n">occ</span> <span class="o">=</span> <span class="mf">1.0</span>
+            <span class="n">vals</span><span class="p">[</span><span class="s">&#39;occupancy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">occ</span> <span class="k">if</span> <span class="n">occ</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="mf">1.0</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="n">atom</span><span class="o">.</span><span class="n">bfactor</span>
+            <span class="n">vals</span><span class="p">[</span><span class="s">&#39;tempFactor&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span> <span class="k">if</span> <span class="n">temp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="mf">0.0</span>
+            <span class="n">vals</span><span class="p">[</span><span class="s">&#39;segID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">segid</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+            <span class="n">vals</span><span class="p">[</span><span class="s">&#39;element&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">guess_atom_element</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">())[:</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">vals</span><span class="p">[</span><span class="s">&#39;charge&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="c"># .. _ATOM: http://www.wwpdb.org/documentation/format32/sect9.html </span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">[</span><span class="s">&#39;ATOM&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">vals</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">multiframe</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ENDMDL</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">frames_written</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -1193,7 +1197,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">trajectory</span><span class="p">,</span> <span class="s">&#39;header&#39;</span><span class="p">):</span>
             <span class="k">return</span>
         <span class="n">header</span> <span class="o">=</span> <span class="n">trajectory</span><span class="o">.</span><span class="n">header</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">[</span><span class="s">&#39;HEADER&#39;</span><span class="p">]</span> <span class="o">%</span> <span class="n">header</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">[</span><span class="s">&#39;HEADER&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">header</span><span class="p">))</span>
 </div>
 <div class="viewcode-block" id="PrimitivePDBWriter.TITLE"><a class="viewcode-back" href="../../../documentation_pages/coordinates/PDB.html#MDAnalysis.coordinates.PDB.PrimitivePDBWriter.TITLE">[docs]</a>    <span class="k">def</span> <span class="nf">TITLE</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">title</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Write TITLE_ record.</span>
@@ -1202,7 +1206,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">line</span> <span class="o">=</span> <span class="s">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>  <span class="c"># TODO: should do continuation automatically</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">[</span><span class="s">&#39;TITLE&#39;</span><span class="p">]</span> <span class="o">%</span> <span class="n">line</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">[</span><span class="s">&#39;TITLE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
 </div>
 <div class="viewcode-block" id="PrimitivePDBWriter.REMARK"><a class="viewcode-back" href="../../../documentation_pages/coordinates/PDB.html#MDAnalysis.coordinates.PDB.PrimitivePDBWriter.REMARK">[docs]</a>    <span class="k">def</span> <span class="nf">REMARK</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">remarks</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Write generic REMARK_ record (without number).</span>
@@ -1217,14 +1221,14 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">remark</span> <span class="ow">in</span> <span class="n">remarks</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">[</span><span class="s">&#39;REMARK&#39;</span><span class="p">]</span> <span class="o">%</span> <span class="p">(</span><span class="n">remark</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">[</span><span class="s">&#39;REMARK&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">remark</span><span class="p">))</span>
 </div>
     <span class="k">def</span> <span class="nf">COMPND</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trajectory</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">trajectory</span><span class="p">,</span> <span class="s">&#39;compound&#39;</span><span class="p">):</span>
             <span class="k">return</span>
         <span class="n">compound</span> <span class="o">=</span> <span class="n">trajectory</span><span class="o">.</span><span class="n">compound</span>
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">compound</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">[</span><span class="s">&#39;COMPND&#39;</span><span class="p">]</span> <span class="o">%</span> <span class="n">c</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">[</span><span class="s">&#39;COMPND&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
 
 <div class="viewcode-block" id="PrimitivePDBWriter.CRYST1"><a class="viewcode-back" href="../../../documentation_pages/coordinates/PDB.html#MDAnalysis.coordinates.PDB.PrimitivePDBWriter.CRYST1">[docs]</a>    <span class="k">def</span> <span class="nf">CRYST1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">spacegroup</span><span class="o">=</span><span class="s">&#39;P 1&#39;</span><span class="p">,</span> <span class="n">zvalue</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Write CRYST1_ record.</span>
@@ -1232,7 +1236,11 @@
 <span class="sd">        .. _CRYST1: http://www.wwpdb.org/documentation/format32/sect8.html</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">[</span><span class="s">&#39;CRYST1&#39;</span><span class="p">]</span> <span class="o">%</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">dimensions</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">spacegroup</span><span class="p">,</span> <span class="n">zvalue</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">[</span><span class="s">&#39;CRYST1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">box</span><span class="o">=</span><span class="n">dimensions</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span>
+            <span class="n">ang</span><span class="o">=</span><span class="n">dimensions</span><span class="p">[</span><span class="mi">3</span><span class="p">:],</span>
+            <span class="n">spacegroup</span><span class="o">=</span><span class="n">spacegroup</span><span class="p">,</span>
+            <span class="n">zvalue</span><span class="o">=</span><span class="n">zvalue</span><span class="p">))</span>
 </div>
 <div class="viewcode-block" id="PrimitivePDBWriter.MODEL"><a class="viewcode-back" href="../../../documentation_pages/coordinates/PDB.html#MDAnalysis.coordinates.PDB.PrimitivePDBWriter.MODEL">[docs]</a>    <span class="k">def</span> <span class="nf">MODEL</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">modelnumber</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Write the MODEL_ record.</span>
@@ -1240,7 +1248,7 @@
 <span class="sd">        .. _MODEL: http://www.wwpdb.org/documentation/format32/sect9.html#MODEL</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">[</span><span class="s">&#39;MODEL&#39;</span><span class="p">]</span> <span class="o">%</span> <span class="n">modelnumber</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">[</span><span class="s">&#39;MODEL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">modelnumber</span><span class="p">))</span>
 </div>
 <div class="viewcode-block" id="PrimitivePDBWriter.END"><a class="viewcode-back" href="../../../documentation_pages/coordinates/PDB.html#MDAnalysis.coordinates.PDB.PrimitivePDBWriter.END">[docs]</a>    <span class="k">def</span> <span class="nf">END</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Write END_ record.</span>
@@ -1265,80 +1273,15 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">[</span><span class="s">&#39;ENDMDL&#39;</span><span class="p">])</span>
 </div>
-<div class="viewcode-block" id="PrimitivePDBWriter.ATOM"><a class="viewcode-back" href="../../../documentation_pages/coordinates/PDB.html#MDAnalysis.coordinates.PDB.PrimitivePDBWriter.ATOM">[docs]</a>    <span class="k">def</span> <span class="nf">ATOM</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serial</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">altLoc</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">resName</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">chainID</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-             <span class="n">resSeq</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">iCode</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">occupancy</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">tempFactor</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
-             <span class="n">segID</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">element</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">charge</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Write ATOM_ record.</span>
-
-<span class="sd">        Only some keword args are optional (*altLoc*, *iCode*, *chainID*), for</span>
-<span class="sd">        some defaults are set.</span>
-
-<span class="sd">        All inputs are cut to the maximum allowed length. For integer numbers</span>
-<span class="sd">        the highest-value digits are chopped (so that the *serial* and *reSeq*</span>
-<span class="sd">        wrap); for strings the trailing characters are chopped. The *last*</span>
-<span class="sd">        character of *chainID* becomes the PDB *chainID* (unless it has the</span>
-<span class="sd">        special value &quot;SYSTEM&quot; (assigned by MDAnalysis if neither *segID* nor</span>
-<span class="sd">        *chainID* were available), in which case the PDB will have an empty</span>
-<span class="sd">        *chainID*).</span>
-
-<span class="sd">        .. Warning: Floats are not checked and can potentially screw up the format.</span>
-
-<span class="sd">        .. _ATOM: http://www.wwpdb.org/documentation/format32/sect9.html</span>
-
-<span class="sd">        .. versionchanged:: 0.7.6</span>
-<span class="sd">           If the *chainID* has the special value &quot;SYSTEM&quot; (case insensitive)</span>
-<span class="sd">           then the chain is set to the empty string &quot;&quot;.</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="c"># TODO Jan: PDBReader sets the bfactor value corretly to 0.0 if not</span>
-        <span class="c"># defined, DCD error does not. Thus when saving a Universe(DCDfile), the</span>
-        <span class="c"># bfactor is None rather than 0.0.</span>
-        <span class="c">#</span>
-        <span class="c"># Now in the `for` loop below we could remove the offending variable but</span>
-        <span class="c"># this gets us when the fromat `ATOM` expects float and not NoneType.</span>
-        <span class="c">#</span>
-        <span class="c"># Provisional solution for now: custom check if tempfactor is None, in</span>
-        <span class="c"># :meth:`_write_timestep`</span>
-        <span class="c">#</span>
-        <span class="c"># OB: The &quot;provisional&quot; solution is correct. ATOM requires the calling code</span>
-        <span class="c">#     to provide a sane value for tempFactor. This is because a tempFactor of</span>
-        <span class="c">#     0 might actually mean to some programs &quot;ignore this atom&quot;. Hence we</span>
-        <span class="c">#     don&#39;t want to make this decision in the general I/O routine.</span>
-
-        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="p">(</span>
-                <span class="s">&#39;serial&#39;</span><span class="p">,</span> <span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="s">&#39;resName&#39;</span><span class="p">,</span> <span class="s">&#39;resSeq&#39;</span><span class="p">,</span> <span class="s">&#39;x&#39;</span><span class="p">,</span> <span class="s">&#39;y&#39;</span><span class="p">,</span> <span class="s">&#39;z&#39;</span><span class="p">,</span>
-                <span class="s">&#39;occupancy&#39;</span><span class="p">,</span> <span class="s">&#39;tempFactor&#39;</span><span class="p">,</span> <span class="s">&#39;charge&#39;</span><span class="p">):</span>
-            <span class="k">if</span> <span class="nb">locals</span><span class="p">()[</span><span class="n">arg</span><span class="p">]</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;parameter &#39;</span> <span class="o">+</span> <span class="n">arg</span> <span class="o">+</span> <span class="s">&#39; must be defined.&#39;</span><span class="p">)</span>
-        <span class="n">serial</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">serial</span><span class="p">)[</span><span class="o">-</span><span class="mi">5</span><span class="p">:])</span>  <span class="c"># check for overflow here?</span>
-        <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="s">&quot; &quot;</span> <span class="o">+</span> <span class="n">name</span>  <span class="c"># customary to start in column 14</span>
-        <span class="n">altLoc</span> <span class="o">=</span> <span class="n">altLoc</span> <span class="ow">or</span> <span class="s">&quot; &quot;</span>
-        <span class="n">altLoc</span> <span class="o">=</span> <span class="n">altLoc</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">resName</span> <span class="o">=</span> <span class="n">resName</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
-        <span class="n">chainID</span> <span class="o">=</span> <span class="n">chainID</span> <span class="ow">or</span> <span class="s">&quot;&quot;</span>  <span class="c"># or should we provide a chainID such as &#39;A&#39;?</span>
-        <span class="n">chainID</span> <span class="o">=</span> <span class="n">chainID</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">chainID</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s">&quot;SYSTEM&quot;</span> <span class="k">else</span> <span class="s">&quot;&quot;</span>  <span class="c"># special case, new in 0.7.6</span>
-        <span class="n">chainID</span> <span class="o">=</span> <span class="n">chainID</span><span class="o">.</span><span class="n">strip</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">:]</span>  <span class="c"># take the last character</span>
-        <span class="n">resSeq</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">resSeq</span><span class="p">)[</span><span class="o">-</span><span class="mi">4</span><span class="p">:])</span>  <span class="c"># check for overflow here?</span>
-        <span class="n">iCode</span> <span class="o">=</span> <span class="n">iCode</span> <span class="ow">or</span> <span class="s">&quot;&quot;</span>
-        <span class="n">iCode</span> <span class="o">=</span> <span class="n">iCode</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">element</span> <span class="o">=</span> <span class="n">element</span> <span class="ow">or</span> <span class="n">guess_atom_element</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>  <span class="c"># element == 0|False|None will be guessed</span>
-        <span class="n">element</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">element</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()[:</span><span class="mi">2</span><span class="p">]</span>  <span class="c"># make sure that is a string for user input</span>
-        <span class="n">segID</span> <span class="o">=</span> <span class="n">segID</span> <span class="ow">or</span> <span class="n">chainID</span>
-        <span class="n">segID</span> <span class="o">=</span> <span class="n">segID</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">[</span><span class="s">&#39;ATOM&#39;</span><span class="p">]</span> <span class="o">%</span> <span class="nb">vars</span><span class="p">())</span>
-</div>
 <div class="viewcode-block" id="PrimitivePDBWriter.CONECT"><a class="viewcode-back" href="../../../documentation_pages/coordinates/PDB.html#MDAnalysis.coordinates.PDB.PrimitivePDBWriter.CONECT">[docs]</a>    <span class="k">def</span> <span class="nf">CONECT</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">conect</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Write CONECT_ record.</span>
 
 <span class="sd">        .. _CONECT: http://www.wwpdb.org/documentation/format32/sect10.html#CONECT</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">conect</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;{0:5d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">((</span><span class="n">entry</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">conect</span><span class="p">]</span>
+        <span class="n">conect</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;{0:5d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">entry</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">conect</span><span class="p">]</span>
         <span class="n">conect</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">conect</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">[</span><span class="s">&#39;CONECT&#39;</span><span class="p">]</span> <span class="o">%</span> <span class="n">conect</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">[</span><span class="s">&#39;CONECT&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">conect</span><span class="p">))</span>
 
 </div></div>
 <span class="k">class</span> <span class="nc">ExtendedPDBReader</span><span class="p">(</span><span class="n">PrimitivePDBReader</span><span class="p">):</span>
