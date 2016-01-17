@@ -281,7 +281,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_unitcell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_unitcell</span><span class="p">()</span>
 </div>
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="Timestep.from_timestep"><a class="viewcode-back" href="../../../documentation_pages/coordinates/xdrfile/XTC.html#MDAnalysis.coordinates.DCD.Timestep.from_timestep">[docs]</a>    <span class="k">def</span> <span class="nf">from_timestep</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="Timestep.from_timestep"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.Timestep.from_timestep">[docs]</a>    <span class="k">def</span> <span class="nf">from_timestep</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a copy of another Timestep, in the format of this Timestep</span>
 
 <span class="sd">        .. versionadded:: 0.11.0</span>
@@ -322,7 +322,7 @@
         <span class="k">return</span> <span class="n">ts</span>
 </div>
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="Timestep.from_coordinates"><a class="viewcode-back" href="../../../documentation_pages/coordinates/xdrfile/XTC.html#MDAnalysis.coordinates.DCD.Timestep.from_coordinates">[docs]</a>    <span class="k">def</span> <span class="nf">from_coordinates</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span>
+<div class="viewcode-block" id="Timestep.from_coordinates"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.Timestep.from_coordinates">[docs]</a>    <span class="k">def</span> <span class="nf">from_coordinates</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span>
                          <span class="n">positions</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                          <span class="n">velocities</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                          <span class="n">forces</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
@@ -440,14 +440,14 @@
             <span class="n">tail</span> <span class="o">=</span> <span class="s">&quot; &gt;&quot;</span>
         <span class="k">return</span> <span class="n">desc</span> <span class="o">+</span> <span class="n">tail</span>
 
-<div class="viewcode-block" id="Timestep.copy"><a class="viewcode-back" href="../../../documentation_pages/coordinates/xdrfile/XTC.html#MDAnalysis.coordinates.DCD.Timestep.copy">[docs]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Timestep.copy"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.Timestep.copy">[docs]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Make an independent (&quot;deep&quot;) copy of the whole :class:`Timestep`.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__deepcopy__</span><span class="p">()</span>
 </div>
     <span class="k">def</span> <span class="nf">__deepcopy__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">from_timestep</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Timestep.copy_slice"><a class="viewcode-back" href="../../../documentation_pages/coordinates/xdrfile/XTC.html#MDAnalysis.coordinates.DCD.Timestep.copy_slice">[docs]</a>    <span class="k">def</span> <span class="nf">copy_slice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sel</span><span class="p">):</span>
+<div class="viewcode-block" id="Timestep.copy_slice"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.Timestep.copy_slice">[docs]</a>    <span class="k">def</span> <span class="nf">copy_slice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sel</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Make a new Timestep containing a subset of the original Timestep.</span>
 
 <span class="sd">        ``ts.copy_slice(slice(start, stop, skip))``</span>
