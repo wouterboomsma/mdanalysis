@@ -116,8 +116,8 @@
 </tbody>
 </table>
 <p>Analyse a trajectory using elastic network models, following the approach of <a class="reference internal" href="#hall2007" id="id1">[Hall2007]</a>.</p>
-<p>An example is provided in <code class="file docutils literal"><span class="pre">examples/GNMExample.py</span></code>. The basic
-approach is to pass a trajectory to <a class="reference internal" href="#MDAnalysis.analysis.gnm.GNMAnalysis" title="MDAnalysis.analysis.gnm.GNMAnalysis"><code class="xref py py-class docutils literal"><span class="pre">GNMAnalysis</span></code></a> and then run
+<p>An example is provided in the MDAnalysis <a href="#id3"><span class="problematic" id="id4">Cookbook_</span></a>, listed as <a href="#id5"><span class="problematic" id="id6">GNMExample_</span></a>.</p>
+<p>The basic approach is to pass a trajectory to <a class="reference internal" href="#MDAnalysis.analysis.gnm.GNMAnalysis" title="MDAnalysis.analysis.gnm.GNMAnalysis"><code class="xref py py-class docutils literal"><span class="pre">GNMAnalysis</span></code></a> and then run
 the analysis:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>
 <span class="n">C</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">gnm</span><span class="o">.</span><span class="n">GNMAnalysis</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">ReportVector</span><span class="o">=</span><span class="s">&quot;output.txt&quot;</span><span class="p">)</span>
