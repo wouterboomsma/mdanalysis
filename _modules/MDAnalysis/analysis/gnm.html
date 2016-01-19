@@ -361,7 +361,7 @@
             <span class="n">matrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_kirchoff</span><span class="p">()</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="p">[</span><span class="n">u</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">:</span>
                 <span class="k">print</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">Frame skip at&quot;</span><span class="p">,</span> <span class="n">timestep</span><span class="p">,</span> <span class="s">&quot;(SVD failed to converge). Cutoff&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cutoff</span>
                 <span class="k">continue</span>
             <span class="c">#Save the results somewhere useful in some useful format. Usefully.</span>

@@ -326,7 +326,7 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="n">atomtypes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">atoms</span><span class="o">.</span><span class="n">types</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>  <span class="c"># sometimes atoms is just list of atoms not AG</span>
-        <span class="n">atomtypes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">type</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">atoms</span><span class="p">])</span>
+        <span class="n">atomtypes</span> <span class="o">=</span> <span class="p">{</span><span class="n">a</span><span class="o">.</span><span class="n">type</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">atoms</span><span class="p">}</span>
     <span class="c"># check that all types have a defined vdw</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">vdwradii</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">atomtypes</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">((</span><span class="s">&quot;vdw radii for types: &quot;</span> <span class="o">+</span>

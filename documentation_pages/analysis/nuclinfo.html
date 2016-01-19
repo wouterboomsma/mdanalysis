@@ -125,9 +125,10 @@ particular</p>
 <li>Watson-Crick N1-N3 distances, C2-O2 distances, N6-O4 distances, O6-N4 distances.</li>
 </ul>
 <p>For applications of this kind of analysis see <a class="reference internal" href="#denning2011" id="id1">[Denning2011]</a> and <a class="reference internal" href="#denning2012" id="id2">[Denning2012]</a>.</p>
-<p>All functions take a <a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.Universe" title="MDAnalysis.core.AtomGroup.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> as an argument
-together with further parameters that specify the base or bases in question. Angles are
-in degrees. The functions use standard CHARMM names for nucleic acids and atom names.</p>
+<p>All functions take a <a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.Universe" title="MDAnalysis.core.AtomGroup.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> as an
+argument together with further parameters that specify the base or bases in
+question. Angles are in degrees. The functions use standard CHARMM names for
+nucleic acids and atom names.</p>
 <p class="rubric">References</p>
 <table class="docutils citation" frame="void" id="denning2011" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
@@ -182,8 +183,8 @@ computed.</p>
 <dt id="MDAnalysis.analysis.nuclinfo.minor_pair">
 <code class="descclassname">MDAnalysis.analysis.nuclinfo.</code><code class="descname">minor_pair</code><span class="sig-paren">(</span><em>universe</em>, <em>i</em>, <em>bp</em>, <em>seg1='SYSTEM'</em>, <em>seg2='SYSTEM'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/nuclinfo.html#minor_pair"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.nuclinfo.minor_pair" title="Permalink to this definition">¶</a></dt>
 <dd><p>Minor-Groove basepair distance for residue <em>i</em> with residue <em>bp</em>.</p>
-<p>The distance of the nitrogen and oxygen atoms in a Minor-groove hydrogen bond is
-computed.</p>
+<p>The distance of the nitrogen and oxygen atoms in a Minor-groove hydrogen
+bond is computed.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -212,14 +213,15 @@ computed.</p>
 <dt id="MDAnalysis.analysis.nuclinfo.major_pair">
 <code class="descclassname">MDAnalysis.analysis.nuclinfo.</code><code class="descname">major_pair</code><span class="sig-paren">(</span><em>universe</em>, <em>i</em>, <em>bp</em>, <em>seg1='SYSTEM'</em>, <em>seg2='SYSTEM'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/nuclinfo.html#major_pair"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.nuclinfo.major_pair" title="Permalink to this definition">¶</a></dt>
 <dd><p>Major-Groove basepair distance for residue <em>i</em> with residue <em>bp</em>.</p>
-<p>The distance of the nitrogen and oxygen atoms in a Major-groove hydrogen bond is
-computed.</p>
+<p>The distance of the nitrogen and oxygen atoms in a Major-groove hydrogen
+bond is computed.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>*universe*</strong> &#8211; <a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.Universe" title="MDAnalysis.core.AtomGroup.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> containing the trajectory       <em>i</em></li>
+<li><strong>*universe*</strong> &#8211; <a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.Universe" title="MDAnalysis.core.AtomGroup.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> containing the
+trajectory <em>i</em></li>
 <li><strong>*seg1*</strong> &#8211; segment id for first base</li>
 <li><strong>*i*</strong> &#8211; resid of the first base</li>
 <li><strong>*seg2*</strong> &#8211; segment id for second base</li>
@@ -470,7 +472,8 @@ computed.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first last docutils">
 <dt><em>universe</em></dt>
-<dd><p class="first last"><a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.Universe" title="MDAnalysis.core.AtomGroup.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> containing the trajectory</p>
+<dd><p class="first last"><a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.Universe" title="MDAnalysis.core.AtomGroup.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> containing the
+trajectory</p>
 </dd>
 <dt><em>segid</em></dt>
 <dd><p class="first last">segid of resid</p>
@@ -505,7 +508,8 @@ documented by charmm force field parameters.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first last docutils">
 <dt><em>universe</em></dt>
-<dd><p class="first last"><a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.Universe" title="MDAnalysis.core.AtomGroup.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> containing the trajectory</p>
+<dd><p class="first last"><a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.Universe" title="MDAnalysis.core.AtomGroup.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> containing the
+trajectory</p>
 </dd>
 <dt><em>segid</em></dt>
 <dd><p class="first last">segid of resid</p>
@@ -541,7 +545,8 @@ documented by charmm force field parameters.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first last docutils">
 <dt><em>universe</em></dt>
-<dd><p class="first last"><a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.Universe" title="MDAnalysis.core.AtomGroup.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> containing the trajectory</p>
+<dd><p class="first last"><a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.Universe" title="MDAnalysis.core.AtomGroup.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> containing the
+trajectory</p>
 </dd>
 <dt><em>segid1</em></dt>
 <dd><p class="first last">segid of resid base pairing with bp2</p>

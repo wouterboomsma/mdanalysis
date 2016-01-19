@@ -140,7 +140,7 @@
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atomkinds</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="MoleculeKind.number_of_residues"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.obj.MoleculeKind.number_of_residues">[docs]</a>    <span class="k">def</span> <span class="nf">number_of_residues</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">resid</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">atomkinds</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">({</span><span class="n">a</span><span class="o">.</span><span class="n">resid</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">atomkinds</span><span class="p">})</span>
 
     <span class="c"># remap_ method returns [tuple(), tuple(), ..] or []</span>
     <span class="c"># Note: in MDAnalysis, bonds, angles, etc are represented as tuple and not as list</span></div>

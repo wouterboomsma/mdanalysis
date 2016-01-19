@@ -500,8 +500,10 @@
 
     <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">):</span>
         <span class="n">sub</span> <span class="o">=</span> <span class="n">group</span><span class="p">[</span><span class="n">group</span><span class="o">.</span><span class="n">names</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
-        <span class="n">sub</span> <span class="o">=</span> <span class="n">sub</span><span class="p">[</span><span class="n">sub</span><span class="o">.</span><span class="n">resids</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">resid</span><span class="p">]</span>
-        <span class="n">sub</span> <span class="o">=</span> <span class="n">sub</span><span class="p">[</span><span class="n">sub</span><span class="o">.</span><span class="n">segids</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">segid</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">sub</span><span class="p">:</span>
+            <span class="n">sub</span> <span class="o">=</span> <span class="n">sub</span><span class="p">[</span><span class="n">sub</span><span class="o">.</span><span class="n">resids</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">resid</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">sub</span><span class="p">:</span>
+            <span class="n">sub</span> <span class="o">=</span> <span class="n">sub</span><span class="p">[</span><span class="n">sub</span><span class="o">.</span><span class="n">segids</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">segid</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">unique</span><span class="p">(</span><span class="n">sub</span><span class="p">)</span>
 
 
