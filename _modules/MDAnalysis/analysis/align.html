@@ -73,7 +73,7 @@
             
   <h1>Source code for MDAnalysis.analysis.align</h1><div class="highlight"><pre>
 <span class="c"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
-<span class="c"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 </span>
+<span class="c"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
 <span class="c">#</span>
 <span class="c"># MDAnalysis --- http://www.MDAnalysis.org</span>
 <span class="c"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
@@ -230,6 +230,8 @@
 <span class="sd">.. autofunction:: fasta2select</span>
 <span class="sd">.. autofunction:: get_matching_atoms</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">range</span>
+
 <span class="kn">import</span> <span class="nn">os.path</span>
 <span class="kn">import</span> <span class="nn">itertools</span>
 
@@ -816,7 +818,7 @@
     <span class="n">GAP</span> <span class="o">=</span> <span class="n">alignment</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">seq</span><span class="o">.</span><span class="n">alphabet</span><span class="o">.</span><span class="n">gap_char</span>  <span class="c"># should be the same for both seqs</span>
     <span class="k">if</span> <span class="n">GAP</span> <span class="o">!=</span> <span class="n">alignment</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">seq</span><span class="o">.</span><span class="n">alphabet</span><span class="o">.</span><span class="n">gap_char</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Different gap characters in sequence &#39;target&#39; and &#39;mobile&#39;.&quot;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">ipos</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">alignment</span><span class="o">.</span><span class="n">get_alignment_length</span><span class="p">()):</span>
+    <span class="k">for</span> <span class="n">ipos</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">alignment</span><span class="o">.</span><span class="n">get_alignment_length</span><span class="p">()):</span>
         <span class="n">aligned</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">alignment</span><span class="p">[:,</span> <span class="n">ipos</span><span class="p">])</span>
         <span class="k">if</span> <span class="n">GAP</span> <span class="ow">in</span> <span class="n">aligned</span><span class="p">:</span>
             <span class="k">continue</span>  <span class="c"># skip residue</span>
@@ -828,7 +830,7 @@
             <span class="n">template</span> <span class="o">+=</span> <span class="s">&quot; and backbone&quot;</span>
         <span class="n">template</span> <span class="o">=</span> <span class="s">&quot;( &quot;</span> <span class="o">+</span> <span class="n">template</span> <span class="o">+</span> <span class="s">&quot; )&quot;</span>
 
-        <span class="n">res_list</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">template</span> <span class="o">%</span> <span class="n">resid</span><span class="p">(</span><span class="n">iseq</span><span class="p">,</span> <span class="n">ipos</span><span class="p">)</span> <span class="k">for</span> <span class="n">iseq</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">nseq</span><span class="p">)])</span>
+        <span class="n">res_list</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">template</span> <span class="o">%</span> <span class="n">resid</span><span class="p">(</span><span class="n">iseq</span><span class="p">,</span> <span class="n">ipos</span><span class="p">)</span> <span class="k">for</span> <span class="n">iseq</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nseq</span><span class="p">)])</span>
 
     <span class="n">sel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res_list</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
 

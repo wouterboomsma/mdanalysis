@@ -129,6 +129,8 @@
 <span class="sd">.. autofunction:: transform_StoR(coordinates, box [,backend])</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">range</span>
+
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">numpy.lib.utils</span> <span class="kn">import</span> <span class="n">deprecate</span>
 
@@ -379,8 +381,8 @@
 <span class="sd">             N*(N-1)/2 numpy 1D array with the distances dist[i,j] between ref</span>
 <span class="sd">             coordinates i and j at position d[k]. Loop through d::</span>
 
-<span class="sd">                 for i in xrange(N):</span>
-<span class="sd">                     for j in xrange(i+1, N):</span>
+<span class="sd">                 for i in range(N):</span>
+<span class="sd">                     for j in range(i+1, N):</span>
 <span class="sd">                         k += 1</span>
 <span class="sd">                         dist[i,j] = d[k]</span>
 

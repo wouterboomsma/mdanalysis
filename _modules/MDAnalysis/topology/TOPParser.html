@@ -117,6 +117,8 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
+<span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">range</span>
+
 <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">ceil</span>
 
 <span class="kn">from</span> <span class="nn">..core.AtomGroup</span> <span class="kn">import</span> <span class="n">Atom</span>
@@ -226,7 +228,7 @@
                 <span class="n">header</span> <span class="o">=</span> <span class="n">next_line</span><span class="p">()</span>
             <span class="n">header</span> <span class="o">=</span> <span class="n">next_line</span><span class="p">()</span>
 
-            <span class="n">topremarks</span> <span class="o">=</span> <span class="p">[</span><span class="n">next_line</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+            <span class="n">topremarks</span> <span class="o">=</span> <span class="p">[</span><span class="n">next_line</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
             <span class="n">sys_info</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">topremarks</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
 
             <span class="n">structure</span> <span class="o">=</span> <span class="p">{}</span>
@@ -292,7 +294,7 @@
 
     <span class="k">def</span> <span class="nf">_parsebond</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lines</span><span class="p">,</span> <span class="n">atoms_per</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">structure</span><span class="p">,</span> <span class="n">numlines</span><span class="p">):</span>
         <span class="n">section</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c"># [None,]*numlines</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">numlines</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numlines</span><span class="p">):</span>
             <span class="n">l</span> <span class="o">=</span> <span class="n">lines</span><span class="p">()</span>
             <span class="c"># Subtract 1 from each number to ensure zero-indexing for the atoms</span>
             <span class="n">f</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">l</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
@@ -306,11 +308,11 @@
         <span class="n">y</span> <span class="o">=</span> <span class="n">lines</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%F</span><span class="s">ORMAT(&quot;</span><span class="p">)</span>
         <span class="n">y</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&quot;)&quot;</span><span class="p">)</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">FORTRANReader</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">numlines</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numlines</span><span class="p">):</span>
             <span class="n">l</span> <span class="o">=</span> <span class="n">lines</span><span class="p">()</span>
             <span class="c"># Subtract 1 from each number to ensure zero-indexing for the atoms</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">entries</span><span class="p">)):</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">entries</span><span class="p">)):</span>
                     <span class="n">section</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">entries</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">:</span><span class="n">x</span><span class="o">.</span><span class="n">entries</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">stop</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()))</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="k">continue</span>
@@ -321,7 +323,7 @@
         <span class="n">y</span> <span class="o">=</span> <span class="n">lines</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%F</span><span class="s">ORMAT(&quot;</span><span class="p">)</span>
         <span class="n">y</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&quot;)&quot;</span><span class="p">)</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">FORTRANReader</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">numlines</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numlines</span><span class="p">):</span>
             <span class="n">l</span> <span class="o">=</span> <span class="n">lines</span><span class="p">()</span>
             <span class="c"># Subtract 1 from each number to ensure zero-indexing for the atoms</span>
             <span class="k">try</span><span class="p">:</span>
@@ -336,7 +338,7 @@
         <span class="n">y</span> <span class="o">=</span> <span class="n">lines</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%F</span><span class="s">ORMAT(&quot;</span><span class="p">)</span>
         <span class="n">y</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&quot;)&quot;</span><span class="p">)</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">FORTRANReader</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">numlines</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numlines</span><span class="p">):</span>
             <span class="n">l</span> <span class="o">=</span> <span class="n">lines</span><span class="p">()</span>
             <span class="c"># Subtract 1 from each number to ensure zero-indexing for the atoms</span>
             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">entries</span><span class="p">)):</span>

@@ -384,6 +384,8 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">range</span>
+
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 <span class="kn">import</span> <span class="nn">itertools</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -1222,8 +1224,8 @@
 
         <span class="k">def</span> <span class="nf">_make_dict</span><span class="p">(</span><span class="n">donors</span><span class="p">,</span> <span class="n">hydrogens</span><span class="p">):</span>
             <span class="c"># two steps so that entry for one residue can be UPDATED for multiple donors</span>
-            <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">donors</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="p">{})</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">donors</span><span class="p">))</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">hydrogens</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">donors</span><span class="p">)):</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">donors</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="p">{})</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">donors</span><span class="p">))</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">hydrogens</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">donors</span><span class="p">)):</span>
                 <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">hydrogens</span><span class="p">:</span>
                     <span class="n">d</span><span class="p">[</span><span class="n">donors</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">resid</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">dict</span><span class="p">((</span><span class="n">atom</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">donors</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">hydrogens</span><span class="p">[</span><span class="n">k</span><span class="p">]))</span>
             <span class="k">return</span> <span class="n">d</span>
@@ -1266,10 +1268,10 @@
         <span class="n">s2h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_s2_donors_h</span>
 
         <span class="k">def</span> <span class="nf">_make_dict</span><span class="p">(</span><span class="n">donors</span><span class="p">,</span> <span class="n">hydrogens</span><span class="p">):</span>
-            <span class="c">#return dict(flatten_1([(atom.id, donors[k].name) for atom in hydrogens[k]] for k in xrange(len(donors))</span>
+            <span class="c">#return dict(flatten_1([(atom.id, donors[k].name) for atom in hydrogens[k]] for k in range(len(donors))</span>
             <span class="c"># if k in hydrogens))</span>
             <span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">donors</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">donors</span><span class="p">)):</span>
                 <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">hydrogens</span><span class="p">:</span>
                     <span class="n">x</span><span class="o">.</span><span class="n">extend</span><span class="p">([(</span><span class="n">atom</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">donors</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">hydrogens</span><span class="p">[</span><span class="n">k</span><span class="p">]])</span>
             <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>

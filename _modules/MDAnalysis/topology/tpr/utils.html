@@ -115,18 +115,20 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
+<span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">range</span>
+
 <span class="kn">from</span> <span class="nn">...core.AtomGroup</span> <span class="kn">import</span> <span class="n">Atom</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">obj</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">setting</span> <span class="k">as</span> <span class="n">S</span>
 
 <div class="viewcode-block" id="ndo_int"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.utils.ndo_int">[docs]</a><span class="k">def</span> <span class="nf">ndo_int</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;mimic of gmx_fio_ndo_real in gromacs&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
 
 </div>
 <div class="viewcode-block" id="ndo_real"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.utils.ndo_real">[docs]</a><span class="k">def</span> <span class="nf">ndo_real</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;mimic of gmx_fio_ndo_real in gromacs&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">unpack_real</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">unpack_real</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
 
 </div>
 <div class="viewcode-block" id="do_rvec"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.utils.do_rvec">[docs]</a><span class="k">def</span> <span class="nf">do_rvec</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
@@ -135,12 +137,12 @@
 </div>
 <div class="viewcode-block" id="ndo_rvec"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.utils.ndo_rvec">[docs]</a><span class="k">def</span> <span class="nf">ndo_rvec</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;mimic of gmx_fio_ndo_rvec in gromacs&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">unpack_farray</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">DIM</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_real</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">unpack_farray</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">DIM</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_real</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
 
 </div>
 <div class="viewcode-block" id="ndo_ivec"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.utils.ndo_ivec">[docs]</a><span class="k">def</span> <span class="nf">ndo_ivec</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;mimic of gmx_fio_ndo_rvec in gromacs&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">unpack_farray</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">DIM</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">unpack_farray</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">DIM</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
 
 </div>
 <div class="viewcode-block" id="fver_err"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.utils.fver_err">[docs]</a><span class="k">def</span> <span class="nf">fver_err</span><span class="p">(</span><span class="n">fver</span><span class="p">):</span>
@@ -228,7 +230,7 @@
 
     <span class="n">nmoltype</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">()</span>
     <span class="n">moltypes</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c"># non-gromacs</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">nmoltype</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nmoltype</span><span class="p">):</span>
         <span class="n">moltype</span> <span class="o">=</span> <span class="n">do_moltype</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">symtab</span><span class="p">,</span> <span class="n">fver</span><span class="p">)</span>
         <span class="n">moltypes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">moltype</span><span class="p">)</span>
 
@@ -236,17 +238,17 @@
 
     <span class="n">mtop</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">Mtop</span><span class="p">(</span><span class="n">nmoltype</span><span class="p">,</span> <span class="n">moltypes</span><span class="p">,</span> <span class="n">nmolblock</span><span class="p">)</span>
 
-    <span class="n">ttop</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">TPRTopology</span><span class="p">(</span><span class="o">*</span><span class="p">[[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">5</span><span class="p">)])</span>
+    <span class="n">ttop</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">TPRTopology</span><span class="p">(</span><span class="o">*</span><span class="p">[[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)])</span>
 
     <span class="n">atom_start_ndx</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">res_start_ndx</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">mtop</span><span class="o">.</span><span class="n">nmolblock</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mtop</span><span class="o">.</span><span class="n">nmolblock</span><span class="p">):</span>
         <span class="c"># molb_type is just an index for moltypes/molecule_types</span>
         <span class="n">mb</span> <span class="o">=</span> <span class="n">do_molblock</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="c"># segment is made to correspond to the molblock as in gromacs, the</span>
         <span class="c"># naming is kind of arbitrary</span>
         <span class="n">segid</span> <span class="o">=</span> <span class="s">&quot;seg_{0}_{1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">mtop</span><span class="o">.</span><span class="n">moltypes</span><span class="p">[</span><span class="n">mb</span><span class="o">.</span><span class="n">molb_type</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">mb</span><span class="o">.</span><span class="n">molb_nmol</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mb</span><span class="o">.</span><span class="n">molb_nmol</span><span class="p">):</span>
             <span class="n">mt</span> <span class="o">=</span> <span class="n">mtop</span><span class="o">.</span><span class="n">moltypes</span><span class="p">[</span><span class="n">mb</span><span class="o">.</span><span class="n">molb_type</span><span class="p">]</span>  <span class="c"># mt: molecule type</span>
             <span class="k">for</span> <span class="n">atomkind</span> <span class="ow">in</span> <span class="n">mt</span><span class="o">.</span><span class="n">atomkinds</span><span class="p">:</span>
                 <span class="n">ttop</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Atom</span><span class="p">(</span><span class="n">atomkind</span><span class="o">.</span><span class="n">id</span> <span class="o">+</span> <span class="n">atom_start_ndx</span><span class="p">,</span>
@@ -287,7 +289,7 @@
 <div class="viewcode-block" id="do_symtab"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.utils.do_symtab">[docs]</a><span class="k">def</span> <span class="nf">do_symtab</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
     <span class="n">symtab_nr</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">()</span>  <span class="c"># number of symbols</span>
     <span class="n">symtab</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">symtab_nr</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">symtab_nr</span><span class="p">):</span>
         <span class="n">j</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_fstring</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c"># strings are separated by void</span>
         <span class="n">j</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_string</span><span class="p">()</span>
         <span class="n">symtab</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
@@ -306,7 +308,7 @@
 
     <span class="c"># mimicing the c code,</span>
     <span class="c"># remapping the functype due to inconsistency in different versions</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">functype</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">functype</span><span class="p">)):</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">S</span><span class="o">.</span><span class="n">ftupd</span><span class="p">:</span>
             <span class="c"># j[0]: tpx_version, j[1] funtype</span>
             <span class="k">if</span> <span class="n">fver</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">functype</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
@@ -629,7 +631,7 @@
         <span class="n">fver_err</span><span class="p">(</span><span class="n">fver</span><span class="p">)</span>
 
     <span class="n">atoms</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">nr</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nr</span><span class="p">):</span>
         <span class="n">A</span> <span class="o">=</span> <span class="n">do_atom</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">fver</span><span class="p">)</span>
         <span class="n">atoms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 
@@ -654,7 +656,7 @@
         <span class="n">resnames</span> <span class="o">=</span> <span class="p">[</span><span class="n">symtab</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ndo_int</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">nres</span><span class="p">)]</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">resnames</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">nres</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nres</span><span class="p">):</span>
             <span class="n">resnames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">symtab</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">()])</span>
             <span class="c"># assume the uchar in gmx is 8 byte, seems right</span>
             <span class="n">data</span><span class="o">.</span><span class="n">unpack_fstring</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
@@ -682,7 +684,7 @@
 <div class="viewcode-block" id="do_ilists"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.utils.do_ilists">[docs]</a><span class="k">def</span> <span class="nf">do_ilists</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">fver</span><span class="p">):</span>
     <span class="n">nr</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c"># number of ilist</span>
     <span class="n">iatoms</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c"># atoms involved in a particular interaction type</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">F_NRE</span><span class="p">):</span>  <span class="c"># total number of energies (i.e. interaction types)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">F_NRE</span><span class="p">):</span>  <span class="c"># total number of energies (i.e. interaction types)</span>
         <span class="n">bClear</span> <span class="o">=</span> <span class="bp">False</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">S</span><span class="o">.</span><span class="n">ftupd</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">fver</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">==</span> <span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
@@ -697,7 +699,7 @@
             <span class="n">n</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">()</span>
             <span class="n">nr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
             <span class="n">l_</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
                 <span class="n">l_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">())</span>
             <span class="n">iatoms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l_</span><span class="p">)</span>
 
@@ -739,7 +741,7 @@
 <div class="viewcode-block" id="do_grps"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.utils.do_grps">[docs]</a><span class="k">def</span> <span class="nf">do_grps</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>  <span class="c"># pragma: no cover</span>
     <span class="n">grps_nr</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">myngrps</span> <span class="o">=</span> <span class="n">ngrps</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">egcNR</span>  <span class="c"># remind of version inconsistency</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">ngrps</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ngrps</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">myngrps</span><span class="p">:</span>
             <span class="n">v</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">()</span>
             <span class="n">grps_nr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
@@ -757,14 +759,14 @@
 
     <span class="n">ngrpnr</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">grpnr</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">egcNR</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">egcNR</span><span class="p">):</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">()</span>
         <span class="n">ngrpnr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">grpnr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">l_</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
                 <span class="n">l_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">unpack_uint</span><span class="p">())</span>
             <span class="n">grpnr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l_</span><span class="p">)</span>
     <span class="c"># print ngrpnr</span>

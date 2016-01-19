@@ -188,6 +188,8 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">range</span>
+
 <span class="kn">import</span> <span class="nn">glob</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">errno</span>
@@ -420,7 +422,7 @@
         <span class="n">na_avg</span><span class="p">,</span> <span class="n">na_std</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean_std</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">na_avg</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
             <span class="n">ax</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;ax&#39;</span><span class="p">,</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">))</span>
-            <span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">na_avg</span><span class="p">[:,</span> <span class="n">k</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">na_avg</span><span class="p">[:,</span> <span class="n">k</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">na_avg</span><span class="p">[:,</span> <span class="n">k</span><span class="p">],</span> <span class="n">yerr</span><span class="o">=</span><span class="n">na_std</span><span class="p">[:,</span> <span class="n">k</span><span class="p">],</span> <span class="n">fmt</span><span class="o">=</span><span class="s">&#39;-o&#39;</span><span class="p">)</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">na_avg</span><span class="p">[:,</span> <span class="n">k</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s">r&quot;Nucleic Acid Number&quot;</span><span class="p">)</span>
