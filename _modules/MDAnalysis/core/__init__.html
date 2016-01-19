@@ -156,6 +156,8 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">import</span> <span class="nn">six</span>
+
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;AtomGroup&#39;</span><span class="p">,</span> <span class="s">&#39;Selection&#39;</span><span class="p">,</span> <span class="s">&#39;Timeseries&#39;</span><span class="p">]</span>
 
 
@@ -207,7 +209,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">get_flag</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_itervalues</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">Flags</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">itervalues</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">six</span><span class="o">.</span><span class="n">itervalues</span><span class="p">(</span><span class="nb">super</span><span class="p">(</span><span class="n">Flags</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">_items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">Flags</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
@@ -517,9 +519,9 @@
     <span class="n">__doc__</span> <span class="o">=</span> <span class="n">flags</span><span class="o">.</span><span class="n">doc</span><span class="p">()</span>
 
 </div>
-<span class="kn">import</span> <span class="nn">AtomGroup</span>
-<span class="kn">import</span> <span class="nn">Selection</span>
-<span class="kn">import</span> <span class="nn">Timeseries</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">AtomGroup</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">Selection</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">Timeseries</span>
 </pre></div>
 
           </div>
