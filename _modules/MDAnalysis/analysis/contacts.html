@@ -218,7 +218,7 @@
 <span class="kn">import</span> <span class="nn">errno</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">bz2</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">izip</span>
+<span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">zip</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 
@@ -619,7 +619,7 @@
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">references</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;a reference AtomGroup must be supplied&quot;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">ref</span><span class="p">,</span> <span class="n">sel</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">izip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">references</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">selections</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection_strings</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">ref</span><span class="p">,</span> <span class="n">sel</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">references</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">selections</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection_strings</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">ref</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">n_atoms</span> <span class="o">!=</span> <span class="n">sel</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;selection=</span><span class="si">%r</span><span class="s">: Number of atoms differ between &quot;</span>
                                  <span class="s">&quot;reference (</span><span class="si">%d</span><span class="s">) and trajectory (</span><span class="si">%d</span><span class="s">)&quot;</span> <span class="o">%</span>

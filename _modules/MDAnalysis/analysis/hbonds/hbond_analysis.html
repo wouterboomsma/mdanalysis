@@ -384,11 +384,12 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">range</span>
 
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
-<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">range</span><span class="p">,</span> <span class="nb">zip</span><span class="p">,</span> <span class="nb">map</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="kn">from</span> <span class="nn">MDAnalysis</span> <span class="kn">import</span> <span class="n">MissingDataWarning</span><span class="p">,</span> <span class="n">NoDataError</span><span class="p">,</span> <span class="n">SelectionError</span><span class="p">,</span> <span class="n">SelectionWarning</span>
 <span class="kn">from</span> <span class="nn">MDAnalysis.core.AtomGroup</span> <span class="kn">import</span> <span class="n">AtomGroup</span>
@@ -397,8 +398,6 @@
 <span class="kn">from</span> <span class="nn">MDAnalysis.lib.log</span> <span class="kn">import</span> <span class="n">ProgressMeter</span>
 <span class="kn">from</span> <span class="nn">MDAnalysis.lib.NeighborSearch</span> <span class="kn">import</span> <span class="n">AtomNeighborSearch</span>
 
-<span class="kn">import</span> <span class="nn">warnings</span>
-<span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;MDAnalysis.analysis.hbonds&#39;</span><span class="p">)</span>
 
@@ -1040,7 +1039,7 @@
         <span class="c"># and speedups of ~x10 can be achieved by filling a standard array, like this:</span>
         <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">num_records</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
         <span class="n">cursor</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c"># current row</span>
-        <span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">hframe</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">izip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timesteps</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">hframe</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timesteps</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">donor_idx</span><span class="p">,</span> <span class="n">acceptor_idx</span><span class="p">,</span> <span class="n">donor</span><span class="p">,</span> <span class="n">acceptor</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">angle</span> <span class="ow">in</span> <span class="n">hframe</span><span class="p">:</span>
                 <span class="n">out</span><span class="p">[</span><span class="n">cursor</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">donor_idx</span><span class="p">,</span> <span class="n">acceptor_idx</span><span class="p">)</span> <span class="o">+</span> <span class="n">parse_residue</span><span class="p">(</span><span class="n">donor</span><span class="p">)</span> <span class="o">+</span> \
                     <span class="n">parse_residue</span><span class="p">(</span><span class="n">acceptor</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
@@ -1078,8 +1077,8 @@
             <span class="k">return</span>
 
         <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timesteps</span><span class="p">),),</span> <span class="n">dtype</span><span class="o">=</span><span class="p">[(</span><span class="s">&#39;time&#39;</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;count&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">)])</span>
-        <span class="k">for</span> <span class="n">cursor</span><span class="p">,</span> <span class="n">time_count</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">izip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timesteps</span><span class="p">,</span>
-                                                           <span class="n">itertools</span><span class="o">.</span><span class="n">imap</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span><span class="p">))):</span>
+        <span class="k">for</span> <span class="n">cursor</span><span class="p">,</span> <span class="n">time_count</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timesteps</span><span class="p">,</span>
+                                                <span class="nb">map</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span><span class="p">))):</span>
             <span class="n">out</span><span class="p">[</span><span class="n">cursor</span><span class="p">]</span> <span class="o">=</span> <span class="n">time_count</span>
         <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">recarray</span><span class="p">)</span>
 </div>
@@ -1158,7 +1157,7 @@
             <span class="k">return</span>
 
         <span class="n">hbonds</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">hframe</span><span class="p">)</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">izip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timesteps</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span><span class="p">):</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">hframe</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timesteps</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">donor_idx</span><span class="p">,</span> <span class="n">acceptor_idx</span><span class="p">,</span> <span class="n">donor</span><span class="p">,</span> <span class="n">acceptor</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">angle</span> <span class="ow">in</span> <span class="n">hframe</span><span class="p">:</span>
                 <span class="n">donor_resnm</span><span class="p">,</span> <span class="n">donor_resid</span><span class="p">,</span> <span class="n">donor_atom</span> <span class="o">=</span> <span class="n">parse_residue</span><span class="p">(</span><span class="n">donor</span><span class="p">)</span>
                 <span class="n">acceptor_resnm</span><span class="p">,</span> <span class="n">acceptor_resid</span><span class="p">,</span> <span class="n">acceptor_atom</span> <span class="o">=</span> <span class="n">parse_residue</span><span class="p">(</span><span class="n">acceptor</span><span class="p">)</span>

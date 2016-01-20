@@ -144,13 +144,10 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">range</span>
-
+<span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">range</span><span class="p">,</span> <span class="nb">zip</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">errno</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">itertools</span>
-
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;MDAnalysis.analysis.psa&#39;</span><span class="p">)</span>
 
@@ -305,8 +302,8 @@
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;n_atoms keyword was specified indicating &#39;</span>
                                  <span class="s">&#39;that this should be a trajectory of the &#39;</span>
                                  <span class="s">&#39;same model. But the provided TimeStep has a &#39;</span>
-                                 <span class="s">&#39;different number ({}) then expected ({})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                                     <span class="n">ts</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">))</span>
+                                 <span class="s">&#39;different number ({}) then expected ({})&#39;</span>
+                                 <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atomnames</span><span class="p">)</span> <span class="o">!=</span> <span class="n">ts</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Trying to write a TimeStep with unkown atoms. &#39;</span>
@@ -316,14 +313,16 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">atomnames</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">atomnames</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">*</span> <span class="n">ts</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_units</span><span class="p">:</span>
-            <span class="n">coordinates</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_pos_to_native</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">_pos</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="n">coordinates</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_pos_to_native</span><span class="p">(</span>
+                <span class="n">ts</span><span class="o">.</span><span class="n">positions</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">coordinates</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">_pos</span>
+            <span class="n">coordinates</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">positions</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;{0:d}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;frame {0}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span><span class="p">))</span>
-        <span class="k">for</span> <span class="n">atom</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">izip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atomnames</span><span class="p">,</span> <span class="n">coordinates</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;{0!s:&gt;8}  {1:10.5f} {2:10.5f} {3:10.5f}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">atom</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">atom</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atomnames</span><span class="p">,</span> <span class="n">coordinates</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_xyz</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;{0!s:&gt;8}  {1:10.5f} {2:10.5f} {3:10.5f}</span><span class="se">\n</span><span class="s">&quot;</span>
+                            <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">atom</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">))</span>
 
 </div></div>
 <div class="viewcode-block" id="XYZReader"><a class="viewcode-back" href="../../../documentation_pages/coordinates/XYZ.html#MDAnalysis.coordinates.XYZ.XYZReader">[docs]</a><span class="k">class</span> <span class="nc">XYZReader</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Reader</span><span class="p">):</span>
