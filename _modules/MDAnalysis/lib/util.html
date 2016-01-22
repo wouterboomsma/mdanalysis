@@ -546,8 +546,11 @@
 <span class="sd">    The class can be used as a context manager.</span>
 
 <span class="sd">    :class:`NamedStream` is derived from :class:`io.IOBase` (to indicate that</span>
-<span class="sd">    it is a stream); some operations that normally expect a string will also</span>
-<span class="sd">    work with a :class:`NamedStream`.</span>
+<span class="sd">    it is a stream). Many operations that normally expect a string will also</span>
+<span class="sd">    work with a :class:`NamedStream`; for instance, most of the functions in</span>
+<span class="sd">    :mod:`os.path` will work with the exception of :func:`os.path.expandvars`</span>
+<span class="sd">    and :func:`os.path.expanduser`, which will return the :class:`NamedStream`</span>
+<span class="sd">    itself instead of a string if no substitutions were made.</span>
 
 <span class="sd">    .. rubric:: Example</span>
 
@@ -601,22 +604,22 @@
 <span class="sd">           :meth:`close` (see there) unless the *close* keyword is set to</span>
 <span class="sd">           ``True``.</span>
 
-<span class="sd">        :Arguments:</span>
-
-<span class="sd">           *stream*</span>
-<span class="sd">               open stream (e.g. :class:`file` or :func:`cStringIO.StringIO`)</span>
-<span class="sd">           *filename*</span>
+<span class="sd">        Arguments</span>
+<span class="sd">        ---------</span>
+<span class="sd">        stream : stream</span>
+<span class="sd">               an open stream (e.g. :class:`file` or :func:`cStringIO.StringIO`)</span>
+<span class="sd">        filename : str</span>
 <span class="sd">               the filename that should be associated with the stream</span>
 
-<span class="sd">        :Keywords:</span>
-
-<span class="sd">           *reset*</span>
+<span class="sd">        Keywords</span>
+<span class="sd">        --------</span>
+<span class="sd">        reset : boolean, default ``True``</span>
 <span class="sd">               start the stream from the beginning (either :meth:`reset` or :meth:`seek`)</span>
-<span class="sd">               when the class instance is constructed [``True``]</span>
-<span class="sd">           *close*</span>
+<span class="sd">               when the class instance is constructed</span>
+<span class="sd">        close : booelan, default ``True``</span>
 <span class="sd">               close the stream when a :keyword:`with` block exits or when</span>
 <span class="sd">               :meth:`close` is called; note that the default is **not to close</span>
-<span class="sd">               the stream** [``False``]</span>
+<span class="sd">               the stream**</span>
 
 <span class="sd">        .. versionadded:: 0.9.0</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -650,7 +653,7 @@
         <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stream</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c"># do not call the stream __enter__ because the stream is already open</span>
+        <span class="c"># do not call the stream&#39;s __enter__ because the stream is already open</span>
         <span class="k">return</span> <span class="bp">self</span>
 
     <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
@@ -803,6 +806,17 @@
 
     <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="n">x</span>
+
+    <span class="k">def</span> <span class="nf">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">*</span> <span class="n">x</span>
+
+    <span class="n">__rmul__</span> <span class="o">=</span> <span class="n">__mul__</span>
 
     <span class="k">def</span> <span class="nf">__format__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">format_spec</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">format_spec</span><span class="p">)</span>

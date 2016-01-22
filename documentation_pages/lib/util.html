@@ -296,8 +296,11 @@ instance. <a class="reference external" href="http://docs.python.org/library/os.
 <a class="reference internal" href="#MDAnalysis.lib.util.NamedStream" title="MDAnalysis.lib.util.NamedStream"><code class="xref py py-class docutils literal"><span class="pre">NamedStream</span></code></a>.</p>
 <p>The class can be used as a context manager.</p>
 <p><a class="reference internal" href="#MDAnalysis.lib.util.NamedStream" title="MDAnalysis.lib.util.NamedStream"><code class="xref py py-class docutils literal"><span class="pre">NamedStream</span></code></a> is derived from <a class="reference external" href="http://docs.python.org/library/io.html#io.IOBase" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">io.IOBase</span></code></a> (to indicate that
-it is a stream); some operations that normally expect a string will also
-work with a <a class="reference internal" href="#MDAnalysis.lib.util.NamedStream" title="MDAnalysis.lib.util.NamedStream"><code class="xref py py-class docutils literal"><span class="pre">NamedStream</span></code></a>.</p>
+it is a stream). Many operations that normally expect a string will also
+work with a <a class="reference internal" href="#MDAnalysis.lib.util.NamedStream" title="MDAnalysis.lib.util.NamedStream"><code class="xref py py-class docutils literal"><span class="pre">NamedStream</span></code></a>; for instance, most of the functions in
+<a class="reference external" href="http://docs.python.org/library/os.path.html#module-os.path" title="(in Python v2.7)"><code class="xref py py-mod docutils literal"><span class="pre">os.path</span></code></a> will work with the exception of <a class="reference external" href="http://docs.python.org/library/os.path.html#os.path.expandvars" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">os.path.expandvars()</span></code></a>
+and <a class="reference external" href="http://docs.python.org/library/os.path.html#os.path.expanduser" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">os.path.expanduser()</span></code></a>, which will return the <a class="reference internal" href="#MDAnalysis.lib.util.NamedStream" title="MDAnalysis.lib.util.NamedStream"><code class="xref py py-class docutils literal"><span class="pre">NamedStream</span></code></a>
+itself instead of a string if no substitutions were made.</p>
 <p class="rubric">Example</p>
 <p>Wrap a <a class="reference external" href="http://docs.python.org/library/stringio.html#cStringIO.StringIO" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">cStringIO.StringIO()</span></code></a> instance to write to:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">cStringIO</span>
@@ -348,30 +351,22 @@ the keyword <em>reset</em> is set to <code class="docutils literal"><span class=
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>*stream*</strong> &#8211; open stream (e.g. <code class="xref py py-class docutils literal"><span class="pre">file</span></code> or <a class="reference external" href="http://docs.python.org/library/stringio.html#cStringIO.StringIO" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">cStringIO.StringIO()</span></code></a>)</li>
-<li><strong>*filename*</strong> &#8211; the filename that should be associated with the stream</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Keywords:</th><td class="field-body"><dl class="first last docutils">
-<dt><em>reset</em></dt>
-<dd><p class="first last">start the stream from the beginning (either <a class="reference internal" href="#MDAnalysis.lib.util.NamedStream.reset" title="MDAnalysis.lib.util.NamedStream.reset"><code class="xref py py-meth docutils literal"><span class="pre">reset()</span></code></a> or <a class="reference internal" href="#MDAnalysis.lib.util.NamedStream.seek" title="MDAnalysis.lib.util.NamedStream.seek"><code class="xref py py-meth docutils literal"><span class="pre">seek()</span></code></a>)
-when the class instance is constructed [<code class="docutils literal"><span class="pre">True</span></code>]</p>
-</dd>
-<dt><em>close</em></dt>
-<dd><p class="first last">close the stream when a <a class="reference external" href="http://docs.python.org/reference/compound_stmts.html#with" title="(in Python v2.7)"><code class="xref std std-keyword docutils literal"><span class="pre">with</span></code></a> block exits or when
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>stream</strong> (<em>stream</em>) &#8211; an open stream (e.g. <code class="xref py py-class docutils literal"><span class="pre">file</span></code> or <a class="reference external" href="http://docs.python.org/library/stringio.html#cStringIO.StringIO" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">cStringIO.StringIO()</span></code></a>)</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; the filename that should be associated with the stream</li>
+<li><strong>Keywords</strong> &#8211; </li>
+<li><strong>--------</strong> &#8211; </li>
+<li><strong>reset</strong> (boolean, default <code class="docutils literal"><span class="pre">True</span></code>) &#8211; start the stream from the beginning (either <a class="reference internal" href="#MDAnalysis.lib.util.NamedStream.reset" title="MDAnalysis.lib.util.NamedStream.reset"><code class="xref py py-meth docutils literal"><span class="pre">reset()</span></code></a> or <a class="reference internal" href="#MDAnalysis.lib.util.NamedStream.seek" title="MDAnalysis.lib.util.NamedStream.seek"><code class="xref py py-meth docutils literal"><span class="pre">seek()</span></code></a>)
+when the class instance is constructed</li>
+<li><strong>close</strong> (booelan, default <code class="docutils literal"><span class="pre">True</span></code>) &#8211; close the stream when a <a class="reference external" href="http://docs.python.org/reference/compound_stmts.html#with" title="(in Python v2.7)"><code class="xref std std-keyword docutils literal"><span class="pre">with</span></code></a> block exits or when
 <a class="reference internal" href="#MDAnalysis.lib.util.NamedStream.close" title="MDAnalysis.lib.util.NamedStream.close"><code class="xref py py-meth docutils literal"><span class="pre">close()</span></code></a> is called; note that the default is <strong>not to close
-the stream</strong> [<code class="docutils literal"><span class="pre">False</span></code>]</p>
-</dd>
-</dl>
+the stream</strong></li>
+<li><strong>versionadded</strong> (<em>.</em>) &#8211; </li>
+</ul>
 </td>
 </tr>
 </tbody>
 </table>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.9.0.</span></p>
-</div>
 <dl class="method">
 <dt id="MDAnalysis.lib.util.NamedStream.__del__">
 <code class="descname">__del__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/util.html#NamedStream.__del__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.util.NamedStream.__del__" title="Permalink to this definition">¶</a></dt>
