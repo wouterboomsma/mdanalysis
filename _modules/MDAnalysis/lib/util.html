@@ -545,8 +545,8 @@
 <span class="sd">    The class can be used as a context manager.</span>
 
 <span class="sd">    :class:`NamedStream` is derived from :class:`io.IOBase` (to indicate that</span>
-<span class="sd">    it is a stream) *and* :class:`basestring` (that one can use</span>
-<span class="sd">    :func:`iterable` in the same way as for strings).</span>
+<span class="sd">    it is a stream); some operations that normally expect a string will also</span>
+<span class="sd">    work with a :class:`NamedStream`.</span>
 
 <span class="sd">    .. rubric:: Example</span>
 
@@ -898,7 +898,8 @@
 
 </div>
 <div class="viewcode-block" id="iterable"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.iterable">[docs]</a><span class="k">def</span> <span class="nf">iterable</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns ``True`` if *obj* can be iterated over and is *not* a  string.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Returns ``True`` if *obj* can be iterated over and is *not* a  string</span>
+<span class="sd">    nor a :class:`NamedStream`&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="nb">basestring</span><span class="p">,</span> <span class="n">NamedStream</span><span class="p">)):</span>
         <span class="k">return</span> <span class="bp">False</span>  <span class="c"># avoid iterating over characters of a string</span>
 

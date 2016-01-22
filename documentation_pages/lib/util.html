@@ -296,8 +296,8 @@ instance. <a class="reference external" href="http://docs.python.org/library/os.
 <a class="reference internal" href="#MDAnalysis.lib.util.NamedStream" title="MDAnalysis.lib.util.NamedStream"><code class="xref py py-class docutils literal"><span class="pre">NamedStream</span></code></a>.</p>
 <p>The class can be used as a context manager.</p>
 <p><a class="reference internal" href="#MDAnalysis.lib.util.NamedStream" title="MDAnalysis.lib.util.NamedStream"><code class="xref py py-class docutils literal"><span class="pre">NamedStream</span></code></a> is derived from <a class="reference external" href="http://docs.python.org/library/io.html#io.IOBase" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">io.IOBase</span></code></a> (to indicate that
-it is a stream) <em>and</em> <code class="xref py py-class docutils literal"><span class="pre">basestring</span></code> (that one can use
-<a class="reference internal" href="#MDAnalysis.lib.util.iterable" title="MDAnalysis.lib.util.iterable"><code class="xref py py-func docutils literal"><span class="pre">iterable()</span></code></a> in the same way as for strings).</p>
+it is a stream); some operations that normally expect a string will also
+work with a <a class="reference internal" href="#MDAnalysis.lib.util.NamedStream" title="MDAnalysis.lib.util.NamedStream"><code class="xref py py-class docutils literal"><span class="pre">NamedStream</span></code></a>.</p>
 <p class="rubric">Example</p>
 <p>Wrap a <a class="reference external" href="http://docs.python.org/library/stringio.html#cStringIO.StringIO" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">cStringIO.StringIO()</span></code></a> instance to write to:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">cStringIO</span>
@@ -538,7 +538,8 @@ supplied). The current file position is not changed.</p>
 <dl class="function">
 <dt id="MDAnalysis.lib.util.iterable">
 <code class="descclassname">MDAnalysis.lib.util.</code><code class="descname">iterable</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/util.html#iterable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.util.iterable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns <code class="docutils literal"><span class="pre">True</span></code> if <em>obj</em> can be iterated over and is <em>not</em> a  string.</p>
+<dd><p>Returns <code class="docutils literal"><span class="pre">True</span></code> if <em>obj</em> can be iterated over and is <em>not</em> a  string
+nor a <a class="reference internal" href="#MDAnalysis.lib.util.NamedStream" title="MDAnalysis.lib.util.NamedStream"><code class="xref py py-class docutils literal"><span class="pre">NamedStream</span></code></a></p>
 </dd></dl>
 
 <dl class="function">
