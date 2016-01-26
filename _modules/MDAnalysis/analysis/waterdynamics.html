@@ -156,7 +156,7 @@
 <span class="sd">  #now we print the data ready to graph. The first two columns are the HBLc vs t graph and</span>
 <span class="sd">  #the second two columns are the HBLi vs t graph</span>
 <span class="sd">  for HBLc, HBLi in HBL_analysis.timeseries:</span>
-<span class="sd">        print i +&quot; &quot;+ HBLc +&quot; &quot;+ i +&quot; &quot;+ HBLi</span>
+<span class="sd">        print(i +&quot; &quot;+ HBLc +&quot; &quot;+ i +&quot; &quot;+ HBLi)</span>
 <span class="sd">        i+=1</span>
 
 <span class="sd">where HBLc is the value for the continuos hydrogen bond lifetimes and HBLi is the value for the intermittent</span>
@@ -180,7 +180,7 @@
 <span class="sd">  #now we print the data ready to graph. The first two columns are WOR_OH vs t graph,</span>
 <span class="sd">  #the second two columns are WOR_HH vs t graph and the third two columns are WOR_dip vs t graph</span>
 <span class="sd">  for WOR_OH, WOR_HH, WOR_dip in WOR_analysis.timeseries:</span>
-<span class="sd">        print i +&quot; &quot;+ WOR_OH +&quot; &quot;+ i +&quot; &quot;+ WOR_HH +&quot; &quot;+ i +&quot; &quot;+ WOR_dip</span>
+<span class="sd">        print(i +&quot; &quot;+ WOR_OH +&quot; &quot;+ i +&quot; &quot;+ WOR_HH +&quot; &quot;+ i +&quot; &quot;+ WOR_dip)</span>
 
 <span class="sd">where t0 = 0, tf = 1000 and dtmax = 20. In this way we create 20 windows timesteps (20 values in the x axis),</span>
 <span class="sd">the first window is created with 1000 timestep average (1000/1), the second window is created with 500</span>
@@ -207,7 +207,7 @@
 <span class="sd">  #the seconds two columns are P(cos(theta)) vs cos(theta) for HH vector and thirds two columns</span>
 <span class="sd">  #are P(cos(theta)) vs cos(theta) for dipole vector</span>
 <span class="sd">  for i in range(bins):</span>
-<span class="sd">        print AD_analysis.graph[0][i] +&quot; &quot;+ AD_analysis.graph[1][i] +&quot; &quot;+ AD_analysis.graph[2][i]</span>
+<span class="sd">        print(AD_analysis.graph[0][i] +&quot; &quot;+ AD_analysis.graph[1][i] +&quot; &quot;+ AD_analysis.graph[2][i])</span>
 
 <span class="sd">where P(cos(theta)) is the angular distribution or angular probabilities.</span>
 
@@ -228,7 +228,7 @@
 <span class="sd">  #represents MSD vs t</span>
 <span class="sd">  i=0</span>
 <span class="sd">  for msd in MSD_analysis.timeseries:</span>
-<span class="sd">        print i +&quot; &quot;+ msd</span>
+<span class="sd">        print(i +&quot; &quot;+ msd)</span>
 <span class="sd">        i += 1</span>
 
 
@@ -250,7 +250,7 @@
 <span class="sd">  #represents SP vs t</span>
 <span class="sd">  i=0</span>
 <span class="sd">  for sp in SP_analysis.timeseries:</span>
-<span class="sd">        print i +&quot; &quot;+ sp</span>
+<span class="sd">        print(i +&quot; &quot;+ sp)</span>
 <span class="sd">        i += 1</span>
 
 <span class="sd">.. Output</span>
@@ -353,8 +353,9 @@
 
 
 <span class="sd">&quot;&quot;&quot;</span>
-
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
 <span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">range</span><span class="p">,</span> <span class="n">zip_longest</span>
+
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">multiprocessing</span>
 
@@ -540,8 +541,8 @@
                 <span class="n">h</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">quiet</span><span class="o">=</span><span class="n">quiet</span><span class="p">)</span>
                 <span class="k">break</span>
             <span class="k">except</span><span class="p">:</span>
-                <span class="k">print</span> <span class="s">&quot;error&quot;</span>
-                <span class="k">print</span> <span class="s">&quot;trying again&quot;</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">&quot;error&quot;</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">&quot;trying again&quot;</span><span class="p">)</span>
                 <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
         <span class="n">conn</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">timeseries</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -560,7 +561,7 @@
                     <span class="n">k</span><span class="o">=</span><span class="n">i</span>
                     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nproc</span><span class="p">):</span>
                         <span class="c">#start</span>
-                        <span class="k">print</span> <span class="s">&quot;ts=&quot;</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+                        <span class="k">print</span><span class="p">(</span><span class="s">&quot;ts=&quot;</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
                         <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="p">):</span>
                             <span class="k">break</span>
                         <span class="n">conn_parent</span><span class="p">,</span> <span class="n">conn_child</span>  <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Pipe</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
@@ -575,7 +576,7 @@
                                      <span class="n">conn_parent</span><span class="p">))</span>
                                 <span class="k">break</span>
                             <span class="k">except</span><span class="p">:</span>
-                                <span class="k">print</span> <span class="s">&quot;error in jobs.append&quot;</span>
+                                <span class="k">print</span><span class="p">(</span><span class="s">&quot;error in jobs.append&quot;</span><span class="p">)</span>
                         <span class="n">jobs</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
                         <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
 
@@ -747,7 +748,7 @@
         <span class="n">selection</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="p">:</span>
             <span class="n">selection</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">selection_str</span><span class="p">))</span>
-            <span class="k">print</span> <span class="n">ts</span><span class="o">.</span><span class="n">frame</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">selection</span>
 
     <span class="c"># Second Legendre polynomial</span>
@@ -904,7 +905,7 @@
         <span class="n">selection</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="p">:</span>
             <span class="n">selection</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">selection_str</span><span class="p">))</span>
-            <span class="k">print</span> <span class="n">ts</span><span class="o">.</span><span class="n">frame</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">selection</span>
 
 </div>
@@ -1002,7 +1003,7 @@
 
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">totalFrames</span><span class="o">/</span><span class="n">dt</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
             <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getOneDeltaPoint</span><span class="p">(</span><span class="n">universe</span><span class="p">,</span><span class="n">repInd</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">sumsdt</span><span class="p">,</span><span class="n">dt</span><span class="p">)</span>
-            <span class="k">print</span> <span class="s">&quot;a=&quot;</span><span class="p">,</span><span class="n">a</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&quot;a=&quot;</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
             <span class="n">sumDeltaO</span> <span class="o">+=</span> <span class="n">a</span>
             <span class="n">valOList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
             <span class="n">sumsdt</span> <span class="o">+=</span>  <span class="n">dt</span>
@@ -1025,7 +1026,7 @@
         <span class="n">selection</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="p">:</span>
             <span class="n">selection</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">selection_str</span><span class="p">))</span>
-            <span class="k">print</span> <span class="n">ts</span><span class="o">.</span><span class="n">frame</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">selection</span>
 
 <div class="viewcode-block" id="MeanSquareDisplacement.run"><a class="viewcode-back" href="../../../documentation_pages/analysis/waterdynamics.html#MDAnalysis.analysis.waterdynamics.MeanSquareDisplacement.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -1135,7 +1136,7 @@
         <span class="n">selection</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="p">:</span>
             <span class="n">selection</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">selection_str</span><span class="p">))</span>
-            <span class="k">print</span> <span class="n">ts</span><span class="o">.</span><span class="n">frame</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">selection</span>
 
 <div class="viewcode-block" id="SurvivalProbability.run"><a class="viewcode-back" href="../../../documentation_pages/analysis/waterdynamics.html#MDAnalysis.analysis.waterdynamics.SurvivalProbability.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>

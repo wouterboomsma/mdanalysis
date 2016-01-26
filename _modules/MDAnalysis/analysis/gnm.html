@@ -154,6 +154,7 @@
 
 <span class="c"># import copy #unused</span>
 
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
 <span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">range</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -187,7 +188,7 @@
                     <span class="n">failure</span> <span class="o">=</span> <span class="bp">False</span>
                     <span class="k">break</span>
         <span class="k">if</span> <span class="n">failure</span><span class="p">:</span>
-            <span class="k">print</span> <span class="s">&quot;Too many backups. Clean up and try again&quot;</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&quot;Too many backups. Clean up and try again&quot;</span><span class="p">)</span>
             <span class="nb">exit</span><span class="p">()</span>
 
 </div>
@@ -269,7 +270,8 @@
         <span class="k">if</span> <span class="n">ReportVector</span><span class="p">:</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">ReportVector</span><span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">oup</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">list_map</span><span class="p">[</span><span class="mi">1</span><span class="p">]]):</span>
-                    <span class="k">print</span> <span class="o">&gt;&gt;</span> <span class="n">oup</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">w</span><span class="p">[</span><span class="n">list_map</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="k">print</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">counter</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                          <span class="n">w</span><span class="p">[</span><span class="n">list_map</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">file</span><span class="o">=</span><span class="n">oup</span><span class="p">)</span>
         <span class="n">outputobject</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">time</span><span class="p">,</span> <span class="n">w</span><span class="p">[</span><span class="n">list_map</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">v</span><span class="p">[</span><span class="n">list_map</span><span class="p">[</span><span class="mi">1</span><span class="p">]]))</span>
         <span class="c">#outputobject.append((time, [ w[list_map[i]] for i in range(nmodes) ], [ v[list_map[i]] for i in range(</span>
         <span class="c"># nmodes) ] ))</span>
@@ -362,7 +364,8 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="p">[</span><span class="n">u</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
             <span class="k">except</span> <span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">:</span>
-                <span class="k">print</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">Frame skip at&quot;</span><span class="p">,</span> <span class="n">timestep</span><span class="p">,</span> <span class="s">&quot;(SVD failed to converge). Cutoff&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cutoff</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Frame skip at&quot;</span><span class="p">,</span> <span class="n">timestep</span><span class="p">,</span>
+                      <span class="s">&quot;(SVD failed to converge). Cutoff&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cutoff</span><span class="p">)</span>
                 <span class="k">continue</span>
             <span class="c">#Save the results somewhere useful in some useful format. Usefully.</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">generate_output</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">,</span> <span class="n">timestep</span><span class="p">,</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">ReportVector</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ReportVector</span><span class="p">,</span> <span class="n">counter</span><span class="o">=</span><span class="n">counter</span><span class="p">)</span>
