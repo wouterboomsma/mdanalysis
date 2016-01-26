@@ -803,8 +803,10 @@
 
     <span class="k">return</span> <span class="n">angles</span>
 </div>
-<span class="n">calc_torsions</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">calc_dihedrals</span><span class="p">,</span> <span class="n">old_name</span><span class="o">=</span><span class="s">&#39;calc_torsions&#39;</span><span class="p">,</span>
-                          <span class="n">new_name</span><span class="o">=</span><span class="s">&#39;calc_dihedrals&#39;</span><span class="p">)</span>
+<span class="n">calc_torsions</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">calc_dihedrals</span><span class="p">,</span>
+                          <span class="n">old_name</span><span class="o">=</span><span class="s">&#39;calc_torsions&#39;</span><span class="p">,</span>
+                          <span class="n">new_name</span><span class="o">=</span><span class="s">&#39;calc_dihedrals&#39;</span><span class="p">,</span>
+                          <span class="n">message</span><span class="o">=</span><span class="s">&quot;This will be removed in v0.15.0&quot;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="apply_PBC"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.lib.distances.apply_PBC">[docs]</a><span class="k">def</span> <span class="nf">apply_PBC</span><span class="p">(</span><span class="n">incoords</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s">&quot;serial&quot;</span><span class="p">):</span>
@@ -865,7 +867,10 @@
 
     <span class="k">return</span> <span class="n">coords</span>
 </div>
-<span class="n">applyPBC</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">apply_PBC</span><span class="p">,</span> <span class="n">old_name</span><span class="o">=</span><span class="s">&#39;applyPBC&#39;</span><span class="p">,</span> <span class="n">new_name</span><span class="o">=</span><span class="s">&#39;apply_PBC&#39;</span><span class="p">)</span>
+<span class="n">applyPBC</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">apply_PBC</span><span class="p">,</span>
+                     <span class="n">old_name</span><span class="o">=</span><span class="s">&#39;applyPBC&#39;</span><span class="p">,</span>
+                     <span class="n">new_name</span><span class="o">=</span><span class="s">&#39;apply_PBC&#39;</span><span class="p">,</span>
+                     <span class="n">message</span><span class="o">=</span><span class="s">&quot;This will be removed in v0.15.0&quot;</span><span class="p">)</span>
 </pre></div>
 
           </div>
