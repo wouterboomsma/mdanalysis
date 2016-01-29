@@ -162,31 +162,31 @@ in MDAnalysis.</p>
 <span class="kn">import</span> <span class="nn">MDAnalysis.analysis.contacts</span>
 <span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span>
 
-<span class="c"># example trajectory (transition of AdK from closed to open)</span>
+<span class="c1"># example trajectory (transition of AdK from closed to open)</span>
 <span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>
 
-<span class="c"># crude definition of salt bridges as contacts between NH/NZ in ARG/LYS and OE*/OD* in ASP/GLU.</span>
-<span class="c"># You might want to think a little bit harder about the problem before using this for real work.</span>
-<span class="n">sel_basic</span> <span class="o">=</span> <span class="s">&quot;(resname ARG or resname LYS) and (name NH* or name NZ)&quot;</span>
-<span class="n">sel_acidic</span> <span class="o">=</span> <span class="s">&quot;(resname ASP or resname GLU) and (name OE* or name OD*)&quot;</span>
+<span class="c1"># crude definition of salt bridges as contacts between NH/NZ in ARG/LYS and OE*/OD* in ASP/GLU.</span>
+<span class="c1"># You might want to think a little bit harder about the problem before using this for real work.</span>
+<span class="n">sel_basic</span> <span class="o">=</span> <span class="s2">&quot;(resname ARG or resname LYS) and (name NH* or name NZ)&quot;</span>
+<span class="n">sel_acidic</span> <span class="o">=</span> <span class="s2">&quot;(resname ASP or resname GLU) and (name OE* or name OD*)&quot;</span>
 
-<span class="c"># reference groups (first frame of the trajectory, but you could also use a separate PDB, eg crystal structure)</span>
+<span class="c1"># reference groups (first frame of the trajectory, but you could also use a separate PDB, eg crystal structure)</span>
 <span class="n">acidic</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">sel_acidic</span><span class="p">)</span>
 <span class="n">basic</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">sel_basic</span><span class="p">)</span>
 
-<span class="c"># set up analysis of native contacts (&quot;salt bridges&quot;); salt bridges have a distance &lt;6 A</span>
+<span class="c1"># set up analysis of native contacts (&quot;salt bridges&quot;); salt bridges have a distance &lt;6 A</span>
 <span class="n">CA1</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">contacts</span><span class="o">.</span><span class="n">ContactAnalysis1</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">selection</span><span class="o">=</span><span class="p">(</span><span class="n">sel_acidic</span><span class="p">,</span> <span class="n">sel_basic</span><span class="p">),</span> <span class="n">refgroup</span><span class="o">=</span><span class="p">(</span><span class="n">acidic</span><span class="p">,</span>
-<span class="n">basic</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="mf">6.0</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="s">&quot;qsalt.dat&quot;</span><span class="p">)</span>
+<span class="n">basic</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="mf">6.0</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="s2">&quot;qsalt.dat&quot;</span><span class="p">)</span>
 
-<span class="c"># iterate through trajectory and perform analysis of &quot;native contacts&quot; q</span>
-<span class="c"># (force=True ignores any previous results, force=True is useful when testing)</span>
+<span class="c1"># iterate through trajectory and perform analysis of &quot;native contacts&quot; q</span>
+<span class="c1"># (force=True ignores any previous results, force=True is useful when testing)</span>
 <span class="n">CA1</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
-<span class="c"># plot time series q(t) [possibly do &quot;import pylab; pylab.clf()&quot; do clear the figure first...]</span>
-<span class="n">CA1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s">&quot;adk_saltbridge_contact_analysis1.pdf&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
+<span class="c1"># plot time series q(t) [possibly do &quot;import pylab; pylab.clf()&quot; do clear the figure first...]</span>
+<span class="n">CA1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;adk_saltbridge_contact_analysis1.pdf&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
 
-<span class="c"># or plot the data in qsalt.dat yourself.</span>
-<span class="n">CA1</span><span class="o">.</span><span class="n">plot_qavg</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s">&quot;adk_saltbridge_contact_analysis1_matrix.pdf&quot;</span><span class="p">)</span>
+<span class="c1"># or plot the data in qsalt.dat yourself.</span>
+<span class="n">CA1</span><span class="o">.</span><span class="n">plot_qavg</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;adk_saltbridge_contact_analysis1_matrix.pdf&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The first graph shows that when AdK opens, about 20% of the salt
@@ -234,33 +234,51 @@ stored in <code class="xref py py-attr docutils literal"><span class="pre">Conta
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>*topology*</strong> &#8211; psf or pdb file</li>
-<li><strong>*trajectory*</strong> &#8211; dcd or xtc/trr file</li>
-<li><strong>*ref1*</strong> &#8211; structure of the reference conformation 1 (pdb); if <code class="docutils literal"><span class="pre">None</span></code> the <em>first</em>
-frame of the trajectory is chosen</li>
-<li><strong>*ref2*</strong> &#8211; structure of the reference conformation 2 (pdb); if <code class="docutils literal"><span class="pre">None</span></code> the <em>last</em>
-frame of the trajectory is chosen</li>
-<li><strong>*radius*</strong> &#8211; contacts are deemed any Ca within radius [8 A]</li>
-<li><strong>*targetdir*</strong> &#8211; output files are saved there [.]</li>
-<li><strong>*infix*</strong> &#8211; additional tag string that is inserted into the output filename of the
-data file [&#8220;&#8221;]</li>
-<li><strong>*selection*</strong> &#8211; <blockquote>
-<div>MDAnalysis selection string that selects the particles of
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first last docutils">
+<dt><em>topology</em></dt>
+<dd><p class="first last">psf or pdb file</p>
+</dd>
+<dt><em>trajectory</em></dt>
+<dd><p class="first last">dcd or xtc/trr file</p>
+</dd>
+<dt><em>ref1</em></dt>
+<dd><p class="first last">structure of the reference conformation 1 (pdb); if <code class="docutils literal"><span class="pre">None</span></code> the <em>first</em>
+frame of the trajectory is chosen</p>
+</dd>
+<dt><em>ref2</em></dt>
+<dd><p class="first last">structure of the reference conformation 2 (pdb); if <code class="docutils literal"><span class="pre">None</span></code> the <em>last</em>
+frame of the trajectory is chosen</p>
+</dd>
+<dt><em>radius</em></dt>
+<dd><p class="first last">contacts are deemed any Ca within radius [8 A]</p>
+</dd>
+<dt><em>targetdir</em></dt>
+<dd><p class="first last">output files are saved there [.]</p>
+</dd>
+<dt><em>infix</em></dt>
+<dd><p class="first last">additional tag string that is inserted into the output filename of the
+data file [&#8220;&#8221;]</p>
+</dd>
+<dt><em>selection</em></dt>
+<dd><blockquote class="first">
+<div><p>MDAnalysis selection string that selects the particles of
 interest; the default is to only select the C-alpha atoms
-in <em>ref1</em> and <a href="#id1"><span class="problematic" id="id2">*</span></a>ref*2 [&#8220;name CA&#8221;]</div></blockquote>
-<div class="admonition note">
+in <em>ref1</em> and <a href="#id1"><span class="problematic" id="id2">*</span></a>ref*2 [&#8220;name CA&#8221;]</p>
+</div></blockquote>
+<div class="last admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">If <em>selection</em> produces more than one atom per
 residue then you will get multiple contacts per
 residue unless you also set <em>centroids</em> = <code class="docutils literal"><span class="pre">True</span></code></p>
 </div>
-</li>
-<li><strong>*centroids*</strong> &#8211; If set to <code class="docutils literal"><span class="pre">True</span></code>, use the centroids for the selected atoms on a
+</dd>
+<dt><em>centroids</em></dt>
+<dd><p class="first last">If set to <code class="docutils literal"><span class="pre">True</span></code>, use the centroids for the selected atoms on a
 per-residue basis to compute contacts. This allows, for instance
 defining the sidechains as <em>selection</em> and then computing distances
-between sidechain centroids.</li>
-</ul>
+between sidechain centroids.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -369,9 +387,9 @@ molecules A and B in the complex. Then the question to be answered by <em>q</em>
 is, is which percentage of the contacts between A and B persist during the simulation.</p>
 <p>First prepare <a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> selections for
 the reference atoms; this example uses some arbitrary selections:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">ref</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="s">&#39;crystal.pdb&#39;</span><span class="p">)</span>
-<span class="n">refA</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&#39;name CA and segid A and resid 6:100&#39;</span><span class="p">)</span>
-<span class="n">refB</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&#39;name CA and segid B and resid 1:40&#39;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ref</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="s1">&#39;crystal.pdb&#39;</span><span class="p">)</span>
+<span class="n">refA</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name CA and segid A and resid 6:100&#39;</span><span class="p">)</span>
+<span class="n">refB</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name CA and segid B and resid 1:40&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Load the trajectory:</p>
@@ -382,8 +400,8 @@ the reference atoms; this example uses some arbitrary selections:</p>
 <code class="docutils literal"><span class="pre">u.select_atoms(selA)</span></code> produce a list of atoms that is equivalent to the
 reference (i.e. <code class="docutils literal"><span class="pre">u.select_atoms(selA)</span></code> must select the same atoms as
 <code class="docutils literal"><span class="pre">refA</span></code> in this example):</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">selA</span> <span class="o">=</span> <span class="s">&#39;name CA and resid 1:95&#39;</span>     <span class="c"># corresponds to refA</span>
-<span class="n">selB</span> <span class="o">=</span> <span class="s">&#39;name CA and resid 150:189&#39;</span>  <span class="c"># corresponds to refB</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">selA</span> <span class="o">=</span> <span class="s1">&#39;name CA and resid 1:95&#39;</span>     <span class="c1"># corresponds to refA</span>
+<span class="n">selB</span> <span class="o">=</span> <span class="s1">&#39;name CA and resid 150:189&#39;</span>  <span class="c1"># corresponds to refB</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -393,7 +411,7 @@ reference (i.e. <code class="docutils literal"><span class="pre">u.select_atoms(
 by <em>selection</em>.</p>
 </div>
 <p>Now we are ready to set up the analysis:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">CA1</span> <span class="o">=</span> <span class="n">ContactAnalysis1</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">selection</span><span class="o">=</span><span class="p">(</span><span class="n">selA</span><span class="p">,</span><span class="n">selB</span><span class="p">),</span> <span class="n">refgroup</span><span class="o">=</span><span class="p">(</span><span class="n">refA</span><span class="p">,</span><span class="n">refB</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="mf">8.0</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="s">&quot;q.dat&quot;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">CA1</span> <span class="o">=</span> <span class="n">ContactAnalysis1</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">selection</span><span class="o">=</span><span class="p">(</span><span class="n">selA</span><span class="p">,</span><span class="n">selB</span><span class="p">),</span> <span class="n">refgroup</span><span class="o">=</span><span class="p">(</span><span class="n">refA</span><span class="p">,</span><span class="n">refB</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="mf">8.0</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="s2">&quot;q.dat&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>If the groups do not match in length then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
@@ -403,8 +421,8 @@ by <em>selection</em>.</p>
 </div>
 <p>Results are saved to <em>outfile</em> (<code class="docutils literal"><span class="pre">framenumber</span> <span class="pre">q</span> <span class="pre">N</span></code> per line) and
 can also be plotted with</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">CA1</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>        <span class="c"># plots the time series q(t)</span>
-<span class="n">CA1</span><span class="o">.</span><span class="n">plot_qavg</span><span class="p">()</span>   <span class="c"># plots the matrix of average contacts &lt;q&gt;</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">CA1</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>        <span class="c1"># plots the time series q(t)</span>
+<span class="n">CA1</span><span class="o">.</span><span class="n">plot_qavg</span><span class="p">()</span>   <span class="c1"># plots the matrix of average contacts &lt;q&gt;</span>
 </pre></div>
 </div>
 <p><strong>Description of computed values</strong> in the output file:</p>
@@ -419,12 +437,18 @@ can also be plotted with</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>*topology*</strong> &#8211; psf or pdb file</li>
-<li><strong>*trajectory*</strong> &#8211; dcd or xtc/trr file</li>
-<li><strong>*universe*</strong> &#8211; instead of a topology/trajectory combination, one can also supply
-a <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code></li>
-</ul>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>topology</em></dt>
+<dd><p class="first last">psf or pdb file</p>
+</dd>
+<dt><em>trajectory</em></dt>
+<dd><p class="first last">dcd or xtc/trr file</p>
+</dd>
+<dt><em>universe</em></dt>
+<dd><p class="first last">instead of a topology/trajectory combination, one can also supply
+a <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code></p>
+</dd>
+</dl>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Keywords:</th><td class="field-body"><dl class="first last docutils">
@@ -590,7 +614,7 @@ data file.
     Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl,
     Gorman Stock, Isaac Virshup, Zhuyi Xue, Carlos Yáñez S.,
     and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>
 </html>

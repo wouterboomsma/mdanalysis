@@ -166,14 +166,18 @@ doi: <a class="reference external" href="http://dx.doi.org/10.1371/journal.pcbi.
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>*v*</strong> &#8211; <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> of coordinates</li>
-<li><strong>*axes*</strong> &#8211; None or int or tuple of ints, optional
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>v</em></dt>
+<dd><p class="first last"><a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> of coordinates</p>
+</dd>
+<dt><em>axes</em></dt>
+<dd><p class="first last">None or int or tuple of ints, optional
 Axes or axes along which a sum is performed. The default (<em>axes</em> =
 <code class="docutils literal"><span class="pre">None</span></code>) performs a sum over all the dimensions of the input array.
 The value of <em>axes</em> may be negative, in which case it counts from the
-last axis to the zeroth axis.</li>
-</ul>
+last axis to the zeroth axis.</p>
+</dd>
+</dl>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">float, the sum of the squares of the elements of <em>v</em> along <em>axes</em></p>
@@ -197,17 +201,18 @@ matrix has dimensions <span class="math">\(N_p\)</span> by <span class="math">\(
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>*P*</strong> &#8211; <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representing a path</li>
-<li><strong>*Q*</strong> &#8211; <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representing a path</li>
-</ul>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>P</em></dt>
+<dd><p class="first last"><a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representing a path</p>
+</dd>
+<dt><em>Q</em></dt>
+<dd><p class="first last"><a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representing a path</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><cite>numpy.ndarray</cite> of pairwise MSDs between points in <em>P</em> and points
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> of pairwise MSDs between points in <em>P</em> and points
 in <em>Q</em></p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">:class</p>
 </td>
 </tr>
 </tbody>
@@ -235,9 +240,15 @@ atom.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*path*</strong> &#8211; <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representing a path</td>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>path</em></dt>
+<dd><p class="first last"><a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representing a path</p>
+</dd>
+</dl>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(int, (int, ...)), the number of atoms and the axes containing coordinates</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">(int, (int, ...)), the number of atoms and the axes containing coordinates</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -254,9 +265,15 @@ atom.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*name*</strong> &#8211; string, name of path metric</td>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>name</em></dt>
+<dd><p class="first last">string, name of path metric</p>
+</dd>
+</dl>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The path metric function specified by <em>name</em> (if found).</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The path metric function specified by <em>name</em> (if found).</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -274,10 +291,14 @@ either shape <span class="math">\(N_p \times N \times 3\)</span> (<span class="m
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>*P*</strong> &#8211; <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representing a path</li>
-<li><strong>*Q*</strong> &#8211; <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representing a path</li>
-</ul>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>P</em></dt>
+<dd><p class="first last"><a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representing a path</p>
+</dd>
+<dt><em>Q</em></dt>
+<dd><p class="first last"><a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representing a path</p>
+</dd>
+</dl>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">float, the Hausdorff distance between paths <em>P</em> and <em>Q</em></p>
@@ -285,23 +306,26 @@ either shape <span class="math">\(N_p \times N \times 3\)</span> (<span class="m
 </tr>
 </tbody>
 </table>
-<p class="rubric">Example</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span>
+<dl class="docutils">
+<dt>Example::</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mid</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ca</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&#39;name CA&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ca</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name CA&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">P</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
 <span class="gp">... </span>               <span class="n">ca</span><span class="o">.</span><span class="n">positions</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[:</span><span class="n">mid</span><span class="p">:]</span>
-<span class="gp">... </span>             <span class="p">])</span> <span class="c"># first half of trajectory</span>
+<span class="gp">... </span>             <span class="p">])</span> <span class="c1"># first half of trajectory</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Q</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
 <span class="gp">... </span>               <span class="n">ca</span><span class="o">.</span><span class="n">positions</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="n">mid</span><span class="p">::]</span>
-<span class="gp">... </span>             <span class="p">])</span> <span class="c"># second half of trajectory</span>
+<span class="gp">... </span>             <span class="p">])</span> <span class="c1"># second half of trajectory</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">hausdorff</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">Q</span><span class="p">)</span>
 <span class="go">4.7786639840135905</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">hausdorff</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">Q</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="c"># hausdorff distance w/ reversed 2nd trajectory</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hausdorff</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">Q</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># hausdorff distance w/ reversed 2nd trajectory</span>
 <span class="go">4.7786639840135905</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -320,10 +344,14 @@ measure that gives equal weight to <em>P</em> and <em>Q</em>.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>*P*</strong> &#8211; <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representing a path</li>
-<li><strong>*Q*</strong> &#8211; <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representing a path</li>
-</ul>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>P</em></dt>
+<dd><p class="first last"><a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representing a path</p>
+</dd>
+<dt><em>Q</em></dt>
+<dd><p class="first last"><a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representing a path</p>
+</dd>
+</dl>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">float, the weighted average Hausdorff distance between paths <em>P</em> and <em>Q</em></p>
@@ -331,24 +359,27 @@ measure that gives equal weight to <em>P</em> and <em>Q</em>.</p>
 </tr>
 </tbody>
 </table>
-<p class="rubric">Example</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MDAnalysis</span> <span class="kn">import</span> <span class="n">Universe</span>
+<dl class="docutils">
+<dt>Example::</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MDAnalysis</span> <span class="kn">import</span> <span class="n">Universe</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mid</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ca</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&#39;name CA&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ca</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name CA&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">P</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
 <span class="gp">... </span>               <span class="n">ca</span><span class="o">.</span><span class="n">positions</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[:</span><span class="n">mid</span><span class="p">:]</span>
-<span class="gp">... </span>             <span class="p">])</span> <span class="c"># first half of trajectory</span>
+<span class="gp">... </span>             <span class="p">])</span> <span class="c1"># first half of trajectory</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Q</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
 <span class="gp">... </span>               <span class="n">ca</span><span class="o">.</span><span class="n">positions</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="n">mid</span><span class="p">::]</span>
-<span class="gp">... </span>             <span class="p">])</span> <span class="c"># second half of trajectory</span>
+<span class="gp">... </span>             <span class="p">])</span> <span class="c1"># second half of trajectory</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">hausdorff_wavg</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">Q</span><span class="p">)</span>
 <span class="go">2.5669644353703447</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">hausdorff_wavg</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">Q</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="c"># weighted avg hausdorff dist w/ Q reversed</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hausdorff_wavg</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">Q</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># weighted avg hausdorff dist w/ Q reversed</span>
 <span class="go">2.5669644353703447</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -367,10 +398,14 @@ average Hausdorff gives equal weight to both paths.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>*P*</strong> &#8211; <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representing a path</li>
-<li><strong>*Q*</strong> &#8211; <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representing a path</li>
-</ul>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>P</em></dt>
+<dd><p class="first last"><a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representing a path</p>
+</dd>
+<dt><em>Q</em></dt>
+<dd><p class="first last"><a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representing a path</p>
+</dd>
+</dl>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">float, the average Hausdorff distance between paths <em>P</em> and <em>Q</em></p>
@@ -378,23 +413,26 @@ average Hausdorff gives equal weight to both paths.</p>
 </tr>
 </tbody>
 </table>
-<p class="rubric">Example</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span>
+<dl class="docutils">
+<dt>Example::</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mid</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ca</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&#39;name CA&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ca</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name CA&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">P</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
 <span class="gp">... </span>               <span class="n">ca</span><span class="o">.</span><span class="n">positions</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[:</span><span class="n">mid</span><span class="p">:]</span>
-<span class="gp">... </span>             <span class="p">])</span> <span class="c"># first half of trajectory</span>
+<span class="gp">... </span>             <span class="p">])</span> <span class="c1"># first half of trajectory</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Q</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
 <span class="gp">... </span>               <span class="n">ca</span><span class="o">.</span><span class="n">positions</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="n">mid</span><span class="p">::]</span>
-<span class="gp">... </span>             <span class="p">])</span> <span class="c"># second half of trajectory</span>
+<span class="gp">... </span>             <span class="p">])</span> <span class="c1"># second half of trajectory</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">hausdorff_avg</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">Q</span><span class="p">)</span>
 <span class="go">2.5669646575869005</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">hausdorff_avg</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">Q</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="c"># hausdorff distance w/ reversed 2nd trajectory</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hausdorff_avg</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">Q</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># hausdorff distance w/ reversed 2nd trajectory</span>
 <span class="go">2.5669646575869005</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -409,10 +447,14 @@ either shape <span class="math">\(N_p \times N \times 3\)</span> (<span class="m
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>*P*</strong> &#8211; <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representing a path</li>
-<li><strong>*Q*</strong> &#8211; <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representing a path</li>
-</ul>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>P</em></dt>
+<dd><p class="first last"><a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representing a path</p>
+</dd>
+<dt><em>Q</em></dt>
+<dd><p class="first last"><a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representing a path</p>
+</dd>
+</dl>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">dictionary of two pairs of numpy arrays, the first pair containing the
@@ -437,10 +479,14 @@ either shape <span class="math">\(N_p \times N \times 3\)</span> (<span class="m
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>*P*</strong> &#8211; <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representing a path</li>
-<li><strong>*Q*</strong> &#8211; <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representing a path</li>
-</ul>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>P</em></dt>
+<dd><p class="first last"><a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representing a path</p>
+</dd>
+<dt><em>Q</em></dt>
+<dd><p class="first last"><a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representing a path</p>
+</dd>
+</dl>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">float, the discrete Frechet distance between paths <em>P</em> and <em>Q</em></p>
@@ -448,22 +494,25 @@ either shape <span class="math">\(N_p \times N \times 3\)</span> (<span class="m
 </tr>
 </tbody>
 </table>
-<p class="rubric">Example</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>
+<dl class="docutils">
+<dt>Example::</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mid</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ca</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&#39;name CA&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ca</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name CA&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
 <span class="gp">... </span>               <span class="n">ca</span><span class="o">.</span><span class="n">positions</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[:</span><span class="n">mid</span><span class="p">:]</span>
-<span class="gp">... </span>             <span class="p">])</span> <span class="c"># first half of trajectory</span>
+<span class="gp">... </span>             <span class="p">])</span> <span class="c1"># first half of trajectory</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
 <span class="gp">... </span>               <span class="n">ca</span><span class="o">.</span><span class="n">positions</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="n">mid</span><span class="p">::]</span>
-<span class="gp">... </span>             <span class="p">])</span> <span class="c"># second half of trajectory</span>
+<span class="gp">... </span>             <span class="p">])</span> <span class="c1"># second half of trajectory</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">discrete_frechet</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">Q</span><span class="p">)</span>
 <span class="go">4.7786639840135905</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">discrete_frechet</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">Q</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="c"># frechet distance w/ 2nd trj reversed 2nd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">discrete_frechet</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">Q</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># frechet distance w/ 2nd trj reversed 2nd</span>
 <span class="go">6.8429011177113832</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
@@ -479,11 +528,17 @@ distance matrix.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>*N*</strong> &#8211; int, size of the distance matrix (of shape <em>N</em>-by-<em>N</em>)</li>
-<li><strong>*i*</strong> &#8211; int, row index (starting at 0) of the distance matrix</li>
-<li><strong>*j*</strong> &#8211; int, column index (starting at 0) of the distance matrix</li>
-</ul>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>N</em></dt>
+<dd><p class="first last">int, size of the distance matrix (of shape <em>N</em>-by-<em>N</em>)</p>
+</dd>
+<dt><em>i</em></dt>
+<dd><p class="first last">int, row index (starting at 0) of the distance matrix</p>
+</dd>
+<dt><em>j</em></dt>
+<dd><p class="first last">int, column index (starting at 0) of the distance matrix</p>
+</dd>
+</dl>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">int, index (of the matrix element) in the corresponding distance vector</p>
@@ -534,13 +589,18 @@ alignment of the original trajectories to a reference structure.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>*universe*</strong> &#8211; <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code> object containing a trajectory</li>
-<li><strong>*reference*</strong> &#8211; reference structure; <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code> object; if
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first last docutils">
+<dt><em>universe</em></dt>
+<dd><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code> object containing a trajectory</p>
+</dd>
+<dt><em>reference</em></dt>
+<dd><p class="first last">reference structure; <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code> object; if
 <code class="docutils literal"><span class="pre">None</span></code> then <em>traj</em> is used (uses the current time step of the
-object) [<code class="docutils literal"><span class="pre">None</span></code>]</li>
-<li><strong>*ref_select*</strong> &#8211; <p>The selection to operate on for rms fitting; can be one of:</p>
-<ol class="arabic">
+object) [<code class="docutils literal"><span class="pre">None</span></code>]</p>
+</dd>
+<dt><em>ref_select</em></dt>
+<dd><p class="first">The selection to operate on for rms fitting; can be one of:</p>
+<ol class="arabic simple">
 <li>any valid selection string for
 <a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.select_atoms" title="MDAnalysis.core.AtomGroup.AtomGroup.select_atoms"><code class="xref py py-meth docutils literal"><span class="pre">select_atoms()</span></code></a> that
 produces identical selections in <em>mobile</em> and <em>reference</em>; or</li>
@@ -550,14 +610,16 @@ such a dictionary based on a <a class="reference external" href="http://www.clus
 alignment); or</li>
 <li>a tuple <code class="docutils literal"><span class="pre">(sel1,</span> <span class="pre">sel2)</span></code></li>
 </ol>
-<p>When using 2. or 3. with <em>sel1</em> and <em>sel2</em> then these selections
+<p class="last">When using 2. or 3. with <em>sel1</em> and <em>sel2</em> then these selections
 can also each be a list of selection strings (to generate an
 AtomGroup with defined atom order as described under
 <a class="reference internal" href="../selections.html#ordered-selections-label"><span>Ordered selections</span></a>).</p>
-</li>
-<li><strong>*path_select*</strong> &#8211; atom selection composing coordinates of (fitted) path; if <code class="docutils literal"><span class="pre">None</span></code>
-then <em>path_select</em> is set to <em>ref_select</em> [<code class="docutils literal"><span class="pre">None</span></code>]</li>
-</ul>
+</dd>
+<dt><em>path_select</em></dt>
+<dd><p class="first last">atom selection composing coordinates of (fitted) path; if <code class="docutils literal"><span class="pre">None</span></code>
+then <em>path_select</em> is set to <em>ref_select</em> [<code class="docutils literal"><span class="pre">None</span></code>]</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -617,22 +679,29 @@ to compose <a class="reference internal" href="#MDAnalysis.analysis.psa.Path.pat
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>*filename*</strong> &#8211; file name for the RMS-fitted trajectory or pdb; defaults to the
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>filename</em></dt>
+<dd><p class="first last">file name for the RMS-fitted trajectory or pdb; defaults to the
 original trajectory filename (from <a class="reference internal" href="#MDAnalysis.analysis.psa.Path.u_original" title="MDAnalysis.analysis.psa.Path.u_original"><code class="xref py py-attr docutils literal"><span class="pre">Path.u_original</span></code></a>) with
-<em>prefix</em> prepended</li>
-<li><strong>*prefix*</strong> &#8211; prefix for auto-generating the new output filename</li>
-<li><strong>*rmsdfile*</strong> &#8211; file name for writing the RMSD time series [<code class="docutils literal"><span class="pre">None</span></code>]</li>
-<li><strong>*mass_weighted*</strong> &#8211; do a mass-weighted RMSD fit</li>
-<li><strong>*tol_mass*</strong> &#8211; Reject match if the atomic masses for matched atoms differ by more
-than <em>tol_mass</em> [0.1]</li>
-</ul>
+<em>prefix</em> prepended</p>
+</dd>
+<dt><em>prefix</em></dt>
+<dd><p class="first last">prefix for auto-generating the new output filename</p>
+</dd>
+<dt><em>rmsdfile</em></dt>
+<dd><p class="first last">file name for writing the RMSD time series [<code class="docutils literal"><span class="pre">None</span></code>]</p>
+</dd>
+<dt><em>mass_weighted</em></dt>
+<dd><p class="first last">do a mass-weighted RMSD fit</p>
+</dd>
+<dt><em>tol_mass</em></dt>
+<dd><p class="first last">Reject match if the atomic masses for matched atoms differ by more
+than <em>tol_mass</em> [0.1]</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><cite>MDAnalysis.Universe</cite> object containing a fitted trajectory</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">:class</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code> object containing a fitted trajectory</p>
 </td>
 </tr>
 </tbody>
@@ -648,9 +717,7 @@ than <em>tol_mass</em> [0.1]</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">class:<cite>Path</cite></td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int, the number of atoms in the</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">int, the number of atoms in the <a class="reference internal" href="#MDAnalysis.analysis.psa.Path" title="MDAnalysis.analysis.psa.Path"><code class="xref py py-class docutils literal"><span class="pre">Path</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -676,23 +743,37 @@ and new trajectory name, which can be fed directly into an
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>*align*</strong> &#8211; Align trajectory to atom selection <a class="reference internal" href="#MDAnalysis.analysis.psa.Path.ref_select" title="MDAnalysis.analysis.psa.Path.ref_select"><code class="xref py py-attr docutils literal"><span class="pre">Path.ref_select</span></code></a> of
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>align</em></dt>
+<dd><p class="first last">Align trajectory to atom selection <a class="reference internal" href="#MDAnalysis.analysis.psa.Path.ref_select" title="MDAnalysis.analysis.psa.Path.ref_select"><code class="xref py py-attr docutils literal"><span class="pre">Path.ref_select</span></code></a> of
 <a class="reference internal" href="#MDAnalysis.analysis.psa.Path.u_reference" title="MDAnalysis.analysis.psa.Path.u_reference"><code class="xref py py-attr docutils literal"><span class="pre">Path.u_reference</span></code></a>. If <code class="docutils literal"><span class="pre">True</span></code>, a universe containing an
 aligned trajectory is produced with <a class="reference internal" href="#MDAnalysis.analysis.psa.Path.fit_to_reference" title="MDAnalysis.analysis.psa.Path.fit_to_reference"><code class="xref py py-meth docutils literal"><span class="pre">Path.fit_to_reference()</span></code></a>
-[<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>*filename*</strong> &#8211; filename for the RMS-fitted trajectory or pdb; defaults to the
+[<code class="docutils literal"><span class="pre">False</span></code>]</p>
+</dd>
+<dt><em>filename</em></dt>
+<dd><p class="first last">filename for the RMS-fitted trajectory or pdb; defaults to the
 original trajectory filename (from <a class="reference internal" href="#MDAnalysis.analysis.psa.Path.u_original" title="MDAnalysis.analysis.psa.Path.u_original"><code class="xref py py-attr docutils literal"><span class="pre">Path.u_original</span></code></a>) with
-<em>prefix</em> prepended</li>
-<li><strong>*prefix*</strong> &#8211; prefix for auto-generating the new output filename</li>
-<li><strong>*rmsdfile*</strong> &#8211; file name for writing the RMSD time series [<code class="docutils literal"><span class="pre">None</span></code>]</li>
-<li><strong>*mass_weighted*</strong> &#8211; do a mass-weighted RMSD fit</li>
-<li><strong>*tol_mass*</strong> &#8211; Reject match if the atomic masses for matched atoms differ by more
-than <em>tol_mass</em> [0.1]</li>
-<li><strong>*flat*</strong> &#8211; represent <a class="reference internal" href="#MDAnalysis.analysis.psa.Path.path" title="MDAnalysis.analysis.psa.Path.path"><code class="xref py py-attr docutils literal"><span class="pre">Path.path</span></code></a> with 2D (<span class="math">\(N_p\times 3N\)</span>) <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>;
+<em>prefix</em> prepended</p>
+</dd>
+<dt><em>prefix</em></dt>
+<dd><p class="first last">prefix for auto-generating the new output filename</p>
+</dd>
+<dt><em>rmsdfile</em></dt>
+<dd><p class="first last">file name for writing the RMSD time series [<code class="docutils literal"><span class="pre">None</span></code>]</p>
+</dd>
+<dt><em>mass_weighted</em></dt>
+<dd><p class="first last">do a mass-weighted RMSD fit</p>
+</dd>
+<dt><em>tol_mass</em></dt>
+<dd><p class="first last">Reject match if the atomic masses for matched atoms differ by more
+than <em>tol_mass</em> [0.1]</p>
+</dd>
+<dt><em>flat</em></dt>
+<dd><p class="first last">represent <a class="reference internal" href="#MDAnalysis.analysis.psa.Path.path" title="MDAnalysis.analysis.psa.Path.path"><code class="xref py py-attr docutils literal"><span class="pre">Path.path</span></code></a> with 2D (<span class="math">\(N_p\times 3N\)</span>) <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>;
 if <code class="docutils literal"><span class="pre">False</span></code> then <a class="reference internal" href="#MDAnalysis.analysis.psa.Path.path" title="MDAnalysis.analysis.psa.Path.path"><code class="xref py py-attr docutils literal"><span class="pre">Path.path</span></code></a> is a 3D (<span class="math">\(N_p\times N\times 3\)</span>)
-<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-</ul>
+<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> [<code class="docutils literal"><span class="pre">False</span></code>]</p>
+</dd>
+</dl>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A tuple of the topology name and new trajectory name.</p>
@@ -716,25 +797,28 @@ fitted trajectory (with dimensions <span class="math">\(N_p\times N\times 3\)</s
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>*fitted*</strong> &#8211; construct a <a class="reference internal" href="#MDAnalysis.analysis.psa.Path.path" title="MDAnalysis.analysis.psa.Path.path"><code class="xref py py-attr docutils literal"><span class="pre">Path.path</span></code></a> from the <a class="reference internal" href="#MDAnalysis.analysis.psa.Path.u_fitted" title="MDAnalysis.analysis.psa.Path.u_fitted"><code class="xref py py-attr docutils literal"><span class="pre">Path.u_fitted</span></code></a>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>fitted</em></dt>
+<dd><p class="first last">construct a <a class="reference internal" href="#MDAnalysis.analysis.psa.Path.path" title="MDAnalysis.analysis.psa.Path.path"><code class="xref py py-attr docutils literal"><span class="pre">Path.path</span></code></a> from the <a class="reference internal" href="#MDAnalysis.analysis.psa.Path.u_fitted" title="MDAnalysis.analysis.psa.Path.u_fitted"><code class="xref py py-attr docutils literal"><span class="pre">Path.u_fitted</span></code></a>
 trajectory; if <code class="docutils literal"><span class="pre">False</span></code> then <a class="reference internal" href="#MDAnalysis.analysis.psa.Path.path" title="MDAnalysis.analysis.psa.Path.path"><code class="xref py py-attr docutils literal"><span class="pre">Path.path</span></code></a> is generated with
-the trajectory from <a class="reference internal" href="#MDAnalysis.analysis.psa.Path.u_original" title="MDAnalysis.analysis.psa.Path.u_original"><code class="xref py py-attr docutils literal"><span class="pre">Path.u_original</span></code></a> [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>*select*</strong> &#8211; the selection for constructing the coordinates of each frame in
+the trajectory from <a class="reference internal" href="#MDAnalysis.analysis.psa.Path.u_original" title="MDAnalysis.analysis.psa.Path.u_original"><code class="xref py py-attr docutils literal"><span class="pre">Path.u_original</span></code></a> [<code class="docutils literal"><span class="pre">False</span></code>]</p>
+</dd>
+<dt><em>select</em></dt>
+<dd><p class="first last">the selection for constructing the coordinates of each frame in
 <a class="reference internal" href="#MDAnalysis.analysis.psa.Path.path" title="MDAnalysis.analysis.psa.Path.path"><code class="xref py py-attr docutils literal"><span class="pre">Path.path</span></code></a>; if <code class="docutils literal"><span class="pre">None</span></code> then <a class="reference internal" href="#MDAnalysis.analysis.psa.Path.path_select" title="MDAnalysis.analysis.psa.Path.path_select"><code class="xref py py-attr docutils literal"><span class="pre">Path.path_select</span></code></a>
-is used, else it is overridden by <em>select</em> [<code class="docutils literal"><span class="pre">None</span></code>]</li>
-<li><strong>*flat*</strong> &#8211; represent <a class="reference internal" href="#MDAnalysis.analysis.psa.Path.path" title="MDAnalysis.analysis.psa.Path.path"><code class="xref py py-attr docutils literal"><span class="pre">Path.path</span></code></a> as a 2D (<span class="math">\(N_p\times 3N\)</span>) <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>;
+is used, else it is overridden by <em>select</em> [<code class="docutils literal"><span class="pre">None</span></code>]</p>
+</dd>
+<dt><em>flat</em></dt>
+<dd><p class="first last">represent <a class="reference internal" href="#MDAnalysis.analysis.psa.Path.path" title="MDAnalysis.analysis.psa.Path.path"><code class="xref py py-attr docutils literal"><span class="pre">Path.path</span></code></a> as a 2D (<span class="math">\(N_p\times 3N\)</span>) <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>;
 if <code class="docutils literal"><span class="pre">False</span></code> then <a class="reference internal" href="#MDAnalysis.analysis.psa.Path.path" title="MDAnalysis.analysis.psa.Path.path"><code class="xref py py-attr docutils literal"><span class="pre">Path.path</span></code></a> is a 3D (<span class="math">\(N_p\times N\times 3\)</span>)
-<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-</ul>
+<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> [<code class="docutils literal"><span class="pre">False</span></code>]</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><cite>numpy.ndarray</cite> representing a time series of atomic positions
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representing a time series of atomic positions
 of an <a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.AtomGroup.AtomGroup</span></code></a> selection from
 <code class="xref py py-attr docutils literal"><span class="pre">Path.u_fitted.trajectory</span></code></p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">:class</p>
 </td>
 </tr>
 </tbody>
@@ -789,12 +873,18 @@ corresponding distance vector.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>*npaths*</strong> &#8211; int, total number of paths in <code class="xref py py-class docutils literal"><span class="pre">PSA</span></code> used to generate <em>this</em>
-<a class="reference internal" href="#MDAnalysis.analysis.psa.PSAPair" title="MDAnalysis.analysis.psa.PSAPair"><code class="xref py py-class docutils literal"><span class="pre">PSAPair</span></code></a></li>
-<li><strong>*i*</strong> &#8211; int, row index (starting at 0) of the distance matrix</li>
-<li><strong>*j*</strong> &#8211; int, column index (starting at 0) of the distance matrix</li>
-</ul>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first last docutils">
+<dt><em>npaths</em></dt>
+<dd><p class="first last">int, total number of paths in <code class="xref py py-class docutils literal"><span class="pre">PSA</span></code> used to generate <em>this</em>
+<a class="reference internal" href="#MDAnalysis.analysis.psa.PSAPair" title="MDAnalysis.analysis.psa.PSAPair"><code class="xref py py-class docutils literal"><span class="pre">PSAPair</span></code></a></p>
+</dd>
+<dt><em>i</em></dt>
+<dd><p class="first last">int, row index (starting at 0) of the distance matrix</p>
+</dd>
+<dt><em>j</em></dt>
+<dd><p class="first last">int, column index (starting at 0) of the distance matrix</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -855,14 +945,19 @@ are computed using a selected path metric.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>*universes*</strong> &#8211; a list of universes (<code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code> object), each
-containing a trajectory</li>
-<li><strong>*reference*</strong> &#8211; reference coordinates; <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code> object; if
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first last docutils">
+<dt><em>universes</em></dt>
+<dd><p class="first last">a list of universes (<code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code> object), each
+containing a trajectory</p>
+</dd>
+<dt><em>reference</em></dt>
+<dd><p class="first last">reference coordinates; <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code> object; if
 <code class="docutils literal"><span class="pre">None</span></code> the first time step of the first item in <em>trajs</em> is used
-[<code class="docutils literal"><span class="pre">None</span></code>]</li>
-<li><strong>*ref_select*</strong> &#8211; <p>The selection to operate on; can be one of:</p>
-<ol class="arabic">
+[<code class="docutils literal"><span class="pre">None</span></code>]</p>
+</dd>
+<dt><em>ref_select</em></dt>
+<dd><p class="first">The selection to operate on; can be one of:</p>
+<ol class="arabic simple">
 <li>any valid selection string for
 <a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.select_atoms" title="MDAnalysis.core.AtomGroup.AtomGroup.select_atoms"><code class="xref py py-meth docutils literal"><span class="pre">select_atoms()</span></code></a> that
 produces identical selections in <em>mobile</em> and <em>reference</em>; or</li>
@@ -872,22 +967,34 @@ such a dictionary based on a <a class="reference external" href="http://www.clus
 alignment); or</li>
 <li>a tuple <code class="docutils literal"><span class="pre">(sel1,</span> <span class="pre">sel2)</span></code></li>
 </ol>
-<p>When using 2. or 3. with <em>sel1</em> and <em>sel2</em> then these selections
+<p class="last">When using 2. or 3. with <em>sel1</em> and <em>sel2</em> then these selections
 can also each be a list of selection strings (to generate an
 AtomGroup with defined atom order as described under
 <a class="reference internal" href="../selections.html#ordered-selections-label"><span>Ordered selections</span></a>).</p>
-</li>
-<li><strong>*mass_weighted*</strong> &#8211; do a mass-weighted RMSD fit [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>*tol_mass*</strong> &#8211; Reject match if the atomic masses for matched atoms differ by more
-than <em>tol_mass</em> [0.1]</li>
-<li><strong>*ref_frame*</strong> &#8211; frame index to select frame from <em>reference</em> [0]</li>
-<li><strong>*path_select*</strong> &#8211; atom selection composing coordinates of (fitted) path; if <code class="docutils literal"><span class="pre">None</span></code>
-then <em>path_select</em> is set to <em>ref_select</em> [<code class="docutils literal"><span class="pre">None</span></code>]</li>
-<li><strong>*targetdir*</strong> &#8211; output files are saved there [.]</li>
-<li><strong>*labels*</strong> &#8211; list of strings, names of trajectories to be analyzed
+</dd>
+<dt><em>mass_weighted</em></dt>
+<dd><p class="first last">do a mass-weighted RMSD fit [<code class="docutils literal"><span class="pre">False</span></code>]</p>
+</dd>
+<dt><em>tol_mass</em></dt>
+<dd><p class="first last">Reject match if the atomic masses for matched atoms differ by more
+than <em>tol_mass</em> [0.1]</p>
+</dd>
+<dt><em>ref_frame</em></dt>
+<dd><p class="first last">frame index to select frame from <em>reference</em> [0]</p>
+</dd>
+<dt><em>path_select</em></dt>
+<dd><p class="first last">atom selection composing coordinates of (fitted) path; if <code class="docutils literal"><span class="pre">None</span></code>
+then <em>path_select</em> is set to <em>ref_select</em> [<code class="docutils literal"><span class="pre">None</span></code>]</p>
+</dd>
+<dt><em>targetdir</em></dt>
+<dd><p class="first last">output files are saved there [.]</p>
+</dd>
+<dt><em>labels</em></dt>
+<dd><p class="first last">list of strings, names of trajectories to be analyzed
 (<code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code>); if <code class="docutils literal"><span class="pre">None</span></code>, defaults to trajectory
-names [<code class="docutils literal"><span class="pre">None</span></code>]</li>
-</ul>
+names [<code class="docutils literal"><span class="pre">None</span></code>]</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -955,19 +1062,27 @@ fitted trajectories</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>*method*</strong> &#8211; string, name of linkage criterion for clustering [<code class="docutils literal"><span class="pre">'ward'</span></code>]</li>
-<li><strong>*no_plot*</strong> &#8211; boolean, if <code class="docutils literal"><span class="pre">True</span></code>, do not render the dendrogram [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>*no_labels*</strong> &#8211; boolean, if <code class="docutils literal"><span class="pre">True</span></code> then do not label dendrogram [<code class="docutils literal"><span class="pre">True</span></code>]</li>
-<li><strong>*color_threshold*</strong> &#8211; For brevity, let t be the color_threshold. Colors all the
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>method</em></dt>
+<dd><p class="first last">string, name of linkage criterion for clustering [<code class="docutils literal"><span class="pre">'ward'</span></code>]</p>
+</dd>
+<dt><em>no_plot</em></dt>
+<dd><p class="first last">boolean, if <code class="docutils literal"><span class="pre">True</span></code>, do not render the dendrogram [<code class="docutils literal"><span class="pre">False</span></code>]</p>
+</dd>
+<dt><em>no_labels</em></dt>
+<dd><p class="first last">boolean, if <code class="docutils literal"><span class="pre">True</span></code> then do not label dendrogram [<code class="docutils literal"><span class="pre">True</span></code>]</p>
+</dd>
+<dt><em>color_threshold</em></dt>
+<dd><p class="first last">For brevity, let t be the color_threshold. Colors all the
 descendent links below a cluster node k the same color if k is
 the first node below the cut threshold t. All links connecting
 nodes with distances greater than or equal to the threshold are
 colored blue. If t is less than or equal to zero, all nodes are
 colored blue. If color_threshold is None or ‘default’,
 corresponding with MATLAB(TM) behavior, the threshold is set to
-0.7*max(Z[:,2]). [<code class="docutils literal"><span class="pre">4</span></code>]]</li>
-</ul>
+0.7*max(Z[:,2]). [<code class="docutils literal"><span class="pre">4</span></code>]]</p>
+</dd>
+</dl>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">list of indices representing the row-wise order of the objects
@@ -1049,9 +1164,7 @@ method.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">class:<cite>PSA</cite>&#8216;s :class:<a href="#id6"><span class="problematic" id="id7">`</span></a>Path`s&#8217;</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int, the number of atoms in</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">int, the number of atoms in <code class="xref py py-class docutils literal"><span class="pre">PSA</span></code>&#8216;s :class:<a href="#id6"><span class="problematic" id="id7">`</span></a>Path`s&#8217;</td>
 </tr>
 </tbody>
 </table>
@@ -1067,9 +1180,7 @@ method.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">class:<cite>PSA</cite></td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int, the number of paths in</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">int, the number of paths in <code class="xref py py-class docutils literal"><span class="pre">PSA</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -1085,12 +1196,16 @@ method.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*vectorform*</strong> &#8211; boolean, if <code class="docutils literal"><span class="pre">True</span></code>, return the distance vector instead [<code class="docutils literal"><span class="pre">False</span></code>]</td>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>vectorform</em></dt>
+<dd><p class="first last">boolean, if <code class="docutils literal"><span class="pre">True</span></code>, return the distance vector instead [<code class="docutils literal"><span class="pre">False</span></code>]</p>
+</dd>
+</dl>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><cite>numpy.ndarray</cite> representation of the distance matrix (or
-vector)</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">:class</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representation of the distance matrix (or
+vector)</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -1106,10 +1221,8 @@ method.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">class:<cite>numpy.ndarray</cite> representations of paths in
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> representations of paths in
 <code class="xref py py-class docutils literal"><span class="pre">PSA</span></code></td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list of</td>
 </tr>
 </tbody>
 </table>
@@ -1174,15 +1287,27 @@ the list of strings specified by <code class="xref py py-attr docutils literal">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>*filename*</strong> &#8211; string, save figure to <em>filename</em> [<code class="docutils literal"><span class="pre">None</span></code>]</li>
-<li><strong>*linkage*</strong> &#8211; string, name of linkage criterion for clustering [<code class="docutils literal"><span class="pre">'ward'</span></code>]</li>
-<li><strong>*count_sort*</strong> &#8211; boolean, see scipy.cluster.hierarchy.dendrogram [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>*distance_sort*</strong> &#8211; boolean, see scipy.cluster.hierarchy.dendrogram [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>*figsize*</strong> &#8211; set the vertical size of plot in inches [<code class="docutils literal"><span class="pre">4.5</span></code>]</li>
-<li><strong>*labelsize*</strong> &#8211; set the font size for colorbar labels; font size for path labels on
-dendrogram default to 3 points smaller [<code class="docutils literal"><span class="pre">12</span></code>]</li>
-</ul>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first last docutils">
+<dt><em>filename</em></dt>
+<dd><p class="first last">string, save figure to <em>filename</em> [<code class="docutils literal"><span class="pre">None</span></code>]</p>
+</dd>
+<dt><em>linkage</em></dt>
+<dd><p class="first last">string, name of linkage criterion for clustering [<code class="docutils literal"><span class="pre">'ward'</span></code>]</p>
+</dd>
+<dt><em>count_sort</em></dt>
+<dd><p class="first last">boolean, see scipy.cluster.hierarchy.dendrogram [<code class="docutils literal"><span class="pre">False</span></code>]</p>
+</dd>
+<dt><em>distance_sort</em></dt>
+<dd><p class="first last">boolean, see scipy.cluster.hierarchy.dendrogram [<code class="docutils literal"><span class="pre">False</span></code>]</p>
+</dd>
+<dt><em>figsize</em></dt>
+<dd><p class="first last">set the vertical size of plot in inches [<code class="docutils literal"><span class="pre">4.5</span></code>]</p>
+</dd>
+<dt><em>labelsize</em></dt>
+<dd><p class="first last">set the font size for colorbar labels; font size for path labels on
+dendrogram default to 3 points smaller [<code class="docutils literal"><span class="pre">12</span></code>]</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1202,14 +1327,26 @@ using the list of strings specified by <code class="xref py py-attr docutils lit
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>*filename*</strong> &#8211; string, save figure to <em>filename</em> [<code class="docutils literal"><span class="pre">None</span></code>]</li>
-<li><strong>*count_sort*</strong> &#8211; boolean, see scipy.cluster.hierarchy.dendrogram [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>*distance_sort*</strong> &#8211; boolean, see scipy.cluster.hierarchy.dendrogram [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>*linkage*</strong> &#8211; string, name of linkage criterion for clustering [<code class="docutils literal"><span class="pre">'ward'</span></code>]</li>
-<li><strong>*figsize*</strong> &#8211; set the vertical size of plot in inches [<code class="docutils literal"><span class="pre">8</span></code>]</li>
-<li><strong>*annot_size*</strong> &#8211; float, font size of annotation labels on heat map [<code class="docutils literal"><span class="pre">6.5</span></code>]</li>
-</ul>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first last docutils">
+<dt><em>filename</em></dt>
+<dd><p class="first last">string, save figure to <em>filename</em> [<code class="docutils literal"><span class="pre">None</span></code>]</p>
+</dd>
+<dt><em>count_sort</em></dt>
+<dd><p class="first last">boolean, see scipy.cluster.hierarchy.dendrogram [<code class="docutils literal"><span class="pre">False</span></code>]</p>
+</dd>
+<dt><em>distance_sort</em></dt>
+<dd><p class="first last">boolean, see scipy.cluster.hierarchy.dendrogram [<code class="docutils literal"><span class="pre">False</span></code>]</p>
+</dd>
+<dt><em>linkage</em></dt>
+<dd><p class="first last">string, name of linkage criterion for clustering [<code class="docutils literal"><span class="pre">'ward'</span></code>]</p>
+</dd>
+<dt><em>figsize</em></dt>
+<dd><p class="first last">set the vertical size of plot in inches [<code class="docutils literal"><span class="pre">8</span></code>]</p>
+</dd>
+<dt><em>annot_size</em></dt>
+<dd><p class="first last">float, font size of annotation labels on heat map [<code class="docutils literal"><span class="pre">6.5</span></code>]</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1228,18 +1365,32 @@ number (mapped to the interval <em>[0,1]</em>).</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>*filename*</strong> &#8211; string, save figure to <em>filename</em> [<code class="docutils literal"><span class="pre">None</span></code>]</li>
-<li><strong>*idx*</strong> &#8211; integer, index of path (pair) comparison to plot [<code class="docutils literal"><span class="pre">0</span></code>]</li>
-<li><strong>*labels*</strong> &#8211; (string, string), pair of names to label nearest neighbor distance
-curves [<code class="docutils literal"><span class="pre">('Path</span> <span class="pre">1',</span> <span class="pre">'Path</span> <span class="pre">2')</span></code>]</li>
-<li><strong>*figsize*</strong> &#8211; float, set the vertical size of plot in inches [<code class="docutils literal"><span class="pre">4.5</span></code>]</li>
-<li><strong>*multiplot*</strong> &#8211; boolean, set to <code class="docutils literal"><span class="pre">True</span></code> to enable plotting multiple nearest
-neighbor distances on the same figure [<code class="docutils literal"><span class="pre">False</span></code>]</li>
-<li><strong>*aspect_ratio*</strong> &#8211; float, set the ratio of width to height of the plot [<code class="docutils literal"><span class="pre">1.75</span></code>]</li>
-<li><strong>*labelsize*</strong> &#8211; set the font size for colorbar labels; font size for path labels on
-dendrogram default to 3 points smaller [<code class="docutils literal"><span class="pre">12</span></code>]</li>
-</ul>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first last docutils">
+<dt><em>filename</em></dt>
+<dd><p class="first last">string, save figure to <em>filename</em> [<code class="docutils literal"><span class="pre">None</span></code>]</p>
+</dd>
+<dt><em>idx</em></dt>
+<dd><p class="first last">integer, index of path (pair) comparison to plot [<code class="docutils literal"><span class="pre">0</span></code>]</p>
+</dd>
+<dt><em>labels</em></dt>
+<dd><p class="first last">(string, string), pair of names to label nearest neighbor distance
+curves [<code class="docutils literal"><span class="pre">('Path</span> <span class="pre">1',</span> <span class="pre">'Path</span> <span class="pre">2')</span></code>]</p>
+</dd>
+<dt><em>figsize</em></dt>
+<dd><p class="first last">float, set the vertical size of plot in inches [<code class="docutils literal"><span class="pre">4.5</span></code>]</p>
+</dd>
+<dt><em>multiplot</em></dt>
+<dd><p class="first last">boolean, set to <code class="docutils literal"><span class="pre">True</span></code> to enable plotting multiple nearest
+neighbor distances on the same figure [<code class="docutils literal"><span class="pre">False</span></code>]</p>
+</dd>
+<dt><em>aspect_ratio</em></dt>
+<dd><p class="first last">float, set the ratio of width to height of the plot [<code class="docutils literal"><span class="pre">1.75</span></code>]</p>
+</dd>
+<dt><em>labelsize</em></dt>
+<dd><p class="first last">set the font size for colorbar labels; font size for path labels on
+dendrogram default to 3 points smaller [<code class="docutils literal"><span class="pre">12</span></code>]</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1271,9 +1422,7 @@ method.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">class:<cite>PSAPair</cite> objects (in distance vector order)</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list of all</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of all <a class="reference internal" href="#MDAnalysis.analysis.psa.PSAPair" title="MDAnalysis.analysis.psa.PSAPair"><code class="xref py py-class docutils literal"><span class="pre">PSAPair</span></code></a> objects (in distance vector order)</td>
 </tr>
 </tbody>
 </table>
@@ -1359,7 +1508,12 @@ frames/distances in <code class="xref py py-attr docutils literal"><span class="
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*filename*</strong> &#8211; string, specifies filename [<code class="docutils literal"><span class="pre">None</span></code>]</td>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first last docutils">
+<dt><em>filename</em></dt>
+<dd><p class="first last">string, specifies filename [<code class="docutils literal"><span class="pre">None</span></code>]</p>
+</dd>
+</dl>
+</td>
 </tr>
 </tbody>
 </table>
@@ -1376,7 +1530,12 @@ file and text file.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*filename*</strong> &#8211; string, specifies filename [<code class="docutils literal"><span class="pre">None</span></code>]</td>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first last docutils">
+<dt><em>filename</em></dt>
+<dd><p class="first last">string, specifies filename [<code class="docutils literal"><span class="pre">None</span></code>]</p>
+</dd>
+</dl>
+</td>
 </tr>
 </tbody>
 </table>
@@ -1427,7 +1586,7 @@ file and text file.</p>
     Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl,
     Gorman Stock, Isaac Virshup, Zhuyi Xue, Carlos Yáñez S.,
     and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>
 </html>

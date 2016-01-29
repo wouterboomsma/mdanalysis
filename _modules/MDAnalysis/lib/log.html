@@ -72,21 +72,21 @@
           <div class="body" role="main">
             
   <h1>Source code for MDAnalysis.lib.log</h1><div class="highlight"><pre>
-<span class="c"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
-<span class="c"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
-<span class="c">#</span>
-<span class="c"># MDAnalysis --- http://www.MDAnalysis.org</span>
-<span class="c"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
-<span class="c"># and contributors (see AUTHORS for the full list)</span>
-<span class="c">#</span>
-<span class="c"># Released under the GNU Public Licence, v2 or any higher version</span>
-<span class="c">#</span>
-<span class="c"># Please cite your use of MDAnalysis in published work:</span>
-<span class="c">#</span>
-<span class="c"># N. Michaud-Agrawal, E. J. Denning, T. B. Woolf, and O. Beckstein.</span>
-<span class="c"># MDAnalysis: A Toolkit for the Analysis of Molecular Dynamics Simulations.</span>
-<span class="c"># J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787</span>
-<span class="c">#</span>
+<span class="c1"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
+<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
+<span class="c1">#</span>
+<span class="c1"># MDAnalysis --- http://www.MDAnalysis.org</span>
+<span class="c1"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
+<span class="c1"># and contributors (see AUTHORS for the full list)</span>
+<span class="c1">#</span>
+<span class="c1"># Released under the GNU Public Licence, v2 or any higher version</span>
+<span class="c1">#</span>
+<span class="c1"># Please cite your use of MDAnalysis in published work:</span>
+<span class="c1">#</span>
+<span class="c1"># N. Michaud-Agrawal, E. J. Denning, T. B. Woolf, and O. Beckstein.</span>
+<span class="c1"># MDAnalysis: A Toolkit for the Analysis of Molecular Dynamics Simulations.</span>
+<span class="c1"># J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787</span>
+<span class="c1">#</span>
 
 
 <span class="sd">&quot;&quot;&quot;</span>
@@ -152,26 +152,26 @@
 
 <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">version</span>
 
-<div class="viewcode-block" id="start_logging"><a class="viewcode-back" href="../../../documentation_pages/lib/log.html#MDAnalysis.start_logging">[docs]</a><span class="k">def</span> <span class="nf">start_logging</span><span class="p">(</span><span class="n">logfile</span><span class="o">=</span><span class="s">&quot;MDAnalysis.log&quot;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="o">.</span><span class="n">__version__</span><span class="p">):</span>
+<div class="viewcode-block" id="start_logging"><a class="viewcode-back" href="../../../documentation_pages/lib/log.html#MDAnalysis.start_logging">[docs]</a><span class="k">def</span> <span class="nf">start_logging</span><span class="p">(</span><span class="n">logfile</span><span class="o">=</span><span class="s2">&quot;MDAnalysis.log&quot;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="o">.</span><span class="n">__version__</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Start logging of messages to file and console.</span>
 
 <span class="sd">    The default logfile is named `MDAnalysis.log` and messages are</span>
 <span class="sd">    logged with the tag *MDAnalysis*.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">create</span><span class="p">(</span><span class="s">&quot;MDAnalysis&quot;</span><span class="p">,</span> <span class="n">logfile</span><span class="o">=</span><span class="n">logfile</span><span class="p">)</span>
-    <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&quot;MDAnalysis&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-        <span class="s">&quot;MDAnalysis </span><span class="si">%s</span><span class="s"> STARTED logging to </span><span class="si">%r</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="n">logfile</span><span class="p">)</span>
+    <span class="n">create</span><span class="p">(</span><span class="s2">&quot;MDAnalysis&quot;</span><span class="p">,</span> <span class="n">logfile</span><span class="o">=</span><span class="n">logfile</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;MDAnalysis&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+        <span class="s2">&quot;MDAnalysis </span><span class="si">%s</span><span class="s2"> STARTED logging to </span><span class="si">%r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="n">logfile</span><span class="p">)</span></div>
 
-</div>
+
 <div class="viewcode-block" id="stop_logging"><a class="viewcode-back" href="../../../documentation_pages/lib/log.html#MDAnalysis.stop_logging">[docs]</a><span class="k">def</span> <span class="nf">stop_logging</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Stop logging to logfile and console.&quot;&quot;&quot;</span>
-    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&quot;MDAnalysis&quot;</span><span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;MDAnalysis STOPPED logging&quot;</span><span class="p">)</span>
-    <span class="n">clear_handlers</span><span class="p">(</span><span class="n">logger</span><span class="p">)</span>  <span class="c"># this _should_ do the job...</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;MDAnalysis&quot;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;MDAnalysis STOPPED logging&quot;</span><span class="p">)</span>
+    <span class="n">clear_handlers</span><span class="p">(</span><span class="n">logger</span><span class="p">)</span>  <span class="c1"># this _should_ do the job...</span></div>
 
 
-</div>
-<div class="viewcode-block" id="create"><a class="viewcode-back" href="../../../documentation_pages/lib/log.html#MDAnalysis.create">[docs]</a><span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="n">logger_name</span><span class="o">=</span><span class="s">&quot;MDAnalysis&quot;</span><span class="p">,</span> <span class="n">logfile</span><span class="o">=</span><span class="s">&quot;MDAnalysis.log&quot;</span><span class="p">):</span>
+
+<div class="viewcode-block" id="create"><a class="viewcode-back" href="../../../documentation_pages/lib/log.html#MDAnalysis.create">[docs]</a><span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="n">logger_name</span><span class="o">=</span><span class="s2">&quot;MDAnalysis&quot;</span><span class="p">,</span> <span class="n">logfile</span><span class="o">=</span><span class="s2">&quot;MDAnalysis.log&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Create a top level logger.</span>
 
 <span class="sd">    - The file logger logs everything (including DEBUG).</span>
@@ -193,23 +193,23 @@
 
     <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
 
-    <span class="c"># handler that writes to logfile</span>
+    <span class="c1"># handler that writes to logfile</span>
     <span class="n">logfile_handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">FileHandler</span><span class="p">(</span><span class="n">logfile</span><span class="p">)</span>
-    <span class="n">logfile_formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%(asctime)s</span><span class="s"> </span><span class="si">%(name)-12s</span><span class="s"> </span><span class="si">%(levelname)-8s</span><span class="s"> </span><span class="si">%(message)s</span><span class="s">&#39;</span><span class="p">)</span>
+    <span class="n">logfile_formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(name)-12s</span><span class="s1"> </span><span class="si">%(levelname)-8s</span><span class="s1"> </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="n">logfile_handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">logfile_formatter</span><span class="p">)</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">logfile_handler</span><span class="p">)</span>
 
-    <span class="c"># define a Handler which writes INFO messages or higher to the sys.stderr</span>
+    <span class="c1"># define a Handler which writes INFO messages or higher to the sys.stderr</span>
     <span class="n">console_handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
     <span class="n">console_handler</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
-    <span class="c"># set a format which is simpler for console use</span>
-    <span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%(name)-12s</span><span class="s">: </span><span class="si">%(levelname)-8s</span><span class="s"> </span><span class="si">%(message)s</span><span class="s">&#39;</span><span class="p">)</span>
+    <span class="c1"># set a format which is simpler for console use</span>
+    <span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%(name)-12s</span><span class="s1">: </span><span class="si">%(levelname)-8s</span><span class="s1"> </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="n">console_handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">console_handler</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">logger</span>
+    <span class="k">return</span> <span class="n">logger</span></div>
 
-</div>
+
 <div class="viewcode-block" id="clear_handlers"><a class="viewcode-back" href="../../../documentation_pages/lib/log.html#MDAnalysis.clear_handlers">[docs]</a><span class="k">def</span> <span class="nf">clear_handlers</span><span class="p">(</span><span class="n">logger</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;clean out handlers in the library top level logger</span>
 
@@ -217,9 +217,9 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">logger</span><span class="o">.</span><span class="n">handlers</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">removeHandler</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">removeHandler</span><span class="p">(</span><span class="n">h</span><span class="p">)</span></div>
 
-</div>
+
 <div class="viewcode-block" id="NullHandler"><a class="viewcode-back" href="../../../documentation_pages/lib/log.html#MDAnalysis.NullHandler">[docs]</a><span class="k">class</span> <span class="nc">NullHandler</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">Handler</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Silent Handler.</span>
 
@@ -233,15 +233,15 @@
 <span class="sd">    http://docs.python.org/library/logging.html?#configuring-logging-for-a-library</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">emit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">):</span>
-        <span class="k">pass</span>
+        <span class="k">pass</span></div>
 
-</div>
-<div class="viewcode-block" id="echo"><a class="viewcode-back" href="../../../documentation_pages/lib/log.html#MDAnalysis.echo">[docs]</a><span class="k">def</span> <span class="nf">echo</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">):</span>
+
+<div class="viewcode-block" id="echo"><a class="viewcode-back" href="../../../documentation_pages/lib/log.html#MDAnalysis.echo">[docs]</a><span class="k">def</span> <span class="nf">echo</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Simple string output that immediately prints to the console.&quot;&quot;&quot;</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span></div>
 
-</div>
+
 <div class="viewcode-block" id="ProgressMeter"><a class="viewcode-back" href="../../../documentation_pages/lib/log.html#MDAnalysis.ProgressMeter">[docs]</a><span class="k">class</span> <span class="nc">ProgressMeter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Simple progress meter</span>
 
@@ -323,16 +323,16 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">numouts</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">quiet</span> <span class="o">=</span> <span class="n">quiet</span>
         <span class="k">if</span> <span class="n">format</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">format</span> <span class="o">=</span> <span class="s">&quot;Step </span><span class="si">%(step)5d</span><span class="s">/</span><span class="si">%(numsteps)d</span><span class="s"> [</span><span class="si">%(percentage)5.1f%%</span><span class="s">]</span><span class="se">\r</span><span class="s">&quot;</span>
+            <span class="n">format</span> <span class="o">=</span> <span class="s2">&quot;Step </span><span class="si">%(step)5d</span><span class="s2">/</span><span class="si">%(numsteps)d</span><span class="s2"> [</span><span class="si">%(percentage)5.1f%%</span><span class="s2">]</span><span class="se">\r</span><span class="s2">&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="n">format</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\r</span><span class="s">&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">last_newline</span> <span class="o">=</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r</span><span class="s1">&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">last_newline</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">last_newline</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">step</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">percentage</span> <span class="o">=</span> <span class="mf">0.0</span>
-        <span class="k">assert</span> <span class="n">numsteps</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;numsteps step must be &gt;0&quot;</span>
-        <span class="k">assert</span> <span class="n">interval</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;interval step must be &gt;0&quot;</span>
+        <span class="k">assert</span> <span class="n">numsteps</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;numsteps step must be &gt;0&quot;</span>
+        <span class="k">assert</span> <span class="n">interval</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;interval step must be &gt;0&quot;</span>
 
 <div class="viewcode-block" id="ProgressMeter.update"><a class="viewcode-back" href="../../../documentation_pages/lib/log.html#MDAnalysis.ProgressMeter.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Update the state of the ProgressMeter.</span>
@@ -345,8 +345,8 @@
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">numouts</span> <span class="o">+=</span> <span class="mi">1</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">numouts</span> <span class="o">+=</span> <span class="mi">1</span></div>
+
 <div class="viewcode-block" id="ProgressMeter.echo"><a class="viewcode-back" href="../../../documentation_pages/lib/log.html#MDAnalysis.ProgressMeter.echo">[docs]</a>    <span class="k">def</span> <span class="nf">echo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Print the state to stderr, but only every *interval* steps.</span>
 
@@ -409,7 +409,7 @@
     Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl,
     Gorman Stock, Isaac Virshup, Zhuyi Xue, Carlos Yáñez S.,
     and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>
 </html>

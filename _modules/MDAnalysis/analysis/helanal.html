@@ -72,28 +72,28 @@
           <div class="body" role="main">
             
   <h1>Source code for MDAnalysis.analysis.helanal</h1><div class="highlight"><pre>
-<span class="c"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
-<span class="c"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
-<span class="c">#</span>
-<span class="c"># MDAnalysis --- http://www.MDAnalysis.org</span>
-<span class="c"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
-<span class="c"># and contributors (see AUTHORS for the full list)</span>
-<span class="c">#</span>
-<span class="c"># Released under the GNU Public Licence, v2 or any higher version</span>
-<span class="c">#</span>
-<span class="c"># Please cite your use of MDAnalysis in published work:</span>
-<span class="c">#</span>
-<span class="c"># N. Michaud-Agrawal, E. J. Denning, T. B. Woolf, and O. Beckstein.</span>
-<span class="c"># MDAnalysis: A Toolkit for the Analysis of Molecular Dynamics Simulations.</span>
-<span class="c"># J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787</span>
-<span class="c">#</span>
-<span class="c"># Python implementation of FORTRAN HELANAL</span>
-<span class="c"># [Bansal et al, J Biomol Struct Dyn. 17 (2000), 811]</span>
-<span class="c"># Copyright (c) 2009 Benjamin Hall &lt;benjamin.hall@bioch.ox.ac.uk&gt;</span>
-<span class="c"># Published under the GNU General Public License v2 or higher</span>
-<span class="c">#</span>
-<span class="c"># Copyright (c) 2011 Oliver Beckstein &lt;orbeckst@gmail.com&gt;</span>
-<span class="c"># Integrated into MDAnalysis and NumPy-fied</span>
+<span class="c1"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
+<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
+<span class="c1">#</span>
+<span class="c1"># MDAnalysis --- http://www.MDAnalysis.org</span>
+<span class="c1"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
+<span class="c1"># and contributors (see AUTHORS for the full list)</span>
+<span class="c1">#</span>
+<span class="c1"># Released under the GNU Public Licence, v2 or any higher version</span>
+<span class="c1">#</span>
+<span class="c1"># Please cite your use of MDAnalysis in published work:</span>
+<span class="c1">#</span>
+<span class="c1"># N. Michaud-Agrawal, E. J. Denning, T. B. Woolf, and O. Beckstein.</span>
+<span class="c1"># MDAnalysis: A Toolkit for the Analysis of Molecular Dynamics Simulations.</span>
+<span class="c1"># J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787</span>
+<span class="c1">#</span>
+<span class="c1"># Python implementation of FORTRAN HELANAL</span>
+<span class="c1"># [Bansal et al, J Biomol Struct Dyn. 17 (2000), 811]</span>
+<span class="c1"># Copyright (c) 2009 Benjamin Hall &lt;benjamin.hall@bioch.ox.ac.uk&gt;</span>
+<span class="c1"># Published under the GNU General Public License v2 or higher</span>
+<span class="c1">#</span>
+<span class="c1"># Copyright (c) 2011 Oliver Beckstein &lt;orbeckst@gmail.com&gt;</span>
+<span class="c1"># Integrated into MDAnalysis and NumPy-fied</span>
 
 
 <span class="sd">&quot;&quot;&quot;</span>
@@ -196,7 +196,7 @@
 <span class="kn">from</span> <span class="nn">MDAnalysis.lib</span> <span class="kn">import</span> <span class="n">mdamath</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&quot;MDAnalysis.analysis.helanal&quot;</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;MDAnalysis.analysis.helanal&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">center</span><span class="p">(</span><span class="n">coordinates</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return the geometric center (centroid) of the coordinates.</span>
@@ -225,12 +225,12 @@
         <span class="n">mean_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">mean_a</span><span class="p">))</span>
 
-<div class="viewcode-block" id="helanal_trajectory"><a class="viewcode-back" href="../../../documentation_pages/analysis/helanal.html#MDAnalysis.analysis.helanal.helanal_trajectory">[docs]</a><span class="k">def</span> <span class="nf">helanal_trajectory</span><span class="p">(</span><span class="n">universe</span><span class="p">,</span> <span class="n">selection</span><span class="o">=</span><span class="s">&quot;name CA&quot;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">begin</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">finish</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                       <span class="n">matrix_filename</span><span class="o">=</span><span class="s">&quot;bending_matrix.dat&quot;</span><span class="p">,</span> <span class="n">origin_pdbfile</span><span class="o">=</span><span class="s">&quot;origin.pdb&quot;</span><span class="p">,</span>
-                       <span class="n">summary_filename</span><span class="o">=</span><span class="s">&quot;summary.txt&quot;</span><span class="p">,</span> <span class="n">screw_filename</span><span class="o">=</span><span class="s">&quot;screw.xvg&quot;</span><span class="p">,</span>
-                       <span class="n">tilt_filename</span><span class="o">=</span><span class="s">&quot;local_tilt.xvg&quot;</span><span class="p">,</span> <span class="n">fitted_tilt_filename</span><span class="o">=</span><span class="s">&quot;fit_tilt.xvg&quot;</span><span class="p">,</span>
-                       <span class="n">bend_filename</span><span class="o">=</span><span class="s">&quot;local_bend.xvg&quot;</span><span class="p">,</span> <span class="n">twist_filename</span><span class="o">=</span><span class="s">&quot;unit_twist.xvg&quot;</span><span class="p">,</span>
-                       <span class="n">prefix</span><span class="o">=</span><span class="s">&quot;helanal_&quot;</span><span class="p">,</span> <span class="n">ref_axis</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="helanal_trajectory"><a class="viewcode-back" href="../../../documentation_pages/analysis/helanal.html#MDAnalysis.analysis.helanal.helanal_trajectory">[docs]</a><span class="k">def</span> <span class="nf">helanal_trajectory</span><span class="p">(</span><span class="n">universe</span><span class="p">,</span> <span class="n">selection</span><span class="o">=</span><span class="s2">&quot;name CA&quot;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">begin</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">finish</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                       <span class="n">matrix_filename</span><span class="o">=</span><span class="s2">&quot;bending_matrix.dat&quot;</span><span class="p">,</span> <span class="n">origin_pdbfile</span><span class="o">=</span><span class="s2">&quot;origin.pdb&quot;</span><span class="p">,</span>
+                       <span class="n">summary_filename</span><span class="o">=</span><span class="s2">&quot;summary.txt&quot;</span><span class="p">,</span> <span class="n">screw_filename</span><span class="o">=</span><span class="s2">&quot;screw.xvg&quot;</span><span class="p">,</span>
+                       <span class="n">tilt_filename</span><span class="o">=</span><span class="s2">&quot;local_tilt.xvg&quot;</span><span class="p">,</span> <span class="n">fitted_tilt_filename</span><span class="o">=</span><span class="s2">&quot;fit_tilt.xvg&quot;</span><span class="p">,</span>
+                       <span class="n">bend_filename</span><span class="o">=</span><span class="s2">&quot;local_bend.xvg&quot;</span><span class="p">,</span> <span class="n">twist_filename</span><span class="o">=</span><span class="s2">&quot;unit_twist.xvg&quot;</span><span class="p">,</span>
+                       <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;helanal_&quot;</span><span class="p">,</span> <span class="n">ref_axis</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Perform HELANAL_ helix analysis on all frames in *universe*.</span>
 
 <span class="sd">    .. Note::</span>
@@ -295,8 +295,8 @@
     <span class="k">if</span> <span class="n">ref_axis</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">ref_axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">])</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="c"># enable MDA API so that one can use a tuple of atoms or AtomGroup with</span>
-        <span class="c"># two atoms</span>
+        <span class="c1"># enable MDA API so that one can use a tuple of atoms or AtomGroup with</span>
+        <span class="c1"># two atoms</span>
         <span class="n">ref_axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ref_axis</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">start</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">end</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">):</span>
@@ -304,25 +304,25 @@
             <span class="n">start</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">resid</span>
         <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">end</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">resid</span>
-        <span class="n">selection</span> <span class="o">+=</span> <span class="s">&quot; and resid {start:d}:{end:d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">())</span>
+        <span class="n">selection</span> <span class="o">+=</span> <span class="s2">&quot; and resid {start:d}:{end:d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">())</span>
     <span class="n">ca</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">selection</span><span class="p">)</span>
     <span class="n">trajectory</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span>
 
     <span class="k">if</span> <span class="n">finish</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">time</span> <span class="o">&gt;</span> <span class="n">finish</span><span class="p">:</span>
-            <span class="c"># you&#39;d be starting with a finish time (in ps) that has already passed or not</span>
-            <span class="c"># available</span>
+            <span class="c1"># you&#39;d be starting with a finish time (in ps) that has already passed or not</span>
+            <span class="c1"># available</span>
             <span class="k">raise</span> <span class="n">FinishTimeException</span><span class="p">(</span>
-                <span class="s">&#39;The input finish time ({finish} ps) precedes the current trajectory time of {traj_time} ps.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="s1">&#39;The input finish time ({finish} ps) precedes the current trajectory time of {traj_time} ps.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                     <span class="n">finish</span><span class="o">=</span><span class="n">finish</span><span class="p">,</span> <span class="n">traj_time</span><span class="o">=</span><span class="n">trajectory</span><span class="o">.</span><span class="n">time</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="n">start</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">end</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Analysing from residue </span><span class="si">%d</span><span class="s"> to </span><span class="si">%d</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Analysing from residue </span><span class="si">%d</span><span class="s2"> to </span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">start</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">end</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Analysing from residue </span><span class="si">%d</span><span class="s"> to the C termini&quot;</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Analysing from residue </span><span class="si">%d</span><span class="s2"> to the C termini&quot;</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">start</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">end</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Analysing from the N termini to </span><span class="si">%d</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Analysing </span><span class="si">%d</span><span class="s">/</span><span class="si">%d</span><span class="s"> residues&quot;</span><span class="p">,</span> <span class="n">ca</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">,</span> <span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">n_residues</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Analysing from the N termini to </span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Analysing </span><span class="si">%d</span><span class="s2">/</span><span class="si">%d</span><span class="s2"> residues&quot;</span><span class="p">,</span> <span class="n">ca</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">,</span> <span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">n_residues</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">prefix</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">prefix</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
@@ -353,7 +353,7 @@
     <span class="n">global_screw</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="n">pm</span> <span class="o">=</span> <span class="n">ProgressMeter</span><span class="p">(</span><span class="n">trajectory</span><span class="o">.</span><span class="n">n_frames</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="n">quiet</span><span class="p">,</span>
-                       <span class="n">format</span><span class="o">=</span><span class="s">&quot;Frame </span><span class="si">%(step)10d</span><span class="s">: </span><span class="si">%(time)20.1f</span><span class="s"> ps</span><span class="se">\r</span><span class="s">&quot;</span><span class="p">)</span>
+                       <span class="n">format</span><span class="o">=</span><span class="s2">&quot;Frame </span><span class="si">%(step)10d</span><span class="s2">: </span><span class="si">%(time)20.1f</span><span class="s2"> ps</span><span class="se">\r</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">trajectory</span><span class="p">:</span>
         <span class="n">pm</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">time</span><span class="p">)</span>
         <span class="n">frame</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">frame</span>
@@ -370,7 +370,7 @@
 
         <span class="n">origin_pdb</span><span class="p">(</span><span class="n">origins</span><span class="p">,</span> <span class="n">origin_pdbfile</span><span class="p">)</span>
 
-        <span class="c">#calculate local bending matrix( it is looking at all i, j combinations)</span>
+        <span class="c1">#calculate local bending matrix( it is looking at all i, j combinations)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">global_bending_matrix</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">global_bending_matrix</span> <span class="o">=</span> <span class="p">[[[]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">local_helix_axes</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">local_helix_axes</span><span class="p">]</span>
 
@@ -378,51 +378,51 @@
             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">local_helix_axes</span><span class="p">)):</span>
                 <span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">local_helix_axes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">local_helix_axes</span><span class="p">[</span><span class="n">j</span><span class="p">])))</span>
                 <span class="n">global_bending_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
-                <span class="c">#global_bending_matrix[j][i].append(angle)</span>
-                <span class="c">#global_bending_matrix[i][i].append(0.)</span>
+                <span class="c1">#global_bending_matrix[j][i].append(angle)</span>
+                <span class="c1">#global_bending_matrix[i][i].append(0.)</span>
 
         <span class="n">fit_vector</span><span class="p">,</span> <span class="n">fit_tilt</span> <span class="o">=</span> <span class="n">vector_of_best_fit</span><span class="p">(</span><span class="n">origins</span><span class="p">)</span>
         <span class="n">global_height</span> <span class="o">+=</span> <span class="n">height</span>
         <span class="n">global_twist</span> <span class="o">+=</span> <span class="n">twist</span>
         <span class="n">global_rnou</span> <span class="o">+=</span> <span class="n">rnou</span>
-        <span class="c">#global_screw.append(local_screw_angles)</span>
+        <span class="c1">#global_screw.append(local_screw_angles)</span>
         <span class="n">global_fitted_tilts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">fit_tilt</span><span class="p">))</span>
 
-        <span class="c">#print out rotations across the helix to a file</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">twist_filename</span><span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">twist_output</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">twist_output</span><span class="p">)</span>
+        <span class="c1">#print out rotations across the helix to a file</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">twist_filename</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">twist_output</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">twist_output</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">loc_twist</span> <span class="ow">in</span> <span class="n">twist</span><span class="p">:</span>
-                <span class="k">print</span><span class="p">(</span><span class="n">loc_twist</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">twist_output</span><span class="p">)</span>
-            <span class="k">print</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">twist_output</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">loc_twist</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">twist_output</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">twist_output</span><span class="p">)</span>
 
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">bend_filename</span><span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">bend_output</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">bend_output</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">bend_filename</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">bend_output</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">bend_output</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">loc_bend</span> <span class="ow">in</span> <span class="n">bending_angles</span><span class="p">:</span>
-                <span class="k">print</span><span class="p">(</span><span class="n">loc_bend</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">bend_output</span><span class="p">)</span>
-            <span class="k">print</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">bend_output</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">loc_bend</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">bend_output</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">bend_output</span><span class="p">)</span>
 
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">screw_filename</span><span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">rot_output</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">rot_output</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">screw_filename</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">rot_output</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">rot_output</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">rotation</span> <span class="ow">in</span> <span class="n">local_screw_angles</span><span class="p">:</span>
-                <span class="k">print</span><span class="p">(</span><span class="n">rotation</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">rot_output</span><span class="p">)</span>
-            <span class="k">print</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">rot_output</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">rotation</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">rot_output</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">rot_output</span><span class="p">)</span>
 
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">tilt_filename</span><span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tilt_output</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">tilt_output</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">tilt_filename</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tilt_output</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">tilt_output</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">tilt</span> <span class="ow">in</span> <span class="n">local_helix_axes</span><span class="p">:</span>
                 <span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">mdamath</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">tilt</span><span class="p">,</span> <span class="n">ref_axis</span><span class="p">)),</span>
-                      <span class="n">end</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">tilt_output</span><span class="p">)</span>
-            <span class="k">print</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">tilt_output</span><span class="p">)</span>
+                      <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">tilt_output</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">tilt_output</span><span class="p">)</span>
 
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fitted_tilt_filename</span><span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tilt_output</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fitted_tilt_filename</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tilt_output</span><span class="p">:</span>
             <span class="k">print</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">fit_tilt</span><span class="p">),</span> <span class="nb">file</span><span class="o">=</span><span class="n">tilt_output</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">global_bending</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">global_bending</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">bending_angles</span><span class="p">]</span>
-            <span class="c">#global_tilt = [ [] for item in local_helix_axes ]</span>
+            <span class="c1">#global_tilt = [ [] for item in local_helix_axes ]</span>
         <span class="k">for</span> <span class="n">store</span><span class="p">,</span> <span class="n">tmp</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">global_bending</span><span class="p">,</span> <span class="n">bending_angles</span><span class="p">):</span>
             <span class="n">store</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
-        <span class="c">#for store,tmp in zip(global_tilt,local_helix_axes): store.append(mdamath.angle(tmp,ref_axis))</span>
+        <span class="c1">#for store,tmp in zip(global_tilt,local_helix_axes): store.append(mdamath.angle(tmp,ref_axis))</span>
 
 
     <span class="n">twist_mean</span><span class="p">,</span> <span class="n">twist_sd</span><span class="p">,</span> <span class="n">twist_abdev</span> <span class="o">=</span> <span class="n">stats</span><span class="p">(</span><span class="n">global_twist</span><span class="p">)</span>
@@ -431,78 +431,78 @@
     <span class="n">ftilt_mean</span><span class="p">,</span> <span class="n">ftilt_sd</span><span class="p">,</span> <span class="n">ftilt_abdev</span> <span class="o">=</span> <span class="n">stats</span><span class="p">(</span><span class="n">global_fitted_tilts</span><span class="p">)</span>
 
     <span class="n">bending_statistics</span> <span class="o">=</span> <span class="p">[</span><span class="n">stats</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">global_bending</span><span class="p">]</span>
-    <span class="c">#tilt_statistics =    [ stats(item) for item in global_tilt]</span>
+    <span class="c1">#tilt_statistics =    [ stats(item) for item in global_tilt]</span>
 
     <span class="n">bending_statistics_matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="n">stats</span><span class="p">(</span><span class="n">col</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">global_bending_matrix</span><span class="p">]</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">matrix_filename</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mat_output</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Mean&quot;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">mat_output</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">matrix_filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mat_output</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Mean&quot;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">mat_output</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">bending_statistics_matrix</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
-                <span class="n">formatted_angle</span> <span class="o">=</span> <span class="s">&quot;{0:6.1f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">col</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-                <span class="k">print</span><span class="p">(</span><span class="n">formatted_angle</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">mat_output</span><span class="p">)</span>
-            <span class="k">print</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">mat_output</span><span class="p">)</span>
+                <span class="n">formatted_angle</span> <span class="o">=</span> <span class="s2">&quot;{0:6.1f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">col</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">formatted_angle</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">mat_output</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">mat_output</span><span class="p">)</span>
 
-        <span class="k">print</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">SD&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">mat_output</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">SD&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">mat_output</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">bending_statistics_matrix</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
-                <span class="n">formatted_angle</span> <span class="o">=</span> <span class="s">&quot;{0:6.1f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">col</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-                <span class="k">print</span><span class="p">(</span><span class="n">formatted_angle</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">mat_output</span><span class="p">)</span>
-            <span class="k">print</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">mat_output</span><span class="p">)</span>
+                <span class="n">formatted_angle</span> <span class="o">=</span> <span class="s2">&quot;{0:6.1f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">col</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">formatted_angle</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">mat_output</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">mat_output</span><span class="p">)</span>
 
-        <span class="k">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">ABDEV&quot;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">mat_output</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ABDEV&quot;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">mat_output</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">bending_statistics_matrix</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
-                <span class="n">formatted_angle</span> <span class="o">=</span> <span class="s">&quot;{0:6.1f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">col</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-                <span class="k">print</span><span class="p">(</span><span class="n">formatted_angle</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">mat_output</span><span class="p">)</span>
-            <span class="k">print</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">mat_output</span><span class="p">)</span>
+                <span class="n">formatted_angle</span> <span class="o">=</span> <span class="s2">&quot;{0:6.1f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">col</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">formatted_angle</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">mat_output</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">mat_output</span><span class="p">)</span>
 
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Height: </span><span class="si">%g</span><span class="s">  SD: </span><span class="si">%g</span><span class="s">  ABDEV: </span><span class="si">%g</span><span class="s">  (Angstroem)&quot;</span><span class="p">,</span> <span class="n">height_mean</span><span class="p">,</span> <span class="n">height_sd</span><span class="p">,</span> <span class="n">height_abdev</span><span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Twist: </span><span class="si">%g</span><span class="s">  SD: </span><span class="si">%g</span><span class="s">  ABDEV: </span><span class="si">%g</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">twist_mean</span><span class="p">,</span> <span class="n">twist_sd</span><span class="p">,</span> <span class="n">twist_abdev</span><span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Residues/turn: </span><span class="si">%g</span><span class="s">  SD: </span><span class="si">%g</span><span class="s">  ABDEV: </span><span class="si">%g</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">rnou_mean</span><span class="p">,</span> <span class="n">rnou_sd</span><span class="p">,</span> <span class="n">rnou_abdev</span><span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Fitted tilt: </span><span class="si">%g</span><span class="s">  SD: </span><span class="si">%g</span><span class="s">  ABDEV: </span><span class="si">%g</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">ftilt_mean</span><span class="p">,</span> <span class="n">ftilt_sd</span><span class="p">,</span> <span class="n">ftilt_abdev</span><span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Local bending angles:&quot;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Height: </span><span class="si">%g</span><span class="s2">  SD: </span><span class="si">%g</span><span class="s2">  ABDEV: </span><span class="si">%g</span><span class="s2">  (Angstroem)&quot;</span><span class="p">,</span> <span class="n">height_mean</span><span class="p">,</span> <span class="n">height_sd</span><span class="p">,</span> <span class="n">height_abdev</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Twist: </span><span class="si">%g</span><span class="s2">  SD: </span><span class="si">%g</span><span class="s2">  ABDEV: </span><span class="si">%g</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">twist_mean</span><span class="p">,</span> <span class="n">twist_sd</span><span class="p">,</span> <span class="n">twist_abdev</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Residues/turn: </span><span class="si">%g</span><span class="s2">  SD: </span><span class="si">%g</span><span class="s2">  ABDEV: </span><span class="si">%g</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">rnou_mean</span><span class="p">,</span> <span class="n">rnou_sd</span><span class="p">,</span> <span class="n">rnou_abdev</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Fitted tilt: </span><span class="si">%g</span><span class="s2">  SD: </span><span class="si">%g</span><span class="s2">  ABDEV: </span><span class="si">%g</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">ftilt_mean</span><span class="p">,</span> <span class="n">ftilt_sd</span><span class="p">,</span> <span class="n">ftilt_abdev</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Local bending angles:&quot;</span><span class="p">)</span>
     <span class="n">residue_statistics</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">bending_statistics</span><span class="p">)</span>
-    <span class="n">measure_names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Mean &quot;</span><span class="p">,</span> <span class="s">&quot;SD   &quot;</span><span class="p">,</span> <span class="s">&quot;ABDEV&quot;</span><span class="p">]</span>
+    <span class="n">measure_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Mean &quot;</span><span class="p">,</span> <span class="s2">&quot;SD   &quot;</span><span class="p">,</span> <span class="s2">&quot;ABDEV&quot;</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">start</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="s">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&quot;{0:8d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;{0:8d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
                            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">residue_statistics</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)])</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="s">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&quot;{0:8d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;{0:8d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
                            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">residue_statistics</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="n">start</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)])</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;ResID </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;ResID </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">measure</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">residue_statistics</span><span class="p">,</span> <span class="n">measure_names</span><span class="p">):</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; &quot;</span>
-        <span class="n">output</span> <span class="o">+=</span> <span class="s">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&quot;{0:8.1f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">residue</span><span class="p">)</span> <span class="k">for</span> <span class="n">residue</span> <span class="ow">in</span> <span class="n">measure</span><span class="p">])</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span>
+        <span class="n">output</span> <span class="o">+=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;{0:8.1f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">residue</span><span class="p">)</span> <span class="k">for</span> <span class="n">residue</span> <span class="ow">in</span> <span class="n">measure</span><span class="p">])</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
 
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">summary_filename</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">summary_output</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Height:&quot;</span><span class="p">,</span> <span class="n">height_mean</span><span class="p">,</span> <span class="s">&quot;SD&quot;</span><span class="p">,</span> <span class="n">height_sd</span><span class="p">,</span> <span class="s">&quot;ABDEV&quot;</span><span class="p">,</span> <span class="n">height_abdev</span><span class="p">,</span> <span class="s">&#39;(nm)&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">summary_output</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Twist:&quot;</span><span class="p">,</span> <span class="n">twist_mean</span><span class="p">,</span> <span class="s">&quot;SD&quot;</span><span class="p">,</span> <span class="n">twist_sd</span><span class="p">,</span> <span class="s">&quot;ABDEV&quot;</span><span class="p">,</span> <span class="n">twist_abdev</span><span class="p">,</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">summary_filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">summary_output</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Height:&quot;</span><span class="p">,</span> <span class="n">height_mean</span><span class="p">,</span> <span class="s2">&quot;SD&quot;</span><span class="p">,</span> <span class="n">height_sd</span><span class="p">,</span> <span class="s2">&quot;ABDEV&quot;</span><span class="p">,</span> <span class="n">height_abdev</span><span class="p">,</span> <span class="s1">&#39;(nm)&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">summary_output</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Twist:&quot;</span><span class="p">,</span> <span class="n">twist_mean</span><span class="p">,</span> <span class="s2">&quot;SD&quot;</span><span class="p">,</span> <span class="n">twist_sd</span><span class="p">,</span> <span class="s2">&quot;ABDEV&quot;</span><span class="p">,</span> <span class="n">twist_abdev</span><span class="p">,</span>
               <span class="nb">file</span><span class="o">=</span><span class="n">summary_output</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Residues/turn:&quot;</span><span class="p">,</span> <span class="n">rnou_mean</span><span class="p">,</span> <span class="s">&quot;SD&quot;</span><span class="p">,</span> <span class="n">rnou_sd</span><span class="p">,</span> <span class="s">&quot;ABDEV&quot;</span><span class="p">,</span> <span class="n">rnou_abdev</span><span class="p">,</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Residues/turn:&quot;</span><span class="p">,</span> <span class="n">rnou_mean</span><span class="p">,</span> <span class="s2">&quot;SD&quot;</span><span class="p">,</span> <span class="n">rnou_sd</span><span class="p">,</span> <span class="s2">&quot;ABDEV&quot;</span><span class="p">,</span> <span class="n">rnou_abdev</span><span class="p">,</span>
               <span class="nb">file</span><span class="o">=</span><span class="n">summary_output</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Local bending angles:&quot;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">summary_output</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Local bending angles:&quot;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">summary_output</span><span class="p">)</span>
         <span class="n">residue_statistics</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">bending_statistics</span><span class="p">))</span>
-        <span class="n">measure_names</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Mean &quot;</span><span class="p">,</span> <span class="s">&quot;SD   &quot;</span><span class="p">,</span> <span class="s">&quot;ABDEV&quot;</span><span class="p">]</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">&quot;ResID&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">summary_output</span><span class="p">)</span>
+        <span class="n">measure_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Mean &quot;</span><span class="p">,</span> <span class="s2">&quot;SD   &quot;</span><span class="p">,</span> <span class="s2">&quot;ABDEV&quot;</span><span class="p">]</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;ResID&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">summary_output</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">start</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">residue_statistics</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="mi">4</span><span class="p">):</span>
-                <span class="n">output</span> <span class="o">=</span> <span class="s">&quot;{0:8d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-                <span class="k">print</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">summary_output</span><span class="p">)</span>
+                <span class="n">output</span> <span class="o">=</span> <span class="s2">&quot;{0:8d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">summary_output</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">residue_statistics</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="n">start</span> <span class="o">+</span> <span class="mi">3</span><span class="p">):</span>
-                <span class="n">output</span> <span class="o">=</span> <span class="s">&quot;{0:8d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-                <span class="k">print</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">summary_output</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">summary_output</span><span class="p">)</span>
+                <span class="n">output</span> <span class="o">=</span> <span class="s2">&quot;{0:8d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">summary_output</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">summary_output</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">measure</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">residue_statistics</span><span class="p">,</span> <span class="n">measure_names</span><span class="p">):</span>
-            <span class="k">print</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">summary_output</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">summary_output</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">residue</span> <span class="ow">in</span> <span class="n">measure</span><span class="p">:</span>
-                <span class="n">output</span> <span class="o">=</span> <span class="s">&quot;{0:8.1f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">residue</span><span class="p">)</span>
-                <span class="k">print</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">summary_output</span><span class="p">)</span>
-            <span class="k">print</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">summary_output</span><span class="p">)</span>
+                <span class="n">output</span> <span class="o">=</span> <span class="s2">&quot;{0:8.1f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">residue</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">summary_output</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">summary_output</span><span class="p">)</span></div>
 
-</div>
+
 <span class="k">def</span> <span class="nf">tilt_correct</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Changes an angle (in degrees) so that it is between 0º and 90º&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">number</span> <span class="o">&lt;</span> <span class="mf">90.</span><span class="p">:</span>
@@ -513,14 +513,14 @@
 
 <span class="k">def</span> <span class="nf">backup_file</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
-        <span class="n">target_name</span> <span class="o">=</span> <span class="s">&quot;#&quot;</span> <span class="o">+</span> <span class="n">filename</span>
+        <span class="n">target_name</span> <span class="o">=</span> <span class="s2">&quot;#&quot;</span> <span class="o">+</span> <span class="n">filename</span>
         <span class="n">failure</span> <span class="o">=</span> <span class="bp">True</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">target_name</span><span class="p">):</span>
             <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">target_name</span><span class="p">)</span>
             <span class="n">failure</span> <span class="o">=</span> <span class="bp">False</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
-                <span class="n">alt_target_name</span> <span class="o">=</span> <span class="n">target_name</span> <span class="o">+</span> <span class="s">&quot;.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="n">alt_target_name</span> <span class="o">=</span> <span class="n">target_name</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">alt_target_name</span><span class="p">):</span>
                     <span class="k">continue</span>
                 <span class="k">else</span><span class="p">:</span>
@@ -528,7 +528,7 @@
                     <span class="n">failure</span> <span class="o">=</span> <span class="bp">False</span>
                     <span class="k">break</span>
         <span class="k">if</span> <span class="n">failure</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s">&quot;Too many backups. Clean up and try again&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;Too many backups. Clean up and try again&quot;</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">stats</span><span class="p">(</span><span class="n">some_list</span><span class="p">):</span>
@@ -540,7 +540,7 @@
     <span class="k">return</span> <span class="p">[</span><span class="n">list_mean</span><span class="p">,</span> <span class="n">list_sd</span><span class="p">,</span> <span class="n">list_abdev</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="helanal_main"><a class="viewcode-back" href="../../../documentation_pages/analysis/helanal.html#MDAnalysis.analysis.helanal.helanal_main">[docs]</a><span class="k">def</span> <span class="nf">helanal_main</span><span class="p">(</span><span class="n">pdbfile</span><span class="p">,</span> <span class="n">selection</span><span class="o">=</span><span class="s">&quot;name CA&quot;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ref_axis</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">permissive</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="helanal_main"><a class="viewcode-back" href="../../../documentation_pages/analysis/helanal.html#MDAnalysis.analysis.helanal.helanal_main">[docs]</a><span class="k">def</span> <span class="nf">helanal_main</span><span class="p">(</span><span class="n">pdbfile</span><span class="p">,</span> <span class="n">selection</span><span class="o">=</span><span class="s2">&quot;name CA&quot;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ref_axis</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">permissive</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Simple HELANAL run on a single frame PDB/GRO.</span>
 
 <span class="sd">    Computed data are returned as a dict and also logged at level INFO to the</span>
@@ -583,103 +583,103 @@
             <span class="n">start</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">resid</span>
         <span class="k">if</span> <span class="n">end</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">end</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">resid</span>
-        <span class="n">selection</span> <span class="o">+=</span> <span class="s">&quot; and resid {start:d}:{end:d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">())</span>
+        <span class="n">selection</span> <span class="o">+=</span> <span class="s2">&quot; and resid {start:d}:{end:d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">())</span>
     <span class="n">ca</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">selection</span><span class="p">)</span>
 
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Analysing </span><span class="si">%d</span><span class="s">/</span><span class="si">%d</span><span class="s"> residues&quot;</span><span class="p">,</span> <span class="n">ca</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">,</span> <span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">n_residues</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Analysing </span><span class="si">%d</span><span class="s2">/</span><span class="si">%d</span><span class="s2"> residues&quot;</span><span class="p">,</span> <span class="n">ca</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">,</span> <span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">n_residues</span><span class="p">)</span>
 
     <span class="n">twist</span><span class="p">,</span> <span class="n">bending_angles</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">rnou</span><span class="p">,</span> <span class="n">origins</span><span class="p">,</span> <span class="n">local_helix_axes</span><span class="p">,</span> <span class="n">local_screw_angles</span> <span class="o">=</span> \
         <span class="n">main_loop</span><span class="p">(</span><span class="n">ca</span><span class="o">.</span><span class="n">coordinates</span><span class="p">(),</span> <span class="n">ref_axis</span><span class="o">=</span><span class="n">ref_axis</span><span class="p">)</span>
 
-    <span class="c">#TESTED- origins are correct</span>
-    <span class="c">#print current_origin</span>
-    <span class="c">#print origins</span>
+    <span class="c1">#TESTED- origins are correct</span>
+    <span class="c1">#print current_origin</span>
+    <span class="c1">#print origins</span>
 
     <span class="n">max_angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">bending_angles</span><span class="p">)</span>
     <span class="n">mean_angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">bending_angles</span><span class="p">)</span>
-    <span class="c">#sd calculated using n-1 to replicate original fortran- assumes a limited sample so uses the sample standard</span>
-    <span class="c"># deviation</span>
+    <span class="c1">#sd calculated using n-1 to replicate original fortran- assumes a limited sample so uses the sample standard</span>
+    <span class="c1"># deviation</span>
     <span class="n">sd_angle</span> <span class="o">=</span> <span class="n">sample_sd</span><span class="p">(</span><span class="n">bending_angles</span><span class="p">,</span> <span class="n">mean_angle</span><span class="p">)</span>
     <span class="n">mean_absolute_deviation_angle</span> <span class="o">=</span> <span class="n">mean_abs_dev</span><span class="p">(</span><span class="n">bending_angles</span><span class="p">,</span> <span class="n">mean_angle</span><span class="p">)</span>
-    <span class="c">#TESTED- stats correct</span>
-    <span class="c">#print max_angle, mean_angle, sd_angle, mean_absolute_deviation_angle</span>
+    <span class="c1">#TESTED- stats correct</span>
+    <span class="c1">#print max_angle, mean_angle, sd_angle, mean_absolute_deviation_angle</span>
 
-    <span class="c">#calculate local bending matrix(now it is looking at all i, j combinations)</span>
-    <span class="c"># (not used for helanal_main())</span>
-<span class="c">#     for i in local_helix_axes:</span>
-<span class="c">#         for j in local_helix_axes:</span>
-<span class="c">#             if (i == j).all():</span>
-<span class="c">#                 angle = 0.</span>
-<span class="c">#             else:</span>
-<span class="c">#                 angle = np.rad2deg(np.arccos(np.dot(i, j)))</span>
-<span class="c">#             #string_angle = &quot;%6.0f\t&quot; % angle</span>
-<span class="c">#             #print string_angle,</span>
-<span class="c">#             #print &#39;&#39;</span>
-<span class="c">#             #TESTED- local bending matrix!</span>
+    <span class="c1">#calculate local bending matrix(now it is looking at all i, j combinations)</span>
+    <span class="c1"># (not used for helanal_main())</span>
+<span class="c1">#     for i in local_helix_axes:</span>
+<span class="c1">#         for j in local_helix_axes:</span>
+<span class="c1">#             if (i == j).all():</span>
+<span class="c1">#                 angle = 0.</span>
+<span class="c1">#             else:</span>
+<span class="c1">#                 angle = np.rad2deg(np.arccos(np.dot(i, j)))</span>
+<span class="c1">#             #string_angle = &quot;%6.0f\t&quot; % angle</span>
+<span class="c1">#             #print string_angle,</span>
+<span class="c1">#             #print &#39;&#39;</span>
+<span class="c1">#             #TESTED- local bending matrix!</span>
 
-    <span class="c">#Average helical parameters</span>
+    <span class="c1">#Average helical parameters</span>
     <span class="n">mean_twist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">twist</span><span class="p">)</span>
     <span class="n">sd_twist</span> <span class="o">=</span> <span class="n">sample_sd</span><span class="p">(</span><span class="n">twist</span><span class="p">,</span> <span class="n">mean_twist</span><span class="p">)</span>
     <span class="n">abdev_twist</span> <span class="o">=</span> <span class="n">mean_abs_dev</span><span class="p">(</span><span class="n">twist</span><span class="p">,</span> <span class="n">mean_twist</span><span class="p">)</span>
-    <span class="c">#TESTED-average twists</span>
-    <span class="c">#print mean_twist, sd_twist, abdev_twist</span>
+    <span class="c1">#TESTED-average twists</span>
+    <span class="c1">#print mean_twist, sd_twist, abdev_twist</span>
     <span class="n">mean_rnou</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rnou</span><span class="p">)</span>
     <span class="n">sd_rnou</span> <span class="o">=</span> <span class="n">sample_sd</span><span class="p">(</span><span class="n">rnou</span><span class="p">,</span> <span class="n">mean_rnou</span><span class="p">)</span>
     <span class="n">abdev_rnou</span> <span class="o">=</span> <span class="n">mean_abs_dev</span><span class="p">(</span><span class="n">rnou</span><span class="p">,</span> <span class="n">mean_rnou</span><span class="p">)</span>
-    <span class="c">#TESTED-average residues per turn</span>
-    <span class="c">#print mean_rnou, sd_rnou, abdev_rnou</span>
+    <span class="c1">#TESTED-average residues per turn</span>
+    <span class="c1">#print mean_rnou, sd_rnou, abdev_rnou</span>
     <span class="n">mean_height</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
     <span class="n">sd_height</span> <span class="o">=</span> <span class="n">sample_sd</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">mean_height</span><span class="p">)</span>
     <span class="n">abdev_height</span> <span class="o">=</span> <span class="n">mean_abs_dev</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">mean_height</span><span class="p">)</span>
-    <span class="c">#TESTED- average rises</span>
+    <span class="c1">#TESTED- average rises</span>
 
-    <span class="c">#calculate best fit vector and tilt of said vector</span>
+    <span class="c1">#calculate best fit vector and tilt of said vector</span>
     <span class="n">fit_vector</span><span class="p">,</span> <span class="n">fit_tilt</span> <span class="o">=</span> <span class="n">vector_of_best_fit</span><span class="p">(</span><span class="n">origins</span><span class="p">)</span>
 
     <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s">&#39;Height&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mean_height</span><span class="p">,</span> <span class="n">sd_height</span><span class="p">,</span> <span class="n">abdev_height</span><span class="p">]),</span>
-        <span class="s">&#39;Twist&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mean_twist</span><span class="p">,</span> <span class="n">sd_twist</span><span class="p">,</span> <span class="n">abdev_twist</span><span class="p">]),</span>
-        <span class="s">&#39;Residues/turn&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mean_rnou</span><span class="p">,</span> <span class="n">sd_rnou</span><span class="p">,</span> <span class="n">abdev_rnou</span><span class="p">]),</span>
-        <span class="s">&#39;Local bending angles&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">bending_angles</span><span class="p">),</span>
-        <span class="s">&#39;Unit twist angles&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">twist</span><span class="p">),</span>
-        <span class="s">&#39;Best fit tilt&#39;</span><span class="p">:</span> <span class="n">fit_tilt</span><span class="p">,</span>
-        <span class="s">&#39;Rotation Angles&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">local_screw_angles</span><span class="p">),</span>
+        <span class="s1">&#39;Height&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mean_height</span><span class="p">,</span> <span class="n">sd_height</span><span class="p">,</span> <span class="n">abdev_height</span><span class="p">]),</span>
+        <span class="s1">&#39;Twist&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mean_twist</span><span class="p">,</span> <span class="n">sd_twist</span><span class="p">,</span> <span class="n">abdev_twist</span><span class="p">]),</span>
+        <span class="s1">&#39;Residues/turn&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mean_rnou</span><span class="p">,</span> <span class="n">sd_rnou</span><span class="p">,</span> <span class="n">abdev_rnou</span><span class="p">]),</span>
+        <span class="s1">&#39;Local bending angles&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">bending_angles</span><span class="p">),</span>
+        <span class="s1">&#39;Unit twist angles&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">twist</span><span class="p">),</span>
+        <span class="s1">&#39;Best fit tilt&#39;</span><span class="p">:</span> <span class="n">fit_tilt</span><span class="p">,</span>
+        <span class="s1">&#39;Rotation Angles&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">local_screw_angles</span><span class="p">),</span>
         <span class="p">}</span>
 
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Height: </span><span class="si">%g</span><span class="s">  SD: </span><span class="si">%g</span><span class="s">  ABDEV: </span><span class="si">%g</span><span class="s">  (Angstroem)&quot;</span><span class="p">,</span> <span class="n">mean_height</span><span class="p">,</span> <span class="n">sd_height</span><span class="p">,</span> <span class="n">abdev_height</span><span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Twist: </span><span class="si">%g</span><span class="s">  SD: </span><span class="si">%g</span><span class="s">  ABDEV: </span><span class="si">%g</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">mean_twist</span><span class="p">,</span> <span class="n">sd_twist</span><span class="p">,</span> <span class="n">abdev_twist</span><span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Residues/turn: </span><span class="si">%g</span><span class="s">  SD: </span><span class="si">%g</span><span class="s">  ABDEV: </span><span class="si">%g</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">mean_rnou</span><span class="p">,</span> <span class="n">sd_rnou</span><span class="p">,</span> <span class="n">abdev_rnou</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Height: </span><span class="si">%g</span><span class="s2">  SD: </span><span class="si">%g</span><span class="s2">  ABDEV: </span><span class="si">%g</span><span class="s2">  (Angstroem)&quot;</span><span class="p">,</span> <span class="n">mean_height</span><span class="p">,</span> <span class="n">sd_height</span><span class="p">,</span> <span class="n">abdev_height</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Twist: </span><span class="si">%g</span><span class="s2">  SD: </span><span class="si">%g</span><span class="s2">  ABDEV: </span><span class="si">%g</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">mean_twist</span><span class="p">,</span> <span class="n">sd_twist</span><span class="p">,</span> <span class="n">abdev_twist</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Residues/turn: </span><span class="si">%g</span><span class="s2">  SD: </span><span class="si">%g</span><span class="s2">  ABDEV: </span><span class="si">%g</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">mean_rnou</span><span class="p">,</span> <span class="n">sd_rnou</span><span class="p">,</span> <span class="n">abdev_rnou</span><span class="p">)</span>
 
-    <span class="n">output</span> <span class="o">=</span> <span class="s">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&quot;{0:8.1f}</span><span class="se">\t</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="k">for</span> <span class="n">angle</span> <span class="ow">in</span> <span class="n">bending_angles</span><span class="p">])</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Local bending angles: </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;{0:8.1f}</span><span class="se">\t</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="k">for</span> <span class="n">angle</span> <span class="ow">in</span> <span class="n">bending_angles</span><span class="p">])</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Local bending angles: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
 
-    <span class="n">output</span> <span class="o">=</span> <span class="s">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&quot;{0:8.1f}</span><span class="se">\t</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">twist_ang</span><span class="p">)</span> <span class="k">for</span> <span class="n">twist_ang</span> <span class="ow">in</span> <span class="n">twist</span><span class="p">])</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Unit twist angles: </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;{0:8.1f}</span><span class="se">\t</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">twist_ang</span><span class="p">)</span> <span class="k">for</span> <span class="n">twist_ang</span> <span class="ow">in</span> <span class="n">twist</span><span class="p">])</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Unit twist angles: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
 
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Best fit tilt: </span><span class="si">%g</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">fit_tilt</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Best fit tilt: </span><span class="si">%g</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fit_tilt</span><span class="p">)</span>
 
-    <span class="n">output</span> <span class="o">=</span> <span class="s">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s">&quot;{0:.1f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">local_screw_angles</span><span class="p">])</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Rotation Angles from 1 to n-1 (local screw angles): </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;{0:.1f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">local_screw_angles</span><span class="p">])</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Rotation Angles from 1 to n-1 (local screw angles): </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">data</span>
-</div>
+    <span class="k">return</span> <span class="n">data</span></div>
+
 <span class="k">def</span> <span class="nf">origin_pdb</span><span class="p">(</span><span class="n">origins</span><span class="p">,</span> <span class="n">pdbfile</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Write origins to PDB (multi-frame).</span>
 
 <span class="sd">    This PDB can be loaded together with the trajectory into, e.g. VMD_, to</span>
 <span class="sd">    view the helix axis together with all the atoms.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">pdbfile</span><span class="p">,</span> <span class="s">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">output</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">pdbfile</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">output</span><span class="p">:</span>
         <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="k">for</span> <span class="n">xyz</span> <span class="ow">in</span> <span class="n">origins</span><span class="p">:</span>
-            <span class="n">tmp</span> <span class="o">=</span> <span class="s">&quot;ATOM    {0:3d}  CA  ALA   {1:3d}    {2:8.3f}{3:8.3f}{4:8.3f}  1.00  0.00&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">xyz</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xyz</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">xyz</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="s2">&quot;ATOM    {0:3d}  CA  ALA   {1:3d}    {2:8.3f}{3:8.3f}{4:8.3f}  1.00  0.00&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">xyz</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xyz</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">xyz</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
             <span class="k">print</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">output</span><span class="p">)</span>
             <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">&quot;TER</span><span class="se">\n</span><span class="s">ENDMDL&quot;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">output</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;TER</span><span class="se">\n</span><span class="s2">ENDMDL&quot;</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">output</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">main_loop</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">ref_axis</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="c"># rewrite in cython?</span>
+    <span class="c1"># rewrite in cython?</span>
 
     <span class="k">if</span> <span class="n">ref_axis</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">ref_axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">])</span>
@@ -699,66 +699,66 @@
         <span class="n">dv13</span> <span class="o">=</span> <span class="n">vec12</span> <span class="o">-</span> <span class="n">vec23</span>
         <span class="n">dv24</span> <span class="o">=</span> <span class="n">vec23</span> <span class="o">-</span> <span class="n">vec34</span>
 
-        <span class="c">#direction of the local helix axis</span>
+        <span class="c1">#direction of the local helix axis</span>
         <span class="n">current_uloc</span> <span class="o">=</span> <span class="n">vecnorm</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">dv13</span><span class="p">,</span> <span class="n">dv24</span><span class="p">))</span>
         <span class="n">local_helix_axes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_uloc</span><span class="p">)</span>
 
-        <span class="c">#TESTED- Axes correct</span>
-        <span class="c">#print current_uloc</span>
+        <span class="c1">#TESTED- Axes correct</span>
+        <span class="c1">#print current_uloc</span>
 
         <span class="n">dmag</span> <span class="o">=</span> <span class="n">mdamath</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">dv13</span><span class="p">)</span>
         <span class="n">emag</span> <span class="o">=</span> <span class="n">mdamath</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">dv24</span><span class="p">)</span>
 
         <span class="n">costheta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">dv13</span><span class="p">,</span> <span class="n">dv24</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">dmag</span> <span class="o">*</span> <span class="n">emag</span><span class="p">)</span>
-        <span class="c">#rnou is the number of residues per turn</span>
+        <span class="c1">#rnou is the number of residues per turn</span>
         <span class="n">current_twist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">costheta</span><span class="p">)</span>
         <span class="n">twist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">current_twist</span><span class="p">))</span>
         <span class="n">rnou</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">current_twist</span><span class="p">)</span>
-        <span class="c">#radius of local helix cylinder radmag</span>
+        <span class="c1">#radius of local helix cylinder radmag</span>
 
         <span class="n">costheta1</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">costheta</span>
         <span class="n">radmag</span> <span class="o">=</span> <span class="p">(</span><span class="n">dmag</span> <span class="o">*</span> <span class="n">emag</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">costheta1</span><span class="p">)</span>
 
-        <span class="c">#Height of local helix cylinder</span>
+        <span class="c1">#Height of local helix cylinder</span>
         <span class="n">current_height</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">vec23</span><span class="p">,</span> <span class="n">current_uloc</span><span class="p">)</span>
         <span class="n">height</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_height</span><span class="p">)</span>
-        <span class="c">#TESTED- Twists etc correct</span>
-        <span class="c">#print current_twist*180/np.pi, 2*np.pi/current_twist, height</span>
+        <span class="c1">#TESTED- Twists etc correct</span>
+        <span class="c1">#print current_twist*180/np.pi, 2*np.pi/current_twist, height</span>
 
         <span class="n">dv13</span> <span class="o">=</span> <span class="n">vecnorm</span><span class="p">(</span><span class="n">dv13</span><span class="p">)</span>
         <span class="n">dv24</span> <span class="o">=</span> <span class="n">vecnorm</span><span class="p">(</span><span class="n">dv24</span><span class="p">)</span>
 
-        <span class="c">#record local rotation</span>
+        <span class="c1">#record local rotation</span>
         <span class="n">location_rotation_vectors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dv13</span><span class="p">)</span>
 
         <span class="n">rad</span> <span class="o">=</span> <span class="p">[</span><span class="n">radmag</span> <span class="o">*</span> <span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">dv13</span><span class="p">]</span>
         <span class="n">current_origin</span> <span class="o">=</span> <span class="p">[(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">positions</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">rad</span><span class="p">)]</span>
         <span class="n">origins</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_origin</span>
 
-        <span class="c">#TESTED- origins are correct</span>
-        <span class="c">#print current_origin</span>
+        <span class="c1">#TESTED- origins are correct</span>
+        <span class="c1">#print current_origin</span>
 
         <span class="n">rad</span> <span class="o">=</span> <span class="p">[</span><span class="n">radmag</span> <span class="o">*</span> <span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">dv24</span><span class="p">]</span>
         <span class="n">current_origin</span> <span class="o">=</span> <span class="p">[(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">positions</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">],</span> <span class="n">rad</span><span class="p">)]</span>
         <span class="n">origins</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_origin</span>
-    <span class="c">#Record final rotation vector</span>
+    <span class="c1">#Record final rotation vector</span>
     <span class="n">location_rotation_vectors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dv24</span><span class="p">)</span>
 
-    <span class="c">#local bending angles (eg i &gt; i+3, i+3 &gt; i+6)</span>
+    <span class="c1">#local bending angles (eg i &gt; i+3, i+3 &gt; i+6)</span>
 
     <span class="n">bending_angles</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">local_helix_axes</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)]</span>
     <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">local_helix_axes</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span><span class="p">):</span>
         <span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">local_helix_axes</span><span class="p">[</span><span class="n">axis</span><span class="p">],</span> <span class="n">local_helix_axes</span><span class="p">[</span><span class="n">axis</span> <span class="o">+</span> <span class="mi">3</span><span class="p">]))</span>
         <span class="n">bending_angles</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
-        <span class="c">#TESTED- angles are correct</span>
-        <span class="c">#print np.rad2deg(angle)</span>
+        <span class="c1">#TESTED- angles are correct</span>
+        <span class="c1">#print np.rad2deg(angle)</span>
 
     <span class="n">local_screw_angles</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="c">#Calculate rotation angles for (+1) to (n-1)</span>
+    <span class="c1">#Calculate rotation angles for (+1) to (n-1)</span>
     <span class="n">fit_vector</span><span class="p">,</span> <span class="n">fit_tilt</span> <span class="o">=</span> <span class="n">vector_of_best_fit</span><span class="p">(</span><span class="n">origins</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">location_rotation_vectors</span><span class="p">:</span>
         <span class="n">local_screw_tmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">rotation_angle</span><span class="p">(</span><span class="n">fit_vector</span><span class="p">,</span> <span class="n">ref_axis</span><span class="p">,</span> <span class="n">item</span><span class="p">))</span>
-        <span class="c">#print local_screw_tmp</span>
+        <span class="c1">#print local_screw_tmp</span>
         <span class="n">local_screw_angles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">local_screw_tmp</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">twist</span><span class="p">,</span> <span class="n">bending_angles</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">rnou</span><span class="p">,</span> <span class="n">origins</span><span class="p">,</span> <span class="n">local_helix_axes</span><span class="p">,</span> <span class="n">local_screw_angles</span>
@@ -781,14 +781,14 @@
         <span class="k">elif</span> <span class="n">screw_angle</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">alt_screw_angle</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">:</span>
             <span class="n">screw_angle</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">alt_screw_angle</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;Big Screw Up: screw_angle=</span><span class="si">%g</span><span class="s"> degrees&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">screw_angle</span><span class="p">))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Big Screw Up: screw_angle=</span><span class="si">%g</span><span class="s2"> degrees&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">screw_angle</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="n">mdamath</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">updown</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&quot;PROBLEM (vector is at 0 or 180)&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;PROBLEM (vector is at 0 or 180)&quot;</span><span class="p">)</span>
 
     <span class="n">helix_dot_rehelix</span> <span class="o">=</span> <span class="n">mdamath</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">updown</span><span class="p">,</span> <span class="n">helix_vector</span><span class="p">)</span>
 
-    <span class="c">#if ( helix_dot_rehelix &lt; np.pi/2 and helix_dot_rehelix &gt;= 0 )or helix_dot_rehelix &lt;-np.pi/2:</span>
+    <span class="c1">#if ( helix_dot_rehelix &lt; np.pi/2 and helix_dot_rehelix &gt;= 0 )or helix_dot_rehelix &lt;-np.pi/2:</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">&lt;</span> <span class="n">helix_dot_rehelix</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">helix_dot_rehelix</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">):</span>
         <span class="n">screw_angle</span> <span class="o">=</span> <span class="o">-</span><span class="n">screw_angle</span>
 
@@ -802,7 +802,7 @@
     <span class="n">A</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span> <span class="o">*</span> <span class="n">M</span>
     <span class="n">u</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">vh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
     <span class="n">vector</span> <span class="o">=</span> <span class="n">vh</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="c">#Correct vector to face towards first residues</span>
+    <span class="c1">#Correct vector to face towards first residues</span>
     <span class="n">rough_helix</span> <span class="o">=</span> <span class="n">origins</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">centroids</span>
     <span class="n">agreement</span> <span class="o">=</span> <span class="n">mdamath</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">rough_helix</span><span class="p">,</span> <span class="n">vector</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">&lt;</span> <span class="n">agreement</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">):</span>
@@ -842,7 +842,7 @@
     Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl,
     Gorman Stock, Isaac Virshup, Zhuyi Xue, Carlos Yáñez S.,
     and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>
 </html>

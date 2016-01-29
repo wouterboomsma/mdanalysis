@@ -119,7 +119,7 @@
 <p>Once you have the <a class="reference internal" href="core/AtomGroup.html#MDAnalysis.core.AtomGroup.Universe" title="MDAnalysis.core.AtomGroup.Universe"><code class="xref py py-meth docutils literal"><span class="pre">Universe()</span></code></a> object, you can
 select atoms (using a syntax very similar to <a class="reference external" href="http://www.charmm.org/documentation/c37b1/select.html">CHARMM&#8217;s atom selection
 syntax</a>):</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">kalp</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&quot;segid KALP&quot;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">kalp</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;segid KALP&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The <a class="reference internal" href="core/AtomGroup.html#MDAnalysis.core.AtomGroup.Universe.select_atoms" title="MDAnalysis.core.AtomGroup.Universe.select_atoms"><code class="xref py py-meth docutils literal"><span class="pre">select_atoms()</span></code></a> of a
@@ -129,7 +129,7 @@ defined for AtomGroups on them. Selections always return an <code class="xref py
 atoms sorted according to their index in the topology (this is to ensure that
 there aren&#8217;t any duplicates, which can happen with complicated selections).</p>
 <p>One can group subselections using parentheses:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&quot;segid DMPC and not (name H* or name O*)&quot;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;segid DMPC and not (name H* or name O*)&quot;</span><span class="p">)</span>
 <span class="go">&lt;AtomGroup with 3420 atoms&gt;</span>
 </pre></div>
 </div>
@@ -255,8 +255,8 @@ minimum image convention (and this only works for rectangular
 simulation cells). If periodic boundary conditions should be taken
 into account then change the default behaviour of MDAnalysis by setting
 these two flags:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">MDAnalysis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">flags</span><span class="p">[</span><span class="s">&#39;use_periodic_selections&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
-<span class="n">MDAnalysis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">flags</span><span class="p">[</span><span class="s">&#39;use_KDTree_routines&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">MDAnalysis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">flags</span><span class="p">[</span><span class="s1">&#39;use_periodic_selections&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">MDAnalysis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">flags</span><span class="p">[</span><span class="s1">&#39;use_KDTree_routines&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
 </pre></div>
 </div>
 </div>
@@ -449,7 +449,7 @@ atoms are required then one has to concatenate multiple AtomGroups, which does
 not sort them.</p>
 <p>The most straightforward way to concatentate two AtomGroups is by using the
 <strong>+</strong> operator:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ordered</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&quot;segid DMPC and resid 3 and name P&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&quot;segid DMPC and resid 2 and name P&quot;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ordered</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;segid DMPC and resid 3 and name P&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;segid DMPC and resid 2 and name P&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="nb">list</span><span class="p">(</span><span class="n">ordered</span><span class="p">)</span>
 <span class="go">[&lt; Atom 570: name &#39;P&#39; of type &#39;180&#39; of resid &#39;DMPC&#39;, 3 and &#39;DMPC&#39;&gt;,</span>
 <span class="go">&lt; Atom 452: name &#39;P&#39; of type &#39;180&#39; of resid &#39;DMPC&#39;, 2 and &#39;DMPC&#39;&gt;]</span>
@@ -458,7 +458,7 @@ not sort them.</p>
 <p>A shortcut is to provide <em>two or more</em> selections to
 <code class="xref py py-meth docutils literal"><span class="pre">select_atoms()</span></code>, which then does the concatenation
 automatically:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="nb">list</span><span class="p">(</span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&quot;segid DMPC and resid 3 and name P&quot;</span><span class="p">,</span> <span class="s">&quot;segid DMPC and resid 2 and name P&quot;</span><span class="p">))</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="nb">list</span><span class="p">(</span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;segid DMPC and resid 3 and name P&quot;</span><span class="p">,</span> <span class="s2">&quot;segid DMPC and resid 2 and name P&quot;</span><span class="p">))</span>
 <span class="go">[&lt; Atom 570: name &#39;P&#39; of type &#39;180&#39; of resid &#39;DMPC&#39;, 3 and &#39;DMPC&#39;&gt;,</span>
 <span class="go">&lt; Atom 452: name &#39;P&#39; of type &#39;180&#39; of resid &#39;DMPC&#39;, 2 and &#39;DMPC&#39;&gt;]</span>
 </pre></div>
@@ -510,7 +510,7 @@ might expect:</p>
     Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl,
     Gorman Stock, Isaac Virshup, Zhuyi Xue, Carlos Yáñez S.,
     and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>
 </html>

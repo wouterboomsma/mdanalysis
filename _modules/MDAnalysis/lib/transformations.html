@@ -72,38 +72,38 @@
           <div class="body" role="main">
             
   <h1>Source code for MDAnalysis.lib.transformations</h1><div class="highlight"><pre>
-<span class="c"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding: utf-8 -*-</span>
-<span class="c"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
+<span class="c1"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding: utf-8 -*-</span>
+<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
 
-<span class="c"># transformations.py</span>
+<span class="c1"># transformations.py</span>
 
-<span class="c"># Copyright (c) 2006, Christoph Gohlke</span>
-<span class="c"># Copyright (c) 2006-2010, The Regents of the University of California</span>
-<span class="c"># All rights reserved.</span>
-<span class="c">#</span>
-<span class="c"># Redistribution and use in source and binary forms, with or without</span>
-<span class="c"># modification, are permitted provided that the following conditions are met:</span>
-<span class="c">#</span>
-<span class="c"># * Redistributions of source code must retain the above copyright</span>
-<span class="c"># notice, this list of conditions and the following disclaimer.</span>
-<span class="c"># * Redistributions in binary form must reproduce the above copyright</span>
-<span class="c">#   notice, this list of conditions and the following disclaimer in the</span>
-<span class="c">#   documentation and/or other materials provided with the distribution.</span>
-<span class="c"># * Neither the name of the copyright holders nor the names of any</span>
-<span class="c">#   contributors may be used to endorse or promote products derived</span>
-<span class="c">#   from this software without specific prior written permission.</span>
-<span class="c">#</span>
-<span class="c"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;</span>
-<span class="c"># AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE</span>
-<span class="c"># IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE</span>
-<span class="c"># ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE</span>
-<span class="c"># LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR</span>
-<span class="c"># CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF</span>
-<span class="c"># SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS</span>
-<span class="c"># INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN</span>
-<span class="c"># CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)</span>
-<span class="c"># ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span>
-<span class="c"># POSSIBILITY OF SUCH DAMAGE.</span>
+<span class="c1"># Copyright (c) 2006, Christoph Gohlke</span>
+<span class="c1"># Copyright (c) 2006-2010, The Regents of the University of California</span>
+<span class="c1"># All rights reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Redistribution and use in source and binary forms, with or without</span>
+<span class="c1"># modification, are permitted provided that the following conditions are met:</span>
+<span class="c1">#</span>
+<span class="c1"># * Redistributions of source code must retain the above copyright</span>
+<span class="c1"># notice, this list of conditions and the following disclaimer.</span>
+<span class="c1"># * Redistributions in binary form must reproduce the above copyright</span>
+<span class="c1">#   notice, this list of conditions and the following disclaimer in the</span>
+<span class="c1">#   documentation and/or other materials provided with the distribution.</span>
+<span class="c1"># * Neither the name of the copyright holders nor the names of any</span>
+<span class="c1">#   contributors may be used to endorse or promote products derived</span>
+<span class="c1">#   from this software without specific prior written permission.</span>
+<span class="c1">#</span>
+<span class="c1"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;</span>
+<span class="c1"># AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE</span>
+<span class="c1"># IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE</span>
+<span class="c1"># ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE</span>
+<span class="c1"># LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR</span>
+<span class="c1"># CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF</span>
+<span class="c1"># SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS</span>
+<span class="c1"># INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN</span>
+<span class="c1"># CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)</span>
+<span class="c1"># ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span>
+<span class="c1"># POSSIBILITY OF SUCH DAMAGE.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Homogeneous Transformation Matrices and Quaternions --- :mod:`MDAnalysis.lib.transformations`</span>
@@ -312,9 +312,9 @@
 <span class="sd">    True</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">False</span><span class="p">)[:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">False</span><span class="p">)[:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></div>
 
-</div>
+
 <span class="k">def</span> <span class="nf">reflection_matrix</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">normal</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return matrix to mirror at plane defined by point and normal vector.</span>
 
@@ -354,22 +354,22 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-    <span class="c"># normal: unit eigenvector corresponding to eigenvalue -1</span>
+    <span class="c1"># normal: unit eigenvector corresponding to eigenvalue -1</span>
     <span class="n">l</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">M</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">])</span>
     <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-8</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;no unit eigenvector corresponding to eigenvalue -1&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;no unit eigenvector corresponding to eigenvalue -1&quot;</span><span class="p">)</span>
     <span class="n">normal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">V</span><span class="p">[:,</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
-    <span class="c"># point: any unit eigenvector corresponding to eigenvalue 1</span>
+    <span class="c1"># point: any unit eigenvector corresponding to eigenvalue 1</span>
     <span class="n">l</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
     <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-8</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;no unit eigenvector corresponding to eigenvalue 1&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;no unit eigenvector corresponding to eigenvalue 1&quot;</span><span class="p">)</span>
     <span class="n">point</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">V</span><span class="p">[:,</span> <span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
     <span class="n">point</span> <span class="o">/=</span> <span class="n">point</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">point</span><span class="p">,</span> <span class="n">normal</span>
+    <span class="k">return</span> <span class="n">point</span><span class="p">,</span> <span class="n">normal</span></div>
 
-</div>
+
 <span class="k">def</span> <span class="nf">rotation_matrix</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">point</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return matrix to rotate about axis defined by point and direction.</span>
 
@@ -398,7 +398,7 @@
     <span class="n">sina</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
     <span class="n">cosa</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
     <span class="n">direction</span> <span class="o">=</span> <span class="n">unit_vector</span><span class="p">(</span><span class="n">direction</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
-    <span class="c"># rotation matrix around unit vector</span>
+    <span class="c1"># rotation matrix around unit vector</span>
     <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
         <span class="p">(</span>
             <span class="p">(</span><span class="n">cosa</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
@@ -413,7 +413,7 @@
     <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
     <span class="n">M</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">R</span>
     <span class="k">if</span> <span class="n">point</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="c"># rotation not around origin</span>
+        <span class="c1"># rotation not around origin</span>
         <span class="n">point</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">point</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
         <span class="n">M</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">point</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">point</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">M</span>
@@ -434,20 +434,20 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
     <span class="n">R33</span> <span class="o">=</span> <span class="n">R</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span>
-    <span class="c"># direction: unit eigenvector of R33 corresponding to eigenvalue of 1</span>
+    <span class="c1"># direction: unit eigenvector of R33 corresponding to eigenvalue of 1</span>
     <span class="n">l</span><span class="p">,</span> <span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">R33</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
     <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-8</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;no unit eigenvector corresponding to eigenvalue 1&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;no unit eigenvector corresponding to eigenvalue 1&quot;</span><span class="p">)</span>
     <span class="n">direction</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">W</span><span class="p">[:,</span> <span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
-    <span class="c"># point: unit eigenvector of R33 corresponding to eigenvalue of 1</span>
+    <span class="c1"># point: unit eigenvector of R33 corresponding to eigenvalue of 1</span>
     <span class="n">l</span><span class="p">,</span> <span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
     <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-8</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;no unit eigenvector corresponding to eigenvalue 1&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;no unit eigenvector corresponding to eigenvalue 1&quot;</span><span class="p">)</span>
     <span class="n">point</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">Q</span><span class="p">[:,</span> <span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
     <span class="n">point</span> <span class="o">/=</span> <span class="n">point</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-    <span class="c"># rotation angle depending on direction</span>
+    <span class="c1"># rotation angle depending on direction</span>
     <span class="n">cosa</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">R33</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span>
     <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">direction</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mf">1e-8</span><span class="p">:</span>
         <span class="n">sina</span> <span class="o">=</span> <span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">cosa</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">direction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">direction</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">direction</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
@@ -456,9 +456,9 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">sina</span> <span class="o">=</span> <span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">cosa</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">direction</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">direction</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="n">direction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">angle</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">sina</span><span class="p">,</span> <span class="n">cosa</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">angle</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">point</span>
+    <span class="k">return</span> <span class="n">angle</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">point</span></div>
 
-</div>
+
 <span class="k">def</span> <span class="nf">scale_matrix</span><span class="p">(</span><span class="n">factor</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return matrix to scale by factor around origin in direction.</span>
 
@@ -477,7 +477,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">direction</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="c"># uniform scaling</span>
+        <span class="c1"># uniform scaling</span>
         <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
             <span class="p">((</span><span class="n">factor</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
             <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">factor</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
@@ -487,7 +487,7 @@
             <span class="n">M</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">origin</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
             <span class="n">M</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">*=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">factor</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="c"># nonuniform scaling</span>
+        <span class="c1"># nonuniform scaling</span>
         <span class="n">direction</span> <span class="o">=</span> <span class="n">unit_vector</span><span class="p">(</span><span class="n">direction</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
         <span class="n">factor</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">factor</span>
         <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
@@ -519,25 +519,25 @@
     <span class="n">M33</span> <span class="o">=</span> <span class="n">M</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span>
     <span class="n">factor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">M33</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.0</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="c"># direction: unit eigenvector corresponding to eigenvalue factor</span>
+        <span class="c1"># direction: unit eigenvector corresponding to eigenvalue factor</span>
         <span class="n">l</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">M33</span><span class="p">)</span>
         <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">-</span> <span class="n">factor</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-8</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">direction</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">V</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
         <span class="n">direction</span> <span class="o">/=</span> <span class="n">vector_norm</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
-        <span class="c"># uniform scaling</span>
+        <span class="c1"># uniform scaling</span>
         <span class="n">factor</span> <span class="o">=</span> <span class="p">(</span><span class="n">factor</span> <span class="o">+</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">3.0</span>
         <span class="n">direction</span> <span class="o">=</span> <span class="bp">None</span>
-    <span class="c"># origin: any eigenvector corresponding to eigenvalue 1</span>
+    <span class="c1"># origin: any eigenvector corresponding to eigenvalue 1</span>
     <span class="n">l</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
     <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-8</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;no eigenvector corresponding to eigenvalue 1&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;no eigenvector corresponding to eigenvalue 1&quot;</span><span class="p">)</span>
     <span class="n">origin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">V</span><span class="p">[:,</span> <span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
     <span class="n">origin</span> <span class="o">/=</span> <span class="n">origin</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">factor</span><span class="p">,</span> <span class="n">origin</span><span class="p">,</span> <span class="n">direction</span>
+    <span class="k">return</span> <span class="n">factor</span><span class="p">,</span> <span class="n">origin</span><span class="p">,</span> <span class="n">direction</span></div>
 
-</div>
+
 <span class="k">def</span> <span class="nf">projection_matrix</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                       <span class="n">perspective</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">pseudo</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return matrix to project onto plane defined by point and normal.</span>
@@ -574,13 +574,13 @@
     <span class="n">point</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">point</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
     <span class="n">normal</span> <span class="o">=</span> <span class="n">unit_vector</span><span class="p">(</span><span class="n">normal</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
     <span class="k">if</span> <span class="n">perspective</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="c"># perspective projection</span>
+        <span class="c1"># perspective projection</span>
         <span class="n">perspective</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">perspective</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
                                   <span class="n">copy</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
         <span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">perspective</span> <span class="o">-</span> <span class="n">point</span><span class="p">,</span> <span class="n">normal</span><span class="p">)</span>
         <span class="n">M</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">perspective</span><span class="p">,</span> <span class="n">normal</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">pseudo</span><span class="p">:</span>
-            <span class="c"># preserve relative depth</span>
+            <span class="c1"># preserve relative depth</span>
             <span class="n">M</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">normal</span><span class="p">,</span> <span class="n">normal</span><span class="p">)</span>
             <span class="n">M</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">normal</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">perspective</span> <span class="o">+</span> <span class="n">normal</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -588,13 +588,13 @@
         <span class="n">M</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">normal</span>
         <span class="n">M</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">perspective</span><span class="p">,</span> <span class="n">normal</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">direction</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="c"># parallel projection</span>
+        <span class="c1"># parallel projection</span>
         <span class="n">direction</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">direction</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
         <span class="n">scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="n">normal</span><span class="p">)</span>
         <span class="n">M</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="n">normal</span><span class="p">)</span> <span class="o">/</span> <span class="n">scale</span>
         <span class="n">M</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">direction</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">normal</span><span class="p">)</span> <span class="o">/</span> <span class="n">scale</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="c"># orthogonal projection</span>
+        <span class="c1"># orthogonal projection</span>
         <span class="n">M</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">normal</span><span class="p">,</span> <span class="n">normal</span><span class="p">)</span>
         <span class="n">M</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">normal</span><span class="p">)</span> <span class="o">*</span> <span class="n">normal</span>
     <span class="k">return</span> <span class="n">M</span>
@@ -637,42 +637,42 @@
     <span class="n">l</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
     <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-8</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">pseudo</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
-        <span class="c"># point: any eigenvector corresponding to eigenvalue 1</span>
+        <span class="c1"># point: any eigenvector corresponding to eigenvalue 1</span>
         <span class="n">point</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">V</span><span class="p">[:,</span> <span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
         <span class="n">point</span> <span class="o">/=</span> <span class="n">point</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-        <span class="c"># direction: unit eigenvector corresponding to eigenvalue 0</span>
+        <span class="c1"># direction: unit eigenvector corresponding to eigenvalue 0</span>
         <span class="n">l</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">M33</span><span class="p">)</span>
         <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">l</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">1e-8</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;no eigenvector corresponding to eigenvalue 0&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;no eigenvector corresponding to eigenvalue 0&quot;</span><span class="p">)</span>
         <span class="n">direction</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">V</span><span class="p">[:,</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
         <span class="n">direction</span> <span class="o">/=</span> <span class="n">vector_norm</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span>
-        <span class="c"># normal: unit eigenvector of M33.T corresponding to eigenvalue 0</span>
+        <span class="c1"># normal: unit eigenvector of M33.T corresponding to eigenvalue 0</span>
         <span class="n">l</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">M33</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
         <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">l</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">1e-8</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
-            <span class="c"># parallel projection</span>
+            <span class="c1"># parallel projection</span>
             <span class="n">normal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">V</span><span class="p">[:,</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
             <span class="n">normal</span> <span class="o">/=</span> <span class="n">vector_norm</span><span class="p">(</span><span class="n">normal</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">point</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">False</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="c"># orthogonal projection, where normal equals direction vector</span>
+            <span class="c1"># orthogonal projection, where normal equals direction vector</span>
             <span class="k">return</span> <span class="n">point</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">False</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="c"># perspective projection</span>
+        <span class="c1"># perspective projection</span>
         <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">l</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mf">1e-8</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s">&quot;no eigenvector not corresponding to eigenvalue 0&quot;</span><span class="p">)</span>
+                <span class="s2">&quot;no eigenvector not corresponding to eigenvalue 0&quot;</span><span class="p">)</span>
         <span class="n">point</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">V</span><span class="p">[:,</span> <span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
         <span class="n">point</span> <span class="o">/=</span> <span class="n">point</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
         <span class="n">normal</span> <span class="o">=</span> <span class="o">-</span> <span class="n">M</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span>
         <span class="n">perspective</span> <span class="o">=</span> <span class="n">M</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">point</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">normal</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">pseudo</span><span class="p">:</span>
             <span class="n">perspective</span> <span class="o">-=</span> <span class="n">normal</span>
-        <span class="k">return</span> <span class="n">point</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">perspective</span><span class="p">,</span> <span class="n">pseudo</span>
+        <span class="k">return</span> <span class="n">point</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">perspective</span><span class="p">,</span> <span class="n">pseudo</span></div>
 
-</div>
+
 <span class="k">def</span> <span class="nf">clip_matrix</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">bottom</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">near</span><span class="p">,</span> <span class="n">far</span><span class="p">,</span> <span class="n">perspective</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return matrix to obtain normalized device coordinates from frustrum.</span>
 
@@ -708,10 +708,10 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">left</span> <span class="o">&gt;=</span> <span class="n">right</span> <span class="ow">or</span> <span class="n">bottom</span> <span class="o">&gt;=</span> <span class="n">top</span> <span class="ow">or</span> <span class="n">near</span> <span class="o">&gt;=</span> <span class="n">far</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;invalid frustrum&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid frustrum&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">perspective</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">near</span> <span class="o">&lt;=</span> <span class="n">_EPS</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;invalid frustrum: near &lt;= 0&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid frustrum: near &lt;= 0&quot;</span><span class="p">)</span>
         <span class="n">t</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">near</span>
         <span class="n">M</span> <span class="o">=</span> <span class="p">(</span>
             <span class="p">(</span><span class="o">-</span><span class="n">t</span> <span class="o">/</span> <span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">,</span> <span class="p">(</span><span class="n">right</span> <span class="o">+</span> <span class="n">left</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">),</span>
@@ -750,7 +750,7 @@
     <span class="n">normal</span> <span class="o">=</span> <span class="n">unit_vector</span><span class="p">(</span><span class="n">normal</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
     <span class="n">direction</span> <span class="o">=</span> <span class="n">unit_vector</span><span class="p">(</span><span class="n">direction</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
     <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">normal</span><span class="p">,</span> <span class="n">direction</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mf">1e-6</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;direction and normal vectors are not orthogonal&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;direction and normal vectors are not orthogonal&quot;</span><span class="p">)</span>
     <span class="n">angle</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
     <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
     <span class="n">M</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">+=</span> <span class="n">angle</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="n">normal</span><span class="p">)</span>
@@ -774,11 +774,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
     <span class="n">M33</span> <span class="o">=</span> <span class="n">M</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span>
-    <span class="c"># normal: cross independent eigenvectors corresponding to the eigenvalue 1</span>
+    <span class="c1"># normal: cross independent eigenvectors corresponding to the eigenvalue 1</span>
     <span class="n">l</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">M33</span><span class="p">)</span>
     <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-4</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;no two linear independent eigenvectors found {0!s}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">l</span><span class="p">))</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;no two linear independent eigenvectors found {0!s}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">l</span><span class="p">))</span>
     <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">V</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
     <span class="n">lenorm</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
     <span class="k">for</span> <span class="n">i0</span><span class="p">,</span> <span class="n">i1</span> <span class="ow">in</span> <span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)):</span>
@@ -788,21 +788,21 @@
             <span class="n">lenorm</span> <span class="o">=</span> <span class="n">l</span>
             <span class="n">normal</span> <span class="o">=</span> <span class="n">n</span>
     <span class="n">normal</span> <span class="o">/=</span> <span class="n">lenorm</span>
-    <span class="c"># direction and angle</span>
+    <span class="c1"># direction and angle</span>
     <span class="n">direction</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M33</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">normal</span><span class="p">)</span>
     <span class="n">angle</span> <span class="o">=</span> <span class="n">vector_norm</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span>
     <span class="n">direction</span> <span class="o">/=</span> <span class="n">angle</span>
     <span class="n">angle</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
-    <span class="c"># point: eigenvector corresponding to eigenvalue 1</span>
+    <span class="c1"># point: eigenvector corresponding to eigenvalue 1</span>
     <span class="n">l</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
     <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-8</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;no eigenvector corresponding to eigenvalue 1&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;no eigenvector corresponding to eigenvalue 1&quot;</span><span class="p">)</span>
     <span class="n">point</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">V</span><span class="p">[:,</span> <span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
     <span class="n">point</span> <span class="o">/=</span> <span class="n">point</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">angle</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">point</span><span class="p">,</span> <span class="n">normal</span>
+    <span class="k">return</span> <span class="n">angle</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">point</span><span class="p">,</span> <span class="n">normal</span></div>
 
-</div>
+
 <div class="viewcode-block" id="decompose_matrix"><a class="viewcode-back" href="../../../documentation_pages/lib/transformations.html#MDAnalysis.lib.transformations.decompose_matrix">[docs]</a><span class="k">def</span> <span class="nf">decompose_matrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return sequence of transformations from transformation matrix.</span>
 
@@ -836,12 +836,12 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
     <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">_EPS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;M[3, 3] is zero&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;M[3, 3] is zero&quot;</span><span class="p">)</span>
     <span class="n">M</span> <span class="o">/=</span> <span class="n">M</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
     <span class="n">P</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">P</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">P</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;matrix is singular&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;matrix is singular&quot;</span><span class="p">)</span>
 
     <span class="n">scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">shear</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
@@ -881,13 +881,13 @@
         <span class="n">angles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
         <span class="n">angles</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="c">#angles[0] = math.atan2(row[1, 0], row[1, 1])</span>
+        <span class="c1">#angles[0] = math.atan2(row[1, 0], row[1, 1])</span>
         <span class="n">angles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="o">-</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
         <span class="n">angles</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
 
-    <span class="k">return</span> <span class="n">scale</span><span class="p">,</span> <span class="n">shear</span><span class="p">,</span> <span class="n">angles</span><span class="p">,</span> <span class="n">translate</span><span class="p">,</span> <span class="n">perspective</span>
+    <span class="k">return</span> <span class="n">scale</span><span class="p">,</span> <span class="n">shear</span><span class="p">,</span> <span class="n">angles</span><span class="p">,</span> <span class="n">translate</span><span class="p">,</span> <span class="n">perspective</span></div>
 
-</div>
+
 <div class="viewcode-block" id="compose_matrix"><a class="viewcode-back" href="../../../documentation_pages/lib/transformations.html#MDAnalysis.lib.transformations.compose_matrix">[docs]</a><span class="k">def</span> <span class="nf">compose_matrix</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">shear</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">angles</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">translate</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                    <span class="n">perspective</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return transformation matrix from sequence of transformations.</span>
@@ -923,7 +923,7 @@
         <span class="n">T</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">translate</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
         <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">angles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">R</span> <span class="o">=</span> <span class="n">euler_matrix</span><span class="p">(</span><span class="n">angles</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">angles</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">angles</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s">&#39;sxyz&#39;</span><span class="p">)</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="n">euler_matrix</span><span class="p">(</span><span class="n">angles</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">angles</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">angles</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;sxyz&#39;</span><span class="p">)</span>
         <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">R</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">shear</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
@@ -938,9 +938,9 @@
         <span class="n">S</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">scale</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
         <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
     <span class="n">M</span> <span class="o">/=</span> <span class="n">M</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">M</span>
+    <span class="k">return</span> <span class="n">M</span></div>
 
-</div>
+
 <span class="k">def</span> <span class="nf">orthogonalization_matrix</span><span class="p">(</span><span class="n">lengths</span><span class="p">,</span> <span class="n">angles</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return orthogonalization matrix for crystallographic cell coordinates.</span>
 
@@ -1021,28 +1021,28 @@
     <span class="n">v1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">False</span><span class="p">)[:</span><span class="mi">3</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="n">v0</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">v1</span><span class="o">.</span><span class="n">shape</span> <span class="ow">or</span> <span class="n">v0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;vector sets are of wrong shape or type&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;vector sets are of wrong shape or type&quot;</span><span class="p">)</span>
 
-    <span class="c"># move centroids to origin</span>
+    <span class="c1"># move centroids to origin</span>
     <span class="n">t0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">v0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">t1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">v0</span> <span class="o">=</span> <span class="n">v0</span> <span class="o">-</span> <span class="n">t0</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">v1</span> <span class="o">=</span> <span class="n">v1</span> <span class="o">-</span> <span class="n">t1</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">usesvd</span><span class="p">:</span>
-        <span class="c"># Singular Value Decomposition of covariance matrix</span>
+        <span class="c1"># Singular Value Decomposition of covariance matrix</span>
         <span class="n">u</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">vh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v0</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
-        <span class="c"># rotation matrix from SVD orthonormal bases</span>
+        <span class="c1"># rotation matrix from SVD orthonormal bases</span>
         <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">vh</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
-            <span class="c"># R does not constitute right handed system</span>
+            <span class="c1"># R does not constitute right handed system</span>
             <span class="n">R</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">u</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">vh</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span> <span class="o">*</span> <span class="mf">2.0</span><span class="p">)</span>
             <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="mf">1.0</span>
-        <span class="c"># homogeneous transformation matrix</span>
+        <span class="c1"># homogeneous transformation matrix</span>
         <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
         <span class="n">M</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">R</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="c"># compute symmetric matrix N</span>
+        <span class="c1"># compute symmetric matrix N</span>
         <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">zz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">v0</span> <span class="o">*</span> <span class="n">v1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">xy</span><span class="p">,</span> <span class="n">yz</span><span class="p">,</span> <span class="n">zx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">v0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">xz</span><span class="p">,</span> <span class="n">yx</span><span class="p">,</span> <span class="n">zy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">v0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -1051,20 +1051,20 @@
             <span class="p">(</span><span class="n">yz</span> <span class="o">-</span> <span class="n">zy</span><span class="p">,</span> <span class="n">xx</span> <span class="o">-</span> <span class="n">yy</span> <span class="o">-</span> <span class="n">zz</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
             <span class="p">(</span><span class="n">zx</span> <span class="o">-</span> <span class="n">xz</span><span class="p">,</span> <span class="n">xy</span> <span class="o">+</span> <span class="n">yx</span><span class="p">,</span> <span class="o">-</span><span class="n">xx</span> <span class="o">+</span> <span class="n">yy</span> <span class="o">-</span> <span class="n">zz</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
             <span class="p">(</span><span class="n">xy</span> <span class="o">-</span> <span class="n">yx</span><span class="p">,</span> <span class="n">zx</span> <span class="o">+</span> <span class="n">xz</span><span class="p">,</span> <span class="n">yz</span> <span class="o">+</span> <span class="n">zy</span><span class="p">,</span> <span class="o">-</span><span class="n">xx</span> <span class="o">-</span> <span class="n">yy</span> <span class="o">+</span> <span class="n">zz</span><span class="p">))</span>
-        <span class="c"># quaternion: eigenvector corresponding to most positive eigenvalue</span>
+        <span class="c1"># quaternion: eigenvector corresponding to most positive eigenvalue</span>
         <span class="n">l</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
         <span class="n">q</span> <span class="o">=</span> <span class="n">V</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">l</span><span class="p">)]</span>
-        <span class="n">q</span> <span class="o">/=</span> <span class="n">vector_norm</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>  <span class="c"># unit quaternion</span>
-        <span class="c"># homogeneous transformation matrix</span>
+        <span class="n">q</span> <span class="o">/=</span> <span class="n">vector_norm</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>  <span class="c1"># unit quaternion</span>
+        <span class="c1"># homogeneous transformation matrix</span>
         <span class="n">M</span> <span class="o">=</span> <span class="n">quaternion_matrix</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
 
-    <span class="c"># scale: ratio of rms deviations from centroid</span>
+    <span class="c1"># scale: ratio of rms deviations from centroid</span>
     <span class="k">if</span> <span class="n">scaling</span><span class="p">:</span>
         <span class="n">v0</span> <span class="o">*=</span> <span class="n">v0</span>
         <span class="n">v1</span> <span class="o">*=</span> <span class="n">v1</span>
         <span class="n">M</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">*=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">v0</span><span class="p">))</span>
 
-    <span class="c"># translation</span>
+    <span class="c1"># translation</span>
     <span class="n">M</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">t1</span>
     <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
     <span class="n">T</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">t0</span>
@@ -1072,7 +1072,7 @@
     <span class="k">return</span> <span class="n">M</span>
 
 
-<span class="k">def</span> <span class="nf">euler_matrix</span><span class="p">(</span><span class="n">ai</span><span class="p">,</span> <span class="n">aj</span><span class="p">,</span> <span class="n">ak</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="s">&#39;sxyz&#39;</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">euler_matrix</span><span class="p">(</span><span class="n">ai</span><span class="p">,</span> <span class="n">aj</span><span class="p">,</span> <span class="n">ak</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="s1">&#39;sxyz&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return homogeneous rotation matrix from Euler angles and axis sequence.</span>
 
 <span class="sd">    ai, aj, ak : Euler&#39;s roll, pitch and yaw angles</span>
@@ -1135,7 +1135,7 @@
     <span class="k">return</span> <span class="n">M</span>
 
 
-<span class="k">def</span> <span class="nf">euler_from_matrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="s">&#39;sxyz&#39;</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">euler_from_matrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="s1">&#39;sxyz&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return Euler angles from rotation matrix for specified axis sequence.</span>
 
 <span class="sd">    axes : One of 24 axis sequences as string or encoded tuple</span>
@@ -1193,7 +1193,7 @@
     <span class="k">return</span> <span class="n">ax</span><span class="p">,</span> <span class="n">ay</span><span class="p">,</span> <span class="n">az</span>
 
 
-<div class="viewcode-block" id="euler_from_quaternion"><a class="viewcode-back" href="../../../documentation_pages/lib/transformations.html#MDAnalysis.lib.transformations.euler_from_quaternion">[docs]</a><span class="k">def</span> <span class="nf">euler_from_quaternion</span><span class="p">(</span><span class="n">quaternion</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="s">&#39;sxyz&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="euler_from_quaternion"><a class="viewcode-back" href="../../../documentation_pages/lib/transformations.html#MDAnalysis.lib.transformations.euler_from_quaternion">[docs]</a><span class="k">def</span> <span class="nf">euler_from_quaternion</span><span class="p">(</span><span class="n">quaternion</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="s1">&#39;sxyz&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return Euler angles from quaternion for specified axis sequence.</span>
 
 <span class="sd">    &gt;&gt;&gt; angles = euler_from_quaternion([0.99810947, 0.06146124, 0, 0])</span>
@@ -1201,10 +1201,10 @@
 <span class="sd">    True</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">euler_from_matrix</span><span class="p">(</span><span class="n">quaternion_matrix</span><span class="p">(</span><span class="n">quaternion</span><span class="p">),</span> <span class="n">axes</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">euler_from_matrix</span><span class="p">(</span><span class="n">quaternion_matrix</span><span class="p">(</span><span class="n">quaternion</span><span class="p">),</span> <span class="n">axes</span><span class="p">)</span></div>
 
-</div>
-<span class="k">def</span> <span class="nf">quaternion_from_euler</span><span class="p">(</span><span class="n">ai</span><span class="p">,</span> <span class="n">aj</span><span class="p">,</span> <span class="n">ak</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="s">&#39;sxyz&#39;</span><span class="p">):</span>
+
+<span class="k">def</span> <span class="nf">quaternion_from_euler</span><span class="p">(</span><span class="n">ai</span><span class="p">,</span> <span class="n">aj</span><span class="p">,</span> <span class="n">ak</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="s1">&#39;sxyz&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return quaternion from Euler angles and axis sequence.</span>
 
 <span class="sd">    ai, aj, ak : Euler&#39;s roll, pitch and yaw angles</span>
@@ -1372,14 +1372,14 @@
         <span class="n">m20</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
         <span class="n">m21</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
         <span class="n">m22</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-        <span class="c"># symmetric matrix K</span>
+        <span class="c1"># symmetric matrix K</span>
         <span class="n">K</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span>
             <span class="p">(</span><span class="n">m00</span> <span class="o">-</span> <span class="n">m11</span> <span class="o">-</span> <span class="n">m22</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
             <span class="p">(</span><span class="n">m01</span> <span class="o">+</span> <span class="n">m10</span><span class="p">,</span> <span class="n">m11</span> <span class="o">-</span> <span class="n">m00</span> <span class="o">-</span> <span class="n">m22</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
             <span class="p">(</span><span class="n">m02</span> <span class="o">+</span> <span class="n">m20</span><span class="p">,</span> <span class="n">m12</span> <span class="o">+</span> <span class="n">m21</span><span class="p">,</span> <span class="n">m22</span> <span class="o">-</span> <span class="n">m00</span> <span class="o">-</span> <span class="n">m11</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
             <span class="p">(</span><span class="n">m21</span> <span class="o">-</span> <span class="n">m12</span><span class="p">,</span> <span class="n">m02</span> <span class="o">-</span> <span class="n">m20</span><span class="p">,</span> <span class="n">m10</span> <span class="o">-</span> <span class="n">m01</span><span class="p">,</span> <span class="n">m00</span> <span class="o">+</span> <span class="n">m11</span> <span class="o">+</span> <span class="n">m22</span><span class="p">)))</span>
         <span class="n">K</span> <span class="o">/=</span> <span class="mf">3.0</span>
-        <span class="c"># quaternion is eigenvector of K that corresponds to largest eigenvalue</span>
+        <span class="c1"># quaternion is eigenvector of K that corresponds to largest eigenvalue</span>
         <span class="n">l</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">K</span><span class="p">)</span>
         <span class="n">q</span> <span class="o">=</span> <span class="n">V</span><span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">l</span><span class="p">)]</span>
 
@@ -1440,9 +1440,9 @@
 <span class="sd">    3.0</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">quaternion</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">quaternion</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
 
-</div>
+
 <div class="viewcode-block" id="quaternion_imag"><a class="viewcode-back" href="../../../documentation_pages/lib/transformations.html#MDAnalysis.lib.transformations.quaternion_imag">[docs]</a><span class="k">def</span> <span class="nf">quaternion_imag</span><span class="p">(</span><span class="n">quaternion</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return imaginary part of quaternion.</span>
 
@@ -1450,9 +1450,9 @@
 <span class="sd">    [0.0, 1.0, 2.0]</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">quaternion</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">quaternion</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span></div>
 
-</div>
+
 <span class="k">def</span> <span class="nf">quaternion_slerp</span><span class="p">(</span><span class="n">quat0</span><span class="p">,</span> <span class="n">quat1</span><span class="p">,</span> <span class="n">fraction</span><span class="p">,</span> <span class="n">spin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shortestpath</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return spherical linear interpolation between two quaternions.</span>
 
@@ -1481,7 +1481,7 @@
     <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">_EPS</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">q0</span>
     <span class="k">if</span> <span class="n">shortestpath</span> <span class="ow">and</span> <span class="n">d</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
-        <span class="c"># invert rotation</span>
+        <span class="c1"># invert rotation</span>
         <span class="n">d</span> <span class="o">=</span> <span class="o">-</span><span class="n">d</span>
         <span class="n">q1</span> <span class="o">*=</span> <span class="o">-</span><span class="mf">1.0</span>
     <span class="n">angle</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">+</span> <span class="n">spin</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span>
@@ -1588,7 +1588,7 @@
                 <span class="n">initial</span> <span class="o">/=</span> <span class="n">vector_norm</span><span class="p">(</span><span class="n">initial</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_qdown</span> <span class="o">=</span> <span class="n">initial</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;initial not a quaternion or matrix&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;initial not a quaternion or matrix&quot;</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_qnow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qpre</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qdown</span>
 
@@ -1603,23 +1603,23 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_radius</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_center</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">center</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span></div>
+
 <div class="viewcode-block" id="Arcball.setaxes"><a class="viewcode-back" href="../../../documentation_pages/lib/transformations.html#MDAnalysis.lib.transformations.Arcball.setaxes">[docs]</a>    <span class="k">def</span> <span class="nf">setaxes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">axes</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set axes to constrain rotations.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">axes</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_axes</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_axes</span> <span class="o">=</span> <span class="p">[</span><span class="n">unit_vector</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span> <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">]</span>
-</div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_axes</span> <span class="o">=</span> <span class="p">[</span><span class="n">unit_vector</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span> <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">]</span></div>
+
 <div class="viewcode-block" id="Arcball.setconstrain"><a class="viewcode-back" href="../../../documentation_pages/lib/transformations.html#MDAnalysis.lib.transformations.Arcball.setconstrain">[docs]</a>    <span class="k">def</span> <span class="nf">setconstrain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">constrain</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set state of constrain to axis mode.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_constrain</span> <span class="o">=</span> <span class="n">constrain</span> <span class="ow">is</span> <span class="bp">True</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_constrain</span> <span class="o">=</span> <span class="n">constrain</span> <span class="ow">is</span> <span class="bp">True</span></div>
+
 <div class="viewcode-block" id="Arcball.getconstrain"><a class="viewcode-back" href="../../../documentation_pages/lib/transformations.html#MDAnalysis.lib.transformations.Arcball.getconstrain">[docs]</a>    <span class="k">def</span> <span class="nf">getconstrain</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return state of constrain to axis mode.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_constrain</span>
-</div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_constrain</span></div>
+
 <div class="viewcode-block" id="Arcball.down"><a class="viewcode-back" href="../../../documentation_pages/lib/transformations.html#MDAnalysis.lib.transformations.Arcball.down">[docs]</a>    <span class="k">def</span> <span class="nf">down</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set initial cursor window coordinates and pick constrain-axis.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_vdown</span> <span class="o">=</span> <span class="n">arcball_map_to_sphere</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_center</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_radius</span><span class="p">)</span>
@@ -1629,8 +1629,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_axis</span> <span class="o">=</span> <span class="n">arcball_nearest_axis</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vdown</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_axes</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_vdown</span> <span class="o">=</span> <span class="n">arcball_constrain_to_axis</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vdown</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_axis</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_axis</span> <span class="o">=</span> <span class="bp">None</span>
-</div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_axis</span> <span class="o">=</span> <span class="bp">None</span></div>
+
 <div class="viewcode-block" id="Arcball.drag"><a class="viewcode-back" href="../../../documentation_pages/lib/transformations.html#MDAnalysis.lib.transformations.Arcball.drag">[docs]</a>    <span class="k">def</span> <span class="nf">drag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Update current cursor window coordinates.&quot;&quot;&quot;</span>
         <span class="n">vnow</span> <span class="o">=</span> <span class="n">arcball_map_to_sphere</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_center</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_radius</span><span class="p">)</span>
@@ -1645,18 +1645,18 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_qnow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qdown</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">q</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vdown</span><span class="p">,</span> <span class="n">vnow</span><span class="p">),</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_qnow</span> <span class="o">=</span> <span class="n">quaternion_multiply</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qdown</span><span class="p">)</span>
-</div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_qnow</span> <span class="o">=</span> <span class="n">quaternion_multiply</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qdown</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="Arcball.next"><a class="viewcode-back" href="../../../documentation_pages/lib/transformations.html#MDAnalysis.lib.transformations.Arcball.next">[docs]</a>    <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">acceleration</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Continue rotation in direction of last drag.&quot;&quot;&quot;</span>
         <span class="n">q</span> <span class="o">=</span> <span class="n">quaternion_slerp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_qpre</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qnow</span><span class="p">,</span> <span class="mf">2.0</span> <span class="o">+</span> <span class="n">acceleration</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_qpre</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qnow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qnow</span><span class="p">,</span> <span class="n">q</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_qpre</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qnow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qnow</span><span class="p">,</span> <span class="n">q</span></div>
+
 <div class="viewcode-block" id="Arcball.matrix"><a class="viewcode-back" href="../../../documentation_pages/lib/transformations.html#MDAnalysis.lib.transformations.Arcball.matrix">[docs]</a>    <span class="k">def</span> <span class="nf">matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return homogeneous rotation matrix.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">quaternion_matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_qnow</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">quaternion_matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_qnow</span><span class="p">)</span></div></div>
 
-</div></div>
+
 <span class="k">def</span> <span class="nf">arcball_map_to_sphere</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return unit sphere coordinates from window coordinates.&quot;&quot;&quot;</span>
     <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
@@ -1668,7 +1668,7 @@
     <span class="p">)</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mf">1.0</span><span class="p">:</span>
-        <span class="n">v</span> <span class="o">/=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>  <span class="c"># position outside of sphere</span>
+        <span class="n">v</span> <span class="o">/=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>  <span class="c1"># position outside of sphere</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">v</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">n</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">v</span>
@@ -1678,7 +1678,7 @@
     <span class="sd">&quot;&quot;&quot;Return sphere point perpendicular to axis.&quot;&quot;&quot;</span>
     <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">v</span> <span class="o">-=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>  <span class="c"># on plane</span>
+    <span class="n">v</span> <span class="o">-=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>  <span class="c1"># on plane</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">vector_norm</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="n">_EPS</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
@@ -1700,25 +1700,25 @@
         <span class="k">if</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="n">mx</span><span class="p">:</span>
             <span class="n">nearest</span> <span class="o">=</span> <span class="n">axis</span>
             <span class="n">mx</span> <span class="o">=</span> <span class="n">t</span>
-    <span class="k">return</span> <span class="n">nearest</span>
+    <span class="k">return</span> <span class="n">nearest</span></div>
 
 
-<span class="c"># epsilon for testing whether a number is close to zero</span></div>
+<span class="c1"># epsilon for testing whether a number is close to zero</span>
 <span class="n">_EPS</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span> <span class="o">*</span> <span class="mf">4.0</span>
 
-<span class="c"># axis sequences for Euler angles</span>
+<span class="c1"># axis sequences for Euler angles</span>
 <span class="n">_NEXT_AXIS</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 
-<span class="c"># map axes strings to/from tuples of inner axis, parity, repetition, frame</span>
+<span class="c1"># map axes strings to/from tuples of inner axis, parity, repetition, frame</span>
 <span class="n">_AXES2TUPLE</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">&#39;sxyz&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s">&#39;sxyx&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s">&#39;sxzy&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
-    <span class="s">&#39;sxzx&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s">&#39;syzx&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s">&#39;syzy&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
-    <span class="s">&#39;syxz&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s">&#39;syxy&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s">&#39;szxy&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
-    <span class="s">&#39;szxz&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s">&#39;szyx&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s">&#39;szyz&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
-    <span class="s">&#39;rzyx&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s">&#39;rxyx&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s">&#39;ryzx&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-    <span class="s">&#39;rxzx&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s">&#39;rxzy&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s">&#39;ryzy&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-    <span class="s">&#39;rzxy&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s">&#39;ryxy&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s">&#39;ryxz&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-    <span class="s">&#39;rzxz&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s">&#39;rxyz&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s">&#39;rzyz&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)}</span>
+    <span class="s1">&#39;sxyz&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;sxyx&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;sxzy&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="s1">&#39;sxzx&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;syzx&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;syzy&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="s1">&#39;syxz&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;syxy&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;szxy&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="s1">&#39;szxz&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;szyx&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;szyz&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="s1">&#39;rzyx&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;rxyx&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;ryzx&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&#39;rxzx&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;rxzy&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;ryzy&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&#39;rzxy&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;ryxy&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;ryxz&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&#39;rzxz&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;rxyz&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;rzyz&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)}</span>
 
 <span class="n">_TUPLE2AXES</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">v</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">_AXES2TUPLE</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
 
@@ -1850,9 +1850,9 @@
     <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">matrices</span><span class="p">:</span>
         <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">M</span>
+    <span class="k">return</span> <span class="n">M</span></div>
 
-</div>
+
 <span class="k">def</span> <span class="nf">is_same_transform</span><span class="p">(</span><span class="n">matrix0</span><span class="p">,</span> <span class="n">matrix1</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return True if two matrices perform same transformation.</span>
 
@@ -1869,7 +1869,7 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">matrix0</span><span class="p">,</span> <span class="n">matrix1</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_import_module</span><span class="p">(</span><span class="n">module_name</span><span class="p">,</span> <span class="n">warn</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s">&#39;_py_&#39;</span><span class="p">,</span> <span class="n">ignore</span><span class="o">=</span><span class="s">&#39;_&#39;</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_import_module</span><span class="p">(</span><span class="n">module_name</span><span class="p">,</span> <span class="n">warn</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;_py_&#39;</span><span class="p">,</span> <span class="n">ignore</span><span class="o">=</span><span class="s1">&#39;_&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Try import all public attributes from module into global namespace.</span>
 
 <span class="sd">    Existing attributes with name clashes are renamed with prefix.</span>
@@ -1884,7 +1884,7 @@
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">warn</span><span class="p">:</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&quot;failed to import module &quot;</span> <span class="o">+</span> <span class="n">module_name</span><span class="p">)</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;failed to import module &quot;</span> <span class="o">+</span> <span class="n">module_name</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">module</span><span class="p">):</span>
@@ -1894,23 +1894,23 @@
                 <span class="k">if</span> <span class="n">attr</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">():</span>
                     <span class="nb">globals</span><span class="p">()[</span><span class="n">prefix</span> <span class="o">+</span> <span class="n">attr</span><span class="p">]</span> <span class="o">=</span> <span class="nb">globals</span><span class="p">()[</span><span class="n">attr</span><span class="p">]</span>
                 <span class="k">elif</span> <span class="n">warn</span><span class="p">:</span>
-                    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&quot;no Python implementation of &quot;</span> <span class="o">+</span> <span class="n">attr</span><span class="p">)</span>
+                    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;no Python implementation of &quot;</span> <span class="o">+</span> <span class="n">attr</span><span class="p">)</span>
             <span class="nb">globals</span><span class="p">()[</span><span class="n">attr</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">True</span>
 
 
-<span class="c"># orbeckst --- some simple geometry</span>
+<span class="c1"># orbeckst --- some simple geometry</span>
 
 <div class="viewcode-block" id="rotaxis"><a class="viewcode-back" href="../../../documentation_pages/lib/transformations.html#MDAnalysis.lib.transformations.rotaxis">[docs]</a><span class="k">def</span> <span class="nf">rotaxis</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return the rotation axis to rotate vector a into b.&quot;&quot;&quot;</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">c</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">c</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">c</span><span class="p">)</span></div>
 
-</div>
-<span class="n">_import_module</span><span class="p">(</span><span class="s">&#39;_transformations&#39;</span><span class="p">)</span>
 
-<span class="c"># Documentation in HTML format can be generated with Epydoc</span>
-<span class="n">__docformat__</span> <span class="o">=</span> <span class="s">&quot;restructuredtext en&quot;</span>
+<span class="n">_import_module</span><span class="p">(</span><span class="s1">&#39;_transformations&#39;</span><span class="p">)</span>
+
+<span class="c1"># Documentation in HTML format can be generated with Epydoc</span>
+<span class="n">__docformat__</span> <span class="o">=</span> <span class="s2">&quot;restructuredtext en&quot;</span>
 </pre></div>
 
           </div>
@@ -1943,7 +1943,7 @@
     Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl,
     Gorman Stock, Isaac Virshup, Zhuyi Xue, Carlos Yáñez S.,
     and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>
 </html>

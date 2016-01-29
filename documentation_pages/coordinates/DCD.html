@@ -315,10 +315,15 @@ weren&#8217;t originally present.</p>
 </p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li>class:<cite>MDAnalysis.NoDataError</cite></li>
-<li><strong>When the Timestep does not contain force information</strong> &#8211;</li>
-<li><strong>.. versionadded</strong> (<em>: 0.11.0</em>) &#8211;</li>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last">
+<li><p class="first"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.NoDataError</span></code></p>
+</li>
+<li><p class="first">When the Timestep does not contain force information</p>
+</li>
+<li><div class="first versionadded">
+<p><span class="versionmodified">New in version 0.11.0.</span></p>
+</div>
+</li>
 </ul>
 </td>
 </tr>
@@ -405,8 +410,8 @@ weren&#8217;t originally present.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li>class:<cite>MDAnalysis.exceptions.NoDataError</cite></li>
-<li><strong>If the Timestep has no position data</strong> &#8211;</li>
+<li><a class="reference internal" href="../exceptions.html#MDAnalysis.exceptions.NoDataError" title="MDAnalysis.exceptions.NoDataError"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.exceptions.NoDataError</span></code></a></li>
+<li>If the Timestep has no position data</li>
 </ul>
 </td>
 </tr>
@@ -422,11 +427,11 @@ weren&#8217;t originally present.</p>
 <code class="descname">time</code><a class="headerlink" href="#MDAnalysis.coordinates.DCD.Timestep.time" title="Permalink to this definition">¶</a></dt>
 <dd><p>The time in ps of this timestep</p>
 <p>This is calculated as:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">time</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;time_offset&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">ts</span><span class="o">.</span><span class="n">time</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">time</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;time_offset&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">ts</span><span class="o">.</span><span class="n">time</span>
 </pre></div>
 </div>
 <p>Or, if the trajectory doesn&#8217;t provide time information:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">time</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;time_offset&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">ts</span><span class="o">.</span><span class="n">frame</span> <span class="o">*</span> <span class="n">ts</span><span class="o">.</span><span class="n">dt</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">time</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;time_offset&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">ts</span><span class="o">.</span><span class="n">frame</span> <span class="o">*</span> <span class="n">ts</span><span class="o">.</span><span class="n">dt</span>
 </pre></div>
 </div>
 <div class="versionadded">
@@ -494,8 +499,8 @@ weren&#8217;t originally present.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li>class:<cite>MDAnalysis.exceptions.NoDataError</cite></li>
-<li><strong>When the Timestep does not contain velocity information</strong> &#8211;</li>
+<li><a class="reference internal" href="../exceptions.html#MDAnalysis.exceptions.NoDataError" title="MDAnalysis.exceptions.NoDataError"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.exceptions.NoDataError</span></code></a></li>
+<li>When the Timestep does not contain velocity information</li>
 </ul>
 </td>
 </tr>
@@ -522,59 +527,40 @@ weren&#8217;t originally present.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Data:</th><td class="field-body"><dl class="first last docutils">
+<tr class="field-odd field"><th class="field-name">Data:</th><td class="field-body"><dl class="first docutils">
 <dt>ts</dt>
 <dd><p class="first last"><a class="reference internal" href="#MDAnalysis.coordinates.DCD.Timestep" title="MDAnalysis.coordinates.DCD.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a> object containing coordinates of current frame</p>
 </dd>
 </dl>
 </td>
 </tr>
+<tr class="field-even field"><th class="field-name">Methods:</th><td class="field-body"><dl class="first last docutils">
+<dt><code class="docutils literal"><span class="pre">dcd</span> <span class="pre">=</span> <span class="pre">DCD(dcdfilename)</span></code></dt>
+<dd><p class="first last">open dcd file and read header</p>
+</dd>
+<dt><code class="docutils literal"><span class="pre">len(dcd)</span></code></dt>
+<dd><p class="first last">return number of frames in dcd</p>
+</dd>
+<dt><code class="docutils literal"><span class="pre">for</span> <span class="pre">ts</span> <span class="pre">in</span> <span class="pre">dcd:</span></code></dt>
+<dd><p class="first last">iterate through trajectory</p>
+</dd>
+<dt><code class="docutils literal"><span class="pre">for</span> <span class="pre">ts</span> <span class="pre">in</span> <span class="pre">dcd[start:stop:skip]:</span></code></dt>
+<dd><p class="first last">iterate through a trajectory</p>
+</dd>
+<dt><code class="docutils literal"><span class="pre">dcd[i]</span></code></dt>
+<dd><p class="first last">random access into the trajectory (i corresponds to frame number)</p>
+</dd>
+<dt><code class="docutils literal"><span class="pre">data</span> <span class="pre">=</span> <span class="pre">dcd.timeseries(...)</span></code></dt>
+<dd><p class="first last">retrieve a subset of coordinate information for a group of atoms</p>
+</dd>
+<dt><code class="docutils literal"><span class="pre">data</span> <span class="pre">=</span> <span class="pre">dcd.correl(...)</span></code></dt>
+<dd><p class="first last">populate a <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.Timeseries.Collection</span></code> object with computed timeseries</p>
+</dd>
+</dl>
+</td>
+</tr>
 </tbody>
 </table>
-<dl class="method">
-<dt>
-<code class="descname">``dcd = DCD(dcdfilename)``</code></dt>
-<dd><p>open dcd file and read header</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">``len(dcd)``</code></dt>
-<dd><p>return number of frames in dcd</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">``for ts in dcd</code></dt>
-<dd><p>``
-iterate through trajectory</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">``for ts in dcd[start</code></dt>
-<dd><p>stop:skip]:``
-iterate through a trajectory</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">``dcd[i]``</code></dt>
-<dd><p>random access into the trajectory (i corresponds to frame number)</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">``data = dcd.timeseries(...)``</code></dt>
-<dd><p>retrieve a subset of coordinate information for a group of atoms</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">``data = dcd.correl(...)``</code></dt>
-<dd><p>populate a <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.Timeseries.Collection</span></code> object with computed timeseries</p>
-</dd></dl>
-
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The DCD file format is not well defined. In particular, NAMD
@@ -617,7 +603,11 @@ available). <em>n_atoms</em> is always set from <code class="xref py py-attr doc
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*filename*</strong> &#8211; filename of the output DCD trajectory</p>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>filename</em></dt>
+<dd><p class="first last">filename of the output DCD trajectory</p>
+</dd>
+</dl>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Keywords:</th><td class="field-body"><dl class="first docutils">
@@ -960,10 +950,14 @@ returned.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>*timeseries*</strong> &#8211; <a class="reference internal" href="../core/Timeseries.html#MDAnalysis.core.Timeseries.TimeseriesCollection" title="MDAnalysis.core.Timeseries.TimeseriesCollection"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.Timeseries.TimeseriesCollection</span></code></a></li>
-<li><strong>stop, skip*</strong> (<em>*start,</em>) &#8211; subset of trajectory to use, with start and stop being inclusive</li>
-</ul>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first last docutils">
+<dt><em>timeseries</em></dt>
+<dd><p class="first last"><a class="reference internal" href="../core/Timeseries.html#MDAnalysis.core.Timeseries.TimeseriesCollection" title="MDAnalysis.core.Timeseries.TimeseriesCollection"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.Timeseries.TimeseriesCollection</span></code></a></p>
+</dd>
+<dt><em>start, stop, skip</em></dt>
+<dd><p class="first last">subset of trajectory to use, with start and stop being inclusive</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1011,15 +1005,21 @@ time = <code class="xref py py-attr docutils literal"><span class="pre">Timestep
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>*asel*</strong> &#8211; <a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> object</li>
-<li><strong>stop, skip*</strong> (<em>*start,</em>) &#8211; range of trajectory to access, start and stop are inclusive</li>
-<li><strong>*format*</strong> &#8211; the order/shape of the return data array, corresponding
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first last docutils">
+<dt><em>asel</em></dt>
+<dd><p class="first last"><a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> object</p>
+</dd>
+<dt><em>start, stop, skip</em></dt>
+<dd><p class="first last">range of trajectory to access, start and stop are inclusive</p>
+</dd>
+<dt><em>format</em></dt>
+<dd><p class="first last">the order/shape of the return data array, corresponding
 to (a)tom, (f)rame, (c)oordinates all six combinations
 of &#8216;a&#8217;, &#8216;f&#8217;, &#8216;c&#8217; are allowed ie &#8220;fac&#8221; - return array
 where the shape is (frame, number of atoms,
-coordinates)</li>
-</ul>
+coordinates)</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1045,11 +1045,14 @@ coordinates)</li>
 </pre></div>
 </div>
 <p>Keywords are available to set some of the low-level attributes of the DCD.</p>
-<dl class="method">
-<dt>
-<code class="descname">``d = DCDWriter(dcdfilename, n_atoms, start, step, delta, remarks)``</code></dt>
-<dd></dd></dl>
-
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Methods:</th><td class="field-body"><code class="docutils literal"><span class="pre">d</span> <span class="pre">=</span> <span class="pre">DCDWriter(dcdfilename,</span> <span class="pre">n_atoms,</span> <span class="pre">start,</span> <span class="pre">step,</span> <span class="pre">delta,</span> <span class="pre">remarks)</span></code></td>
+</tr>
+</tbody>
+</table>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>The Writer will write the <strong>unit cell information</strong> to the DCD in a
@@ -1413,10 +1416,14 @@ returned.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>*criteria*</strong> &#8211; dictionary containing the <em>max</em> and <em>min</em> values in native units</li>
-<li><strong>*x*</strong> &#8211; <code class="xref py py-class docutils literal"><span class="pre">np.ndarray</span></code> of <code class="docutils literal"><span class="pre">(x,</span> <span class="pre">y,</span> <span class="pre">z)</span></code> coordinates of atoms selected to be written out.</li>
-</ul>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>criteria</em></dt>
+<dd><p class="first last">dictionary containing the <em>max</em> and <em>min</em> values in native units</p>
+</dd>
+<dt><em>x</em></dt>
+<dd><p class="first last"><code class="xref py py-class docutils literal"><span class="pre">np.ndarray</span></code> of <code class="docutils literal"><span class="pre">(x,</span> <span class="pre">y,</span> <span class="pre">z)</span></code> coordinates of atoms selected to be written out.</p>
+</dd>
+</dl>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">boolean</p>
@@ -1493,7 +1500,7 @@ if no coordinates to be written.</p>
     Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl,
     Gorman Stock, Isaac Virshup, Zhuyi Xue, Carlos Yáñez S.,
     and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>
 </html>

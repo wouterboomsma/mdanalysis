@@ -203,7 +203,11 @@ helix, e.g. with &#8220;name CA and resid 1:20&#8221; or use start=1, stop=20.</
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*universe*</strong> &#8211; <a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.Universe" title="MDAnalysis.core.AtomGroup.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a></p>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>universe</em></dt>
+<dd><p class="first last"><a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.Universe" title="MDAnalysis.core.AtomGroup.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a></p>
+</dd>
+</dl>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Keywords:</th><td class="field-body"><dl class="first docutils">
@@ -263,9 +267,12 @@ is chosen [<code class="docutils literal"><span class="pre">None</span></code>]<
 </dl>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><code class="xref py py-exc docutils literal"><span class="pre">FinishTimeException</span></code> &#8211;</p>
-<p class="last">If the specified finish time precedes the specified start time or
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><dl class="first last docutils">
+<dt>FinishTimeException</dt>
+<dd><p class="first last">If the specified finish time precedes the specified start time or
 current time stamp of trajectory object.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -311,7 +318,7 @@ the helix, e.g. with &#8220;name CA and resid 1:20&#8221;.</p>
 <p>Analyze helix 8 in AdK (PDB 4AKE); the standard logger is started and
 writes output to the file <code class="docutils literal"><span class="pre">MDAnalysis.log</span></code>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">MDAnalysis</span><span class="o">.</span><span class="n">start_logging</span><span class="p">()</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">helanal_main</span><span class="p">(</span><span class="s">&quot;4ake_A.pdb&quot;</span><span class="p">,</span> <span class="n">selection</span><span class="o">=</span><span class="s">&quot;name CA and resnum 161-187&quot;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">helanal_main</span><span class="p">(</span><span class="s2">&quot;4ake_A.pdb&quot;</span><span class="p">,</span> <span class="n">selection</span><span class="o">=</span><span class="s2">&quot;name CA and resnum 161-187&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="versionchanged">
@@ -360,7 +367,7 @@ writes output to the file <code class="docutils literal"><span class="pre">MDAna
     Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl,
     Gorman Stock, Isaac Virshup, Zhuyi Xue, Carlos Yáñez S.,
     and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>
 </html>

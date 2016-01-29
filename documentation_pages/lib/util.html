@@ -119,17 +119,22 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>*name*</strong> &#8211; filename; extension is replaced unless keep=True;
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first last docutils">
+<dt><em>name</em></dt>
+<dd><p class="first last">filename; extension is replaced unless keep=True;
 <em>name</em> can also be a <a class="reference internal" href="#MDAnalysis.lib.util.NamedStream" title="MDAnalysis.lib.util.NamedStream"><code class="xref py py-class docutils literal"><span class="pre">NamedStream</span></code></a> (and its
-<code class="xref py py-attr docutils literal"><span class="pre">NamedStream.name</span></code> will be changed accordingly)</li>
-<li><strong>*ext*</strong> &#8211; extension</li>
-<li><strong>*keep*</strong> &#8211; <ul>
+<code class="xref py py-attr docutils literal"><span class="pre">NamedStream.name</span></code> will be changed accordingly)</p>
+</dd>
+<dt><em>ext</em></dt>
+<dd><p class="first last">extension</p>
+</dd>
+<dt><em>keep</em></dt>
+<dd><ul class="first last simple">
 <li><code class="docutils literal"><span class="pre">False</span></code>: replace existing extension with <em>ext</em>;</li>
 <li><code class="docutils literal"><span class="pre">True</span></code>: keep old extension if one existed</li>
 </ul>
-</li>
-</ul>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -159,13 +164,19 @@ default, a stream is reset to its start if possible (via
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>*datasource*</strong> &#8211; a file (from <code class="xref py py-class docutils literal"><span class="pre">file</span></code> or <a class="reference external" href="http://docs.python.org/library/functions.html#open" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">open()</span></code></a>) or a stream (e.g. from
-<a class="reference external" href="http://docs.python.org/library/urllib2.html#urllib2.urlopen" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">urllib2.urlopen()</span></code></a> or <code class="xref py py-class docutils literal"><span class="pre">cStringIO.StringIO</span></code>)</li>
-<li><strong>*mode*</strong> &#8211; &#8216;r&#8217; or &#8216;w&#8217; or &#8216;a&#8217;, more complicated modes (&#8216;r+&#8217;, &#8216;w+&#8217; are not supported because
-only the first letter is looked at) [<code class="docutils literal"><span class="pre">'r'</span></code>]</li>
-<li><strong>*reset*</strong> &#8211; try to read (<em>mode</em> &#8216;r&#8217;) the stream from the start [<code class="docutils literal"><span class="pre">True</span></code>]</li>
-</ul>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>datasource</em></dt>
+<dd><p class="first last">a file (from <code class="xref py py-class docutils literal"><span class="pre">file</span></code> or <a class="reference external" href="http://docs.python.org/library/functions.html#open" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">open()</span></code></a>) or a stream (e.g. from
+<a class="reference external" href="http://docs.python.org/library/urllib2.html#urllib2.urlopen" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">urllib2.urlopen()</span></code></a> or <code class="xref py py-class docutils literal"><span class="pre">cStringIO.StringIO</span></code>)</p>
+</dd>
+<dt><em>mode</em></dt>
+<dd><p class="first last">&#8216;r&#8217; or &#8216;w&#8217; or &#8216;a&#8217;, more complicated modes (&#8216;r+&#8217;, &#8216;w+&#8217; are not supported because
+only the first letter is looked at) [<code class="docutils literal"><span class="pre">'r'</span></code>]</p>
+</dd>
+<dt><em>reset</em></dt>
+<dd><p class="first last">try to read (<em>mode</em> &#8216;r&#8217;) the stream from the start [<code class="docutils literal"><span class="pre">True</span></code>]</p>
+</dd>
+</dl>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">tuple <code class="docutils literal"><span class="pre">stream</span></code> which is a file-like object</p>
@@ -205,7 +216,7 @@ separator <a class="reference external" href="http://docs.python.org/library/os.
 </tbody>
 </table>
 <p class="rubric">Example</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">greedy_splitext</span><span class="p">(</span><span class="s">&quot;/home/joe/protein.pdb.bz2&quot;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">greedy_splitext</span><span class="p">(</span><span class="s2">&quot;/home/joe/protein.pdb.bz2&quot;</span><span class="p">)</span>
 <span class="go">(&#39;/home/joe/protein&#39;, &#39;.pdb.bz2&#39;)</span>
 </pre></div>
 </div>
@@ -238,7 +249,7 @@ and can work around compressed format extensions</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">*ValueError*</span></code> &#8211;</td>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><em>ValueError</em></td>
 </tr>
 </tbody>
 </table>
@@ -264,12 +275,12 @@ class:<cite>~MDAnalysis.core.AtomGroup.Universe</cite> but it is also possible t
 <span class="kn">from</span> <span class="nn">MDAnalysis.lib.util</span> <span class="kn">import</span> <span class="n">NamedStream</span>
 <span class="kn">import</span> <span class="nn">cStringIO</span>
 
-<span class="n">pdb_s</span> <span class="o">=</span> <span class="s">&quot;TITLE     Lonely Ion</span><span class="se">\n</span><span class="s">ATOM      1  NA  NA+     1      81.260  64.982  10.926  1.00  0.00</span><span class="se">\n</span><span class="s">&quot;</span>
-<span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">NamedStream</span><span class="p">(</span><span class="n">cStringIO</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">pdb_s</span><span class="p">),</span> <span class="s">&quot;ion.pdb&quot;</span><span class="p">))</span>
+<span class="n">pdb_s</span> <span class="o">=</span> <span class="s2">&quot;TITLE     Lonely Ion</span><span class="se">\n</span><span class="s2">ATOM      1  NA  NA+     1      81.260  64.982  10.926  1.00  0.00</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">NamedStream</span><span class="p">(</span><span class="n">cStringIO</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">pdb_s</span><span class="p">),</span> <span class="s2">&quot;ion.pdb&quot;</span><span class="p">))</span>
 <span class="k">print</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
-<span class="c">#  &lt;Universe with 1 atoms&gt;</span>
+<span class="c1">#  &lt;Universe with 1 atoms&gt;</span>
 <span class="k">print</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
-<span class="c"># [[ 81.26000214  64.98200226  10.92599964]]</span>
+<span class="c1"># [[ 81.26000214  64.98200226  10.92599964]]</span>
 </pre></div>
 </div>
 <p>It is important to provide a proper pseudo file name with the correct extension
@@ -306,22 +317,22 @@ itself instead of a string if no substitutions were made.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">cStringIO</span>
 <span class="kn">import</span> <span class="nn">os.path</span>
 <span class="n">stream</span> <span class="o">=</span> <span class="n">cStringIO</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span>
-<span class="n">f</span> <span class="o">=</span> <span class="n">NamedStream</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="s">&quot;output.pdb&quot;</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">NamedStream</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="s2">&quot;output.pdb&quot;</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>Wrap a <code class="xref py py-class docutils literal"><span class="pre">file</span></code> instance to read from:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">stream</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;input.pdb&quot;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">stream</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;input.pdb&quot;</span><span class="p">)</span>
 <span class="n">f</span> <span class="o">=</span> <span class="n">NamedStream</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">stream</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Use as a context manager (closes stream automatically when the
 <a class="reference external" href="http://docs.python.org/reference/compound_stmts.html#with" title="(in Python v2.7)"><code class="xref std std-keyword docutils literal"><span class="pre">with</span></code></a> block is left):</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">with</span> <span class="n">NamedStream</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s">&quot;input.pdb&quot;</span><span class="p">),</span> <span class="s">&quot;input.pdb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-   <span class="c"># use f</span>
-   <span class="k">print</span> <span class="n">f</span><span class="o">.</span><span class="n">closed</span>  <span class="c"># --&gt; False</span>
-   <span class="c"># ...</span>
-<span class="k">print</span> <span class="n">f</span><span class="o">.</span><span class="n">closed</span>     <span class="c"># --&gt; True</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">with</span> <span class="n">NamedStream</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;input.pdb&quot;</span><span class="p">),</span> <span class="s2">&quot;input.pdb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+   <span class="c1"># use f</span>
+   <span class="k">print</span> <span class="n">f</span><span class="o">.</span><span class="n">closed</span>  <span class="c1"># --&gt; False</span>
+   <span class="c1"># ...</span>
+<span class="k">print</span> <span class="n">f</span><span class="o">.</span><span class="n">closed</span>     <span class="c1"># --&gt; True</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -516,9 +527,15 @@ supplied). The current file position is not changed.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*obj*</strong> &#8211; stream or string</td>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>obj</em></dt>
+<dd><p class="first last">stream or string</p>
+</dd>
+</dl>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><code class="docutils literal"><span class="pre">True</span></code> is <em>obj</em> is a stream, <code class="docutils literal"><span class="pre">False</span></code> otherwise</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><code class="docutils literal"><span class="pre">True</span></code> is <em>obj</em> is a stream, <code class="docutils literal"><span class="pre">False</span></code> otherwise</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -557,8 +574,8 @@ nor a <a class="reference internal" href="#MDAnalysis.lib.util.NamedStream" titl
 <em class="property">class </em><code class="descclassname">MDAnalysis.lib.util.</code><code class="descname">FORTRANReader</code><span class="sig-paren">(</span><em>fmt</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/util.html#FORTRANReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.util.FORTRANReader" title="Permalink to this definition">¶</a></dt>
 <dd><p>FORTRANReader provides a method to parse FORTRAN formatted lines in a file.</p>
 <p>Usage:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">atomformat</span> <span class="o">=</span> <span class="n">FORTRANReader</span><span class="p">(</span><span class="s">&#39;2I10,2X,A8,2X,A8,3F20.10,2X,A8,2X,A8,F20.10&#39;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;coordinates.crd&#39;</span><span class="p">):</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">atomformat</span> <span class="o">=</span> <span class="n">FORTRANReader</span><span class="p">(</span><span class="s1">&#39;2I10,2X,A8,2X,A8,3F20.10,2X,A8,2X,A8,F20.10&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;coordinates.crd&#39;</span><span class="p">):</span>
     <span class="n">serial</span><span class="p">,</span><span class="n">TotRes</span><span class="p">,</span><span class="n">resName</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">chainID</span><span class="p">,</span><span class="n">resSeq</span><span class="p">,</span><span class="n">tempFactor</span> <span class="o">=</span> <span class="n">atomformat</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -785,7 +802,7 @@ close it.</td></tr>
     Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl,
     Gorman Stock, Isaac Virshup, Zhuyi Xue, Carlos Yáñez S.,
     and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>
 </html>

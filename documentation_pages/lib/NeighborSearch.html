@@ -108,13 +108,17 @@ yourself that the trajectory has been corrected for PBC artifacts.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>*atom_list*</strong> &#8211; list of atoms (:class: <cite>~MDAnalysis.core.AtomGroup.AtomGroup</cite>)</li>
-<li><strong>*bucket_size*</strong> &#8211; Number of entries in leafs of the KDTree. If you suffer poor
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first last docutils">
+<dt><em>atom_list</em></dt>
+<dd><p class="first last">list of atoms (:class: <cite>~MDAnalysis.core.AtomGroup.AtomGroup</cite>)</p>
+</dd>
+<dt><em>bucket_size</em></dt>
+<dd><p class="first last">Number of entries in leafs of the KDTree. If you suffer poor
 performance you can play around with this number. Increasing the
 <cite>bucket_size</cite> will speed up the construction of the KDTree but
-slow down the search.</li>
-</ul>
+slow down the search.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -128,12 +132,18 @@ atoms in <em>atoms</em>.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>*atoms*</strong> &#8211; list of atoms (:class: <cite>~MDAnalysis.core.AtomGroup.AtomGroup</cite>)</li>
-<li><strong>*radius*</strong> &#8211; float. Radius for search in Angstrom.</li>
-<li><strong>(optional)</strong> (<em>*level*</em>) &#8211; char (A, R, S). Return atoms(A), residues(R) or segments(S) within
-<em>radius</em> of <em>atoms</em>.</li>
-</ul>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first last docutils">
+<dt><em>atoms</em></dt>
+<dd><p class="first last">list of atoms (:class: <cite>~MDAnalysis.core.AtomGroup.AtomGroup</cite>)</p>
+</dd>
+<dt><em>radius</em></dt>
+<dd><p class="first last">float. Radius for search in Angstrom.</p>
+</dd>
+<dt><em>level</em> (optional)</dt>
+<dd><p class="first last">char (A, R, S). Return atoms(A), residues(R) or segments(S) within
+<em>radius</em> of <em>atoms</em>.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -181,7 +191,7 @@ atoms in <em>atoms</em>.</p>
     Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl,
     Gorman Stock, Isaac Virshup, Zhuyi Xue, Carlos Yáñez S.,
     and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>
 </html>

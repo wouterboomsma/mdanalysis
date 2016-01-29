@@ -72,22 +72,22 @@
           <div class="body" role="main">
             
   <h1>Source code for MDAnalysis.coordinates.TRZ</h1><div class="highlight"><pre>
-<span class="c"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
-<span class="c"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
-<span class="c">#</span>
-<span class="c"># MDAnalysis --- http://www.MDAnalysis.org</span>
-<span class="c"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
-<span class="c"># and contributors (see AUTHORS for the full list)</span>
-<span class="c">#</span>
-<span class="c"># Released under the GNU Public Licence, v2 or any higher version</span>
-<span class="c">#</span>
-<span class="c"># Please cite your use of MDAnalysis in published work:</span>
-<span class="c">#</span>
-<span class="c"># N. Michaud-Agrawal, E. J. Denning, T. B. Woolf, and O. Beckstein.</span>
-<span class="c"># MDAnalysis: A Toolkit for the Analysis of Molecular Dynamics Simulations.</span>
-<span class="c"># J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787</span>
+<span class="c1"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
+<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
+<span class="c1">#</span>
+<span class="c1"># MDAnalysis --- http://www.MDAnalysis.org</span>
+<span class="c1"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
+<span class="c1"># and contributors (see AUTHORS for the full list)</span>
+<span class="c1">#</span>
+<span class="c1"># Released under the GNU Public Licence, v2 or any higher version</span>
+<span class="c1">#</span>
+<span class="c1"># Please cite your use of MDAnalysis in published work:</span>
+<span class="c1">#</span>
+<span class="c1"># N. Michaud-Agrawal, E. J. Denning, T. B. Woolf, and O. Beckstein.</span>
+<span class="c1"># MDAnalysis: A Toolkit for the Analysis of Molecular Dynamics Simulations.</span>
+<span class="c1"># J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787</span>
 
-<span class="c"># TRZ Reader written by Richard J. Gowers (2013)</span>
+<span class="c1"># TRZ Reader written by Richard J. Gowers (2013)</span>
 
 <span class="sd">&quot;&quot;&quot;TRZ trajectory I/O  --- :mod:`MDAnalysis.coordinates.TRZ`</span>
 <span class="sd">============================================================</span>
@@ -184,9 +184,9 @@
 
 <span class="sd">        .. versionadded:: 0.9.0</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_unitcell</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">triclinic_vectors</span><span class="p">(</span><span class="n">box</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_unitcell</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">triclinic_vectors</span><span class="p">(</span><span class="n">box</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span></div>
 
-</div>
+
 <div class="viewcode-block" id="TRZReader"><a class="viewcode-back" href="../../../documentation_pages/coordinates/TRZ.html#MDAnalysis.coordinates.TRZ.TRZReader">[docs]</a><span class="k">class</span> <span class="nc">TRZReader</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Reader</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Reads an IBIsCO or YASP trajectory file</span>
 
@@ -212,9 +212,9 @@
 <span class="sd">       Now passes a weakref of self to ts (ts._reader)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">format</span> <span class="o">=</span> <span class="s">&quot;TRZ&quot;</span>
+    <span class="n">format</span> <span class="o">=</span> <span class="s2">&quot;TRZ&quot;</span>
 
-    <span class="n">units</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;time&#39;</span><span class="p">:</span> <span class="s">&#39;ps&#39;</span><span class="p">,</span> <span class="s">&#39;length&#39;</span><span class="p">:</span> <span class="s">&#39;nm&#39;</span><span class="p">,</span> <span class="s">&#39;velocity&#39;</span><span class="p">:</span> <span class="s">&#39;nm/ps&#39;</span><span class="p">}</span>
+    <span class="n">units</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="s1">&#39;ps&#39;</span><span class="p">,</span> <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="s1">&#39;nm&#39;</span><span class="p">,</span> <span class="s1">&#39;velocity&#39;</span><span class="p">:</span> <span class="s1">&#39;nm/ps&#39;</span><span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trzfilename</span><span class="p">,</span> <span class="n">n_atoms</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Creates a TRZ Reader</span>
@@ -230,9 +230,9 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">TRZReader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">trzfilename</span><span class="p">,</span>  <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">n_atoms</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;TRZReader requires the n_atoms keyword&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;TRZReader requires the n_atoms keyword&#39;</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">trzfile</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">anyopen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s">&#39;rb&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trzfile</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">anyopen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_n_atoms</span> <span class="o">=</span> <span class="n">n_atoms</span>
 
@@ -241,47 +241,47 @@
                            <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_ts_kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">_reader</span> <span class="o">=</span> <span class="n">weakref</span><span class="o">.</span><span class="n">ref</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
-        <span class="c"># structured dtype of a single trajectory frame</span>
-        <span class="n">readarg</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">n_atoms</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;f4&#39;</span>
+        <span class="c1"># structured dtype of a single trajectory frame</span>
+        <span class="n">readarg</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">n_atoms</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;f4&#39;</span>
         <span class="n">frame_contents</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="p">(</span><span class="s">&#39;p1&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;nframe&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;ntrj&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;natoms&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;treal&#39;</span><span class="p">,</span> <span class="s">&#39;f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;p2&#39;</span><span class="p">,</span> <span class="s">&#39;2i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;box&#39;</span><span class="p">,</span> <span class="s">&#39;9f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;p3&#39;</span><span class="p">,</span> <span class="s">&#39;2i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;pressure&#39;</span><span class="p">,</span> <span class="s">&#39;f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;ptensor&#39;</span><span class="p">,</span> <span class="s">&#39;6f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;p4&#39;</span><span class="p">,</span> <span class="s">&#39;3i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;etot&#39;</span><span class="p">,</span> <span class="s">&#39;f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;ptot&#39;</span><span class="p">,</span> <span class="s">&#39;f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;ek&#39;</span><span class="p">,</span> <span class="s">&#39;f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;T&#39;</span><span class="p">,</span> <span class="s">&#39;f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;p5&#39;</span><span class="p">,</span> <span class="s">&#39;6i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;rx&#39;</span><span class="p">,</span> <span class="n">readarg</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;pad2&#39;</span><span class="p">,</span> <span class="s">&#39;2i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;ry&#39;</span><span class="p">,</span> <span class="n">readarg</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;pad3&#39;</span><span class="p">,</span> <span class="s">&#39;2i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;rz&#39;</span><span class="p">,</span> <span class="n">readarg</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;pad4&#39;</span><span class="p">,</span> <span class="s">&#39;2i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;vx&#39;</span><span class="p">,</span> <span class="n">readarg</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;pad5&#39;</span><span class="p">,</span> <span class="s">&#39;2i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;vy&#39;</span><span class="p">,</span> <span class="n">readarg</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;pad6&#39;</span><span class="p">,</span> <span class="s">&#39;2i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;vz&#39;</span><span class="p">,</span> <span class="n">readarg</span><span class="p">)]</span>
+            <span class="p">(</span><span class="s1">&#39;p1&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;nframe&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;ntrj&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;natoms&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;treal&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p2&#39;</span><span class="p">,</span> <span class="s1">&#39;2i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;box&#39;</span><span class="p">,</span> <span class="s1">&#39;9f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p3&#39;</span><span class="p">,</span> <span class="s1">&#39;2i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;pressure&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;ptensor&#39;</span><span class="p">,</span> <span class="s1">&#39;6f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p4&#39;</span><span class="p">,</span> <span class="s1">&#39;3i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;etot&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;ptot&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;ek&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p5&#39;</span><span class="p">,</span> <span class="s1">&#39;6i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;rx&#39;</span><span class="p">,</span> <span class="n">readarg</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;pad2&#39;</span><span class="p">,</span> <span class="s1">&#39;2i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;ry&#39;</span><span class="p">,</span> <span class="n">readarg</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;pad3&#39;</span><span class="p">,</span> <span class="s1">&#39;2i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;rz&#39;</span><span class="p">,</span> <span class="n">readarg</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;pad4&#39;</span><span class="p">,</span> <span class="s1">&#39;2i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;vx&#39;</span><span class="p">,</span> <span class="n">readarg</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;pad5&#39;</span><span class="p">,</span> <span class="s1">&#39;2i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;vy&#39;</span><span class="p">,</span> <span class="n">readarg</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;pad6&#39;</span><span class="p">,</span> <span class="s1">&#39;2i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;vz&#39;</span><span class="p">,</span> <span class="n">readarg</span><span class="p">)]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_force</span><span class="p">:</span>
-            <span class="n">frame_contents</span> <span class="o">+=</span> <span class="p">[(</span><span class="s">&#39;pad7&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">)]</span>
+            <span class="n">frame_contents</span> <span class="o">+=</span> <span class="p">[(</span><span class="s1">&#39;pad7&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">)]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">frame_contents</span> <span class="o">+=</span> <span class="p">[</span>
-                <span class="p">(</span><span class="s">&#39;pad7&#39;</span><span class="p">,</span> <span class="s">&#39;2i4&#39;</span><span class="p">),</span>
-                <span class="p">(</span><span class="s">&#39;fx&#39;</span><span class="p">,</span> <span class="n">readarg</span><span class="p">),</span>
-                <span class="p">(</span><span class="s">&#39;pad8&#39;</span><span class="p">,</span> <span class="s">&#39;2i4&#39;</span><span class="p">),</span>
-                <span class="p">(</span><span class="s">&#39;fy&#39;</span><span class="p">,</span> <span class="n">readarg</span><span class="p">),</span>
-                <span class="p">(</span><span class="s">&#39;pad9&#39;</span><span class="p">,</span> <span class="s">&#39;2i4&#39;</span><span class="p">),</span>
-                <span class="p">(</span><span class="s">&#39;fz&#39;</span><span class="p">,</span> <span class="n">readarg</span><span class="p">),</span>
-                <span class="p">(</span><span class="s">&#39;pad10&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">)]</span>
+                <span class="p">(</span><span class="s1">&#39;pad7&#39;</span><span class="p">,</span> <span class="s1">&#39;2i4&#39;</span><span class="p">),</span>
+                <span class="p">(</span><span class="s1">&#39;fx&#39;</span><span class="p">,</span> <span class="n">readarg</span><span class="p">),</span>
+                <span class="p">(</span><span class="s1">&#39;pad8&#39;</span><span class="p">,</span> <span class="s1">&#39;2i4&#39;</span><span class="p">),</span>
+                <span class="p">(</span><span class="s1">&#39;fy&#39;</span><span class="p">,</span> <span class="n">readarg</span><span class="p">),</span>
+                <span class="p">(</span><span class="s1">&#39;pad9&#39;</span><span class="p">,</span> <span class="s1">&#39;2i4&#39;</span><span class="p">),</span>
+                <span class="p">(</span><span class="s1">&#39;fz&#39;</span><span class="p">,</span> <span class="n">readarg</span><span class="p">),</span>
+                <span class="p">(</span><span class="s1">&#39;pad10&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">)]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">frame_contents</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_read_next_timestep</span><span class="p">()</span>
@@ -289,16 +289,16 @@
     <span class="k">def</span> <span class="nf">_read_trz_header</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Reads the header of the trz trajectory&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_headerdtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">([</span>
-            <span class="p">(</span><span class="s">&#39;p1&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;title&#39;</span><span class="p">,</span> <span class="s">&#39;80c&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;p2&#39;</span><span class="p">,</span> <span class="s">&#39;2i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;force&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;p3&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">)])</span>
+            <span class="p">(</span><span class="s1">&#39;p1&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;80c&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p2&#39;</span><span class="p">,</span> <span class="s1">&#39;2i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;force&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p3&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">)])</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trzfile</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_headerdtype</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
-        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;force&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;force&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">has_force</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="k">elif</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;force&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">20</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;force&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">20</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">has_force</span> <span class="o">=</span> <span class="bp">True</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">IOError</span>
@@ -309,30 +309,30 @@
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trzfile</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-            <span class="n">ts</span><span class="o">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;nframe&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c"># 0 based for MDA</span>
-            <span class="n">ts</span><span class="o">.</span><span class="n">_frame</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;ntrj&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">ts</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;treal&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">ts</span><span class="o">.</span><span class="n">_unitcell</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;box&#39;</span><span class="p">]</span>
-            <span class="n">ts</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;pressure&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;pressure&#39;</span><span class="p">]</span>
-            <span class="n">ts</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;pressure_tensor&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;ptensor&#39;</span><span class="p">]</span>
-            <span class="n">ts</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;total_energy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;etot&#39;</span><span class="p">]</span>
-            <span class="n">ts</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;potential_energy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;ptot&#39;</span><span class="p">]</span>
-            <span class="n">ts</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;kinetic_energy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;ek&#39;</span><span class="p">]</span>
-            <span class="n">ts</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;temperature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;T&#39;</span><span class="p">]</span>
-            <span class="n">ts</span><span class="o">.</span><span class="n">_x</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;rx&#39;</span><span class="p">]</span>
-            <span class="n">ts</span><span class="o">.</span><span class="n">_y</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;ry&#39;</span><span class="p">]</span>
-            <span class="n">ts</span><span class="o">.</span><span class="n">_z</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;rz&#39;</span><span class="p">]</span>
-            <span class="n">ts</span><span class="o">.</span><span class="n">_velocities</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;vx&#39;</span><span class="p">]</span>
-            <span class="n">ts</span><span class="o">.</span><span class="n">_velocities</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;vy&#39;</span><span class="p">]</span>
-            <span class="n">ts</span><span class="o">.</span><span class="n">_velocities</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;vz&#39;</span><span class="p">]</span>
+            <span class="n">ts</span><span class="o">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;nframe&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># 0 based for MDA</span>
+            <span class="n">ts</span><span class="o">.</span><span class="n">_frame</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;ntrj&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">ts</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;treal&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">ts</span><span class="o">.</span><span class="n">_unitcell</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;box&#39;</span><span class="p">]</span>
+            <span class="n">ts</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;pressure&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;pressure&#39;</span><span class="p">]</span>
+            <span class="n">ts</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;pressure_tensor&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;ptensor&#39;</span><span class="p">]</span>
+            <span class="n">ts</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;total_energy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;etot&#39;</span><span class="p">]</span>
+            <span class="n">ts</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;potential_energy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;ptot&#39;</span><span class="p">]</span>
+            <span class="n">ts</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;kinetic_energy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;ek&#39;</span><span class="p">]</span>
+            <span class="n">ts</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span>
+            <span class="n">ts</span><span class="o">.</span><span class="n">_x</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;rx&#39;</span><span class="p">]</span>
+            <span class="n">ts</span><span class="o">.</span><span class="n">_y</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;ry&#39;</span><span class="p">]</span>
+            <span class="n">ts</span><span class="o">.</span><span class="n">_z</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;rz&#39;</span><span class="p">]</span>
+            <span class="n">ts</span><span class="o">.</span><span class="n">_velocities</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;vx&#39;</span><span class="p">]</span>
+            <span class="n">ts</span><span class="o">.</span><span class="n">_velocities</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;vy&#39;</span><span class="p">]</span>
+            <span class="n">ts</span><span class="o">.</span><span class="n">_velocities</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;vz&#39;</span><span class="p">]</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_force</span><span class="p">:</span>
-                <span class="n">ts</span><span class="o">.</span><span class="n">_forces</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;fx&#39;</span><span class="p">]</span>
-                <span class="n">ts</span><span class="o">.</span><span class="n">_forces</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;fy&#39;</span><span class="p">]</span>
-                <span class="n">ts</span><span class="o">.</span><span class="n">_forces</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;fz&#39;</span><span class="p">]</span>
-        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span> <span class="c"># Raises indexerror if data has no data (EOF)</span>
+                <span class="n">ts</span><span class="o">.</span><span class="n">_forces</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;fx&#39;</span><span class="p">]</span>
+                <span class="n">ts</span><span class="o">.</span><span class="n">_forces</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;fy&#39;</span><span class="p">]</span>
+                <span class="n">ts</span><span class="o">.</span><span class="n">_forces</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;fz&#39;</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span> <span class="c1"># Raises indexerror if data has no data (EOF)</span>
             <span class="k">raise</span> <span class="ne">IOError</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="c"># Convert things read into MDAnalysis&#39; native formats (nm -&gt; angstroms)</span>
+            <span class="c1"># Convert things read into MDAnalysis&#39; native formats (nm -&gt; angstroms)</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_units</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">convert_pos_from_native</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">_pos</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">convert_pos_from_native</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">_unitcell</span><span class="p">)</span>
@@ -346,7 +346,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_atoms</span>
 
     <span class="nd">@property</span>
-    <span class="nd">@cached</span><span class="p">(</span><span class="s">&#39;n_frames&#39;</span><span class="p">)</span>
+    <span class="nd">@cached</span><span class="p">(</span><span class="s1">&#39;n_frames&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">n_frames</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Total number of frames in a trajectory&quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
@@ -360,12 +360,12 @@
 <span class="sd">        .. versionchanged:: 0.9.0</span>
 <span class="sd">           Now is based on filesize rather than reading entire file</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">fsize</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">fstat</span><span class="p">(</span><span class="n">trzfile</span><span class="o">.</span><span class="n">fileno</span><span class="p">())</span><span class="o">.</span><span class="n">st_size</span>  <span class="c"># size of file in bytes</span>
+        <span class="n">fsize</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">fstat</span><span class="p">(</span><span class="n">trzfile</span><span class="o">.</span><span class="n">fileno</span><span class="p">())</span><span class="o">.</span><span class="n">st_size</span>  <span class="c1"># size of file in bytes</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">fsize</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_headerdtype</span><span class="o">.</span><span class="n">itemsize</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span><span class="o">.</span><span class="n">itemsize</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s">&quot;Trajectory has incomplete frames&quot;</span><span class="p">)</span>  <span class="c"># check that division is sane</span>
+            <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;Trajectory has incomplete frames&quot;</span><span class="p">)</span>  <span class="c1"># check that division is sane</span>
 
-        <span class="n">nframes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">fsize</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_headerdtype</span><span class="o">.</span><span class="n">itemsize</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span><span class="o">.</span><span class="n">itemsize</span><span class="p">)</span>  <span class="c"># returns long int otherwise</span>
+        <span class="n">nframes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">fsize</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_headerdtype</span><span class="o">.</span><span class="n">itemsize</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span><span class="o">.</span><span class="n">itemsize</span><span class="p">)</span>  <span class="c1"># returns long int otherwise</span>
 
         <span class="k">return</span> <span class="n">nframes</span>
 
@@ -390,13 +390,13 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_read_frame</span><span class="p">(</span><span class="n">curr_frame</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="nd">@cached</span><span class="p">(</span><span class="s">&#39;delta&#39;</span><span class="p">)</span>
+    <span class="nd">@cached</span><span class="p">(</span><span class="s1">&#39;delta&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">delta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;MD integration timestep&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip_timestep</span>
 
     <span class="nd">@property</span>
-    <span class="nd">@cached</span><span class="p">(</span><span class="s">&#39;skip_timestep&#39;</span><span class="p">)</span>
+    <span class="nd">@cached</span><span class="p">(</span><span class="s1">&#39;skip_timestep&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">skip_timestep</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Timesteps between trajectory frames&quot;&quot;&quot;</span>
         <span class="n">curr_frame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span>
@@ -437,12 +437,12 @@
         <span class="n">seeksize</span> <span class="o">=</span> <span class="n">framesize</span> <span class="o">*</span> <span class="n">nframes</span>
 
         <span class="k">if</span> <span class="n">seeksize</span> <span class="o">&gt;</span> <span class="n">maxi_l</span><span class="p">:</span>
-            <span class="c"># Workaround for seek not liking long ints</span>
+            <span class="c1"># Workaround for seek not liking long ints</span>
             <span class="n">framesize</span> <span class="o">=</span> <span class="nb">long</span><span class="p">(</span><span class="n">framesize</span><span class="p">)</span>
             <span class="n">seeksize</span> <span class="o">=</span> <span class="n">framesize</span> <span class="o">*</span> <span class="n">nframes</span>
 
-            <span class="n">nreps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">seeksize</span> <span class="o">/</span> <span class="n">maxi_l</span><span class="p">)</span>  <span class="c"># number of max seeks we&#39;ll have to do</span>
-            <span class="n">rem</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">seeksize</span> <span class="o">%</span> <span class="n">maxi_l</span><span class="p">)</span>  <span class="c"># amount leftover to do once max seeks done</span>
+            <span class="n">nreps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">seeksize</span> <span class="o">/</span> <span class="n">maxi_l</span><span class="p">)</span>  <span class="c1"># number of max seeks we&#39;ll have to do</span>
+            <span class="n">rem</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">seeksize</span> <span class="o">%</span> <span class="n">maxi_l</span><span class="p">)</span>  <span class="c1"># amount leftover to do once max seeks done</span>
 
             <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nreps</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">trzfile</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">maxint</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -455,26 +455,26 @@
     <span class="k">def</span> <span class="nf">_reopen</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">open_trajectory</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_read_trz_header</span><span class="p">()</span>  <span class="c"># Moves to start of first frame</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_read_trz_header</span><span class="p">()</span>  <span class="c1"># Moves to start of first frame</span>
 
 <div class="viewcode-block" id="TRZReader.open_trajectory"><a class="viewcode-back" href="../../../documentation_pages/coordinates/TRZ.html#MDAnalysis.coordinates.TRZ.TRZReader.open_trajectory">[docs]</a>    <span class="k">def</span> <span class="nf">open_trajectory</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Open the trajectory file&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">trzfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="n">errno</span><span class="o">.</span><span class="n">EALREADY</span><span class="p">,</span> <span class="s">&#39;TRZ file already opened&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="n">errno</span><span class="o">.</span><span class="n">EALREADY</span><span class="p">,</span> <span class="s1">&#39;TRZ file already opened&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="n">errno</span><span class="o">.</span><span class="n">ENOENT</span><span class="p">,</span> <span class="s">&#39;TRZ file not found&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="n">errno</span><span class="o">.</span><span class="n">ENOENT</span><span class="p">,</span> <span class="s1">&#39;TRZ file not found&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">trzfile</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">anyopen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s">&#39;rb&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trzfile</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">anyopen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
 
-        <span class="c">#Reset ts</span>
+        <span class="c1">#Reset ts</span>
         <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ts</span>
         <span class="n">ts</span><span class="o">.</span><span class="n">frame</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">trzfile</span>
-</div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">trzfile</span></div>
+
     <span class="k">def</span> <span class="nf">Writer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">n_atoms</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">n_atoms</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="c"># guess that they want to write the whole timestep unless told otherwise?</span>
+            <span class="c1"># guess that they want to write the whole timestep unless told otherwise?</span>
             <span class="n">n_atoms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">n_atoms</span>
         <span class="k">return</span> <span class="n">TRZWriter</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">n_atoms</span><span class="p">)</span>
 
@@ -482,9 +482,9 @@
         <span class="sd">&quot;&quot;&quot;Close trz file if it was open&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">trzfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">trzfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">trzfile</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trzfile</span> <span class="o">=</span> <span class="bp">None</span></div></div>
 
-</div></div>
+
 <div class="viewcode-block" id="TRZWriter"><a class="viewcode-back" href="../../../documentation_pages/coordinates/TRZ.html#MDAnalysis.coordinates.TRZ.TRZWriter">[docs]</a><span class="k">class</span> <span class="nc">TRZWriter</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Writer</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Writes a TRZ format trajectory.</span>
 
@@ -492,12 +492,12 @@
 <span class="sd">       ``W = TRZWriter(trzfilename, n_atoms, title=&#39;TRZ&#39;)``</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">format</span> <span class="o">=</span> <span class="s">&#39;TRZ&#39;</span>
+    <span class="n">format</span> <span class="o">=</span> <span class="s1">&#39;TRZ&#39;</span>
     <span class="n">multiframe</span> <span class="o">=</span> <span class="bp">True</span>
 
-    <span class="n">units</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;time&#39;</span><span class="p">:</span> <span class="s">&#39;ps&#39;</span><span class="p">,</span> <span class="s">&#39;length&#39;</span><span class="p">:</span> <span class="s">&#39;nm&#39;</span><span class="p">,</span> <span class="s">&#39;velocity&#39;</span><span class="p">:</span> <span class="s">&#39;nm/ps&#39;</span><span class="p">}</span>
+    <span class="n">units</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="s1">&#39;ps&#39;</span><span class="p">,</span> <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="s1">&#39;nm&#39;</span><span class="p">,</span> <span class="s1">&#39;velocity&#39;</span><span class="p">:</span> <span class="s1">&#39;nm/ps&#39;</span><span class="p">}</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">n_atoms</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&#39;TRZ&#39;</span><span class="p">,</span> <span class="n">convert_units</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">n_atoms</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;TRZ&#39;</span><span class="p">,</span> <span class="n">convert_units</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create a TRZWriter</span>
 
 <span class="sd">        :Arguments:</span>
@@ -516,144 +516,144 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
         <span class="k">if</span> <span class="n">n_atoms</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;TRZWriter requires the n_atoms keyword&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;TRZWriter requires the n_atoms keyword&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">n_atoms</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;TRZWriter: no atoms in output trajectory&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;TRZWriter: no atoms in output trajectory&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_atoms</span> <span class="o">=</span> <span class="n">n_atoms</span>
 
         <span class="k">if</span> <span class="n">convert_units</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">convert_units</span> <span class="o">=</span> <span class="n">flags</span><span class="p">[</span><span class="s">&#39;convert_lengths&#39;</span><span class="p">]</span>
+            <span class="n">convert_units</span> <span class="o">=</span> <span class="n">flags</span><span class="p">[</span><span class="s1">&#39;convert_lengths&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">convert_units</span> <span class="o">=</span> <span class="n">convert_units</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">trzfile</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">anyopen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s">&#39;wb&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trzfile</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">anyopen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_writeheader</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
 
-        <span class="n">floatsize</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">n_atoms</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;f4&#39;</span>
+        <span class="n">floatsize</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">n_atoms</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;f4&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">frameDtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">([</span>
-            <span class="p">(</span><span class="s">&#39;p1a&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;nframe&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;ntrj&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;natoms&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;treal&#39;</span><span class="p">,</span> <span class="s">&#39;f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;p1b&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;p2a&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;box&#39;</span><span class="p">,</span> <span class="s">&#39;9f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;p2b&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;p3a&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;pressure&#39;</span><span class="p">,</span> <span class="s">&#39;f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;ptensor&#39;</span><span class="p">,</span> <span class="s">&#39;6f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;p3b&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;p4a&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;six&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;etot&#39;</span><span class="p">,</span> <span class="s">&#39;f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;ptot&#39;</span><span class="p">,</span> <span class="s">&#39;f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;ek&#39;</span><span class="p">,</span> <span class="s">&#39;f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;T&#39;</span><span class="p">,</span> <span class="s">&#39;f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;blanks&#39;</span><span class="p">,</span> <span class="s">&#39;2f8&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;p4b&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;p5a&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;rx&#39;</span><span class="p">,</span> <span class="n">floatsize</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;p5b&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;p6a&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;ry&#39;</span><span class="p">,</span> <span class="n">floatsize</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;p6b&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;p7a&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;rz&#39;</span><span class="p">,</span> <span class="n">floatsize</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;p7b&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;p8a&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;vx&#39;</span><span class="p">,</span> <span class="n">floatsize</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;p8b&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;p9a&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;vy&#39;</span><span class="p">,</span> <span class="n">floatsize</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;p9b&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;p10a&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;vz&#39;</span><span class="p">,</span> <span class="n">floatsize</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;p10b&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">)])</span>
+            <span class="p">(</span><span class="s1">&#39;p1a&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;nframe&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;ntrj&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;natoms&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;treal&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p1b&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p2a&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;box&#39;</span><span class="p">,</span> <span class="s1">&#39;9f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p2b&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p3a&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;pressure&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;ptensor&#39;</span><span class="p">,</span> <span class="s1">&#39;6f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p3b&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p4a&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;six&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;etot&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;ptot&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;ek&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;blanks&#39;</span><span class="p">,</span> <span class="s1">&#39;2f8&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p4b&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p5a&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;rx&#39;</span><span class="p">,</span> <span class="n">floatsize</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p5b&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p6a&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;ry&#39;</span><span class="p">,</span> <span class="n">floatsize</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p6b&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p7a&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;rz&#39;</span><span class="p">,</span> <span class="n">floatsize</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p7b&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p8a&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;vx&#39;</span><span class="p">,</span> <span class="n">floatsize</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p8b&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p9a&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;vy&#39;</span><span class="p">,</span> <span class="n">floatsize</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p9b&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p10a&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;vz&#39;</span><span class="p">,</span> <span class="n">floatsize</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;p10b&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">)])</span>
 
     <span class="k">def</span> <span class="nf">_writeheader</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
         <span class="n">hdt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">([</span>
-            <span class="p">(</span><span class="s">&#39;pad1&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;title&#39;</span><span class="p">,</span> <span class="s">&#39;80c&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;pad2&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s">&#39;pad3&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;nrec&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;pad4&#39;</span><span class="p">,</span> <span class="s">&#39;i4&#39;</span><span class="p">)])</span>
+            <span class="p">(</span><span class="s1">&#39;pad1&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;80c&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pad2&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;pad3&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;nrec&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pad4&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">)])</span>
         <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">hdt</span><span class="p">)</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;pad1&#39;</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="s">&#39;pad2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">80</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;pad3&#39;</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="s">&#39;pad4&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;nrec&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;pad1&#39;</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="s1">&#39;pad2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">80</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;pad3&#39;</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="s1">&#39;pad4&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;nrec&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
         <span class="n">out</span><span class="o">.</span><span class="n">tofile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trzfile</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">write_next_timestep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="p">):</span>
-        <span class="c"># Check size of ts is same as initial</span>
+        <span class="c1"># Check size of ts is same as initial</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">ts</span><span class="o">.</span><span class="n">n_atoms</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Number of atoms in ts different to initialisation&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Number of atoms in ts different to initialisation&quot;</span><span class="p">)</span>
 
-        <span class="c"># Gather data, faking it when unavailable</span>
+        <span class="c1"># Gather data, faking it when unavailable</span>
         <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">faked_attrs</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">att</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;pressure&#39;</span><span class="p">,</span> <span class="s">&#39;pressure_tensor&#39;</span><span class="p">,</span> <span class="s">&#39;total_energy&#39;</span><span class="p">,</span> <span class="s">&#39;potential_energy&#39;</span><span class="p">,</span>
-                    <span class="s">&#39;kinetic_energy&#39;</span><span class="p">,</span> <span class="s">&#39;temperature&#39;</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">att</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;pressure&#39;</span><span class="p">,</span> <span class="s1">&#39;pressure_tensor&#39;</span><span class="p">,</span> <span class="s1">&#39;total_energy&#39;</span><span class="p">,</span> <span class="s1">&#39;potential_energy&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;kinetic_energy&#39;</span><span class="p">,</span> <span class="s1">&#39;temperature&#39;</span><span class="p">]:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">data</span><span class="p">[</span><span class="n">att</span><span class="p">]</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">att</span><span class="p">]</span>
             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">att</span> <span class="o">==</span> <span class="s">&#39;pressure_tensor&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">att</span> <span class="o">==</span> <span class="s1">&#39;pressure_tensor&#39;</span><span class="p">:</span>
                     <span class="n">data</span><span class="p">[</span><span class="n">att</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">data</span><span class="p">[</span><span class="n">att</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
                 <span class="n">faked_attrs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">att</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">data</span><span class="p">[</span><span class="s">&#39;step&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">_frame</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;step&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">_frame</span>
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-            <span class="n">data</span><span class="p">[</span><span class="s">&#39;step&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">frame</span>
-            <span class="n">faked_attrs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;step&#39;</span><span class="p">)</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;step&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">frame</span>
+            <span class="n">faked_attrs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">data</span><span class="p">[</span><span class="s">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">time</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">time</span>
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-            <span class="n">data</span><span class="p">[</span><span class="s">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span><span class="p">)</span>
-            <span class="n">faked_attrs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;time&#39;</span><span class="p">)</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span><span class="p">)</span>
+            <span class="n">faked_attrs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">faked_attrs</span><span class="p">:</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&quot;Timestep didn&#39;t have the following attributes: &#39;{0}&#39;, &quot;</span>
-                          <span class="s">&quot;these will be set to 0 in the output trajectory&quot;</span>
-                          <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">faked_attrs</span><span class="p">)))</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Timestep didn&#39;t have the following attributes: &#39;{0}&#39;, &quot;</span>
+                          <span class="s2">&quot;these will be set to 0 in the output trajectory&quot;</span>
+                          <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">faked_attrs</span><span class="p">)))</span>
 
-        <span class="c"># Convert other stuff into our format</span>
+        <span class="c1"># Convert other stuff into our format</span>
         <span class="n">unitcell</span> <span class="o">=</span> <span class="n">triclinic_vectors</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">dimensions</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">vels</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">_velocities</span>
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-            <span class="n">vels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s">&#39;F&#39;</span><span class="p">)</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&quot;Timestep didn&#39;t have velocity information, &quot;</span>
-                          <span class="s">&quot;this will be set to zero in output trajectory. &quot;</span><span class="p">)</span>
+            <span class="n">vels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Timestep didn&#39;t have velocity information, &quot;</span>
+                          <span class="s2">&quot;this will be set to zero in output trajectory. &quot;</span><span class="p">)</span>
 
         <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((),</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">frameDtype</span><span class="p">)</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;p1a&#39;</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="s">&#39;p1b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;nframe&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">frame</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c"># TRZ wants 1 based</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;ntrj&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;step&#39;</span><span class="p">]</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;treal&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;time&#39;</span><span class="p">]</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;p2a&#39;</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="s">&#39;p2b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">72</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;box&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_pos_to_native</span><span class="p">(</span><span class="n">unitcell</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;p3a&#39;</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="s">&#39;p3b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">56</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;pressure&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;pressure&#39;</span><span class="p">]</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;ptensor&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;pressure_tensor&#39;</span><span class="p">]</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;p4a&#39;</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="s">&#39;p4b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">60</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;six&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;etot&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;total_energy&#39;</span><span class="p">]</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;ptot&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;potential_energy&#39;</span><span class="p">]</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;ek&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;kinetic_energy&#39;</span><span class="p">]</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;T&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;temperature&#39;</span><span class="p">]</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;blanks&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span>
-        <span class="n">size</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">n_atoms</span> <span class="o">*</span> <span class="mi">4</span>  <span class="c"># size of float for vels &amp; coords</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;p5a&#39;</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="s">&#39;p5b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">size</span><span class="p">,</span> <span class="n">size</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;rx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_pos_to_native</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">_x</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;p6a&#39;</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="s">&#39;p6b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">size</span><span class="p">,</span> <span class="n">size</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;ry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_pos_to_native</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">_y</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;p7a&#39;</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="s">&#39;p7b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">size</span><span class="p">,</span> <span class="n">size</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;rz&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_pos_to_native</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">_z</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;p8a&#39;</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="s">&#39;p8b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">size</span><span class="p">,</span> <span class="n">size</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;vx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_velocities_to_native</span><span class="p">(</span><span class="n">vels</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;p9a&#39;</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="s">&#39;p9b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">size</span><span class="p">,</span> <span class="n">size</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;vy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_velocities_to_native</span><span class="p">(</span><span class="n">vels</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;p10a&#39;</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="s">&#39;p10b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">size</span><span class="p">,</span> <span class="n">size</span>
-        <span class="n">out</span><span class="p">[</span><span class="s">&#39;vz&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_velocities_to_native</span><span class="p">(</span><span class="n">vels</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;p1a&#39;</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="s1">&#39;p1b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;nframe&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">frame</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1"># TRZ wants 1 based</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;ntrj&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;step&#39;</span><span class="p">]</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;treal&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;p2a&#39;</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="s1">&#39;p2b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">72</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;box&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_pos_to_native</span><span class="p">(</span><span class="n">unitcell</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;p3a&#39;</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="s1">&#39;p3b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">56</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;pressure&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;pressure&#39;</span><span class="p">]</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;ptensor&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;pressure_tensor&#39;</span><span class="p">]</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;p4a&#39;</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="s1">&#39;p4b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">60</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;six&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;etot&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;total_energy&#39;</span><span class="p">]</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;ptot&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;potential_energy&#39;</span><span class="p">]</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;ek&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;kinetic_energy&#39;</span><span class="p">]</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">]</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;blanks&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">n_atoms</span> <span class="o">*</span> <span class="mi">4</span>  <span class="c1"># size of float for vels &amp; coords</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;p5a&#39;</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="s1">&#39;p5b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">size</span><span class="p">,</span> <span class="n">size</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;rx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_pos_to_native</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">_x</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;p6a&#39;</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="s1">&#39;p6b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">size</span><span class="p">,</span> <span class="n">size</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;ry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_pos_to_native</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">_y</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;p7a&#39;</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="s1">&#39;p7b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">size</span><span class="p">,</span> <span class="n">size</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;rz&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_pos_to_native</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">_z</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;p8a&#39;</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="s1">&#39;p8b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">size</span><span class="p">,</span> <span class="n">size</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;vx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_velocities_to_native</span><span class="p">(</span><span class="n">vels</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;p9a&#39;</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="s1">&#39;p9b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">size</span><span class="p">,</span> <span class="n">size</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;vy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_velocities_to_native</span><span class="p">(</span><span class="n">vels</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;p10a&#39;</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="s1">&#39;p10b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">size</span><span class="p">,</span> <span class="n">size</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;vz&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_velocities_to_native</span><span class="p">(</span><span class="n">vels</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
         <span class="n">out</span><span class="o">.</span><span class="n">tofile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trzfile</span><span class="p">)</span>
 
 <div class="viewcode-block" id="TRZWriter.close"><a class="viewcode-back" href="../../../documentation_pages/coordinates/TRZ.html#MDAnalysis.coordinates.TRZ.TRZWriter.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -694,7 +694,7 @@
     Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl,
     Gorman Stock, Isaac Virshup, Zhuyi Xue, Carlos Yáñez S.,
     and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>
 </html>

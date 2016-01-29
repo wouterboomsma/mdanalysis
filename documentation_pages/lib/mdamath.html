@@ -201,11 +201,17 @@ vectors</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*dimensions*</strong> &#8211; list of box lengths and angles (in degrees) such as
-[A,B,C,alpha,beta,gamma]</td>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>dimensions</em></dt>
+<dd><p class="first last">list of box lengths and angles (in degrees) such as
+[A,B,C,alpha,beta,gamma]</p>
+</dd>
+</dl>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">numpy 3x3 array B, with B[0] = first box vector,
-B[1] = second vector, B[2] third box vector.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">numpy 3x3 array B, with B[0] = first box vector,
+B[1] = second vector, B[2] third box vector.</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -229,11 +235,17 @@ triclinic box vectors from <a class="reference internal" href="#MDAnalysis.lib.m
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*dimensions*</strong> &#8211; list of box lengths and angles (in degrees) such as
-[A,B,C,alpha,beta,gamma]</td>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>dimensions</em></dt>
+<dd><p class="first last">list of box lengths and angles (in degrees) such as
+[A,B,C,alpha,beta,gamma]</p>
+</dd>
+</dl>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">numpy 3x3 array B, with B[0] = first box vector,
-B[1] = second vector, B[2] third box vector.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">numpy 3x3 array B, with B[0] = first box vector,
+B[1] = second vector, B[2] third box vector.</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -247,9 +259,13 @@ B[1] = second vector, B[2] third box vector.</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*atomgroup*</strong> &#8211; The <a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.AtomGroup.AtomGroup</span></code></a> to work with.
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>atomgroup</em></dt>
+<dd><p class="first last">The <a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.AtomGroup.AtomGroup</span></code></a> to work with.
 The positions of this are modified in place.  All these atoms
 must belong in the same molecule or fragment.</p>
+</dd>
+</dl>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Keywords:</th><td class="field-body"><dl class="first docutils">
@@ -263,17 +279,17 @@ Defaults to atom 0 in the atomgroup.</p>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">None</span></code>.  Atom positions are modified in place</p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last">
-<li><p class="first">:exc:<code class="docutils literal"><span class="pre">NoDataError</span></code> &#8211;</p>
-<p>if there are no bonds present.
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><dl class="first last docutils">
+<dt><cite>NoDataError</cite></dt>
+<dd><p class="first last">if there are no bonds present.
 (See <a class="reference internal" href="../topology/core.html#MDAnalysis.topology.core.guess_bonds" title="MDAnalysis.topology.core.guess_bonds"><code class="xref py py-func docutils literal"><span class="pre">guess_bonds()</span></code></a>)</p>
-</li>
-<li><p class="first">:exc:<code class="docutils literal"><span class="pre">ValueError</span></code> &#8211;</p>
-<p>if the algorithm fails to work.  This is usually
+</dd>
+<dt><cite>ValueError</cite></dt>
+<dd><p class="first last">if the algorithm fails to work.  This is usually
 caused by the atomgroup not being a single fragment.
 (ie the molecule can&#8217;t be traversed by following bonds)</p>
-</li>
-</ul>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -296,20 +312,20 @@ such as calculating the center of mass of the molecule.</p>
 <p>Usage:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">MDAnalysis.util.mdamath</span> <span class="kn">import</span> <span class="n">make_whole</span>
 
-<span class="c"># This algorithm requires bonds, these can be guessed!</span>
+<span class="c1"># This algorithm requires bonds, these can be guessed!</span>
 <span class="n">u</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="o">......</span><span class="p">,</span> <span class="n">guess_bonds</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
-<span class="c"># MDAnalysis can split molecules into their fragments</span>
-<span class="c"># based on bonding information.</span>
-<span class="c"># Note that this function will only handle a single fragment</span>
-<span class="c"># at a time, necessitating a loop.</span>
+<span class="c1"># MDAnalysis can split molecules into their fragments</span>
+<span class="c1"># based on bonding information.</span>
+<span class="c1"># Note that this function will only handle a single fragment</span>
+<span class="c1"># at a time, necessitating a loop.</span>
 <span class="k">for</span> <span class="n">frag</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">fragments</span><span class="p">:</span>
     <span class="n">make_whole</span><span class="p">(</span><span class="n">frag</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Alternatively, to keep a single atom in place as the anchor:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c"># This will mean that atomgroup[10] will NOT get moved,</span>
-<span class="c"># and all other atoms will move (if necessary).</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c1"># This will mean that atomgroup[10] will NOT get moved,</span>
+<span class="c1"># and all other atoms will move (if necessary).</span>
 <span class="n">make_whole</span><span class="p">(</span><span class="n">atomgroup</span><span class="p">,</span> <span class="n">reference_atom</span><span class="o">=</span><span class="n">atomgroup</span><span class="p">[</span><span class="mi">10</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -344,11 +360,17 @@ triclinic box vectors from <a class="reference internal" href="#MDAnalysis.lib.m
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*dimensions*</strong> &#8211; list of box lengths and angles (in degrees) such as
-[A,B,C,alpha,beta,gamma]</td>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>dimensions</em></dt>
+<dd><p class="first last">list of box lengths and angles (in degrees) such as
+[A,B,C,alpha,beta,gamma]</p>
+</dd>
+</dl>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">numpy 3x3 array B, with B[0] = first box vector,
-B[1] = second vector, B[2] third box vector.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">numpy 3x3 array B, with B[0] = first box vector,
+B[1] = second vector, B[2] third box vector.</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -384,9 +406,13 @@ A----&gt;B
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*atomgroup*</strong> &#8211; The <a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.AtomGroup.AtomGroup</span></code></a> to work with.
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>atomgroup</em></dt>
+<dd><p class="first last">The <a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.AtomGroup.AtomGroup</span></code></a> to work with.
 The positions of this are modified in place.  All these atoms
 must belong in the same molecule or fragment.</p>
+</dd>
+</dl>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Keywords:</th><td class="field-body"><dl class="first docutils">
@@ -400,17 +426,17 @@ Defaults to atom 0 in the atomgroup.</p>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">None</span></code>.  Atom positions are modified in place</p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last">
-<li><p class="first">:exc:<code class="docutils literal"><span class="pre">NoDataError</span></code> &#8211;</p>
-<p>if there are no bonds present.
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><dl class="first last docutils">
+<dt><cite>NoDataError</cite></dt>
+<dd><p class="first last">if there are no bonds present.
 (See <a class="reference internal" href="../topology/core.html#MDAnalysis.topology.core.guess_bonds" title="MDAnalysis.topology.core.guess_bonds"><code class="xref py py-func docutils literal"><span class="pre">guess_bonds()</span></code></a>)</p>
-</li>
-<li><p class="first">:exc:<code class="docutils literal"><span class="pre">ValueError</span></code> &#8211;</p>
-<p>if the algorithm fails to work.  This is usually
+</dd>
+<dt><cite>ValueError</cite></dt>
+<dd><p class="first last">if the algorithm fails to work.  This is usually
 caused by the atomgroup not being a single fragment.
 (ie the molecule can&#8217;t be traversed by following bonds)</p>
-</li>
-</ul>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -433,20 +459,20 @@ such as calculating the center of mass of the molecule.</p>
 <p>Usage:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">MDAnalysis.util.mdamath</span> <span class="kn">import</span> <span class="n">make_whole</span>
 
-<span class="c"># This algorithm requires bonds, these can be guessed!</span>
+<span class="c1"># This algorithm requires bonds, these can be guessed!</span>
 <span class="n">u</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="o">......</span><span class="p">,</span> <span class="n">guess_bonds</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
-<span class="c"># MDAnalysis can split molecules into their fragments</span>
-<span class="c"># based on bonding information.</span>
-<span class="c"># Note that this function will only handle a single fragment</span>
-<span class="c"># at a time, necessitating a loop.</span>
+<span class="c1"># MDAnalysis can split molecules into their fragments</span>
+<span class="c1"># based on bonding information.</span>
+<span class="c1"># Note that this function will only handle a single fragment</span>
+<span class="c1"># at a time, necessitating a loop.</span>
 <span class="k">for</span> <span class="n">frag</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">fragments</span><span class="p">:</span>
     <span class="n">make_whole</span><span class="p">(</span><span class="n">frag</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Alternatively, to keep a single atom in place as the anchor:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c"># This will mean that atomgroup[10] will NOT get moved,</span>
-<span class="c"># and all other atoms will move (if necessary).</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c1"># This will mean that atomgroup[10] will NOT get moved,</span>
+<span class="c1"># and all other atoms will move (if necessary).</span>
 <span class="n">make_whole</span><span class="p">(</span><span class="n">atomgroup</span><span class="p">,</span> <span class="n">reference_atom</span><span class="o">=</span><span class="n">atomgroup</span><span class="p">[</span><span class="mi">10</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -534,11 +560,17 @@ vectors</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*dimensions*</strong> &#8211; list of box lengths and angles (in degrees) such as
-[A,B,C,alpha,beta,gamma]</td>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>dimensions</em></dt>
+<dd><p class="first last">list of box lengths and angles (in degrees) such as
+[A,B,C,alpha,beta,gamma]</p>
+</dd>
+</dl>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">numpy 3x3 array B, with B[0] = first box vector,
-B[1] = second vector, B[2] third box vector.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">numpy 3x3 array B, with B[0] = first box vector,
+B[1] = second vector, B[2] third box vector.</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -591,7 +623,7 @@ i.e. parallel to (1,0,0).</p>
     Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl,
     Gorman Stock, Isaac Virshup, Zhuyi Xue, Carlos Yáñez S.,
     and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>
 </html>

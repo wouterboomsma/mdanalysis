@@ -72,20 +72,20 @@
           <div class="body" role="main">
             
   <h1>Source code for MDAnalysis.topology.PQRParser</h1><div class="highlight"><pre>
-<span class="c"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
-<span class="c"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 </span>
-<span class="c">#</span>
-<span class="c"># MDAnalysis --- http://www.MDAnalysis.org</span>
-<span class="c"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
-<span class="c"># and contributors (see AUTHORS for the full list)</span>
-<span class="c">#</span>
-<span class="c"># Released under the GNU Public Licence, v2 or any higher version</span>
-<span class="c">#</span>
-<span class="c"># Please cite your use of MDAnalysis in published work:</span>
-<span class="c"># N. Michaud-Agrawal, E. J. Denning, T. B. Woolf, and O. Beckstein.</span>
-<span class="c"># MDAnalysis: A Toolkit for the Analysis of Molecular Dynamics Simulations.</span>
-<span class="c"># J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787</span>
-<span class="c">#</span>
+<span class="c1"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
+<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 </span>
+<span class="c1">#</span>
+<span class="c1"># MDAnalysis --- http://www.MDAnalysis.org</span>
+<span class="c1"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
+<span class="c1"># and contributors (see AUTHORS for the full list)</span>
+<span class="c1">#</span>
+<span class="c1"># Released under the GNU Public Licence, v2 or any higher version</span>
+<span class="c1">#</span>
+<span class="c1"># Please cite your use of MDAnalysis in published work:</span>
+<span class="c1"># N. Michaud-Agrawal, E. J. Denning, T. B. Woolf, and O. Beckstein.</span>
+<span class="c1"># MDAnalysis: A Toolkit for the Analysis of Molecular Dynamics Simulations.</span>
+<span class="c1"># J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787</span>
+<span class="c1">#</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">PQR topology parser</span>
@@ -128,7 +128,7 @@
 <span class="sd">       Read chainID from a PQR file and use it as segid (before we always used</span>
 <span class="sd">       &#39;SYSTEM&#39; as the new segid).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">format</span> <span class="o">=</span> <span class="s">&#39;PQR&#39;</span>
+    <span class="n">format</span> <span class="o">=</span> <span class="s1">&#39;PQR&#39;</span>
 
 <div class="viewcode-block" id="PQRParser.parse"><a class="viewcode-back" href="../../../documentation_pages/topology/PQRParser.html#MDAnalysis.topology.PQRParser.PQRParser.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Parse atom information from PQR file *filename*.</span>
@@ -144,22 +144,22 @@
         <span class="n">pqr</span> <span class="o">=</span> <span class="n">PQRReader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
 
         <span class="n">atoms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parseatoms</span><span class="p">(</span><span class="n">pqr</span><span class="p">)</span>
-        <span class="n">structure</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;atoms&#39;</span><span class="p">:</span> <span class="n">atoms</span><span class="p">}</span>
+        <span class="n">structure</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;atoms&#39;</span><span class="p">:</span> <span class="n">atoms</span><span class="p">}</span>
 
-        <span class="k">return</span> <span class="n">structure</span>
-</div>
+        <span class="k">return</span> <span class="n">structure</span></div>
+
     <span class="k">def</span> <span class="nf">_parseatoms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pqr</span><span class="p">):</span>
         <span class="n">atoms</span> <span class="o">=</span> <span class="p">[]</span>
 
-        <span class="c"># translate list of atoms to MDAnalysis Atom.</span>
+        <span class="c1"># translate list of atoms to MDAnalysis Atom.</span>
         <span class="k">for</span> <span class="n">iatom</span><span class="p">,</span> <span class="n">atom</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pqr</span><span class="o">.</span><span class="n">_atoms</span><span class="p">):</span>
             <span class="n">atomname</span> <span class="o">=</span> <span class="n">atom</span><span class="o">.</span><span class="n">name</span>
             <span class="n">atomtype</span> <span class="o">=</span> <span class="n">guess_atom_type</span><span class="p">(</span><span class="n">atomname</span><span class="p">)</span>
             <span class="n">resname</span> <span class="o">=</span> <span class="n">atom</span><span class="o">.</span><span class="n">resName</span>
             <span class="n">resid</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">resSeq</span><span class="p">)</span>
             <span class="n">chain</span> <span class="o">=</span> <span class="n">atom</span><span class="o">.</span><span class="n">chainID</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-            <span class="c"># no empty segids (or Universe throws IndexError)</span>
-            <span class="n">segid</span> <span class="o">=</span> <span class="n">atom</span><span class="o">.</span><span class="n">segID</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">or</span> <span class="n">chain</span> <span class="ow">or</span> <span class="s">&quot;SYSTEM&quot;</span>
+            <span class="c1"># no empty segids (or Universe throws IndexError)</span>
+            <span class="n">segid</span> <span class="o">=</span> <span class="n">atom</span><span class="o">.</span><span class="n">segID</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">or</span> <span class="n">chain</span> <span class="ow">or</span> <span class="s2">&quot;SYSTEM&quot;</span>
             <span class="n">mass</span> <span class="o">=</span> <span class="n">guess_atom_mass</span><span class="p">(</span><span class="n">atomname</span><span class="p">)</span>
             <span class="n">charge</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">charge</span><span class="p">)</span>
             <span class="n">radius</span> <span class="o">=</span> <span class="n">atom</span><span class="o">.</span><span class="n">radius</span>
@@ -199,7 +199,7 @@
     Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl,
     Gorman Stock, Isaac Virshup, Zhuyi Xue, Carlos Yáñez S.,
     and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>
 </html>

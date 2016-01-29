@@ -72,21 +72,21 @@
           <div class="body" role="main">
             
   <h1>Source code for MDAnalysis.core.__init__</h1><div class="highlight"><pre>
-<span class="c"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
-<span class="c"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 </span>
-<span class="c">#</span>
-<span class="c"># MDAnalysis --- http://www.MDAnalysis.org</span>
-<span class="c"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
-<span class="c"># and contributors (see AUTHORS for the full list)</span>
-<span class="c">#</span>
-<span class="c"># Released under the GNU Public Licence, v2 or any higher version</span>
-<span class="c">#</span>
-<span class="c"># Please cite your use of MDAnalysis in published work:</span>
-<span class="c">#</span>
-<span class="c"># N. Michaud-Agrawal, E. J. Denning, T. B. Woolf, and O. Beckstein.</span>
-<span class="c"># MDAnalysis: A Toolkit for the Analysis of Molecular Dynamics Simulations.</span>
-<span class="c"># J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787</span>
-<span class="c">#</span>
+<span class="c1"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
+<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 </span>
+<span class="c1">#</span>
+<span class="c1"># MDAnalysis --- http://www.MDAnalysis.org</span>
+<span class="c1"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
+<span class="c1"># and contributors (see AUTHORS for the full list)</span>
+<span class="c1">#</span>
+<span class="c1"># Released under the GNU Public Licence, v2 or any higher version</span>
+<span class="c1">#</span>
+<span class="c1"># Please cite your use of MDAnalysis in published work:</span>
+<span class="c1">#</span>
+<span class="c1"># N. Michaud-Agrawal, E. J. Denning, T. B. Woolf, and O. Beckstein.</span>
+<span class="c1"># MDAnalysis: A Toolkit for the Analysis of Molecular Dynamics Simulations.</span>
+<span class="c1"># J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787</span>
+<span class="c1">#</span>
 
 
 <span class="sd">&quot;&quot;&quot;</span>
@@ -158,11 +158,11 @@
 
 <span class="kn">import</span> <span class="nn">six</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;AtomGroup&#39;</span><span class="p">,</span> <span class="s">&#39;Selection&#39;</span><span class="p">,</span> <span class="s">&#39;Timeseries&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;AtomGroup&#39;</span><span class="p">,</span> <span class="s1">&#39;Selection&#39;</span><span class="p">,</span> <span class="s1">&#39;Timeseries&#39;</span><span class="p">]</span>
 
 
-<span class="c"># set up flags for core routines (more convoluted than strictly necessary but should</span>
-<span class="c"># be clean to add more flags if needed)</span>
+<span class="c1"># set up flags for core routines (more convoluted than strictly necessary but should</span>
+<span class="c1"># be clean to add more flags if needed)</span>
 <div class="viewcode-block" id="Flags"><a class="viewcode-back" href="../../../documentation_pages/core/init.html#MDAnalysis.core.__init__.Flags">[docs]</a><span class="k">class</span> <span class="nc">Flags</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Global registry of flags. Acts like a dict for item access.</span>
 
@@ -189,16 +189,16 @@
 
 <div class="viewcode-block" id="Flags.doc"><a class="viewcode-back" href="../../../documentation_pages/core/init.html#MDAnalysis.core.__init__.Flags.doc">[docs]</a>    <span class="k">def</span> <span class="nf">doc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Shows doc strings for all flags.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s">&quot;</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">flag</span><span class="o">.</span><span class="n">__doc__</span> <span class="k">for</span> <span class="n">flag</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_itervalues</span><span class="p">()])</span>
-</div>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">flag</span><span class="o">.</span><span class="n">__doc__</span> <span class="k">for</span> <span class="n">flag</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_itervalues</span><span class="p">()])</span></div>
+
 <div class="viewcode-block" id="Flags.register"><a class="viewcode-back" href="../../../documentation_pages/core/init.html#MDAnalysis.core.__init__.Flags.register">[docs]</a>    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Register a new Flag instance with the Flags registry.&quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Flags</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__setitem__</span><span class="p">(</span><span class="n">flag</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">flag</span><span class="p">)</span>
-</div>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Flags</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__setitem__</span><span class="p">(</span><span class="n">flag</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">flag</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="Flags.update"><a class="viewcode-back" href="../../../documentation_pages/core/init.html#MDAnalysis.core.__init__.Flags.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">flags</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Update Flags registry with a list of Flag instances.&quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">Flags</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">([(</span><span class="n">flag</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">flag</span><span class="p">)</span> <span class="k">for</span> <span class="n">flag</span> <span class="ow">in</span> <span class="n">flags</span><span class="p">])</span>
-</div>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Flags</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">([(</span><span class="n">flag</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">flag</span><span class="p">)</span> <span class="k">for</span> <span class="n">flag</span> <span class="ow">in</span> <span class="n">flags</span><span class="p">])</span></div>
+
     <span class="k">def</span> <span class="nf">setdefault</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
@@ -229,17 +229,17 @@
         <span class="k">return</span> <span class="p">[(</span><span class="n">flag</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">flag</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">flag</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_itervalues</span><span class="p">()]</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">())</span></div>
 
-</div>
+
 <span class="k">class</span> <span class="nc">FlagsDynamicDocs</span><span class="p">(</span><span class="n">Flags</span><span class="p">):</span>
-    <span class="c"># docs are generated on the fly for interactive use; but because</span>
-    <span class="c"># this does not work well with the sphinx documentation system</span>
-    <span class="c"># (&quot;AttributeError: &#39;property&#39; object has no attribute</span>
-    <span class="c"># &#39;expandtabs&#39;&quot;) we split the class...</span>
+    <span class="c1"># docs are generated on the fly for interactive use; but because</span>
+    <span class="c1"># this does not work well with the sphinx documentation system</span>
+    <span class="c1"># (&quot;AttributeError: &#39;property&#39; object has no attribute</span>
+    <span class="c1"># &#39;expandtabs&#39;&quot;) we split the class...</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">__doc__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c"># generate dynamic docs on all flags</span>
+        <span class="c1"># generate dynamic docs on all flags</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">doc</span><span class="p">()</span>
 
 
@@ -278,9 +278,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">default</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">default</span> <span class="o">=</span> <span class="n">default</span>
-        <span class="c"># {v1:v1,v2:v1,v3:v3, ...} mapping of allowed values to canonical ones</span>
+        <span class="c1"># {v1:v1,v2:v1,v3:v3, ...} mapping of allowed values to canonical ones</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span> <span class="o">=</span> <span class="n">mapping</span> <span class="ow">or</span> <span class="n">IdentityMapping</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_doctemplate</span> <span class="o">=</span> <span class="s">&quot;**</span><span class="si">%(name)s</span><span class="s">** = *</span><span class="si">%(value)r</span><span class="s">*</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="n">doc</span> <span class="ow">or</span> <span class="s">&quot;*undocumented flag*&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_doctemplate</span> <span class="o">=</span> <span class="s2">&quot;**</span><span class="si">%(name)s</span><span class="s2">** = *</span><span class="si">%(value)r</span><span class="s2">*</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="n">doc</span> <span class="ow">or</span> <span class="s2">&quot;*undocumented flag*&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
@@ -290,27 +290,27 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="n">value</span><span class="p">]</span>
             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;flag must be None or one of &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;flag must be None or one of &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 
 <div class="viewcode-block" id="Flag.prop"><a class="viewcode-back" href="../../../documentation_pages/core/init.html#MDAnalysis.core.__init__.Flag.prop">[docs]</a>    <span class="k">def</span> <span class="nf">prop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Use this for ``property(**flag.prop())``&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s">&#39;fget&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">,</span> <span class="s">&#39;fset&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">,</span> <span class="s">&#39;doc&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__doc__</span><span class="p">}</span>
-</div>
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&quot;&quot;&quot;Flag(&#39;{name!s}&#39;,{value!r})&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;fget&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">,</span> <span class="s1">&#39;fset&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">,</span> <span class="s1">&#39;doc&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__doc__</span><span class="p">}</span></div>
 
-</div>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;&quot;Flag(&#39;{name!s}&#39;,{value!r})&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">)</span></div>
+
+
 <span class="k">class</span> <span class="nc">_Flag</span><span class="p">(</span><span class="n">Flag</span><span class="p">):</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">__doc__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c"># generate dynamic docs with current values</span>
+        <span class="c1"># generate dynamic docs with current values</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_doctemplate</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span>
 
 
 <span class="n">_flags</span> <span class="o">=</span> <span class="p">[</span>
     <span class="n">_Flag</span><span class="p">(</span>
-        <span class="s">&#39;use_periodic_selections&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;use_periodic_selections&#39;</span><span class="p">,</span>
         <span class="bp">True</span><span class="p">,</span>
         <span class="p">{</span><span class="bp">True</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">:</span> <span class="bp">False</span><span class="p">},</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -329,11 +329,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
     <span class="p">),</span>
     <span class="n">_Flag</span><span class="p">(</span>
-        <span class="s">&#39;use_KDTree_routines&#39;</span><span class="p">,</span>
-        <span class="s">&#39;fast&#39;</span><span class="p">,</span>
-        <span class="p">{</span><span class="bp">True</span><span class="p">:</span> <span class="s">&#39;fast&#39;</span><span class="p">,</span> <span class="s">&#39;fast&#39;</span><span class="p">:</span> <span class="s">&#39;fast&#39;</span><span class="p">,</span>  <span class="c"># only KDTree if advantageous</span>
-            <span class="s">&#39;always&#39;</span><span class="p">:</span> <span class="s">&#39;always&#39;</span><span class="p">,</span>  <span class="c"># always even if slower (for testing)</span>
-            <span class="bp">False</span><span class="p">:</span> <span class="s">&#39;never&#39;</span><span class="p">,</span> <span class="s">&#39;never&#39;</span><span class="p">:</span> <span class="s">&#39;never&#39;</span><span class="p">},</span>  <span class="c"># never, only use (slower) alternatives</span>
+        <span class="s1">&#39;use_KDTree_routines&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;fast&#39;</span><span class="p">,</span>
+        <span class="p">{</span><span class="bp">True</span><span class="p">:</span> <span class="s1">&#39;fast&#39;</span><span class="p">,</span> <span class="s1">&#39;fast&#39;</span><span class="p">:</span> <span class="s1">&#39;fast&#39;</span><span class="p">,</span>  <span class="c1"># only KDTree if advantageous</span>
+            <span class="s1">&#39;always&#39;</span><span class="p">:</span> <span class="s1">&#39;always&#39;</span><span class="p">,</span>  <span class="c1"># always even if slower (for testing)</span>
+            <span class="bp">False</span><span class="p">:</span> <span class="s1">&#39;never&#39;</span><span class="p">,</span> <span class="s1">&#39;never&#39;</span><span class="p">:</span> <span class="s1">&#39;never&#39;</span><span class="p">},</span>  <span class="c1"># never, only use (slower) alternatives</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">           Determines which KDTree routines are used for distance selections</span>
 
@@ -357,7 +357,7 @@
 <span class="sd">           &quot;&quot;&quot;</span>
     <span class="p">),</span>
     <span class="n">_Flag</span><span class="p">(</span>
-        <span class="s">&#39;convert_lengths&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;convert_lengths&#39;</span><span class="p">,</span>
         <span class="bp">True</span><span class="p">,</span>
         <span class="p">{</span><span class="bp">True</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">:</span> <span class="bp">False</span><span class="p">},</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -375,11 +375,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
     <span class="p">),</span>
     <span class="n">_Flag</span><span class="p">(</span>
-        <span class="s">&#39;length_unit&#39;</span><span class="p">,</span>
-        <span class="s">&#39;Angstrom&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;length_unit&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Angstrom&#39;</span><span class="p">,</span>
         <span class="p">{</span>
-            <span class="s">&#39;Angstrom&#39;</span><span class="p">:</span> <span class="s">&#39;Angstrom&#39;</span><span class="p">,</span> <span class="s">&#39;A&#39;</span><span class="p">:</span> <span class="s">&#39;Angstrom&#39;</span><span class="p">,</span>
-            <span class="s">&#39;nm&#39;</span><span class="p">:</span> <span class="s">&#39;nm&#39;</span><span class="p">,</span> <span class="s">&#39;nano meter&#39;</span><span class="p">:</span> <span class="s">&#39;nm&#39;</span><span class="p">,</span> <span class="s">&#39;nanometer&#39;</span><span class="p">:</span> <span class="s">&#39;nm&#39;</span>
+            <span class="s1">&#39;Angstrom&#39;</span><span class="p">:</span> <span class="s1">&#39;Angstrom&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="s1">&#39;Angstrom&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;nm&#39;</span><span class="p">:</span> <span class="s1">&#39;nm&#39;</span><span class="p">,</span> <span class="s1">&#39;nano meter&#39;</span><span class="p">:</span> <span class="s1">&#39;nm&#39;</span><span class="p">,</span> <span class="s1">&#39;nanometer&#39;</span><span class="p">:</span> <span class="s1">&#39;nm&#39;</span>
         <span class="p">},</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">           Base unit for lengths (in particular coordinates in trajectories)</span>
@@ -390,13 +390,13 @@
 <span class="sd">        &quot;&quot;&quot;</span>
     <span class="p">),</span>
     <span class="n">_Flag</span><span class="p">(</span>
-        <span class="s">&#39;time_unit&#39;</span><span class="p">,</span>
-        <span class="s">&#39;ps&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;time_unit&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ps&#39;</span><span class="p">,</span>
         <span class="p">{</span>
-            <span class="s">&#39;ps&#39;</span><span class="p">:</span> <span class="s">&#39;ps&#39;</span><span class="p">,</span> <span class="s">&#39;pico second&#39;</span><span class="p">:</span> <span class="s">&#39;ps&#39;</span><span class="p">,</span> <span class="s">&#39;picosecond&#39;</span><span class="p">:</span> <span class="s">&#39;ps&#39;</span><span class="p">,</span>
-            <span class="s">&#39;ns&#39;</span><span class="p">:</span> <span class="s">&#39;ns&#39;</span><span class="p">,</span> <span class="s">&#39;nano second&#39;</span><span class="p">:</span> <span class="s">&#39;ns&#39;</span><span class="p">,</span> <span class="s">&#39;nanosecond&#39;</span><span class="p">:</span> <span class="s">&#39;ns&#39;</span><span class="p">,</span>
-            <span class="s">&#39;fs&#39;</span><span class="p">:</span> <span class="s">&#39;fs&#39;</span><span class="p">,</span> <span class="s">&#39;femto second&#39;</span><span class="p">:</span> <span class="s">&#39;fs&#39;</span><span class="p">,</span> <span class="s">&#39;femtosecond&#39;</span><span class="p">:</span> <span class="s">&#39;fs&#39;</span><span class="p">,</span>
-            <span class="s">&#39;AKMA&#39;</span><span class="p">:</span> <span class="s">&#39;AKMA&#39;</span><span class="p">,</span> <span class="s">&#39;Charmm&#39;</span><span class="p">:</span> <span class="s">&#39;AKMA&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;ps&#39;</span><span class="p">:</span> <span class="s1">&#39;ps&#39;</span><span class="p">,</span> <span class="s1">&#39;pico second&#39;</span><span class="p">:</span> <span class="s1">&#39;ps&#39;</span><span class="p">,</span> <span class="s1">&#39;picosecond&#39;</span><span class="p">:</span> <span class="s1">&#39;ps&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;ns&#39;</span><span class="p">:</span> <span class="s1">&#39;ns&#39;</span><span class="p">,</span> <span class="s1">&#39;nano second&#39;</span><span class="p">:</span> <span class="s1">&#39;ns&#39;</span><span class="p">,</span> <span class="s1">&#39;nanosecond&#39;</span><span class="p">:</span> <span class="s1">&#39;ns&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;fs&#39;</span><span class="p">:</span> <span class="s1">&#39;fs&#39;</span><span class="p">,</span> <span class="s1">&#39;femto second&#39;</span><span class="p">:</span> <span class="s1">&#39;fs&#39;</span><span class="p">,</span> <span class="s1">&#39;femtosecond&#39;</span><span class="p">:</span> <span class="s1">&#39;fs&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;AKMA&#39;</span><span class="p">:</span> <span class="s1">&#39;AKMA&#39;</span><span class="p">,</span> <span class="s1">&#39;Charmm&#39;</span><span class="p">:</span> <span class="s1">&#39;AKMA&#39;</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">           Base unit for times (in particular time steps in trajectories)</span>
@@ -406,14 +406,14 @@
 <span class="sd">        &quot;&quot;&quot;</span>
     <span class="p">),</span>
     <span class="n">_Flag</span><span class="p">(</span>
-        <span class="s">&#39;speed_unit&#39;</span><span class="p">,</span>
-        <span class="s">&#39;Angstrom/ps&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;speed_unit&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Angstrom/ps&#39;</span><span class="p">,</span>
         <span class="p">{</span>
-            <span class="s">&#39;Angstrom/ps&#39;</span><span class="p">:</span> <span class="s">&#39;Angstrom/ps&#39;</span><span class="p">,</span> <span class="s">&#39;A/ps&#39;</span><span class="p">:</span> <span class="s">&#39;Angstrom/ps&#39;</span><span class="p">,</span>
-            <span class="s">&#39;nm/ps&#39;</span><span class="p">:</span> <span class="s">&#39;nm/ps&#39;</span><span class="p">,</span> <span class="s">&#39;nanometer/ps&#39;</span><span class="p">:</span> <span class="s">&#39;nm/ps&#39;</span><span class="p">,</span> <span class="s">&#39;nanometer/picosecond&#39;</span><span class="p">:</span> <span class="s">&#39;nm/ps&#39;</span><span class="p">,</span>
-            <span class="s">&#39;Angstrom/AKMA&#39;</span><span class="p">:</span> <span class="s">&#39;Angstrom/AKMA&#39;</span><span class="p">,</span> <span class="s">&#39;A/AKMA&#39;</span><span class="p">:</span> <span class="s">&#39;Angstrom/AKMA&#39;</span><span class="p">,</span>
-            <span class="s">&#39;pm/ps&#39;</span><span class="p">:</span> <span class="s">&#39;pm/ps&#39;</span><span class="p">,</span>
-            <span class="s">&#39;m/s&#39;</span><span class="p">:</span> <span class="s">&#39;m/s&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Angstrom/ps&#39;</span><span class="p">:</span> <span class="s1">&#39;Angstrom/ps&#39;</span><span class="p">,</span> <span class="s1">&#39;A/ps&#39;</span><span class="p">:</span> <span class="s1">&#39;Angstrom/ps&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;nm/ps&#39;</span><span class="p">:</span> <span class="s1">&#39;nm/ps&#39;</span><span class="p">,</span> <span class="s1">&#39;nanometer/ps&#39;</span><span class="p">:</span> <span class="s1">&#39;nm/ps&#39;</span><span class="p">,</span> <span class="s1">&#39;nanometer/picosecond&#39;</span><span class="p">:</span> <span class="s1">&#39;nm/ps&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Angstrom/AKMA&#39;</span><span class="p">:</span> <span class="s1">&#39;Angstrom/AKMA&#39;</span><span class="p">,</span> <span class="s1">&#39;A/AKMA&#39;</span><span class="p">:</span> <span class="s1">&#39;Angstrom/AKMA&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;pm/ps&#39;</span><span class="p">:</span> <span class="s1">&#39;pm/ps&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;m/s&#39;</span><span class="p">:</span> <span class="s1">&#39;m/s&#39;</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">           Base unit for speed (in particular velocities in trajectories)</span>
@@ -423,12 +423,12 @@
 <span class="sd">        &quot;&quot;&quot;</span>
     <span class="p">),</span>
     <span class="n">_Flag</span><span class="p">(</span>
-        <span class="s">&#39;force_unit&#39;</span><span class="p">,</span>
-        <span class="s">&#39;kJ/(mol*Angstrom)&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;force_unit&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;kJ/(mol*Angstrom)&#39;</span><span class="p">,</span>
         <span class="p">{</span>
-            <span class="s">&#39;kJ/(mol*Angstrom)&#39;</span><span class="p">:</span> <span class="s">&#39;kJ/(mol*Angstrom)&#39;</span><span class="p">,</span> <span class="s">&#39;kJ/(mol*A)&#39;</span><span class="p">:</span> <span class="s">&#39;kJ/(mol*Angstrom)&#39;</span><span class="p">,</span>
-            <span class="s">&#39;kJ/(mol*nm)&#39;</span><span class="p">:</span> <span class="s">&#39;kJ/(mol*nm)&#39;</span><span class="p">,</span>
-            <span class="s">&#39;kcal/(mol*Angstrom)&#39;</span><span class="p">:</span> <span class="s">&#39;kcal/(mol*Angstrom)&#39;</span><span class="p">,</span> <span class="s">&#39;kcal/(mol*A)&#39;</span><span class="p">:</span> <span class="s">&#39;kcal/(mol*Angstrom)&#39;</span>
+            <span class="s1">&#39;kJ/(mol*Angstrom)&#39;</span><span class="p">:</span> <span class="s1">&#39;kJ/(mol*Angstrom)&#39;</span><span class="p">,</span> <span class="s1">&#39;kJ/(mol*A)&#39;</span><span class="p">:</span> <span class="s1">&#39;kJ/(mol*Angstrom)&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;kJ/(mol*nm)&#39;</span><span class="p">:</span> <span class="s1">&#39;kJ/(mol*nm)&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;kcal/(mol*Angstrom)&#39;</span><span class="p">:</span> <span class="s1">&#39;kcal/(mol*Angstrom)&#39;</span><span class="p">,</span> <span class="s1">&#39;kcal/(mol*A)&#39;</span><span class="p">:</span> <span class="s1">&#39;kcal/(mol*Angstrom)&#39;</span>
         <span class="p">},</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">           Base unit for forces (in particular forces in trajectories)</span>
@@ -438,12 +438,12 @@
 <span class="sd">        &quot;&quot;&quot;</span>
     <span class="p">),</span>
     <span class="n">_Flag</span><span class="p">(</span>
-        <span class="s">&#39;charge_unit&#39;</span><span class="p">,</span>
-        <span class="s">&#39;e&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;charge_unit&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;e&#39;</span><span class="p">,</span>
         <span class="p">{</span>
-            <span class="s">&#39;e&#39;</span><span class="p">:</span> <span class="s">&#39;e&#39;</span><span class="p">,</span> <span class="s">&#39;electron charge&#39;</span><span class="p">:</span> <span class="s">&#39;e&#39;</span><span class="p">,</span>
-            <span class="s">&#39;Amber&#39;</span><span class="p">:</span> <span class="s">&#39;Amber&#39;</span><span class="p">,</span>
-            <span class="s">&#39;C&#39;</span><span class="p">:</span> <span class="s">&#39;C&#39;</span><span class="p">,</span> <span class="s">&#39;Coulomb&#39;</span><span class="p">:</span> <span class="s">&#39;C&#39;</span><span class="p">,</span> <span class="s">&#39;As&#39;</span><span class="p">:</span> <span class="s">&#39;C&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;e&#39;</span><span class="p">:</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;electron charge&#39;</span><span class="p">:</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Amber&#39;</span><span class="p">:</span> <span class="s1">&#39;Amber&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;Coulomb&#39;</span><span class="p">:</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;As&#39;</span><span class="p">:</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">           Base unit for charge</span>
@@ -453,11 +453,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
     <span class="p">),</span>
     <span class="n">_Flag</span><span class="p">(</span>
-        <span class="s">&#39;permissive_pdb_reader&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;permissive_pdb_reader&#39;</span><span class="p">,</span>
         <span class="bp">True</span><span class="p">,</span>
         <span class="p">{</span>
-            <span class="s">&#39;primitive&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s">&#39;permissive&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">True</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
-            <span class="s">&#39;Bio.PDB&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s">&#39;biopython&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+            <span class="s1">&#39;primitive&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s1">&#39;permissive&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">True</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+            <span class="s1">&#39;Bio.PDB&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s1">&#39;biopython&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">           Select the default reader for PDB Brookhaven databank files.</span>
@@ -483,7 +483,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
     <span class="p">),</span>
     <span class="n">_Flag</span><span class="p">(</span>
-        <span class="s">&#39;use_pbc&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;use_pbc&#39;</span><span class="p">,</span>
         <span class="bp">False</span><span class="p">,</span>
         <span class="p">{</span><span class="bp">True</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">:</span> <span class="bp">False</span><span class="p">},</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -508,17 +508,17 @@
 
 <span class="p">]</span>
 
-<span class="c">#: Global flag registry for :mod:`MDAnalysis.core`.</span>
-<span class="c">#: Can be accessed like a dictionary and appears to the casual user as such.</span>
+<span class="c1">#: Global flag registry for :mod:`MDAnalysis.core`.</span>
+<span class="c1">#: Can be accessed like a dictionary and appears to the casual user as such.</span>
 <span class="n">flags</span> <span class="o">=</span> <span class="n">FlagsDynamicDocs</span><span class="p">(</span><span class="o">*</span><span class="n">_flags</span><span class="p">)</span>
 <span class="k">del</span> <span class="n">_flags</span>
 
 
-<span class="c"># only for sphinx docs</span>
+<span class="c1"># only for sphinx docs</span>
 <div class="viewcode-block" id="flagsDocs"><a class="viewcode-back" href="../../../documentation_pages/core/init.html#MDAnalysis.core.__init__.flagsDocs">[docs]</a><span class="k">class</span> <span class="nc">flagsDocs</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="n">__doc__</span> <span class="o">=</span> <span class="n">flags</span><span class="o">.</span><span class="n">doc</span><span class="p">()</span>
+    <span class="n">__doc__</span> <span class="o">=</span> <span class="n">flags</span><span class="o">.</span><span class="n">doc</span><span class="p">()</span></div>
 
-</div>
+
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">AtomGroup</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">Selection</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">Timeseries</span>
@@ -554,7 +554,7 @@
     Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl,
     Gorman Stock, Isaac Virshup, Zhuyi Xue, Carlos Yáñez S.,
     and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>
 </html>

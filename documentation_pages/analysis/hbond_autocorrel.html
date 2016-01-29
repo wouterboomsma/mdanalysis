@@ -64,7 +64,6 @@
 <li><a class="reference internal" href="#description">3.3.2.1. Description</a></li>
 <li><a class="reference internal" href="#input">3.3.2.2. Input</a></li>
 <li><a class="reference internal" href="#output">3.3.2.3. Output</a></li>
-<li><a class="reference internal" href="#examples">3.3.2.4. Examples</a></li>
 </ul>
 </li>
 </ul>
@@ -200,24 +199,22 @@ This is a dictionary with the following keys</p>
 <p>The <em>results</em> and <em>time</em> values are only filled after the <code class="xref py py-meth docutils literal"><span class="pre">run()</span></code> method,
 <em>fit</em>, <em>tau</em> and <em>estimate</em> are filled after the <code class="xref py py-meth docutils literal"><span class="pre">solve()</span></code> method has been
 used.</p>
-</div>
-<div class="section" id="examples">
-<h2>3.3.2.4. Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p class="rubric">Examples</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">MDAnalysis.analysis</span> <span class="kn">import</span> <span class="n">hbonds</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="n">H</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&#39;name Hn&#39;</span><span class="p">)</span>
-<span class="n">O</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&#39;name O&#39;</span><span class="p">)</span>
-<span class="n">N</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&#39;name N&#39;</span><span class="p">)</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name Hn&#39;</span><span class="p">)</span>
+<span class="n">O</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name O&#39;</span><span class="p">)</span>
+<span class="n">N</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name N&#39;</span><span class="p">)</span>
 <span class="n">hb_ac</span> <span class="o">=</span> <span class="n">hbonds</span><span class="o">.</span><span class="n">HydrogenBondAutoCorrel</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">acceptors</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">O</span><span class="p">,</span>
-            <span class="n">hydrogens</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">Hn</span><span class="p">,</span> <span class="n">donors</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">N</span><span class="p">,</span><span class="n">bond_type</span><span class="o">=</span><span class="s">&#39;continuous&#39;</span><span class="p">,</span>
+            <span class="n">hydrogens</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">Hn</span><span class="p">,</span> <span class="n">donors</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">N</span><span class="p">,</span><span class="n">bond_type</span><span class="o">=</span><span class="s1">&#39;continuous&#39;</span><span class="p">,</span>
             <span class="n">sample_time</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">nruns</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">nsamples</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span>
 <span class="n">hb_ac</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 <span class="n">hb_ac</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
-<span class="n">tau</span> <span class="o">=</span> <span class="n">hb_ac</span><span class="o">.</span><span class="n">solution</span><span class="p">[</span><span class="s">&#39;tau&#39;</span><span class="p">]</span>
-<span class="n">time</span> <span class="o">=</span> <span class="n">hb_ac</span><span class="o">.</span><span class="n">solution</span><span class="p">[</span><span class="s">&#39;time&#39;</span><span class="p">]</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">hb_ac</span><span class="o">.</span><span class="n">solution</span><span class="p">[</span><span class="s">&#39;results&#39;</span><span class="p">]</span>
-<span class="n">estimate</span> <span class="o">=</span> <span class="n">hb_ac</span><span class="o">.</span><span class="n">solution</span><span class="p">[</span><span class="s">&#39;estimate&#39;</span><span class="p">]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="s">&#39;ro&#39;</span><span class="p">)</span>
+<span class="n">tau</span> <span class="o">=</span> <span class="n">hb_ac</span><span class="o">.</span><span class="n">solution</span><span class="p">[</span><span class="s1">&#39;tau&#39;</span><span class="p">]</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">hb_ac</span><span class="o">.</span><span class="n">solution</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">hb_ac</span><span class="o">.</span><span class="n">solution</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span>
+<span class="n">estimate</span> <span class="o">=</span> <span class="n">hb_ac</span><span class="o">.</span><span class="n">solution</span><span class="p">[</span><span class="s1">&#39;estimate&#39;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">estimate</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -230,18 +227,28 @@ used.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>*universe*</strong> &#8211; The MDA universe</li>
-<li><strong>*hydrogens*</strong> &#8211; AtomGroup of Hydrogens which can form hydrogen bonds</li>
-<li><strong>*acceptors*</strong> &#8211; AtomGroup of all Acceptor atoms</li>
-<li><strong>*donors*</strong> &#8211; The atoms which are connected to the hydrogens.  This group
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>universe</em></dt>
+<dd><p class="first last">The MDA universe</p>
+</dd>
+<dt><em>hydrogens</em></dt>
+<dd><p class="first last">AtomGroup of Hydrogens which can form hydrogen bonds</p>
+</dd>
+<dt><em>acceptors</em></dt>
+<dd><p class="first last">AtomGroup of all Acceptor atoms</p>
+</dd>
+<dt><em>donors</em></dt>
+<dd><p class="first last">The atoms which are connected to the hydrogens.  This group
 must be identical in length to the hydrogen group and matched,
 ie hydrogens[1] is bonded to donors[0].
 For many cases, this will mean a donor appears twice in this
-group.</li>
-<li><strong>*bond_type*</strong> &#8211; Which definition of hydrogen bond lifetime to consider, either
-&#8216;continuous&#8217; or &#8216;intermittent&#8217;.</li>
-</ul>
+group.</p>
+</dd>
+<dt><em>bond_type</em></dt>
+<dd><p class="first last">Which definition of hydrogen bond lifetime to consider, either
+&#8216;continuous&#8217; or &#8216;intermittent&#8217;.</p>
+</dd>
+</dl>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Keywords:</th><td class="field-body"><dl class="first last docutils">
@@ -401,7 +408,7 @@ solution dict</p>
     Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl,
     Gorman Stock, Isaac Virshup, Zhuyi Xue, Carlos Yáñez S.,
     and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>
 </html>

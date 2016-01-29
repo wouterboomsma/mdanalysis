@@ -72,21 +72,21 @@
           <div class="body" role="main">
             
   <h1>Source code for MDAnalysis.analysis.rdf</h1><div class="highlight"><pre>
-<span class="c"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
-<span class="c"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
-<span class="c">#</span>
-<span class="c"># MDAnalysis --- http://www.MDAnalysis.org</span>
-<span class="c"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
-<span class="c"># and contributors (see AUTHORS for the full list)</span>
-<span class="c">#</span>
-<span class="c"># Released under the GNU Public Licence, v2 or any higher version</span>
-<span class="c">#</span>
-<span class="c"># Please cite your use of MDAnalysis in published work:</span>
-<span class="c">#</span>
-<span class="c"># N. Michaud-Agrawal, E. J. Denning, T. B. Woolf, and O. Beckstein.</span>
-<span class="c"># MDAnalysis: A Toolkit for the Analysis of Molecular Dynamics Simulations.</span>
-<span class="c"># J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787</span>
-<span class="c">#</span>
+<span class="c1"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
+<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
+<span class="c1">#</span>
+<span class="c1"># MDAnalysis --- http://www.MDAnalysis.org</span>
+<span class="c1"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
+<span class="c1"># and contributors (see AUTHORS for the full list)</span>
+<span class="c1">#</span>
+<span class="c1"># Released under the GNU Public Licence, v2 or any higher version</span>
+<span class="c1">#</span>
+<span class="c1"># Please cite your use of MDAnalysis in published work:</span>
+<span class="c1">#</span>
+<span class="c1"># N. Michaud-Agrawal, E. J. Denning, T. B. Woolf, and O. Beckstein.</span>
+<span class="c1"># MDAnalysis: A Toolkit for the Analysis of Molecular Dynamics Simulations.</span>
+<span class="c1"># J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787</span>
+<span class="c1">#</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Radial Distribution Functions --- :mod:`MDAnalysis.analysis.rdf`</span>
@@ -163,10 +163,10 @@
                            <span class="n">stop</span><span class="o">=</span><span class="n">stop</span><span class="p">,</span>
                            <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">rdf_settings</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;bins&#39;</span><span class="p">:</span><span class="n">nbins</span><span class="p">,</span>
-                             <span class="s">&#39;range&#39;</span><span class="p">:</span><span class="nb">range</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rdf_settings</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bins&#39;</span><span class="p">:</span><span class="n">nbins</span><span class="p">,</span>
+                             <span class="s1">&#39;range&#39;</span><span class="p">:</span><span class="nb">range</span><span class="p">}</span>
 
-        <span class="c"># Empty histogram to store the RDF</span>
+        <span class="c1"># Empty histogram to store the RDF</span>
         <span class="n">count</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">rdf_settings</span><span class="p">)</span>
         <span class="n">count</span> <span class="o">=</span> <span class="n">count</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="n">count</span> <span class="o">*=</span> <span class="mf">0.0</span>
@@ -174,13 +174,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">edges</span> <span class="o">=</span> <span class="n">edges</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bins</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">edges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">edges</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
 
-        <span class="c"># Need to know average volume</span>
+        <span class="c1"># Need to know average volume</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="mf">0.0</span>
 
-        <span class="c"># Allocate a results array which we will reuse</span>
+        <span class="c1"># Allocate a results array which we will reuse</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">g1</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">g2</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-        <span class="c"># If provided exclusions, create a mask of _result which</span>
-        <span class="c"># lets us take these out</span>
+        <span class="c1"># If provided exclusions, create a mask of _result which</span>
+        <span class="c1"># lets us take these out</span>
         <span class="k">if</span> <span class="n">exclusion_block</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_exclusion_block</span> <span class="o">=</span> <span class="n">exclusion_block</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_exclusion_mask</span> <span class="o">=</span> <span class="n">blocks_of</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_result</span><span class="p">,</span> <span class="o">*</span><span class="n">exclusion_block</span><span class="p">)</span>
@@ -192,7 +192,7 @@
     <span class="k">def</span> <span class="nf">_single_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">distances</span><span class="o">.</span><span class="n">distance_array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">g1</span><span class="o">.</span><span class="n">positions</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">g2</span><span class="o">.</span><span class="n">positions</span><span class="p">,</span>
                                  <span class="n">box</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="o">.</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_result</span><span class="p">)</span>
-        <span class="c"># Maybe exclude same molecule distances</span>
+        <span class="c1"># Maybe exclude same molecule distances</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exclusion_mask</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_exclusion_mask</span><span class="p">[:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maxrange</span>
 
@@ -202,22 +202,22 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">volume</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ts</span><span class="o">.</span><span class="n">volume</span>
 
     <span class="k">def</span> <span class="nf">_conclude</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c"># Number of each selection</span>
+        <span class="c1"># Number of each selection</span>
         <span class="n">nA</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">g1</span><span class="p">)</span>
         <span class="n">nB</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">g2</span><span class="p">)</span>
         <span class="n">N</span> <span class="o">=</span> <span class="n">nA</span> <span class="o">*</span> <span class="n">nB</span>
 
-        <span class="c"># If we had exclusions, take these into account</span>
+        <span class="c1"># If we had exclusions, take these into account</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exclusion_block</span><span class="p">:</span>
             <span class="n">xA</span><span class="p">,</span> <span class="n">xB</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exclusion_block</span>
             <span class="n">nblocks</span> <span class="o">=</span> <span class="n">nA</span> <span class="o">/</span> <span class="n">xA</span>
             <span class="n">N</span> <span class="o">-=</span> <span class="n">xA</span> <span class="o">*</span> <span class="n">xB</span> <span class="o">*</span> <span class="n">nblocks</span>
 
-        <span class="c"># Volume in each radial shell</span>
+        <span class="c1"># Volume in each radial shell</span>
         <span class="n">vol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
         <span class="n">vol</span> <span class="o">*=</span> <span class="mi">4</span><span class="o">/</span><span class="mf">3.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
 
-        <span class="c"># Average number density</span>
+        <span class="c1"># Average number density</span>
         <span class="n">box_vol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">volume</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">nframes</span>
         <span class="n">density</span> <span class="o">=</span> <span class="n">N</span> <span class="o">/</span> <span class="n">box_vol</span>
 
@@ -256,7 +256,7 @@
     Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl,
     Gorman Stock, Isaac Virshup, Zhuyi Xue, Carlos Yáñez S.,
     and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>
 </html>

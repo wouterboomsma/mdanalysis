@@ -72,20 +72,20 @@
           <div class="body" role="main">
             
   <h1>Source code for MDAnalysis.topology.PSFParser</h1><div class="highlight"><pre>
-<span class="c"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
-<span class="c"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 </span>
-<span class="c">#</span>
-<span class="c"># MDAnalysis --- http://www.MDAnalysis.org</span>
-<span class="c"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
-<span class="c"># and contributors (see AUTHORS for the full list)</span>
-<span class="c">#</span>
-<span class="c"># Released under the GNU Public Licence, v2 or any higher version</span>
-<span class="c">#</span>
-<span class="c"># Please cite your use of MDAnalysis in published work:</span>
-<span class="c"># N. Michaud-Agrawal, E. J. Denning, T. B. Woolf, and O. Beckstein.</span>
-<span class="c"># MDAnalysis: A Toolkit for the Analysis of Molecular Dynamics Simulations.</span>
-<span class="c"># J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787</span>
-<span class="c">#</span>
+<span class="c1"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
+<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 </span>
+<span class="c1">#</span>
+<span class="c1"># MDAnalysis --- http://www.MDAnalysis.org</span>
+<span class="c1"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
+<span class="c1"># and contributors (see AUTHORS for the full list)</span>
+<span class="c1">#</span>
+<span class="c1"># Released under the GNU Public Licence, v2 or any higher version</span>
+<span class="c1">#</span>
+<span class="c1"># Please cite your use of MDAnalysis in published work:</span>
+<span class="c1"># N. Michaud-Agrawal, E. J. Denning, T. B. Woolf, and O. Beckstein.</span>
+<span class="c1"># MDAnalysis: A Toolkit for the Analysis of Molecular Dynamics Simulations.</span>
+<span class="c1"># J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787</span>
+<span class="c1">#</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">PSF topology parser</span>
@@ -119,7 +119,7 @@
 <span class="kn">from</span> <span class="nn">..lib.util</span> <span class="kn">import</span> <span class="n">openany</span>
 <span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">TopologyReader</span>
 
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&quot;MDAnalysis.topology.PSF&quot;</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;MDAnalysis.topology.PSF&quot;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="PSFParser"><a class="viewcode-back" href="../../../documentation_pages/topology/PSFParser.html#MDAnalysis.topology.PSFParser.PSFParser">[docs]</a><span class="k">class</span> <span class="nc">PSFParser</span><span class="p">(</span><span class="n">TopologyReader</span><span class="p">):</span>
@@ -127,52 +127,52 @@
 
 <span class="sd">    .. _PSF: http://www.charmm.org/documentation/c35b1/struct.html</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">format</span> <span class="o">=</span> <span class="s">&#39;PSF&#39;</span>
+    <span class="n">format</span> <span class="o">=</span> <span class="s1">&#39;PSF&#39;</span>
 
 <div class="viewcode-block" id="PSFParser.parse"><a class="viewcode-back" href="../../../documentation_pages/topology/PSFParser.html#MDAnalysis.topology.PSFParser.PSFParser.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Parse PSF file *filename*.</span>
 
 <span class="sd">        :Returns: MDAnalysis internal *structure* dict as defined here.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c"># Open and check psf validity</span>
-        <span class="k">with</span> <span class="n">openany</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">psffile</span><span class="p">:</span>
+        <span class="c1"># Open and check psf validity</span>
+        <span class="k">with</span> <span class="n">openany</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">psffile</span><span class="p">:</span>
             <span class="n">header</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">psffile</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">header</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&quot;PSF&quot;</span><span class="p">:</span>
-                <span class="n">err</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;{0} is not valid PSF file (header = {1})&quot;</span>
-                       <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">header</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">header</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;PSF&quot;</span><span class="p">:</span>
+                <span class="n">err</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;{0} is not valid PSF file (header = {1})&quot;</span>
+                       <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">header</span><span class="p">))</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
             <span class="n">header_flags</span> <span class="o">=</span> <span class="n">header</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
 
-            <span class="k">if</span> <span class="s">&quot;NAMD&quot;</span> <span class="ow">in</span> <span class="n">header_flags</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_format</span> <span class="o">=</span> <span class="s">&quot;NAMD&quot;</span>        <span class="c"># NAMD/VMD</span>
-            <span class="k">elif</span> <span class="s">&quot;EXT&quot;</span> <span class="ow">in</span> <span class="n">header_flags</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_format</span> <span class="o">=</span> <span class="s">&quot;EXTENDED&quot;</span>    <span class="c"># CHARMM</span>
+            <span class="k">if</span> <span class="s2">&quot;NAMD&quot;</span> <span class="ow">in</span> <span class="n">header_flags</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_format</span> <span class="o">=</span> <span class="s2">&quot;NAMD&quot;</span>        <span class="c1"># NAMD/VMD</span>
+            <span class="k">elif</span> <span class="s2">&quot;EXT&quot;</span> <span class="ow">in</span> <span class="n">header_flags</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_format</span> <span class="o">=</span> <span class="s2">&quot;EXTENDED&quot;</span>    <span class="c1"># CHARMM</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_format</span> <span class="o">=</span> <span class="s">&quot;STANDARD&quot;</span>    <span class="c"># CHARMM</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_format</span> <span class="o">=</span> <span class="s2">&quot;STANDARD&quot;</span>    <span class="c1"># CHARMM</span>
 
             <span class="nb">next</span><span class="p">(</span><span class="n">psffile</span><span class="p">)</span>
             <span class="n">title</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">psffile</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">title</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;!NTITLE&quot;</span><span class="p">):</span>
-                <span class="n">err</span> <span class="o">=</span> <span class="s">&quot;{0} is not a valid PSF file&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">psffile</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">title</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;!NTITLE&quot;</span><span class="p">):</span>
+                <span class="n">err</span> <span class="o">=</span> <span class="s2">&quot;{0} is not a valid PSF file&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">psffile</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
-            <span class="c"># psfremarks = [psffile.next() for i in range(int(title[0]))]</span>
+            <span class="c1"># psfremarks = [psffile.next() for i in range(int(title[0]))]</span>
             <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">title</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
                 <span class="nb">next</span><span class="p">(</span><span class="n">psffile</span><span class="p">)</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;PSF file {0}: format {1}&quot;</span>
-                         <span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">psffile</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format</span><span class="p">))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;PSF file {0}: format {1}&quot;</span>
+                         <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">psffile</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format</span><span class="p">))</span>
 
             <span class="n">structure</span> <span class="o">=</span> <span class="p">{}</span>
 
             <span class="n">sections</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="p">(</span><span class="s">&quot;atoms&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s">&quot;NATOM&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parseatoms</span><span class="p">)),</span>
-                <span class="p">(</span><span class="s">&quot;bonds&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s">&quot;NBOND&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsesection</span><span class="p">)),</span>
-                <span class="p">(</span><span class="s">&quot;angles&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s">&quot;NTHETA&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsesection</span><span class="p">)),</span>
-                <span class="p">(</span><span class="s">&quot;dihedrals&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s">&quot;NPHI&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsesection</span><span class="p">)),</span>
-                <span class="p">(</span><span class="s">&quot;impropers&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s">&quot;NIMPHI&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsesection</span><span class="p">)),</span>
-                <span class="p">(</span><span class="s">&quot;donors&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s">&quot;NDON&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsesection</span><span class="p">)),</span>
-                <span class="p">(</span><span class="s">&quot;acceptors&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s">&quot;NACC&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsesection</span><span class="p">))</span>
+                <span class="p">(</span><span class="s2">&quot;atoms&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;NATOM&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parseatoms</span><span class="p">)),</span>
+                <span class="p">(</span><span class="s2">&quot;bonds&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;NBOND&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsesection</span><span class="p">)),</span>
+                <span class="p">(</span><span class="s2">&quot;angles&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;NTHETA&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsesection</span><span class="p">)),</span>
+                <span class="p">(</span><span class="s2">&quot;dihedrals&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;NPHI&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsesection</span><span class="p">)),</span>
+                <span class="p">(</span><span class="s2">&quot;impropers&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;NIMPHI&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsesection</span><span class="p">)),</span>
+                <span class="p">(</span><span class="s2">&quot;donors&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;NDON&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsesection</span><span class="p">)),</span>
+                <span class="p">(</span><span class="s2">&quot;acceptors&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;NACC&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parsesection</span><span class="p">))</span>
             <span class="p">)</span>
 
             <span class="k">try</span><span class="p">:</span>
@@ -180,31 +180,31 @@
                     <span class="nb">next</span><span class="p">(</span><span class="n">psffile</span><span class="p">)</span>
                     <span class="n">structure</span><span class="p">[</span><span class="n">attr</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_sec</span><span class="p">(</span><span class="n">psffile</span><span class="p">,</span> <span class="n">info</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
-                <span class="c"># Reached the end of the file before we expected</span>
-                <span class="k">if</span> <span class="s">&quot;atoms&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">structure</span><span class="p">:</span>
-                    <span class="n">err</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;The PSF file didn&#39;t contain the required&quot;</span>
-                           <span class="s">&quot; section of NATOM&quot;</span><span class="p">)</span>
+                <span class="c1"># Reached the end of the file before we expected</span>
+                <span class="k">if</span> <span class="s2">&quot;atoms&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">structure</span><span class="p">:</span>
+                    <span class="n">err</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;The PSF file didn&#39;t contain the required&quot;</span>
+                           <span class="s2">&quot; section of NATOM&quot;</span><span class="p">)</span>
                     <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
                     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
 
-        <span class="c"># Who cares about the rest</span>
-        <span class="k">return</span> <span class="n">structure</span>
-</div>
+        <span class="c1"># Who cares about the rest</span>
+        <span class="k">return</span> <span class="n">structure</span></div>
+
     <span class="k">def</span> <span class="nf">_parse_sec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">psffile</span><span class="p">,</span> <span class="n">section_info</span><span class="p">):</span>
         <span class="n">desc</span><span class="p">,</span> <span class="n">atoms_per</span><span class="p">,</span> <span class="n">per_line</span><span class="p">,</span> <span class="n">parsefunc</span> <span class="o">=</span> <span class="n">section_info</span>
         <span class="n">header</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">psffile</span><span class="p">)</span>
-        <span class="k">while</span> <span class="n">header</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">:</span>
+        <span class="k">while</span> <span class="n">header</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
             <span class="n">header</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">psffile</span><span class="p">)</span>
         <span class="n">header</span> <span class="o">=</span> <span class="n">header</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-        <span class="c"># Get the number</span>
+        <span class="c1"># Get the number</span>
         <span class="n">num</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">header</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="n">sect_type</span> <span class="o">=</span> <span class="n">header</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s">&#39;!:&#39;</span><span class="p">)</span>
-        <span class="c"># Make sure the section type matches the desc</span>
+        <span class="n">sect_type</span> <span class="o">=</span> <span class="n">header</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;!:&#39;</span><span class="p">)</span>
+        <span class="c1"># Make sure the section type matches the desc</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">sect_type</span> <span class="o">==</span> <span class="n">desc</span><span class="p">:</span>
-            <span class="n">err</span> <span class="o">=</span> <span class="s">&quot;Expected section {0} but found {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">desc</span><span class="p">,</span> <span class="n">sect_type</span><span class="p">)</span>
+            <span class="n">err</span> <span class="o">=</span> <span class="s2">&quot;Expected section {0} but found {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">desc</span><span class="p">,</span> <span class="n">sect_type</span><span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
-        <span class="c"># Now figure out how many lines to read</span>
+        <span class="c1"># Now figure out how many lines to read</span>
         <span class="n">numlines</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ceil</span><span class="p">(</span><span class="n">num</span><span class="o">/</span><span class="n">per_line</span><span class="p">))</span>
 
         <span class="n">psffile_next</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="nb">next</span><span class="p">,</span> <span class="n">psffile</span><span class="p">)</span>
@@ -260,35 +260,35 @@
 <span class="sd">        take the same approach.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c"># how to partition the line into the individual atom components</span>
+        <span class="c1"># how to partition the line into the individual atom components</span>
         <span class="n">atom_parsers</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s">&#39;STANDARD&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">l</span><span class="p">:</span>
-            <span class="p">(</span><span class="n">l</span><span class="p">[:</span><span class="mi">8</span><span class="p">],</span> <span class="n">l</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">13</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">or</span> <span class="s">&quot;SYSTEM&quot;</span><span class="p">,</span> <span class="n">l</span><span class="p">[</span><span class="mi">14</span><span class="p">:</span><span class="mi">18</span><span class="p">],</span>
+            <span class="s1">&#39;STANDARD&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">l</span><span class="p">:</span>
+            <span class="p">(</span><span class="n">l</span><span class="p">[:</span><span class="mi">8</span><span class="p">],</span> <span class="n">l</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">13</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">or</span> <span class="s2">&quot;SYSTEM&quot;</span><span class="p">,</span> <span class="n">l</span><span class="p">[</span><span class="mi">14</span><span class="p">:</span><span class="mi">18</span><span class="p">],</span>
              <span class="n">l</span><span class="p">[</span><span class="mi">19</span><span class="p">:</span><span class="mi">23</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">l</span><span class="p">[</span><span class="mi">24</span><span class="p">:</span><span class="mi">28</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
              <span class="n">l</span><span class="p">[</span><span class="mi">29</span><span class="p">:</span><span class="mi">33</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">l</span><span class="p">[</span><span class="mi">34</span><span class="p">:</span><span class="mi">48</span><span class="p">],</span> <span class="n">l</span><span class="p">[</span><span class="mi">48</span><span class="p">:</span><span class="mi">62</span><span class="p">]),</span>
-            <span class="c"># l[62:70], l[70:84], l[84:98] ignore IMOVE, ECH and EHA,</span>
-            <span class="s">&#39;EXTENDED&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">l</span><span class="p">:</span>
-            <span class="p">(</span><span class="n">l</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">l</span><span class="p">[</span><span class="mi">11</span><span class="p">:</span><span class="mi">19</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">or</span> <span class="s">&quot;SYSTEM&quot;</span><span class="p">,</span> <span class="n">l</span><span class="p">[</span><span class="mi">20</span><span class="p">:</span><span class="mi">28</span><span class="p">],</span>
+            <span class="c1"># l[62:70], l[70:84], l[84:98] ignore IMOVE, ECH and EHA,</span>
+            <span class="s1">&#39;EXTENDED&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">l</span><span class="p">:</span>
+            <span class="p">(</span><span class="n">l</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">l</span><span class="p">[</span><span class="mi">11</span><span class="p">:</span><span class="mi">19</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">or</span> <span class="s2">&quot;SYSTEM&quot;</span><span class="p">,</span> <span class="n">l</span><span class="p">[</span><span class="mi">20</span><span class="p">:</span><span class="mi">28</span><span class="p">],</span>
              <span class="n">l</span><span class="p">[</span><span class="mi">29</span><span class="p">:</span><span class="mi">37</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">l</span><span class="p">[</span><span class="mi">38</span><span class="p">:</span><span class="mi">46</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
              <span class="n">l</span><span class="p">[</span><span class="mi">47</span><span class="p">:</span><span class="mi">51</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">l</span><span class="p">[</span><span class="mi">52</span><span class="p">:</span><span class="mi">66</span><span class="p">],</span> <span class="n">l</span><span class="p">[</span><span class="mi">66</span><span class="p">:</span><span class="mi">70</span><span class="p">]),</span>
-            <span class="c"># l[70:78],  l[78:84], l[84:98] ignore IMOVE, ECH and EHA,</span>
-            <span class="s">&#39;NAMD&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="n">l</span><span class="o">.</span><span class="n">split</span><span class="p">()[:</span><span class="mi">8</span><span class="p">],</span>
+            <span class="c1"># l[70:78],  l[78:84], l[84:98] ignore IMOVE, ECH and EHA,</span>
+            <span class="s1">&#39;NAMD&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="n">l</span><span class="o">.</span><span class="n">split</span><span class="p">()[:</span><span class="mi">8</span><span class="p">],</span>
         <span class="p">}</span>
         <span class="n">atom_parser</span> <span class="o">=</span> <span class="n">atom_parsers</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_format</span><span class="p">]</span>
-        <span class="c"># once partitioned, assigned each component the correct type</span>
-        <span class="n">set_type</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">or</span> <span class="s">&quot;SYSTEM&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+        <span class="c1"># once partitioned, assigned each component the correct type</span>
+        <span class="n">set_type</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">or</span> <span class="s2">&quot;SYSTEM&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
                               <span class="n">x</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">6</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">7</span><span class="p">]))</span>
 
-        <span class="c"># Oli: I don&#39;t think that this is the correct OUTPUT format:</span>
-        <span class="c">#   psf_atom_format = &quot;   %5d %4s %4d %4s %-4s %-4s %10.6f      %7.4f%s\n&quot;</span>
-        <span class="c"># It should be rather something like:</span>
-        <span class="c">#   psf_ATOM_format = &#39;%(iatom)8d %(segid)4s %(resid)-4d %(resname)4s &#39;+\</span>
-        <span class="c">#                     &#39;%(name)-4s %(type)4s %(charge)-14.6f%(mass)-14.4f%(imove)8d\n&#39;</span>
+        <span class="c1"># Oli: I don&#39;t think that this is the correct OUTPUT format:</span>
+        <span class="c1">#   psf_atom_format = &quot;   %5d %4s %4d %4s %-4s %-4s %10.6f      %7.4f%s\n&quot;</span>
+        <span class="c1"># It should be rather something like:</span>
+        <span class="c1">#   psf_ATOM_format = &#39;%(iatom)8d %(segid)4s %(resid)-4d %(resname)4s &#39;+\</span>
+        <span class="c1">#                     &#39;%(name)-4s %(type)4s %(charge)-14.6f%(mass)-14.4f%(imove)8d\n&#39;</span>
 
-        <span class="c"># source/psfres.src (CHEQ and now can be used for CHEQ EXTended), see comments above</span>
-        <span class="c">#   II,LSEGID,LRESID,LRES,TYPE(I),IAC(I),CG(I),AMASS(I),IMOVE(I),ECH(I),EHA(I)</span>
-        <span class="c">#  (I8,1X,A4, 1X,A4,  1X,A4,  1X,A4,  1X,I4,  1X,2G14.6,     I8,   2G14.6)</span>
-        <span class="c">#   0:8   9:13   14:18   19:23   24:28   29:33   34:48 48:62 62:70 70:84 84:98</span>
+        <span class="c1"># source/psfres.src (CHEQ and now can be used for CHEQ EXTended), see comments above</span>
+        <span class="c1">#   II,LSEGID,LRESID,LRES,TYPE(I),IAC(I),CG(I),AMASS(I),IMOVE(I),ECH(I),EHA(I)</span>
+        <span class="c1">#  (I8,1X,A4, 1X,A4,  1X,A4,  1X,A4,  1X,I4,  1X,2G14.6,     I8,   2G14.6)</span>
+        <span class="c1">#   0:8   9:13   14:18   19:23   24:28   29:33   34:48 48:62 62:70 70:84 84:98</span>
 
         <span class="n">atoms</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="p">]</span><span class="o">*</span><span class="n">numlines</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numlines</span><span class="p">):</span>
@@ -296,23 +296,23 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">iatom</span><span class="p">,</span> <span class="n">segid</span><span class="p">,</span> <span class="n">resid</span><span class="p">,</span> <span class="n">resname</span><span class="p">,</span> <span class="n">atomname</span><span class="p">,</span> <span class="n">atomtype</span><span class="p">,</span> <span class="n">charge</span><span class="p">,</span> <span class="n">mass</span> <span class="o">=</span> <span class="n">set_type</span><span class="p">(</span><span class="n">atom_parser</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
             <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-                <span class="c"># last ditch attempt: this *might* be a NAMD/VMD space-separated &quot;PSF&quot; file from</span>
-                <span class="c"># VMD version &lt; 1.9.1</span>
-                <span class="n">atom_parser</span> <span class="o">=</span> <span class="n">atom_parsers</span><span class="p">[</span><span class="s">&#39;NAMD&#39;</span><span class="p">]</span>
+                <span class="c1"># last ditch attempt: this *might* be a NAMD/VMD space-separated &quot;PSF&quot; file from</span>
+                <span class="c1"># VMD version &lt; 1.9.1</span>
+                <span class="n">atom_parser</span> <span class="o">=</span> <span class="n">atom_parsers</span><span class="p">[</span><span class="s1">&#39;NAMD&#39;</span><span class="p">]</span>
                 <span class="n">iatom</span><span class="p">,</span> <span class="n">segid</span><span class="p">,</span> <span class="n">resid</span><span class="p">,</span> <span class="n">resname</span><span class="p">,</span> <span class="n">atomname</span><span class="p">,</span> <span class="n">atomtype</span><span class="p">,</span> <span class="n">charge</span><span class="p">,</span> <span class="n">mass</span> <span class="o">=</span> <span class="n">set_type</span><span class="p">(</span><span class="n">atom_parser</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&quot;Guessing that this is actually a NAMD-type PSF file...&quot;</span>
-                            <span class="s">&quot; continuing with fingers crossed!&quot;</span><span class="p">)</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;First NAMD-type line: {0}: {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()))</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Guessing that this is actually a NAMD-type PSF file...&quot;</span>
+                            <span class="s2">&quot; continuing with fingers crossed!&quot;</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;First NAMD-type line: {0}: {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()))</span>
 
             <span class="n">atoms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Atom</span><span class="p">(</span><span class="n">iatom</span><span class="p">,</span> <span class="n">atomname</span><span class="p">,</span> <span class="n">atomtype</span><span class="p">,</span> <span class="n">resname</span><span class="p">,</span> <span class="n">resid</span><span class="p">,</span>
                             <span class="n">segid</span><span class="p">,</span> <span class="n">mass</span><span class="p">,</span> <span class="n">charge</span><span class="p">,</span> <span class="n">universe</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">atoms</span>
 
     <span class="k">def</span> <span class="nf">_parsesection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lines</span><span class="p">,</span> <span class="n">atoms_per</span><span class="p">,</span> <span class="n">numlines</span><span class="p">):</span>
-        <span class="n">section</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c"># [None,]*numlines</span>
+        <span class="n">section</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># [None,]*numlines</span>
 
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numlines</span><span class="p">):</span>
-            <span class="c"># Subtract 1 from each number to ensure zero-indexing for the atoms</span>
+            <span class="c1"># Subtract 1 from each number to ensure zero-indexing for the atoms</span>
             <span class="n">fields</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">lines</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">fields</span><span class="p">),</span> <span class="n">atoms_per</span><span class="p">):</span>
                 <span class="n">section</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">fields</span><span class="p">[</span><span class="n">j</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="n">atoms_per</span><span class="p">]))</span>
@@ -349,7 +349,7 @@
     Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl,
     Gorman Stock, Isaac Virshup, Zhuyi Xue, Carlos Yáñez S.,
     and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>
 </html>

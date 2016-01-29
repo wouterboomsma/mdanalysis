@@ -124,17 +124,17 @@ can create new objects (in this case, another
 coordinates for every frame. In the following example the end-to-end distance
 of a protein and the radius of gyration of the backbone atoms are calculated:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">MDAnalysis</span>
-<span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span>   <span class="c"># test trajectory</span>
+<span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span>   <span class="c1"># test trajectory</span>
 <span class="kn">import</span> <span class="nn">numpy.linalg</span>
-<span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>                 <span class="c"># always start with a Universe</span>
-<span class="n">nterm</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">s4AKE</span><span class="o">.</span><span class="n">N</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>   <span class="c"># can access structure via segid (s4AKE) and atom name</span>
-<span class="n">cterm</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">s4AKE</span><span class="o">.</span><span class="n">C</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c"># ... takes the last atom named &#39;C&#39;</span>
-<span class="n">bb</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&#39;protein and backbone&#39;</span><span class="p">)</span>  <span class="c"># a selection (a AtomGroup)</span>
-<span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">:</span>     <span class="c"># iterate through all frames</span>
-  <span class="n">r</span> <span class="o">=</span> <span class="n">cterm</span><span class="o">.</span><span class="n">pos</span> <span class="o">-</span> <span class="n">nterm</span><span class="o">.</span><span class="n">pos</span> <span class="c"># end-to-end vector from atom positions</span>
-  <span class="n">d</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>  <span class="c"># end-to-end distance</span>
-  <span class="n">rgyr</span> <span class="o">=</span> <span class="n">bb</span><span class="o">.</span><span class="n">radius_of_gyration</span><span class="p">()</span>  <span class="c"># method of a AtomGroup; updates with each frame</span>
-  <span class="k">print</span> <span class="s">&quot;frame = </span><span class="si">%d</span><span class="s">: d = </span><span class="si">%f</span><span class="s"> Angstroem, Rgyr = </span><span class="si">%f</span><span class="s"> Angstroem&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">rgyr</span><span class="p">)</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>                 <span class="c1"># always start with a Universe</span>
+<span class="n">nterm</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">s4AKE</span><span class="o">.</span><span class="n">N</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>   <span class="c1"># can access structure via segid (s4AKE) and atom name</span>
+<span class="n">cterm</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">s4AKE</span><span class="o">.</span><span class="n">C</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># ... takes the last atom named &#39;C&#39;</span>
+<span class="n">bb</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;protein and backbone&#39;</span><span class="p">)</span>  <span class="c1"># a selection (a AtomGroup)</span>
+<span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">:</span>     <span class="c1"># iterate through all frames</span>
+  <span class="n">r</span> <span class="o">=</span> <span class="n">cterm</span><span class="o">.</span><span class="n">pos</span> <span class="o">-</span> <span class="n">nterm</span><span class="o">.</span><span class="n">pos</span> <span class="c1"># end-to-end vector from atom positions</span>
+  <span class="n">d</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>  <span class="c1"># end-to-end distance</span>
+  <span class="n">rgyr</span> <span class="o">=</span> <span class="n">bb</span><span class="o">.</span><span class="n">radius_of_gyration</span><span class="p">()</span>  <span class="c1"># method of a AtomGroup; updates with each frame</span>
+  <span class="k">print</span> <span class="s2">&quot;frame = </span><span class="si">%d</span><span class="s2">: d = </span><span class="si">%f</span><span class="s2"> Angstroem, Rgyr = </span><span class="si">%f</span><span class="s2"> Angstroem&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">rgyr</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="section" id="using-mdanalysis-in-python">
@@ -204,7 +204,7 @@ over time:</p>
 </div>
 <p>Finally, the <code class="xref py py-meth docutils literal"><span class="pre">MDAnalysis.Universe.select_atoms()</span></code> method generates a new
 <a class="reference internal" href="core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> according to a selection criterion</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">calphas</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&quot;name CA&quot;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">calphas</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;name CA&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">calphas</span>
 <span class="go">&lt;AtomGroup with 214 atoms&gt;</span>
 </pre></div>
@@ -304,7 +304,7 @@ via clustering (<a class="reference external" href="https://github.com/MDAnalysi
     Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl,
     Gorman Stock, Isaac Virshup, Zhuyi Xue, Carlos Yáñez S.,
     and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>
 </html>

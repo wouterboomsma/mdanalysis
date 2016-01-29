@@ -148,8 +148,8 @@ Nat Protoc. 3(7), 1213-27.</td></tr>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">MDAnalysis.analysis.x3dna</span> <span class="kn">import</span> <span class="n">X3DNA</span><span class="p">,</span> <span class="n">X3DNAtraj</span>
 <span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">PDB_X3DNA</span>
 
-<span class="c"># set path to your x3dna binary in bashrc file</span>
-<span class="n">H</span> <span class="o">=</span> <span class="n">X3DNA</span><span class="p">(</span><span class="n">PDB_X3DNA</span><span class="p">,</span> <span class="n">executable</span><span class="o">=</span><span class="s">&quot;x3dna_ensemble analyze -b 355d.bps -p pdbfile&quot;</span><span class="p">)</span>
+<span class="c1"># set path to your x3dna binary in bashrc file</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">X3DNA</span><span class="p">(</span><span class="n">PDB_X3DNA</span><span class="p">,</span> <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;x3dna_ensemble analyze -b 355d.bps -p pdbfile&quot;</span><span class="p">)</span>
 <span class="n">H</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 <span class="n">H</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
 <span class="n">H</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
@@ -196,13 +196,16 @@ data such as <a class="reference internal" href="#MDAnalysis.analysis.x3dna.X3DN
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>*filename*</strong> &#8211; The <em>filename</em> is used as input for X3DNA in the &#8220;xdna_ensemble&#8221;
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><p class="first"><em>filename</em></p>
+<blockquote>
+<div><p>The <em>filename</em> is used as input for X3DNA in the &#8220;xdna_ensemble&#8221;
 command.  It specifies the name of a PDB coordinate file
 to be used. This must be in Brookhaven protein databank format
 or something closely approximating this. Both ATOM and HETATM
 records are read. Note that if water molecules or ions are
 present in the channel these can be ignored on read by the use
 of the <em>ignore_residues</em> keyword.</p>
+</div></blockquote>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Keywords:</th><td class="field-body"><p class="first"><em>executable</em></p>
@@ -397,19 +400,27 @@ each frame and runs X3DNA on the frame.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>*universe*</strong> &#8211; The input trajectory as part of a
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first last docutils">
+<dt><em>universe</em></dt>
+<dd><p class="first last">The input trajectory as part of a
 <a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.Universe" title="MDAnalysis.core.AtomGroup.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a>. trajectory is
 converted to a sequence of PDB files and X3DNA is run on each
 individual file. (Use the <em>start</em>, <em>stop</em>, and <em>step</em> keywords
-to slice the trajectory.)</li>
-<li><strong>stop, step</strong> (<em>*start*,</em>) &#8211; frame indices to slice the trajectory as
-<code class="docutils literal"><span class="pre">universe.trajectory[start,</span> <span class="pre">stop,</span> <span class="pre">step]</span></code></li>
-<li><strong>*x3dna_param*</strong> &#8211; indicates whether stacked bases or stacked base-pairs will be
+to slice the trajectory.)</p>
+</dd>
+<dt><em>start</em>, <em>stop</em>, <em>step</em></dt>
+<dd><p class="first last">frame indices to slice the trajectory as
+<code class="docutils literal"><span class="pre">universe.trajectory[start,</span> <span class="pre">stop,</span> <span class="pre">step]</span></code></p>
+</dd>
+<dt><em>x3dna_param</em></dt>
+<dd><p class="first last">indicates whether stacked bases or stacked base-pairs will be
 analyzed. True is bases or False is stacked base-pairs [Default
-is True].</li>
-<li><strong>*kwargs*</strong> &#8211; All other keywords are passed on to <a class="reference internal" href="#MDAnalysis.analysis.x3dna.X3DNA" title="MDAnalysis.analysis.x3dna.X3DNA"><code class="xref py py-class docutils literal"><span class="pre">X3DNA</span></code></a> (see there for description).</li>
-</ul>
+is True].</p>
+</dd>
+<dt><em>kwargs</em></dt>
+<dd><p class="first last">All other keywords are passed on to <a class="reference internal" href="#MDAnalysis.analysis.x3dna.X3DNA" title="MDAnalysis.analysis.x3dna.X3DNA"><code class="xref py py-class docutils literal"><span class="pre">X3DNA</span></code></a> (see there for description).</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -604,7 +615,7 @@ Buckle,Propeller,Opening,Shift,Slide,Rise,Tilt,Roll,Twist) for each nucleic acid
     Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl,
     Gorman Stock, Isaac Virshup, Zhuyi Xue, Carlos Yáñez S.,
     and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>
 </html>

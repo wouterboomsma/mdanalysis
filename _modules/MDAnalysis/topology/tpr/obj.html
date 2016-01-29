@@ -72,26 +72,26 @@
           <div class="body" role="main">
             
   <h1>Source code for MDAnalysis.topology.tpr.obj</h1><div class="highlight"><pre>
-<span class="c"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding: utf-8 -*-</span>
-<span class="c"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
-<span class="c">#</span>
-<span class="c"># MDAnalysis --- http://www.MDAnalysis.org</span>
-<span class="c"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
-<span class="c"># and contributors (see AUTHORS for the full list)</span>
-<span class="c">#</span>
-<span class="c"># Released under the GNU Public Licence, v2 or any higher version</span>
-<span class="c">#</span>
-<span class="c"># Please cite your use of MDAnalysis in published work:</span>
-<span class="c">#</span>
-<span class="c"># N. Michaud-Agrawal, E. J. Denning, T. B. Woolf, and O. Beckstein.</span>
-<span class="c"># MDAnalysis: A Toolkit for the Analysis of Molecular Dynamics Simulations.</span>
-<span class="c"># J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787</span>
-<span class="c">#</span>
+<span class="c1"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding: utf-8 -*-</span>
+<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
+<span class="c1">#</span>
+<span class="c1"># MDAnalysis --- http://www.MDAnalysis.org</span>
+<span class="c1"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
+<span class="c1"># and contributors (see AUTHORS for the full list)</span>
+<span class="c1">#</span>
+<span class="c1"># Released under the GNU Public Licence, v2 or any higher version</span>
+<span class="c1">#</span>
+<span class="c1"># Please cite your use of MDAnalysis in published work:</span>
+<span class="c1">#</span>
+<span class="c1"># N. Michaud-Agrawal, E. J. Denning, T. B. Woolf, and O. Beckstein.</span>
+<span class="c1"># MDAnalysis: A Toolkit for the Analysis of Molecular Dynamics Simulations.</span>
+<span class="c1"># J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787</span>
+<span class="c1">#</span>
 
 
-<span class="c"># TPR parser and tpr support module</span>
-<span class="c"># Copyright (c) 2011 Zhuyi Xue</span>
-<span class="c"># Released under the  GNU Public Licence, v2</span>
+<span class="c1"># TPR parser and tpr support module</span>
+<span class="c1"># Copyright (c) 2011 Zhuyi Xue</span>
+<span class="c1"># Released under the  GNU Public Licence, v2</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Class definitions for the TPRParser</span>
@@ -104,26 +104,26 @@
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
 
 <span class="n">TpxHeader</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span>
-    <span class="s">&quot;TpxHeader&quot;</span><span class="p">,</span> <span class="p">[</span>
-        <span class="s">&quot;number&quot;</span><span class="p">,</span> <span class="s">&quot;ver_str&quot;</span><span class="p">,</span> <span class="s">&quot;precision&quot;</span><span class="p">,</span>
-        <span class="s">&quot;fver&quot;</span><span class="p">,</span> <span class="s">&quot;fgen&quot;</span><span class="p">,</span> <span class="s">&quot;file_tag&quot;</span><span class="p">,</span> <span class="s">&quot;natoms&quot;</span><span class="p">,</span> <span class="s">&quot;ngtc&quot;</span><span class="p">,</span> <span class="s">&quot;fep_state&quot;</span><span class="p">,</span> <span class="s">&quot;lamb&quot;</span><span class="p">,</span>
-        <span class="s">&quot;bIr&quot;</span><span class="p">,</span> <span class="s">&quot;bTop&quot;</span><span class="p">,</span> <span class="s">&quot;bX&quot;</span><span class="p">,</span> <span class="s">&quot;bV&quot;</span><span class="p">,</span> <span class="s">&quot;bF&quot;</span><span class="p">,</span> <span class="s">&quot;bBox&quot;</span><span class="p">])</span>
-<span class="n">Box</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">&quot;Box&quot;</span><span class="p">,</span> <span class="s">&quot;size rel v&quot;</span><span class="p">)</span>
-<span class="n">Mtop</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">&quot;Mtop&quot;</span><span class="p">,</span> <span class="s">&quot;nmoltype moltypes nmolblock&quot;</span><span class="p">)</span>
-<span class="n">TPRTopology</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">&quot;TPRTopology&quot;</span><span class="p">,</span> <span class="s">&quot;atoms, bonds, angles, dihe, impr&quot;</span><span class="p">)</span>
-<span class="n">Params</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">&quot;Params&quot;</span><span class="p">,</span> <span class="s">&quot;atnr ntypes functype reppow fudgeQQ iparams&quot;</span><span class="p">)</span>
-<span class="n">Atom</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">&quot;Atom&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;m&quot;</span><span class="p">,</span> <span class="s">&quot;q&quot;</span><span class="p">,</span> <span class="s">&quot;mB&quot;</span><span class="p">,</span> <span class="s">&quot;qB&quot;</span><span class="p">,</span> <span class="s">&quot;tp&quot;</span><span class="p">,</span> <span class="s">&quot;typeB&quot;</span><span class="p">,</span> <span class="s">&quot;ptype&quot;</span><span class="p">,</span> <span class="s">&quot;resind&quot;</span><span class="p">,</span> <span class="s">&quot;atomnumber&quot;</span><span class="p">])</span>
-<span class="n">Atoms</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">&quot;Atoms&quot;</span><span class="p">,</span> <span class="s">&quot;atoms nr nres type typeB atomnames resnames&quot;</span><span class="p">)</span>
-<span class="n">Ilist</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">&quot;Ilist&quot;</span><span class="p">,</span> <span class="s">&quot;nr ik, iatoms&quot;</span><span class="p">)</span>
-<span class="n">Molblock</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">&quot;Molblock&quot;</span><span class="p">,</span> <span class="p">[</span>
-    <span class="s">&quot;molb_type&quot;</span><span class="p">,</span> <span class="s">&quot;molb_nmol&quot;</span><span class="p">,</span> <span class="s">&quot;molb_natoms_mol&quot;</span><span class="p">,</span>
-    <span class="s">&quot;molb_nposres_xA&quot;</span><span class="p">,</span> <span class="s">&quot;molb_nposres_xB&quot;</span><span class="p">])</span>
+    <span class="s2">&quot;TpxHeader&quot;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="s2">&quot;number&quot;</span><span class="p">,</span> <span class="s2">&quot;ver_str&quot;</span><span class="p">,</span> <span class="s2">&quot;precision&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;fver&quot;</span><span class="p">,</span> <span class="s2">&quot;fgen&quot;</span><span class="p">,</span> <span class="s2">&quot;file_tag&quot;</span><span class="p">,</span> <span class="s2">&quot;natoms&quot;</span><span class="p">,</span> <span class="s2">&quot;ngtc&quot;</span><span class="p">,</span> <span class="s2">&quot;fep_state&quot;</span><span class="p">,</span> <span class="s2">&quot;lamb&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;bIr&quot;</span><span class="p">,</span> <span class="s2">&quot;bTop&quot;</span><span class="p">,</span> <span class="s2">&quot;bX&quot;</span><span class="p">,</span> <span class="s2">&quot;bV&quot;</span><span class="p">,</span> <span class="s2">&quot;bF&quot;</span><span class="p">,</span> <span class="s2">&quot;bBox&quot;</span><span class="p">])</span>
+<span class="n">Box</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">&quot;Box&quot;</span><span class="p">,</span> <span class="s2">&quot;size rel v&quot;</span><span class="p">)</span>
+<span class="n">Mtop</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">&quot;Mtop&quot;</span><span class="p">,</span> <span class="s2">&quot;nmoltype moltypes nmolblock&quot;</span><span class="p">)</span>
+<span class="n">TPRTopology</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">&quot;TPRTopology&quot;</span><span class="p">,</span> <span class="s2">&quot;atoms, bonds, angles, dihe, impr&quot;</span><span class="p">)</span>
+<span class="n">Params</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">&quot;Params&quot;</span><span class="p">,</span> <span class="s2">&quot;atnr ntypes functype reppow fudgeQQ iparams&quot;</span><span class="p">)</span>
+<span class="n">Atom</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">&quot;Atom&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="s2">&quot;mB&quot;</span><span class="p">,</span> <span class="s2">&quot;qB&quot;</span><span class="p">,</span> <span class="s2">&quot;tp&quot;</span><span class="p">,</span> <span class="s2">&quot;typeB&quot;</span><span class="p">,</span> <span class="s2">&quot;ptype&quot;</span><span class="p">,</span> <span class="s2">&quot;resind&quot;</span><span class="p">,</span> <span class="s2">&quot;atomnumber&quot;</span><span class="p">])</span>
+<span class="n">Atoms</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">&quot;Atoms&quot;</span><span class="p">,</span> <span class="s2">&quot;atoms nr nres type typeB atomnames resnames&quot;</span><span class="p">)</span>
+<span class="n">Ilist</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">&quot;Ilist&quot;</span><span class="p">,</span> <span class="s2">&quot;nr ik, iatoms&quot;</span><span class="p">)</span>
+<span class="n">Molblock</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">&quot;Molblock&quot;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s2">&quot;molb_type&quot;</span><span class="p">,</span> <span class="s2">&quot;molb_nmol&quot;</span><span class="p">,</span> <span class="s2">&quot;molb_natoms_mol&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;molb_nposres_xA&quot;</span><span class="p">,</span> <span class="s2">&quot;molb_nposres_xB&quot;</span><span class="p">])</span>
 
 
 <div class="viewcode-block" id="MoleculeKind"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.obj.MoleculeKind">[docs]</a><span class="k">class</span> <span class="nc">MoleculeKind</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">atomkinds</span><span class="p">,</span> <span class="n">bonds</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">angles</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                  <span class="n">dihe</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">impr</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">donors</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">acceptors</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>  <span class="c"># name of the molecule</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>  <span class="c1"># name of the molecule</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">atomkinds</span> <span class="o">=</span> <span class="n">atomkinds</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bonds</span> <span class="o">=</span> <span class="n">bonds</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">angles</span> <span class="o">=</span> <span class="n">angles</span>
@@ -133,46 +133,46 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">acceptors</span> <span class="o">=</span> <span class="n">acceptors</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&quot;Molecule: {0:&lt;20s} #atoms: {1:&lt;10d} #residues: {2:&lt;10d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="k">return</span> <span class="s2">&quot;Molecule: {0:&lt;20s} #atoms: {1:&lt;10d} #residues: {2:&lt;10d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_atoms</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_residues</span><span class="p">())</span>
 
 <div class="viewcode-block" id="MoleculeKind.number_of_atoms"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.obj.MoleculeKind.number_of_atoms">[docs]</a>    <span class="k">def</span> <span class="nf">number_of_atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atomkinds</span><span class="p">)</span>
-</div>
-<div class="viewcode-block" id="MoleculeKind.number_of_residues"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.obj.MoleculeKind.number_of_residues">[docs]</a>    <span class="k">def</span> <span class="nf">number_of_residues</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">({</span><span class="n">a</span><span class="o">.</span><span class="n">resid</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">atomkinds</span><span class="p">})</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atomkinds</span><span class="p">)</span></div>
 
-    <span class="c"># remap_ method returns [tuple(), tuple(), ..] or []</span>
-    <span class="c"># Note: in MDAnalysis, bonds, angles, etc are represented as tuple and not as list</span></div>
+<div class="viewcode-block" id="MoleculeKind.number_of_residues"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.obj.MoleculeKind.number_of_residues">[docs]</a>    <span class="k">def</span> <span class="nf">number_of_residues</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">({</span><span class="n">a</span><span class="o">.</span><span class="n">resid</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">atomkinds</span><span class="p">})</span></div>
+
+    <span class="c1"># remap_ method returns [tuple(), tuple(), ..] or []</span>
+    <span class="c1"># Note: in MDAnalysis, bonds, angles, etc are represented as tuple and not as list</span>
 <div class="viewcode-block" id="MoleculeKind.remap_bonds"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.obj.MoleculeKind.remap_bonds">[docs]</a>    <span class="k">def</span> <span class="nf">remap_bonds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atom_start_ndx</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bonds</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">atom_start_ndx</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bonds</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">[]</span>
-</div>
+            <span class="k">return</span> <span class="p">[]</span></div>
+
 <div class="viewcode-block" id="MoleculeKind.remap_angles"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.obj.MoleculeKind.remap_angles">[docs]</a>    <span class="k">def</span> <span class="nf">remap_angles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atom_start_ndx</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">angles</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">atom_start_ndx</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">angles</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">[]</span>
-</div>
+            <span class="k">return</span> <span class="p">[]</span></div>
+
 <div class="viewcode-block" id="MoleculeKind.remap_dihe"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.obj.MoleculeKind.remap_dihe">[docs]</a>    <span class="k">def</span> <span class="nf">remap_dihe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atom_start_ndx</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dihe</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">atom_start_ndx</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dihe</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">[]</span>
-</div>
+            <span class="k">return</span> <span class="p">[]</span></div>
+
 <div class="viewcode-block" id="MoleculeKind.remap_impr"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.obj.MoleculeKind.remap_impr">[docs]</a>    <span class="k">def</span> <span class="nf">remap_impr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atom_start_ndx</span><span class="p">):</span>
-        <span class="c"># improper</span>
+        <span class="c1"># improper</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">impr</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">atom_start_ndx</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">impr</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">[]</span>
+            <span class="k">return</span> <span class="p">[]</span></div></div>
 
-</div></div>
+
 <div class="viewcode-block" id="AtomKind"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.obj.AtomKind">[docs]</a><span class="k">class</span> <span class="nc">AtomKind</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">resid</span><span class="p">,</span> <span class="n">resname</span><span class="p">,</span> <span class="n">mass</span><span class="p">,</span> <span class="n">charge</span><span class="p">):</span>
-        <span class="c"># id is only within the scope of a single molecule, not the whole system</span>
+        <span class="c1"># id is only within the scope of a single molecule, not the whole system</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="nb">type</span>
@@ -183,11 +183,11 @@
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> \
-            <span class="p">(</span><span class="s">&quot;&lt; AtomKind: id {0:6d}, name {1:5s}, type {2:10s}, resid {3:6d}, resname {4:4s}, mass {5:8.4f}, &quot;</span>
-             <span class="s">&quot;charge {6:12.3f} &gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span>
-                                         <span class="bp">self</span><span class="o">.</span><span class="n">resname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mass</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">charge</span><span class="p">))</span>
+            <span class="p">(</span><span class="s2">&quot;&lt; AtomKind: id {0:6d}, name {1:5s}, type {2:10s}, resid {3:6d}, resname {4:4s}, mass {5:8.4f}, &quot;</span>
+             <span class="s2">&quot;charge {6:12.3f} &gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span>
+                                         <span class="bp">self</span><span class="o">.</span><span class="n">resname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mass</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">charge</span><span class="p">))</span></div>
 
-</div>
+
 <div class="viewcode-block" id="InteractionKind"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.obj.InteractionKind">[docs]</a><span class="k">class</span> <span class="nc">InteractionKind</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">long_name</span><span class="p">,</span> <span class="n">natoms</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;natoms: number of atoms involved in this type of interaction&quot;&quot;&quot;</span>
@@ -197,10 +197,10 @@
 
 <div class="viewcode-block" id="InteractionKind.process"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.obj.InteractionKind.process">[docs]</a>    <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atom_ndx</span><span class="p">):</span>
         <span class="k">while</span> <span class="n">atom_ndx</span><span class="p">:</span>
-            <span class="c"># format for all info: (type, [atom1, atom2, ...])</span>
-            <span class="c"># yield atom_ndx.pop(0), [atom_ndx.pop(0) for i in range(self.natoms)]</span>
+            <span class="c1"># format for all info: (type, [atom1, atom2, ...])</span>
+            <span class="c1"># yield atom_ndx.pop(0), [atom_ndx.pop(0) for i in range(self.natoms)]</span>
 
-            <span class="c"># but currently only [atom1, atom2, ...] is interested</span>
+            <span class="c1"># but currently only [atom1, atom2, ...] is interested</span>
             <span class="n">atom_ndx</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
             <span class="k">yield</span> <span class="p">[</span><span class="n">atom_ndx</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">natoms</span><span class="p">)]</span></div></div>
 </pre></div>
@@ -235,7 +235,7 @@
     Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl,
     Gorman Stock, Isaac Virshup, Zhuyi Xue, Carlos Yáñez S.,
     and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>
 </html>

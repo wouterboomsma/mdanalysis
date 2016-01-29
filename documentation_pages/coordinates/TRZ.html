@@ -192,7 +192,7 @@ the has_* attribute</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Data:</th><td class="field-body"><dl class="first last docutils">
+<tr class="field-odd field"><th class="field-name">Data:</th><td class="field-body"><dl class="first docutils">
 <dt>ts</dt>
 <dd><p class="first last"><a class="reference internal" href="#MDAnalysis.coordinates.TRZ.Timestep" title="MDAnalysis.coordinates.TRZ.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a> object
 containing coordinates of current frame</p>
@@ -200,33 +200,24 @@ containing coordinates of current frame</p>
 </dl>
 </td>
 </tr>
+<tr class="field-even field"><th class="field-name">Methods:</th><td class="field-body"><dl class="first last docutils">
+<dt><code class="docutils literal"><span class="pre">len(trz)</span></code></dt>
+<dd><p class="first last">returns the number of frames</p>
+</dd>
+<dt><code class="docutils literal"><span class="pre">for</span> <span class="pre">ts</span> <span class="pre">in</span> <span class="pre">trz</span></code></dt>
+<dd><p class="first last">iterates through the trajectory</p>
+</dd>
+<dt><code class="docutils literal"><span class="pre">for</span> <span class="pre">ts</span> <span class="pre">in</span> <span class="pre">trz[start:stop:skip]</span></code></dt>
+<dd><p class="first last">iterate through a trajectory using slicing</p>
+</dd>
+<dt><code class="docutils literal"><span class="pre">trz[i]</span></code></dt>
+<dd><p class="first last">random access of a trajectory frame</p>
+</dd>
+</dl>
+</td>
+</tr>
 </tbody>
 </table>
-<dl class="method">
-<dt>
-<code class="descname">``len(trz)``</code></dt>
-<dd><p>returns the number of frames</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">``for ts in trz``</code></dt>
-<dd><p>iterates through the trajectory</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">``for ts in trz[start</code></dt>
-<dd><p>stop:skip]``
-iterate through a trajectory using slicing</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">``trz[i]``</code></dt>
-<dd><p>random access of a trajectory frame</p>
-</dd></dl>
-
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Frames now 0-based instead of 1-based
 Extra data (Temperature, Energies, Pressures, etc) now read
@@ -238,11 +229,17 @@ Now passes a weakref of self to ts (ts._reader)</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>*trzfilename*</strong> &#8211; name of input file</li>
-<li><strong>*n_atoms*</strong> &#8211; number of atoms in trajectory, must taken from topology file!</li>
-<li><strong>*convert_units*</strong> &#8211; converts units to MDAnalysis defaults</li>
-</ul>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first last docutils">
+<dt><em>trzfilename</em></dt>
+<dd><p class="first last">name of input file</p>
+</dd>
+<dt><em>n_atoms</em></dt>
+<dd><p class="first last">number of atoms in trajectory, must taken from topology file!</p>
+</dd>
+<dt><em>convert_units</em></dt>
+<dd><p class="first last">converts units to MDAnalysis defaults</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -289,20 +286,27 @@ Now passes a weakref of self to ts (ts._reader)</p>
 <dt id="MDAnalysis.coordinates.TRZ.TRZWriter">
 <em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.TRZ.</code><code class="descname">TRZWriter</code><span class="sig-paren">(</span><em>filename</em>, <em>n_atoms</em>, <em>title='TRZ'</em>, <em>convert_units=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/TRZ.html#TRZWriter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.TRZ.TRZWriter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes a TRZ format trajectory.</p>
-<dl class="method">
-<dt>
-<code class="descname">``W = TRZWriter(trzfilename, n_atoms, title='TRZ')``</code></dt>
-<dd></dd></dl>
-
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Methods:</th><td class="field-body"><code class="docutils literal"><span class="pre">W</span> <span class="pre">=</span> <span class="pre">TRZWriter(trzfilename,</span> <span class="pre">n_atoms,</span> <span class="pre">title='TRZ')</span></code></td>
+</tr>
+</tbody>
+</table>
 <p>Create a TRZWriter</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>*filename*</strong> &#8211; name of output file</li>
-<li><strong>*n_atoms*</strong> &#8211; number of atoms in trajectory</li>
-</ul>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>filename</em></dt>
+<dd><p class="first last">name of output file</p>
+</dd>
+<dt><em>n_atoms</em></dt>
+<dd><p class="first last">number of atoms in trajectory</p>
+</dd>
+</dl>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Keywords:</th><td class="field-body"><dl class="first last docutils">
@@ -335,7 +339,7 @@ the value of <code class="xref py py-data docutils literal"><span class="pre">MD
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Data:</th><td class="field-body"><dl class="first last docutils">
+<tr class="field-odd field"><th class="field-name">Data:</th><td class="field-body"><dl class="first docutils">
 <dt>ts</dt>
 <dd><p class="first last"><a class="reference internal" href="#MDAnalysis.coordinates.TRZ.Timestep" title="MDAnalysis.coordinates.TRZ.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a> object
 containing coordinates of current frame</p>
@@ -343,33 +347,24 @@ containing coordinates of current frame</p>
 </dl>
 </td>
 </tr>
+<tr class="field-even field"><th class="field-name">Methods:</th><td class="field-body"><dl class="first last docutils">
+<dt><code class="docutils literal"><span class="pre">len(trz)</span></code></dt>
+<dd><p class="first last">returns the number of frames</p>
+</dd>
+<dt><code class="docutils literal"><span class="pre">for</span> <span class="pre">ts</span> <span class="pre">in</span> <span class="pre">trz</span></code></dt>
+<dd><p class="first last">iterates through the trajectory</p>
+</dd>
+<dt><code class="docutils literal"><span class="pre">for</span> <span class="pre">ts</span> <span class="pre">in</span> <span class="pre">trz[start:stop:skip]</span></code></dt>
+<dd><p class="first last">iterate through a trajectory using slicing</p>
+</dd>
+<dt><code class="docutils literal"><span class="pre">trz[i]</span></code></dt>
+<dd><p class="first last">random access of a trajectory frame</p>
+</dd>
+</dl>
+</td>
+</tr>
 </tbody>
 </table>
-<dl class="method">
-<dt>
-<code class="descname">``len(trz)``</code></dt>
-<dd><p>returns the number of frames</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">``for ts in trz``</code></dt>
-<dd><p>iterates through the trajectory</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">``for ts in trz[start</code></dt>
-<dd><p>stop:skip]``
-iterate through a trajectory using slicing</p>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">``trz[i]``</code></dt>
-<dd><p>random access of a trajectory frame</p>
-</dd></dl>
-
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Frames now 0-based instead of 1-based
 Extra data (Temperature, Energies, Pressures, etc) now read
@@ -381,11 +376,17 @@ Now passes a weakref of self to ts (ts._reader)</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>*trzfilename*</strong> &#8211; name of input file</li>
-<li><strong>*n_atoms*</strong> &#8211; number of atoms in trajectory, must taken from topology file!</li>
-<li><strong>*convert_units*</strong> &#8211; converts units to MDAnalysis defaults</li>
-</ul>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first last docutils">
+<dt><em>trzfilename</em></dt>
+<dd><p class="first last">name of input file</p>
+</dd>
+<dt><em>n_atoms</em></dt>
+<dd><p class="first last">number of atoms in trajectory, must taken from topology file!</p>
+</dd>
+<dt><em>convert_units</em></dt>
+<dd><p class="first last">converts units to MDAnalysis defaults</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -432,20 +433,27 @@ Now passes a weakref of self to ts (ts._reader)</p>
 <dt>
 <em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.TRZ.</code><code class="descname">TRZWriter</code><span class="sig-paren">(</span><em>filename</em>, <em>n_atoms</em>, <em>title='TRZ'</em>, <em>convert_units=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/TRZ.html#TRZWriter"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Writes a TRZ format trajectory.</p>
-<dl class="method">
-<dt>
-<code class="descname">``W = TRZWriter(trzfilename, n_atoms, title='TRZ')``</code></dt>
-<dd></dd></dl>
-
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Methods:</th><td class="field-body"><code class="docutils literal"><span class="pre">W</span> <span class="pre">=</span> <span class="pre">TRZWriter(trzfilename,</span> <span class="pre">n_atoms,</span> <span class="pre">title='TRZ')</span></code></td>
+</tr>
+</tbody>
+</table>
 <p>Create a TRZWriter</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>*filename*</strong> &#8211; name of output file</li>
-<li><strong>*n_atoms*</strong> &#8211; number of atoms in trajectory</li>
-</ul>
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
+<dt><em>filename</em></dt>
+<dd><p class="first last">name of output file</p>
+</dd>
+<dt><em>n_atoms</em></dt>
+<dd><p class="first last">number of atoms in trajectory</p>
+</dd>
+</dl>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Keywords:</th><td class="field-body"><dl class="first last docutils">
@@ -542,7 +550,7 @@ the has_* attribute</li>
     Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl,
     Gorman Stock, Isaac Virshup, Zhuyi Xue, Carlos Yáñez S.,
     and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>
 </html>

@@ -72,20 +72,20 @@
           <div class="body" role="main">
             
   <h1>Source code for MDAnalysis.topology.tables</h1><div class="highlight"><pre>
-<span class="c"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
-<span class="c"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 </span>
-<span class="c">#</span>
-<span class="c"># MDAnalysis --- http://www.MDAnalysis.org</span>
-<span class="c"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
-<span class="c"># and contributors (see AUTHORS for the full list)</span>
-<span class="c">#</span>
-<span class="c"># Released under the GNU Public Licence, v2 or any higher version</span>
-<span class="c">#</span>
-<span class="c"># Please cite your use of MDAnalysis in published work:</span>
-<span class="c"># N. Michaud-Agrawal, E. J. Denning, T. B. Woolf, and O. Beckstein.</span>
-<span class="c"># MDAnalysis: A Toolkit for the Analysis of Molecular Dynamics Simulations.</span>
-<span class="c"># J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787</span>
-<span class="c">#</span>
+<span class="c1"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
+<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 </span>
+<span class="c1">#</span>
+<span class="c1"># MDAnalysis --- http://www.MDAnalysis.org</span>
+<span class="c1"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
+<span class="c1"># and contributors (see AUTHORS for the full list)</span>
+<span class="c1">#</span>
+<span class="c1"># Released under the GNU Public Licence, v2 or any higher version</span>
+<span class="c1">#</span>
+<span class="c1"># Please cite your use of MDAnalysis in published work:</span>
+<span class="c1"># N. Michaud-Agrawal, E. J. Denning, T. B. Woolf, and O. Beckstein.</span>
+<span class="c1"># MDAnalysis: A Toolkit for the Analysis of Molecular Dynamics Simulations.</span>
+<span class="c1"># J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787</span>
+<span class="c1">#</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">MDAnalysis topology tables</span>
@@ -134,241 +134,241 @@
     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
         <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span>
         <span class="n">values</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&quot;#&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">):</span>
             <span class="k">continue</span>
         <span class="n">d</span><span class="p">[</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">convertor</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">d</span>
+    <span class="k">return</span> <span class="n">d</span></div>
 
-<span class="c">#: Table with hard-coded special atom names, used for guessing atom types</span>
-<span class="c">#: with :func:`MDAnalysis.topology.core.guess_atom_element`.</span></div>
-<span class="n">TABLE_ATOMELEMENTS</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s"># translation of atomnames to types/element</span>
-<span class="s"># based on CHARMM and AMBER usage with a little bit of GROMOS (and PROPKA)</span>
-<span class="s"># NOTE: CL might be ambiguous and is interpreted as chloride!</span>
+<span class="c1">#: Table with hard-coded special atom names, used for guessing atom types</span>
+<span class="c1">#: with :func:`MDAnalysis.topology.core.guess_atom_element`.</span>
+<span class="n">TABLE_ATOMELEMENTS</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2"># translation of atomnames to types/element</span>
+<span class="s2"># based on CHARMM and AMBER usage with a little bit of GROMOS (and PROPKA)</span>
+<span class="s2"># NOTE: CL might be ambiguous and is interpreted as chloride!</span>
 
-<span class="s"># --------- ------------------</span>
-<span class="s"># atomname   element</span>
-<span class="s"># --------- ------------------</span>
+<span class="s2"># --------- ------------------</span>
+<span class="s2"># atomname   element</span>
+<span class="s2"># --------- ------------------</span>
 
-<span class="s"># Bromide</span>
-<span class="s">BR           BR</span>
+<span class="s2"># Bromide</span>
+<span class="s2">BR           BR</span>
 
-<span class="s"># Calcium</span>
-<span class="s">CAL          CA</span>
-<span class="s">C0           CA</span>
-<span class="s">CA2+         CA</span>
+<span class="s2"># Calcium</span>
+<span class="s2">CAL          CA</span>
+<span class="s2">C0           CA</span>
+<span class="s2">CA2+         CA</span>
 
-<span class="s"># Cesium</span>
-<span class="s">CES          CS</span>
+<span class="s2"># Cesium</span>
+<span class="s2">CES          CS</span>
 
-<span class="s"># Chloride</span>
-<span class="s">CLA          CL</span>
-<span class="s">CLAL         CL</span>
-<span class="s">CL           CL</span>
-<span class="s">CL-          CL</span>
+<span class="s2"># Chloride</span>
+<span class="s2">CLA          CL</span>
+<span class="s2">CLAL         CL</span>
+<span class="s2">CL           CL</span>
+<span class="s2">CL-          CL</span>
 
-<span class="s"># Iodide</span>
-<span class="s">IOD          I</span>
+<span class="s2"># Iodide</span>
+<span class="s2">IOD          I</span>
 
-<span class="s"># Iron</span>
-<span class="s">FE           FE</span>
-<span class="s">FE2          FE</span>
+<span class="s2"># Iron</span>
+<span class="s2">FE           FE</span>
+<span class="s2">FE2          FE</span>
 
-<span class="s"># Lithium</span>
-<span class="s">LIT          LI</span>
-<span class="s">LI           LI</span>
-<span class="s">LI+          LI</span>
-<span class="s">QL           LI</span>
+<span class="s2"># Lithium</span>
+<span class="s2">LIT          LI</span>
+<span class="s2">LI           LI</span>
+<span class="s2">LI+          LI</span>
+<span class="s2">QL           LI</span>
 
-<span class="s"># Magnesium</span>
-<span class="s">MG           MG</span>
-<span class="s">MG2+         MG</span>
+<span class="s2"># Magnesium</span>
+<span class="s2">MG           MG</span>
+<span class="s2">MG2+         MG</span>
 
-<span class="s"># Noble gases</span>
-<span class="s">## XXX collides with NE, HE in Arg  XXX</span>
-<span class="s">## XXX so we remove the noble gases XXX</span>
-<span class="s">##HE           HE</span>
-<span class="s">##NE           NE</span>
+<span class="s2"># Noble gases</span>
+<span class="s2">## XXX collides with NE, HE in Arg  XXX</span>
+<span class="s2">## XXX so we remove the noble gases XXX</span>
+<span class="s2">##HE           HE</span>
+<span class="s2">##NE           NE</span>
 
-<span class="s"># Potassium</span>
-<span class="s">K            K</span>
-<span class="s">POT          K</span>
-<span class="s">K+           K</span>
-<span class="s">QK           K</span>
+<span class="s2"># Potassium</span>
+<span class="s2">K            K</span>
+<span class="s2">POT          K</span>
+<span class="s2">K+           K</span>
+<span class="s2">QK           K</span>
 
-<span class="s"># Sodium</span>
-<span class="s">SOD          NA</span>
-<span class="s">NA           NA</span>
-<span class="s">NA+          NA</span>
-<span class="s">QN           NA</span>
+<span class="s2"># Sodium</span>
+<span class="s2">SOD          NA</span>
+<span class="s2">NA           NA</span>
+<span class="s2">NA+          NA</span>
+<span class="s2">QN           NA</span>
 
-<span class="s"># Zink</span>
-<span class="s">ZN           ZN</span>
+<span class="s2"># Zink</span>
+<span class="s2">ZN           ZN</span>
 
-<span class="s"># Copper</span>
-<span class="s">CU           CU</span>
+<span class="s2"># Copper</span>
+<span class="s2">CU           CU</span>
 
-<span class="s"># Cesium</span>
-<span class="s">CS           CS</span>
-<span class="s">CS+          CS</span>
-<span class="s">CES          CS</span>
+<span class="s2"># Cesium</span>
+<span class="s2">CS           CS</span>
+<span class="s2">CS+          CS</span>
+<span class="s2">CES          CS</span>
 
-<span class="s"># Cerium??</span>
-<span class="s">QC           CE</span>
+<span class="s2"># Cerium??</span>
+<span class="s2">QC           CE</span>
 
-<span class="s"># Rubidium</span>
-<span class="s">RB           RB</span>
-<span class="s">QR           RB</span>
+<span class="s2"># Rubidium</span>
+<span class="s2">RB           RB</span>
+<span class="s2">QR           RB</span>
 
-<span class="s"># special carbons (Amber?)</span>
-<span class="s">BC           C</span>
-<span class="s">AC           C</span>
+<span class="s2"># special carbons (Amber?)</span>
+<span class="s2">BC           C</span>
+<span class="s2">AC           C</span>
 
-<span class="s"># other types are guessed from the name; see</span>
-<span class="s"># topology.core.guess_atom_elements()</span>
-<span class="s">&quot;&quot;&quot;</span>
+<span class="s2"># other types are guessed from the name; see</span>
+<span class="s2"># topology.core.guess_atom_elements()</span>
+<span class="s2">&quot;&quot;&quot;</span>
 
-<span class="c">#: Dictionary with hard-coded special atom names, used for guessing atom types</span>
-<span class="c">#: with :func:`MDAnalysis.topology.core.guess_atom_type`.</span>
+<span class="c1">#: Dictionary with hard-coded special atom names, used for guessing atom types</span>
+<span class="c1">#: with :func:`MDAnalysis.topology.core.guess_atom_type`.</span>
 <span class="n">atomelements</span> <span class="o">=</span> <span class="n">kv2dict</span><span class="p">(</span><span class="n">TABLE_ATOMELEMENTS</span><span class="p">)</span>
 
-<span class="c">#: Plain-text table with atomic masses in u.</span>
-<span class="n">TABLE_MASSES</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
-<span class="s"># masses for elements in atomic units (u)</span>
-<span class="s"># (taken from CHARMM and Gromacs atommass.dat)</span>
+<span class="c1">#: Plain-text table with atomic masses in u.</span>
+<span class="n">TABLE_MASSES</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2"># masses for elements in atomic units (u)</span>
+<span class="s2"># (taken from CHARMM and Gromacs atommass.dat)</span>
 
-<span class="s">#------------ -----------</span>
-<span class="s"># atomtype    mass</span>
-<span class="s">#------------ -----------</span>
-<span class="s">Ac    227.028</span>
-<span class="s">Al    26.981539</span>
-<span class="s">Am    243</span>
-<span class="s">Sb    121.757</span>
-<span class="s">Ar    39.948</span>
-<span class="s">As    74.92159</span>
-<span class="s">At    210</span>
-<span class="s">Ba    137.327</span>
-<span class="s">Bk    247</span>
-<span class="s">Be    9.012182</span>
-<span class="s">Bi    208.98037</span>
-<span class="s">Bh    262</span>
-<span class="s">B     10.811</span>
-<span class="s">BR    79.90400</span>
-<span class="s">Cd    112.411</span>
-<span class="s">CA    40.08000</span>
-<span class="s">Cf    251</span>
-<span class="s">C     12.01100</span>
-<span class="s">Ce    140.11600</span>
-<span class="s">CS    132.90000</span>
-<span class="s">CL    35.45000</span>
-<span class="s">Cr    51.9961</span>
-<span class="s">Co    58.9332</span>
-<span class="s">CU    63.54600</span>
-<span class="s">Cm    247</span>
-<span class="s">Db    262</span>
-<span class="s">Dy    162.5</span>
-<span class="s">Es    252</span>
-<span class="s">Er    167.26</span>
-<span class="s">Eu    151.965</span>
-<span class="s">Fm    257</span>
-<span class="s">F     18.99800</span>
-<span class="s">Fr    223</span>
-<span class="s">Gd    157.25</span>
-<span class="s">Ga    69.723</span>
-<span class="s">Ge    72.61</span>
-<span class="s">Au    196.96654</span>
-<span class="s">Hf    178.49</span>
-<span class="s">Hs    265</span>
-<span class="s">HE    4.00260</span>
-<span class="s">Ho    164.93032</span>
-<span class="s">H     1.00800</span>
-<span class="s">In    114.82</span>
-<span class="s">I     126.90450</span>
-<span class="s">Ir    192.22</span>
-<span class="s">FE    55.84700</span>
-<span class="s">Kr    83.8</span>
-<span class="s">La    138.9055</span>
-<span class="s">Lr    262</span>
-<span class="s">Pb    207.2</span>
-<span class="s">Li    6.941</span>
-<span class="s">Lu    174.967</span>
-<span class="s">MG    24.30500</span>
-<span class="s">Mn    54.93805</span>
-<span class="s">Mt    266</span>
-<span class="s">Md    258</span>
-<span class="s">Hg    200.59</span>
-<span class="s">Mo    95.94</span>
-<span class="s">N     14.00700</span>
-<span class="s">NA    22.98977</span>
-<span class="s">Nd    144.24</span>
-<span class="s">NE    20.17970</span>
-<span class="s">Np    237.048</span>
-<span class="s">Ni    58.6934</span>
-<span class="s">Nb    92.90638</span>
-<span class="s">No    259</span>
-<span class="s">Os    190.2</span>
-<span class="s">O     15.99900</span>
-<span class="s">Pd    106.42</span>
-<span class="s">P     30.97400</span>
-<span class="s">Pt    195.08</span>
-<span class="s">Pu    244</span>
-<span class="s">Po    209</span>
-<span class="s">K     39.10200</span>
-<span class="s">Pr    140.90765</span>
-<span class="s">Pm    145</span>
-<span class="s">Pa    231.0359</span>
-<span class="s">Ra    226.025</span>
-<span class="s">Rn    222</span>
-<span class="s">Re    186.207</span>
-<span class="s">Rh    102.9055</span>
-<span class="s">RB    85.46780</span>
-<span class="s">Ru    101.07</span>
-<span class="s">Rf    261</span>
-<span class="s">Sm    150.36</span>
-<span class="s">Sc    44.95591</span>
-<span class="s">Sg    263</span>
-<span class="s">Se    78.96</span>
-<span class="s">Si    28.0855</span>
-<span class="s">Ag    107.8682</span>
-<span class="s">Na    22.989768</span>
-<span class="s">Sr    87.62</span>
-<span class="s">S     32.06000</span>
-<span class="s">Ta    180.9479</span>
-<span class="s">Tc    98</span>
-<span class="s">Te    127.6</span>
-<span class="s">Tb    158.92534</span>
-<span class="s">Tl    204.3833</span>
-<span class="s">Th    232.0381</span>
-<span class="s">Tm    168.93421</span>
-<span class="s">Sn    118.71</span>
-<span class="s">Ti    47.88</span>
-<span class="s">W     183.85</span>
-<span class="s">U     238.0289</span>
-<span class="s">V     50.9415</span>
-<span class="s">Xe    131.29</span>
-<span class="s">Yb    173.04</span>
-<span class="s">Y     88.90585</span>
-<span class="s">ZN    65.37000</span>
-<span class="s">Zr    91.224</span>
-<span class="s">&quot;&quot;&quot;</span>
+<span class="s2">#------------ -----------</span>
+<span class="s2"># atomtype    mass</span>
+<span class="s2">#------------ -----------</span>
+<span class="s2">Ac    227.028</span>
+<span class="s2">Al    26.981539</span>
+<span class="s2">Am    243</span>
+<span class="s2">Sb    121.757</span>
+<span class="s2">Ar    39.948</span>
+<span class="s2">As    74.92159</span>
+<span class="s2">At    210</span>
+<span class="s2">Ba    137.327</span>
+<span class="s2">Bk    247</span>
+<span class="s2">Be    9.012182</span>
+<span class="s2">Bi    208.98037</span>
+<span class="s2">Bh    262</span>
+<span class="s2">B     10.811</span>
+<span class="s2">BR    79.90400</span>
+<span class="s2">Cd    112.411</span>
+<span class="s2">CA    40.08000</span>
+<span class="s2">Cf    251</span>
+<span class="s2">C     12.01100</span>
+<span class="s2">Ce    140.11600</span>
+<span class="s2">CS    132.90000</span>
+<span class="s2">CL    35.45000</span>
+<span class="s2">Cr    51.9961</span>
+<span class="s2">Co    58.9332</span>
+<span class="s2">CU    63.54600</span>
+<span class="s2">Cm    247</span>
+<span class="s2">Db    262</span>
+<span class="s2">Dy    162.5</span>
+<span class="s2">Es    252</span>
+<span class="s2">Er    167.26</span>
+<span class="s2">Eu    151.965</span>
+<span class="s2">Fm    257</span>
+<span class="s2">F     18.99800</span>
+<span class="s2">Fr    223</span>
+<span class="s2">Gd    157.25</span>
+<span class="s2">Ga    69.723</span>
+<span class="s2">Ge    72.61</span>
+<span class="s2">Au    196.96654</span>
+<span class="s2">Hf    178.49</span>
+<span class="s2">Hs    265</span>
+<span class="s2">HE    4.00260</span>
+<span class="s2">Ho    164.93032</span>
+<span class="s2">H     1.00800</span>
+<span class="s2">In    114.82</span>
+<span class="s2">I     126.90450</span>
+<span class="s2">Ir    192.22</span>
+<span class="s2">FE    55.84700</span>
+<span class="s2">Kr    83.8</span>
+<span class="s2">La    138.9055</span>
+<span class="s2">Lr    262</span>
+<span class="s2">Pb    207.2</span>
+<span class="s2">Li    6.941</span>
+<span class="s2">Lu    174.967</span>
+<span class="s2">MG    24.30500</span>
+<span class="s2">Mn    54.93805</span>
+<span class="s2">Mt    266</span>
+<span class="s2">Md    258</span>
+<span class="s2">Hg    200.59</span>
+<span class="s2">Mo    95.94</span>
+<span class="s2">N     14.00700</span>
+<span class="s2">NA    22.98977</span>
+<span class="s2">Nd    144.24</span>
+<span class="s2">NE    20.17970</span>
+<span class="s2">Np    237.048</span>
+<span class="s2">Ni    58.6934</span>
+<span class="s2">Nb    92.90638</span>
+<span class="s2">No    259</span>
+<span class="s2">Os    190.2</span>
+<span class="s2">O     15.99900</span>
+<span class="s2">Pd    106.42</span>
+<span class="s2">P     30.97400</span>
+<span class="s2">Pt    195.08</span>
+<span class="s2">Pu    244</span>
+<span class="s2">Po    209</span>
+<span class="s2">K     39.10200</span>
+<span class="s2">Pr    140.90765</span>
+<span class="s2">Pm    145</span>
+<span class="s2">Pa    231.0359</span>
+<span class="s2">Ra    226.025</span>
+<span class="s2">Rn    222</span>
+<span class="s2">Re    186.207</span>
+<span class="s2">Rh    102.9055</span>
+<span class="s2">RB    85.46780</span>
+<span class="s2">Ru    101.07</span>
+<span class="s2">Rf    261</span>
+<span class="s2">Sm    150.36</span>
+<span class="s2">Sc    44.95591</span>
+<span class="s2">Sg    263</span>
+<span class="s2">Se    78.96</span>
+<span class="s2">Si    28.0855</span>
+<span class="s2">Ag    107.8682</span>
+<span class="s2">Na    22.989768</span>
+<span class="s2">Sr    87.62</span>
+<span class="s2">S     32.06000</span>
+<span class="s2">Ta    180.9479</span>
+<span class="s2">Tc    98</span>
+<span class="s2">Te    127.6</span>
+<span class="s2">Tb    158.92534</span>
+<span class="s2">Tl    204.3833</span>
+<span class="s2">Th    232.0381</span>
+<span class="s2">Tm    168.93421</span>
+<span class="s2">Sn    118.71</span>
+<span class="s2">Ti    47.88</span>
+<span class="s2">W     183.85</span>
+<span class="s2">U     238.0289</span>
+<span class="s2">V     50.9415</span>
+<span class="s2">Xe    131.29</span>
+<span class="s2">Yb    173.04</span>
+<span class="s2">Y     88.90585</span>
+<span class="s2">ZN    65.37000</span>
+<span class="s2">Zr    91.224</span>
+<span class="s2">&quot;&quot;&quot;</span>
 
-<span class="c">#: Dictionary table with atomic masses in u, indexed by the element from</span>
-<span class="c">#: :data:`atomelements`.</span>
+<span class="c1">#: Dictionary table with atomic masses in u, indexed by the element from</span>
+<span class="c1">#: :data:`atomelements`.</span>
 <span class="n">masses</span> <span class="o">=</span> <span class="n">kv2dict</span><span class="p">(</span><span class="n">TABLE_MASSES</span><span class="p">,</span> <span class="n">convertor</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
-<span class="c">#: Van der Waals radii (taken from GROMACS_, ``/usr/share/gromacs/top/vdwradii.dat``)</span>
-<span class="c">#: and converted to ångström.</span>
-<span class="c">#: .. _GROMACS: http://www.gromacs.org</span>
-<span class="c">#:</span>
-<span class="c">#: .. SeeAlso:: :func:`MDAnalysis.topology.core.guess_bonds`</span>
+<span class="c1">#: Van der Waals radii (taken from GROMACS_, ``/usr/share/gromacs/top/vdwradii.dat``)</span>
+<span class="c1">#: and converted to ångström.</span>
+<span class="c1">#: .. _GROMACS: http://www.gromacs.org</span>
+<span class="c1">#:</span>
+<span class="c1">#: .. SeeAlso:: :func:`MDAnalysis.topology.core.guess_bonds`</span>
 <span class="n">vdwradii</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">&quot;C&quot;</span><span class="p">:</span>     <span class="mf">1.5</span><span class="p">,</span>
-    <span class="s">&quot;F&quot;</span><span class="p">:</span>     <span class="mf">1.2</span><span class="p">,</span>
-    <span class="s">&quot;H&quot;</span><span class="p">:</span>     <span class="mf">0.4</span><span class="p">,</span>
-    <span class="s">&quot;N&quot;</span><span class="p">:</span>     <span class="mf">1.10</span><span class="p">,</span>
-    <span class="s">&quot;O&quot;</span><span class="p">:</span>     <span class="mf">1.05</span><span class="p">,</span>
-    <span class="s">&quot;S&quot;</span><span class="p">:</span>     <span class="mf">1.6</span><span class="p">,</span>
-    <span class="s">&quot;P&quot;</span><span class="p">:</span>     <span class="mf">1.6</span><span class="p">,</span>
+    <span class="s2">&quot;C&quot;</span><span class="p">:</span>     <span class="mf">1.5</span><span class="p">,</span>
+    <span class="s2">&quot;F&quot;</span><span class="p">:</span>     <span class="mf">1.2</span><span class="p">,</span>
+    <span class="s2">&quot;H&quot;</span><span class="p">:</span>     <span class="mf">0.4</span><span class="p">,</span>
+    <span class="s2">&quot;N&quot;</span><span class="p">:</span>     <span class="mf">1.10</span><span class="p">,</span>
+    <span class="s2">&quot;O&quot;</span><span class="p">:</span>     <span class="mf">1.05</span><span class="p">,</span>
+    <span class="s2">&quot;S&quot;</span><span class="p">:</span>     <span class="mf">1.6</span><span class="p">,</span>
+    <span class="s2">&quot;P&quot;</span><span class="p">:</span>     <span class="mf">1.6</span><span class="p">,</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -402,7 +402,7 @@
     Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl,
     Gorman Stock, Isaac Virshup, Zhuyi Xue, Carlos Yáñez S.,
     and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>
 </html>

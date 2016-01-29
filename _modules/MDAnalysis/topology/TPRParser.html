@@ -72,24 +72,24 @@
           <div class="body" role="main">
             
   <h1>Source code for MDAnalysis.topology.TPRParser</h1><div class="highlight"><pre>
-<span class="c"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
-<span class="c"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 </span>
-<span class="c">#</span>
-<span class="c"># MDAnalysis --- http://www.MDAnalysis.org</span>
-<span class="c"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
-<span class="c"># and contributors (see AUTHORS for the full list)</span>
-<span class="c">#</span>
-<span class="c"># Released under the GNU Public Licence, v2 or any higher version</span>
-<span class="c">#</span>
-<span class="c"># Please cite your use of MDAnalysis in published work:</span>
-<span class="c"># N. Michaud-Agrawal, E. J. Denning, T. B. Woolf, and O. Beckstein.</span>
-<span class="c"># MDAnalysis: A Toolkit for the Analysis of Molecular Dynamics Simulations.</span>
-<span class="c"># J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787</span>
-<span class="c">#</span>
+<span class="c1"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
+<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 </span>
+<span class="c1">#</span>
+<span class="c1"># MDAnalysis --- http://www.MDAnalysis.org</span>
+<span class="c1"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
+<span class="c1"># and contributors (see AUTHORS for the full list)</span>
+<span class="c1">#</span>
+<span class="c1"># Released under the GNU Public Licence, v2 or any higher version</span>
+<span class="c1">#</span>
+<span class="c1"># Please cite your use of MDAnalysis in published work:</span>
+<span class="c1"># N. Michaud-Agrawal, E. J. Denning, T. B. Woolf, and O. Beckstein.</span>
+<span class="c1"># MDAnalysis: A Toolkit for the Analysis of Molecular Dynamics Simulations.</span>
+<span class="c1"># J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787</span>
+<span class="c1">#</span>
 
-<span class="c"># TPR parser and tpr support module</span>
-<span class="c"># Copyright (c) 2011 Zhuyi Xue</span>
-<span class="c"># Released under the  GNU Public Licence, v2</span>
+<span class="c1"># TPR parser and tpr support module</span>
+<span class="c1"># Copyright (c) 2011 Zhuyi Xue</span>
+<span class="c1"># Released under the  GNU Public Licence, v2</span>
 
 
 <span class="sd">&quot;&quot;&quot;</span>
@@ -200,8 +200,8 @@
 <span class="sd">.. _TPRReaderDevelopment: https://github.com/MDAnalysis/mdanalysis/wiki/TPRReaderDevelopment</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
-<span class="n">__author__</span> <span class="o">=</span> <span class="s">&quot;Zhuyi Xue&quot;</span>
-<span class="n">__copyright__</span> <span class="o">=</span> <span class="s">&quot;GNU Public Licence, v2&quot;</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Zhuyi Xue&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;GNU Public Licence, v2&quot;</span>
 
 <span class="kn">import</span> <span class="nn">xdrlib</span>
 
@@ -210,7 +210,7 @@
 <span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">TopologyReader</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&quot;MDAnalysis.topology.TPRparser&quot;</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;MDAnalysis.topology.TPRparser&quot;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="TPRParser"><a class="viewcode-back" href="../../../documentation_pages/topology/TPRParser.html#MDAnalysis.topology.TPRParser.TPRParser">[docs]</a><span class="k">class</span> <span class="nc">TPRParser</span><span class="p">(</span><span class="n">TopologyReader</span><span class="p">):</span>
@@ -221,39 +221,39 @@
 <span class="sd">    .. _Gromacs: http://www.gromacs.org</span>
 <span class="sd">    .. _TPR file: http://manual.gromacs.org/current/online/tpr.html</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">format</span> <span class="o">=</span> <span class="s">&#39;TPR&#39;</span>
+    <span class="n">format</span> <span class="o">=</span> <span class="s1">&#39;TPR&#39;</span>
 
 <div class="viewcode-block" id="TPRParser.parse"><a class="viewcode-back" href="../../../documentation_pages/topology/TPRParser.html#MDAnalysis.topology.TPRParser.TPRParser.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Parse a Gromacs TPR file into a MDAnalysis internal topology structure.</span>
 
 <span class="sd">        :Returns: ``structure`` dict</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c">#ndo_int = U.ndo_int</span>
+        <span class="c1">#ndo_int = U.ndo_int</span>
         <span class="n">ndo_real</span> <span class="o">=</span> <span class="n">U</span><span class="o">.</span><span class="n">ndo_real</span>
-        <span class="c">#ndo_rvec = U.ndo_rvec</span>
-        <span class="c">#ndo_ivec = U.ndo_ivec</span>
+        <span class="c1">#ndo_rvec = U.ndo_rvec</span>
+        <span class="c1">#ndo_ivec = U.ndo_ivec</span>
 
-        <span class="n">tprf</span> <span class="o">=</span> <span class="n">anyopen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">&#39;rb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">tprf</span> <span class="o">=</span> <span class="n">anyopen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">xdrlib</span><span class="o">.</span><span class="n">Unpacker</span><span class="p">(</span><span class="n">tprf</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">th</span> <span class="o">=</span> <span class="n">U</span><span class="o">.</span><span class="n">read_tpxheader</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>                    <span class="c"># tpxheader</span>
+            <span class="n">th</span> <span class="o">=</span> <span class="n">U</span><span class="o">.</span><span class="n">read_tpxheader</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>                    <span class="c1"># tpxheader</span>
         <span class="k">except</span> <span class="ne">EOFError</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;{0}: Invalid tpr file or cannot be recognized&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;{0}: Invalid tpr file or cannot be recognized&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
             <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_log_header</span><span class="p">(</span><span class="n">th</span><span class="p">)</span>
 
-        <span class="n">V</span> <span class="o">=</span> <span class="n">th</span><span class="o">.</span><span class="n">fver</span>                                    <span class="c"># since it&#39;s used very often</span>
+        <span class="n">V</span> <span class="o">=</span> <span class="n">th</span><span class="o">.</span><span class="n">fver</span>                                    <span class="c1"># since it&#39;s used very often</span>
 
-        <span class="n">state_ngtc</span> <span class="o">=</span> <span class="n">th</span><span class="o">.</span><span class="n">ngtc</span>         <span class="c"># done init_state() in src/gmxlib/tpxio.c</span>
+        <span class="n">state_ngtc</span> <span class="o">=</span> <span class="n">th</span><span class="o">.</span><span class="n">ngtc</span>         <span class="c1"># done init_state() in src/gmxlib/tpxio.c</span>
         <span class="k">if</span> <span class="n">th</span><span class="o">.</span><span class="n">bBox</span><span class="p">:</span>
             <span class="n">U</span><span class="o">.</span><span class="n">extract_box_info</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">state_ngtc</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">V</span> <span class="o">&gt;=</span> <span class="mi">28</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">V</span> <span class="o">&lt;</span> <span class="mi">69</span><span class="p">:</span>                      <span class="c"># redundancy due to  different versions</span>
+            <span class="k">if</span> <span class="n">V</span> <span class="o">&lt;</span> <span class="mi">69</span><span class="p">:</span>                      <span class="c1"># redundancy due to  different versions</span>
                 <span class="n">ndo_real</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">state_ngtc</span><span class="p">)</span>
-            <span class="n">ndo_real</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">state_ngtc</span><span class="p">)</span>        <span class="c"># relevant to Berendsen tcoupl_lambda</span>
+            <span class="n">ndo_real</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">state_ngtc</span><span class="p">)</span>        <span class="c1"># relevant to Berendsen tcoupl_lambda</span>
 
         <span class="k">if</span> <span class="n">V</span> <span class="o">&lt;</span> <span class="mi">26</span><span class="p">:</span>
             <span class="n">U</span><span class="o">.</span><span class="n">fver_err</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
@@ -261,61 +261,61 @@
         <span class="k">if</span> <span class="n">th</span><span class="o">.</span><span class="n">bTop</span><span class="p">:</span>
             <span class="n">tpr_top</span> <span class="o">=</span> <span class="n">U</span><span class="o">.</span><span class="n">do_mtop</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_u</span><span class="p">)</span>
             <span class="n">structure</span> <span class="o">=</span> <span class="p">{</span>
-                <span class="s">&#39;atoms&#39;</span><span class="p">:</span> <span class="n">tpr_top</span><span class="o">.</span><span class="n">atoms</span><span class="p">,</span>
-                <span class="s">&#39;bonds&#39;</span><span class="p">:</span> <span class="n">tpr_top</span><span class="o">.</span><span class="n">bonds</span><span class="p">,</span>
-                <span class="s">&#39;angles&#39;</span><span class="p">:</span> <span class="n">tpr_top</span><span class="o">.</span><span class="n">angles</span><span class="p">,</span>
-                <span class="s">&#39;dihedrals&#39;</span><span class="p">:</span> <span class="n">tpr_top</span><span class="o">.</span><span class="n">dihe</span><span class="p">,</span>
-                <span class="s">&#39;impropers&#39;</span><span class="p">:</span> <span class="n">tpr_top</span><span class="o">.</span><span class="n">impr</span>
+                <span class="s1">&#39;atoms&#39;</span><span class="p">:</span> <span class="n">tpr_top</span><span class="o">.</span><span class="n">atoms</span><span class="p">,</span>
+                <span class="s1">&#39;bonds&#39;</span><span class="p">:</span> <span class="n">tpr_top</span><span class="o">.</span><span class="n">bonds</span><span class="p">,</span>
+                <span class="s1">&#39;angles&#39;</span><span class="p">:</span> <span class="n">tpr_top</span><span class="o">.</span><span class="n">angles</span><span class="p">,</span>
+                <span class="s1">&#39;dihedrals&#39;</span><span class="p">:</span> <span class="n">tpr_top</span><span class="o">.</span><span class="n">dihe</span><span class="p">,</span>
+                <span class="s1">&#39;impropers&#39;</span><span class="p">:</span> <span class="n">tpr_top</span><span class="o">.</span><span class="n">impr</span>
             <span class="p">}</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;{0}: No topology found in tpr file&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;{0}: No topology found in tpr file&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
             <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">structure</span>
+        <span class="k">return</span> <span class="n">structure</span></div>
 
-    <span class="c"># THE FOLLOWING CODE IS WORKING FOR TPX VERSION 58, BUT SINCE THESE INFO IS</span>
-    <span class="c"># NOT INTERESTED, SO IT&#39;S NOT COVERED IN ALL VERSIONS. PARSING STOPS HERE.</span>
+    <span class="c1"># THE FOLLOWING CODE IS WORKING FOR TPX VERSION 58, BUT SINCE THESE INFO IS</span>
+    <span class="c1"># NOT INTERESTED, SO IT&#39;S NOT COVERED IN ALL VERSIONS. PARSING STOPS HERE.</span>
 
-    <span class="c"># if th.bX:</span>
-    <span class="c">#     ndo_rvec(data, th.natoms)</span>
+    <span class="c1"># if th.bX:</span>
+    <span class="c1">#     ndo_rvec(data, th.natoms)</span>
 
-    <span class="c"># if th.bV:</span>
-    <span class="c">#     ndo_rvec(data, th.natoms)</span>
+    <span class="c1"># if th.bV:</span>
+    <span class="c1">#     ndo_rvec(data, th.natoms)</span>
 
-    <span class="c"># if th.bF:</span>
-    <span class="c">#     ndo_rvec(data, th.natoms)</span>
+    <span class="c1"># if th.bF:</span>
+    <span class="c1">#     ndo_rvec(data, th.natoms)</span>
 
-    <span class="c"># not useful at the moment</span>
-    <span class="c"># ePBC = -1;</span>
-    <span class="c"># bPeriodicMols = False</span>
-    <span class="c"># if th.bIr:</span>
-    <span class="c">#     # update</span>
-    <span class="c">#     data.unpack_int()                                # ePBC</span>
-    <span class="c">#     data.unpack_bool()                               # bPeriodicMols</span>
-    <span class="c">#     # 17 &lt; 23. and ir (ir is from the c code, seems not apply here</span>
-    <span class="c">#     if th.fgen &lt; setting.tpx_generation:</span>
-    <span class="c">#         # a crazily long (670 lines) function in c, slightly better here</span>
-    <span class="c">#         # (240 lines), so put it in setting.py</span>
-    <span class="c">#         utils.do_inputrec(data)</span>
-</div>
+    <span class="c1"># not useful at the moment</span>
+    <span class="c1"># ePBC = -1;</span>
+    <span class="c1"># bPeriodicMols = False</span>
+    <span class="c1"># if th.bIr:</span>
+    <span class="c1">#     # update</span>
+    <span class="c1">#     data.unpack_int()                                # ePBC</span>
+    <span class="c1">#     data.unpack_bool()                               # bPeriodicMols</span>
+    <span class="c1">#     # 17 &lt; 23. and ir (ir is from the c code, seems not apply here</span>
+    <span class="c1">#     if th.fgen &lt; setting.tpx_generation:</span>
+    <span class="c1">#         # a crazily long (670 lines) function in c, slightly better here</span>
+    <span class="c1">#         # (240 lines), so put it in setting.py</span>
+    <span class="c1">#         utils.do_inputrec(data)</span>
+
     <span class="k">def</span> <span class="nf">_log_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">th</span><span class="p">):</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Gromacs version   : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">ver_str</span><span class="p">))</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;tpx version       : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">fver</span><span class="p">))</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;tpx generation    : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">fgen</span><span class="p">))</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;tpx number        : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">number</span><span class="p">))</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;tpx precision     : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">precision</span><span class="p">))</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;tpx file_tag      : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">file_tag</span><span class="p">))</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;tpx natoms        : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">natoms</span><span class="p">))</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;tpx ngtc          : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">ngtc</span><span class="p">))</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;tpx fep_state     : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">fep_state</span><span class="p">))</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;tpx lambda        : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">lamb</span><span class="p">))</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;tpx bIr (input record): {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">bIr</span><span class="p">))</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;tpx bTop         : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">bTop</span><span class="p">))</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;tpx bX           : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">bX</span><span class="p">))</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;tpx bV           : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">bV</span><span class="p">))</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;tpx bF           : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">bF</span><span class="p">))</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;tpx bBox         : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">bBox</span><span class="p">))</span></div>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Gromacs version   : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">ver_str</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;tpx version       : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">fver</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;tpx generation    : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">fgen</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;tpx number        : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">number</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;tpx precision     : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">precision</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;tpx file_tag      : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">file_tag</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;tpx natoms        : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">natoms</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;tpx ngtc          : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">ngtc</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;tpx fep_state     : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">fep_state</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;tpx lambda        : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">lamb</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;tpx bIr (input record): {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">bIr</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;tpx bTop         : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">bTop</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;tpx bX           : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">bX</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;tpx bV           : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">bV</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;tpx bF           : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">bF</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;tpx bBox         : {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">th</span><span class="o">.</span><span class="n">bBox</span><span class="p">))</span></div>
 </pre></div>
 
           </div>
@@ -348,7 +348,7 @@
     Paul Rigor, Sean L. Seyler, Andy Somogyi, Lukas Stelzl,
     Gorman Stock, Isaac Virshup, Zhuyi Xue, Carlos Yáñez S.,
     and Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
     </div>
   </body>
 </html>
