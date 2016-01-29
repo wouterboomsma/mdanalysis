@@ -1169,7 +1169,7 @@
 
         <span class="n">out_nrows</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="c1"># count number of timesteps per key to get length of output table</span>
-        <span class="k">for</span> <span class="n">ts_list</span> <span class="ow">in</span> <span class="n">hbonds</span><span class="o">.</span><span class="n">itervalues</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">ts_list</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">itervalues</span><span class="p">(</span><span class="n">hbonds</span><span class="p">):</span>
             <span class="n">out_nrows</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ts_list</span><span class="p">)</span>
 
         <span class="c1"># build empty output table</span>
