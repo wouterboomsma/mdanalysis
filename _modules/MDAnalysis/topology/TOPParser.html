@@ -153,7 +153,7 @@
 <span class="sd">        :Returns: MDAnalysis internal *structure* dict.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">formatversion</span> <span class="o">=</span> <span class="mi">10</span>
-        <span class="k">with</span> <span class="n">openany</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">topfile</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">openany</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">topfile</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">topfile</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%F</span><span class="s2">LAG ATOMIC_NUMBER&quot;</span><span class="p">):</span>
                     <span class="n">formatversion</span> <span class="o">=</span> <span class="mi">12</span>
@@ -216,7 +216,7 @@
 
         <span class="c1"># Open and check top validity</span>
         <span class="c1"># Reading header info POINTERS</span>
-        <span class="k">with</span> <span class="n">openany</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">topfile</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">openany</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">topfile</span><span class="p">:</span>
             <span class="n">next_line</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="nb">next</span><span class="p">,</span> <span class="n">topfile</span><span class="p">)</span>
             <span class="n">header</span> <span class="o">=</span> <span class="n">next_line</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">header</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;%VE&quot;</span><span class="p">:</span>

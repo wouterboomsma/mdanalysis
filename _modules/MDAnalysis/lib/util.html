@@ -331,6 +331,25 @@
         <span class="n">stream</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
 
+<span class="c1"># On python 3, we want to use bz2.open to open and uncompress bz2 files. That</span>
+<span class="c1"># function allows to specify the type of the uncompressed file (bytes ot text).</span>
+<span class="c1"># The function does not exist in python 2, thus we must use bz2.BZFile to</span>
+<span class="c1"># which we cannot tell if the uncompressed file contains bytes or text.</span>
+<span class="c1"># Therefore, on python 2 we use a proxy function that removes the type of the</span>
+<span class="c1"># uncompressed file from the `mode` argument.</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">bz2</span><span class="o">.</span><span class="n">open</span>
+<span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+    <span class="c1"># We are on python 2 and bz2.open is not available</span>
+    <span class="k">def</span> <span class="nf">bz2_open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Open and uncompress a BZ2 file&quot;&quot;&quot;</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">bz2</span><span class="o">.</span><span class="n">BZ2File</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># We are on python 3 so we can use bz2.open</span>
+    <span class="n">bz2_open</span> <span class="o">=</span> <span class="n">bz2</span><span class="o">.</span><span class="n">open</span>
+
+
 <div class="viewcode-block" id="anyopen"><a class="viewcode-back" href="../../../documentation_pages/lib/util.html#MDAnalysis.lib.util.anyopen">[docs]</a><span class="k">def</span> <span class="nf">anyopen</span><span class="p">(</span><span class="n">datasource</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Open datasource (gzipped, bzipped, uncompressed) and return a stream.</span>
 
@@ -359,7 +378,7 @@
 <span class="sd">       Only returns the ``stream`` and tries to set ``stream.name = filename`` instead of the previous</span>
 <span class="sd">       behavior to return a tuple ``(stream, filename)``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">handlers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bz2&#39;</span><span class="p">:</span> <span class="n">bz2</span><span class="o">.</span><span class="n">BZ2File</span><span class="p">,</span> <span class="s1">&#39;gz&#39;</span><span class="p">:</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">:</span> <span class="nb">open</span><span class="p">}</span>
+    <span class="n">handlers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bz2&#39;</span><span class="p">:</span> <span class="n">bz2_open</span><span class="p">,</span> <span class="s1">&#39;gz&#39;</span><span class="p">:</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">:</span> <span class="nb">open</span><span class="p">}</span>
 
     <span class="k">if</span> <span class="n">mode</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">isstream</span><span class="p">(</span><span class="n">datasource</span><span class="p">):</span>
