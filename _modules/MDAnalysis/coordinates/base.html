@@ -244,6 +244,9 @@
 <span class="sd">          Whether this Timestep has velocity information [``False``]</span>
 <span class="sd">        forces : bool, optional</span>
 <span class="sd">          Whether this Timestep has force information [``False``]</span>
+<span class="sd">        reader : Reader, optional</span>
+<span class="sd">          A weak reference to the owning Reader.  Used for</span>
+<span class="sd">          when attributes require trajectory manipulation (e.g. dt)</span>
 <span class="sd">        dt : float, optional</span>
 <span class="sd">          The time difference between frames (ps).  If :attr:`time`</span>
 <span class="sd">          is set, then `dt` will be ignored.</span>
@@ -267,6 +270,11 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">att</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">att</span><span class="p">]</span>
             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
                 <span class="k">pass</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># do I have a hook back to the Reader?</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_reader</span> <span class="o">=</span> <span class="n">weakref</span><span class="o">.</span><span class="n">ref</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;reader&#39;</span><span class="p">])</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">pass</span>
 
         <span class="c1"># Stupid hack to make it allocate first time round</span>
         <span class="c1"># ie we have to go from not having, to having positions</span>

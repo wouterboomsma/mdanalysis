@@ -139,6 +139,8 @@ allocate space for both coordinates and velocities;</p>
 <li><strong>positions</strong> (<em>bool, optional</em>) &#8211; Whether this Timestep has position information [<code class="docutils literal"><span class="pre">True</span></code>]</li>
 <li><strong>velocities</strong> (<em>bool, optional</em>) &#8211; Whether this Timestep has velocity information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
 <li><strong>forces</strong> (<em>bool, optional</em>) &#8211; Whether this Timestep has force information [<code class="docutils literal"><span class="pre">False</span></code>]</li>
+<li><strong>reader</strong> (<em>Reader, optional</em>) &#8211; A weak reference to the owning Reader.  Used for
+when attributes require trajectory manipulation (e.g. dt)</li>
 <li><strong>dt</strong> (<em>float, optional</em>) &#8211; The time difference between frames (ps).  If <code class="xref py py-attr docutils literal"><span class="pre">time</span></code>
 is set, then <cite>dt</cite> will be ignored.</li>
 <li><strong>time_offset</strong> (<em>float, optional</em>) &#8211; The starting time from which to calculate time (ps)</li>
