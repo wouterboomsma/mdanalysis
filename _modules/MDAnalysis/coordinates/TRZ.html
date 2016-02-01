@@ -145,10 +145,10 @@
 <span class="sd">.. autoclass:: TRZWriter</span>
 <span class="sd">   :members:</span>
 <span class="sd">&quot;&quot;&quot;</span>
-
+<span class="kn">import</span> <span class="nn">six</span>
 <span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">range</span>
 
-<span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">maxint</span>
+<span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">os</span>
@@ -296,7 +296,7 @@
             <span class="p">(</span><span class="s1">&#39;force&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span>
             <span class="p">(</span><span class="s1">&#39;p3&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">)])</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trzfile</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_headerdtype</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;force&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">has_force</span> <span class="o">=</span> <span class="bp">False</span>
         <span class="k">elif</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;force&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">20</span><span class="p">:</span>
@@ -432,13 +432,21 @@
 
 <span class="sd">        .. versionadded:: 0.9.0</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">maxi_l</span> <span class="o">=</span> <span class="nb">long</span><span class="p">(</span><span class="n">maxint</span><span class="p">)</span>
-
-        <span class="n">framesize</span> <span class="o">=</span> <span class="nb">long</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span><span class="o">.</span><span class="n">itemsize</span><span class="p">)</span>
-        <span class="n">seeksize</span> <span class="o">=</span> <span class="n">framesize</span> <span class="o">*</span> <span class="n">nframes</span>
+        <span class="c1"># On python 2, seek has issues with long int. This is solve in python 3</span>
+        <span class="c1"># where there is no longer a distinction between int and long int.</span>
+        <span class="k">if</span> <span class="n">six</span><span class="o">.</span><span class="n">PY2</span><span class="p">:</span>
+            <span class="n">framesize</span> <span class="o">=</span> <span class="nb">long</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span><span class="o">.</span><span class="n">itemsize</span><span class="p">)</span>
+            <span class="n">seeksize</span> <span class="o">=</span> <span class="n">framesize</span> <span class="o">*</span> <span class="n">nframes</span>
+            <span class="n">maxi_l</span> <span class="o">=</span> <span class="nb">long</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">maxint</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">framesize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span><span class="o">.</span><span class="n">itemsize</span>
+            <span class="n">seeksize</span> <span class="o">=</span> <span class="n">framesize</span> <span class="o">*</span> <span class="n">nframes</span>
+            <span class="n">maxi_l</span> <span class="o">=</span> <span class="n">seeksize</span> <span class="o">+</span> <span class="mi">1</span>
 
         <span class="k">if</span> <span class="n">seeksize</span> <span class="o">&gt;</span> <span class="n">maxi_l</span><span class="p">:</span>
             <span class="c1"># Workaround for seek not liking long ints</span>
+            <span class="c1"># On python 3 this branch will never be used as we defined maxi_l</span>
+            <span class="c1"># greater than seeksize.</span>
             <span class="n">framesize</span> <span class="o">=</span> <span class="nb">long</span><span class="p">(</span><span class="n">framesize</span><span class="p">)</span>
             <span class="n">seeksize</span> <span class="o">=</span> <span class="n">framesize</span> <span class="o">*</span> <span class="n">nframes</span>
 
@@ -509,7 +517,8 @@
 
 <span class="sd">        :Keywords:</span>
 <span class="sd">         *title*</span>
-<span class="sd">          title of the trajectory</span>
+<span class="sd">          title of the trajectory; the title must be 80 characters or shorter,</span>
+<span class="sd">          a longer title raises a ValueError exception.</span>
 <span class="sd">         *convert_units*</span>
 <span class="sd">          units are converted to the MDAnalysis base format; ``None`` selects</span>
 <span class="sd">          the value of :data:`MDAnalysis.core.flags` [&#39;convert_lengths&#39;].</span>
@@ -521,6 +530,9 @@
         <span class="k">if</span> <span class="n">n_atoms</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;TRZWriter: no atoms in output trajectory&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_atoms</span> <span class="o">=</span> <span class="n">n_atoms</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">title</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">80</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;TRZWriter: &#39;title&#39; must be 80 characters of shorter&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">convert_units</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">convert_units</span> <span class="o">=</span> <span class="n">flags</span><span class="p">[</span><span class="s1">&#39;convert_lengths&#39;</span><span class="p">]</span>
@@ -578,7 +590,7 @@
             <span class="p">(</span><span class="s1">&#39;pad3&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;nrec&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;pad4&#39;</span><span class="p">,</span> <span class="s1">&#39;i4&#39;</span><span class="p">)])</span>
         <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">hdt</span><span class="p">)</span>
         <span class="n">out</span><span class="p">[</span><span class="s1">&#39;pad1&#39;</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="s1">&#39;pad2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">80</span>
-        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="n">out</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">80</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">title</span><span class="p">))</span>
         <span class="n">out</span><span class="p">[</span><span class="s1">&#39;pad3&#39;</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="s1">&#39;pad4&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span>
         <span class="n">out</span><span class="p">[</span><span class="s1">&#39;nrec&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
         <span class="n">out</span><span class="o">.</span><span class="n">tofile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">trzfile</span><span class="p">)</span>
@@ -591,8 +603,8 @@
         <span class="c1"># Gather data, faking it when unavailable</span>
         <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">faked_attrs</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">att</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;pressure&#39;</span><span class="p">,</span> <span class="s1">&#39;pressure_tensor&#39;</span><span class="p">,</span> <span class="s1">&#39;total_energy&#39;</span><span class="p">,</span> <span class="s1">&#39;potential_energy&#39;</span><span class="p">,</span>
-                    <span class="s1">&#39;kinetic_energy&#39;</span><span class="p">,</span> <span class="s1">&#39;temperature&#39;</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">att</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;pressure&#39;</span><span class="p">,</span> <span class="s1">&#39;pressure_tensor&#39;</span><span class="p">,</span> <span class="s1">&#39;total_energy&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;potential_energy&#39;</span><span class="p">,</span> <span class="s1">&#39;kinetic_energy&#39;</span><span class="p">,</span> <span class="s1">&#39;temperature&#39;</span><span class="p">]:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">data</span><span class="p">[</span><span class="n">att</span><span class="p">]</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">att</span><span class="p">]</span>
             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
