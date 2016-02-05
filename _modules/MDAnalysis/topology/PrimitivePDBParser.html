@@ -73,11 +73,11 @@
             
   <h1>Source code for MDAnalysis.topology.PrimitivePDBParser</h1><div class="highlight"><pre>
 <span class="c1"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
-<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 </span>
+<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
 <span class="c1">#</span>
 <span class="c1"># MDAnalysis --- http://www.MDAnalysis.org</span>
-<span class="c1"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
-<span class="c1"># and contributors (see AUTHORS for the full list)</span>
+<span class="c1"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver</span>
+<span class="c1"># Beckstein and contributors (see AUTHORS for the full list)</span>
 <span class="c1">#</span>
 <span class="c1"># Released under the GNU Public Licence, v2 or any higher version</span>
 <span class="c1">#</span>
@@ -120,8 +120,9 @@
 <span class="sd">   :inherited-members:</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">print_function</span>
 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">from</span> <span class="nn">..core.AtomGroup</span> <span class="kn">import</span> <span class="n">Atom</span>
@@ -133,7 +134,9 @@
 <div class="viewcode-block" id="PrimitivePDBParser"><a class="viewcode-back" href="../../../documentation_pages/topology/PrimitivePDBParser.html#MDAnalysis.topology.ExtendedPDBParser.PrimitivePDBParser">[docs]</a><span class="k">class</span> <span class="nc">PrimitivePDBParser</span><span class="p">(</span><span class="n">TopologyReader</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Parser that obtains a list of atoms from a standard PDB file.</span>
 
-<span class="sd">    .. seealso:: :class:`MDAnalysis.coordinates.PDB.PrimitivePDBReader`</span>
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :class:`MDAnalysis.coordinates.PDB.PrimitivePDBReader`</span>
 
 <span class="sd">    .. versionadded:: 0.8</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -142,12 +145,15 @@
 <div class="viewcode-block" id="PrimitivePDBParser.parse"><a class="viewcode-back" href="../../../documentation_pages/topology/PrimitivePDBParser.html#MDAnalysis.topology.ExtendedPDBParser.PrimitivePDBParser.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Parse atom information from PDB file *filename*.</span>
 
-<span class="sd">        :Returns: MDAnalysis internal *structure* dict</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        MDAnalysis internal *structure* dict</span>
 
-<span class="sd">        .. SeeAlso:: The *structure* dict is defined in</span>
-<span class="sd">                     `MDAnalysis.topology` and the file is</span>
-<span class="sd">                     read with</span>
-<span class="sd">                     :class:`MDAnalysis.coordinates.PDB.PrimitivePDBReader`.</span>
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        The *structure* dict is defined in `MDAnalysis.topology` and the file</span>
+<span class="sd">        is read with :class:`MDAnalysis.coordinates.PDB.PrimitivePDBReader`.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">structure</span> <span class="o">=</span> <span class="p">{}</span>
 
@@ -183,9 +189,11 @@
                     <span class="n">name</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">12</span><span class="p">:</span><span class="mi">16</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
                     <span class="n">altLoc</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">16</span><span class="p">:</span><span class="mi">17</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
                     <span class="n">resName</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">17</span><span class="p">:</span><span class="mi">21</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-                    <span class="n">chainID</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>  <span class="c1"># empty chainID is a single space &#39; &#39;!</span>
+                    <span class="c1"># empty chainID is a single space &#39; &#39;!</span>
+                    <span class="n">chainID</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">==</span> <span class="s2">&quot;XPDB&quot;</span><span class="p">:</span>  <span class="c1"># fugly but keeps code DRY</span>
-                        <span class="n">resSeq</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">22</span><span class="p">:</span><span class="mi">27</span><span class="p">])</span>  <span class="c1"># extended non-standard format used by VMD</span>
+                        <span class="c1"># extended non-standard format used by VMD</span>
+                        <span class="n">resSeq</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">22</span><span class="p">:</span><span class="mi">27</span><span class="p">])</span>
                         <span class="n">resid</span> <span class="o">=</span> <span class="n">resSeq</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">resSeq</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">22</span><span class="p">:</span><span class="mi">26</span><span class="p">])</span>
@@ -206,7 +214,7 @@
                     <span class="n">segid</span> <span class="o">=</span> <span class="n">segID</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">or</span> <span class="n">chainID</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">or</span> <span class="s2">&quot;SYSTEM&quot;</span>
 
                     <span class="n">elem</span> <span class="o">=</span> <span class="n">guess_atom_element</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-                    
+
                     <span class="n">atomtype</span> <span class="o">=</span> <span class="n">element</span> <span class="ow">or</span> <span class="n">elem</span>
                     <span class="n">mass</span> <span class="o">=</span> <span class="n">get_atom_mass</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
                     <span class="c1"># charge = guess_atom_charge(name)</span>
@@ -225,7 +233,7 @@
     <span class="k">def</span> <span class="nf">_parsebonds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atoms</span><span class="p">):</span>
         <span class="c1"># Could optimise this by saving lines in the main loop</span>
         <span class="c1"># then doing post processing after all Atoms have been read</span>
-        <span class="c1"># ie do one pass through the file only        </span>
+        <span class="c1"># ie do one pass through the file only</span>
         <span class="c1"># Problem is that in multiframe PDB, the CONECT is at end of file,</span>
         <span class="c1"># so the &quot;break&quot; call happens before bonds are reached.</span>
 
@@ -241,10 +249,9 @@
 
         <span class="n">bonds</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
         <span class="k">with</span> <span class="n">openany</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">lines</span> <span class="o">=</span> <span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">6</span><span class="p">:]</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span>
-                     <span class="k">if</span> <span class="n">line</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;CONECT&quot;</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">bond</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
-                <span class="n">atom</span><span class="p">,</span> <span class="n">atoms</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">bond</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">bond</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+            <span class="n">lines</span> <span class="o">=</span> <span class="p">(</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span> <span class="k">if</span> <span class="n">line</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;CONECT&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+                <span class="n">atom</span><span class="p">,</span> <span class="n">atoms</span> <span class="o">=</span> <span class="n">_parse_conect</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
                 <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">atoms</span><span class="p">:</span>
                     <span class="n">bond</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">mapping</span><span class="p">[</span><span class="n">atom</span><span class="p">],</span> <span class="n">mapping</span><span class="p">[</span><span class="n">a</span><span class="p">]])</span>
                     <span class="n">bonds</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">bond</span><span class="p">)</span>
@@ -252,6 +259,36 @@
         <span class="n">bonds</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">bonds</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">bonds</span></div>
+
+
+<span class="k">def</span> <span class="nf">_parse_conect</span><span class="p">(</span><span class="n">conect</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;parse a CONECT record from pdbs</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    conect : str</span>
+<span class="sd">        white space striped CONECT record</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    atom_id : int</span>
+<span class="sd">        atom index of bond</span>
+<span class="sd">    bonds : set</span>
+<span class="sd">        atom ids of bonded atoms</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    RuntimeError</span>
+<span class="sd">        Raised if ``conect`` is not a valid CONECT record</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">atom_id</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">(</span><span class="n">conect</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">11</span><span class="p">])</span>
+    <span class="n">n_bond_atoms</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">conect</span><span class="p">[</span><span class="mi">11</span><span class="p">:])</span> <span class="o">//</span> <span class="mi">5</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">conect</span><span class="p">[</span><span class="mi">11</span><span class="p">:])</span> <span class="o">%</span> <span class="n">n_bond_atoms</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Bond atoms aren&#39;t aligned proberly for CONECT &quot;</span>
+                           <span class="s2">&quot;record: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">conect</span><span class="p">))</span>
+    <span class="n">bond_atoms</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">conect</span><span class="p">[</span><span class="mi">11</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">5</span><span class="p">:</span> <span class="mi">16</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">5</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span>
+                  <span class="nb">range</span><span class="p">(</span><span class="n">n_bond_atoms</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">atom_id</span><span class="p">,</span> <span class="n">bond_atoms</span>
 </pre></div>
 
           </div>

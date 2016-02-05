@@ -142,10 +142,11 @@ step is the final <a class="reference external" href="http://www.wwpdb.org/docum
 standard</a>.</p>
 <div class="section" id="implementations">
 <h2>5.11.1. Implementations<a class="headerlink" href="#implementations" title="Permalink to this headline">¶</a></h2>
-<p>Two different implementations of PDB I/O are available: the &#8220;<a class="reference internal" href="#permissive"><span>permissive</span></a>&#8221;
-and the &#8220;<a class="reference internal" href="#strict"><span>strict</span></a>&#8221; Reader/Writers. The default are the &#8220;permissive&#8221; ones
-but this can be changed by setting the flag &#8220;permissive_pdb_reader&#8221; in
-<code class="xref py py-data docutils literal"><span class="pre">MDAnalysis.core.flags</span></code> (see <a class="reference internal" href="../core/init.html#flags-label"><span>Flags</span></a>) to <code class="docutils literal"><span class="pre">False</span></code>:</p>
+<p>Two different implementations of PDB I/O are available: the
+&#8220;<a class="reference internal" href="#permissive"><span>permissive</span></a>&#8221; and the &#8220;<a class="reference internal" href="#strict"><span>strict</span></a>&#8221; Reader/Writers.
+The default are the &#8220;permissive&#8221; ones but this can be changed by setting the
+flag &#8220;permissive_pdb_reader&#8221; in <code class="xref py py-data docutils literal"><span class="pre">MDAnalysis.core.flags</span></code> (see
+<a class="reference internal" href="../core/init.html#flags-label"><span>Flags</span></a>) to <code class="docutils literal"><span class="pre">False</span></code>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">MDAnalysis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">flags</span><span class="p">[</span><span class="s2">&quot;permissive_pdb_reader&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
 </pre></div>
 </div>
@@ -217,7 +218,8 @@ do the following:</p>
 <dt id="MDAnalysis.coordinates.PDB.PrimitivePDBReader">
 <em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.PDB.</code><code class="descname">PrimitivePDBReader</code><span class="sig-paren">(</span><em>filename</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/PDB.html#PrimitivePDBReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.PDB.PrimitivePDBReader" title="Permalink to this definition">¶</a></dt>
 <dd><p>PDBReader that reads a <a class="reference external" href="http://www.wwpdb.org/documentation/file-format-content/format33/v3.3.html">PDB-formatted</a> file, no frills.</p>
-<p>The following <em>PDB records</em> are parsed (see <a class="reference external" href="http://www.wwpdb.org/documentation/format32/sect9.html">PDB coordinate section</a> for details):</p>
+<p>The following <em>PDB records</em> are parsed (see <a class="reference external" href="http://www.wwpdb.org/documentation/format32/sect9.html">PDB coordinate section</a> for
+details):</p>
 <blockquote>
 <div><ul class="simple">
 <li><em>CRYST1</em> for unitcell A,B,C, alpha,beta,gamma</li>
@@ -882,8 +884,9 @@ which happens automatically when the
 <table class="docutils citation" frame="void" id="hamelryck2003" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id17">[Hamelryck2003]</a></td><td>Hamelryck, T., Manderick, B. (2003) PDB parser and structure class
-implemented in Python. Bioinformatics, 19, 2308-2310. <a class="reference external" href="http://biopython.org">http://biopython.org</a></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id17">[Hamelryck2003]</a></td><td>Hamelryck, T., Manderick, B. (2003) PDB parser and structure
+class implemented in Python. Bioinformatics, 19, 2308-2310.
+<a class="reference external" href="http://biopython.org">http://biopython.org</a></td></tr>
 </tbody>
 </table>
 </div>

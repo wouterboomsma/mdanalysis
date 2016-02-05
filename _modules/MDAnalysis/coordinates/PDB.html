@@ -76,8 +76,8 @@
 <span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
 <span class="c1">#</span>
 <span class="c1"># MDAnalysis --- http://www.MDAnalysis.org</span>
-<span class="c1"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
-<span class="c1"># and contributors (see AUTHORS for the full list)</span>
+<span class="c1"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver</span>
+<span class="c1"># Beckstein and contributors (see AUTHORS for the full list)</span>
 <span class="c1">#</span>
 <span class="c1"># Released under the GNU Public Licence, v2 or any higher version</span>
 <span class="c1">#</span>
@@ -89,8 +89,7 @@
 <span class="c1">#</span>
 
 
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">PDB structure files in MDAnalysis --- :mod:`MDAnalysis.coordinates.PDB`</span>
+<span class="sd">&quot;&quot;&quot;PDB structure files in MDAnalysis --- :mod:`MDAnalysis.coordinates.PDB`</span>
 <span class="sd">========================================================================</span>
 
 <span class="sd">MDAnalysis reads coordinates from PDB files and additional optional</span>
@@ -131,10 +130,11 @@
 <span class="sd">Implementations</span>
 <span class="sd">---------------</span>
 
-<span class="sd">Two different implementations of PDB I/O are available: the &quot;:ref:`permissive&lt;permissive&gt;`&quot;</span>
-<span class="sd">and the &quot;:ref:`strict&lt;strict&gt;`&quot; Reader/Writers. The default are the &quot;permissive&quot; ones</span>
-<span class="sd">but this can be changed by setting the flag &quot;permissive_pdb_reader&quot; in</span>
-<span class="sd">:data:`MDAnalysis.core.flags` (see :ref:`flags-label`) to ``False``::</span>
+<span class="sd">Two different implementations of PDB I/O are available: the</span>
+<span class="sd">&quot;:ref:`permissive&lt;permissive&gt;`&quot; and the &quot;:ref:`strict&lt;strict&gt;`&quot; Reader/Writers.</span>
+<span class="sd">The default are the &quot;permissive&quot; ones but this can be changed by setting the</span>
+<span class="sd">flag &quot;permissive_pdb_reader&quot; in :data:`MDAnalysis.core.flags` (see</span>
+<span class="sd">:ref:`flags-label`) to ``False``::</span>
 
 <span class="sd">   MDAnalysis.core.flags[&quot;permissive_pdb_reader&quot;] = False</span>
 
@@ -262,8 +262,9 @@
 <span class="sd">References</span>
 <span class="sd">----------</span>
 
-<span class="sd">.. [Hamelryck2003]  Hamelryck, T., Manderick, B. (2003) PDB parser and structure class</span>
-<span class="sd">                    implemented in Python. Bioinformatics, 19, 2308-2310. http://biopython.org</span>
+<span class="sd">.. [Hamelryck2003] Hamelryck, T., Manderick, B. (2003) PDB parser and structure</span>
+<span class="sd">                    class implemented in Python. Bioinformatics, 19, 2308-2310.</span>
+<span class="sd">                    http://biopython.org</span>
 
 <span class="sd">.. _PDB standard: http://www.wwpdb.org/documentation/format32/v3.2.html</span>
 <span class="sd">.. _END: http://www.wwpdb.org/documentation/format32/sect11.html#END</span>
@@ -279,7 +280,8 @@
     <span class="c1"># disable PDBConstructionWarning from picky builder</span>
     <span class="kn">import</span> <span class="nn">warnings</span>
 
-    <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">Bio</span><span class="o">.</span><span class="n">PDB</span><span class="o">.</span><span class="n">PDBExceptions</span><span class="o">.</span><span class="n">PDBConstructionWarning</span><span class="p">,</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span>
+                            <span class="n">category</span><span class="o">=</span><span class="n">Bio</span><span class="o">.</span><span class="n">PDB</span><span class="o">.</span><span class="n">PDBExceptions</span><span class="o">.</span><span class="n">PDBConstructionWarning</span><span class="p">,</span>
                             <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Could not assign element|Used element .* for Atom&quot;</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
     <span class="c1"># TODO: fall back to PrimitivePDBReader</span>
@@ -354,12 +356,14 @@
 <span class="sd">           not optional anymore when the Writer is obtained through</span>
 <span class="sd">           this method of :class:`PDBReader` .)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># This is messy; we cannot get a universe from the Reader, which would be</span>
-        <span class="c1"># also needed to be fed to the PDBWriter (which is a total mess...).</span>
-        <span class="c1"># Hence we ignore the problem and document it in the doc string... --- the</span>
-        <span class="c1"># limitation is simply that PDBWriter.write() must always be called with an argument.</span>
+        <span class="c1"># This is messy; we cannot get a universe from the Reader, which would</span>
+        <span class="c1"># be also needed to be fed to the PDBWriter (which is a total mess...).</span>
+        <span class="c1"># Hence we ignore the problem and document it in the doc string... ---</span>
+        <span class="c1"># the limitation is simply that PDBWriter.write() must always be called</span>
+        <span class="c1"># with an argument.</span>
         <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;BioPDBstructure&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdb</span>  <span class="c1"># make sure that this Writer is</span>
-        <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;universe&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>  <span class="c1"># always linked to this reader, don&#39;t bother with Universe</span>
+        <span class="c1"># always linked to this reader, don&#39;t bother with Universe</span>
+        <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;universe&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">PDBWriter</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div></div>
 
 
@@ -406,7 +410,8 @@
         <span class="kn">import</span> <span class="nn">Bio.PDB.Structure</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">universe</span> <span class="o">=</span> <span class="n">universe</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">PDBstructure</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;BioPDBstructure&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>  <span class="c1"># hack for PDBReader.Writer()</span>
+        <span class="c1"># hack for PDBReader.Writer()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">PDBstructure</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;BioPDBstructure&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">PDBstructure</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">PDBstructure</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">pdb</span>
@@ -448,8 +453,10 @@
                     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;PDBWriter: Not writing frame as neither universe nor timestep supplied.&quot;</span><span class="p">)</span>
                     <span class="k">return</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="s1">&#39;_pos&#39;</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The PDBWriter can only process a Timestep as optional argument, not &quot;</span>
-                                <span class="s2">&quot;e.g. a selection. Use the PrimitivePDBWriter instead and see the docs.&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;The PDBWriter can only process a Timestep as &quot;</span>
+                                <span class="s2">&quot; optional argument, not e.g. a selection. &quot;</span>
+                                <span class="s2">&quot;Use the PrimitivePDBWriter instead and see &quot;</span>
+                                <span class="s2">&quot;the docs.&quot;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">PDBstructure</span><span class="o">.</span><span class="n">get_atoms</span><span class="p">(),</span> <span class="n">ts</span><span class="o">.</span><span class="n">_pos</span><span class="p">):</span>
                 <span class="n">a</span><span class="o">.</span><span class="n">set_coord</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
             <span class="n">io</span> <span class="o">=</span> <span class="n">pdb</span><span class="o">.</span><span class="n">extensions</span><span class="o">.</span><span class="n">SloppyPDBIO</span><span class="p">()</span>
@@ -460,7 +467,8 @@
 <div class="viewcode-block" id="PrimitivePDBReader"><a class="viewcode-back" href="../../../documentation_pages/coordinates/PDB.html#MDAnalysis.coordinates.PDB.PrimitivePDBReader">[docs]</a><span class="k">class</span> <span class="nc">PrimitivePDBReader</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Reader</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;PDBReader that reads a `PDB-formatted`_ file, no frills.</span>
 
-<span class="sd">    The following *PDB records* are parsed (see `PDB coordinate section`_ for details):</span>
+<span class="sd">    The following *PDB records* are parsed (see `PDB coordinate section`_ for</span>
+<span class="sd">    details):</span>
 
 <span class="sd">     - *CRYST1* for unitcell A,B,C, alpha,beta,gamma</span>
 <span class="sd">     - *ATOM* or *HETATM* for serial,name,resName,chainID,resSeq,x,y,z,occupancy,tempFactor</span>
@@ -559,9 +567,9 @@
                 <span class="k">if</span> <span class="n">record</span> <span class="o">==</span> <span class="s1">&#39;END&#39;</span><span class="p">:</span>
                     <span class="k">break</span>
                 <span class="k">elif</span> <span class="n">record</span> <span class="o">==</span> <span class="s1">&#39;CRYST1&#39;</span><span class="p">:</span>
-                    <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="p">[</span><span class="n">line</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">15</span><span class="p">],</span> <span class="n">line</span><span class="p">[</span><span class="mi">15</span><span class="p">:</span><span class="mi">24</span><span class="p">],</span> <span class="n">line</span><span class="p">[</span><span class="mi">24</span><span class="p">:</span><span class="mi">33</span><span class="p">]])</span>
-                    <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="p">[</span><span class="n">line</span><span class="p">[</span><span class="mi">33</span><span class="p">:</span><span class="mi">40</span><span class="p">],</span> <span class="n">line</span><span class="p">[</span><span class="mi">40</span><span class="p">:</span><span class="mi">47</span><span class="p">],</span> <span class="n">line</span><span class="p">[</span><span class="mi">47</span><span class="p">:</span><span class="mi">54</span><span class="p">]])</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">_unitcell</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">_unitcell</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">15</span><span class="p">],</span> <span class="n">line</span><span class="p">[</span><span class="mi">15</span><span class="p">:</span><span class="mi">24</span><span class="p">],</span>
+                                            <span class="n">line</span><span class="p">[</span><span class="mi">24</span><span class="p">:</span><span class="mi">33</span><span class="p">],</span> <span class="n">line</span><span class="p">[</span><span class="mi">33</span><span class="p">:</span><span class="mi">40</span><span class="p">],</span>
+                                            <span class="n">line</span><span class="p">[</span><span class="mi">40</span><span class="p">:</span><span class="mi">47</span><span class="p">],</span> <span class="n">line</span><span class="p">[</span><span class="mi">47</span><span class="p">:</span><span class="mi">54</span><span class="p">]]</span>
                     <span class="k">continue</span>
                 <span class="k">elif</span> <span class="n">record</span> <span class="o">==</span> <span class="s1">&#39;HEADER&#39;</span><span class="p">:</span>
                     <span class="c1"># classification = line[10:50]</span>
@@ -588,11 +596,11 @@
                     <span class="c1"># on the trajectory reader</span>
                     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">frames</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
                         <span class="k">continue</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">_pos</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="p">[</span><span class="n">line</span><span class="p">[</span><span class="mi">30</span><span class="p">:</span><span class="mi">38</span><span class="p">],</span>
-                                                         <span class="n">line</span><span class="p">[</span><span class="mi">38</span><span class="p">:</span><span class="mi">46</span><span class="p">],</span>
-                                                         <span class="n">line</span><span class="p">[</span><span class="mi">46</span><span class="p">:</span><span class="mi">54</span><span class="p">]]))</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">_pos</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="p">[</span><span class="mi">30</span><span class="p">:</span><span class="mi">38</span><span class="p">],</span>
+                                         <span class="n">line</span><span class="p">[</span><span class="mi">38</span><span class="p">:</span><span class="mi">46</span><span class="p">],</span>
+                                         <span class="n">line</span><span class="p">[</span><span class="mi">46</span><span class="p">:</span><span class="mi">54</span><span class="p">]]</span>
                     <span class="k">try</span><span class="p">:</span>
-                        <span class="n">occupancy</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">54</span><span class="p">:</span><span class="mi">60</span><span class="p">])</span>
+                        <span class="n">occupancy</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">54</span><span class="p">:</span><span class="mi">60</span><span class="p">]</span>
                     <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
                         <span class="k">pass</span>
                     <span class="n">pos</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -674,23 +682,22 @@
             <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">line</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;ENDMDL&#39;</span><span class="p">:</span>
                     <span class="k">break</span>
-                <span class="c1"># NOTE - CRYST1 line won&#39;t be found if it comes before the MODEL</span>
-                <span class="c1"># line, which is sometimes the case, e.g. output from gromacs</span>
-                <span class="c1"># trjconv</span>
+                <span class="c1"># NOTE - CRYST1 line won&#39;t be found if it comes before the</span>
+                <span class="c1"># MODEL line, which is sometimes the case, e.g. output from</span>
+                <span class="c1"># gromacs trjconv</span>
                 <span class="k">elif</span> <span class="n">line</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;CRYST1&#39;</span><span class="p">:</span>
-                    <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="p">[</span><span class="n">line</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">15</span><span class="p">],</span> <span class="n">line</span><span class="p">[</span><span class="mi">15</span><span class="p">:</span><span class="mi">24</span><span class="p">],</span> <span class="n">line</span><span class="p">[</span><span class="mi">24</span><span class="p">:</span><span class="mi">33</span><span class="p">]])</span>
-                    <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="p">[</span><span class="n">line</span><span class="p">[</span><span class="mi">33</span><span class="p">:</span><span class="mi">40</span><span class="p">],</span> <span class="n">line</span><span class="p">[</span><span class="mi">40</span><span class="p">:</span><span class="mi">47</span><span class="p">],</span>
-                                                     <span class="n">line</span><span class="p">[</span><span class="mi">47</span><span class="p">:</span><span class="mi">54</span><span class="p">]])</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">_unitcell</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">_unitcell</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">15</span><span class="p">],</span> <span class="n">line</span><span class="p">[</span><span class="mi">15</span><span class="p">:</span><span class="mi">24</span><span class="p">],</span>
+                                            <span class="n">line</span><span class="p">[</span><span class="mi">24</span><span class="p">:</span><span class="mi">33</span><span class="p">],</span> <span class="n">line</span><span class="p">[</span><span class="mi">33</span><span class="p">:</span><span class="mi">40</span><span class="p">],</span>
+                                            <span class="n">line</span><span class="p">[</span><span class="mi">40</span><span class="p">:</span><span class="mi">47</span><span class="p">],</span> <span class="n">line</span><span class="p">[</span><span class="mi">47</span><span class="p">:</span><span class="mi">54</span><span class="p">]]</span>
                     <span class="k">continue</span>
                 <span class="k">elif</span> <span class="n">line</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;ATOM  &#39;</span><span class="p">,</span> <span class="s1">&#39;HETATM&#39;</span><span class="p">):</span>
                     <span class="c1"># we only care about coordinates</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">_pos</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="p">[</span><span class="n">line</span><span class="p">[</span><span class="mi">30</span><span class="p">:</span><span class="mi">38</span><span class="p">],</span>
-                                                         <span class="n">line</span><span class="p">[</span><span class="mi">38</span><span class="p">:</span><span class="mi">46</span><span class="p">],</span>
-                                                         <span class="n">line</span><span class="p">[</span><span class="mi">46</span><span class="p">:</span><span class="mi">54</span><span class="p">]]))</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">_pos</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="p">[</span><span class="mi">30</span><span class="p">:</span><span class="mi">38</span><span class="p">],</span>
+                                         <span class="n">line</span><span class="p">[</span><span class="mi">38</span><span class="p">:</span><span class="mi">46</span><span class="p">],</span>
+                                         <span class="n">line</span><span class="p">[</span><span class="mi">46</span><span class="p">:</span><span class="mi">54</span><span class="p">]]</span>
                     <span class="c1"># TODO import bfactors - might these change?</span>
                     <span class="k">try</span><span class="p">:</span>
-                        <span class="n">occupancy</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">54</span><span class="p">:</span><span class="mi">60</span><span class="p">])</span>
+                        <span class="n">occupancy</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">54</span><span class="p">:</span><span class="mi">60</span><span class="p">]</span>
                     <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
                         <span class="c1"># Be tolerant for ill-formated or empty occupancies</span>
                         <span class="k">pass</span>
@@ -704,8 +711,9 @@
                              <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">expected</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_n_atoms</span><span class="p">,</span> <span class="n">actual</span><span class="o">=</span><span class="n">pos</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_units</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">convert_pos_from_native</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">_pos</span><span class="p">)</span>  <span class="c1"># in-place !</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">convert_pos_from_native</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">_unitcell</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>  <span class="c1"># in-place ! (only lengths)</span>
+            <span class="c1"># both happen inplace</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">convert_pos_from_native</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">_pos</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">convert_pos_from_native</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">_unitcell</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">frame</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;occupancy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">occupancy</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ts</span></div>
@@ -906,15 +914,18 @@
         <span class="c1"># can write from selection == Universe (Issue 49)</span>
         <span class="n">coor</span> <span class="o">=</span> <span class="n">atoms</span><span class="o">.</span><span class="n">positions</span>
 
-        <span class="c1"># check if any coordinates are illegal (coordinates are already in Angstroem per package default)</span>
+        <span class="c1"># check if any coordinates are illegal (coordinates are already in</span>
+        <span class="c1"># Angstroem per package default)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_valid_coordinates</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdb_coor_limits</span><span class="p">,</span> <span class="n">coor</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">True</span>
-        <span class="c1"># note the precarious close() here: we know that the file is open and we now</span>
-        <span class="c1"># prepare to remove what we have already written (header and such) or add a REMARK</span>
-        <span class="c1"># (which allows the user to look at the previously written frames)</span>
+        <span class="c1"># note the precarious close() here: we know that the file is open and</span>
+        <span class="c1"># we now prepare to remove what we have already written (header and</span>
+        <span class="c1"># such) or add a REMARK (which allows the user to look at the</span>
+        <span class="c1"># previously written frames)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">frames_written</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">REMARK</span><span class="p">(</span><span class="s2">&quot;Incomplete multi-frame trajectory.&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;Coordinates for the current frame cannot be represented in the PDB format.&quot;</span><span class="p">)</span>
+                        <span class="s2">&quot;Coordinates for the current frame cannot be &quot;</span>
+                        <span class="s2">&quot;represented in the PDB format.&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -923,8 +934,10 @@
             <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">err</span><span class="o">.</span><span class="n">errno</span> <span class="o">==</span> <span class="n">errno</span><span class="o">.</span><span class="n">ENOENT</span><span class="p">:</span>
                     <span class="k">pass</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;PDB files must have coordinate values between {0:.3f} and {1:.3f} Angstroem: file writing was aborted.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdb_coor_limits</span><span class="p">[</span><span class="s2">&quot;min&quot;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">pdb_coor_limits</span><span class="p">[</span><span class="s2">&quot;max&quot;</span><span class="p">]))</span></div>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;PDB files must have coordinate values between &quot;</span>
+                         <span class="s2">&quot;{0:.3f} and {1:.3f} Angstroem: file writing was &quot;</span>
+                         <span class="s2">&quot;aborted.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdb_coor_limits</span><span class="p">[</span><span class="s2">&quot;min&quot;</span><span class="p">],</span>
+                                           <span class="bp">self</span><span class="o">.</span><span class="n">pdb_coor_limits</span><span class="p">[</span><span class="s2">&quot;max&quot;</span><span class="p">]))</span></div>
 
 <div class="viewcode-block" id="PrimitivePDBWriter._write_pdb_bonds"><a class="viewcode-back" href="../../../documentation_pages/coordinates/PDB.html#MDAnalysis.coordinates.PDB.PrimitivePDBWriter._write_pdb_bonds">[docs]</a>    <span class="k">def</span> <span class="nf">_write_pdb_bonds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Writes out all the bond records; works only for Universe objects.</span>
@@ -983,7 +996,6 @@
             <span class="n">con</span><span class="p">[</span><span class="n">a2</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span>
             <span class="n">con</span><span class="p">[</span><span class="n">a1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span>
 
-        <span class="c1">#print con</span>
         <span class="n">atoms</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">index</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">atoms</span><span class="p">])</span>
 
         <span class="n">conect</span> <span class="o">=</span> <span class="p">[([</span><span class="n">a</span><span class="p">,</span> <span class="p">]</span> <span class="o">+</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">con</span><span class="p">[</span><span class="n">a</span><span class="p">]))</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">atoms</span> <span class="k">if</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">con</span><span class="p">]</span>
@@ -1012,11 +1024,12 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">base</span><span class="o">.</span><span class="n">Timestep</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                <span class="s2">&quot;PrimitivePDBWriter cannot write Timestep objects directly, since they lack topology information (&quot;</span>
-                <span class="s2">&quot;atom names and types) required in PDB files&quot;</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span>  <span class="c1"># remember obj for some of other methods  --- NOTE: this is an evil/lazy hack...</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;PrimitivePDBWriter cannot write Timestep objects &quot;</span>
+                            <span class="s2">&quot;directly, since they lack topology information (&quot;</span>
+                            <span class="s2">&quot;atom names and types) required in PDB files&quot;</span><span class="p">)</span>
+        <span class="c1"># remember obj for some of other methods --- NOTE: this is an evil/lazy</span>
+        <span class="c1"># hack...</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span>
         <span class="n">ts</span><span class="p">,</span> <span class="n">traj</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s1">&#39;universe&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">Universe</span><span class="p">):</span>
             <span class="c1"># For AtomGroup and children (Residue, ResidueGroup, Segment)</span>
@@ -1028,9 +1041,9 @@
             <span class="n">traj</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">trajectory</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">ts</span> <span class="ow">and</span> <span class="n">traj</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span>
-                <span class="s2">&quot;PrimitivePDBWriter couldn&#39;t extract trajectory and timestep information from an object; inheritance &quot;</span>
-                <span class="s2">&quot;problem.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">&quot;PrimitivePDBWriter couldn&#39;t extract &quot;</span>
+                                 <span class="s2">&quot;trajectory and timestep information &quot;</span>
+                                 <span class="s2">&quot;from an object; inheritance problem.&quot;</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">trajectory</span> <span class="o">=</span> <span class="n">traj</span>  <span class="c1"># update trajectory (used by other methods)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ts</span> <span class="o">=</span> <span class="n">ts</span>  <span class="c1"># update timestep (used by other methods)</span>
@@ -1055,8 +1068,9 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_update_frame</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_write_pdb_header</span><span class="p">()</span>
-        <span class="c1"># Issue 105: with write() ONLY write a single frame; use write_all_timesteps() to dump</span>
-        <span class="c1"># everything in one go, or do the traditional loop over frames</span>
+        <span class="c1"># Issue 105: with write() ONLY write a single frame; use</span>
+        <span class="c1"># write_all_timesteps() to dump everything in one go, or do the</span>
+        <span class="c1"># traditional loop over frames</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">write_next_timestep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="p">,</span> <span class="n">multiframe</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_multiframe</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_write_pdb_bonds</span><span class="p">()</span></div>
         <span class="c1"># END record is written when file is being close()d</span>
@@ -1127,7 +1141,8 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="n">ts</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;ts&quot;</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="s2">&quot;PBDWriter: no coordinate data to write to trajectory file&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="s2">&quot;PBDWriter: no coordinate data to write to &quot;</span>
+                                  <span class="s2">&quot;trajectory file&quot;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ts</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_pdb_coordinates</span><span class="p">()</span>
@@ -1271,7 +1286,8 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_END</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">[</span><span class="s1">&#39;END&#39;</span><span class="p">])</span>  <span class="c1"># only write a single END record</span>
+            <span class="c1"># only write a single END record</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">[</span><span class="s1">&#39;END&#39;</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">has_END</span> <span class="o">=</span> <span class="bp">True</span></div>
 
 <div class="viewcode-block" id="PrimitivePDBWriter.ENDMDL"><a class="viewcode-back" href="../../../documentation_pages/coordinates/PDB.html#MDAnalysis.coordinates.PDB.PrimitivePDBWriter.ENDMDL">[docs]</a>    <span class="k">def</span> <span class="nf">ENDMDL</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
