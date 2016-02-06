@@ -129,12 +129,17 @@
 
 <span class="sd">    :math:`A_n = 1 - \\sum\\limits_{i=1}^{n-1} A_i`</span>
 
+<span class="sd">For further details see [Gowers2015]_.</span>
+
 <span class="sd">.. rubric:: References</span>
 
-<span class="sd">.. [notsure]  Multiscale modelling of polymeric systems with hydrogen bonding: Selective removal of degrees of freedom</span>
+<span class="sd">.. [Gowers2015]  Richard J. Gowers and Paola Carbone,</span>
+<span class="sd">                 A multiscale approach to model hydrogen bonding: The case of polyamide</span>
+<span class="sd">                 The Journal of Chemical Physics, 142, 224907 (2015),</span>
+<span class="sd">                 DOI:http://dx.doi.org/10.1063/1.4922445</span>
 
 <span class="sd">Input</span>
-<span class="sd">---------------</span>
+<span class="sd">-----</span>
 
 <span class="sd">Three AtomGroup selections representing the **hydrogens**, **donors** and</span>
 <span class="sd">**acceptors** that you wish to analyse.  Note that the **hydrogens** and</span>
@@ -161,7 +166,7 @@
 
 
 <span class="sd">Output</span>
-<span class="sd">---------------</span>
+<span class="sd">------</span>
 
 <span class="sd">All results of the analysis are available through the *solution* attribute.</span>
 <span class="sd">This is a dictionary with the following keys</span>
@@ -180,7 +185,7 @@
 
 
 <span class="sd">Examples</span>
-<span class="sd">---------------</span>
+<span class="sd">--------</span>
 
 <span class="sd">::</span>
 
@@ -222,7 +227,45 @@
 
 
 <div class="viewcode-block" id="HydrogenBondAutoCorrel"><a class="viewcode-back" href="../../../../documentation_pages/analysis/hbond_autocorrel.html#MDAnalysis.analysis.hbonds.hbond_autocorrel.HydrogenBondAutoCorrel">[docs]</a><span class="k">class</span> <span class="nc">HydrogenBondAutoCorrel</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Perform a time autocorrelation of the hydrogen bonds in the system. &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Perform a time autocorrelation of the hydrogen bonds in the system. </span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    universe : Universe</span>
+<span class="sd">        MDAnalysis Universe that all selections belong to</span>
+<span class="sd">    hydrogens : AtomGroup</span>
+<span class="sd">        AtomGroup of Hydrogens which can form hydrogen bonds</span>
+<span class="sd">    acceptors : AtomGroup</span>
+<span class="sd">        AtomGroup of all Acceptor atoms</span>
+<span class="sd">    donors : AtomGroup</span>
+<span class="sd">        The atoms which are connected to the hydrogens.  This group</span>
+<span class="sd">        must be identical in length to the hydrogen group and matched,</span>
+<span class="sd">        ie hydrogens[0] is bonded to donors[0].</span>
+<span class="sd">        For many cases, this will mean a donor appears twice in this</span>
+<span class="sd">        group.</span>
+<span class="sd">    bond_type : str</span>
+<span class="sd">        Which definition of hydrogen bond lifetime to consider, either</span>
+<span class="sd">        &#39;continuous&#39; or &#39;intermittent&#39;.</span>
+<span class="sd">    exclusions : ndarray, optional</span>
+<span class="sd">        Indices of Hydrogen-Acceptor pairs to be excluded.</span>
+<span class="sd">        With nH and nA Hydrogens and Acceptors, a (nH x nA) array of distances</span>
+<span class="sd">        is calculated, *exclusions* is used as a mask on this array to exclude</span>
+<span class="sd">        some pairs.</span>
+<span class="sd">    angle_crit : float, optional</span>
+<span class="sd">        The angle (in degrees) which all bonds must be greater than [130.0]</span>
+<span class="sd">    dist_crit : float, optional</span>
+<span class="sd">        The maximum distance (in Angstroms) for a hydrogen bond [3.0]</span>
+<span class="sd">    sample_time : float, optional</span>
+<span class="sd">        The amount of time, in ps, that you wish to observe hydrogen</span>
+<span class="sd">        bonds for [100]</span>
+<span class="sd">    nruns : int, optional</span>
+<span class="sd">        The number of different start points within the trajectory</span>
+<span class="sd">        to use [1]</span>
+<span class="sd">    nsamples : int, optional</span>
+<span class="sd">        Within each run, the number of frames to analyse [50]</span>
+<span class="sd">    pbc : bool, optional</span>
+<span class="sd">        Whether to consider periodic boundaries in calculations [``True``]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">,</span>
                  <span class="n">hydrogens</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">acceptors</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">donors</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
@@ -234,45 +277,6 @@
                  <span class="n">nruns</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>  <span class="c1"># number of times to iterate through the trajectory</span>
                  <span class="n">nsamples</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>  <span class="c1"># number of different points to sample in a run</span>
                  <span class="n">pbc</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        :Arguments:</span>
-<span class="sd">          *universe*</span>
-<span class="sd">            The MDA universe</span>
-<span class="sd">          *hydrogens*</span>
-<span class="sd">            AtomGroup of Hydrogens which can form hydrogen bonds</span>
-<span class="sd">          *acceptors*</span>
-<span class="sd">            AtomGroup of all Acceptor atoms</span>
-<span class="sd">          *donors*</span>
-<span class="sd">            The atoms which are connected to the hydrogens.  This group</span>
-<span class="sd">            must be identical in length to the hydrogen group and matched,</span>
-<span class="sd">            ie hydrogens[1] is bonded to donors[0].</span>
-<span class="sd">            For many cases, this will mean a donor appears twice in this</span>
-<span class="sd">            group.</span>
-<span class="sd">          *bond_type*</span>
-<span class="sd">            Which definition of hydrogen bond lifetime to consider, either</span>
-<span class="sd">            &#39;continuous&#39; or &#39;intermittent&#39;.</span>
-
-<span class="sd">        :Keywords:</span>
-<span class="sd">          *exclusions*</span>
-<span class="sd">            Indices of Hydrogen-Acceptor pairs to be excluded.</span>
-<span class="sd">            With nH and nA Hydrogens and Acceptors, a (nH x nA) array of distances</span>
-<span class="sd">            is calculated, *exclusions* is used as a mask on this array to exclude</span>
-<span class="sd">            some pairs.</span>
-<span class="sd">          *angle_crit*</span>
-<span class="sd">            The angle (in degrees) which all bonds must be greater than [130.0]</span>
-<span class="sd">          *dist_crit*</span>
-<span class="sd">            The maximum distance (in Angstroms) for a hydrogen bond [3.0]</span>
-<span class="sd">          *sample_time*</span>
-<span class="sd">            The amount of time, in ps, that you wish to observe hydrogen</span>
-<span class="sd">            bonds for [100]</span>
-<span class="sd">          *nruns*</span>
-<span class="sd">            The number of different start points within the trajectory</span>
-<span class="sd">            to use [1]</span>
-<span class="sd">          *nsamples*</span>
-<span class="sd">            Within each run, the number of frames to analyse [50]</span>
-<span class="sd">          *pbc*</span>
-<span class="sd">            Whether to consider periodic boundaries in calculations [``True``]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">u</span> <span class="o">=</span> <span class="n">universe</span>
         <span class="c1"># check that slicing is possible</span>
         <span class="k">try</span><span class="p">:</span>
@@ -345,11 +349,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_skip</span> <span class="o">=</span> <span class="mi">1</span>
 
 <div class="viewcode-block" id="HydrogenBondAutoCorrel.run"><a class="viewcode-back" href="../../../../documentation_pages/analysis/hbond_autocorrel.html#MDAnalysis.analysis.hbonds.hbond_autocorrel.HydrogenBondAutoCorrel.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Run all the required passes</span>
+        <span class="sd">&quot;&quot;&quot;Run all the required passes</span>
 
-<span class="sd">        :Keywords:</span>
-<span class="sd">          *force*</span>
+<span class="sd">        Parameters:</span>
+<span class="sd">        -----------</span>
+<span class="sd">        force : bool, optional</span>
 <span class="sd">            Will overwrite previous results if they exist</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># if results exist, don&#39;t waste any time</span>
@@ -456,13 +460,13 @@
         <span class="k">return</span> <span class="n">results</span>
 
 <div class="viewcode-block" id="HydrogenBondAutoCorrel.save_results"><a class="viewcode-back" href="../../../../documentation_pages/analysis/hbond_autocorrel.html#MDAnalysis.analysis.hbonds.hbond_autocorrel.HydrogenBondAutoCorrel.save_results">[docs]</a>    <span class="k">def</span> <span class="nf">save_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;hbond_autocorrel&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Saves the results to a numpy zipped array (.npz, see np.savez)</span>
+        <span class="sd">&quot;&quot;&quot;Saves the results to a numpy zipped array (.npz, see np.savez)</span>
 
 <span class="sd">        This can be loaded using np.load(filename)</span>
 
-<span class="sd">        :Keywords:</span>
-<span class="sd">          *filename*</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filename : str, optional</span>
 <span class="sd">            The desired filename [hbond_autocorrel]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">solution</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
@@ -476,8 +480,9 @@
         <span class="sd">&quot;&quot;&quot;Fit results to an multi exponential decay and integrate to find</span>
 <span class="sd">        characteristic time</span>
 
-<span class="sd">        :Keywords:</span>
-<span class="sd">          *p_guess*</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        p_guess : tuple of floats, optional</span>
 <span class="sd">            Initial guess for the leastsq fit, must match the shape of the</span>
 <span class="sd">            expected coefficients</span>
 
@@ -569,7 +574,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_my_solve</span> <span class="o">=</span> <span class="n">triple</span>
 
             <span class="k">if</span> <span class="n">p_guess</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="n">p_guess</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.33</span><span class="p">,</span> <span class="mf">0.33</span><span class="p">,</span> <span class="mi">10</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_time</span><span class="p">,</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_time</span><span class="p">)</span>
+                <span class="n">p_guess</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.33</span><span class="p">,</span> <span class="mf">0.33</span><span class="p">,</span> <span class="mi">10</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_time</span><span class="p">,</span>
+                           <span class="bp">self</span><span class="o">.</span><span class="n">sample_time</span><span class="p">,</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_time</span><span class="p">)</span>
 
             <span class="n">p</span><span class="p">,</span> <span class="n">cov</span><span class="p">,</span> <span class="n">infodict</span><span class="p">,</span> <span class="n">mesg</span><span class="p">,</span> <span class="n">ier</span> <span class="o">=</span> <span class="n">leastsq</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">p_guess</span><span class="p">,</span>
                                                   <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">results</span><span class="p">),</span>
@@ -590,9 +596,9 @@
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Solution to results not found&quot;</span><span class="p">,</span> <span class="ne">RuntimeWarning</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">&quot;&lt; MDAnalysis HydrogenBondAutoCorrel analysis measuring the &quot;</span> <span class="o">+</span> \
-               <span class="bp">self</span><span class="o">.</span><span class="n">bond_type</span> <span class="o">+</span> \
-               <span class="s2">&quot; lifetime of {0} different hydrogens &gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;&lt;MDAnalysis HydrogenBondAutoCorrel analysis measuring the &quot;</span>
+                <span class="s2">&quot;{btype} lifetime of {n} different hydrogens&gt;&quot;</span>
+                <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">btype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">bond_type</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">)))</span></div>
 </pre></div>
 
           </div>

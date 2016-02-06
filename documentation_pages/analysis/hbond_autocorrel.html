@@ -146,11 +146,15 @@ lifetime.</p>
 <p>Where the final pre expoential factor <span class="math">\(A_n\)</span> is subject to the condition:</p>
 <blockquote>
 <div><span class="math">\(A_n = 1 - \sum\limits_{i=1}^{n-1} A_i\)</span></div></blockquote>
+<p>For further details see <a class="reference internal" href="#gowers2015" id="id1">[Gowers2015]</a>.</p>
 <p class="rubric">References</p>
-<table class="docutils citation" frame="void" id="notsure" rules="none">
+<table class="docutils citation" frame="void" id="gowers2015" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[notsure]</td><td>Multiscale modelling of polymeric systems with hydrogen bonding: Selective removal of degrees of freedom</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id1">[Gowers2015]</a></td><td>Richard J. Gowers and Paola Carbone,
+A multiscale approach to model hydrogen bonding: The case of polyamide
+The Journal of Chemical Physics, 142, 224907 (2015),
+DOI:http://dx.doi.org/10.1063/1.4922445</td></tr>
 </tbody>
 </table>
 </div>
@@ -227,58 +231,30 @@ used.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
-<dt><em>universe</em></dt>
-<dd><p class="first last">The MDA universe</p>
-</dd>
-<dt><em>hydrogens</em></dt>
-<dd><p class="first last">AtomGroup of Hydrogens which can form hydrogen bonds</p>
-</dd>
-<dt><em>acceptors</em></dt>
-<dd><p class="first last">AtomGroup of all Acceptor atoms</p>
-</dd>
-<dt><em>donors</em></dt>
-<dd><p class="first last">The atoms which are connected to the hydrogens.  This group
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>universe</strong> (<a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.Universe" title="MDAnalysis.core.AtomGroup.Universe"><em>Universe</em></a>) &#8211; MDAnalysis Universe that all selections belong to</li>
+<li><strong>hydrogens</strong> (<a class="reference internal" href="../core/AtomGroup.html#module-MDAnalysis.core.AtomGroup" title="MDAnalysis.core.AtomGroup"><em>AtomGroup</em></a>) &#8211; AtomGroup of Hydrogens which can form hydrogen bonds</li>
+<li><strong>acceptors</strong> (<a class="reference internal" href="../core/AtomGroup.html#module-MDAnalysis.core.AtomGroup" title="MDAnalysis.core.AtomGroup"><em>AtomGroup</em></a>) &#8211; AtomGroup of all Acceptor atoms</li>
+<li><strong>donors</strong> (<a class="reference internal" href="../core/AtomGroup.html#module-MDAnalysis.core.AtomGroup" title="MDAnalysis.core.AtomGroup"><em>AtomGroup</em></a>) &#8211; The atoms which are connected to the hydrogens.  This group
 must be identical in length to the hydrogen group and matched,
-ie hydrogens[1] is bonded to donors[0].
+ie hydrogens[0] is bonded to donors[0].
 For many cases, this will mean a donor appears twice in this
-group.</p>
-</dd>
-<dt><em>bond_type</em></dt>
-<dd><p class="first last">Which definition of hydrogen bond lifetime to consider, either
-&#8216;continuous&#8217; or &#8216;intermittent&#8217;.</p>
-</dd>
-</dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Keywords:</th><td class="field-body"><dl class="first last docutils">
-<dt><em>exclusions</em></dt>
-<dd><p class="first last">Indices of Hydrogen-Acceptor pairs to be excluded.
+group.</li>
+<li><strong>bond_type</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Which definition of hydrogen bond lifetime to consider, either
+&#8216;continuous&#8217; or &#8216;intermittent&#8217;.</li>
+<li><strong>exclusions</strong> (<em>ndarray, optional</em>) &#8211; Indices of Hydrogen-Acceptor pairs to be excluded.
 With nH and nA Hydrogens and Acceptors, a (nH x nA) array of distances
 is calculated, <em>exclusions</em> is used as a mask on this array to exclude
-some pairs.</p>
-</dd>
-<dt><em>angle_crit</em></dt>
-<dd><p class="first last">The angle (in degrees) which all bonds must be greater than [130.0]</p>
-</dd>
-<dt><em>dist_crit</em></dt>
-<dd><p class="first last">The maximum distance (in Angstroms) for a hydrogen bond [3.0]</p>
-</dd>
-<dt><em>sample_time</em></dt>
-<dd><p class="first last">The amount of time, in ps, that you wish to observe hydrogen
-bonds for [100]</p>
-</dd>
-<dt><em>nruns</em></dt>
-<dd><p class="first last">The number of different start points within the trajectory
-to use [1]</p>
-</dd>
-<dt><em>nsamples</em></dt>
-<dd><p class="first last">Within each run, the number of frames to analyse [50]</p>
-</dd>
-<dt><em>pbc</em></dt>
-<dd><p class="first last">Whether to consider periodic boundaries in calculations [<code class="docutils literal"><span class="pre">True</span></code>]</p>
-</dd>
-</dl>
+some pairs.</li>
+<li><strong>angle_crit</strong> (<em>float, optional</em>) &#8211; The angle (in degrees) which all bonds must be greater than [130.0]</li>
+<li><strong>dist_crit</strong> (<em>float, optional</em>) &#8211; The maximum distance (in Angstroms) for a hydrogen bond [3.0]</li>
+<li><strong>sample_time</strong> (<em>float, optional</em>) &#8211; The amount of time, in ps, that you wish to observe hydrogen
+bonds for [100]</li>
+<li><strong>nruns</strong> (<em>int, optional</em>) &#8211; The number of different start points within the trajectory
+to use [1]</li>
+<li><strong>nsamples</strong> (<em>int, optional</em>) &#8211; Within each run, the number of frames to analyse [50]</li>
+<li><strong>pbc</strong> (<em>bool, optional</em>) &#8211; Whether to consider periodic boundaries in calculations [<code class="docutils literal"><span class="pre">True</span></code>]</li>
+</ul>
 </td>
 </tr>
 </tbody>
@@ -287,19 +263,10 @@ to use [1]</p>
 <dt id="MDAnalysis.analysis.hbonds.hbond_autocorrel.HydrogenBondAutoCorrel.run">
 <code class="descname">run</code><span class="sig-paren">(</span><em>force=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/hbonds/hbond_autocorrel.html#HydrogenBondAutoCorrel.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.hbonds.hbond_autocorrel.HydrogenBondAutoCorrel.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run all the required passes</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Keywords:</th><td class="field-body"><dl class="first last docutils">
-<dt><em>force</em></dt>
-<dd><p class="first last">Will overwrite previous results if they exist</p>
-</dd>
+<dl class="docutils">
+<dt>force <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd>Will overwrite previous results if they exist</dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
 </dd></dl>
 
 <dl class="method">
@@ -311,22 +278,13 @@ characteristic time</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Keywords:</th><td class="field-body"><dl class="first last docutils">
-<dt><em>p_guess</em></dt>
-<dd><p class="first last">Initial guess for the leastsq fit, must match the shape of the
-expected coefficients</p>
-</dd>
-</dl>
-</td>
-</tr>
-</tbody>
-</table>
-<p>Continuous defition results are fitted to a double exponential,
-intermittent definition are fit to a triple exponential.</p>
-<p>The results of this fitting procedure are saved into the <em>fit</em>,
-<em>tau</em> and <em>estimate</em> keywords in the solution dict.</p>
-<blockquote>
-<div><ul class="simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>p_guess</strong> (<em>tuple of floats, optional</em>) &#8211; Initial guess for the leastsq fit, must match the shape of the
+expected coefficients</li>
+<li><strong>defition results are fitted to a double exponential,</strong> (<em>Continuous</em>) &#8211; </li>
+<li><strong>definition are fit to a triple exponential.</strong> (<em>intermittent</em>) &#8211; </li>
+<li><strong>results of this fitting procedure are saved into the fit,</strong> (<em>The</em>) &#8211; </li>
+<li><strong>and estimate keywords in the solution dict.</strong> (<em>tau</em>) &#8211; <ul>
 <li><em>fit</em> contains the coefficients, (A1, tau1, tau2) or
 (A1, A2, tau1, tau2, tau3)</li>
 <li><em>tau</em> contains the calculated lifetime in ps for the hydrogen
@@ -334,16 +292,19 @@ bonding</li>
 <li><em>estimate</em> contains the estimate provided by the fit of the time
 autocorrelation function</li>
 </ul>
-</div></blockquote>
-<p>In addition, the output of the leastsq function is saved into the
-solution dict</p>
-<blockquote>
-<div><ul class="simple">
+</li>
+<li><strong>addition, the output of the leastsq function is saved into the</strong> (<em>In</em>) &#8211; </li>
+<li><strong>dict</strong> (<em>solution</em>) &#8211; <ul>
 <li><em>infodict</em></li>
 <li><em>mesg</em></li>
 <li><em>ier</em></li>
 </ul>
-</div></blockquote>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -355,12 +316,7 @@ solution dict</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Keywords:</th><td class="field-body"><dl class="first last docutils">
-<dt><em>filename</em></dt>
-<dd><p class="first last">The desired filename [hbond_autocorrel]</p>
-</dd>
-</dl>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<em>str, optional</em>) &#8211; The desired filename [hbond_autocorrel]</td>
 </tr>
 </tbody>
 </table>
