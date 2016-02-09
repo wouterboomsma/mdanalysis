@@ -423,12 +423,15 @@ exception that it defaults to writing single-frame PDB files as if
 <p><span class="versionmodified">Changed in version 0.7.5: </span>Initial support for multi-frame PDB files.</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.7.6: </span>The <em>multiframe</em> keyword was added to select the writing mode. The writing
-of bond information (<a class="reference external" href="http://www.wwpdb.org/documentation/format32/sect10.html#CONECT">CONECT</a> records) is now disabled by default but can be
-enabled with the <em>bonds</em> keyword.</p>
+<p><span class="versionmodified">Changed in version 0.7.6: </span>The <em>multiframe</em> keyword was added to select the writing mode. The
+writing of bond information (<a class="reference external" href="http://www.wwpdb.org/documentation/format32/sect10.html#CONECT">CONECT</a> records) is now disabled by default
+but can be enabled with the <em>bonds</em> keyword.</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Frames now 0-based instead of 1-based</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.14.0: </span>PDB doesn&#8217;t save charge information</p>
 </div>
 <p>Create a new PDBWriter</p>
 <table class="docutils field-list" frame="void" rules="none">

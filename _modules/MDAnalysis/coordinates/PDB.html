@@ -746,33 +746,23 @@
 <span class="sd">       Initial support for multi-frame PDB files.</span>
 
 <span class="sd">    .. versionchanged:: 0.7.6</span>
-<span class="sd">       The *multiframe* keyword was added to select the writing mode. The writing</span>
-<span class="sd">       of bond information (CONECT_ records) is now disabled by default but can be</span>
-<span class="sd">       enabled with the *bonds* keyword.</span>
+<span class="sd">       The *multiframe* keyword was added to select the writing mode. The</span>
+<span class="sd">       writing of bond information (CONECT_ records) is now disabled by default</span>
+<span class="sd">       but can be enabled with the *bonds* keyword.</span>
 
 <span class="sd">    .. versionchanged:: 0.11.0</span>
 <span class="sd">       Frames now 0-based instead of 1-based</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1">#          1         2         3         4         5         6         7         8</span>
-    <span class="c1"># 123456789.123456789.123456789.123456789.123456789.123456789.123456789.123456789.</span>
-    <span class="c1"># ATOM__seria nameAres CressI   xxxxxxxxyyyyyyyyzzzzzzzzOCCUPAtempft          elCH</span>
-    <span class="c1"># ATOM  %5d   %-4s %-3s %4d %1s %8.3f   %8.3f   %8.3f   %6.2f %6.2f           %2s</span>
-    <span class="c1">#                 %1s  %1s                                                      %2d</span>
-    <span class="c1">#            =        =      ===                                    ==========</span>
-    <span class="c1"># ATOM  %5d %-4s%1s%-3s %1s%4d%1s   %8.3f%8.3f%8.3f%6.2f%6.2f          %2s%2d</span>
-    <span class="c1"># ATOM  %(serial)5d %(name)-4s%(altLoc)1s%(resName)-3s %(chainID)1s%(resSeq)4d%(iCode)1s   %(x)8.3f%(y)8.3f%(</span>
-    <span class="c1"># z)8.3f%(occupancy)6.2f%(tempFactor)6.2f          %(element)2s%(charge)2d</span>
 
-    <span class="c1"># Strict PDB format:</span>
-    <span class="c1">#fmt = {&#39;ATOM&#39;:   &quot;ATOM  %(serial)5d %(name)-4s%(altLoc)1s%(resName)-3s %(chainID)1s%(resSeq)4d%(iCode)1s   %(</span>
-    <span class="c1"># x)8.3f%(y)8.3f%(z)8.3f%(occupancy)6.2f%(tempFactor)6.2f          %(element)2s%(charge)2d\n&quot;,</span>
-    <span class="c1"># PDB format as used by NAMD/CHARMM: 4-letter resnames and segID, altLoc ignored</span>
+<span class="sd">    .. versionchanged:: 0.14.0</span>
+<span class="sd">       PDB doesn&#39;t save charge information</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">fmt</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;ATOM&#39;</span><span class="p">:</span> <span class="p">(</span>
             <span class="s2">&quot;ATOM  {serial:5d} {name:&lt;4s}{altLoc:&lt;1s}{resName:&lt;4s}&quot;</span>
             <span class="s2">&quot;{chainID:1s}{resSeq:4d}{iCode:1s}&quot;</span>
             <span class="s2">&quot;   {pos[0]:8.3f}{pos[1]:8.3f}{pos[2]:8.3f}{occupancy:6.2f}&quot;</span>
-            <span class="s2">&quot;{tempFactor:6.2f}      {segID:&lt;4s}{element:&gt;2s}{charge:.2f}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;{tempFactor:6.2f}      {segID:&lt;4s}{element:&gt;2s}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">),</span>
         <span class="s1">&#39;REMARK&#39;</span><span class="p">:</span> <span class="s2">&quot;REMARK     {0}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="s1">&#39;COMPND&#39;</span><span class="p">:</span> <span class="s2">&quot;COMPND    {0}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="s1">&#39;HEADER&#39;</span><span class="p">:</span> <span class="s2">&quot;HEADER    {0}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
@@ -1204,7 +1194,6 @@
             <span class="n">vals</span><span class="p">[</span><span class="s1">&#39;tempFactor&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span> <span class="k">if</span> <span class="n">temp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="mf">0.0</span>
             <span class="n">vals</span><span class="p">[</span><span class="s1">&#39;segID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">segid</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
             <span class="n">vals</span><span class="p">[</span><span class="s1">&#39;element&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">guess_atom_element</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">())[:</span><span class="mi">2</span><span class="p">]</span>
-            <span class="n">vals</span><span class="p">[</span><span class="s1">&#39;charge&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 
             <span class="c1"># .. _ATOM: http://www.wwpdb.org/documentation/format32/sect9.html</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">pdbfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">[</span><span class="s1">&#39;ATOM&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">vals</span><span class="p">))</span>
