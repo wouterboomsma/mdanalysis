@@ -217,34 +217,46 @@ provided.</p>
 
 <dl class="function">
 <dt id="MDAnalysis.coordinates.core.get_writer_for">
-<code class="descclassname">MDAnalysis.coordinates.core.</code><code class="descname">get_writer_for</code><span class="sig-paren">(</span><em>filename=None</em>, <em>format='DCD'</em>, <em>multiframe=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/core.html#get_writer_for"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.core.get_writer_for" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">MDAnalysis.coordinates.core.</code><code class="descname">get_writer_for</code><span class="sig-paren">(</span><em>filename=None</em>, <em>format=None</em>, <em>multiframe=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/core.html#get_writer_for"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.core.get_writer_for" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return an appropriate trajectory or frame writer class for <em>filename</em>.</p>
 <p>The format is determined by the <em>format</em> argument or the extension of
-<em>filename</em>. The default is to return a dcd writer (<em>format</em> = &#8216;dcd&#8217;). If
-the <em>filename</em> is not provided or if it is something like a
-<code class="xref py py-class docutils literal"><span class="pre">cStringIO.StringIO</span></code> instance then the <em>format</em> argument must be
-used.</p>
+<em>filename</em>. If <em>format</em> is provided, it takes precedence over The
+extension of <em>filename</em>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; The filename for the trajectory is examined for its extension and
-the Writer is chosen accordingly.</li>
-<li><strong>format</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; If no <em>filename</em> is supplied then the format can be explicitly set</li>
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; If no <em>format</em> is supplied, then the filename for the trajectory is
+examined for its extension and the Writer is chosen accordingly.</li>
+<li><strong>format</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Explicitly set a format.</li>
 <li><strong>multiframe</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; <code class="docutils literal"><span class="pre">True</span></code>: write multiple frames to the trajectory; <code class="docutils literal"><span class="pre">False</span></code>: only
 write a single coordinate frame; <code class="docutils literal"><span class="pre">None</span></code>: first try trajectory (multi
 frame writers), then the single frame ones. Default is <code class="docutils literal"><span class="pre">None</span></code>.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><ul class="simple">
-<li><em>A Writer object</em></li>
-<li><strong>.. versionchanged</strong> (<em>: 0.7.6</em>) &#8211;
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">A Writer object</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li>ValueError: &#8211;
+The format could not be deduced from <em>filename</em> or an unexpected value
+was provided for the <em>multiframe</em> argument.</li>
+<li>TypeError: &#8211;
+No writer got found for the required format.</li>
+<li><em>.. versionchanged:: 0.7.6</em> &#8211;
 Added <em>multiframe</em> keyword; the default <code class="docutils literal"><span class="pre">None</span></code> reflects the previous
 behaviour.</li>
+<li><em>.. versionchanged:: 0.14.0</em> &#8211;
+Removed the default value for the <em>format</em> argument. Now, the value
+provided with the <em>format</em> parameter takes precedence over the extension
+of <em>filename</em>. A <code class="docutils literal"><span class="pre">ValueError</span></code> is raised if the format cannot be
+deduced from <em>filename</em>.</li>
 </ul>
-</p>
 </td>
 </tr>
 </tbody>

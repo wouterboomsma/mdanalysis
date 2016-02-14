@@ -201,22 +201,20 @@
         <span class="k">return</span> <span class="n">Reader</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="get_writer_for"><a class="viewcode-back" href="../../../documentation_pages/coordinates/core.html#MDAnalysis.coordinates.core.get_writer_for">[docs]</a><span class="k">def</span> <span class="nf">get_writer_for</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s1">&#39;DCD&#39;</span><span class="p">,</span> <span class="n">multiframe</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="get_writer_for"><a class="viewcode-back" href="../../../documentation_pages/coordinates/core.html#MDAnalysis.coordinates.core.get_writer_for">[docs]</a><span class="k">def</span> <span class="nf">get_writer_for</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">multiframe</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return an appropriate trajectory or frame writer class for *filename*.</span>
 
 <span class="sd">    The format is determined by the *format* argument or the extension of</span>
-<span class="sd">    *filename*. The default is to return a dcd writer (*format* = &#39;dcd&#39;). If</span>
-<span class="sd">    the *filename* is not provided or if it is something like a</span>
-<span class="sd">    :class:`cStringIO.StringIO` instance then the *format* argument must be</span>
-<span class="sd">    used.</span>
+<span class="sd">    *filename*. If *format* is provided, it takes precedence over The</span>
+<span class="sd">    extension of *filename*.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    filename : str</span>
-<span class="sd">        The filename for the trajectory is examined for its extension and</span>
-<span class="sd">        the Writer is chosen accordingly.</span>
+<span class="sd">        If no *format* is supplied, then the filename for the trajectory is</span>
+<span class="sd">        examined for its extension and the Writer is chosen accordingly.</span>
 <span class="sd">    format : str</span>
-<span class="sd">        If no *filename* is supplied then the format can be explicitly set</span>
+<span class="sd">        Explicitly set a format.</span>
 <span class="sd">    multiframe : bool</span>
 <span class="sd">        ``True``: write multiple frames to the trajectory; ``False``: only</span>
 <span class="sd">        write a single coordinate frame; ``None``: first try trajectory (multi</span>
@@ -226,13 +224,34 @@
 <span class="sd">    -------</span>
 <span class="sd">    A Writer object</span>
 
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError:</span>
+<span class="sd">        The format could not be deduced from *filename* or an unexpected value</span>
+<span class="sd">        was provided for the *multiframe* argument.</span>
+<span class="sd">    TypeError:</span>
+<span class="sd">        No writer got found for the required format.</span>
+
 <span class="sd">    .. versionchanged:: 0.7.6</span>
 <span class="sd">       Added *multiframe* keyword; the default ``None`` reflects the previous</span>
 <span class="sd">       behaviour.</span>
+
+<span class="sd">    .. versionchanged:: 0.14.0</span>
+<span class="sd">       Removed the default value for the *format* argument. Now, the value</span>
+<span class="sd">       provided with the *format* parameter takes precedence over the extension</span>
+<span class="sd">       of *filename*. A ``ValueError`` is raised if the format cannot be</span>
+<span class="sd">       deduced from *filename*.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">string_types</span><span class="p">)</span> <span class="ow">and</span> <span class="n">filename</span><span class="p">:</span>
-        <span class="n">root</span><span class="p">,</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">get_ext</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-        <span class="n">format</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">check_compressed_format</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">ext</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">format</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">filename</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">root</span><span class="p">,</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">get_ext</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="c1"># An AttributeError is raised if filename cannot</span>
+            <span class="c1"># be manipulated as a string.</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;File format could not be guessed from &quot;{0}&quot;&#39;</span>
+                             <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">format</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">check_compressed_format</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">ext</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">multiframe</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">_MULTIFRAME_WRITERS</span><span class="p">[</span><span class="n">format</span><span class="p">]</span>
@@ -241,8 +260,8 @@
                 <span class="k">return</span> <span class="n">_SINGLEFRAME_WRITERS</span><span class="p">[</span><span class="n">format</span><span class="p">]</span>
             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                    <span class="s2">&quot;No trajectory or frame writer for format {0}&quot;</span>
-                    <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">format</span><span class="p">))</span>
+                    <span class="s2">&quot;No trajectory or frame writer for format &#39;{0}&#39;&quot;</span>
+                    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">format</span><span class="p">))</span>
     <span class="k">elif</span> <span class="n">multiframe</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">_MULTIFRAME_WRITERS</span><span class="p">[</span><span class="n">format</span><span class="p">]</span>
