@@ -99,7 +99,7 @@ coordinate and topology files. Used by the <a class="reference external" href="h
 code.</p>
 <p class="rubric">Examples</p>
 <p>To open a mol2, remove all hydrogens and save as a new file, use the following:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">u</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="s2">&quot;MDAnalysis/testsuite/MDAnalysisTests/data/mol2/Molecule.mol2&quot;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="s2">&quot;MDAnalysis/testsuite/MDAnalysisTests/data/mol2/Molecule.mol2&quot;</span><span class="p">)</span>
 <span class="n">gr</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;not name H*&quot;</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">gr</span><span class="p">))</span>
 <span class="n">gr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Molecule_noh.mol2&quot;</span><span class="p">)</span>

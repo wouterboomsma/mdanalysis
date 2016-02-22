@@ -158,7 +158,7 @@ very good illustrative example).</p>
 <p>As an example we analyze the opening (&#8220;unzipping&#8221;) of salt bridges
 when the AdK enzyme opens up; this is one of the example trajectories
 in MDAnalysis.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">MDAnalysis</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">MDAnalysis</span>
 <span class="kn">import</span> <span class="nn">MDAnalysis.analysis.contacts</span>
 <span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span>
 
@@ -204,7 +204,7 @@ but is is included for illustration.</p>
 <h2>3.2.2.2. Two-dimensional contact analysis (q1-q2)<a class="headerlink" href="#two-dimensional-contact-analysis-q1-q2" title="Permalink to this headline">¶</a></h2>
 <p>Analyze a single DIMS transition of AdK between its closed and open
 conformation and plot the trajectory projected on q1-q2:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">MDAnalysis.analysis.contacts</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">MDAnalysis.analysis.contacts</span>
 <span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span>
 <span class="n">C</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">contacts</span><span class="o">.</span><span class="n">ContactAnalysis</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">)</span>
 <span class="n">C</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
@@ -223,7 +223,7 @@ conformation and plot the trajectory projected on q1-q2:</p>
 <code class="xref py py-attr docutils literal"><span class="pre">ContactAnalysis.timeseries</span></code>. It is a numpy array which
 contains the frame number at index 0, q1 and q2 at index 1 and 2,
 and the total number of contacts in 3 and 4.</p>
-<div class="highlight-python"><div class="highlight"><pre>frame  q1 q2  n1 n2
+<div class="highlight-python"><div class="highlight"><pre><span></span>frame  q1 q2  n1 n2
 </pre></div>
 </div>
 <p>The total number of contacts in the reference states 1 and 2 are
@@ -374,20 +374,20 @@ molecules A and B in the complex. Then the question to be answered by <em>q</em>
 is, is which percentage of the contacts between A and B persist during the simulation.</p>
 <p>First prepare <a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> selections for
 the reference atoms; this example uses some arbitrary selections:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">ref</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="s1">&#39;crystal.pdb&#39;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">ref</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="s1">&#39;crystal.pdb&#39;</span><span class="p">)</span>
 <span class="n">refA</span> <span class="o">=</span> <span class="n">ref</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name CA and segid A and resid 6:100&#39;</span><span class="p">)</span>
 <span class="n">refB</span> <span class="o">=</span> <span class="n">ref</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name CA and segid B and resid 1:40&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Load the trajectory:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">u</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">trajectory</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">topology</span><span class="p">,</span> <span class="n">trajectory</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>We then need two selection strings <em>selA</em> and <em>selB</em> that, when applied as
 <code class="docutils literal"><span class="pre">u.select_atoms(selA)</span></code> produce a list of atoms that is equivalent to the
 reference (i.e. <code class="docutils literal"><span class="pre">u.select_atoms(selA)</span></code> must select the same atoms as
 <code class="docutils literal"><span class="pre">refA</span></code> in this example):</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">selA</span> <span class="o">=</span> <span class="s1">&#39;name CA and resid 1:95&#39;</span>     <span class="c1"># corresponds to refA</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">selA</span> <span class="o">=</span> <span class="s1">&#39;name CA and resid 1:95&#39;</span>     <span class="c1"># corresponds to refA</span>
 <span class="n">selB</span> <span class="o">=</span> <span class="s1">&#39;name CA and resid 150:189&#39;</span>  <span class="c1"># corresponds to refB</span>
 </pre></div>
 </div>
@@ -398,17 +398,17 @@ reference (i.e. <code class="docutils literal"><span class="pre">u.select_atoms(
 by <em>selection</em>.</p>
 </div>
 <p>Now we are ready to set up the analysis:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">CA1</span> <span class="o">=</span> <span class="n">ContactAnalysis1</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">selection</span><span class="o">=</span><span class="p">(</span><span class="n">selA</span><span class="p">,</span><span class="n">selB</span><span class="p">),</span> <span class="n">refgroup</span><span class="o">=</span><span class="p">(</span><span class="n">refA</span><span class="p">,</span><span class="n">refB</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="mf">8.0</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="s2">&quot;q.dat&quot;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">CA1</span> <span class="o">=</span> <span class="n">ContactAnalysis1</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">selection</span><span class="o">=</span><span class="p">(</span><span class="n">selA</span><span class="p">,</span><span class="n">selB</span><span class="p">),</span> <span class="n">refgroup</span><span class="o">=</span><span class="p">(</span><span class="n">refA</span><span class="p">,</span><span class="n">refB</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="mf">8.0</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="s2">&quot;q.dat&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>If the groups do not match in length then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
 <p>The analysis across the whole trajectory is performed with</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">CA1</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">CA1</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Results are saved to <em>outfile</em> (<code class="docutils literal"><span class="pre">framenumber</span> <span class="pre">q</span> <span class="pre">N</span></code> per line) and
 can also be plotted with</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">CA1</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>        <span class="c1"># plots the time series q(t)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">CA1</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>        <span class="c1"># plots the time series q(t)</span>
 <span class="n">CA1</span><span class="o">.</span><span class="n">plot_qavg</span><span class="p">()</span>   <span class="c1"># plots the matrix of average contacts &lt;q&gt;</span>
 </pre></div>
 </div>

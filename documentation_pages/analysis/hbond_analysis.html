@@ -148,7 +148,7 @@ that is bonded to the heavy atom donor,</li>
 <p>Hydrogen bond data are returned per frame, which is stored in
 <a class="reference internal" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.timeseries" title="MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.timeseries"><code class="xref py py-attr docutils literal"><span class="pre">HydrogenBondAnalysis.timeseries</span></code></a> (In the following description, <code class="docutils literal"><span class="pre">#</span></code>
 indicates comments that are not part of the output.):</p>
-<div class="highlight-python"><div class="highlight"><pre>results = [
+<div class="highlight-python"><div class="highlight"><pre><span></span>results = [
     [ # frame 1
        [ # hbond 1
           &lt;donor index&gt;, &lt;acceptor index&gt;, &lt;donor string&gt;, &lt;acceptor string&gt;, &lt;distance&gt;, &lt;angle&gt;
@@ -363,7 +363,7 @@ atom names in the <em>donors</em> and <em>acceptors</em> keywords to
 (e.g. when analysing simulations done with a force field that uses very
 different atom names) then one should either use the value &#8220;other&#8221; for <em>forcefield</em>
 to set no default values, or derive a new class and set the default list oneself:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">HydrogenBondAnalysis_OtherFF</span><span class="p">(</span><span class="n">HydrogenBondAnalysis</span><span class="p">):</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">HydrogenBondAnalysis_OtherFF</span><span class="p">(</span><span class="n">HydrogenBondAnalysis</span><span class="p">):</span>
       <span class="n">DEFAULT_DONORS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;OtherFF&quot;</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="o">...</span><span class="p">]))}</span>
       <span class="n">DEFAULT_ACCEPTORS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;OtherFF&quot;</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="o">...</span><span class="p">]))}</span>
 </pre></div>
@@ -382,7 +382,7 @@ F.E. Cohen. Hydrogen bonds involving sulfur atoms in proteins. Proteins,
 </table>
 <p class="rubric">Example</p>
 <p>All protein-water hydrogen bonds can be analysed with</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">MDAnalysis.analysis.hbonds</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">MDAnalysis.analysis.hbonds</span>
 
 <span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">PDB</span><span class="p">,</span> <span class="n">permissive</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">h</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">hbonds</span><span class="o">.</span><span class="n">HydrogenBondAnalysis</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="s1">&#39;protein&#39;</span><span class="p">,</span> <span class="s1">&#39;resname TIP3&#39;</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mf">120.0</span><span class="p">)</span>
@@ -609,7 +609,7 @@ of a hydrogen bond existence, or see <a class="reference internal" href="#MDAnal
 <dd><p>Results of the hydrogen bond analysis, stored for each frame. In
 the following description, # indicates comments that are not
 part of the output:</p>
-<div class="highlight-python"><div class="highlight"><pre>results = [
+<div class="highlight-python"><div class="highlight"><pre><span></span>results = [
     [ # frame 1
        [ # hbond 1
           &lt;donor index&gt;, &lt;acceptor index&gt;, &lt;donor string&gt;, &lt;acceptor string&gt;, &lt;distance&gt;, &lt;angle&gt;
@@ -833,7 +833,7 @@ with e.g. <a class="reference external" href="http://pypi.python.org/pypi/RecSQL
 
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.r_cov">
-<code class="descname">r_cov</code><em class="property"> = defaultdict(&lt;function &lt;lambda&gt; at 0x2ab5859828c0&gt;, {'P': 1.58, 'S': 1.55, 'O': 1.31, 'N': 1.31})</em><a class="headerlink" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.r_cov" title="Permalink to this definition">¶</a></dt>
+<code class="descname">r_cov</code><em class="property"> = defaultdict(&lt;function &lt;lambda&gt; at 0x2b294c7eb398&gt;, {'P': 1.58, 'S': 1.55, 'O': 1.31, 'N': 1.31})</em><a class="headerlink" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.r_cov" title="Permalink to this definition">¶</a></dt>
 <dd><p>A <a class="reference external" href="http://docs.python.org/library/collections.html#collections.defaultdict" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">collections.defaultdict</span></code></a> of covalent radii of common donors
 (used in :meth`_get_bonded_hydrogens_list` to check if a hydrogen is
 sufficiently close to its donor heavy atom). Values are stored for
@@ -874,7 +874,7 @@ no donors or acceptors were found in a particular frame.</p>
 <code class="descname">save_table</code><span class="sig-paren">(</span><em>filename='hbond_table.pickle'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/hbonds/hbond_analysis.html#HydrogenBondAnalysis.save_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.save_table" title="Permalink to this definition">¶</a></dt>
 <dd><p>Saves <a class="reference internal" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.table" title="MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.table"><code class="xref py py-attr docutils literal"><span class="pre">table</span></code></a> to a pickled file.</p>
 <p>Load with</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">cPickle</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cPickle</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">cPickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
 </pre></div>
 </div>

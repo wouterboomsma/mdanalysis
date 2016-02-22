@@ -157,7 +157,7 @@ using backbone atoms</li>
 </ul>
 <p>The trajectory is included with the test data files. The data in
 <a class="reference internal" href="#MDAnalysis.analysis.rms.RMSD.rmsd" title="MDAnalysis.analysis.rms.RMSD.rmsd"><code class="xref py py-attr docutils literal"><span class="pre">RMSD.rmsd</span></code></a> is plotted with <a class="reference external" href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot" title="(in Matplotlib v1.5.1)"><code class="xref py py-func docutils literal"><span class="pre">matplotlib.pyplot.plot()</span></code></a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">MDAnalysis</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">MDAnalysis</span>
 <span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">,</span><span class="n">CRD</span>
 <span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>
 <span class="n">ref</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>     <span class="c1"># reference closed AdK (1AKE) (with the default ref_frame=0)</span>
@@ -212,7 +212,7 @@ for a weighted RMSD calculation.</p>
 <a class="reference internal" href="../lib/qcprot.html#theobald2005" id="id3">[Theobald2005]</a> to calculate the RMSD.</p>
 <dl class="docutils">
 <dt>Example::</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bb</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;backbone&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">bb</span><span class="o">.</span><span class="n">coordinates</span><span class="p">()</span>  <span class="c1"># coordinates of first frame</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>      <span class="c1"># forward to last frame</span>
@@ -234,7 +234,7 @@ for a weighted RMSD calculation.</p>
 <dd><p>Class to perform RMSD analysis on a trajectory.</p>
 <p>Run the analysis with <a class="reference internal" href="#MDAnalysis.analysis.rms.RMSD.run" title="MDAnalysis.analysis.rms.RMSD.run"><code class="xref py py-meth docutils literal"><span class="pre">RMSD.run()</span></code></a>, which stores the results
 in the array <a class="reference internal" href="#MDAnalysis.analysis.rms.RMSD.rmsd" title="MDAnalysis.analysis.rms.RMSD.rmsd"><code class="xref py py-attr docutils literal"><span class="pre">RMSD.rmsd</span></code></a>:</p>
-<div class="highlight-python"><div class="highlight"><pre>frame    time (ps)    RMSD (A)
+<div class="highlight-python"><div class="highlight"><pre><span></span>frame    time (ps)    RMSD (A)
 </pre></div>
 </div>
 <p>This class uses Douglas Theobald&#8217;s fast QCP algorithm

@@ -134,7 +134,7 @@ the trajectory frame by frame in python. Inspired by CHARMM&#8217;s correl
 command.</p>
 <p>The disadvantage is that the timeseries &#8216;plugins&#8217; must be implemented in
 C-code.</p>
-<div class="highlight-python"><div class="highlight"><pre>collection = TimeseriesCollection()
+<div class="highlight-python"><div class="highlight"><pre><span></span>collection = TimeseriesCollection()
 collection.addTimeseries(Timeseries.Atom(...)) - add a new Timeseries object
 collection.compute(...)                        - compute the collection of timeseries from the trajectory
 collection.clear()                             - clear the collection
@@ -176,7 +176,7 @@ note that <em>start</em> and <em>stop</em> are inclusive</dd>
 <dt id="MDAnalysis.core.Timeseries.Atom">
 <em class="property">class </em><code class="descclassname">MDAnalysis.core.Timeseries.</code><code class="descname">Atom</code><span class="sig-paren">(</span><em>code</em>, <em>atoms</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/Timeseries.html#Atom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.Timeseries.Atom" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a timeseries that returns coordinate data for an atom or group of atoms</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">t</span> <span class="o">=</span> <span class="n">Atom</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">atoms</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">Atom</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">atoms</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="docutils">

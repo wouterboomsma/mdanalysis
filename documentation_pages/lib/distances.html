@@ -247,7 +247,7 @@ possibilities are &#8220;OpenMP&#8221; (OpenMP).</p>
 <dt><em>d</em></dt>
 <dd><p class="first">N*(N-1)/2 numpy 1D array with the distances dist[i,j] between ref
 coordinates i and j at position d[k]. Loop through d:</p>
-<div class="last highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+<div class="last highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
         <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
@@ -277,7 +277,7 @@ arrays of coordinates, where atom1[i] and atom2[i] represent a bond.</p>
 <p>In comparison to distance_array and self_distance_array which calculate distances
 between all combinations of coordinates, calc_bonds can be used to calculate distance
 between pairs of objects, similar to:</p>
-<div class="highlight-python"><div class="highlight"><pre>numpy.linalg.norm(a - b) for a, b in zip(coords1, coords2)
+<div class="highlight-python"><div class="highlight"><pre><span></span>numpy.linalg.norm(a - b) for a, b in zip(coords1, coords2)
 </pre></div>
 </div>
 <p>The optional argument <em>box</em> applies minimum image convention if supplied.
@@ -404,7 +404,7 @@ possibilities are &#8220;OpenMP&#8221; (OpenMP).</p>
 <dd><p>Calculate the dihedral angle formed by four atoms, over a list of coordinates.</p>
 <p>Dihedral angle around axis connecting atoms 1 and 2 (i.e. the angle
 between the planes spanned by atoms (0,1,2) and (1,2,3)):</p>
-<div class="highlight-python"><div class="highlight"><pre>        3
+<div class="highlight-python"><div class="highlight"><pre><span></span>        3
         |
   1-----2
  /
@@ -417,7 +417,7 @@ up calculations.</p>
 <p>The optional argument <code class="docutils literal"><span class="pre">box</span></code> ensures that periodic boundaries are taken into
 account when constructing the connecting vectors between atoms, ie that the vector
 between atoms 1 &amp; 2 goes between coordinates in the same image:</p>
-<div class="highlight-python"><div class="highlight"><pre>angles = calc_dihedrals(coords1, coords2, coords3, coords4 [,box=box, result=angles])
+<div class="highlight-python"><div class="highlight"><pre><span></span>angles = calc_dihedrals(coords1, coords2, coords3, coords4 [,box=box, result=angles])
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -723,7 +723,7 @@ arrays of coordinates, where atom1[i] and atom2[i] represent a bond.</p>
 <p>In comparison to distance_array and self_distance_array which calculate distances
 between all combinations of coordinates, calc_bonds can be used to calculate distance
 between pairs of objects, similar to:</p>
-<div class="highlight-python"><div class="highlight"><pre>numpy.linalg.norm(a - b) for a, b in zip(coords1, coords2)
+<div class="highlight-python"><div class="highlight"><pre><span></span>numpy.linalg.norm(a - b) for a, b in zip(coords1, coords2)
 </pre></div>
 </div>
 <p>The optional argument <em>box</em> applies minimum image convention if supplied.
@@ -784,7 +784,7 @@ possibilities are &#8220;OpenMP&#8221; (OpenMP).</p>
 <dd><p>Calculate the dihedral angle formed by four atoms, over a list of coordinates.</p>
 <p>Dihedral angle around axis connecting atoms 1 and 2 (i.e. the angle
 between the planes spanned by atoms (0,1,2) and (1,2,3)):</p>
-<div class="highlight-python"><div class="highlight"><pre>        3
+<div class="highlight-python"><div class="highlight"><pre><span></span>        3
         |
   1-----2
  /
@@ -797,7 +797,7 @@ up calculations.</p>
 <p>The optional argument <code class="docutils literal"><span class="pre">box</span></code> ensures that periodic boundaries are taken into
 account when constructing the connecting vectors between atoms, ie that the vector
 between atoms 1 &amp; 2 goes between coordinates in the same image:</p>
-<div class="highlight-python"><div class="highlight"><pre>angles = calc_dihedrals(coords1, coords2, coords3, coords4 [,box=box, result=angles])
+<div class="highlight-python"><div class="highlight"><pre><span></span>angles = calc_dihedrals(coords1, coords2, coords3, coords4 [,box=box, result=angles])
 </pre></div>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -963,7 +963,7 @@ possibilities are &#8220;OpenMP&#8221; (OpenMP).</p>
 <dt><em>d</em></dt>
 <dd><p class="first">N*(N-1)/2 numpy 1D array with the distances dist[i,j] between ref
 coordinates i and j at position d[k]. Loop through d:</p>
-<div class="last highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+<div class="last highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
         <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>

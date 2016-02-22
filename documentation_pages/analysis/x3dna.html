@@ -145,7 +145,7 @@ Nat Protoc. 3(7), 1213-27.</td></tr>
 <div class="section" id="single-structure">
 <h2>3.5.2.1. Single structure<a class="headerlink" href="#single-structure" title="Permalink to this headline">¶</a></h2>
 <p>B-DNA structure:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">MDAnalysis.analysis.x3dna</span> <span class="kn">import</span> <span class="n">X3DNA</span><span class="p">,</span> <span class="n">X3DNAtraj</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">MDAnalysis.analysis.x3dna</span> <span class="kn">import</span> <span class="n">X3DNA</span><span class="p">,</span> <span class="n">X3DNAtraj</span>
 <span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">PDB_X3DNA</span>
 
 <span class="c1"># set path to your x3dna binary in bashrc file</span>
@@ -159,7 +159,7 @@ Nat Protoc. 3(7), 1213-27.</td></tr>
 <div class="section" id="trajectory">
 <h2>3.5.2.2. Trajectory<a class="headerlink" href="#trajectory" title="Permalink to this headline">¶</a></h2>
 <p>Analyzing a trajectory:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">psf</span><span class="p">,</span> <span class="n">trajectory</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">psf</span><span class="p">,</span> <span class="n">trajectory</span><span class="p">)</span>
 <span class="n">H</span> <span class="o">=</span> <span class="n">X3DNAtraj</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
 <span class="n">H</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 <span class="n">H</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
@@ -364,7 +364,7 @@ Stretch,Stagger,Buckle,Propeller,Opening,Shift,Slide,Rise,Tilt,Roll,Twist) for e
 <code class="descname">save</code><span class="sig-paren">(</span><em>filename='x3dna.pickle'</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.analysis.x3dna.X3DNA.save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save <a class="reference internal" href="#MDAnalysis.analysis.x3dna.X3DNA.profiles" title="MDAnalysis.analysis.x3dna.X3DNA.profiles"><code class="xref py py-attr docutils literal"><span class="pre">profiles</span></code></a> as a Python pickle file <em>filename</em>.</p>
 <p>Load profiles dictionary with</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">cPickle</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cPickle</span>
 <span class="n">profiles</span> <span class="o">=</span> <span class="n">cPickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -539,7 +539,7 @@ analyse part of the trajectory.</p>
 <code class="descname">save</code><span class="sig-paren">(</span><em>filename='x3dna.pickle'</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.analysis.x3dna.X3DNAtraj.save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save <a class="reference internal" href="#MDAnalysis.analysis.x3dna.X3DNAtraj.profiles" title="MDAnalysis.analysis.x3dna.X3DNAtraj.profiles"><code class="xref py py-attr docutils literal"><span class="pre">profiles</span></code></a> as a Python pickle file <em>filename</em>.</p>
 <p>Load profiles dictionary with</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">cPickle</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cPickle</span>
 <span class="n">profiles</span> <span class="o">=</span> <span class="n">cPickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
 </pre></div>
 </div>

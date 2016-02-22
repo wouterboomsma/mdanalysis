@@ -147,7 +147,7 @@ required)</dd>
 <code class="xref py py-data docutils literal"><span class="pre">DCD</span></code>, and
 <code class="xref py py-data docutils literal"><span class="pre">PDB_small</span></code>). For all further
 examples execute first</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MDAnalysis</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MDAnalysis</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MDAnalysis.analysis.align</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MDAnalysis.analysis.rms</span> <span class="kn">import</span> <span class="n">rmsd</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">,</span> <span class="n">PDB_small</span>
@@ -155,7 +155,7 @@ examples execute first</p>
 </div>
 <p>In the simplest case, we can simply calculate the C-alpha RMSD between
 two structures, using <code class="xref py py-func docutils literal"><span class="pre">rmsd()</span></code>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ref</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PDB_small</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ref</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PDB_small</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mobile</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rmsd</span><span class="p">(</span><span class="n">mobile</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">positions</span><span class="p">,</span> <span class="n">ref</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
 <span class="go">18.858259026820352</span>
@@ -164,7 +164,7 @@ two structures, using <code class="xref py py-func docutils literal"><span class
 <p>Note that in this example translations have not been removed. In order
 to look at the pure rotation one needs to superimpose the centres of
 mass (or geometry) first:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ref0</span> <span class="o">=</span>  <span class="n">ref</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="n">ref</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">()</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ref0</span> <span class="o">=</span>  <span class="n">ref</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="n">ref</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mobile0</span> <span class="o">=</span> <span class="n">mobile</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="n">mobile</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rmsd</span><span class="p">(</span><span class="n">mobile0</span><span class="p">,</span> <span class="n">ref0</span><span class="p">)</span>
 <span class="go"> 6.8093965864717951</span>
@@ -173,7 +173,7 @@ mass (or geometry) first:</p>
 <p>The rotation matrix that superimposes <em>mobile</em> on <em>ref</em> while
 minimizing the CA-RMSD is obtained with the <a class="reference internal" href="#MDAnalysis.analysis.align.rotation_matrix" title="MDAnalysis.analysis.align.rotation_matrix"><code class="xref py py-func docutils literal"><span class="pre">rotation_matrix()</span></code></a>
 function</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">rmsd</span> <span class="o">=</span> <span class="n">rotation_matrix</span><span class="p">(</span><span class="n">mobile0</span><span class="p">,</span> <span class="n">ref0</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">rmsd</span> <span class="o">=</span> <span class="n">rotation_matrix</span><span class="p">(</span><span class="n">mobile0</span><span class="p">,</span> <span class="n">ref0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">rmsd</span>
 <span class="go">6.8093965864717951</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">R</span>
@@ -183,7 +183,7 @@ function</p>
 </pre></div>
 </div>
 <p>Putting all this together one can superimpose all of <em>mobile</em> onto <em>ref</em>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">mobile</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="o">-</span><span class="n">mobile</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">())</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mobile</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="o">-</span><span class="n">mobile</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">())</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mobile</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mobile</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">ref</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">())</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mobile</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;mobile_on_ref.pdb&quot;</span><span class="p">)</span>
@@ -193,7 +193,7 @@ function</p>
 <div class="section" id="common-usage">
 <h2>3.2.1.2. Common usage<a class="headerlink" href="#common-usage" title="Permalink to this headline">¶</a></h2>
 <p>To <strong>fit a single structure</strong> with <a class="reference internal" href="#MDAnalysis.analysis.align.alignto" title="MDAnalysis.analysis.align.alignto"><code class="xref py py-func docutils literal"><span class="pre">alignto()</span></code></a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ref</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">PDB_small</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ref</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">PDB_small</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mobile</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">)</span>     <span class="c1"># we use the first frame</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">alignto</span><span class="p">(</span><span class="n">mobile</span><span class="p">,</span> <span class="n">ref</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s2">&quot;protein and name CA&quot;</span><span class="p">,</span> <span class="n">mass_weighted</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
@@ -202,7 +202,7 @@ function</p>
 C-alpha atoms are optimally superimposed (translation and rotation).</p>
 <p>To <strong>fit a whole trajectory</strong> to a reference structure with the
 <a class="reference internal" href="#MDAnalysis.analysis.align.rms_fit_trj" title="MDAnalysis.analysis.align.rms_fit_trj"><code class="xref py py-func docutils literal"><span class="pre">rms_fit_trj()</span></code></a> function:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ref</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">PDB_small</span><span class="p">)</span>   <span class="c1"># reference structure 1AKE</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ref</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">PDB_small</span><span class="p">)</span>   <span class="c1"># reference structure 1AKE</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">trj</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">)</span>         <span class="c1"># trajectory of change 1AKE-&gt;4AKE</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rms_fit_trj</span><span class="p">(</span><span class="n">trj</span><span class="p">,</span> <span class="n">ref</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;rmsfit.dcd&#39;</span><span class="p">)</span>
 </pre></div>
@@ -213,7 +213,7 @@ fitting of structural homologs or wild type and mutant.</p>
 <p>If a alignment was provided as &#8220;sequences.aln&#8221; one would first produce
 the appropriate MDAnalysis selections with the <a class="reference internal" href="#MDAnalysis.analysis.align.fasta2select" title="MDAnalysis.analysis.align.fasta2select"><code class="xref py py-func docutils literal"><span class="pre">fasta2select()</span></code></a>
 function and then feed the resulting dictionary to <a class="reference internal" href="#MDAnalysis.analysis.align.rms_fit_trj" title="MDAnalysis.analysis.align.rms_fit_trj"><code class="xref py py-func docutils literal"><span class="pre">rms_fit_trj()</span></code></a>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">seldict</span> <span class="o">=</span> <span class="n">fasta2select</span><span class="p">(</span><span class="s1">&#39;sequences.aln&#39;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">seldict</span> <span class="o">=</span> <span class="n">fasta2select</span><span class="p">(</span><span class="s1">&#39;sequences.aln&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rms_fit_trj</span><span class="p">(</span><span class="n">trj</span><span class="p">,</span> <span class="n">ref</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;rmsfit.dcd&#39;</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="n">seldict</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -484,7 +484,7 @@ RMSD between <em>a</em> and <em>b</em> before rotation</li>
 <p><em>R</em> can be used as an argument for
 <a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.rotate" title="MDAnalysis.core.AtomGroup.AtomGroup.rotate"><code class="xref py py-meth docutils literal"><span class="pre">MDAnalysis.core.AtomGroup.AtomGroup.rotate()</span></code></a> to generate a rotated
 selection, e.g.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span> <span class="o">=</span> <span class="n">rotation_matrix</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;backbone&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">coordinates</span><span class="p">(),</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span> <span class="o">=</span> <span class="n">rotation_matrix</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;backbone&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">coordinates</span><span class="p">(),</span>
 <span class="gp">&gt;&gt;&gt; </span>                    <span class="n">B</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;backbone&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">coordinates</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;rotated.pdb&quot;</span><span class="p">)</span>
@@ -531,7 +531,7 @@ un-aligned sequence, namely the first residue has resid == 1.</p>
 structure/psf has gaps due to missing parts), simply provide the
 sequence of resids as they appear in the psf in <em>ref_resids</em> or
 <em>target_resids</em>, e.g.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">target_resids</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">resid</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">trj</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name CA&#39;</span><span class="p">)]</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">target_resids</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">resid</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">trj</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s1">&#39;name CA&#39;</span><span class="p">)]</span>
 </pre></div>
 </div>
 <p>(This translation table <em>is</em> combined with any value for <em>xxx_offset</em>!)</p>

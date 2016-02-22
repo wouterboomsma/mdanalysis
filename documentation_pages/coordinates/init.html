@@ -187,7 +187,7 @@ instance although this is often not needed because the
 appropriate reader automatically.</p>
 <p>A typical approach is to generate a new trajectory from an old one, e.g. to
 only keep the protein:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PDB</span><span class="p">,</span> <span class="n">XTC</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PDB</span><span class="p">,</span> <span class="n">XTC</span><span class="p">)</span>
 <span class="n">protein</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;protein&quot;</span><span class="p">)</span>
 <span class="k">with</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Writer</span><span class="p">(</span><span class="s2">&quot;protein.xtc&quot;</span><span class="p">,</span> <span class="n">protein</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">)</span> <span class="k">as</span> <span class="n">W</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">:</span>
@@ -521,7 +521,7 @@ current Timestep.</dd>
 (typically implemented as a property because it needs to translate whatever is in the
 underlying <code class="xref py py-class docutils literal"><span class="pre">_unitcell</span></code> attribute. Also
 comes with a setter that takes a MDAnalysis box so that one can do</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">Timestep</span><span class="o">.</span><span class="n">dimensions</span> <span class="o">=</span> <span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">]</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Timestep</span><span class="o">.</span><span class="n">dimensions</span> <span class="o">=</span> <span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">]</span>
 </pre></div>
 </div>
 <p class="last">which then converts automatically to the underlying representation and stores it
@@ -586,7 +586,7 @@ within <code class="xref py py-class docutils literal"><span class="pre">MDAnaly
 </dd>
 <dt><code class="docutils literal"><span class="pre">__iter__()</span></code></dt>
 <dd><p class="first">allow iteration from beginning to end:</p>
-<div class="last highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">trajectory</span><span class="p">:</span>
+<div class="last highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">trajectory</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -625,17 +625,17 @@ deal with missing methods gracefully.</p>
 slice, then return an iterator over that part of the trajectory.</p>
 <p>The first functionality allows one to randomly access frames in the
 trajectory:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="mi">314</span><span class="p">]</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="mi">314</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>would load frame 314 into the current <code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code>.</p>
 <p>Using slices allows iteration over parts of a trajectory</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="mi">1000</span><span class="p">:</span><span class="mi">2000</span><span class="p">]:</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="mi">1000</span><span class="p">:</span><span class="mi">2000</span><span class="p">]:</span>
     <span class="n">process_frame</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>   <span class="c1"># do some analysis on ts</span>
 </pre></div>
 </div>
 <p>or skipping frames</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="mi">1000</span><span class="p">::</span><span class="mi">100</span><span class="p">]:</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="mi">1000</span><span class="p">::</span><span class="mi">100</span><span class="p">]:</span>
     <span class="n">process_frame</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>   <span class="c1"># do some analysis on ts</span>
 </pre></div>
 </div>
@@ -732,12 +732,12 @@ multiple frames to a trajectory file. Every time the
 another frame is appended to the trajectory.</p>
 <p>Typically, many methods and attributes are overriden.</p>
 <p>Signature:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">W</span> <span class="o">=</span> <span class="n">TrajectoryWriter</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">n_atoms</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">W</span> <span class="o">=</span> <span class="n">TrajectoryWriter</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">n_atoms</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 <span class="n">W</span><span class="o">.</span><span class="n">write_next_timestep</span><span class="p">(</span><span class="n">Timestep</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>or:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">W</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">AtomGroup</span><span class="p">)</span>   <span class="c1"># write a selection</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">W</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">AtomGroup</span><span class="p">)</span>   <span class="c1"># write a selection</span>
 <span class="n">W</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">Universe</span><span class="p">)</span>    <span class="c1"># write a whole universe</span>
 <span class="n">W</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">Timestep</span><span class="p">)</span>    <span class="c1"># same as write_next_timestep()</span>
 </pre></div>
@@ -798,7 +798,7 @@ frame</em> formats contain much more information (e.g. atom and residue names an
 numbers) and hence it is possible to write selections of atoms in a meaningful
 way.</p>
 <p>Signature:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">W</span> <span class="o">=</span> <span class="n">FrameWriter</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">W</span> <span class="o">=</span> <span class="n">FrameWriter</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 <span class="n">W</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">AtomGroup</span><span class="p">)</span>
 <span class="n">W</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">Universe</span><span class="p">)</span>
 </pre></div>

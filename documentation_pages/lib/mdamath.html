@@ -144,7 +144,7 @@ linalg.norm does.</p>
 <code class="descclassname">MDAnalysis.lib.mdamath.</code><code class="descname">dihedral</code><span class="sig-paren">(</span><em>ab</em>, <em>bc</em>, <em>cd</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/mdamath.html#dihedral"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.mdamath.dihedral" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the dihedral angle in radians between vectors connecting A,B,C,D.</p>
 <p>The dihedral measures the rotation around bc:</p>
-<div class="highlight-python"><div class="highlight"><pre>  ab
+<div class="highlight-python"><div class="highlight"><pre><span></span>  ab
 A----&gt;B
        \ bc
        _\&#39;
@@ -298,7 +298,7 @@ caused by the atomgroup not being a single fragment.
 unit cell, causing breaks mid molecule, with the molecule then appearing
 on either side of the unit cell. This is problematic for operations
 such as calculating the center of mass of the molecule.</p>
-<div class="highlight-python"><div class="highlight"><pre>+-----------+     +-----------+
+<div class="highlight-python"><div class="highlight"><pre><span></span>+-----------+     +-----------+
 |           |     |           |
 | 6       3 |     |         3 | 6
 | !       ! |     |         ! | !
@@ -310,7 +310,7 @@ such as calculating the center of mass of the molecule.</p>
 </pre></div>
 </div>
 <p>Usage:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">MDAnalysis.util.mdamath</span> <span class="kn">import</span> <span class="n">make_whole</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">MDAnalysis.util.mdamath</span> <span class="kn">import</span> <span class="n">make_whole</span>
 
 <span class="c1"># This algorithm requires bonds, these can be guessed!</span>
 <span class="n">u</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="o">......</span><span class="p">,</span> <span class="n">guess_bonds</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -324,7 +324,7 @@ such as calculating the center of mass of the molecule.</p>
 </pre></div>
 </div>
 <p>Alternatively, to keep a single atom in place as the anchor:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c1"># This will mean that atomgroup[10] will NOT get moved,</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># This will mean that atomgroup[10] will NOT get moved,</span>
 <span class="c1"># and all other atoms will move (if necessary).</span>
 <span class="n">make_whole</span><span class="p">(</span><span class="n">atomgroup</span><span class="p">,</span> <span class="n">reference_atom</span><span class="o">=</span><span class="n">atomgroup</span><span class="p">[</span><span class="mi">10</span><span class="p">])</span>
 </pre></div>
@@ -381,7 +381,7 @@ B[1] = second vector, B[2] third box vector.</p>
 <code class="descclassname">MDAnalysis.lib.mdamath.</code><code class="descname">dihedral</code><span class="sig-paren">(</span><em>ab</em>, <em>bc</em>, <em>cd</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/mdamath.html#dihedral"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Returns the dihedral angle in radians between vectors connecting A,B,C,D.</p>
 <p>The dihedral measures the rotation around bc:</p>
-<div class="highlight-python"><div class="highlight"><pre>  ab
+<div class="highlight-python"><div class="highlight"><pre><span></span>  ab
 A----&gt;B
        \ bc
        _\&#39;
@@ -445,7 +445,7 @@ caused by the atomgroup not being a single fragment.
 unit cell, causing breaks mid molecule, with the molecule then appearing
 on either side of the unit cell. This is problematic for operations
 such as calculating the center of mass of the molecule.</p>
-<div class="highlight-python"><div class="highlight"><pre>+-----------+     +-----------+
+<div class="highlight-python"><div class="highlight"><pre><span></span>+-----------+     +-----------+
 |           |     |           |
 | 6       3 |     |         3 | 6
 | !       ! |     |         ! | !
@@ -457,7 +457,7 @@ such as calculating the center of mass of the molecule.</p>
 </pre></div>
 </div>
 <p>Usage:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">MDAnalysis.util.mdamath</span> <span class="kn">import</span> <span class="n">make_whole</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">MDAnalysis.util.mdamath</span> <span class="kn">import</span> <span class="n">make_whole</span>
 
 <span class="c1"># This algorithm requires bonds, these can be guessed!</span>
 <span class="n">u</span> <span class="o">=</span> <span class="n">mda</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="o">......</span><span class="p">,</span> <span class="n">guess_bonds</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -471,7 +471,7 @@ such as calculating the center of mass of the molecule.</p>
 </pre></div>
 </div>
 <p>Alternatively, to keep a single atom in place as the anchor:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="c1"># This will mean that atomgroup[10] will NOT get moved,</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># This will mean that atomgroup[10] will NOT get moved,</span>
 <span class="c1"># and all other atoms will move (if necessary).</span>
 <span class="n">make_whole</span><span class="p">(</span><span class="n">atomgroup</span><span class="p">,</span> <span class="n">reference_atom</span><span class="o">=</span><span class="n">atomgroup</span><span class="p">[</span><span class="mi">10</span><span class="p">])</span>
 </pre></div>

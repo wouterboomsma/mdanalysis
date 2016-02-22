@@ -145,7 +145,7 @@ URL <a class="reference external" href="http://www.smartsci.uk/hole/">http://www
 <div class="section" id="single-structure">
 <h2>3.4.1.1. Single structure<a class="headerlink" href="#single-structure" title="Permalink to this headline">¶</a></h2>
 <p>Gramicidin A (gA) channel:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">MDAnalysis.analysis.hole</span> <span class="kn">import</span> <span class="n">HOLE</span><span class="p">,</span> <span class="n">HOLEtraj</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">MDAnalysis.analysis.hole</span> <span class="kn">import</span> <span class="n">HOLE</span><span class="p">,</span> <span class="n">HOLEtraj</span>
 <span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">PDB_HOLE</span>
 
 <span class="n">H</span> <span class="o">=</span> <span class="n">HOLE</span><span class="p">(</span><span class="n">PDB_HOLE</span><span class="p">,</span> <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;~/hole2/bin/hole&quot;</span><span class="p">)</span>  <span class="c1"># set path to your hole binary</span>
@@ -158,7 +158,7 @@ URL <a class="reference external" href="http://www.smartsci.uk/hole/">http://www
 <div class="section" id="trajectory">
 <h2>3.4.1.2. Trajectory<a class="headerlink" href="#trajectory" title="Permalink to this headline">¶</a></h2>
 <p>Analyzing a trajectory:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">psf</span><span class="p">,</span> <span class="n">trajectory</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">psf</span><span class="p">,</span> <span class="n">trajectory</span><span class="p">)</span>
 <span class="n">H</span> <span class="o">=</span> <span class="n">HOLEtraj</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
 <span class="n">H</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 <span class="n">H</span><span class="o">.</span><span class="n">plot3D</span><span class="p">()</span>
@@ -176,7 +176,7 @@ structure is calculated for each trajectory frame (e.g. using the
 <a class="reference internal" href="rms.html#MDAnalysis.analysis.rms.RMSD" title="MDAnalysis.analysis.rms.RMSD"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.analysis.rms.RMSD</span></code></a> analysis class). Then the HOLE
 profiles can be ordered by the RMSD, which acts as an order
 parameter.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">MDAnalysis.analysis.hole</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">MDAnalysis.analysis.hole</span>
 <span class="kn">import</span> <span class="nn">MDAnalysis.analysis.rms</span>
 <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">start_logging</span><span class="p">()</span>
 <span class="n">ref</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="s2">&quot;ref.psf&quot;</span><span class="p">,</span> <span class="s2">&quot;ref.pdb&quot;</span><span class="p">)</span>         <span class="c1"># reference structure</span>
@@ -195,7 +195,7 @@ parameter.</p>
 for each frame. The plot functions will automatically sort the profiles by
 ascending order parameter. To access the individual profiles one can simply
 iterate over the sorted profiles (see <a class="reference internal" href="#MDAnalysis.analysis.hole.HOLEtraj.sorted_profiles_iter" title="MDAnalysis.analysis.hole.HOLEtraj.sorted_profiles_iter"><code class="xref py py-meth docutils literal"><span class="pre">HOLEtraj.sorted_profiles_iter()</span></code></a>)</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">q</span><span class="p">,</span> <span class="n">profile</span> <span class="ow">in</span> <span class="n">H</span><span class="p">:</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">q</span><span class="p">,</span> <span class="n">profile</span> <span class="ow">in</span> <span class="n">H</span><span class="p">:</span>
    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;orderparameter = </span><span class="si">%g</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">q</span><span class="p">)</span>
    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;min(R) = </span><span class="si">%g</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">profile</span><span class="o">.</span><span class="n">radius</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
 </pre></div>
@@ -203,7 +203,7 @@ iterate over the sorted profiles (see <a class="reference internal" href="#MDAna
 <div class="section" id="data-structures">
 <h3>3.4.1.3.1. Data structures<a class="headerlink" href="#data-structures" title="Permalink to this headline">¶</a></h3>
 <p>A profile is stored as a <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.recarray.html#numpy.recarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.recarray</span></code></a>:</p>
-<div class="highlight-python"><div class="highlight"><pre>frame   rxncoord   radius
+<div class="highlight-python"><div class="highlight"><pre><span></span>frame   rxncoord   radius
 </pre></div>
 </div>
 <dl class="docutils">
@@ -554,7 +554,7 @@ with the <em>tmpdir</em> keyword (e.g. one can use &#8220;/tmp&#8221;).</p>
 <code class="descname">collect</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/hole.html#HOLE.collect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.hole.HOLE.collect" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse the output from a HOLE run into numpy recarrays.</p>
 <p>Can deal with outputs containing multiple frames. Output format:</p>
-<div class="highlight-python"><div class="highlight"><pre>frame  rxncoord   radius
+<div class="highlight-python"><div class="highlight"><pre><span></span>frame  rxncoord   radius
 </pre></div>
 </div>
 <p>The method saves the result as <a class="reference internal" href="#MDAnalysis.analysis.hole.HOLE.profiles" title="MDAnalysis.analysis.hole.HOLE.profiles"><code class="xref py py-attr docutils literal"><span class="pre">HOLE.profiles</span></code></a>, a dictionary
@@ -589,7 +589,7 @@ value but <code class="docutils literal"><span class="pre">None</span></code> [<
 and <strong class="program">sos_triangle</strong> as described under <a class="reference external" href="http://s3.smartsci.uk/hole2/doc/index.html#_producing_a_triangulated_surface_and_visualizing_in_vmd">Visualization of HOLE
 results</a>.</p>
 <p>Load the output file <em>filename</em> into VMD by issuing in the tcl console</p>
-<div class="highlight-python"><div class="highlight"><pre>source hole.vmd
+<div class="highlight-python"><div class="highlight"><pre><span></span>source hole.vmd
 </pre></div>
 </div>
 <p>The level of detail is determined by <code class="xref py py-attr docutils literal"><span class="pre">HOLE.dotden</span></code> (which can be
@@ -704,7 +704,7 @@ legend is displayed</p>
 <code class="descname">save</code><span class="sig-paren">(</span><em>filename='hole.pickle'</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.analysis.hole.HOLE.save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save <a class="reference internal" href="#MDAnalysis.analysis.hole.HOLE.profiles" title="MDAnalysis.analysis.hole.HOLE.profiles"><code class="xref py py-attr docutils literal"><span class="pre">profiles</span></code></a> as a Python pickle file <em>filename</em>.</p>
 <p>Load profiles dictionary with</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">cPickle</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cPickle</span>
 <span class="n">profiles</span> <span class="o">=</span> <span class="n">cPickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -948,7 +948,7 @@ analyse part of the trajectory.</p>
 <code class="descname">save</code><span class="sig-paren">(</span><em>filename='hole.pickle'</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.analysis.hole.HOLEtraj.save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save <a class="reference internal" href="#MDAnalysis.analysis.hole.HOLEtraj.profiles" title="MDAnalysis.analysis.hole.HOLEtraj.profiles"><code class="xref py py-attr docutils literal"><span class="pre">profiles</span></code></a> as a Python pickle file <em>filename</em>.</p>
 <p>Load profiles dictionary with</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">cPickle</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cPickle</span>
 <span class="n">profiles</span> <span class="o">=</span> <span class="n">cPickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
 </pre></div>
 </div>

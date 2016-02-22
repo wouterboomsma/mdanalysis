@@ -170,7 +170,7 @@ is then</p>
 <span class="math">\(f_{b,b'}\)</span>.</p>
 <p>Conversion between different units is always carried out via the base unit as
 an intermediate step:</p>
-<div class="highlight-python"><div class="highlight"><pre>x is in u1: from u1 to b:  x&#39;  = x  / factor[u1]
+<div class="highlight-python"><div class="highlight"><pre><span></span>x is in u1: from u1 to b:  x&#39;  = x  / factor[u1]
             from b  to u2: x&#39;&#39; = x&#39; * factor[u2]
 so f[u1,u2] = factor[u2]/factor[u1]
 </pre></div>
@@ -182,7 +182,7 @@ hard-coded in <a class="reference internal" href="#module-MDAnalysis.units" titl
 <dl class="docutils">
 <dt>density:</dt>
 <dd><p class="first">Base unit is <span class="math">\(\mathrm{Å}^{-3}\)</span>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">n</span><span class="o">/</span><span class="n">x</span> <span class="o">=</span> <span class="n">n</span><span class="o">/</span><span class="n">A</span><span class="o">**</span><span class="mi">3</span> <span class="o">*</span> <span class="n">densityUnit_factor</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">/</span><span class="n">x</span> <span class="o">=</span> <span class="n">n</span><span class="o">/</span><span class="n">A</span><span class="o">**</span><span class="mi">3</span> <span class="o">*</span> <span class="n">densityUnit_factor</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>Example for how to calculate the conversion factor
@@ -196,11 +196,11 @@ hard-coded in <a class="reference internal" href="#module-MDAnalysis.units" titl
 </dd>
 <dt>concentration:</dt>
 <dd><p class="first">Example for how to convert the conversion factor to Molar (mol/l):</p>
-<div class="highlight-python"><div class="highlight"><pre>factor = 1 A**-3 / (N_Avogadro * (10**-9 dm)**-3)
+<div class="highlight-python"><div class="highlight"><pre><span></span>factor = 1 A**-3 / (N_Avogadro * (10**-9 dm)**-3)
 </pre></div>
 </div>
 <p>relative to a density rho0 in g/cm^3:</p>
-<div class="highlight-python"><div class="highlight"><pre>M(H2O) = 18 g/mol   Molar mass of water
+<div class="highlight-python"><div class="highlight"><pre><span></span>M(H2O) = 18 g/mol   Molar mass of water
 
 factor = 1/(1e-24 * N_Avogadro / M(H2O))
 </pre></div>

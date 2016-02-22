@@ -119,7 +119,7 @@
 <p>An example is provided in the MDAnalysis <a href="#id3"><span class="problematic" id="id4">Cookbook_</span></a>, listed as <a href="#id5"><span class="problematic" id="id6">GNMExample_</span></a>.</p>
 <p>The basic approach is to pass a trajectory to <a class="reference internal" href="#MDAnalysis.analysis.gnm.GNMAnalysis" title="MDAnalysis.analysis.gnm.GNMAnalysis"><code class="xref py py-class docutils literal"><span class="pre">GNMAnalysis</span></code></a> and then run
 the analysis:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>
 <span class="n">C</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">gnm</span><span class="o">.</span><span class="n">GNMAnalysis</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">ReportVector</span><span class="o">=</span><span class="s2">&quot;output.txt&quot;</span><span class="p">)</span>
 
 <span class="n">C</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
@@ -177,7 +177,7 @@ outputs</p>
 <code class="descname">run</code><span class="sig-paren">(</span><em>skip=1</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/gnm.html#GNMAnalysis.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.gnm.GNMAnalysis.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Analyze trajectory and produce timeseries.</p>
 <p>Returns GNM results per frame:</p>
-<div class="highlight-python"><div class="highlight"><pre>results = [(time,eigenvalues[1],eigenvectors[1]),(time,eigenvalues[1],eigenvectors[1])... ]
+<div class="highlight-python"><div class="highlight"><pre><span></span>results = [(time,eigenvalues[1],eigenvectors[1]),(time,eigenvalues[1],eigenvectors[1])... ]
 </pre></div>
 </div>
 </dd></dl>
