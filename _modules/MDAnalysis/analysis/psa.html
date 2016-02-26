@@ -1740,9 +1740,8 @@
         <span class="n">colors</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">xkcd_palette</span><span class="p">([</span><span class="s2">&quot;cherry&quot;</span><span class="p">,</span> <span class="s2">&quot;windows blue&quot;</span><span class="p">])</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_NN</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">err_str</span> <span class="o">=</span>                                                           \
-                    <span class="o">+</span> <span class="s2">&quot;No nearest neighbor data; run &quot;</span>                          \
-                    <span class="o">+</span> <span class="s2">&quot;&#39;PSAnalysis.run_nearest_neighbors()&#39; first.&quot;</span>
+            <span class="n">err_str</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;No nearest neighbor data; run &quot;</span>
+                       <span class="s2">&quot;&#39;PSAnalysis.run_nearest_neighbors()&#39; first.&quot;</span><span class="p">)</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">err_str</span><span class="p">)</span>
 
         <span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s1">&#39;whitegrid&#39;</span><span class="p">)</span>
