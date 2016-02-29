@@ -265,7 +265,7 @@
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Input arrays must all be same shape&quot;</span>
                          <span class="s2">&quot;Got {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">arrays</span><span class="p">]))</span>
 
-<div class="viewcode-block" id="distance_array"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.lib.distances.distance_array">[docs]</a><span class="k">def</span> <span class="nf">distance_array</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;serial&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="distance_array"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.distance_array">[docs]</a><span class="k">def</span> <span class="nf">distance_array</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;serial&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Calculate all distances between a reference set and another configuration.</span>
 
 <span class="sd">    If there are *i* positions in reference, and *j* positions in configuration,</span>
@@ -349,7 +349,7 @@
     <span class="k">return</span> <span class="n">distances</span></div>
 
 
-<div class="viewcode-block" id="self_distance_array"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.lib.distances.self_distance_array">[docs]</a><span class="k">def</span> <span class="nf">self_distance_array</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;serial&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="self_distance_array"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.self_distance_array">[docs]</a><span class="k">def</span> <span class="nf">self_distance_array</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;serial&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Calculate all distances within a configuration *reference*.</span>
 
 <span class="sd">    If a *box* is supplied then a minimum image convention is used before</span>
@@ -431,7 +431,7 @@
     <span class="k">return</span> <span class="n">distances</span></div>
 
 
-<div class="viewcode-block" id="transform_RtoS"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.lib.distances.transform_RtoS">[docs]</a><span class="k">def</span> <span class="nf">transform_RtoS</span><span class="p">(</span><span class="n">inputcoords</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;serial&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="transform_RtoS"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.transform_RtoS">[docs]</a><span class="k">def</span> <span class="nf">transform_RtoS</span><span class="p">(</span><span class="n">inputcoords</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;serial&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Transform an array of coordinates from real space to S space (aka lambda space)</span>
 
 <span class="sd">    S space represents fractional space within the unit cell for this system</span>
@@ -482,7 +482,7 @@
     <span class="k">return</span> <span class="n">coords</span></div>
 
 
-<div class="viewcode-block" id="transform_StoR"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.lib.distances.transform_StoR">[docs]</a><span class="k">def</span> <span class="nf">transform_StoR</span><span class="p">(</span><span class="n">inputcoords</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;serial&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="transform_StoR"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.transform_StoR">[docs]</a><span class="k">def</span> <span class="nf">transform_StoR</span><span class="p">(</span><span class="n">inputcoords</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;serial&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Transform an array of coordinates from S space into real space.</span>
 
 <span class="sd">    S space represents fractional space within the unit cell for this system</span>
@@ -527,7 +527,7 @@
     <span class="k">return</span> <span class="n">coords</span></div>
 
 
-<div class="viewcode-block" id="calc_bonds"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.lib.distances.calc_bonds">[docs]</a><span class="k">def</span> <span class="nf">calc_bonds</span><span class="p">(</span><span class="n">coords1</span><span class="p">,</span> <span class="n">coords2</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;serial&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="calc_bonds"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.calc_bonds">[docs]</a><span class="k">def</span> <span class="nf">calc_bonds</span><span class="p">(</span><span class="n">coords1</span><span class="p">,</span> <span class="n">coords2</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;serial&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate all distances between a pair of atoms.  *atom1* and *atom2* are both</span>
 <span class="sd">    arrays of coordinates, where atom1[i] and atom2[i] represent a bond.</span>
@@ -613,7 +613,7 @@
     <span class="k">return</span> <span class="n">distances</span></div>
 
 
-<div class="viewcode-block" id="calc_angles"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.lib.distances.calc_angles">[docs]</a><span class="k">def</span> <span class="nf">calc_angles</span><span class="p">(</span><span class="n">coords1</span><span class="p">,</span> <span class="n">coords2</span><span class="p">,</span> <span class="n">coords3</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;serial&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="calc_angles"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.calc_angles">[docs]</a><span class="k">def</span> <span class="nf">calc_angles</span><span class="p">(</span><span class="n">coords1</span><span class="p">,</span> <span class="n">coords2</span><span class="p">,</span> <span class="n">coords3</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;serial&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculates the angle formed between three atoms, over a list of coordinates.</span>
 <span class="sd">    All *atom* inputs are lists of coordinates of equal length, with *atom2*</span>
@@ -701,7 +701,7 @@
     <span class="k">return</span> <span class="n">angles</span></div>
 
 
-<div class="viewcode-block" id="calc_dihedrals"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.lib.distances.calc_dihedrals">[docs]</a><span class="k">def</span> <span class="nf">calc_dihedrals</span><span class="p">(</span><span class="n">coords1</span><span class="p">,</span> <span class="n">coords2</span><span class="p">,</span> <span class="n">coords3</span><span class="p">,</span> <span class="n">coords4</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+<div class="viewcode-block" id="calc_dihedrals"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.calc_dihedrals">[docs]</a><span class="k">def</span> <span class="nf">calc_dihedrals</span><span class="p">(</span><span class="n">coords1</span><span class="p">,</span> <span class="n">coords2</span><span class="p">,</span> <span class="n">coords3</span><span class="p">,</span> <span class="n">coords4</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                    <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;serial&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate the dihedral angle formed by four atoms, over a list of coordinates.</span>
@@ -809,7 +809,7 @@
                           <span class="n">message</span><span class="o">=</span><span class="s2">&quot;This will be removed in v0.15.0&quot;</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="apply_PBC"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.lib.distances.apply_PBC">[docs]</a><span class="k">def</span> <span class="nf">apply_PBC</span><span class="p">(</span><span class="n">incoords</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;serial&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="apply_PBC"><a class="viewcode-back" href="../../../documentation_pages/lib/distances.html#MDAnalysis.analysis.distances.apply_PBC">[docs]</a><span class="k">def</span> <span class="nf">apply_PBC</span><span class="p">(</span><span class="n">incoords</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;serial&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Moves a set of coordinates to all be within the primary unit cell</span>
 
 <span class="sd">    newcoords = apply_PBC(coords, box)</span>
