@@ -97,6 +97,73 @@
 <p>A tool to compute mass and charge density profiles along the three
 cartesian axes of the simulation cell. Works only for orthorombic,
 fixed volume cells (thus for simulations in canonical NVT ensemble).</p>
+<dl class="class">
+<dt id="MDAnalysis.analysis.lineardensity.LinearDensity">
+<em class="property">class </em><code class="descclassname">MDAnalysis.analysis.lineardensity.</code><code class="descname">LinearDensity</code><span class="sig-paren">(</span><em>selection</em>, <em>grouping='atoms'</em>, <em>binsize=0.25</em>, <em>start=None</em>, <em>stop=None</em>, <em>step=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/lineardensity.html#LinearDensity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.lineardensity.LinearDensity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Linear density profile
+LinearDensity(selection, grouping=&#8217;atoms&#8217;, binsize=0.25)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>selection</strong> (<cite>AtomGroup</cite> object) &#8211; Any atomgroup</li>
+<li><strong>Keywords</strong> &#8211; </li>
+<li><strong>--------</strong> &#8211; </li>
+<li><strong>grouping</strong> (<em>str {'atoms', 'residues', 'segments', 'fragments'}</em>) &#8211; Density profiles will be computed on the center of geometry
+of a selected group of atoms [&#8216;atoms&#8217;]</li>
+<li><strong>binsize</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Bin width in Angstrom used to build linear density
+histograms. Defines the resolution of the resulting density
+profile (smaller &#8211;&gt; higher resolution) [0.25]</li>
+<li><strong>start</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The frame to start at [0]</li>
+<li><strong>stop</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The frame to end at [-1]</li>
+<li><strong>step</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; The step size through the trajectory in frames [0]</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Example</p>
+<p>First create a LinearDensity object by supplying a selection,
+then use the <cite>run</cite> method:</p>
+<blockquote>
+<div>ldens = LinearDensity(selection)
+ldens.run()</div></blockquote>
+<dl class="docutils">
+<dt>Density profiles can be written to file through the <cite>save</cite> method:</dt>
+<dd>ldens.save(description=&#8217;mydensprof&#8217;, form=&#8217;txt&#8217;)</dd>
+</dl>
+<p>which will output the density profiles in a file named
+&lt;trajectory_filename&gt;.mydensprof_&lt;grouping&gt;.ldens
+Results can be saved in npz format by specifying <cite>form=&#8217;npz&#8217;</cite></p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.14.0.</span></p>
+</div>
+<dl class="method">
+<dt id="MDAnalysis.analysis.lineardensity.LinearDensity.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>description=''</em>, <em>form='txt'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/lineardensity.html#LinearDensity.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.lineardensity.LinearDensity.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save density profile to file
+Allows to save the density profile to either a ASCII txt file or a
+binary numpy npz file. Output file has extension &#8216;ldens&#8217; and begins
+with the name of the trajectory file.</p>
+<dl class="docutils">
+<dt>description <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>An arbitrary description added to the output filename. Can be useful</dd>
+<dt>form <span class="classifier-delimiter">:</span> <span class="classifier">str {&#8216;txt&#8217;, &#8216;npz&#8217;}</span></dt>
+<dd>Format of the output. &#8216;txt&#8217; will generate an ASCII text file while &#8216;npz&#8217;
+will produce a numpy binary file.</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>After initializing and running a <cite>LinearDensity</cite> object, results can be written
+to file as follows:</p>
+<blockquote>
+<div>ldens.save(description=&#8217;mydensprof&#8217;, form=&#8217;txt&#8217;)</div></blockquote>
+<p>which will output the linear density profiles in a file named
+&lt;trajectory_filename&gt;.mydensprof_&lt;grouping&gt;.ldens</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 

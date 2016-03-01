@@ -96,6 +96,42 @@
 <h1>3.1.1. Analysis building blocks &#8212; <a class="reference internal" href="#module-MDAnalysis.analysis.base" title="MDAnalysis.analysis.base"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.base</span></code></a><a class="headerlink" href="#analysis-building-blocks-mdanalysis-analysis-base" title="Permalink to this headline">¶</a></h1>
 <p>A collection of useful building blocks for creating Analysis
 classes.</p>
+<dl class="class">
+<dt id="MDAnalysis.analysis.base.AnalysisBase">
+<em class="property">class </em><code class="descclassname">MDAnalysis.analysis.base.</code><code class="descname">AnalysisBase</code><a class="reference internal" href="../../_modules/MDAnalysis/analysis/base.html#AnalysisBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.base.AnalysisBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for defining multi frame analysis</p>
+<p>The analysis base class is designed as a template for creating
+multiframe analysis.</p>
+<p>The class implements the following methods:</p>
+<dl class="docutils">
+<dt>_setup_frames(trajectory, start=None, stop=None, step=None)</dt>
+<dd>Pass a Reader object and define the desired iteration pattern
+through the trajectory</dd>
+<dt>run</dt>
+<dd>The user facing run method.  Calls the analysis methods
+defined below</dd>
+</dl>
+<p>Your analysis can implement the following methods, which are
+called from run:</p>
+<dl class="docutils">
+<dt>_prepare</dt>
+<dd>Called before iteration on the trajectory has begun.
+Data structures can be set up at this time, however most
+error checking should be done in the __init__</dd>
+<dt>_single_frame</dt>
+<dd>Called after the trajectory is moved onto each new frame.</dd>
+<dt>_conclude</dt>
+<dd>Called once iteration on the trajectory is finished.
+Apply normalisation and averaging to results here.</dd>
+</dl>
+<dl class="method">
+<dt id="MDAnalysis.analysis.base.AnalysisBase.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/base.html#AnalysisBase.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.base.AnalysisBase.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform the calculation</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
