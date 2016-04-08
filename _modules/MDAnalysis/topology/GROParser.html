@@ -145,7 +145,7 @@
                     <span class="n">charge</span> <span class="o">=</span> <span class="n">guess_atom_charge</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
                     <span class="c1"># segid = &quot;SYSTEM&quot;</span>
                     <span class="c1"># ignore coords and velocities, they can be read by coordinates.GRO</span>
-                <span class="k">except</span><span class="p">:</span>
+                <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">IndexError</span><span class="p">):</span>
                     <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;Couldn&#39;t read the following line of the .gro file:</span><span class="se">\n</span><span class="s2">&quot;</span>
                                   <span class="s2">&quot;{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
                 <span class="k">else</span><span class="p">:</span>
