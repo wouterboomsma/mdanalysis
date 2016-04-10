@@ -152,7 +152,7 @@ changes it &#8220;everywhere&#8221;.</p>
 <p>The same is mostly true for <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue" title="MDAnalysis.core.AtomGroup.Residue"><code class="xref py py-class docutils literal"><span class="pre">Residue</span></code></a> instances although they are
 derived from <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom" title="MDAnalysis.core.AtomGroup.Atom"><code class="xref py py-class docutils literal"><span class="pre">Atom</span></code></a> instances: all <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom" title="MDAnalysis.core.AtomGroup.Atom"><code class="xref py py-class docutils literal"><span class="pre">Atom</span></code></a> objects with the same
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.resid" title="MDAnalysis.core.AtomGroup.Atom.resid"><code class="xref py py-attr docutils literal"><span class="pre">Atom.resid</span></code></a> are bundled into a single <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue" title="MDAnalysis.core.AtomGroup.Residue"><code class="xref py py-class docutils literal"><span class="pre">Residue</span></code></a> with
-<code class="xref py py-class docutils literal"><span class="pre">Residue.id</span></code> = <em>resid</em>. This means that just changing, say, the residue
+<a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue.id" title="MDAnalysis.core.AtomGroup.Residue.id"><code class="xref py py-class docutils literal"><span class="pre">Residue.id</span></code></a> = <em>resid</em>. This means that just changing, say, the residue
 name with a command such as</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;resid 99&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">residues</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
@@ -167,13 +167,13 @@ name with a command such as</p>
 </div>
 <p>will typically work as expected. When working with collections such as
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> or <a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup" title="MDAnalysis.core.AtomGroup.ResidueGroup"><code class="xref py py-class docutils literal"><span class="pre">ResidueGroup</span></code></a> it is generally better to use
-properties such as <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup.resnames" title="MDAnalysis.core.AtomGroup.AtomGroup.resnames"><code class="xref py py-attr docutils literal"><span class="pre">AtomGroup.resnames</span></code></a> or <a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup.resnames" title="MDAnalysis.core.AtomGroup.ResidueGroup.resnames"><code class="xref py py-attr docutils literal"><span class="pre">ResidueGroup.resnames</span></code></a>
+properties such as <code class="xref py py-attr docutils literal"><span class="pre">AtomGroup.resnames</span></code> or <code class="xref py py-attr docutils literal"><span class="pre">ResidueGroup.resnames</span></code>
 to modify their items&#8217; attributes.</p>
 <p>There are two cases when it is very important to use these collective
 properties:</p>
 <ul class="simple">
-<li>changing <em>resid</em>: <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup.resids" title="MDAnalysis.core.AtomGroup.AtomGroup.resids"><code class="xref py py-attr docutils literal"><span class="pre">AtomGroup.resids</span></code></a> and <a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup.resids" title="MDAnalysis.core.AtomGroup.ResidueGroup.resids"><code class="xref py py-attr docutils literal"><span class="pre">ResidueGroup.resids</span></code></a></li>
-<li>changing <em>segid</em>: <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup.segids" title="MDAnalysis.core.AtomGroup.AtomGroup.segids"><code class="xref py py-attr docutils literal"><span class="pre">AtomGroup.segids</span></code></a> and <a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup.segids" title="MDAnalysis.core.AtomGroup.ResidueGroup.segids"><code class="xref py py-attr docutils literal"><span class="pre">ResidueGroup.segids</span></code></a></li>
+<li>changing <em>resid</em>: <code class="xref py py-attr docutils literal"><span class="pre">AtomGroup.resids</span></code> and <code class="xref py py-attr docutils literal"><span class="pre">ResidueGroup.resids</span></code></li>
+<li>changing <em>segid</em>: <code class="xref py py-attr docutils literal"><span class="pre">AtomGroup.segids</span></code> and <code class="xref py py-attr docutils literal"><span class="pre">ResidueGroup.segids</span></code></li>
 </ul>
 <p>Because residues are determined by the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.resid" title="MDAnalysis.core.AtomGroup.Atom.resid"><code class="xref py py-attr docutils literal"><span class="pre">Atom.resid</span></code></a> and segments by
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.segid" title="MDAnalysis.core.AtomGroup.Atom.segid"><code class="xref py py-attr docutils literal"><span class="pre">Atom.segid</span></code></a>, the above properties take extra care to rebuild the list of
@@ -182,8 +182,8 @@ the corresponding setter method, e.g. <a class="reference internal" href="#MDAna
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Setting any of
-<a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup.resids" title="MDAnalysis.core.AtomGroup.AtomGroup.resids"><code class="xref py py-attr docutils literal"><span class="pre">AtomGroup.resids</span></code></a>, <a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup.resids" title="MDAnalysis.core.AtomGroup.ResidueGroup.resids"><code class="xref py py-attr docutils literal"><span class="pre">ResidueGroup.resids</span></code></a>,
-<a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup.segids" title="MDAnalysis.core.AtomGroup.AtomGroup.segids"><code class="xref py py-attr docutils literal"><span class="pre">AtomGroup.segids</span></code></a>, <a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup.segids" title="MDAnalysis.core.AtomGroup.ResidueGroup.segids"><code class="xref py py-attr docutils literal"><span class="pre">ResidueGroup.segids</span></code></a>
+<code class="xref py py-attr docutils literal"><span class="pre">AtomGroup.resids</span></code>, <code class="xref py py-attr docutils literal"><span class="pre">ResidueGroup.resids</span></code>,
+<code class="xref py py-attr docutils literal"><span class="pre">AtomGroup.segids</span></code>, <code class="xref py py-attr docutils literal"><span class="pre">ResidueGroup.segids</span></code>
 can change the topology: they can split or merge residues or segments.</p>
 </div>
 <p>Splitting/merging of residues is probably not very useful because no chemical
@@ -681,7 +681,7 @@ is already not on the list.</p>
 <dt id="MDAnalysis.core.AtomGroup.Universe.selectAtoms">
 <code class="descname">selectAtoms</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.Universe.selectAtoms" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>selectAtoms</cite> is deprecated, use <cite>select_atoms</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
 <p>Selection of atoms using the MDAnalysis selection syntax.</p>
 <blockquote>
 <div><dl class="docutils">
@@ -908,14 +908,14 @@ manually force a complete cache rebuild.</p>
 <ul class="simple">
 <li>atoms (for &#8220;in&#8221; lookup); cache is only built for large systems with
 &gt; 10,000 atoms</li>
-<li>indices (<a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup.indices" title="MDAnalysis.core.AtomGroup.AtomGroup.indices"><code class="xref py py-meth docutils literal"><span class="pre">AtomGroup.indices()</span></code></a>)</li>
-<li>masses (<a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup.masses" title="MDAnalysis.core.AtomGroup.AtomGroup.masses"><code class="xref py py-meth docutils literal"><span class="pre">AtomGroup.masses()</span></code></a>)</li>
+<li>indices (<code class="xref py py-meth docutils literal"><span class="pre">AtomGroup.indices()</span></code>)</li>
+<li>masses (<code class="xref py py-meth docutils literal"><span class="pre">AtomGroup.masses()</span></code>)</li>
 <li>residues (<a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup.residues" title="MDAnalysis.core.AtomGroup.AtomGroup.residues"><code class="xref py py-attr docutils literal"><span class="pre">AtomGroup.residues</span></code></a>)</li>
 <li>segments (<a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup.segments" title="MDAnalysis.core.AtomGroup.AtomGroup.segments"><code class="xref py py-attr docutils literal"><span class="pre">AtomGroup.segments</span></code></a>)</li>
-<li>bonds (<a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup.bonds" title="MDAnalysis.core.AtomGroup.AtomGroup.bonds"><code class="xref py py-attr docutils literal"><span class="pre">AtomGroup.bonds</span></code></a>)</li>
-<li>angles (<a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup.angles" title="MDAnalysis.core.AtomGroup.AtomGroup.angles"><code class="xref py py-attr docutils literal"><span class="pre">AtomGroup.angles</span></code></a>)</li>
-<li>dihedrals (<a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup.dihedrals" title="MDAnalysis.core.AtomGroup.AtomGroup.dihedrals"><code class="xref py py-attr docutils literal"><span class="pre">AtomGroup.dihedrals</span></code></a>)</li>
-<li>improper dihedrals (<a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup.impropers" title="MDAnalysis.core.AtomGroup.AtomGroup.impropers"><code class="xref py py-attr docutils literal"><span class="pre">AtomGroup.impropers</span></code></a>)</li>
+<li>bonds (<code class="xref py py-attr docutils literal"><span class="pre">AtomGroup.bonds</span></code>)</li>
+<li>angles (<code class="xref py py-attr docutils literal"><span class="pre">AtomGroup.angles</span></code>)</li>
+<li>dihedrals (<code class="xref py py-attr docutils literal"><span class="pre">AtomGroup.dihedrals</span></code>)</li>
+<li>improper dihedrals (<code class="xref py py-attr docutils literal"><span class="pre">AtomGroup.impropers</span></code>)</li>
 </ul>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
@@ -980,7 +980,7 @@ return groups themselves and allow advanced slicing</p>
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.align_principalAxis">
 <code class="descname">align_principalAxis</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.align_principalAxis" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>align_principalAxis</cite> is deprecated, use <cite>align_principal_axis</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
 <p>Align principal axis with index <em>axis</em> with <em>vector</em>.</p>
 <blockquote>
 <div><table class="docutils field-list" frame="void" rules="none">
@@ -1041,15 +1041,6 @@ i.e. <em>axis</em> = 0) with the z-axis:</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="MDAnalysis.core.AtomGroup.AtomGroup.altLocs">
-<code class="descname">altLocs</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.altLocs" title="Permalink to this definition">¶</a></dt>
-<dd><p>numpy array of the altLocs for all atoms in this group</p>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.11.0.</span></p>
-</div>
-</dd></dl>
-
-<dl class="attribute">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.angle">
 <code class="descname">angle</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.angle" title="Permalink to this definition">¶</a></dt>
 <dd><p>This AtomGroup represented as an Angle object</p>
@@ -1065,21 +1056,6 @@ i.e. <em>axis</em> = 0) with the z-axis:</p>
 </table>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.11.0.</span></p>
-</div>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.AtomGroup.AtomGroup.angles">
-<code class="descname">angles</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.angles" title="Permalink to this definition">¶</a></dt>
-<dd><p>All the angles in this AtomGroup</p>
-<p>Note that these angles might extend out of the AtomGroup, to select
-only angles which are entirely contained by the AtomGroup use
-u.angles.atomgroup_intersection(ag, strict=True)</p>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.9.0.</span></p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.10.0: </span>Now always returns a (possibly empty) TopologyGroup</p>
 </div>
 </dd></dl>
 
@@ -1169,12 +1145,6 @@ flag to be used by default.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="MDAnalysis.core.AtomGroup.AtomGroup.bfactors">
-<code class="descname">bfactors</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.bfactors" title="Permalink to this definition">¶</a></dt>
-<dd><p>Crystallographic B-factors (from PDB) in A**2.</p>
-</dd></dl>
-
-<dl class="attribute">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.bond">
 <code class="descname">bond</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.bond" title="Permalink to this definition">¶</a></dt>
 <dd><p>This AtomGroup represented as a Bond object</p>
@@ -1190,21 +1160,6 @@ flag to be used by default.</p>
 </table>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.11.0.</span></p>
-</div>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.AtomGroup.AtomGroup.bonds">
-<code class="descname">bonds</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.bonds" title="Permalink to this definition">¶</a></dt>
-<dd><p>All the bonds in this AtomGroup</p>
-<p>Note that these bonds might extend out of the AtomGroup, to select
-only bonds which are entirely contained by the AtomGroup use
-u.bonds.atomgroup_intersection(ag, strict=True)</p>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.9.0.</span></p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.10.0: </span>Now always returns a (possibly empty) TopologyGroup</p>
 </div>
 </dd></dl>
 
@@ -1251,7 +1206,7 @@ flag to be used by default.</p>
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.centerOfGeometry">
 <code class="descname">centerOfGeometry</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.centerOfGeometry" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>centerOfGeometry</cite> is deprecated, use <cite>center_of_geometry</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
 <p>Center of geometry (also known as centroid) of the selection.</p>
 <blockquote>
 <div><table class="docutils field-list" frame="void" rules="none">
@@ -1282,7 +1237,7 @@ flag to be used by default.</p>
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.centerOfMass">
 <code class="descname">centerOfMass</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.centerOfMass" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>centerOfMass</cite> is deprecated, use <cite>center_of_mass</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
 <p>Center of mass of the selection.</p>
 <blockquote>
 <div><table class="docutils field-list" frame="void" rules="none">
@@ -1390,18 +1345,9 @@ flag to be used by default.</p>
 </div>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="MDAnalysis.core.AtomGroup.AtomGroup.charges">
-<code class="descname">charges</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.charges" title="Permalink to this definition">¶</a></dt>
-<dd><p>Array of partial charges of the atoms (as defined in the topology)</p>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Now a property</p>
-</div>
-</dd></dl>
-
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.coordinates">
-<code class="descname">coordinates</code><span class="sig-paren">(</span><em>ts=None</em>, <em>copy=False</em>, <em>dtype=&lt;type 'numpy.float32'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.coordinates" title="Permalink to this definition">¶</a></dt>
+<code class="descname">coordinates</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.coordinates" title="Permalink to this definition">¶</a></dt>
 <dd><p>Np array of the coordinates.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
@@ -1428,21 +1374,6 @@ flag to be used by default.</p>
 </table>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.11.0.</span></p>
-</div>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.AtomGroup.AtomGroup.dihedrals">
-<code class="descname">dihedrals</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.dihedrals" title="Permalink to this definition">¶</a></dt>
-<dd><p>All the dihedrals in this AtomGroup</p>
-<p>Note that these dihedrals might extend out of the AtomGroup, to select
-only dihedrals which are entirely contained by the AtomGroup use
-u.dihedrals.atomgroup_intersection(ag, strict=True)</p>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.9.0.</span></p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.10.0: </span>Now always returns a (possibly empty) TopologyGroup</p>
 </div>
 </dd></dl>
 
@@ -1477,8 +1408,11 @@ the fragments may extend beyond the contents of this AtomGroup.</p>
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.get_forces">
-<code class="descname">get_forces</code><span class="sig-paren">(</span><em>ts=None</em>, <em>copy=False</em>, <em>dtype=&lt;type 'numpy.float32'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/AtomGroup.html#AtomGroup.get_forces"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.get_forces" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get a numpy array of the atomic forces (if available).
+<code class="descname">get_forces</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.get_forces" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>get_forces</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>forces</cite> property instead</p>
+<blockquote>
+<div><p>Get a numpy array of the atomic forces (if available).
 Currently only supported for Gromacs .trr trajectories.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1490,7 +1424,7 @@ Currently only supported for Gromacs .trr trajectories.</p>
 <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep" title="MDAnalysis.coordinates.base.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a> instead of
 the one from the current trajectory belonging to this universe.
 The <em>ts</em> is indexed with the indices returned by
-<a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup.indices" title="MDAnalysis.core.AtomGroup.AtomGroup.indices"><code class="xref py py-meth docutils literal"><span class="pre">indices()</span></code></a> and it is the user&#8217;s responsibility
+<code class="xref py py-meth docutils literal"><span class="pre">indices()</span></code> and it is the user&#8217;s responsibility
 to provide a time step that has the appropriate dimensions.</p>
 </dd>
 <dt><em>copy</em></dt>
@@ -1516,13 +1450,17 @@ by assigning to <a class="reference internal" href="#MDAnalysis.core.AtomGroup.A
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.7.7.</span></p>
 </div>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.get_positions">
-<code class="descname">get_positions</code><span class="sig-paren">(</span><em>ts=None</em>, <em>copy=False</em>, <em>dtype=&lt;type 'numpy.float32'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/AtomGroup.html#AtomGroup.get_positions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.get_positions" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get a numpy array of the coordinates.</p>
-<table class="docutils field-list" frame="void" rules="none">
+<code class="descname">get_positions</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.get_positions" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>get_positions</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>positions</cite> property instead</p>
+<p>Get a numpy array of the coordinates.</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -1532,7 +1470,7 @@ by assigning to <a class="reference internal" href="#MDAnalysis.core.AtomGroup.A
 <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep" title="MDAnalysis.coordinates.base.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a> instead of
 the one from the current trajectory belonging to this universe.
 The <em>ts</em> is indexed with the indices returned by
-<a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup.indices" title="MDAnalysis.core.AtomGroup.AtomGroup.indices"><code class="xref py py-meth docutils literal"><span class="pre">indices()</span></code></a> and it is the user&#8217;s responsibility
+<code class="xref py py-meth docutils literal"><span class="pre">indices()</span></code> and it is the user&#8217;s responsibility
 to provide a time step that has the appropriate dimensions.</p>
 </dd>
 <dt><em>copy</em></dt>
@@ -1560,13 +1498,17 @@ differently for symmetry with with <a class="reference internal" href="#MDAnalys
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.7.6.</span></p>
 </div>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.get_velocities">
-<code class="descname">get_velocities</code><span class="sig-paren">(</span><em>ts=None</em>, <em>copy=False</em>, <em>dtype=&lt;type 'numpy.float32'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/AtomGroup.html#AtomGroup.get_velocities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.get_velocities" title="Permalink to this definition">¶</a></dt>
-<dd><p>numpy array of the velocities.</p>
-<p>Raises a <a class="reference internal" href="#MDAnalysis.core.AtomGroup.NoDataError" title="MDAnalysis.core.AtomGroup.NoDataError"><code class="xref py py-exc docutils literal"><span class="pre">NoDataError</span></code></a> if the underlying
+<code class="descname">get_velocities</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.get_velocities" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>get_velocities</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>velocities</cite> property instead</p>
+<p>numpy array of the velocities.</p>
+<blockquote>
+<div><p>Raises a <a class="reference internal" href="#MDAnalysis.core.AtomGroup.NoDataError" title="MDAnalysis.core.AtomGroup.NoDataError"><code class="xref py py-exc docutils literal"><span class="pre">NoDataError</span></code></a> if the underlying
 <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep" title="MDAnalysis.coordinates.base.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a> does not contain
 <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.velocities" title="MDAnalysis.coordinates.base.Timestep.velocities"><code class="xref py py-attr docutils literal"><span class="pre">velocities</span></code></a>.</p>
 <p>See also <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_velocities" title="MDAnalysis.core.AtomGroup.AtomGroup.set_velocities"><code class="xref py py-meth docutils literal"><span class="pre">AtomGroup.set_velocities()</span></code></a> and attribute access through
@@ -1574,32 +1516,7 @@ differently for symmetry with with <a class="reference internal" href="#MDAnalys
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.7.6.</span></p>
 </div>
-</dd></dl>
-
-<dl class="method">
-<dt id="MDAnalysis.core.AtomGroup.AtomGroup.guess_bonds">
-<code class="descname">guess_bonds</code><span class="sig-paren">(</span><em>vdwradii=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/AtomGroup.html#AtomGroup.guess_bonds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.guess_bonds" title="Permalink to this definition">¶</a></dt>
-<dd><p>Guess all the bonds that exist within this AtomGroup and add to Universe.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Keywords:</th><td class="field-body"><dl class="first last docutils">
-<dt><em>vdwradii</em></dt>
-<dd><p class="first last">Pass a dict relating atom types to vdwradii.</p>
-</dd>
-</dl>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="../topology/core.html#MDAnalysis.topology.core.guess_bonds" title="MDAnalysis.topology.core.guess_bonds"><code class="xref py py-func docutils literal"><span class="pre">MDAnalysis.topology.core.guess_bonds()</span></code></a></p>
-</div>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.10.0.</span></p>
-</div>
+</div></blockquote>
 </dd></dl>
 
 <dl class="attribute">
@@ -1621,51 +1538,11 @@ differently for symmetry with with <a class="reference internal" href="#MDAnalys
 </div>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="MDAnalysis.core.AtomGroup.AtomGroup.impropers">
-<code class="descname">impropers</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.impropers" title="Permalink to this definition">¶</a></dt>
-<dd><p>All the improper dihedrals in this AtomGroup</p>
-<p>Note that these improper dihedrals might extend out of the AtomGroup,
-to select only dihedrals which are entirely contained by the AtomGroup use
-u.impropers.atomgroup_intersection(ag, strict=True)</p>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.9.0.</span></p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.10.0: </span>Now always returns a (possibly empty) TopologyGroup</p>
-</div>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.AtomGroup.AtomGroup.indices">
-<code class="descname">indices</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.indices" title="Permalink to this definition">¶</a></dt>
-<dd><p>Array of all <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.index" title="MDAnalysis.core.AtomGroup.Atom.index"><code class="xref py py-attr docutils literal"><span class="pre">Atom.index</span></code></a> in the group.</p>
-<p>These indices are 0-based and can be used to directly index
-<code class="xref py py-attr docutils literal"><span class="pre">Universe.atoms</span></code> or the coordinate array
-<a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.positions" title="MDAnalysis.coordinates.base.Timestep.positions"><code class="xref py py-attr docutils literal"><span class="pre">MDAnalysis.coordinates.base.Timestep.positions</span></code></a>.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This property is read only</p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Now a property</p>
-</div>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.AtomGroup.AtomGroup.masses">
-<code class="descname">masses</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.masses" title="Permalink to this definition">¶</a></dt>
-<dd><p>Array of atomic masses (as defined in the topology)</p>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Now a property</p>
-</div>
-</dd></dl>
-
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.momentOfInertia">
 <code class="descname">momentOfInertia</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.momentOfInertia" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>momentOfInertia</cite> is deprecated, use <cite>moment_of_inertia</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
 <p>Tensor of inertia as 3x3 numpy array.</p>
 <blockquote>
 <div><table class="docutils field-list" frame="void" rules="none">
@@ -1737,43 +1614,11 @@ flag to be used by default.</p>
 <dd><p>Total number of segments in the group</p>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="MDAnalysis.core.AtomGroup.AtomGroup.names">
-<code class="descname">names</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.names" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns an array of atom names.</p>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.8: </span>Returns a <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a></p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Now a property</p>
-</div>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.AtomGroup.AtomGroup.occupancies">
-<code class="descname">occupancies</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.occupancies" title="Permalink to this definition">¶</a></dt>
-<dd><p>Access occupancies of atoms</p>
-<p>If available can have a value between 0 and 1</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
-<li><em>ndarray</em> &#8211;
-occupancies for all atoms in AtomGroup</li>
-<li><strong>.. versionadded</strong> (<em>: 0.11.1</em>)</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.packIntoBox">
 <code class="descname">packIntoBox</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.packIntoBox" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>packIntoBox</cite> is deprecated, use <cite>pack_into_box</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
 <p>Shift all atoms in this group to be within the primary unit cell.</p>
 <blockquote>
 <div><p>AtomGroup.packintobox([box, [inplace=True]])</p>
@@ -1870,7 +1715,7 @@ will move all particles to the origin).</p>
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.principalAxes">
 <code class="descname">principalAxes</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.principalAxes" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>principalAxes</cite> is deprecated, use <cite>principal_axes</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
 <p>Calculate the principal axes from the moment of inertia.</p>
 <blockquote>
 <div><p>e1,e2,e3 = AtomGroup.principal_axes()</p>
@@ -1948,20 +1793,11 @@ and <code class="docutils literal"><span class="pre">v[2]</span></code> as third
 </div>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="MDAnalysis.core.AtomGroup.AtomGroup.radii">
-<code class="descname">radii</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.radii" title="Permalink to this definition">¶</a></dt>
-<dd><p>Array of atomic radii (as defined in the PQR file)</p>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Now a property</p>
-</div>
-</dd></dl>
-
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.radiusOfGyration">
 <code class="descname">radiusOfGyration</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.radiusOfGyration" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>radiusOfGyration</cite> is deprecated, use <cite>radius_of_gyration</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
 <p>Radius of gyration.</p>
 <blockquote>
 <div><table class="docutils field-list" frame="void" rules="none">
@@ -2016,18 +1852,6 @@ flag to be used by default.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="MDAnalysis.core.AtomGroup.AtomGroup.resids">
-<code class="descname">resids</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.resids" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns an array of residue numbers.</p>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.8: </span>Returns a <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a></p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Now a property and returns array of length <cite>len(self)</cite></p>
-</div>
-</dd></dl>
-
-<dl class="attribute">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.residues">
 <code class="descname">residues</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.residues" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read-only list of <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue" title="MDAnalysis.core.AtomGroup.Residue"><code class="xref py py-class docutils literal"><span class="pre">Residue</span></code></a> objects.</p>
@@ -2036,33 +1860,6 @@ this group.</p>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.9.0: </span>Now returns strictly a ResidueGroup of the unique Residues that Atoms in this group
 belong to.</p>
-</div>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.AtomGroup.AtomGroup.resnames">
-<code class="descname">resnames</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.resnames" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns an array of residue names.</p>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.8: </span>Returns a <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a></p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Now a property and returns array of length <cite>len(self)</cite></p>
-</div>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.AtomGroup.AtomGroup.resnums">
-<code class="descname">resnums</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.resnums" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns an array of canonical residue numbers.</p>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.7.4.</span></p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.8: </span>Returns a <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a></p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Now a property and returns array of length <cite>len(self)</cite></p>
 </div>
 </dd></dl>
 
@@ -2120,18 +1917,6 @@ and the translation vector <code class="docutils literal"><span class="pre">M[:3
 </dd></dl>
 
 <dl class="attribute">
-<dt id="MDAnalysis.core.AtomGroup.AtomGroup.segids">
-<code class="descname">segids</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.segids" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns an array of segment names.</p>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.8: </span>Returns a <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a></p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Now a property and returns array of length <cite>len(self)</cite></p>
-</div>
-</dd></dl>
-
-<dl class="attribute">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.segments">
 <code class="descname">segments</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.segments" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read-only list of <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Segment" title="MDAnalysis.core.AtomGroup.Segment"><code class="xref py py-class docutils literal"><span class="pre">Segment</span></code></a> objects.</p>
@@ -2146,7 +1931,7 @@ the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Segment" titl
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.selectAtoms">
 <code class="descname">selectAtoms</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.selectAtoms" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>selectAtoms</cite> is deprecated, use <cite>select_atoms</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
 <p>Select atoms using a MDAnalysis selection string.</p>
 <blockquote>
 <div><dl class="docutils">
@@ -2659,10 +2444,14 @@ select protein residues. Raises <code class="xref py py-exc docutils literal"><s
 <dl class="attribute">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.serials">
 <code class="descname">serials</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.serials" title="Permalink to this definition">¶</a></dt>
-<dd><p>numpy array of the serials for all atoms in this group</p>
-<div class="versionadded">
+<dd><p><cite>serials</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>ids</cite> property instead</p>
+<p>numpy array of the serials for all atoms in this group</p>
+<blockquote>
+<div><div class="versionadded">
 <p><span class="versionmodified">New in version 0.11.0.</span></p>
 </div>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
@@ -2685,7 +2474,9 @@ then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom" t
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.set_altLoc">
 <code class="descname">set_altLoc</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_altLoc" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>set_altLoc</cite> is deprecated, use <cite>set_altLocs</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
+<p><cite>set_altLocs</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>altLocs</cite> property instead</p>
 <p>Set the altLocs to <em>altLoc for **all atoms*</em> in the AtomGroup.</p>
 <blockquote>
 <div><p>If <em>altLoc</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
@@ -2700,22 +2491,28 @@ then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.al
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.set_altLocs">
-<code class="descname">set_altLocs</code><span class="sig-paren">(</span><em>altLoc</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/AtomGroup.html#AtomGroup.set_altLocs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_altLocs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the altLocs to <em>altLoc for **all atoms*</em> in the AtomGroup.</p>
-<p>If <em>altLoc</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
+<code class="descname">set_altLocs</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_altLocs" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>set_altLocs</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>altLocs</cite> property instead</p>
+<p>Set the altLocs to <em>altLoc for **all atoms*</em> in the AtomGroup.</p>
+<blockquote>
+<div><p>If <em>altLoc</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.altLoc" title="MDAnalysis.core.AtomGroup.Atom.altLoc"><code class="xref py py-attr docutils literal"><span class="pre">Atom.altLoc</span></code></a> is set to the corresponding value. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.11.0.</span></p>
 </div>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.set_bfactor">
 <code class="descname">set_bfactor</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_bfactor" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>set_bfactor</cite> is deprecated, use <cite>set_bfactors</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
+<p><cite>set_bfactors</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>bfactors</cite> property instead</p>
 <p>Set the atom bfactors to float <em>bfactor</em> for <strong>all atoms</strong> in the AtomGroup.</p>
 <blockquote>
 <div><p>If <em>bfactor</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
@@ -2736,9 +2533,12 @@ then each <code class="xref py py-attr docutils literal"><span class="pre">Atom.
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.set_bfactors">
-<code class="descname">set_bfactors</code><span class="sig-paren">(</span><em>bfactor</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/AtomGroup.html#AtomGroup.set_bfactors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_bfactors" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the atom bfactors to float <em>bfactor</em> for <strong>all atoms</strong> in the AtomGroup.</p>
-<p>If <em>bfactor</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
+<code class="descname">set_bfactors</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_bfactors" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>set_bfactors</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>bfactors</cite> property instead</p>
+<p>Set the atom bfactors to float <em>bfactor</em> for <strong>all atoms</strong> in the AtomGroup.</p>
+<blockquote>
+<div><p>If <em>bfactor</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
 then each <code class="xref py py-attr docutils literal"><span class="pre">Atom.bfactor</span></code> is set to the corresponding value. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
@@ -2751,13 +2551,16 @@ then each <code class="xref py py-attr docutils literal"><span class="pre">Atom.
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Made plural to make consistent with corresponding property</p>
 </div>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.set_charge">
 <code class="descname">set_charge</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_charge" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>set_charge</cite> is deprecated, use <cite>set_charges</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
+<p><cite>set_charges</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>charges</cite> property instead</p>
 <p>Set the partial charges to float <em>charge</em> for <strong>all atoms</strong> in the AtomGroup.</p>
 <blockquote>
 <div><p>If <em>charge</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
@@ -2778,9 +2581,12 @@ then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.ch
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.set_charges">
-<code class="descname">set_charges</code><span class="sig-paren">(</span><em>charge</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/AtomGroup.html#AtomGroup.set_charges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_charges" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the partial charges to float <em>charge</em> for <strong>all atoms</strong> in the AtomGroup.</p>
-<p>If <em>charge</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
+<code class="descname">set_charges</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_charges" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>set_charges</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>charges</cite> property instead</p>
+<p>Set the partial charges to float <em>charge</em> for <strong>all atoms</strong> in the AtomGroup.</p>
+<blockquote>
+<div><p>If <em>charge</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.charge" title="MDAnalysis.core.AtomGroup.Atom.charge"><code class="xref py py-attr docutils literal"><span class="pre">Atom.charge</span></code></a> is set to the corresponding value. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
@@ -2793,13 +2599,17 @@ then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.ch
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Made plural to make consistent with corresponding property</p>
 </div>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.set_forces">
-<code class="descname">set_forces</code><span class="sig-paren">(</span><em>forces</em>, <em>ts=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/AtomGroup.html#AtomGroup.set_forces"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_forces" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the forces for all atoms in the group.</p>
-<table class="docutils field-list" frame="void" rules="none">
+<code class="descname">set_forces</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_forces" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>set_forces</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>forces</cite> property instead</p>
+<p>Set the forces for all atoms in the group.</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -2833,13 +2643,16 @@ to numpy&#8217;s broadcasting rules), as described for
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.7.7.</span></p>
 </div>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.set_mass">
 <code class="descname">set_mass</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_mass" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>set_mass</cite> is deprecated, use <cite>set_masses</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
+<p><cite>set_masses</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>masses</cite> property instead</p>
 <p>Set the atom masses to float <em>mass</em> for <strong>all atoms</strong> in the AtomGroup.</p>
 <blockquote>
 <div><p>If <em>mass</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
@@ -2860,9 +2673,12 @@ then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.ma
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.set_masses">
-<code class="descname">set_masses</code><span class="sig-paren">(</span><em>mass</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/AtomGroup.html#AtomGroup.set_masses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_masses" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the atom masses to float <em>mass</em> for <strong>all atoms</strong> in the AtomGroup.</p>
-<p>If <em>mass</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
+<code class="descname">set_masses</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_masses" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>set_masses</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>masses</cite> property instead</p>
+<p>Set the atom masses to float <em>mass</em> for <strong>all atoms</strong> in the AtomGroup.</p>
+<blockquote>
+<div><p>If <em>mass</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.mass" title="MDAnalysis.core.AtomGroup.Atom.mass"><code class="xref py py-attr docutils literal"><span class="pre">Atom.mass</span></code></a> is set to the corresponding value. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
@@ -2875,13 +2691,16 @@ then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.ma
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Made plural to make consistent with corresponding property</p>
 </div>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.set_name">
 <code class="descname">set_name</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_name" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>set_name</cite> is deprecated, use <cite>set_names</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
+<p><cite>set_names</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>names</cite> property instead</p>
 <p>Set the atom names to string for <em>all atoms</em> in the AtomGroup.</p>
 <blockquote>
 <div><p>If <em>value</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
@@ -2902,9 +2721,12 @@ then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.na
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.set_names">
-<code class="descname">set_names</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/AtomGroup.html#AtomGroup.set_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_names" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the atom names to string for <em>all atoms</em> in the AtomGroup.</p>
-<p>If <em>value</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
+<code class="descname">set_names</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_names" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>set_names</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>names</cite> property instead</p>
+<p>Set the atom names to string for <em>all atoms</em> in the AtomGroup.</p>
+<blockquote>
+<div><p>If <em>value</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.name" title="MDAnalysis.core.AtomGroup.Atom.name"><code class="xref py py-attr docutils literal"><span class="pre">Atom.name</span></code></a> is set to the corresponding value. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
@@ -2917,6 +2739,7 @@ then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.na
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Made plural to make consistent with corresponding property</p>
 </div>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
@@ -2934,9 +2757,12 @@ then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.na
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.set_positions">
-<code class="descname">set_positions</code><span class="sig-paren">(</span><em>coords</em>, <em>ts=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/AtomGroup.html#AtomGroup.set_positions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_positions" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the positions for all atoms in the group.</p>
-<table class="docutils field-list" frame="void" rules="none">
+<code class="descname">set_positions</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_positions" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>set_positions</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>positions</cite> property instead</p>
+<p>Set the positions for all atoms in the group.</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -2970,13 +2796,17 @@ to numpy&#8217;s broadcasting rules), as described for
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.7.6.</span></p>
 </div>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.set_radii">
-<code class="descname">set_radii</code><span class="sig-paren">(</span><em>radius</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/AtomGroup.html#AtomGroup.set_radii"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_radii" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the atom radii to float <em>radius</em> for <strong>all atoms</strong> in the AtomGroup.</p>
-<p>If <em>radius</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
+<code class="descname">set_radii</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_radii" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>set_radii</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>radii</cite> property instead</p>
+<p>Set the atom radii to float <em>radius</em> for <strong>all atoms</strong> in the AtomGroup.</p>
+<blockquote>
+<div><p>If <em>radius</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.radius" title="MDAnalysis.core.AtomGroup.Atom.radius"><code class="xref py py-attr docutils literal"><span class="pre">Atom.radius</span></code></a> is set to the corresponding value. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
@@ -2989,13 +2819,16 @@ then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.ra
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Made plural to make consistent with corresponding property</p>
 </div>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.set_radius">
 <code class="descname">set_radius</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_radius" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>set_radius</cite> is deprecated, use <cite>set_radii</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
+<p><cite>set_radii</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>radii</cite> property instead</p>
 <p>Set the atom radii to float <em>radius</em> for <strong>all atoms</strong> in the AtomGroup.</p>
 <blockquote>
 <div><p>If <em>radius</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
@@ -3018,12 +2851,14 @@ then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.ra
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.set_resid">
 <code class="descname">set_resid</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_resid" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>set_resid</cite> is deprecated, use <cite>set_resids</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
+<p><cite>set_resids</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>resids</cite> property instead</p>
 <p>Set the resids to integer <em>resid</em> for <strong>all atoms</strong> in the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>.</p>
 <blockquote>
 <div><p>If <em>resid</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.resid" title="MDAnalysis.core.AtomGroup.Atom.resid"><code class="xref py py-attr docutils literal"><span class="pre">Atom.resid</span></code></a> is set to the corresponding value together
-with the <code class="xref py py-attr docutils literal"><span class="pre">Residue.id</span></code> of the residue the atom belongs to. If
+with the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue.id" title="MDAnalysis.core.AtomGroup.Residue.id"><code class="xref py py-attr docutils literal"><span class="pre">Residue.id</span></code></a> of the residue the atom belongs to. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
 <div class="admonition note">
@@ -3053,11 +2888,14 @@ sequence or iterable and can change the topology via
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.set_resids">
-<code class="descname">set_resids</code><span class="sig-paren">(</span><em>resid</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/AtomGroup.html#AtomGroup.set_resids"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_resids" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the resids to integer <em>resid</em> for <strong>all atoms</strong> in the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>.</p>
-<p>If <em>resid</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
+<code class="descname">set_resids</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_resids" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>set_resids</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>resids</cite> property instead</p>
+<p>Set the resids to integer <em>resid</em> for <strong>all atoms</strong> in the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>.</p>
+<blockquote>
+<div><p>If <em>resid</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.resid" title="MDAnalysis.core.AtomGroup.Atom.resid"><code class="xref py py-attr docutils literal"><span class="pre">Atom.resid</span></code></a> is set to the corresponding value together
-with the <code class="xref py py-attr docutils literal"><span class="pre">Residue.id</span></code> of the residue the atom belongs to. If
+with the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue.id" title="MDAnalysis.core.AtomGroup.Residue.id"><code class="xref py py-attr docutils literal"><span class="pre">Residue.id</span></code></a> of the residue the atom belongs to. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
 <div class="admonition note">
@@ -3082,18 +2920,21 @@ sequence or iterable and can change the topology via
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Made plural to make consistent with corresponding property</p>
 </div>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.set_resname">
 <code class="descname">set_resname</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_resname" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>set_resname</cite> is deprecated, use <cite>set_resnames</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
+<p><cite>set_resnames</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>resnames</cite> property instead</p>
 <p>Set the resnames to string <em>resname</em> for <strong>all atoms</strong> in the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>.</p>
 <blockquote>
 <div><p>If <em>resname</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.resname" title="MDAnalysis.core.AtomGroup.Atom.resname"><code class="xref py py-attr docutils literal"><span class="pre">Atom.resname</span></code></a> is set to the corresponding value together
-with the <code class="xref py py-attr docutils literal"><span class="pre">Residue.name</span></code> of the residue the atom belongs to. If
+with the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue.name" title="MDAnalysis.core.AtomGroup.Residue.name"><code class="xref py py-attr docutils literal"><span class="pre">Residue.name</span></code></a> of the residue the atom belongs to. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
 <div class="versionadded">
@@ -3113,11 +2954,14 @@ with the <code class="xref py py-attr docutils literal"><span class="pre">Residu
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.set_resnames">
-<code class="descname">set_resnames</code><span class="sig-paren">(</span><em>resname</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/AtomGroup.html#AtomGroup.set_resnames"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_resnames" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the resnames to string <em>resname</em> for <strong>all atoms</strong> in the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>.</p>
-<p>If <em>resname</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
+<code class="descname">set_resnames</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_resnames" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>set_resnames</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>resnames</cite> property instead</p>
+<p>Set the resnames to string <em>resname</em> for <strong>all atoms</strong> in the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>.</p>
+<blockquote>
+<div><p>If <em>resname</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.resname" title="MDAnalysis.core.AtomGroup.Atom.resname"><code class="xref py py-attr docutils literal"><span class="pre">Atom.resname</span></code></a> is set to the corresponding value together
-with the <code class="xref py py-attr docutils literal"><span class="pre">Residue.name</span></code> of the residue the atom belongs to. If
+with the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue.name" title="MDAnalysis.core.AtomGroup.Residue.name"><code class="xref py py-attr docutils literal"><span class="pre">Residue.name</span></code></a> of the residue the atom belongs to. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
 <div class="versionadded">
@@ -3132,13 +2976,16 @@ with the <code class="xref py py-attr docutils literal"><span class="pre">Residu
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Made plural to make consistent with corresponding property</p>
 </div>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.set_resnum">
 <code class="descname">set_resnum</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_resnum" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>set_resnum</cite> is deprecated, use <cite>set_resnums</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
+<p><cite>set_resnums</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>resnums</cite> property instead</p>
 <p>Set the resnums to <em>resnum</em> for <strong>all atoms</strong> in the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>.</p>
 <blockquote>
 <div><p>If <em>resnum</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
@@ -3172,9 +3019,12 @@ multiple residues with the same <em>resnum</em>.</p>
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.set_resnums">
-<code class="descname">set_resnums</code><span class="sig-paren">(</span><em>resnum</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/AtomGroup.html#AtomGroup.set_resnums"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_resnums" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the resnums to <em>resnum</em> for <strong>all atoms</strong> in the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>.</p>
-<p>If <em>resnum</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
+<code class="descname">set_resnums</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_resnums" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>set_resnums</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>resnums</cite> property instead</p>
+<p>Set the resnums to <em>resnum</em> for <strong>all atoms</strong> in the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>.</p>
+<blockquote>
+<div><p>If <em>resnum</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.resnum" title="MDAnalysis.core.AtomGroup.Atom.resnum"><code class="xref py py-attr docutils literal"><span class="pre">Atom.resnum</span></code></a> is set to the corresponding value together
 with the <code class="xref py py-attr docutils literal"><span class="pre">Residue.resnum</span></code> of the residue the atom belongs to. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
@@ -3200,13 +3050,16 @@ multiple residues with the same <em>resnum</em>.</p>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Made plural to make consistent with corresponding property</p>
 </div>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.set_segid">
 <code class="descname">set_segid</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_segid" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>set_segid</cite> is deprecated, use <cite>set_segids</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
+<p><cite>set_segids</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>segids</cite> property instead</p>
 <p>Set the segids to <em>segid</em> for all atoms in the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>.</p>
 <blockquote>
 <div><p>If <em>segid</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
@@ -3236,9 +3089,12 @@ results in Segments being regenerated</p>
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.set_segids">
-<code class="descname">set_segids</code><span class="sig-paren">(</span><em>segid</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/AtomGroup.html#AtomGroup.set_segids"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_segids" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the segids to <em>segid</em> for all atoms in the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>.</p>
-<p>If <em>segid</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
+<code class="descname">set_segids</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_segids" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>set_segids</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>segids</cite> property instead</p>
+<p>Set the segids to <em>segid</em> for all atoms in the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>.</p>
+<blockquote>
+<div><p>If <em>segid</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.segid" title="MDAnalysis.core.AtomGroup.Atom.segid"><code class="xref py py-attr docutils literal"><span class="pre">Atom.segid</span></code></a> is set to the corresponding value together
 with the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Segment.id" title="MDAnalysis.core.AtomGroup.Segment.id"><code class="xref py py-attr docutils literal"><span class="pre">Segment.id</span></code></a> of the residue the atom belongs to. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
@@ -3260,13 +3116,16 @@ results in Segments being regenerated</p>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Made plural to make consistent with corresponding property</p>
 </div>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.set_serial">
 <code class="descname">set_serial</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_serial" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>set_serial</cite> is deprecated, use <cite>set_serials</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
+<p><cite>set_serials</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>serials</cite> property instead</p>
 <p>Set the serials to <em>serial</em> for <strong>all atoms</strong> in the AtomGroup.</p>
 <blockquote>
 <div><p>If <em>serial</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
@@ -3281,22 +3140,28 @@ then each <code class="xref py py-attr docutils literal"><span class="pre">Atom.
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.set_serials">
-<code class="descname">set_serials</code><span class="sig-paren">(</span><em>serial</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/AtomGroup.html#AtomGroup.set_serials"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_serials" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the serials to <em>serial</em> for <strong>all atoms</strong> in the AtomGroup.</p>
-<p>If <em>serial</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
+<code class="descname">set_serials</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_serials" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>set_serials</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>serials</cite> property instead</p>
+<p>Set the serials to <em>serial</em> for <strong>all atoms</strong> in the AtomGroup.</p>
+<blockquote>
+<div><p>If <em>serial</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
 then each <code class="xref py py-attr docutils literal"><span class="pre">Atom.serial</span></code> is set to the corresponding value. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.11.0.</span></p>
 </div>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.set_type">
 <code class="descname">set_type</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_type" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>set_type</cite> is deprecated, use <cite>set_types</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
+<p><cite>set_types</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>types</cite> property instead</p>
 <p>Set the atom types to <em>atype</em> for <strong>all atoms</strong> in the AtomGroup.</p>
 <blockquote>
 <div><p>If <em>atype</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
@@ -3317,9 +3182,12 @@ then each <code class="xref py py-attr docutils literal"><span class="pre">Atom.
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.set_types">
-<code class="descname">set_types</code><span class="sig-paren">(</span><em>atype</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/AtomGroup.html#AtomGroup.set_types"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_types" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the atom types to <em>atype</em> for <strong>all atoms</strong> in the AtomGroup.</p>
-<p>If <em>atype</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
+<code class="descname">set_types</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_types" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>set_types</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>types</cite> property instead</p>
+<p>Set the atom types to <em>atype</em> for <strong>all atoms</strong> in the AtomGroup.</p>
+<blockquote>
+<div><p>If <em>atype</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
 then each <code class="xref py py-attr docutils literal"><span class="pre">Atom.atype</span></code> is set to the corresponding value. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
@@ -3332,13 +3200,17 @@ then each <code class="xref py py-attr docutils literal"><span class="pre">Atom.
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Made plural to make consistent with corresponding property</p>
 </div>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.set_velocities">
-<code class="descname">set_velocities</code><span class="sig-paren">(</span><em>v</em>, <em>ts=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/AtomGroup.html#AtomGroup.set_velocities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_velocities" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign the velocities <em>v</em> to the timestep.</p>
-<p>Raises a <a class="reference internal" href="#MDAnalysis.core.AtomGroup.NoDataError" title="MDAnalysis.core.AtomGroup.NoDataError"><code class="xref py py-exc docutils literal"><span class="pre">NoDataError</span></code></a> if the underlying
+<code class="descname">set_velocities</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_velocities" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>set_velocities</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>velocities</cite> property instead</p>
+<p>Assign the velocities <em>v</em> to the timestep.</p>
+<blockquote>
+<div><p>Raises a <a class="reference internal" href="#MDAnalysis.core.AtomGroup.NoDataError" title="MDAnalysis.core.AtomGroup.NoDataError"><code class="xref py py-exc docutils literal"><span class="pre">NoDataError</span></code></a> if the underlying
 <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep" title="MDAnalysis.coordinates.base.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a> does not contain
 <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.Timestep.velocities" title="MDAnalysis.coordinates.base.Timestep.velocities"><code class="xref py py-attr docutils literal"><span class="pre">velocities</span></code></a>.</p>
 <p>See also <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup.get_velocities" title="MDAnalysis.core.AtomGroup.AtomGroup.get_velocities"><code class="xref py py-meth docutils literal"><span class="pre">AtomGroup.get_velocities()</span></code></a> and <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup.velocities" title="MDAnalysis.core.AtomGroup.AtomGroup.velocities"><code class="xref py py-attr docutils literal"><span class="pre">AtomGroup.velocities</span></code></a> for
@@ -3346,13 +3218,14 @@ attribute access.</p>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.7.6.</span></p>
 </div>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.shapeParameter">
 <code class="descname">shapeParameter</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.shapeParameter" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>shapeParameter</cite> is deprecated, use <cite>shape_parameter</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
 <p>Shape parameter.</p>
 <blockquote>
 <div><p>See <a class="reference internal" href="#dima2004" id="id28">[Dima2004]</a> for background information.</p>
@@ -3426,7 +3299,7 @@ flag to be used by default.</p>
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.totalCharge">
 <code class="descname">totalCharge</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.totalCharge" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>totalCharge</cite> is deprecated, use <cite>total_charge</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
 <p>Sum of all partial charges (must be defined in topology).</p>
 </dd></dl>
 
@@ -3434,7 +3307,7 @@ This will be removed in version 0.15.0</p>
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.totalMass">
 <code class="descname">totalMass</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.totalMass" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>totalMass</cite> is deprecated, use <cite>total_mass</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
 <p>Total mass of the selection (masses are taken from the topology or guessed).</p>
 </dd></dl>
 
@@ -3504,18 +3377,6 @@ difference between the centers of geometry (centroid) of B and A:</p>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.AtomGroup.AtomGroup.types">
-<code class="descname">types</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.types" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns an array of atom types.</p>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.9.0.</span></p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Now a property</p>
-</div>
 </dd></dl>
 
 <dl class="attribute">
@@ -3647,9 +3508,12 @@ selections out.</p>
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.write_selection">
-<code class="descname">write_selection</code><span class="sig-paren">(</span><em>filename=None</em>, <em>format='vmd'</em>, <em>filenamefmt='%(trjname)s_%(frame)d'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/AtomGroup.html#AtomGroup.write_selection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.write_selection" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write AtomGroup selection to a file to be used in another programme.</p>
-<table class="docutils field-list" frame="void" rules="none">
+<code class="descname">write_selection</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.write_selection" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>write_selection</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>write</cite> method instead</p>
+<p>Write AtomGroup selection to a file to be used in another programme.</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -3678,6 +3542,7 @@ placeholders; the extension is set according to the <em>format</em>
 <div class="deprecated">
 <p><span class="versionmodified">Deprecated since version 0.9.0: </span>Use <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup.write" title="MDAnalysis.core.AtomGroup.AtomGroup.write"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a></p>
 </div>
+</div></blockquote>
 </dd></dl>
 
 </dd></dl>
@@ -3884,8 +3749,10 @@ that this atom is present in.</p>
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.Atom.centroid">
-<code class="descname">centroid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/AtomGroup.html#Atom.centroid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.AtomGroup.Atom.centroid" title="Permalink to this definition">¶</a></dt>
-<dd><p>The centroid of an atom is its position, <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.position" title="MDAnalysis.core.AtomGroup.Atom.position"><code class="xref py py-attr docutils literal"><span class="pre">Atom.position</span></code></a>.</p>
+<code class="descname">centroid</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.Atom.centroid" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>centroid</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>position</cite> property instead</p>
+<p>The centroid of an atom is its position, <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.position" title="MDAnalysis.core.AtomGroup.Atom.position"><code class="xref py py-attr docutils literal"><span class="pre">Atom.position</span></code></a>.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -3930,6 +3797,12 @@ does not contain velocities.</p>
 
 <dl class="attribute">
 <dt>
+<code class="descname">id</code></dt>
+<dd><p>The atom id of this atom</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
 <code class="descname">impropers</code></dt>
 <dd><p>A TopologyGroup of the improper dihedrals that this Atom is in</p>
 <div class="versionchanged">
@@ -3940,7 +3813,9 @@ does not contain velocities.</p>
 <dl class="attribute">
 <dt id="MDAnalysis.core.AtomGroup.Atom.number">
 <code class="descname">number</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.Atom.number" title="Permalink to this definition">¶</a></dt>
-<dd><p>The index of this atom</p>
+<dd><p><cite>number</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>index</cite> property instead</p>
+<p>The index of this atom</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -3966,11 +3841,15 @@ occupancy of Atom</li>
 <dl class="attribute">
 <dt id="MDAnalysis.core.AtomGroup.Atom.pos">
 <code class="descname">pos</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.Atom.pos" title="Permalink to this definition">¶</a></dt>
-<dd><p>coordinates of the atom</p>
-<p>Get the current cartesian coordinates of the atom (read-only).</p>
+<dd><p><cite>pos</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>position</cite> property instead</p>
+<p>coordinates of the atom</p>
+<blockquote>
+<div><p>Get the current cartesian coordinates of the atom (read-only).</p>
 <div class="deprecated">
 <p><span class="versionmodified">Deprecated since version 0.8: </span>use <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.position" title="MDAnalysis.core.AtomGroup.Atom.position"><code class="xref py py-attr docutils literal"><span class="pre">position</span></code></a></p>
 </div>
+</div></blockquote>
 </dd></dl>
 
 <dl class="attribute">
@@ -4041,10 +3920,10 @@ does not contain velocities.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Data:</th><td class="field-body"><dl class="first last docutils">
-<dt><code class="xref py py-attr docutils literal"><span class="pre">Residue.name</span></code></dt>
+<dt><a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue.name" title="MDAnalysis.core.AtomGroup.Residue.name"><code class="xref py py-attr docutils literal"><span class="pre">Residue.name</span></code></a></dt>
 <dd><p class="first last">Three letter residue name.</p>
 </dd>
-<dt><code class="xref py py-attr docutils literal"><span class="pre">Residue.id</span></code></dt>
+<dt><a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue.id" title="MDAnalysis.core.AtomGroup.Residue.id"><code class="xref py py-attr docutils literal"><span class="pre">Residue.id</span></code></a></dt>
 <dd><p class="first last">Numeric (integer) resid, taken from the topology.</p>
 </dd>
 <dt><code class="xref py py-attr docutils literal"><span class="pre">Residue.resnum</span></code></dt>
@@ -4080,6 +3959,20 @@ found then this method returns <code class="docutils literal"><span class="pre">
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.7.5.</span></p>
 </div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="MDAnalysis.core.AtomGroup.Residue.id">
+<code class="descname">id</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.Residue.id" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>id</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>resid</cite> property instead</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="MDAnalysis.core.AtomGroup.Residue.name">
+<code class="descname">name</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.Residue.name" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>name</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>resname</cite> property instead</p>
 </dd></dl>
 
 <dl class="method">
@@ -4163,62 +4056,6 @@ method returns <code class="docutils literal"><span class="pre">None</span></cod
 </tbody>
 </table>
 <p>Initialize the ResidueGroup with a list of <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue" title="MDAnalysis.core.AtomGroup.Residue"><code class="xref py py-class docutils literal"><span class="pre">Residue</span></code></a> instances.</p>
-<dl class="attribute">
-<dt id="MDAnalysis.core.AtomGroup.ResidueGroup.resids">
-<code class="descname">resids</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.ResidueGroup.resids" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns an array of residue numbers.</p>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.8: </span>Returns a <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a></p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Now a property and returns array of length <cite>len(self)</cite></p>
-</div>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.AtomGroup.ResidueGroup.resnames">
-<code class="descname">resnames</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.ResidueGroup.resnames" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns an array of residue names.</p>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.8: </span>Returns a <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a></p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Now a property and returns array of length <cite>len(self)</cite></p>
-</div>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.AtomGroup.ResidueGroup.resnums">
-<code class="descname">resnums</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.ResidueGroup.resnums" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns an array of canonical residue numbers.</p>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.7.4.</span></p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.8: </span>Returns a <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a></p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Now a property and returns array of length <cite>len(self)</cite></p>
-</div>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="MDAnalysis.core.AtomGroup.ResidueGroup.segids">
-<code class="descname">segids</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.ResidueGroup.segids" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns an array of segment names.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">uses the segment of the first atom in each residue for the
-segment name returned</p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.8: </span>Returns a <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a></p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Now a property and returns array of length <cite>len(self)</cite></p>
-</div>
-</dd></dl>
-
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.ResidueGroup.set">
 <code class="descname">set</code><span class="sig-paren">(</span><em>name</em>, <em>value</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.ResidueGroup.set" title="Permalink to this definition">¶</a></dt>
@@ -4240,13 +4077,15 @@ length of the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Res
 <dt id="MDAnalysis.core.AtomGroup.ResidueGroup.set_resid">
 <code class="descname">set_resid</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.ResidueGroup.set_resid" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>set_resid</cite> is deprecated, use <cite>set_resids</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
+<p><cite>set_resids</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>resids</cite> property instead</p>
 <dl class="docutils">
 <dt>Set the resids to integer <em>resid</em> for <strong>all residues</strong> in the</dt>
 <dd><p class="first"><a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup" title="MDAnalysis.core.AtomGroup.ResidueGroup"><code class="xref py py-class docutils literal"><span class="pre">ResidueGroup</span></code></a>.</p>
 <p>If <em>resid</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup" title="MDAnalysis.core.AtomGroup.ResidueGroup"><code class="xref py py-class docutils literal"><span class="pre">ResidueGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.resid" title="MDAnalysis.core.AtomGroup.Atom.resid"><code class="xref py py-attr docutils literal"><span class="pre">Atom.resid</span></code></a> is set to the corresponding value together
-with the <code class="xref py py-attr docutils literal"><span class="pre">Residue.id</span></code> of the residue the atom belongs to. If
+with the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue.id" title="MDAnalysis.core.AtomGroup.Residue.id"><code class="xref py py-attr docutils literal"><span class="pre">Residue.id</span></code></a> of the residue the atom belongs to. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
 <div class="admonition note">
@@ -4275,12 +4114,15 @@ everything else is derived from these atoms.</p>
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.ResidueGroup.set_resids">
-<code class="descname">set_resids</code><span class="sig-paren">(</span><em>resid</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/AtomGroup.html#ResidueGroup.set_resids"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.AtomGroup.ResidueGroup.set_resids" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the resids to integer <em>resid</em> for <strong>all residues</strong> in the
-<a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup" title="MDAnalysis.core.AtomGroup.ResidueGroup"><code class="xref py py-class docutils literal"><span class="pre">ResidueGroup</span></code></a>.</p>
+<code class="descname">set_resids</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.ResidueGroup.set_resids" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>set_resids</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>resids</cite> property instead</p>
+<dl class="docutils">
+<dt>Set the resids to integer <em>resid</em> for <strong>all residues</strong> in the</dt>
+<dd><p class="first"><a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup" title="MDAnalysis.core.AtomGroup.ResidueGroup"><code class="xref py py-class docutils literal"><span class="pre">ResidueGroup</span></code></a>.</p>
 <p>If <em>resid</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup" title="MDAnalysis.core.AtomGroup.ResidueGroup"><code class="xref py py-class docutils literal"><span class="pre">ResidueGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.resid" title="MDAnalysis.core.AtomGroup.Atom.resid"><code class="xref py py-attr docutils literal"><span class="pre">Atom.resid</span></code></a> is set to the corresponding value together
-with the <code class="xref py py-attr docutils literal"><span class="pre">Residue.id</span></code> of the residue the atom belongs to. If
+with the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue.id" title="MDAnalysis.core.AtomGroup.Residue.id"><code class="xref py py-attr docutils literal"><span class="pre">Residue.id</span></code></a> of the residue the atom belongs to. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
 <div class="admonition note">
@@ -4300,22 +4142,26 @@ everything else is derived from these atoms.</p>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.8.</span></p>
 </div>
-<div class="versionchanged">
+<div class="last versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Made plural to make consistent with corresponding property</p>
 </div>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.ResidueGroup.set_resname">
 <code class="descname">set_resname</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.ResidueGroup.set_resname" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>set_resname</cite> is deprecated, use <cite>set_resnames</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
+<p><cite>set_resnames</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>resnames</cite> property instead</p>
 <dl class="docutils">
 <dt>Set the resnames to string <em>resname</em> for <strong>all residues</strong> in the</dt>
 <dd><p class="first"><a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup" title="MDAnalysis.core.AtomGroup.ResidueGroup"><code class="xref py py-class docutils literal"><span class="pre">ResidueGroup</span></code></a>.</p>
 <p>If <em>resname</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup" title="MDAnalysis.core.AtomGroup.ResidueGroup"><code class="xref py py-class docutils literal"><span class="pre">ResidueGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.resname" title="MDAnalysis.core.AtomGroup.Atom.resname"><code class="xref py py-attr docutils literal"><span class="pre">Atom.resname</span></code></a> is set to the corresponding value together
-with the <code class="xref py py-attr docutils literal"><span class="pre">Residue.name</span></code> of the residue the atom belongs to. If
+with the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue.name" title="MDAnalysis.core.AtomGroup.Residue.name"><code class="xref py py-attr docutils literal"><span class="pre">Residue.name</span></code></a> of the residue the atom belongs to. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
 <div class="versionadded">
@@ -4336,12 +4182,15 @@ with the <code class="xref py py-attr docutils literal"><span class="pre">Residu
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.ResidueGroup.set_resnames">
-<code class="descname">set_resnames</code><span class="sig-paren">(</span><em>resname</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/AtomGroup.html#ResidueGroup.set_resnames"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.AtomGroup.ResidueGroup.set_resnames" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the resnames to string <em>resname</em> for <strong>all residues</strong> in the
-<a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup" title="MDAnalysis.core.AtomGroup.ResidueGroup"><code class="xref py py-class docutils literal"><span class="pre">ResidueGroup</span></code></a>.</p>
+<code class="descname">set_resnames</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.ResidueGroup.set_resnames" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>set_resnames</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>resnames</cite> property instead</p>
+<dl class="docutils">
+<dt>Set the resnames to string <em>resname</em> for <strong>all residues</strong> in the</dt>
+<dd><p class="first"><a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup" title="MDAnalysis.core.AtomGroup.ResidueGroup"><code class="xref py py-class docutils literal"><span class="pre">ResidueGroup</span></code></a>.</p>
 <p>If <em>resname</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup" title="MDAnalysis.core.AtomGroup.ResidueGroup"><code class="xref py py-class docutils literal"><span class="pre">ResidueGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.resname" title="MDAnalysis.core.AtomGroup.Atom.resname"><code class="xref py py-attr docutils literal"><span class="pre">Atom.resname</span></code></a> is set to the corresponding value together
-with the <code class="xref py py-attr docutils literal"><span class="pre">Residue.name</span></code> of the residue the atom belongs to. If
+with the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue.name" title="MDAnalysis.core.AtomGroup.Residue.name"><code class="xref py py-attr docutils literal"><span class="pre">Residue.name</span></code></a> of the residue the atom belongs to. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
 <div class="versionadded">
@@ -4353,16 +4202,20 @@ with the <code class="xref py py-attr docutils literal"><span class="pre">Residu
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.8: </span>Can set atoms and residues to distinct values by providing a sequence or iterable.</p>
 </div>
-<div class="versionchanged">
+<div class="last versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Made plural to make consistent with corresponding property</p>
 </div>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.ResidueGroup.set_resnum">
 <code class="descname">set_resnum</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.ResidueGroup.set_resnum" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>set_resnum</cite> is deprecated, use <cite>set_resnums</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
+<p><cite>set_resnums</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>resnums</cite> property instead</p>
 <p>Set the resnums to <em>resnum</em> for <strong>all residues</strong> in the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup" title="MDAnalysis.core.AtomGroup.ResidueGroup"><code class="xref py py-class docutils literal"><span class="pre">ResidueGroup</span></code></a>.</p>
 <blockquote>
 <div><p>If <em>resnum</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup" title="MDAnalysis.core.AtomGroup.ResidueGroup"><code class="xref py py-class docutils literal"><span class="pre">ResidueGroup</span></code></a>
@@ -4396,9 +4249,12 @@ multiple residues with the same <em>resnum</em>.</p>
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.ResidueGroup.set_resnums">
-<code class="descname">set_resnums</code><span class="sig-paren">(</span><em>resnum</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/AtomGroup.html#ResidueGroup.set_resnums"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.AtomGroup.ResidueGroup.set_resnums" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the resnums to <em>resnum</em> for <strong>all residues</strong> in the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup" title="MDAnalysis.core.AtomGroup.ResidueGroup"><code class="xref py py-class docutils literal"><span class="pre">ResidueGroup</span></code></a>.</p>
-<p>If <em>resnum</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup" title="MDAnalysis.core.AtomGroup.ResidueGroup"><code class="xref py py-class docutils literal"><span class="pre">ResidueGroup</span></code></a>
+<code class="descname">set_resnums</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.ResidueGroup.set_resnums" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>set_resnums</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>resnums</cite> property instead</p>
+<p>Set the resnums to <em>resnum</em> for <strong>all residues</strong> in the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup" title="MDAnalysis.core.AtomGroup.ResidueGroup"><code class="xref py py-class docutils literal"><span class="pre">ResidueGroup</span></code></a>.</p>
+<blockquote>
+<div><p>If <em>resnum</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup" title="MDAnalysis.core.AtomGroup.ResidueGroup"><code class="xref py py-class docutils literal"><span class="pre">ResidueGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.resnum" title="MDAnalysis.core.AtomGroup.Atom.resnum"><code class="xref py py-attr docutils literal"><span class="pre">Atom.resnum</span></code></a> is set to the corresponding value together
 with the <code class="xref py py-attr docutils literal"><span class="pre">Residue.resnum</span></code> of the residue the atom belongs to. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
@@ -4424,6 +4280,7 @@ multiple residues with the same <em>resnum</em>.</p>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Made plural to make consistent with corresponding property</p>
 </div>
+</div></blockquote>
 </dd></dl>
 
 </dd></dl>
@@ -4462,7 +4319,7 @@ segment (numbering starts at N=1). Example:</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Data:</th><td class="field-body"><code class="xref py py-attr docutils literal"><span class="pre">Segment.name</span></code> is the segid from the topology or the
+<tr class="field-odd field"><th class="field-name">Data:</th><td class="field-body"><a class="reference internal" href="#MDAnalysis.core.AtomGroup.Segment.segid" title="MDAnalysis.core.AtomGroup.Segment.segid"><code class="xref py py-attr docutils literal"><span class="pre">Segment.segid</span></code></a> is the segid from the topology or the
 chain identifier when loaded from a PDB</td>
 </tr>
 </tbody>
@@ -4471,7 +4328,22 @@ chain identifier when loaded from a PDB</td>
 <dl class="attribute">
 <dt id="MDAnalysis.core.AtomGroup.Segment.id">
 <code class="descname">id</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.Segment.id" title="Permalink to this definition">¶</a></dt>
-<dd><p>Segment id (alias for <code class="xref py py-attr docutils literal"><span class="pre">Segment.name</span></code>)</p>
+<dd><p><cite>id</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>segid</cite> property instead</p>
+<p>Segment id (alias for <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Segment.name" title="MDAnalysis.core.AtomGroup.Segment.name"><code class="xref py py-attr docutils literal"><span class="pre">Segment.name</span></code></a>)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="MDAnalysis.core.AtomGroup.Segment.name">
+<code class="descname">name</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.Segment.name" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>name</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>segid</cite> property instead</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="MDAnalysis.core.AtomGroup.Segment.segid">
+<code class="descname">segid</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.Segment.segid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Segment id (alias for <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Segment.name" title="MDAnalysis.core.AtomGroup.Segment.name"><code class="xref py py-attr docutils literal"><span class="pre">Segment.name</span></code></a>)</p>
 </dd></dl>
 
 </dd></dl>
@@ -4508,18 +4380,6 @@ character is prefixed with &#8216;s&#8217;, thus &#8216;4AKE&#8217; &#8211;&gt; 
 </tbody>
 </table>
 <p>Initialize the SegmentGroup with a list of <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Segment" title="MDAnalysis.core.AtomGroup.Segment"><code class="xref py py-class docutils literal"><span class="pre">Segment</span></code></a> instances.</p>
-<dl class="attribute">
-<dt id="MDAnalysis.core.AtomGroup.SegmentGroup.segids">
-<code class="descname">segids</code><a class="headerlink" href="#MDAnalysis.core.AtomGroup.SegmentGroup.segids" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns an array of segment names.</p>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.8: </span>Returns a <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a></p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.11.0: </span>Now a property and returns array of length <cite>len(self)</cite></p>
-</div>
-</dd></dl>
-
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.SegmentGroup.set">
 <code class="descname">set</code><span class="sig-paren">(</span><em>name</em>, <em>value</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.SegmentGroup.set" title="Permalink to this definition">¶</a></dt>
@@ -4538,7 +4398,9 @@ length of the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Seg
 <dt id="MDAnalysis.core.AtomGroup.SegmentGroup.set_segid">
 <code class="descname">set_segid</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.SegmentGroup.set_segid" title="Permalink to this definition">¶</a></dt>
 <dd><p><cite>set_segid</cite> is deprecated, use <cite>set_segids</cite> instead!
-This will be removed in version 0.15.0</p>
+This will be removed in version 0.16.0</p>
+<p><cite>set_segids</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>segids</cite> property instead</p>
 <p>Set the segids to <em>segid</em> for all atoms in the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.SegmentGroup" title="MDAnalysis.core.AtomGroup.SegmentGroup"><code class="xref py py-class docutils literal"><span class="pre">SegmentGroup</span></code></a>.</p>
 <blockquote>
 <div><p>If <em>segid</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.SegmentGroup" title="MDAnalysis.core.AtomGroup.SegmentGroup"><code class="xref py py-class docutils literal"><span class="pre">SegmentGroup</span></code></a>
@@ -4567,9 +4429,12 @@ single <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Segment" t
 
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.SegmentGroup.set_segids">
-<code class="descname">set_segids</code><span class="sig-paren">(</span><em>segid</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/AtomGroup.html#SegmentGroup.set_segids"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.AtomGroup.SegmentGroup.set_segids" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the segids to <em>segid</em> for all atoms in the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.SegmentGroup" title="MDAnalysis.core.AtomGroup.SegmentGroup"><code class="xref py py-class docutils literal"><span class="pre">SegmentGroup</span></code></a>.</p>
-<p>If <em>segid</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.SegmentGroup" title="MDAnalysis.core.AtomGroup.SegmentGroup"><code class="xref py py-class docutils literal"><span class="pre">SegmentGroup</span></code></a>
+<code class="descname">set_segids</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.SegmentGroup.set_segids" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>set_segids</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>segids</cite> property instead</p>
+<p>Set the segids to <em>segid</em> for all atoms in the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.SegmentGroup" title="MDAnalysis.core.AtomGroup.SegmentGroup"><code class="xref py py-class docutils literal"><span class="pre">SegmentGroup</span></code></a>.</p>
+<blockquote>
+<div><p>If <em>segid</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.SegmentGroup" title="MDAnalysis.core.AtomGroup.SegmentGroup"><code class="xref py py-class docutils literal"><span class="pre">SegmentGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.segid" title="MDAnalysis.core.AtomGroup.Atom.segid"><code class="xref py py-attr docutils literal"><span class="pre">Atom.segid</span></code></a> is set to the corresponding value together
 with the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Segment.id" title="MDAnalysis.core.AtomGroup.Segment.id"><code class="xref py py-attr docutils literal"><span class="pre">Segment.id</span></code></a> of the segment the atom belongs to. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
@@ -4590,15 +4455,19 @@ single <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Segment" t
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Made plural to make consistent with corresponding property</p>
 </div>
+</div></blockquote>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="function">
 <dt id="MDAnalysis.core.AtomGroup.as_Universe">
-<code class="descclassname">MDAnalysis.core.AtomGroup.</code><code class="descname">as_Universe</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/AtomGroup.html#as_Universe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.AtomGroup.as_Universe" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a universe from the input arguments.</p>
-<ol class="arabic">
+<code class="descclassname">MDAnalysis.core.AtomGroup.</code><code class="descname">as_Universe</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.as_Universe" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>as_Universe</cite> is deprecated!
+This will be removed in version 0.16.0</p>
+<p>Return a universe from the input arguments.</p>
+<blockquote>
+<div><ol class="arabic">
 <li><p class="first">If the first argument is a universe, just return it:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span>as_Universe(universe) --&gt; universe
 </pre></div>
@@ -4621,6 +4490,7 @@ as_Universe(*args, **kwargs) --&gt; Universe(*args, **kwargs)
 </tr>
 </tbody>
 </table>
+</div></blockquote>
 </dd></dl>
 
 <dl class="exception">

@@ -531,7 +531,83 @@
 <span class="c1"># And the return route</span>
 <span class="n">_SINGULAR_PROPERTIES</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">_PLURAL_PROPERTIES</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
 
-<span class="n">_FIFTEEN_DEPRECATION</span> <span class="o">=</span> <span class="s2">&quot;This will be removed in version 0.15.0&quot;</span>
+<span class="n">_SIXTEEN_DEPRECATION</span> <span class="o">=</span> <span class="s2">&quot;This will be removed in version 0.16.0&quot;</span>
+
+<span class="k">def</span> <span class="nf">warn_atom_property</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="n">warnstring</span> <span class="o">=</span> <span class="s2">&quot;In version 0.16.0, use `{}.atoms.{}` instead.&quot;</span>
+
+    <span class="k">def</span> <span class="nf">outfunc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">SegmentGroup</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">warnstring</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;segmentgroup&#39;</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="n">__name__</span><span class="p">),</span>
+                          <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Segment</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">warnstring</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;segment&#39;</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="n">__name__</span><span class="p">),</span>
+                          <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ResidueGroup</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">warnstring</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;residuegroup&#39;</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="n">__name__</span><span class="p">),</span>
+                          <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Residue</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">warnstring</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;residue&#39;</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="n">__name__</span><span class="p">),</span>
+                          <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">AtomGroup</span><span class="p">):</span>
+            <span class="k">pass</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Atom</span><span class="p">):</span>
+            <span class="k">pass</span>
+
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">outfunc</span>
+
+<span class="k">def</span> <span class="nf">warn_residue_property</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="n">warnstring</span> <span class="o">=</span> <span class="s2">&quot;In version 0.16.0, use `{}.residues.{}` instead.&quot;</span>
+    <span class="n">warnstring_sing</span> <span class="o">=</span> <span class="s2">&quot;In version 0.16.0, use `{}.atoms.{}` instead.&quot;</span>
+
+    <span class="k">def</span> <span class="nf">outfunc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">SegmentGroup</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">warnstring</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;segmentgroup&#39;</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="n">__name__</span><span class="p">),</span>
+                          <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Segment</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">warnstring</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;segment&#39;</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="n">__name__</span><span class="p">),</span>
+                          <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ResidueGroup</span><span class="p">):</span>
+            <span class="k">pass</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Residue</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">warnstring_sing</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;residue&#39;</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="n">__name__</span><span class="p">),</span>
+                          <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">AtomGroup</span><span class="p">):</span>
+            <span class="k">pass</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Atom</span><span class="p">):</span>
+            <span class="k">pass</span>
+
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">outfunc</span>
+
+<span class="k">def</span> <span class="nf">warn_segment_property</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="n">warnstring</span> <span class="o">=</span> <span class="s2">&quot;In version 0.16.0, use `{}.segments.{}` instead.&quot;</span>
+    <span class="n">warnstring_sing</span> <span class="o">=</span> <span class="s2">&quot;In version 0.16.0, use `{}.atoms.{}` instead.&quot;</span>
+
+    <span class="k">def</span> <span class="nf">outfunc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">SegmentGroup</span><span class="p">):</span>
+            <span class="k">pass</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Segment</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;In version 0.16.0, Use &#39;segment.residues.{}&#39; instead.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">__name__</span><span class="p">),</span>
+                          <span class="ne">DeprecationWarning</span><span class="p">)</span>
+            <span class="k">pass</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ResidueGroup</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">warnstring</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;residuegroup&#39;</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="n">__name__</span><span class="p">),</span>
+                          <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Residue</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">warnstring_sing</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;residue&#39;</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="n">__name__</span><span class="p">),</span>
+                          <span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">AtomGroup</span><span class="p">):</span>
+            <span class="k">pass</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Atom</span><span class="p">):</span>
+            <span class="k">pass</span>
+
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">outfunc</span>
 
 
 <span class="nd">@functools.total_ordering</span>
@@ -566,7 +642,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">__slots__</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="s2">&quot;index&quot;</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="s2">&quot;resname&quot;</span><span class="p">,</span> <span class="s2">&quot;resid&quot;</span><span class="p">,</span> <span class="s2">&quot;segid&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;index&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="s2">&quot;resname&quot;</span><span class="p">,</span> <span class="s2">&quot;resid&quot;</span><span class="p">,</span> <span class="s2">&quot;segid&quot;</span><span class="p">,</span>
         <span class="s2">&quot;mass&quot;</span><span class="p">,</span> <span class="s2">&quot;charge&quot;</span><span class="p">,</span> <span class="s2">&quot;residue&quot;</span><span class="p">,</span> <span class="s2">&quot;segment&quot;</span><span class="p">,</span>
         <span class="s2">&quot;_universe&quot;</span><span class="p">,</span>
         <span class="s2">&quot;radius&quot;</span><span class="p">,</span> <span class="s2">&quot;bfactor&quot;</span><span class="p">,</span> <span class="s2">&quot;resnum&quot;</span><span class="p">,</span> <span class="s2">&quot;serial&quot;</span><span class="p">,</span> <span class="s2">&quot;altLoc&quot;</span><span class="p">)</span>
@@ -620,11 +696,21 @@
             <span class="k">return</span> <span class="n">AtomGroup</span><span class="p">([</span><span class="bp">self</span><span class="p">]</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">_atoms</span><span class="p">)</span>
 
     <span class="nd">@property</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `index` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
     <span class="k">def</span> <span class="nf">number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;The index of this atom&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span>
 
     <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The atom id of this atom&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">serial</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">serial</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `position` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
     <span class="k">def</span> <span class="nf">pos</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;coordinates of the atom</span>
 
@@ -745,10 +831,11 @@
         <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="n">NoDataError</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="s2">&quot;Timestep does not contain forces&quot;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Atom.centroid"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.Atom.centroid">[docs]</a>    <span class="k">def</span> <span class="nf">centroid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `position` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">centroid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;The centroid of an atom is its position, :attr:`Atom.position`.&quot;&quot;&quot;</span>
         <span class="c1"># centroid exists for compatibility with AtomGroup</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">universe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -759,6 +846,7 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_universe</span>
 
     <span class="nd">@universe.setter</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; Atoms will not be able to leave their Universes.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
     <span class="k">def</span> <span class="nf">universe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_universe</span> <span class="o">=</span> <span class="n">new</span>
 
@@ -1116,6 +1204,9 @@
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Cannot slice with type: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">item</span><span class="p">)))</span></div>
 
     <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ResidueGroup</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;In version 0.16.0 this will select &quot;</span>
+                          <span class="s2">&quot;residue names, not atom names &quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_named_atom</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">SelectionError</span><span class="p">:</span>
@@ -1217,6 +1308,7 @@
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">segments</span><span class="p">)</span>
 
     <span class="nd">@property</span>
+    <span class="nd">@warn_atom_property</span>
     <span class="nd">@cached</span><span class="p">(</span><span class="s1">&#39;indices&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">indices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Array of all :attr:`Atom.index` in the group.</span>
@@ -1234,6 +1326,7 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">atom</span><span class="o">.</span><span class="n">index</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atoms</span><span class="p">])</span>
 
     <span class="nd">@property</span>
+    <span class="nd">@warn_atom_property</span>
     <span class="nd">@cached</span><span class="p">(</span><span class="s1">&#39;masses&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">masses</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Array of atomic masses (as defined in the topology)</span>
@@ -1244,9 +1337,10 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">atom</span><span class="o">.</span><span class="n">mass</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atoms</span><span class="p">])</span>
 
     <span class="nd">@masses.setter</span>
+    <span class="nd">@warn_atom_property</span>
     <span class="k">def</span> <span class="nf">masses</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_clear_caches</span><span class="p">(</span><span class="s1">&#39;masses&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_masses</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;mass&quot;</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">conversion</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="s2">&quot;masses&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AtomGroup.total_mass"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.total_mass">[docs]</a>    <span class="k">def</span> <span class="nf">total_mass</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Total mass of the selection (masses are taken from the topology or guessed).&quot;&quot;&quot;</span>
@@ -1255,9 +1349,10 @@
     <span class="n">totalMass</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">total_mass</span><span class="p">,</span>
                           <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;totalMass&#39;</span><span class="p">,</span>
                           <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;total_mass&#39;</span><span class="p">,</span>
-                          <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                          <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
     <span class="nd">@property</span>
+    <span class="nd">@warn_atom_property</span>
     <span class="k">def</span> <span class="nf">occupancies</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Access occupancies of atoms</span>
 
@@ -1276,6 +1371,7 @@
             <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="s1">&#39;Timestep does not contain occupancy&#39;</span><span class="p">)</span>
 
     <span class="nd">@occupancies.setter</span>
+    <span class="nd">@warn_atom_property</span>
     <span class="k">def</span> <span class="nf">occupancies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">coord</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;occupancy&#39;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">]</span> <span class="o">=</span> <span class="n">new</span>
@@ -1285,6 +1381,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">coord</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;occupancy&#39;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">]</span> <span class="o">=</span> <span class="n">new</span>
 
     <span class="nd">@property</span>
+    <span class="nd">@warn_atom_property</span>
     <span class="k">def</span> <span class="nf">charges</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Array of partial charges of the atoms (as defined in the topology)</span>
 
@@ -1294,8 +1391,9 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">atom</span><span class="o">.</span><span class="n">charge</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atoms</span><span class="p">])</span>
 
     <span class="nd">@charges.setter</span>
+    <span class="nd">@warn_atom_property</span>
     <span class="k">def</span> <span class="nf">charges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_charges</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;charge&quot;</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">conversion</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AtomGroup.total_charge"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.total_charge">[docs]</a>    <span class="k">def</span> <span class="nf">total_charge</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Sum of all partial charges (must be defined in topology).&quot;&quot;&quot;</span>
@@ -1304,9 +1402,10 @@
     <span class="n">totalCharge</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">total_charge</span><span class="p">,</span>
                             <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;totalCharge&#39;</span><span class="p">,</span>
                             <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;total_charge&#39;</span><span class="p">,</span>
-                            <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                            <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
     <span class="nd">@property</span>
+    <span class="nd">@warn_atom_property</span>
     <span class="k">def</span> <span class="nf">names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns an array of atom names.</span>
 
@@ -1318,10 +1417,12 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atoms</span><span class="p">])</span>
 
     <span class="nd">@names.setter</span>
+    <span class="nd">@warn_atom_property</span>
     <span class="k">def</span> <span class="nf">names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_names</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">conversion</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
 
     <span class="nd">@property</span>
+    <span class="nd">@warn_atom_property</span>
     <span class="k">def</span> <span class="nf">types</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns an array of atom types.</span>
 
@@ -1332,10 +1433,12 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">type</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atoms</span><span class="p">])</span>
 
     <span class="nd">@types.setter</span>
+    <span class="nd">@warn_atom_property</span>
     <span class="k">def</span> <span class="nf">types</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_types</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="n">new</span><span class="p">)</span>
 
     <span class="nd">@property</span>
+    <span class="nd">@warn_atom_property</span>
     <span class="k">def</span> <span class="nf">radii</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Array of atomic radii (as defined in the PQR file)</span>
 
@@ -1345,20 +1448,24 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">atom</span><span class="o">.</span><span class="n">radius</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atoms</span><span class="p">])</span>
 
     <span class="nd">@radii.setter</span>
+    <span class="nd">@warn_atom_property</span>
     <span class="k">def</span> <span class="nf">radii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_radii</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;radius&quot;</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">conversion</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
     <span class="nd">@property</span>
+    <span class="nd">@warn_atom_property</span>
     <span class="k">def</span> <span class="nf">bfactors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Crystallographic B-factors (from PDB) in A**2.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">atom</span><span class="o">.</span><span class="n">bfactor</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atoms</span><span class="p">])</span>
 
     <span class="nd">@bfactors.setter</span>
+    <span class="nd">@warn_atom_property</span>
     <span class="k">def</span> <span class="nf">bfactors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_bfactors</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;bfactor&quot;</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">conversion</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
     <span class="nd">@property</span>
+    <span class="nd">@warn_atom_property</span>
     <span class="k">def</span> <span class="nf">altLocs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;numpy array of the altLocs for all atoms in this group</span>
 
@@ -1367,10 +1474,12 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">atom</span><span class="o">.</span><span class="n">altLoc</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atoms</span><span class="p">])</span>
 
     <span class="nd">@altLocs.setter</span>
+    <span class="nd">@warn_atom_property</span>
     <span class="k">def</span> <span class="nf">altLocs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_altlocs</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;altLoc&quot;</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">conversion</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
 
     <span class="nd">@property</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `ids` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
     <span class="k">def</span> <span class="nf">serials</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;numpy array of the serials for all atoms in this group</span>
 
@@ -1379,8 +1488,31 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">atom</span><span class="o">.</span><span class="n">serial</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atoms</span><span class="p">])</span>
 
     <span class="nd">@serials.setter</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `ids` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
     <span class="k">def</span> <span class="nf">serials</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_serials</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;serial&quot;</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">conversion</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@warn_atom_property</span>
+    <span class="k">def</span> <span class="nf">ids</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Array of the atom ids for all atoms in this group.</span>
+
+<span class="sd">        Atom ids are defined by the topology file the universe was built from,</span>
+<span class="sd">        and need not start from 0. They are usually unique to each atom, but</span>
+<span class="sd">        need not be.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">atom</span><span class="o">.</span><span class="n">serial</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atoms</span><span class="p">])</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">out</span><span class="p">):</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">atom</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atoms</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">out</span>
+
+    <span class="nd">@ids.setter</span>
+    <span class="nd">@warn_atom_property</span>
+    <span class="k">def</span> <span class="nf">ids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;serial&quot;</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">conversion</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="nd">@cached</span><span class="p">(</span><span class="s1">&#39;residues&#39;</span><span class="p">)</span>
@@ -1427,6 +1559,7 @@
         <span class="k">return</span> <span class="n">SegmentGroup</span><span class="p">(</span><span class="n">segments</span><span class="p">)</span>
 
     <span class="nd">@property</span>
+    <span class="nd">@warn_residue_property</span>
     <span class="k">def</span> <span class="nf">resids</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns an array of residue numbers.</span>
 
@@ -1438,10 +1571,24 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">resid</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atoms</span><span class="p">])</span>
 
     <span class="nd">@resids.setter</span>
+    <span class="nd">@warn_residue_property</span>
     <span class="k">def</span> <span class="nf">resids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_resids</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+        <span class="kn">from</span> <span class="nn">MDAnalysis.topology.core</span> <span class="kn">import</span> <span class="n">build_residues</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;resid&quot;</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">conversion</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="c1"># Note that this also automagically updates THIS AtomGroup;</span>
+        <span class="c1"># the side effect of build_residues(self.atoms) is to update all Atoms!!!!</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fill_cache</span><span class="p">(</span><span class="s1">&#39;residues&#39;</span><span class="p">,</span> <span class="n">ResidueGroup</span><span class="p">(</span><span class="n">build_residues</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">)))</span>
+
+        <span class="c1"># make sure to update the whole universe: the Atoms are shared but</span>
+        <span class="c1"># ResidueGroups are not</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">_fill_cache</span><span class="p">(</span>
+                    <span class="s1">&#39;residues&#39;</span><span class="p">,</span>
+                    <span class="n">ResidueGroup</span><span class="p">(</span><span class="n">build_residues</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">)))</span>
 
     <span class="nd">@property</span>
+    <span class="nd">@warn_residue_property</span>
     <span class="k">def</span> <span class="nf">resnames</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns an array of residue names.</span>
 
@@ -1453,10 +1600,12 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">resname</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atoms</span><span class="p">])</span>
 
     <span class="nd">@resnames.setter</span>
+    <span class="nd">@warn_residue_property</span>
     <span class="k">def</span> <span class="nf">resnames</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_resnames</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;resname&quot;</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">conversion</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
 
     <span class="nd">@property</span>
+    <span class="nd">@warn_residue_property</span>
     <span class="k">def</span> <span class="nf">resnums</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns an array of canonical residue numbers.</span>
 
@@ -1469,10 +1618,12 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">resnum</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atoms</span><span class="p">])</span>
 
     <span class="nd">@resnums.setter</span>
+    <span class="nd">@warn_residue_property</span>
     <span class="k">def</span> <span class="nf">resnums</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_resnums</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;resnum&quot;</span><span class="p">,</span> <span class="n">new</span><span class="p">)</span>
 
     <span class="nd">@property</span>
+    <span class="nd">@warn_segment_property</span>
     <span class="k">def</span> <span class="nf">segids</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns an array of segment names.</span>
 
@@ -1484,8 +1635,25 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">segid</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atoms</span><span class="p">])</span>
 
     <span class="nd">@segids.setter</span>
+    <span class="nd">@warn_segment_property</span>
     <span class="k">def</span> <span class="nf">segids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_segids</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+        <span class="kn">from</span> <span class="nn">MDAnalysis.topology.core</span> <span class="kn">import</span> <span class="n">build_segments</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;segid&quot;</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">conversion</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+
+        <span class="c1"># also updates convenience handles for segments in universe</span>
+        <span class="n">segments</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">_build_segments</span><span class="p">()</span>
+
+        <span class="c1"># Note that this also automagically updates THIS AtomGroup;</span>
+        <span class="c1"># the side effect of build_residues(self.atoms) is to update all Atoms!!!!</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fill_cache</span><span class="p">(</span><span class="s1">&#39;segments&#39;</span><span class="p">,</span> <span class="n">SegmentGroup</span><span class="p">(</span><span class="n">segments</span><span class="p">))</span>
+
+        <span class="c1"># make sure to update the whole universe: the Atoms are shared but</span>
+        <span class="c1"># ResidueGroups are not</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">_fill_cache</span><span class="p">(</span>
+                    <span class="s1">&#39;segments&#39;</span><span class="p">,</span>
+                    <span class="n">SegmentGroup</span><span class="p">(</span><span class="n">segments</span><span class="p">))</span>
 
 <div class="viewcode-block" id="AtomGroup.sequence"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.sequence">[docs]</a>    <span class="k">def</span> <span class="nf">sequence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the amino acid sequence.</span>
@@ -1592,7 +1760,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">fragment</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atoms</span><span class="p">))</span>
 
-<div class="viewcode-block" id="AtomGroup.guess_bonds"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.guess_bonds">[docs]</a>    <span class="k">def</span> <span class="nf">guess_bonds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vdwradii</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="nd">@warn_atom_property</span>
+    <span class="k">def</span> <span class="nf">guess_bonds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vdwradii</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Guess all the bonds that exist within this AtomGroup and add to Universe.</span>
 
 <span class="sd">        :Keywords:</span>
@@ -1635,9 +1804,10 @@
         <span class="n">tgroup</span> <span class="o">=</span> <span class="n">top</span><span class="o">.</span><span class="n">TopologyGroup</span><span class="o">.</span><span class="n">from_indices</span><span class="p">(</span><span class="n">new_t</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">,</span>
                                                             <span class="n">bondclass</span><span class="o">=</span><span class="n">top</span><span class="o">.</span><span class="n">Dihedral</span><span class="p">,</span> <span class="n">guessed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">dihedrals</span> <span class="o">+=</span> <span class="n">tgroup</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_clear_caches</span><span class="p">(</span><span class="s1">&#39;dihedrals&#39;</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_clear_caches</span><span class="p">(</span><span class="s1">&#39;dihedrals&#39;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
+    <span class="nd">@warn_atom_property</span>
     <span class="nd">@cached</span><span class="p">(</span><span class="s1">&#39;bonds&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">bonds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;All the bonds in this AtomGroup</span>
@@ -1655,6 +1825,7 @@
         <span class="k">return</span> <span class="n">top</span><span class="o">.</span><span class="n">TopologyGroup</span><span class="p">(</span><span class="n">mybonds</span><span class="p">)</span>
 
     <span class="nd">@property</span>
+    <span class="nd">@warn_atom_property</span>
     <span class="nd">@cached</span><span class="p">(</span><span class="s1">&#39;angles&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">angles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;All the angles in this AtomGroup</span>
@@ -1672,6 +1843,7 @@
         <span class="k">return</span> <span class="n">top</span><span class="o">.</span><span class="n">TopologyGroup</span><span class="p">(</span><span class="n">mybonds</span><span class="p">)</span>
 
     <span class="nd">@property</span>
+    <span class="nd">@warn_atom_property</span>
     <span class="nd">@cached</span><span class="p">(</span><span class="s1">&#39;dihedrals&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">dihedrals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;All the dihedrals in this AtomGroup</span>
@@ -1689,6 +1861,7 @@
         <span class="k">return</span> <span class="n">top</span><span class="o">.</span><span class="n">TopologyGroup</span><span class="p">(</span><span class="n">mybonds</span><span class="p">)</span>
 
     <span class="nd">@property</span>
+    <span class="nd">@warn_atom_property</span>
     <span class="nd">@cached</span><span class="p">(</span><span class="s1">&#39;impropers&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">impropers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;All the improper dihedrals in this AtomGroup</span>
@@ -1780,7 +1953,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">occupancies</span> <span class="o">=</span> <span class="n">occupancies</span></div>
 
-<div class="viewcode-block" id="AtomGroup.set_names"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.set_names">[docs]</a>    <span class="k">def</span> <span class="nf">set_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `names` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">set_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the atom names to string for *all atoms* in the AtomGroup.</span>
 
 <span class="sd">        If *value* is a sequence of the same length as the :class:`AtomGroup`</span>
@@ -1794,14 +1968,15 @@
 <span class="sd">        .. versionchanged:: 0.11.0</span>
 <span class="sd">           Made plural to make consistent with corresponding property</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">conversion</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">conversion</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
 
     <span class="n">set_name</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">set_names</span><span class="p">,</span>
                          <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;set_name&#39;</span><span class="p">,</span>
                          <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;set_names&#39;</span><span class="p">,</span>
-                         <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                         <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
-<div class="viewcode-block" id="AtomGroup.set_resids"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.set_resids">[docs]</a>    <span class="k">def</span> <span class="nf">set_resids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resid</span><span class="p">):</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `resids` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">set_resids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resid</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the resids to integer *resid* for **all atoms** in the :class:`AtomGroup`.</span>
 
 <span class="sd">        If *resid* is a sequence of the same length as the :class:`AtomGroup`</span>
@@ -1841,14 +2016,15 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">_fill_cache</span><span class="p">(</span>
                     <span class="s1">&#39;residues&#39;</span><span class="p">,</span>
-                    <span class="n">ResidueGroup</span><span class="p">(</span><span class="n">build_residues</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">)))</span></div>
+                    <span class="n">ResidueGroup</span><span class="p">(</span><span class="n">build_residues</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">)))</span>
 
     <span class="n">set_resid</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">set_resids</span><span class="p">,</span>
                           <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;set_resid&#39;</span><span class="p">,</span>
                           <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;set_resids&#39;</span><span class="p">,</span>
-                          <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                          <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
-<div class="viewcode-block" id="AtomGroup.set_resnums"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.set_resnums">[docs]</a>    <span class="k">def</span> <span class="nf">set_resnums</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resnum</span><span class="p">):</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `resnums` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">set_resnums</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resnum</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the resnums to *resnum* for **all atoms** in the :class:`AtomGroup`.</span>
 
 <span class="sd">        If *resnum* is a sequence of the same length as the :class:`AtomGroup`</span>
@@ -1872,14 +2048,15 @@
 <span class="sd">        .. versionchanged:: 0.11.0</span>
 <span class="sd">           Made plural to make consistent with corresponding property</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;resnum&quot;</span><span class="p">,</span> <span class="n">resnum</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;resnum&quot;</span><span class="p">,</span> <span class="n">resnum</span><span class="p">)</span>
 
     <span class="n">set_resnum</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">set_resnums</span><span class="p">,</span>
                            <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;set_resnum&#39;</span><span class="p">,</span>
                            <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;set_resnums&#39;</span><span class="p">,</span>
-                           <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                           <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
-<div class="viewcode-block" id="AtomGroup.set_resnames"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.set_resnames">[docs]</a>    <span class="k">def</span> <span class="nf">set_resnames</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resname</span><span class="p">):</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `resnames` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">set_resnames</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resname</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the resnames to string *resname* for **all atoms** in the :class:`AtomGroup`.</span>
 
 <span class="sd">        If *resname* is a sequence of the same length as the :class:`AtomGroup`</span>
@@ -1896,14 +2073,15 @@
 <span class="sd">        .. versionchanged:: 0.11.0</span>
 <span class="sd">           Made plural to make consistent with corresponding property</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;resname&quot;</span><span class="p">,</span> <span class="n">resname</span><span class="p">,</span> <span class="n">conversion</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;resname&quot;</span><span class="p">,</span> <span class="n">resname</span><span class="p">,</span> <span class="n">conversion</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
 
     <span class="n">set_resname</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">set_resnames</span><span class="p">,</span>
                             <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;set_resname&#39;</span><span class="p">,</span>
                             <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;set_resnames&#39;</span><span class="p">,</span>
-                            <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                            <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
-<div class="viewcode-block" id="AtomGroup.set_segids"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.set_segids">[docs]</a>    <span class="k">def</span> <span class="nf">set_segids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">segid</span><span class="p">):</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `segids` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">set_segids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">segid</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the segids to *segid* for all atoms in the :class:`AtomGroup`.</span>
 
 <span class="sd">        If *segid* is a sequence of the same length as the :class:`AtomGroup`</span>
@@ -1941,14 +2119,15 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">_fill_cache</span><span class="p">(</span>
                     <span class="s1">&#39;segments&#39;</span><span class="p">,</span>
-                    <span class="n">SegmentGroup</span><span class="p">(</span><span class="n">segments</span><span class="p">))</span></div>
+                    <span class="n">SegmentGroup</span><span class="p">(</span><span class="n">segments</span><span class="p">))</span>
 
     <span class="n">set_segid</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">set_segids</span><span class="p">,</span>
                           <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;set_segid&#39;</span><span class="p">,</span>
                           <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;set_segids&#39;</span><span class="p">,</span>
-                          <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                          <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
-<div class="viewcode-block" id="AtomGroup.set_masses"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.set_masses">[docs]</a>    <span class="k">def</span> <span class="nf">set_masses</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mass</span><span class="p">):</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `masses` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">set_masses</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mass</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the atom masses to float *mass* for **all atoms** in the AtomGroup.</span>
 
 <span class="sd">        If *mass* is a sequence of the same length as the :class:`AtomGroup`</span>
@@ -1962,14 +2141,15 @@
 <span class="sd">        .. versionchanged:: 0.11.0</span>
 <span class="sd">           Made plural to make consistent with corresponding property</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;mass&quot;</span><span class="p">,</span> <span class="n">mass</span><span class="p">,</span> <span class="n">conversion</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="s2">&quot;masses&quot;</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;mass&quot;</span><span class="p">,</span> <span class="n">mass</span><span class="p">,</span> <span class="n">conversion</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="s2">&quot;masses&quot;</span><span class="p">)</span>
 
     <span class="n">set_mass</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">set_masses</span><span class="p">,</span>
                          <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;set_mass&#39;</span><span class="p">,</span>
                          <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;set_masses&#39;</span><span class="p">,</span>
-                         <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                         <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
-<div class="viewcode-block" id="AtomGroup.set_types"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.set_types">[docs]</a>    <span class="k">def</span> <span class="nf">set_types</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atype</span><span class="p">):</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `types` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">set_types</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atype</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the atom types to *atype* for **all atoms** in the AtomGroup.</span>
 
 <span class="sd">        If *atype* is a sequence of the same length as the :class:`AtomGroup`</span>
@@ -1983,14 +2163,15 @@
 <span class="sd">        .. versionchanged:: 0.11.0</span>
 <span class="sd">           Made plural to make consistent with corresponding property</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="n">atype</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="n">atype</span><span class="p">)</span>
 
     <span class="n">set_type</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">set_types</span><span class="p">,</span>
                          <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;set_type&#39;</span><span class="p">,</span>
                          <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;set_types&#39;</span><span class="p">,</span>
-                         <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                         <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
-<div class="viewcode-block" id="AtomGroup.set_charges"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.set_charges">[docs]</a>    <span class="k">def</span> <span class="nf">set_charges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">charge</span><span class="p">):</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `charges` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">set_charges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">charge</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the partial charges to float *charge* for **all atoms** in the AtomGroup.</span>
 
 <span class="sd">        If *charge* is a sequence of the same length as the :class:`AtomGroup`</span>
@@ -2004,14 +2185,15 @@
 <span class="sd">        .. versionchanged:: 0.11.0</span>
 <span class="sd">           Made plural to make consistent with corresponding property</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;charge&quot;</span><span class="p">,</span> <span class="n">charge</span><span class="p">,</span> <span class="n">conversion</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;charge&quot;</span><span class="p">,</span> <span class="n">charge</span><span class="p">,</span> <span class="n">conversion</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
     <span class="n">set_charge</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">set_charges</span><span class="p">,</span>
                            <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;set_charge&#39;</span><span class="p">,</span>
                            <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;set_charges&#39;</span><span class="p">,</span>
-                           <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                           <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
-<div class="viewcode-block" id="AtomGroup.set_radii"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.set_radii">[docs]</a>    <span class="k">def</span> <span class="nf">set_radii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `radii` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">set_radii</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the atom radii to float *radius* for **all atoms** in the AtomGroup.</span>
 
 <span class="sd">        If *radius* is a sequence of the same length as the :class:`AtomGroup`</span>
@@ -2025,14 +2207,15 @@
 <span class="sd">        .. versionchanged:: 0.11.0</span>
 <span class="sd">           Made plural to make consistent with corresponding property</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;radius&quot;</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">conversion</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;radius&quot;</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">conversion</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
     <span class="n">set_radius</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">set_radii</span><span class="p">,</span>
                            <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;set_radius&#39;</span><span class="p">,</span>
                            <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;set_radii&#39;</span><span class="p">,</span>
-                           <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                           <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
-<div class="viewcode-block" id="AtomGroup.set_bfactors"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.set_bfactors">[docs]</a>    <span class="k">def</span> <span class="nf">set_bfactors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bfactor</span><span class="p">):</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `bfactors` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">set_bfactors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bfactor</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the atom bfactors to float *bfactor* for **all atoms** in the AtomGroup.</span>
 
 <span class="sd">        If *bfactor* is a sequence of the same length as the :class:`AtomGroup`</span>
@@ -2046,14 +2229,15 @@
 <span class="sd">        .. versionchanged:: 0.11.0</span>
 <span class="sd">           Made plural to make consistent with corresponding property</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;bfactor&quot;</span><span class="p">,</span> <span class="n">bfactor</span><span class="p">,</span> <span class="n">conversion</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;bfactor&quot;</span><span class="p">,</span> <span class="n">bfactor</span><span class="p">,</span> <span class="n">conversion</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
     <span class="n">set_bfactor</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">set_bfactors</span><span class="p">,</span>
                             <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;set_bfactor&#39;</span><span class="p">,</span>
                             <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;set_bfactors&#39;</span><span class="p">,</span>
-                            <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                            <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
-<div class="viewcode-block" id="AtomGroup.set_altLocs"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.set_altLocs">[docs]</a>    <span class="k">def</span> <span class="nf">set_altLocs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">altLoc</span><span class="p">):</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `altLocs` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">set_altLocs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">altLoc</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the altLocs to *altLoc for **all atoms** in the AtomGroup.</span>
 
 <span class="sd">        If *altLoc* is a sequence of the same length as the :class:`AtomGroup`</span>
@@ -2063,14 +2247,15 @@
 
 <span class="sd">        .. versionadded:: 0.11.0</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;altLoc&quot;</span><span class="p">,</span> <span class="n">altLoc</span><span class="p">,</span> <span class="n">conversion</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;altLoc&quot;</span><span class="p">,</span> <span class="n">altLoc</span><span class="p">,</span> <span class="n">conversion</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
 
     <span class="n">set_altLoc</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">set_altLocs</span><span class="p">,</span>
                            <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;set_altLoc&#39;</span><span class="p">,</span>
                            <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;set_altLocs&#39;</span><span class="p">,</span>
-                           <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                           <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
-<div class="viewcode-block" id="AtomGroup.set_serials"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.set_serials">[docs]</a>    <span class="k">def</span> <span class="nf">set_serials</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serial</span><span class="p">):</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `serials` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">set_serials</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serial</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the serials to *serial* for **all atoms** in the AtomGroup.</span>
 
 <span class="sd">        If *serial* is a sequence of the same length as the :class:`AtomGroup`</span>
@@ -2080,12 +2265,12 @@
 
 <span class="sd">        .. versionadded:: 0.11.0</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;serial&quot;</span><span class="p">,</span> <span class="n">serial</span><span class="p">,</span> <span class="n">conversion</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;serial&quot;</span><span class="p">,</span> <span class="n">serial</span><span class="p">,</span> <span class="n">conversion</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
 
     <span class="n">set_serial</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">set_serials</span><span class="p">,</span>
                            <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;set_serial&#39;</span><span class="p">,</span>
                            <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;set_serials&#39;</span><span class="p">,</span>
-                           <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                           <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AtomGroup.center_of_geometry"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.center_of_geometry">[docs]</a>    <span class="k">def</span> <span class="nf">center_of_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Center of geometry (also known as centroid) of the selection.</span>
@@ -2109,7 +2294,7 @@
     <span class="n">centerOfGeometry</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">center_of_geometry</span><span class="p">,</span>
                                  <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;centerOfGeometry&#39;</span><span class="p">,</span>
                                  <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;center_of_geometry&#39;</span><span class="p">,</span>
-                                 <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                                 <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
     <span class="n">centroid</span> <span class="o">=</span> <span class="n">center_of_geometry</span>
 
@@ -2136,7 +2321,7 @@
     <span class="n">centerOfMass</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">center_of_mass</span><span class="p">,</span>
                              <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;centerOfMass&#39;</span><span class="p">,</span>
                              <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;center_of_mass&#39;</span><span class="p">,</span>
-                             <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                             <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AtomGroup.radius_of_gyration"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.radius_of_gyration">[docs]</a>    <span class="k">def</span> <span class="nf">radius_of_gyration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Radius of gyration.</span>
@@ -2163,7 +2348,7 @@
     <span class="n">radiusOfGyration</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">radius_of_gyration</span><span class="p">,</span>
                                  <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;radiusOfGyration&#39;</span><span class="p">,</span>
                                  <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;radius_of_gyration&#39;</span><span class="p">,</span>
-                                 <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                                 <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AtomGroup.shape_parameter"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.shape_parameter">[docs]</a>    <span class="k">def</span> <span class="nf">shape_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Shape parameter.</span>
@@ -2199,7 +2384,7 @@
     <span class="n">shapeParameter</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">shape_parameter</span><span class="p">,</span>
                                <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;shapeParameter&#39;</span><span class="p">,</span>
                                <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;shape_parameter&#39;</span><span class="p">,</span>
-                               <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                               <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AtomGroup.asphericity"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.asphericity">[docs]</a>    <span class="k">def</span> <span class="nf">asphericity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Asphericity.</span>
@@ -2282,7 +2467,7 @@
     <span class="n">momentOfInertia</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">moment_of_inertia</span><span class="p">,</span>
                                 <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;momentOfInertia&#39;</span><span class="p">,</span>
                                 <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;moment_of_inertia&#39;</span><span class="p">,</span>
-                                <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                                <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AtomGroup.bbox"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.bbox">[docs]</a>    <span class="k">def</span> <span class="nf">bbox</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the bounding box of the selection.</span>
@@ -2440,9 +2625,10 @@
     <span class="n">principalAxes</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">principal_axes</span><span class="p">,</span>
                               <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;principalAxes&#39;</span><span class="p">,</span>
                               <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;principal_axes&#39;</span><span class="p">,</span>
-                              <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                              <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
-<div class="viewcode-block" id="AtomGroup.get_positions"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.get_positions">[docs]</a>    <span class="k">def</span> <span class="nf">get_positions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">):</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `positions` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">get_positions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get a numpy array of the coordinates.</span>
 
 <span class="sd">        :Keywords:</span>
@@ -2476,7 +2662,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">ts</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">positions</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">],</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">positions</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">],</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
 
     <span class="n">coordinates</span> <span class="o">=</span> <span class="n">get_positions</span>
     <span class="sd">&quot;&quot;&quot;Np array of the coordinates.</span>
@@ -2489,7 +2675,11 @@
     <span class="c1"># coordinates() should NOT be removed as it has been used in many scripts,</span>
     <span class="c1"># MDAnalysis itself, and in the paper</span>
 
-<div class="viewcode-block" id="AtomGroup.set_positions"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.set_positions">[docs]</a>    <span class="k">def</span> <span class="nf">set_positions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">ts</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="n">coordinates</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> 
+                            <span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `positions` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `positions` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">set_positions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">ts</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the positions for all atoms in the group.</span>
 
 <span class="sd">        :Arguments:</span>
@@ -2516,7 +2706,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">ts</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">ts</span>
-        <span class="n">ts</span><span class="o">.</span><span class="n">positions</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">coords</span></div>
+        <span class="n">ts</span><span class="o">.</span><span class="n">positions</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">coords</span>
 
     <span class="n">positions</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_positions</span><span class="p">,</span> <span class="n">set_positions</span><span class="p">,</span>
                          <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
@@ -2532,7 +2722,8 @@
 
 <span class="s2">                .. versionadded:: 0.7.6&quot;&quot;&quot;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="AtomGroup.get_velocities"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.get_velocities">[docs]</a>    <span class="k">def</span> <span class="nf">get_velocities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">):</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `velocities` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">get_velocities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;numpy array of the velocities.</span>
 
 <span class="sd">        Raises a :exc:`NoDataError` if the underlying</span>
@@ -2549,9 +2740,10 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">velocities</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">],</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="n">NoDataError</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="s2">&quot;Timestep does not contain velocities&quot;</span><span class="p">)</span></div>
+            <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="s2">&quot;Timestep does not contain velocities&quot;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="AtomGroup.set_velocities"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.set_velocities">[docs]</a>    <span class="k">def</span> <span class="nf">set_velocities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">ts</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `velocities` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">set_velocities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">ts</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Assign the velocities *v* to the timestep.</span>
 
 <span class="sd">        Raises a :exc:`NoDataError` if the underlying</span>
@@ -2568,7 +2760,7 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">ts</span><span class="o">.</span><span class="n">velocities</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">v</span>
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="s2">&quot;Timestep does not contain velocities&quot;</span><span class="p">)</span></div>
+            <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="s2">&quot;Timestep does not contain velocities&quot;</span><span class="p">)</span>
 
     <span class="n">velocities</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_velocities</span><span class="p">,</span> <span class="n">set_velocities</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
 <span class="s2">        numpy array of the velocities of the atoms in the group.</span>
@@ -2584,7 +2776,8 @@
 <span class="s2">           Became an attribute.</span>
 <span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="AtomGroup.get_forces"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.get_forces">[docs]</a>    <span class="k">def</span> <span class="nf">get_forces</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">):</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `forces` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">get_forces</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get a numpy array of the atomic forces (if available).</span>
 <span class="sd">        Currently only supported for Gromacs .trr trajectories.</span>
@@ -2620,9 +2813,10 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">forces</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">],</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="n">NoDataError</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="s2">&quot;Timestep does not contain forces&quot;</span><span class="p">)</span></div>
+            <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="s2">&quot;Timestep does not contain forces&quot;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="AtomGroup.set_forces"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.set_forces">[docs]</a>    <span class="k">def</span> <span class="nf">set_forces</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">forces</span><span class="p">,</span> <span class="n">ts</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `forces` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">set_forces</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">forces</span><span class="p">,</span> <span class="n">ts</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the forces for all atoms in the group.</span>
 
 <span class="sd">        :Arguments:</span>
@@ -2652,7 +2846,7 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">ts</span><span class="o">.</span><span class="n">forces</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">forces</span>
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="s2">&quot;Timestep does not contain forces&quot;</span><span class="p">)</span></div>
+            <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="s2">&quot;Timestep does not contain forces&quot;</span><span class="p">)</span>
 
     <span class="n">forces</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_forces</span><span class="p">,</span> <span class="n">set_forces</span><span class="p">,</span>
                       <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
@@ -2667,7 +2861,6 @@
 <span class="s2">                :meth:`~AtomGroup.set_forces` methods.</span>
 
 <span class="s2">                .. versionadded:: 0.7.7&quot;&quot;&quot;</span><span class="p">)</span>
-
 
 <div class="viewcode-block" id="AtomGroup.transform"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.transform">[docs]</a>    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">M</span><span class="p">):</span>
         <span class="sd">r&quot;&quot;&quot;Apply homogenous transformation matrix *M* to the coordinates.</span>
@@ -2717,6 +2910,7 @@
             <span class="n">sel1</span><span class="p">,</span> <span class="n">sel2</span> <span class="o">=</span> <span class="n">t</span>
             <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span> <span class="o">=</span> <span class="n">sel1</span><span class="o">.</span><span class="n">centroid</span><span class="p">(),</span> <span class="n">sel2</span><span class="o">.</span><span class="n">centroid</span><span class="p">()</span>
             <span class="n">vector</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span>
+
         <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
             <span class="n">vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
         <span class="c1"># changes the coordinates (in place)</span>
@@ -2782,6 +2976,7 @@
             <span class="n">n</span> <span class="o">=</span> <span class="n">v</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">point</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="n">point</span> <span class="o">=</span> <span class="n">x1</span>
+
         <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
             <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">point</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
@@ -2822,7 +3017,7 @@
     <span class="n">align_principalAxis</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">align_principal_axis</span><span class="p">,</span>
                                     <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;align_principalAxis&#39;</span><span class="p">,</span>
                                     <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;align_principal_axis&#39;</span><span class="p">,</span>
-                                    <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                                    <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AtomGroup.pack_into_box"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.pack_into_box">[docs]</a>    <span class="k">def</span> <span class="nf">pack_into_box</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">r&quot;&quot;&quot;Shift all atoms in this group to be within the primary unit cell.</span>
@@ -2881,7 +3076,7 @@
     <span class="n">packIntoBox</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">pack_into_box</span><span class="p">,</span>
                             <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;packIntoBox&#39;</span><span class="p">,</span>
                             <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;pack_into_box&#39;</span><span class="p">,</span>
-                            <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                            <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AtomGroup.wrap"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.wrap">[docs]</a>    <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">compound</span><span class="o">=</span><span class="s2">&quot;atoms&quot;</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="s2">&quot;com&quot;</span><span class="p">,</span> <span class="n">box</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Shift the contents of this AtomGroup back into the unit cell.</span>
@@ -3170,7 +3365,7 @@
     <span class="n">selectAtoms</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">select_atoms</span><span class="p">,</span>
                             <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;selectAtoms&#39;</span><span class="p">,</span>
                             <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;select_atoms&#39;</span><span class="p">,</span>
-                            <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                            <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AtomGroup.split"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.split">[docs]</a>    <span class="k">def</span> <span class="nf">split</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Split atomgroup into a list of atomgroups by *level*.</span>
@@ -3186,6 +3381,12 @@
 
         <span class="k">if</span> <span class="n">level</span> <span class="o">==</span> <span class="s2">&quot;atom&quot;</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[</span><span class="n">AtomGroup</span><span class="p">([</span><span class="n">a</span><span class="p">])</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">level</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;resid&#39;</span><span class="p">,</span> <span class="s1">&#39;segid&#39;</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;&#39;resid&#39; or &#39;segid&#39; are no longer allowed levels &quot;</span> 
+                          <span class="s2">&quot;in version 0.16.0; instead give &quot;</span>
+                          <span class="s2">&quot;&#39;residue&#39; or &#39;segment&#39;, respectively.&quot;</span><span class="p">,</span>
+                          <span class="ne">DeprecationWarning</span><span class="p">)</span>
 
         <span class="c1"># more complicated groupings</span>
         <span class="k">try</span><span class="p">:</span>
@@ -3283,7 +3484,8 @@
                 <span class="n">writer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
     <span class="c1"># TODO: This is _almost_ the same code as write() --- should unify!</span>
-<div class="viewcode-block" id="AtomGroup.write_selection"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.write_selection">[docs]</a>    <span class="k">def</span> <span class="nf">write_selection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s2">&quot;vmd&quot;</span><span class="p">,</span> <span class="n">filenamefmt</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(trjname)s</span><span class="s2">_</span><span class="si">%(frame)d</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `write` method instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">write_selection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s2">&quot;vmd&quot;</span><span class="p">,</span> <span class="n">filenamefmt</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(trjname)s</span><span class="s2">_</span><span class="si">%(frame)d</span><span class="s2">&quot;</span><span class="p">,</span>
                         <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Write AtomGroup selection to a file to be used in another programme.</span>
 
@@ -3320,7 +3522,7 @@
         <span class="n">filename</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">filename</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="n">extension</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
         <span class="n">writer</span> <span class="o">=</span> <span class="n">SelectionWriter</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">)</span>  <span class="c1"># wants a atomgroup</span></div>
+        <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">)</span>  <span class="c1"># wants a atomgroup</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dimensions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -3392,15 +3594,14 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">atoms</span><span class="p">,</span> <span class="n">resnum</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">Residue</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_resname</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_resid</span> <span class="o">=</span> <span class="nb">id</span>
         <span class="k">if</span> <span class="n">resnum</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">resnum</span> <span class="o">=</span> <span class="n">resnum</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_resnum</span> <span class="o">=</span> <span class="n">resnum</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">resnum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span>  <span class="c1"># TODO: get resnum from topologies that support it</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_resnum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resid</span>  <span class="c1"># TODO: get resnum from topologies that support it</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">segment</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">atoms</span><span class="p">):</span>
-            <span class="n">a</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">atoms</span><span class="p">:</span>
             <span class="n">a</span><span class="o">.</span><span class="n">resnum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resnum</span>
             <span class="n">a</span><span class="o">.</span><span class="n">residue</span> <span class="o">=</span> <span class="bp">self</span>
 
@@ -3411,6 +3612,50 @@
         <span class="c1">##if not Residue._cache.has_key(name):</span>
         <span class="c1">##    Residue._cache[name] = dict([(a.name, i) for i, a in enumerate(self._atoms)])</span>
 
+    <span class="nd">@property</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `resname` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resname</span>
+
+    <span class="nd">@name.setter</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `resname` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_resname</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">resname</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resname</span>
+
+    <span class="nd">@resname.setter</span>
+    <span class="k">def</span> <span class="nf">resname</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_resname</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `resid` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resid</span>
+
+    <span class="nd">@id.setter</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `resid` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_resid</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">resid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resid</span>
+
+    <span class="nd">@resid.setter</span>
+    <span class="k">def</span> <span class="nf">resid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_resid</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">resnum</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resnum</span>
+
+    <span class="nd">@resnum.setter</span>
+    <span class="k">def</span> <span class="nf">resnum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_resnum</span> <span class="o">=</span> <span class="n">value</span>
+
 <div class="viewcode-block" id="Residue.phi_selection"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.Residue.phi_selection">[docs]</a>    <span class="k">def</span> <span class="nf">phi_selection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;AtomGroup corresponding to the phi protein backbone dihedral C&#39;-N-CA-C.</span>
 
@@ -3419,7 +3664,7 @@
 <span class="sd">                  method returns ``None``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">sel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span>
-            <span class="s1">&#39;segid {0!s} and resid {1:d} and name C&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">segment</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> \
+            <span class="s1">&#39;segid {0!s} and resid {1:d} and name C&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">segment</span><span class="o">.</span><span class="n">segid</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">resid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> \
               <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;CA&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sel</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>  <span class="c1"># select_atoms doesnt raise errors if nothing found, so check size</span>
             <span class="k">return</span> <span class="n">sel</span>
@@ -3435,7 +3680,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">sel</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;CA&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">]</span> <span class="o">+</span> \
               <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span>
-                  <span class="s1">&#39;segid {0!s} and resid {1:d} and name N&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">segment</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+                  <span class="s1">&#39;segid {0!s} and resid {1:d} and name N&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">segment</span><span class="o">.</span><span class="n">segid</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">resid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sel</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">sel</span>
         <span class="k">else</span><span class="p">:</span>
@@ -3453,8 +3698,8 @@
 <span class="sd">                  method returns ``None``.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">nextres</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="n">segid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">segment</span><span class="o">.</span><span class="n">id</span>
+        <span class="n">nextres</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resid</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">segid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">segment</span><span class="o">.</span><span class="n">segid</span>
         <span class="n">sel</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;CA&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">]</span> <span class="o">+</span> \
               <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span>
                   <span class="s1">&#39;segid {0!s} and resid {1:d} and name N&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">segid</span><span class="p">,</span> <span class="n">nextres</span><span class="p">),</span>
@@ -3479,7 +3724,7 @@
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;&lt;Residue {name}, {id}&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-            <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span></div>
+            <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">resname</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">resid</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ResidueGroup"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.ResidueGroup">[docs]</a><span class="k">class</span> <span class="nc">ResidueGroup</span><span class="p">(</span><span class="n">AtomGroup</span><span class="p">):</span>
@@ -3546,6 +3791,7 @@
     <span class="nb">set</span> <span class="o">=</span> <span class="n">_set_residues</span>
 
     <span class="nd">@property</span>
+    <span class="nd">@warn_residue_property</span>
     <span class="k">def</span> <span class="nf">resids</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns an array of residue numbers.</span>
 
@@ -3554,9 +3800,10 @@
 <span class="sd">        .. versionchanged:: 0.11.0</span>
 <span class="sd">           Now a property and returns array of length `len(self)`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">r</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">residues</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">r</span><span class="o">.</span><span class="n">resid</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">residues</span><span class="p">])</span>
 
     <span class="nd">@property</span>
+    <span class="nd">@warn_residue_property</span>
     <span class="k">def</span> <span class="nf">resnames</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns an array of residue names.</span>
 
@@ -3568,6 +3815,7 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">r</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">residues</span><span class="p">])</span>
 
     <span class="nd">@property</span>
+    <span class="nd">@warn_residue_property</span>
     <span class="k">def</span> <span class="nf">resnums</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns an array of canonical residue numbers.</span>
 
@@ -3580,6 +3828,7 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">r</span><span class="o">.</span><span class="n">resnum</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">residues</span><span class="p">])</span>
 
     <span class="nd">@property</span>
+    <span class="nd">@warn_segment_property</span>
     <span class="k">def</span> <span class="nf">segids</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns an array of segment names.</span>
 
@@ -3594,7 +3843,8 @@
         <span class="c1"># a bit of a hack to use just</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">segid</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">residues</span><span class="p">])</span>
 
-<div class="viewcode-block" id="ResidueGroup.set_resids"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.ResidueGroup.set_resids">[docs]</a>    <span class="k">def</span> <span class="nf">set_resids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resid</span><span class="p">):</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `resids` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">set_resids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resid</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the resids to integer *resid* for **all residues** in the</span>
 <span class="sd">        :class:`ResidueGroup`.</span>
 
@@ -3623,14 +3873,15 @@
 <span class="sd">        .. versionchanged:: 0.11.0</span>
 <span class="sd">           Made plural to make consistent with corresponding property</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">ResidueGroup</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set_resids</span><span class="p">(</span><span class="n">resid</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ResidueGroup</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set_resids</span><span class="p">(</span><span class="n">resid</span><span class="p">)</span>
 
     <span class="n">set_resid</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">set_resids</span><span class="p">,</span>
                           <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;set_resid&#39;</span><span class="p">,</span>
                           <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;set_resids&#39;</span><span class="p">,</span>
-                          <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                          <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
-<div class="viewcode-block" id="ResidueGroup.set_resnums"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.ResidueGroup.set_resnums">[docs]</a>    <span class="k">def</span> <span class="nf">set_resnums</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resnum</span><span class="p">):</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `resnums` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">set_resnums</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resnum</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the resnums to *resnum* for **all residues** in the :class:`ResidueGroup`.</span>
 
 <span class="sd">        If *resnum* is a sequence of the same length as the :class:`ResidueGroup`</span>
@@ -3654,14 +3905,15 @@
 <span class="sd">        .. versionchanged:: 0.11.0</span>
 <span class="sd">           Made plural to make consistent with corresponding property</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">ResidueGroup</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set_resnums</span><span class="p">(</span><span class="n">resnum</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ResidueGroup</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set_resnums</span><span class="p">(</span><span class="n">resnum</span><span class="p">)</span>
 
     <span class="n">set_resnum</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">set_resnums</span><span class="p">,</span>
                            <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;set_resnum&#39;</span><span class="p">,</span>
                            <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;set_resnums&#39;</span><span class="p">,</span>
-                           <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                           <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
-<div class="viewcode-block" id="ResidueGroup.set_resnames"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.ResidueGroup.set_resnames">[docs]</a>    <span class="k">def</span> <span class="nf">set_resnames</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resname</span><span class="p">):</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `resnames` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">set_resnames</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resname</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the resnames to string *resname* for **all residues** in the</span>
 <span class="sd">        :class:`ResidueGroup`.</span>
 
@@ -3679,12 +3931,12 @@
 <span class="sd">        .. versionchanged:: 0.11.0</span>
 <span class="sd">           Made plural to make consistent with corresponding property</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">ResidueGroup</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set_resnames</span><span class="p">(</span><span class="n">resname</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ResidueGroup</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set_resnames</span><span class="p">(</span><span class="n">resname</span><span class="p">)</span>
 
     <span class="n">set_resname</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">set_resnames</span><span class="p">,</span>
                             <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;set_resname&#39;</span><span class="p">,</span>
                             <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;set_resnames&#39;</span><span class="p">,</span>
-                            <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                            <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
     <span class="c1"># All other AtomGroup.set_xxx() methods should just work as</span>
     <span class="c1"># ResidueGroup.set_xxx() because we overrode self.set(); the ones above</span>
@@ -3720,14 +3972,14 @@
 <span class="sd">          &lt;ResidueGroup [&lt;Residue &#39;MET&#39;, 1&gt;, &lt;Residue &#39;MET&#39;, 21&gt;, &lt;Residue &#39;MET&#39;, 34&gt;, &lt;Residue &#39;MET&#39;, 53&gt;,</span>
 <span class="sd">          &lt;Residue &#39;MET&#39;, 96&gt;, &lt;Residue &#39;MET&#39;, 174&gt;]&gt;</span>
 
-<span class="sd">    :Data: :attr:`Segment.name` is the segid from the topology or the</span>
+<span class="sd">    :Data: :attr:`Segment.segid` is the segid from the topology or the</span>
 <span class="sd">           chain identifier when loaded from a PDB</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">residues</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialize a Segment with segid *name* from a list of :class:`Residue` instances.&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">Segment</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">residues</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_segid</span> <span class="o">=</span> <span class="n">name</span>
         <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">residues</span><span class="p">:</span>
             <span class="n">res</span><span class="o">.</span><span class="n">segment</span> <span class="o">=</span> <span class="bp">self</span>
             <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
@@ -3735,13 +3987,34 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_cls</span> <span class="o">=</span> <span class="n">ResidueGroup</span>
 
     <span class="nd">@property</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `segid` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
     <span class="k">def</span> <span class="nf">id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Segment id (alias for :attr:`Segment.name`)&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_segid</span>
 
     <span class="nd">@id.setter</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `segid` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
     <span class="k">def</span> <span class="nf">id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_segid</span> <span class="o">=</span> <span class="n">x</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">segid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Segment id (alias for :attr:`Segment.name`)&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_segid</span>
+
+    <span class="nd">@segid.setter</span>
+    <span class="k">def</span> <span class="nf">segid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_segid</span> <span class="o">=</span> <span class="n">x</span>
+
+    <span class="nd">@property</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `segid` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_segid</span>
+
+    <span class="nd">@name.setter</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `segid` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_segid</span> <span class="o">=</span> <span class="n">x</span>
 
     <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">attr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;r&#39;</span><span class="p">:</span>
@@ -3761,7 +4034,7 @@
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;&lt;Segment {name}&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-            <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
+            <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">segid</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="SegmentGroup"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.SegmentGroup">[docs]</a><span class="k">class</span> <span class="nc">SegmentGroup</span><span class="p">(</span><span class="n">ResidueGroup</span><span class="p">):</span>
@@ -3819,6 +4092,7 @@
     <span class="nb">set</span> <span class="o">=</span> <span class="n">_set_segments</span>
 
     <span class="nd">@property</span>
+    <span class="nd">@warn_segment_property</span>
     <span class="k">def</span> <span class="nf">segids</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns an array of segment names.</span>
 
@@ -3827,9 +4101,10 @@
 <span class="sd">        .. versionchanged:: 0.11.0</span>
 <span class="sd">           Now a property and returns array of length `len(self)`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">s</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">segments</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">s</span><span class="o">.</span><span class="n">segid</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">segments</span><span class="p">])</span>
 
-<div class="viewcode-block" id="SegmentGroup.set_segids"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.SegmentGroup.set_segids">[docs]</a>    <span class="k">def</span> <span class="nf">set_segids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">segid</span><span class="p">):</span>
+    <span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;{}; use `segids` property instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">set_segids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">segid</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the segids to *segid* for all atoms in the :class:`SegmentGroup`.</span>
 
 <span class="sd">        If *segid* is a sequence of the same length as the :class:`SegmentGroup`</span>
@@ -3852,12 +4127,12 @@
 <span class="sd">        .. versionchanged:: 0.11.0</span>
 <span class="sd">           Made plural to make consistent with corresponding property</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">SegmentGroup</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set_segids</span><span class="p">(</span><span class="n">segid</span><span class="p">)</span></div>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SegmentGroup</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set_segids</span><span class="p">(</span><span class="n">segid</span><span class="p">)</span>
 
     <span class="n">set_segid</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">set_segids</span><span class="p">,</span>
                           <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;set_segid&#39;</span><span class="p">,</span>
                           <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;set_segids&#39;</span><span class="p">,</span>
-                          <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                          <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">attr</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">attr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
@@ -4187,10 +4462,10 @@
 
         <span class="n">segments</span> <span class="o">=</span> <span class="n">build_segments</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">seg</span> <span class="ow">in</span> <span class="n">segments</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">seg</span><span class="o">.</span><span class="n">id</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
-                <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;s&#39;</span> <span class="o">+</span> <span class="n">seg</span><span class="o">.</span><span class="n">id</span>
+            <span class="k">if</span> <span class="n">seg</span><span class="o">.</span><span class="n">segid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;s&#39;</span> <span class="o">+</span> <span class="n">seg</span><span class="o">.</span><span class="n">segid</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">name</span> <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">id</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">segid</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">seg</span>
 
         <span class="k">return</span> <span class="n">segments</span>
@@ -4211,11 +4486,11 @@
         <span class="n">guessed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_topology</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;guessed_&#39;</span> <span class="o">+</span> <span class="n">cat</span><span class="p">,</span> <span class="nb">set</span><span class="p">())</span>
 
         <span class="n">TopSet</span> <span class="o">=</span> <span class="n">top</span><span class="o">.</span><span class="n">TopologyGroup</span><span class="o">.</span><span class="n">from_indices</span><span class="p">(</span><span class="n">defined</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">,</span>
-                                                            <span class="n">bondclass</span><span class="o">=</span><span class="n">Top</span><span class="p">,</span> <span class="n">guessed</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
-                                                            <span class="n">remove_duplicates</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                                                <span class="n">bondclass</span><span class="o">=</span><span class="n">Top</span><span class="p">,</span> <span class="n">guessed</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                                                <span class="n">remove_duplicates</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
         <span class="n">TopSet</span> <span class="o">+=</span> <span class="n">top</span><span class="o">.</span><span class="n">TopologyGroup</span><span class="o">.</span><span class="n">from_indices</span><span class="p">(</span><span class="n">guessed</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">,</span>
-                                                             <span class="n">bondclass</span><span class="o">=</span><span class="n">Top</span><span class="p">,</span> <span class="n">guessed</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-                                                             <span class="n">remove_duplicates</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                                                 <span class="n">bondclass</span><span class="o">=</span><span class="n">Top</span><span class="p">,</span> <span class="n">guessed</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                                 <span class="n">remove_duplicates</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">TopSet</span>
 
@@ -4696,7 +4971,7 @@
     <span class="n">selectAtoms</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">select_atoms</span><span class="p">,</span>
                             <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;selectAtoms&#39;</span><span class="p">,</span>
                             <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;select_atoms&#39;</span><span class="p">,</span>
-                            <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                            <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;&lt;Universe with {n_atoms} atoms{bonds}&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -4801,7 +5076,8 @@
             <span class="k">return</span> <span class="bp">False</span></div>
 
 
-<div class="viewcode-block" id="as_Universe"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.as_Universe">[docs]</a><span class="k">def</span> <span class="nf">as_Universe</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="nd">@deprecate</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">as_Universe</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return a universe from the input arguments.</span>
 
 <span class="sd">    1. If the first argument is a universe, just return it::</span>
@@ -4821,12 +5097,12 @@
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;as_Universe() takes at least one argument ({0:d} given)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)))</span>
     <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Universe</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">Universe</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">Universe</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 <span class="n">asUniverse</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">as_Universe</span><span class="p">,</span>
                        <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;asUniverse&#39;</span><span class="p">,</span>
                        <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;as_Universe&#39;</span><span class="p">,</span>
-                       <span class="n">message</span><span class="o">=</span><span class="n">_FIFTEEN_DEPRECATION</span><span class="p">)</span>
+                       <span class="n">message</span><span class="o">=</span><span class="n">_SIXTEEN_DEPRECATION</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Merge"><a class="viewcode-back" href="../../../documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.Merge">[docs]</a><span class="k">def</span> <span class="nf">Merge</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return a :class:`Universe` from two or more :class:`AtomGroup` instances.</span>
