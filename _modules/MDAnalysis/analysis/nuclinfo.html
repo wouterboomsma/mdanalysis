@@ -308,11 +308,11 @@
     <span class="n">atom4</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot; atom {0!s} {1!s} C3</span><span class="se">\&#39;</span><span class="s2"> &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">seg</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
     <span class="n">atom5</span> <span class="o">=</span> <span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot; atom {0!s} {1!s} C4</span><span class="se">\&#39;</span><span class="s2"> &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">seg</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
 
-    <span class="n">data1</span> <span class="o">=</span> <span class="n">atom1</span><span class="o">.</span><span class="n">coordinates</span><span class="p">()</span>
-    <span class="n">data2</span> <span class="o">=</span> <span class="n">atom2</span><span class="o">.</span><span class="n">coordinates</span><span class="p">()</span>
-    <span class="n">data3</span> <span class="o">=</span> <span class="n">atom3</span><span class="o">.</span><span class="n">coordinates</span><span class="p">()</span>
-    <span class="n">data4</span> <span class="o">=</span> <span class="n">atom4</span><span class="o">.</span><span class="n">coordinates</span><span class="p">()</span>
-    <span class="n">data5</span> <span class="o">=</span> <span class="n">atom5</span><span class="o">.</span><span class="n">coordinates</span><span class="p">()</span>
+    <span class="n">data1</span> <span class="o">=</span> <span class="n">atom1</span><span class="o">.</span><span class="n">positions</span>
+    <span class="n">data2</span> <span class="o">=</span> <span class="n">atom2</span><span class="o">.</span><span class="n">positions</span>
+    <span class="n">data3</span> <span class="o">=</span> <span class="n">atom3</span><span class="o">.</span><span class="n">positions</span>
+    <span class="n">data4</span> <span class="o">=</span> <span class="n">atom4</span><span class="o">.</span><span class="n">positions</span>
+    <span class="n">data5</span> <span class="o">=</span> <span class="n">atom5</span><span class="o">.</span><span class="n">positions</span>
 
     <span class="n">r0</span> <span class="o">=</span> <span class="p">(</span><span class="n">data1</span> <span class="o">+</span> <span class="n">data2</span> <span class="o">+</span> <span class="n">data3</span> <span class="o">+</span> <span class="n">data4</span> <span class="o">+</span> <span class="n">data5</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="mf">5.0</span><span class="p">)</span>
     <span class="n">r1</span> <span class="o">=</span> <span class="n">data1</span> <span class="o">-</span> <span class="n">r0</span>

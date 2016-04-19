@@ -291,8 +291,8 @@
 <span class="sd">    :meth:`MDAnalysis.core.AtomGroup.AtomGroup.rotate` to generate a rotated</span>
 <span class="sd">    selection, e.g. ::</span>
 
-<span class="sd">    &gt;&gt;&gt; R = rotation_matrix(A.select_atoms(&#39;backbone&#39;).coordinates(),</span>
-<span class="sd">    &gt;&gt;&gt;                     B.select_atoms(&#39;backbone&#39;).coordinates())[0]</span>
+<span class="sd">    &gt;&gt;&gt; R = rotation_matrix(A.select_atoms(&#39;backbone&#39;).positions,</span>
+<span class="sd">    &gt;&gt;&gt;                     B.select_atoms(&#39;backbone&#39;).positions)[0]</span>
 <span class="sd">    &gt;&gt;&gt; A.atoms.rotate(R)</span>
 <span class="sd">    &gt;&gt;&gt; A.atoms.write(&quot;rotated.pdb&quot;)</span>
 
@@ -430,8 +430,8 @@
         <span class="n">ref_com</span> <span class="o">=</span> <span class="n">ref_atoms</span><span class="o">.</span><span class="n">center_of_geometry</span><span class="p">()</span>
         <span class="n">mobile_com</span> <span class="o">=</span> <span class="n">mobile_atoms</span><span class="o">.</span><span class="n">center_of_geometry</span><span class="p">()</span>
 
-    <span class="n">ref_coordinates</span> <span class="o">=</span> <span class="n">ref_atoms</span><span class="o">.</span><span class="n">coordinates</span><span class="p">()</span> <span class="o">-</span> <span class="n">ref_com</span>
-    <span class="n">mobile_coordinates</span> <span class="o">=</span> <span class="n">mobile_atoms</span><span class="o">.</span><span class="n">coordinates</span><span class="p">()</span> <span class="o">-</span> <span class="n">mobile_com</span>
+    <span class="n">ref_coordinates</span> <span class="o">=</span> <span class="n">ref_atoms</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="n">ref_com</span>
+    <span class="n">mobile_coordinates</span> <span class="o">=</span> <span class="n">mobile_atoms</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="n">mobile_com</span>
 
     <span class="n">old_rmsd</span> <span class="o">=</span> <span class="n">rms</span><span class="o">.</span><span class="n">rmsd</span><span class="p">(</span><span class="n">mobile_coordinates</span><span class="p">,</span> <span class="n">ref_coordinates</span><span class="p">)</span>
 
@@ -568,10 +568,10 @@
 
     <span class="c1"># reference centre of mass system</span>
     <span class="n">ref_com</span> <span class="o">=</span> <span class="n">ref_atoms</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">()</span>
-    <span class="n">ref_coordinates</span> <span class="o">=</span> <span class="n">ref_atoms</span><span class="o">.</span><span class="n">coordinates</span><span class="p">()</span> <span class="o">-</span> <span class="n">ref_com</span>
+    <span class="n">ref_coordinates</span> <span class="o">=</span> <span class="n">ref_atoms</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="n">ref_com</span>
 
     <span class="c1"># allocate the array for selection atom coords</span>
-    <span class="n">traj_coordinates</span> <span class="o">=</span> <span class="n">traj_atoms</span><span class="o">.</span><span class="n">coordinates</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">traj_coordinates</span> <span class="o">=</span> <span class="n">traj_atoms</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
     <span class="c1"># RMSD timeseries</span>
     <span class="n">nframes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">frames</span><span class="p">)</span>
@@ -590,7 +590,7 @@
         <span class="c1"># shift coordinates for rotation fitting</span>
         <span class="c1"># selection is updated with the time frame</span>
         <span class="n">x_com</span> <span class="o">=</span> <span class="n">traj_atoms</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-        <span class="n">traj_coordinates</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">traj_atoms</span><span class="o">.</span><span class="n">coordinates</span><span class="p">()</span> <span class="o">-</span> <span class="n">x_com</span>
+        <span class="n">traj_coordinates</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">traj_atoms</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="n">x_com</span>
 
         <span class="c1"># Need to transpose coordinates such that the coordinate array is</span>
         <span class="c1"># 3xN instead of Nx3. Also qcp requires that the dtype be float64</span>

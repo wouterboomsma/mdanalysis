@@ -112,33 +112,33 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atom_group</span><span class="p">,</span> <span class="n">bucket_size</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        :Arguments:</span>
-<span class="sd">         *atom_list*</span>
-<span class="sd">          list of atoms (:class: `~MDAnalysis.core.AtomGroup.AtomGroup`)</span>
-<span class="sd">         *bucket_size*</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        atom_list : AtomGroup</span>
+<span class="sd">          list of atoms</span>
+<span class="sd">        bucket_size : int</span>
 <span class="sd">          Number of entries in leafs of the KDTree. If you suffer poor</span>
 <span class="sd">          performance you can play around with this number. Increasing the</span>
 <span class="sd">          `bucket_size` will speed up the construction of the KDTree but</span>
 <span class="sd">          slow down the search.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">atom_group</span> <span class="o">=</span> <span class="n">atom_group</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">atom_group</span><span class="p">,</span> <span class="s1">&#39;coordinates&#39;</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;atom_group must have a coordinates() method&#39;</span>
-                            <span class="s1">&#39;(eq a AtomGroup from a selection)&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">kdtree</span> <span class="o">=</span> <span class="n">KDTree</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">bucket_size</span><span class="o">=</span><span class="n">bucket_size</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">kdtree</span><span class="o">.</span><span class="n">set_coords</span><span class="p">(</span><span class="n">atom_group</span><span class="o">.</span><span class="n">coordinates</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kdtree</span><span class="o">.</span><span class="n">set_coords</span><span class="p">(</span><span class="n">atom_group</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AtomNeighborSearch.search"><a class="viewcode-back" href="../../../documentation_pages/lib/NeighborSearch.html#MDAnalysis.lib.NeighborSearch.AtomNeighborSearch.search">[docs]</a>    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atoms</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return all atoms/residues/segments that are within *radius* of the</span>
 <span class="sd">        atoms in *atoms*.</span>
 
-<span class="sd">        :Arguments:</span>
-<span class="sd">         *atoms*</span>
-<span class="sd">          list of atoms (:class: `~MDAnalysis.core.AtomGroup.AtomGroup`)</span>
-<span class="sd">         *radius*</span>
-<span class="sd">          float. Radius for search in Angstrom.</span>
-<span class="sd">         *level* (optional)</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        atoms : AtomGroup</span>
+<span class="sd">          list of atoms</span>
+<span class="sd">        radius : float</span>
+<span class="sd">          Radius for search in Angstrom.</span>
+<span class="sd">        level : str</span>
 <span class="sd">          char (A, R, S). Return atoms(A), residues(R) or segments(S) within</span>
 <span class="sd">          *radius* of *atoms*.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -150,13 +150,14 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_index2level</span><span class="p">(</span><span class="n">unique_idx</span><span class="p">,</span> <span class="n">level</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_index2level</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Convert list of atom_indices in a AtomGroup to either the</span>
-<span class="sd">            Atoms or segments/residues containing these atoms.</span>
+        <span class="sd">&quot;&quot;&quot;Convert list of atom_indices in a AtomGroup to either the</span>
+<span class="sd">        Atoms or segments/residues containing these atoms.</span>
 
-<span class="sd">        :Arguments:</span>
-<span class="sd">         *indices*</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        indices</span>
 <span class="sd">           list of atom indices</span>
-<span class="sd">         *level*</span>
+<span class="sd">        level : str</span>
 <span class="sd">          char (A, R, S). Return atoms(A), residues(R) or segments(S) within</span>
 <span class="sd">          *radius* of *atoms*.</span>
 <span class="sd">        &quot;&quot;&quot;</span>

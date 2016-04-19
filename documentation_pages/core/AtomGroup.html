@@ -152,12 +152,12 @@ changes it &#8220;everywhere&#8221;.</p>
 <p>The same is mostly true for <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue" title="MDAnalysis.core.AtomGroup.Residue"><code class="xref py py-class docutils literal"><span class="pre">Residue</span></code></a> instances although they are
 derived from <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom" title="MDAnalysis.core.AtomGroup.Atom"><code class="xref py py-class docutils literal"><span class="pre">Atom</span></code></a> instances: all <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom" title="MDAnalysis.core.AtomGroup.Atom"><code class="xref py py-class docutils literal"><span class="pre">Atom</span></code></a> objects with the same
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.resid" title="MDAnalysis.core.AtomGroup.Atom.resid"><code class="xref py py-attr docutils literal"><span class="pre">Atom.resid</span></code></a> are bundled into a single <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue" title="MDAnalysis.core.AtomGroup.Residue"><code class="xref py py-class docutils literal"><span class="pre">Residue</span></code></a> with
-<a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue.id" title="MDAnalysis.core.AtomGroup.Residue.id"><code class="xref py py-class docutils literal"><span class="pre">Residue.id</span></code></a> = <em>resid</em>. This means that just changing, say, the residue
+<code class="xref py py-class docutils literal"><span class="pre">Residue.resid</span></code> = <em>resid</em>. This means that just changing, say, the residue
 name with a command such as</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;resid 99&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">residues</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 <span class="go">&lt;Residue &#39;ALA&#39;, 99&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;UNK&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">resname</span> <span class="o">=</span> <span class="s2">&quot;UNK&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 <span class="go">&lt;Residue &#39;UNK&#39;, 99&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rnew</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s2">&quot;resid 99&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">residues</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -1348,14 +1348,19 @@ flag to be used by default.</p>
 <dl class="method">
 <dt id="MDAnalysis.core.AtomGroup.AtomGroup.coordinates">
 <code class="descname">coordinates</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.core.AtomGroup.AtomGroup.coordinates" title="Permalink to this definition">¶</a></dt>
-<dd><p>Np array of the coordinates.</p>
-<div class="admonition seealso">
+<dd><p><cite>coordinates</cite> is deprecated!
+This will be removed in version 0.16.0; use <cite>positions</cite> property instead</p>
+<p>Np array of the coordinates.</p>
+<blockquote>
+<div><div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup.positions" title="MDAnalysis.core.AtomGroup.AtomGroup.positions"><code class="xref py py-attr docutils literal"><span class="pre">positions</span></code></a> and <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup.get_positions" title="MDAnalysis.core.AtomGroup.AtomGroup.get_positions"><code class="xref py py-meth docutils literal"><span class="pre">get_positions()</span></code></a></p>
 </div>
 <div class="deprecated">
-<p><span class="versionmodified">Deprecated since version 0.7.6: </span>In new scripts use <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup.get_positions" title="MDAnalysis.core.AtomGroup.AtomGroup.get_positions"><code class="xref py py-meth docutils literal"><span class="pre">AtomGroup.get_positions()</span></code></a> preferrably.</p>
+<p><span class="versionmodified">Deprecated since version 0.7.6.</span></p>
 </div>
+<p>In new scripts use <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup.get_positions" title="MDAnalysis.core.AtomGroup.AtomGroup.get_positions"><code class="xref py py-meth docutils literal"><span class="pre">AtomGroup.get_positions()</span></code></a> preferrably.</p>
+</div></blockquote>
 </dd></dl>
 
 <dl class="attribute">
@@ -1704,8 +1709,6 @@ format <code class="docutils literal"><span class="pre">[Lx,</span> <span class=
 shape, i.e. either Nx3 to assign individual coordinates or 3, to assign
 the <em>same</em> coordinate to all atoms (e.g. <code class="docutils literal"><span class="pre">ag.positions</span> <span class="pre">=</span> <span class="pre">array([0,0,0])</span></code>
 will move all particles to the origin).</p>
-<p>For more control use the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup.get_positions" title="MDAnalysis.core.AtomGroup.AtomGroup.get_positions"><code class="xref py py-meth docutils literal"><span class="pre">get_positions()</span></code></a> and
-<a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup.set_positions" title="MDAnalysis.core.AtomGroup.AtomGroup.set_positions"><code class="xref py py-meth docutils literal"><span class="pre">set_positions()</span></code></a> methods.</p>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 0.7.6.</span></p>
 </div>
@@ -2858,7 +2861,7 @@ This will be removed in version 0.16.0; use <cite>resids</cite> property instead
 <blockquote>
 <div><p>If <em>resid</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.resid" title="MDAnalysis.core.AtomGroup.Atom.resid"><code class="xref py py-attr docutils literal"><span class="pre">Atom.resid</span></code></a> is set to the corresponding value together
-with the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue.id" title="MDAnalysis.core.AtomGroup.Residue.id"><code class="xref py py-attr docutils literal"><span class="pre">Residue.id</span></code></a> of the residue the atom belongs to. If
+with the <code class="xref py py-attr docutils literal"><span class="pre">Residue.resid</span></code> of the residue the atom belongs to. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
 <div class="admonition note">
@@ -2895,7 +2898,7 @@ This will be removed in version 0.16.0; use <cite>resids</cite> property instead
 <blockquote>
 <div><p>If <em>resid</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.resid" title="MDAnalysis.core.AtomGroup.Atom.resid"><code class="xref py py-attr docutils literal"><span class="pre">Atom.resid</span></code></a> is set to the corresponding value together
-with the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue.id" title="MDAnalysis.core.AtomGroup.Residue.id"><code class="xref py py-attr docutils literal"><span class="pre">Residue.id</span></code></a> of the residue the atom belongs to. If
+with the <code class="xref py py-attr docutils literal"><span class="pre">Residue.resid</span></code> of the residue the atom belongs to. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
 <div class="admonition note">
@@ -2934,7 +2937,7 @@ This will be removed in version 0.16.0; use <cite>resnames</cite> property inste
 <blockquote>
 <div><p>If <em>resname</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.resname" title="MDAnalysis.core.AtomGroup.Atom.resname"><code class="xref py py-attr docutils literal"><span class="pre">Atom.resname</span></code></a> is set to the corresponding value together
-with the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue.name" title="MDAnalysis.core.AtomGroup.Residue.name"><code class="xref py py-attr docutils literal"><span class="pre">Residue.name</span></code></a> of the residue the atom belongs to. If
+with the <code class="xref py py-attr docutils literal"><span class="pre">Residue.resname</span></code> of the residue the atom belongs to. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
 <div class="versionadded">
@@ -2961,7 +2964,7 @@ This will be removed in version 0.16.0; use <cite>resnames</cite> property inste
 <blockquote>
 <div><p>If <em>resname</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.resname" title="MDAnalysis.core.AtomGroup.Atom.resname"><code class="xref py py-attr docutils literal"><span class="pre">Atom.resname</span></code></a> is set to the corresponding value together
-with the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue.name" title="MDAnalysis.core.AtomGroup.Residue.name"><code class="xref py py-attr docutils literal"><span class="pre">Residue.name</span></code></a> of the residue the atom belongs to. If
+with the <code class="xref py py-attr docutils literal"><span class="pre">Residue.resname</span></code> of the residue the atom belongs to. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
 <div class="versionadded">
@@ -3064,7 +3067,7 @@ This will be removed in version 0.16.0; use <cite>segids</cite> property instead
 <blockquote>
 <div><p>If <em>segid</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.segid" title="MDAnalysis.core.AtomGroup.Atom.segid"><code class="xref py py-attr docutils literal"><span class="pre">Atom.segid</span></code></a> is set to the corresponding value together
-with the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Segment.id" title="MDAnalysis.core.AtomGroup.Segment.id"><code class="xref py py-attr docutils literal"><span class="pre">Segment.id</span></code></a> of the residue the atom belongs to. If
+with the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Segment.segid" title="MDAnalysis.core.AtomGroup.Segment.segid"><code class="xref py py-attr docutils literal"><span class="pre">Segment.segid</span></code></a> of the residue the atom belongs to. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
 <div class="admonition note">
@@ -3096,7 +3099,7 @@ This will be removed in version 0.16.0; use <cite>segids</cite> property instead
 <blockquote>
 <div><p>If <em>segid</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.segid" title="MDAnalysis.core.AtomGroup.Atom.segid"><code class="xref py py-attr docutils literal"><span class="pre">Atom.segid</span></code></a> is set to the corresponding value together
-with the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Segment.id" title="MDAnalysis.core.AtomGroup.Segment.id"><code class="xref py py-attr docutils literal"><span class="pre">Segment.id</span></code></a> of the residue the atom belongs to. If
+with the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Segment.segid" title="MDAnalysis.core.AtomGroup.Segment.segid"><code class="xref py py-attr docutils literal"><span class="pre">Segment.segid</span></code></a> of the residue the atom belongs to. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
 <div class="admonition note">
@@ -3920,10 +3923,10 @@ does not contain velocities.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Data:</th><td class="field-body"><dl class="first last docutils">
-<dt><a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue.name" title="MDAnalysis.core.AtomGroup.Residue.name"><code class="xref py py-attr docutils literal"><span class="pre">Residue.name</span></code></a></dt>
+<dt><code class="xref py py-attr docutils literal"><span class="pre">Residue.resname</span></code></dt>
 <dd><p class="first last">Three letter residue name.</p>
 </dd>
-<dt><a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue.id" title="MDAnalysis.core.AtomGroup.Residue.id"><code class="xref py py-attr docutils literal"><span class="pre">Residue.id</span></code></a></dt>
+<dt><code class="xref py py-attr docutils literal"><span class="pre">Residue.resid</span></code></dt>
 <dd><p class="first last">Numeric (integer) resid, taken from the topology.</p>
 </dd>
 <dt><code class="xref py py-attr docutils literal"><span class="pre">Residue.resnum</span></code></dt>
@@ -4085,7 +4088,7 @@ This will be removed in version 0.16.0; use <cite>resids</cite> property instead
 <dd><p class="first"><a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup" title="MDAnalysis.core.AtomGroup.ResidueGroup"><code class="xref py py-class docutils literal"><span class="pre">ResidueGroup</span></code></a>.</p>
 <p>If <em>resid</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup" title="MDAnalysis.core.AtomGroup.ResidueGroup"><code class="xref py py-class docutils literal"><span class="pre">ResidueGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.resid" title="MDAnalysis.core.AtomGroup.Atom.resid"><code class="xref py py-attr docutils literal"><span class="pre">Atom.resid</span></code></a> is set to the corresponding value together
-with the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue.id" title="MDAnalysis.core.AtomGroup.Residue.id"><code class="xref py py-attr docutils literal"><span class="pre">Residue.id</span></code></a> of the residue the atom belongs to. If
+with the <code class="xref py py-attr docutils literal"><span class="pre">Residue.resid</span></code> of the residue the atom belongs to. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
 <div class="admonition note">
@@ -4122,7 +4125,7 @@ This will be removed in version 0.16.0; use <cite>resids</cite> property instead
 <dd><p class="first"><a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup" title="MDAnalysis.core.AtomGroup.ResidueGroup"><code class="xref py py-class docutils literal"><span class="pre">ResidueGroup</span></code></a>.</p>
 <p>If <em>resid</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup" title="MDAnalysis.core.AtomGroup.ResidueGroup"><code class="xref py py-class docutils literal"><span class="pre">ResidueGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.resid" title="MDAnalysis.core.AtomGroup.Atom.resid"><code class="xref py py-attr docutils literal"><span class="pre">Atom.resid</span></code></a> is set to the corresponding value together
-with the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue.id" title="MDAnalysis.core.AtomGroup.Residue.id"><code class="xref py py-attr docutils literal"><span class="pre">Residue.id</span></code></a> of the residue the atom belongs to. If
+with the <code class="xref py py-attr docutils literal"><span class="pre">Residue.resid</span></code> of the residue the atom belongs to. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
 <div class="admonition note">
@@ -4161,7 +4164,7 @@ This will be removed in version 0.16.0; use <cite>resnames</cite> property inste
 <dd><p class="first"><a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup" title="MDAnalysis.core.AtomGroup.ResidueGroup"><code class="xref py py-class docutils literal"><span class="pre">ResidueGroup</span></code></a>.</p>
 <p>If <em>resname</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup" title="MDAnalysis.core.AtomGroup.ResidueGroup"><code class="xref py py-class docutils literal"><span class="pre">ResidueGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.resname" title="MDAnalysis.core.AtomGroup.Atom.resname"><code class="xref py py-attr docutils literal"><span class="pre">Atom.resname</span></code></a> is set to the corresponding value together
-with the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue.name" title="MDAnalysis.core.AtomGroup.Residue.name"><code class="xref py py-attr docutils literal"><span class="pre">Residue.name</span></code></a> of the residue the atom belongs to. If
+with the <code class="xref py py-attr docutils literal"><span class="pre">Residue.resname</span></code> of the residue the atom belongs to. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
 <div class="versionadded">
@@ -4190,7 +4193,7 @@ This will be removed in version 0.16.0; use <cite>resnames</cite> property inste
 <dd><p class="first"><a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup" title="MDAnalysis.core.AtomGroup.ResidueGroup"><code class="xref py py-class docutils literal"><span class="pre">ResidueGroup</span></code></a>.</p>
 <p>If <em>resname</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.ResidueGroup" title="MDAnalysis.core.AtomGroup.ResidueGroup"><code class="xref py py-class docutils literal"><span class="pre">ResidueGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.resname" title="MDAnalysis.core.AtomGroup.Atom.resname"><code class="xref py py-attr docutils literal"><span class="pre">Atom.resname</span></code></a> is set to the corresponding value together
-with the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Residue.name" title="MDAnalysis.core.AtomGroup.Residue.name"><code class="xref py py-attr docutils literal"><span class="pre">Residue.name</span></code></a> of the residue the atom belongs to. If
+with the <code class="xref py py-attr docutils literal"><span class="pre">Residue.resname</span></code> of the residue the atom belongs to. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
 <div class="versionadded">
@@ -4405,7 +4408,7 @@ This will be removed in version 0.16.0; use <cite>segids</cite> property instead
 <blockquote>
 <div><p>If <em>segid</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.SegmentGroup" title="MDAnalysis.core.AtomGroup.SegmentGroup"><code class="xref py py-class docutils literal"><span class="pre">SegmentGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.segid" title="MDAnalysis.core.AtomGroup.Atom.segid"><code class="xref py py-attr docutils literal"><span class="pre">Atom.segid</span></code></a> is set to the corresponding value together
-with the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Segment.id" title="MDAnalysis.core.AtomGroup.Segment.id"><code class="xref py py-attr docutils literal"><span class="pre">Segment.id</span></code></a> of the segment the atom belongs to. If
+with the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Segment.segid" title="MDAnalysis.core.AtomGroup.Segment.segid"><code class="xref py py-attr docutils literal"><span class="pre">Segment.segid</span></code></a> of the segment the atom belongs to. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
 <div class="admonition note">
@@ -4436,7 +4439,7 @@ This will be removed in version 0.16.0; use <cite>segids</cite> property instead
 <blockquote>
 <div><p>If <em>segid</em> is a sequence of the same length as the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.SegmentGroup" title="MDAnalysis.core.AtomGroup.SegmentGroup"><code class="xref py py-class docutils literal"><span class="pre">SegmentGroup</span></code></a>
 then each <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom.segid" title="MDAnalysis.core.AtomGroup.Atom.segid"><code class="xref py py-attr docutils literal"><span class="pre">Atom.segid</span></code></a> is set to the corresponding value together
-with the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Segment.id" title="MDAnalysis.core.AtomGroup.Segment.id"><code class="xref py py-attr docutils literal"><span class="pre">Segment.id</span></code></a> of the segment the atom belongs to. If
+with the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Segment.segid" title="MDAnalysis.core.AtomGroup.Segment.segid"><code class="xref py py-attr docutils literal"><span class="pre">Segment.segid</span></code></a> of the segment the atom belongs to. If
 <em>value</em> is neither of length 1 (or a scalar) nor of the length of the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> then a <code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> is raised.</p>
 <div class="admonition note">
