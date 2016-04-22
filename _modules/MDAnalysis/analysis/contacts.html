@@ -76,8 +76,8 @@
 <span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
 <span class="c1">#</span>
 <span class="c1"># MDAnalysis --- http://www.MDAnalysis.org</span>
-<span class="c1"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
-<span class="c1"># and contributors (see AUTHORS for the full list)</span>
+<span class="c1"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver</span>
+<span class="c1"># Beckstein and contributors (see AUTHORS for the full list)</span>
 <span class="c1">#</span>
 <span class="c1"># Released under the GNU Public Licence, v2 or any higher version</span>
 <span class="c1">#</span>
@@ -88,45 +88,31 @@
 <span class="c1"># J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787</span>
 <span class="c1">#</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Native contacts analysis --- :mod:`MDAnalysis.analysis.contacts`</span>
+<span class="sd">&quot;&quot;&quot;Native contacts analysis --- :mod:`MDAnalysis.analysis.contacts`</span>
 <span class="sd">================================================================</span>
 
-<span class="sd">Analysis of native contacts *q* over a trajectory.</span>
 
-<span class="sd">* a &quot;contact&quot; exists between two atoms *i* and *j* if the distance between them is</span>
-<span class="sd">  smaller than a given *radius*</span>
+<span class="sd">Analysis of native contacts *Q* over a trajectory. Native contacts of a</span>
+<span class="sd">conformation are contacts that exist in a reference structure and in the</span>
+<span class="sd">conformation. Contacts in the reference structure are always defined as being</span>
+<span class="sd">closer then a distance `radius`. The fraction of native contacts for a</span>
+<span class="sd">conformation can be calculated in different ways. This module supports 3</span>
+<span class="sd">different metrics liseted below, as wel as custom metrics.</span>
 
-<span class="sd">* a &quot;native contact&quot; exists between *i* and *j* if a contact exists and if the</span>
-<span class="sd">  contact also exists between the equivalent atoms in a reference structure or</span>
-<span class="sd">  conformation</span>
+<span class="sd">1. *Hard Cut*: To count as a contact the atoms *i* and *j* have to be at least</span>
+<span class="sd">   as close as in the reference structure.</span>
 
-<span class="sd">The &quot;fraction of native contacts&quot; *q(t)* is a number between 0 and 1 and</span>
+<span class="sd">2. *Soft Cut*: The atom pair *i* and *j* is assigned based on a soft potential</span>
+<span class="sd">   that is 1 for if the distance is 0, 1./2 if the distance is the same as in</span>
+<span class="sd">   the reference and 0 for large distances. For the exact definition of the</span>
+<span class="sd">   potential and parameters have a look at `soft_cut_q`.</span>
+
+<span class="sd">3. *Radius Cut*: To count as a contact the atoms *i* and *j* cannot be further</span>
+<span class="sd">   apart then some distance `radius`.</span>
+
+<span class="sd">The &quot;fraction of native contacts&quot; *Q(t)* is a number between 0 and 1 and</span>
 <span class="sd">calculated as the total number of native contacts for a given time frame</span>
 <span class="sd">divided by the total number of contacts in the reference structure.</span>
-
-<span class="sd">Classes are available for two somewhat different ways to perform a contact</span>
-<span class="sd">analysis:</span>
-
-<span class="sd">1. Contacts between two groups of atoms are defined with</span>
-<span class="sd">   :class:`ContactAnalysis1`), which allows one to calculate *q(t)* over</span>
-<span class="sd">   time. This is especially useful in order to look at native contacts during</span>
-<span class="sd">   an equilibrium simulation where one can also look at the average matrix of</span>
-<span class="sd">   native contacts (see :meth:`ContactAnalysis1.plot_qavg`).</span>
-
-<span class="sd">2. Contacts are defined within one group in a protein (e.g. all C-alpha atoms)</span>
-<span class="sd">   but relative to *two different conformations* 1 and 2, using</span>
-<span class="sd">   :class:`ContactAnalysis`. This allows one to do a *q1-q2* analysis that</span>
-<span class="sd">   shows how native contacts of state 1 change in comparison to native contacts</span>
-<span class="sd">   of state 2.  Transition pathways have been analyzed in terms of these two</span>
-<span class="sd">   variables q1 and q2 that relate to the native contacts in the end states of</span>
-<span class="sd">   the transition.</span>
-
-<span class="sd">.. SeeAlso:: See http://lorentz.dynstr.pasteur.fr/joel/adenylate.php for an</span>
-<span class="sd">   example of contact analysis applied to MinActionPath trajectories of AdK</span>
-<span class="sd">   (although this was *not* performed with MDAnalysis --- it&#39;s provided as a</span>
-<span class="sd">   very good illustrative example).</span>
-
 
 <span class="sd">Examples</span>
 <span class="sd">--------</span>
@@ -138,52 +124,51 @@
 <span class="sd">when the AdK enzyme opens up; this is one of the example trajectories</span>
 <span class="sd">in MDAnalysis. ::</span>
 
-<span class="sd">    import MDAnalysis</span>
-<span class="sd">    import MDAnalysis.analysis.contacts</span>
-<span class="sd">    from MDAnalysis.tests.datafiles import PSF,DCD</span>
+<span class="sd">&gt;&gt;&gt; import MDAnalysis as mda</span>
+<span class="sd">&gt;&gt;&gt; from MDAnalysis.analysis import contacts</span>
+<span class="sd">&gt;&gt;&gt; from MDAnalysis.tests.datafiles import PSF,DCD</span>
+<span class="sd">&gt;&gt;&gt; import matplotlib.pyplot as plt</span>
+<span class="sd">&gt;&gt;&gt; # example trajectory (transition of AdK from closed to open)</span>
+<span class="sd">&gt;&gt;&gt; u = mda.Universe(PSF,DCD)</span>
+<span class="sd">&gt;&gt;&gt; # crude definition of salt bridges as contacts between NH/NZ in ARG/LYS and</span>
+<span class="sd">&gt;&gt;&gt; # OE*/OD* in ASP/GLU. You might want to think a little bit harder about the</span>
+<span class="sd">&gt;&gt;&gt; # problem before using this for real work.</span>
+<span class="sd">&gt;&gt;&gt; sel_basic = &quot;(resname ARG LYS) and (name NH* NZ)&quot;</span>
+<span class="sd">&gt;&gt;&gt; sel_acidic = &quot;(resname ASP GLU) and (name OE* OD*)&quot;</span>
+<span class="sd">&gt;&gt;&gt; # reference groups (first frame of the trajectory, but you could also use a</span>
+<span class="sd">&gt;&gt;&gt; # separate PDB, eg crystal structure)</span>
+<span class="sd">&gt;&gt;&gt; acidic = u.select_atoms(sel_acidic)</span>
+<span class="sd">&gt;&gt;&gt; basic = u.select_atoms(sel_basic)</span>
+<span class="sd">&gt;&gt;&gt; # set up analysis of native contacts (&quot;salt bridges&quot;); salt bridges have a</span>
+<span class="sd">&gt;&gt;&gt; # distance &lt;6 A</span>
+<span class="sd">&gt;&gt;&gt; ca1 = contacts.Contacts(u, selection=(sel_acidic, sel_basic),</span>
+<span class="sd">&gt;&gt;&gt;                         refgroup=(acidic, basic), radius=6.0)</span>
+<span class="sd">&gt;&gt;&gt; # iterate through trajectory and perform analysis of &quot;native contacts&quot; Q</span>
+<span class="sd">&gt;&gt;&gt; ca1.run()</span>
+<span class="sd">&gt;&gt;&gt; # print number of averave contacts</span>
+<span class="sd">&gt;&gt;&gt; average_contacts = np.mean(ca1.timeseries[:, 1])</span>
+<span class="sd">&gt;&gt;&gt; print(&#39;average contacts = {}&#39;.format(average_contacts))</span>
+<span class="sd">&gt;&gt;&gt; # plot time series q(t)</span>
+<span class="sd">&gt;&gt;&gt; f, ax = plt.subplots()</span>
+<span class="sd">&gt;&gt;&gt; ax.plot(ca1.timeseries[:, 0], ca1.timeseries[:, 1])</span>
+<span class="sd">&gt;&gt;&gt; ax.set(xlabel=&#39;frame&#39;, ylabel=&#39;fraction of native contacts&#39;,</span>
+<span class="sd">           title=&#39;Native Contacts, average = {:.2f}&#39;.format(average_contacts))</span>
+<span class="sd">&gt;&gt;&gt; fig.show()</span>
 
-<span class="sd">    # example trajectory (transition of AdK from closed to open)</span>
-<span class="sd">    u = MDAnalysis.Universe(PSF,DCD)</span>
-
-<span class="sd">    # crude definition of salt bridges as contacts between NH/NZ in ARG/LYS and OE*/OD* in ASP/GLU.</span>
-<span class="sd">    # You might want to think a little bit harder about the problem before using this for real work.</span>
-<span class="sd">    sel_basic = &quot;(resname ARG or resname LYS) and (name NH* or name NZ)&quot;</span>
-<span class="sd">    sel_acidic = &quot;(resname ASP or resname GLU) and (name OE* or name OD*)&quot;</span>
-
-<span class="sd">    # reference groups (first frame of the trajectory, but you could also use a separate PDB, eg crystal structure)</span>
-<span class="sd">    acidic = u.select_atoms(sel_acidic)</span>
-<span class="sd">    basic = u.select_atoms(sel_basic)</span>
-
-<span class="sd">    # set up analysis of native contacts (&quot;salt bridges&quot;); salt bridges have a distance &lt;6 A</span>
-<span class="sd">    CA1 = MDAnalysis.analysis.contacts.ContactAnalysis1(u, selection=(sel_acidic, sel_basic), refgroup=(acidic,</span>
-<span class="sd">    basic), radius=6.0, outfile=&quot;qsalt.dat&quot;)</span>
-
-<span class="sd">    # iterate through trajectory and perform analysis of &quot;native contacts&quot; q</span>
-<span class="sd">    # (force=True ignores any previous results, force=True is useful when testing)</span>
-<span class="sd">    CA1.run(force=True)</span>
-
-<span class="sd">    # plot time series q(t) [possibly do &quot;import pylab; pylab.clf()&quot; do clear the figure first...]</span>
-<span class="sd">    CA1.plot(filename=&quot;adk_saltbridge_contact_analysis1.pdf&quot;, linewidth=3, color=&quot;blue&quot;)</span>
-
-<span class="sd">    # or plot the data in qsalt.dat yourself.</span>
-<span class="sd">    CA1.plot_qavg(filename=&quot;adk_saltbridge_contact_analysis1_matrix.pdf&quot;)</span>
 
 <span class="sd">The first graph shows that when AdK opens, about 20% of the salt</span>
 <span class="sd">bridges that existed in the closed state disappear when the enzyme</span>
 <span class="sd">opens. They open in a step-wise fashion (made more clear by the movie</span>
 <span class="sd">`AdK_zipper_cartoon.avi`_).</span>
 
-<span class="sd">The output graphs can be made prettier but if you look at the code</span>
-<span class="sd">itself then you&#39;ll quickly figure out what to do. The qavg plot is the</span>
-<span class="sd">matrix of all contacts, averaged over the trajectory. This plot makes</span>
-<span class="sd">more sense for an equilibrium trajectory than for the example above</span>
-<span class="sd">but is is included for illustration.</span>
-
-<span class="sd">See the docs for :class:`ContactAnalysis1` for another example.</span>
-
-
 <span class="sd">.. AdK_zipper_cartoon.avi:</span>
 <span class="sd">   http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2803350/bin/NIHMS150766-supplement-03.avi</span>
+
+<span class="sd">Notes</span>
+<span class="sd">-----</span>
+<span class="sd">Suggested cutoff distances for different simulations</span>
+<span class="sd">* For all-atom simulations, cutoff = 4.5 A</span>
+<span class="sd">* For coarse-grained simulations, cutoff = 6.0 A</span>
 
 <span class="sd">Two-dimensional contact analysis (q1-q2)</span>
 <span class="sd">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
@@ -191,23 +176,85 @@
 <span class="sd">Analyze a single DIMS transition of AdK between its closed and open</span>
 <span class="sd">conformation and plot the trajectory projected on q1-q2::</span>
 
-<span class="sd">  import MDAnalysis.analysis.contacts</span>
-<span class="sd">  from MDAnalysis.tests.datafiles import PSF, DCD</span>
-<span class="sd">  C = MDAnalysis.analysis.contacts.ContactAnalysis(PSF, DCD)</span>
-<span class="sd">  C.run()</span>
-<span class="sd">  C.plot()</span>
+
+<span class="sd">&gt;&gt;&gt; import MDAnalysis as mda</span>
+<span class="sd">&gt;&gt;&gt; from MDAnalysis.analysis import contacts</span>
+<span class="sd">&gt;&gt;&gt; from MDAnalysisTests.datafiles import PSF, DCD</span>
+<span class="sd">&gt;&gt;&gt; u = mda.Universe(PSF, DCD)</span>
+<span class="sd">&gt;&gt;&gt; q1q2 = contacts.q1q2(u, &#39;name CA&#39;, radius=8)</span>
+<span class="sd">&gt;&gt;&gt; q1q2.run()</span>
+<span class="sd">&gt;&gt;&gt;</span>
+<span class="sd">&gt;&gt;&gt; f, ax = plt.subplots(1, 2, figsize=plt.figaspect(0.5))</span>
+<span class="sd">&gt;&gt;&gt; ax[0].plot(q1q2.timeseries[:, 0], q1q2.timeseries[:, 1], label=&#39;q1&#39;)</span>
+<span class="sd">&gt;&gt;&gt; ax[0].plot(q1q2.timeseries[:, 0], q1q2.timeseries[:, 2], label=&#39;q2&#39;)</span>
+<span class="sd">&gt;&gt;&gt; ax[0].legend(loc=&#39;best&#39;)</span>
+<span class="sd">&gt;&gt;&gt; ax[1].plot(q1q2.timeseries[:, 1], q1q2.timeseries[:, 2], &#39;.-&#39;)</span>
+<span class="sd">&gt;&gt;&gt; f.show()</span>
 
 <span class="sd">Compare the resulting pathway to the `MinActionPath result for AdK`_.</span>
 
 <span class="sd">.. _MinActionPath result for AdK:</span>
 <span class="sd">   http://lorentz.dynstr.pasteur.fr/joel/adenylate.php</span>
 
+<span class="sd">Writing your own contact analysis</span>
+<span class="sd">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+
+<span class="sd">The ..class:`Contacts` has been designed to be extensible for your own</span>
+<span class="sd">analysis. As an example we will analysis when the acidic and basic groups of</span>
+<span class="sd">are in contact which each other, this means that at least one of the contacts</span>
+<span class="sd">formed in the reference is closer then 2.5 Angstrom. For this we define a new</span>
+<span class="sd">method to determine if any contact is closer then 2.5 Angström that implements</span>
+<span class="sd">the API ..class:`Contacts` except.</span>
+
+<span class="sd">The first to parameters `r` and `r0` are provided by ..class:`Contacts` the</span>
+<span class="sd">others can be passed as keyword args using the `kwargs` parameter in</span>
+<span class="sd">..class:`Contacts`.</span>
+
+<span class="sd">&gt;&gt;&gt; def is_any_closer(r, r0, dist=2.5):</span>
+<span class="sd">&gt;&gt;&gt;     return np.any(r &lt; dist)</span>
+
+<span class="sd">Next we are creating an instance of the Constants class and use the</span>
+<span class="sd">`is_any_closer` function as an argument to `method` and run the analysus</span>
+
+<span class="sd">&gt;&gt;&gt; # crude definition of salt bridges as contacts between NH/NZ in ARG/LYS and</span>
+<span class="sd">&gt;&gt;&gt; # OE*/OD* in ASP/GLU. You might want to think a little bit harder about the</span>
+<span class="sd">&gt;&gt;&gt; # problem before using this for real work.</span>
+<span class="sd">&gt;&gt;&gt; sel_basic = &quot;(resname ARG LYS) and (name NH* NZ)&quot;</span>
+<span class="sd">&gt;&gt;&gt; sel_acidic = &quot;(resname ASP GLU) and (name OE* OD*)&quot;</span>
+<span class="sd">&gt;&gt;&gt; # reference groups (first frame of the trajectory, but you could also use a</span>
+<span class="sd">&gt;&gt;&gt; # separate PDB, eg crystal structure)</span>
+<span class="sd">&gt;&gt;&gt; acidic = u.select_atoms(sel_acidic)</span>
+<span class="sd">&gt;&gt;&gt; basic = u.select_atoms(sel_basic)</span>
+<span class="sd">&gt;&gt;&gt; nc = contacts.Contacts(u, selection=(sel_acidic, sel_basic),</span>
+<span class="sd">&gt;&gt;&gt;                        method=is_any_closer,</span>
+<span class="sd">&gt;&gt;&gt;                        refgroup=(acidic, basic), kwargs={&#39;dist&#39;: 2.5})</span>
+<span class="sd">&gt;&gt;&gt;</span>
+<span class="sd">&gt;&gt;&gt; nc.run()</span>
+<span class="sd">&gt;&gt;&gt;</span>
+<span class="sd">&gt;&gt;&gt; bound = nc.timeseries[:, 1]</span>
+<span class="sd">&gt;&gt;&gt; frames = nc.timeseries[:, 0]</span>
+<span class="sd">&gt;&gt;&gt;</span>
+<span class="sd">&gt;&gt;&gt; f, ax = plt.subplots()</span>
+<span class="sd">&gt;&gt;&gt;</span>
+<span class="sd">&gt;&gt;&gt; ax.plot(frames, bound, &#39;.&#39;)</span>
+<span class="sd">&gt;&gt;&gt; ax.set(xlabel=&#39;frame&#39;, ylabel=&#39;is Bound&#39;,</span>
+<span class="sd">&gt;&gt;&gt;        ylim=(-0.1, 1.1))</span>
+<span class="sd">&gt;&gt;&gt;</span>
+<span class="sd">&gt;&gt;&gt; f.show()</span>
+
+<span class="sd">Functions</span>
+<span class="sd">---------</span>
+
+<span class="sd">.. autofunction:: hard_cut_q</span>
+<span class="sd">.. autofunction:: soft_cut_q</span>
+<span class="sd">.. autofunction:: radius_cut_q</span>
+<span class="sd">.. autofunction:: contact_matrix</span>
+<span class="sd">.. autofunction:: q1q2</span>
+
 <span class="sd">Classes</span>
 <span class="sd">-------</span>
 
 <span class="sd">.. autoclass:: Contacts</span>
-<span class="sd">   :members:</span>
-<span class="sd">.. autoclass:: ContactAnalysis</span>
 <span class="sd">   :members:</span>
 
 
@@ -216,8 +263,11 @@
 
 <span class="sd">.. autoclass:: ContactAnalysis1</span>
 <span class="sd">   :members:</span>
+<span class="sd">.. autoclass:: ContactAnalysis</span>
+<span class="sd">   :members:</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">errno</span>
@@ -226,6 +276,7 @@
 <span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">zip</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy.lib.utils</span> <span class="kn">import</span> <span class="n">deprecate</span>
 
 <span class="kn">import</span> <span class="nn">logging</span>
 
@@ -233,16 +284,303 @@
 <span class="kn">import</span> <span class="nn">MDAnalysis.lib.distances</span>
 <span class="kn">from</span> <span class="nn">MDAnalysis.lib.util</span> <span class="kn">import</span> <span class="n">openany</span>
 <span class="kn">from</span> <span class="nn">MDAnalysis.analysis.distances</span> <span class="kn">import</span> <span class="n">distance_array</span>
+<span class="kn">from</span> <span class="nn">MDAnalysis.core.AtomGroup</span> <span class="kn">import</span> <span class="n">AtomGroup</span>
 <span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">AnalysisBase</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;MDAnalysis.analysis.contacts&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="soft_cut_q"><a class="viewcode-back" href="../../../documentation_pages/analysis/contacts.html#MDAnalysis.analysis.contacts.soft_cut_q">[docs]</a><span class="k">def</span> <span class="nf">soft_cut_q</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">lambda_constant</span><span class="o">=</span><span class="mf">1.8</span><span class="p">):</span>
+    <span class="sd">r&quot;&quot;&quot;Calculate fraction of native contacts *Q* for a soft cut off</span>
+
+<span class="sd">    ..math::</span>
+<span class="sd">        Q(r, r_0) = \frac{1}{1 + e^{\beta (r - \lambda r_0)}}</span>
+
+<span class="sd">    Reasonable values for different simulation types are</span>
+
+<span class="sd">    *All Atom*: lambda_constant = 1.8 (unitless)</span>
+<span class="sd">    *Coarse Grained*: lambda_constant = 1.5 (unitless)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    r: array</span>
+<span class="sd">      Contact distances at time t</span>
+<span class="sd">    r0: array</span>
+<span class="sd">      Contact distances at time t=0, reference distances</span>
+<span class="sd">    beta: float (default 5.0 Angstrom)</span>
+<span class="sd">      Softness of the switching function</span>
+<span class="sd">    lambda_constant: float (default 1.8, unitless)</span>
+<span class="sd">      Reference distance tolerance</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Q : float</span>
+<span class="sd">      fraction of native contacts</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [1] RB Best, G Hummer, and WA Eaton, &quot;Native contacts determine protein</span>
+<span class="sd">       folding mechanisms in atomistic simulations&quot; _PNAS_ **110** (2013),</span>
+<span class="sd">       17874–17879. `10.1073/pnas.1311599110</span>
+<span class="sd">       &lt;http://doi.org/10.1073/pnas.1311599110&gt;`_.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="n">r0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">r0</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">beta</span><span class="o">*</span><span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">lambda_constant</span> <span class="o">*</span> <span class="n">r0</span><span class="p">)))</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">r0</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="hard_cut_q"><a class="viewcode-back" href="../../../documentation_pages/analysis/contacts.html#MDAnalysis.analysis.contacts.hard_cut_q">[docs]</a><span class="k">def</span> <span class="nf">hard_cut_q</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate fraction of native contacts *Q* for a hard cut off. The cutoff</span>
+<span class="sd">    can either be a float a ndarray the same shape as `r`</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    r : ndarray</span>
+<span class="sd">        distance matrix</span>
+<span class="sd">    cutoff : ndarray | float</span>
+<span class="sd">        cut off value to count distances. Can either be a float of a ndarray of</span>
+<span class="sd">        the same size as distances</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Q : float</span>
+<span class="sd">        fraction of contacts</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="n">cutoff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">cutoff</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">r</span> <span class="o">&lt;=</span> <span class="n">cutoff</span>
+    <span class="k">return</span> <span class="n">y</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">r</span><span class="o">.</span><span class="n">size</span></div>
+
+
+<div class="viewcode-block" id="radius_cut_q"><a class="viewcode-back" href="../../../documentation_pages/analysis/contacts.html#MDAnalysis.analysis.contacts.radius_cut_q">[docs]</a><span class="k">def</span> <span class="nf">radius_cut_q</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;calculate native contacts *Q* based on the single sistance radius</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    r : ndarray</span>
+<span class="sd">        distance array between atoms</span>
+<span class="sd">    r0 : ndarray</span>
+<span class="sd">        unused to fullfill Contacts API</span>
+<span class="sd">    radius : float</span>
+<span class="sd">        Distance between atoms at which a contact is formed</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Q : float</span>
+<span class="sd">        fraction of contacts</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [1] Franklin, J., Koehl, P., Doniach, S., &amp; Delarue, M. (2007).</span>
+<span class="sd">       MinActionPath: Maximum likelihood trajectory for large-scale structural</span>
+<span class="sd">       transitions in a coarse-grained locally harmonic energy landscape.</span>
+<span class="sd">       Nucleic Acids Research, 35(SUPPL.2), 477–482.</span>
+<span class="sd">       http://doi.org/10.1093/nar/gkm342</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">hard_cut_q</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="contact_matrix"><a class="viewcode-back" href="../../../documentation_pages/analysis/contacts.html#MDAnalysis.analysis.contacts.contact_matrix">[docs]</a><span class="k">def</span> <span class="nf">contact_matrix</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;calculate contacts from distance matrix</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    d : array-like</span>
+<span class="sd">        distance matrix</span>
+<span class="sd">    radius : float</span>
+<span class="sd">        distance below which a contact is formed.</span>
+<span class="sd">    out: array (optional)</span>
+<span class="sd">        If `out` is supplied as a pre-allocated array of the correct</span>
+<span class="sd">        shape then it is filled instead of allocating a new one in</span>
+<span class="sd">        order to increase performance.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    contacts : ndarray</span>
+<span class="sd">        boolean array of formed contacts</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">out</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">out</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">d</span> <span class="o">&lt;=</span> <span class="n">radius</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">d</span> <span class="o">&lt;=</span> <span class="n">radius</span>
+    <span class="k">return</span> <span class="n">out</span></div>
+
+
+<div class="viewcode-block" id="Contacts"><a class="viewcode-back" href="../../../documentation_pages/analysis/contacts.html#MDAnalysis.analysis.contacts.Contacts">[docs]</a><span class="k">class</span> <span class="nc">Contacts</span><span class="p">(</span><span class="n">AnalysisBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate contacts based observables.</span>
+
+<span class="sd">    The standard methods used in this class calculate the fraction of native</span>
+<span class="sd">    contacts *Q* from a trajectory. By defining your own method it is possible</span>
+<span class="sd">    to calculate other observables that only depend on the distances and a</span>
+<span class="sd">    possible reference distance.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    timeseries : list</span>
+<span class="sd">        list containing *Q* for all refgroup pairs and analyzed frames</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="n">refgroup</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;hard_cut&quot;</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">4.5</span><span class="p">,</span>
+                 <span class="n">kwargs</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="bp">None</span><span class="p">,):</span>
+        <span class="sd">&quot;&quot;&quot;Initialization</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        u : Universe</span>
+<span class="sd">            trajectory</span>
+<span class="sd">        selection : tuple(string, string)</span>
+<span class="sd">            two contacting groups that change over time</span>
+<span class="sd">        refgroup : tuple(AtomGroup, AtomGroup)</span>
+<span class="sd">            two contacting atomgroups in their reference conformation. This</span>
+<span class="sd">            can also be a list of tuples containing different atom groups</span>
+<span class="sd">        radius : float, optional (4.5 Angstroms)</span>
+<span class="sd">            radius within which contacts exist in refgroup</span>
+<span class="sd">        method : string | callable (optional)</span>
+<span class="sd">            Can either be one of [&#39;hard_cut&#39; , &#39;soft_cut&#39;] or a callable that</span>
+<span class="sd">            implements a API (r, r0, **kwargs).</span>
+<span class="sd">        kwargs : dict, optional</span>
+<span class="sd">            dictionary of additional kwargs passed to `method`. Check</span>
+<span class="sd">            respective functions for reasonable values.</span>
+<span class="sd">        start : int, optional</span>
+<span class="sd">            First frame of trajectory to analyse, Default: 0</span>
+<span class="sd">        stop : int, optional</span>
+<span class="sd">            Last frame of trajectory to analyse, Default: -1</span>
+<span class="sd">        step : int, optional</span>
+<span class="sd">            Step between frames to analyse, Default: 1</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;hard_cut&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fraction_contacts</span> <span class="o">=</span> <span class="n">hard_cut_q</span>
+        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;soft_cut&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fraction_contacts</span> <span class="o">=</span> <span class="n">soft_cut_q</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">callable</span><span class="p">(</span><span class="n">method</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;method has to be callable&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fraction_contacts</span> <span class="o">=</span> <span class="n">method</span>
+
+        <span class="c1"># setup boilerplate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">u</span> <span class="o">=</span> <span class="n">u</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_setup_frames</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">selection</span> <span class="o">=</span> <span class="n">selection</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grA</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">selection</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grB</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">selection</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="c1"># contacts formed in reference</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">r0</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initial_contacts</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">refgroup</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">AtomGroup</span><span class="p">):</span>
+            <span class="n">refA</span><span class="p">,</span> <span class="n">refB</span> <span class="o">=</span> <span class="n">refgroup</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">r0</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">distance_array</span><span class="p">(</span><span class="n">refA</span><span class="o">.</span><span class="n">positions</span><span class="p">,</span> <span class="n">refB</span><span class="o">.</span><span class="n">positions</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">initial_contacts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">contact_matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r0</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">radius</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">refA</span><span class="p">,</span> <span class="n">refB</span> <span class="ow">in</span> <span class="n">refgroup</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">r0</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">distance_array</span><span class="p">(</span><span class="n">refA</span><span class="o">.</span><span class="n">positions</span><span class="p">,</span> <span class="n">refB</span><span class="o">.</span><span class="n">positions</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">initial_contacts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">contact_matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r0</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                                                            <span class="n">radius</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fraction_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span> <span class="k">if</span> <span class="n">kwargs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">_single_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># compute distance array for a frame</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">distance_array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grA</span><span class="o">.</span><span class="n">positions</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">grB</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
+
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ts</span><span class="o">.</span><span class="n">frame</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">initial_contacts</span><span class="p">,</span> <span class="n">r0</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_contacts</span><span class="p">,</span>
+                                                       <span class="bp">self</span><span class="o">.</span><span class="n">r0</span><span class="p">)):</span>
+            <span class="c1"># select only the contacts that were formed in the reference state</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">initial_contacts</span><span class="p">]</span>
+            <span class="n">r0</span> <span class="o">=</span> <span class="n">r0</span><span class="p">[</span><span class="n">initial_contacts</span><span class="p">]</span>
+            <span class="n">y</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fraction_contacts</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">fraction_kwargs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_conclude</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Contacts.save"><a class="viewcode-back" href="../../../documentation_pages/analysis/contacts.html#MDAnalysis.analysis.contacts.Contacts.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outfile</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;save contacts timeseries</span>
+
+<span class="sd">        Parameter</span>
+<span class="sd">        ---------</span>
+<span class="sd">        outfile : str</span>
+<span class="sd">            file to save contacts</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;# q1 analysis</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span><span class="p">)</span></div></div>
+
+
+<span class="k">def</span> <span class="nf">_new_selections</span><span class="p">(</span><span class="n">u_orig</span><span class="p">,</span> <span class="n">selections</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;create stand alone AGs from selections at frame&quot;&quot;&quot;</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">u_orig</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">u_orig</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+    <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="n">frame</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">selections</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="q1q2"><a class="viewcode-back" href="../../../documentation_pages/analysis/contacts.html#MDAnalysis.analysis.contacts.q1q2">[docs]</a><span class="k">def</span> <span class="nf">q1q2</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">selection</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">4.5</span><span class="p">,</span>
+         <span class="n">start</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Do a q1-q2 analysis to compare native contacts between the starting</span>
+<span class="sd">    structure and final structure of a trajectory.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    u : Universe</span>
+<span class="sd">        Universe with a trajectory</span>
+<span class="sd">    selection : string, optional</span>
+<span class="sd">        atoms to do analysis on</span>
+<span class="sd">    radius : float, optional</span>
+<span class="sd">        distance at which contact is formed</span>
+<span class="sd">    start : int, optional</span>
+<span class="sd">        First frame of trajectory to analyse, Default: 0</span>
+<span class="sd">    stop : int, optional</span>
+<span class="sd">        Last frame of trajectory to analyse, Default: -1</span>
+<span class="sd">    step : int, optional</span>
+<span class="sd">        Step between frames to analyse, Default: 1</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    contacts</span>
+<span class="sd">        Contact Analysis setup for a q1-q2 analysis</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">selection</span> <span class="o">=</span> <span class="p">(</span><span class="n">selection</span><span class="p">,</span> <span class="n">selection</span><span class="p">)</span>
+    <span class="n">first_frame_refs</span> <span class="o">=</span> <span class="n">_new_selections</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">last_frame_refs</span> <span class="o">=</span> <span class="n">_new_selections</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Contacts</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span>
+                    <span class="p">(</span><span class="n">first_frame_refs</span><span class="p">,</span> <span class="n">last_frame_refs</span><span class="p">),</span>
+                    <span class="n">radius</span><span class="o">=</span><span class="n">radius</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">radius_cut_q</span><span class="p">,</span>
+                    <span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span>
+                    <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;radius&#39;</span><span class="p">:</span> <span class="n">radius</span><span class="p">})</span></div>
+
+<span class="c1">################################################################################</span>
+<span class="c1">################################################################################</span>
+<span class="c1">################################################################################</span>
+<span class="c1">################################################################################</span>
+<span class="c1">################################################################################</span>
+<span class="c1">################################################################################</span>
+
+
+<span class="c1"># What comes now are old deprecated contact Analysis classes</span>
 
 
 <span class="c1"># ContactAnalysis needs to be cleaned up and possibly renamed but</span>
 <span class="c1"># until then it remains because we don&#39;t have the functionality</span>
 <span class="c1"># elsewhere.</span>
 
-<div class="viewcode-block" id="ContactAnalysis"><a class="viewcode-back" href="../../../documentation_pages/analysis/contacts.html#MDAnalysis.analysis.contacts.ContactAnalysis">[docs]</a><span class="k">class</span> <span class="nc">ContactAnalysis</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="nd">@deprecate</span><span class="p">(</span><span class="n">new_name</span><span class="o">=</span><span class="s2">&quot;Contacts&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;This class will be removed in 0.17&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">ContactAnalysis</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Perform a native contact analysis (&quot;q1-q2&quot;).</span>
 
 <span class="sd">    The analysis of the trajectory is performed with the</span>
@@ -283,18 +621,18 @@
 <span class="sd">        trajectory : filename</span>
 <span class="sd">            trajectory</span>
 <span class="sd">        ref1 : filename or ``None``, optional</span>
-<span class="sd">            structure of the reference conformation 1 (pdb); if ``None`` the *first*</span>
-<span class="sd">            frame of the trajectory is chosen</span>
+<span class="sd">            structure of the reference conformation 1 (pdb); if ``None`` the</span>
+<span class="sd">            *first* frame of the trajectory is chosen</span>
 <span class="sd">        ref2 : filename or ``None``, optional</span>
-<span class="sd">            structure of the reference conformation 2 (pdb); if ``None`` the *last*</span>
-<span class="sd">            frame of the trajectory is chosen</span>
+<span class="sd">            structure of the reference conformation 2 (pdb); if ``None`` the</span>
+<span class="sd">            *last* frame of the trajectory is chosen</span>
 <span class="sd">        radius : float, optional, default 8 A</span>
 <span class="sd">            contacts are deemed any Ca within radius</span>
 <span class="sd">        targetdir : path, optional, default ``.``</span>
 <span class="sd">            output files are saved in this directory</span>
 <span class="sd">        infix : string, optional</span>
-<span class="sd">            additional tag string that is inserted into the output filename of the</span>
-<span class="sd">            data file</span>
+<span class="sd">            additional tag string that is inserted into the output filename of</span>
+<span class="sd">            the data file</span>
 <span class="sd">         selection : string, optional, default ``&quot;name CA&quot;``</span>
 <span class="sd">            MDAnalysis selection string that selects the particles of</span>
 <span class="sd">            interest; the default is to only select the C-alpha atoms</span>
@@ -308,6 +646,7 @@
 <span class="sd">            per-residue basis to compute contacts. This allows, for instance</span>
 <span class="sd">            defining the sidechains as `selection` and then computing distances</span>
 <span class="sd">            between sidechain centroids.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">topology</span> <span class="o">=</span> <span class="n">topology</span>
@@ -328,11 +667,15 @@
         <span class="c1"># short circuit if output file already exists: skip everything</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_exists</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_skip</span> <span class="o">=</span> <span class="bp">True</span>
-            <span class="k">return</span>  <span class="c1"># do not bother reading any data or initializing arrays... !!</span>
-        <span class="c1"># don&#39;t bother if trajectory is empty (can lead to segfaults so better catch it)</span>
+            <span class="c1"># do not bother reading any data or initializing arrays... !!</span>
+            <span class="k">return</span>
+
+        <span class="c1"># don&#39;t bother if trajectory is empty (can lead to segfaults so better</span>
+        <span class="c1"># catch it)</span>
         <span class="n">stats</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">trajectory</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">stats</span><span class="o">.</span><span class="n">st_size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;trajectory = {trajectory!s} is empty, skipping...&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">()))</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;trajectory = {trajectory!s} is empty, &#39;</span>
+                          <span class="s1">&#39;skipping...&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">()))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_skip</span> <span class="o">=</span> <span class="bp">True</span>
             <span class="k">return</span>
         <span class="c1"># under normal circumstances we do not skip</span>
@@ -382,9 +725,9 @@
 <span class="sd">              passed on to :func:`MDAnalysis.lib.distances.self_distance_array`</span>
 <span class="sd">              as a preallocated array</span>
 <span class="sd">        centroids : bool, optional, default ``None``</span>
-<span class="sd">              ``True``: calculate per-residue centroids from the selected atoms;</span>
-<span class="sd">              ``False``: consider each atom separately; ``None``: use the class</span>
-<span class="sd">              default for *centroids* [``None``]</span>
+<span class="sd">              ``True``: calculate per-residue centroids from the selected</span>
+<span class="sd">              atoms; ``False``: consider each atom separately; ``None``: use</span>
+<span class="sd">              the class default for *centroids* [``None``]</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">centroids</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;centroids&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
@@ -393,15 +736,18 @@
             <span class="n">coordinates</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">positions</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># centroids per residue (but only including the selected atoms)</span>
-            <span class="n">coordinates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">residue</span><span class="o">.</span><span class="n">centroid</span><span class="p">()</span> <span class="k">for</span> <span class="n">residue</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;residue&quot;</span><span class="p">)])</span>
-        <span class="k">return</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">distances</span><span class="o">.</span><span class="n">self_distance_array</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+            <span class="n">coordinates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">residue</span><span class="o">.</span><span class="n">centroid</span><span class="p">()</span>
+                                    <span class="k">for</span> <span class="n">residue</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;residue&quot;</span><span class="p">)])</span>
+        <span class="k">return</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">distances</span><span class="o">.</span><span class="n">self_distance_array</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span>
+                                                            <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ContactAnalysis.output_exists"><a class="viewcode-back" href="../../../documentation_pages/analysis/contacts.html#MDAnalysis.analysis.contacts.ContactAnalysis.output_exists">[docs]</a>    <span class="k">def</span> <span class="nf">output_exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return True if default output file already exists.</span>
 
 <span class="sd">        Disable with force=True (will always return False)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">)</span> <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_bz2</span><span class="p">))</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">force</span> <span class="ow">or</span> <span class="n">force</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">)</span> <span class="ow">or</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_bz2</span><span class="p">))</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">force</span> <span class="ow">or</span> <span class="n">force</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ContactAnalysis.run"><a class="viewcode-back" href="../../../documentation_pages/analysis/contacts.html#MDAnalysis.analysis.contacts.ContactAnalysis.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Analyze trajectory and produce timeseries.</span>
@@ -410,7 +756,8 @@
 <span class="sd">        store=True) and writes them to a bzip2-compressed data file.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_skip</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_exists</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="n">force</span><span class="p">):</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;File {output!r} or {output_bz2!r} already exists, loading {trajectory!r}.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">)))</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;File {output!r} or {output_bz2!r} already exists, &quot;</span>
+                          <span class="s2">&quot;loading {trajectory!r}.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">)))</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
@@ -419,7 +766,10 @@
 
         <span class="n">outbz2</span> <span class="o">=</span> <span class="n">bz2</span><span class="o">.</span><span class="n">BZ2File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_bz2</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">buffering</span><span class="o">=</span><span class="mi">8192</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">outbz2</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;# q1-q2 analysis</span><span class="se">\n</span><span class="s2"># nref1 = {0:d}</span><span class="se">\n</span><span class="s2"># nref2 = {1:d}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nref</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">nref</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+            <span class="n">outbz2</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;# q1-q2 analysis</span><span class="se">\n</span><span class="s2">&quot;</span>
+                         <span class="s2">&quot;# nref1 = {0:d}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                         <span class="s2">&quot;# nref2 = {1:d}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nref</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                                    <span class="bp">self</span><span class="o">.</span><span class="n">nref</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
             <span class="n">outbz2</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;# frame  q1  q2   n1  n2</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="n">records</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">:</span>
@@ -518,28 +868,26 @@
 
         <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;color&#39;</span><span class="p">,</span> <span class="s1">&#39;black&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No timeseries data; do &#39;ContactAnalysis.run(store=True)&#39; first.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No timeseries data; do &quot;</span>
+                             <span class="s2">&quot;&#39;ContactAnalysis.run(store=True)&#39; first.&quot;</span><span class="p">)</span>
         <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span>
         <span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="n">xlabel</span><span class="p">(</span><span class="s2">r&quot;$q_1$&quot;</span><span class="p">)</span>
-        <span class="n">ylabel</span><span class="p">(</span><span class="s2">r&quot;$q_2$&quot;</span><span class="p">)</span></div></div>
+        <span class="n">ylabel</span><span class="p">(</span><span class="s2">r&quot;$q_2$&quot;</span><span class="p">)</span></div>
 
 
-<span class="c1"># ContactAnalysis1 is a (hopefully) temporary hack. It should be unified with ContactAnalysis</span>
-<span class="c1"># or either should be derived from a base class because many methods are copy&amp;paste with</span>
-<span class="c1"># minor changes (mostly for going from q1q2 -&gt; q1 only).</span>
-<span class="c1"># If ContactAnalysis is enhanced to accept two references then this should be even easier.</span>
-<span class="c1"># It might also be worthwhile making a simpler class that just does the q calculation</span>
-<span class="c1"># and use it for both reference and trajectory data.</span>
-<div class="viewcode-block" id="ContactAnalysis1"><a class="viewcode-back" href="../../../documentation_pages/analysis/contacts.html#MDAnalysis.analysis.contacts.ContactAnalysis1">[docs]</a><span class="k">class</span> <span class="nc">ContactAnalysis1</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Perform a very flexible native contact analysis with respect to a single reference.</span>
+<span class="nd">@deprecate</span><span class="p">(</span><span class="n">new_name</span><span class="o">=</span><span class="s2">&quot;Contacts&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;This class will be removed in 0.17&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">ContactAnalysis1</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Perform a very flexible native contact analysis with respect to a single</span>
+<span class="sd">    reference.</span>
 
 <span class="sd">    This analysis class allows one to calculate the fraction of native contacts</span>
 <span class="sd">    *q* between two arbitrary groups of atoms with respect to an arbitrary</span>
 <span class="sd">    reference structure. For instance, as a reference one could take a crystal</span>
 <span class="sd">    structure of a complex, and as the two groups atoms one selects two</span>
 <span class="sd">    molecules A and B in the complex. Then the question to be answered by *q*</span>
-<span class="sd">    is, is which percentage of the contacts between A and B persist during the simulation.</span>
+<span class="sd">    is, is which percentage of the contacts between A and B persist during the</span>
+<span class="sd">    simulation.</span>
 
 <span class="sd">    First prepare :class:`~MDAnalysis.core.AtomGroup.AtomGroup` selections for</span>
 <span class="sd">    the reference atoms; this example uses some arbitrary selections::</span>
@@ -568,7 +916,8 @@
 
 <span class="sd">    Now we are ready to set up the analysis::</span>
 
-<span class="sd">      CA1 = ContactAnalysis1(u, selection=(selA,selB), refgroup=(refA,refB), radius=8.0, outfile=&quot;q.dat&quot;)</span>
+<span class="sd">      CA1 = ContactAnalysis1(u, selection=(selA,selB), refgroup=(refA,refB),</span>
+<span class="sd">                             radius=8.0, outfile=&quot;q.dat&quot;)</span>
 
 <span class="sd">    If the groups do not match in length then a :exc:`ValueError` is raised.</span>
 
@@ -606,14 +955,16 @@
 
 <span class="sd">        :Keywords:</span>
 <span class="sd">          *selection*</span>
-<span class="sd">            selection string that determines which distances are calculated; if this</span>
-<span class="sd">            is a tuple or list with two entries then distances are calculated between</span>
-<span class="sd">            these two different groups [&quot;name CA or name B*&quot;]</span>
+<span class="sd">            selection string that determines which distances are calculated; if</span>
+<span class="sd">            this is a tuple or list with two entries then distances are</span>
+<span class="sd">            calculated between these two different groups [&quot;name CA or name</span>
+<span class="sd">            B*&quot;]</span>
 <span class="sd">          *refgroup*</span>
-<span class="sd">            reference group, either a single :class:`~MDAnalysis.core.AtomGroup.AtomGroup`</span>
-<span class="sd">            (if there is only a single *selection*) or a list of two such groups.</span>
-<span class="sd">            The reference contacts are directly computed from *refgroup* and hence</span>
-<span class="sd">            the atoms in the reference group(s) must be equivalent to the ones produced</span>
+<span class="sd">            reference group, either a single</span>
+<span class="sd">            :class:`~MDAnalysis.core.AtomGroup.AtomGroup` (if there is only a</span>
+<span class="sd">            single *selection*) or a list of two such groups. The reference</span>
+<span class="sd">            contacts are directly computed from *refgroup* and hence the atoms</span>
+<span class="sd">            in the reference group(s) must be equivalent to the ones produced</span>
 <span class="sd">            by the *selection* on the input trajectory.</span>
 <span class="sd">          *radius*</span>
 <span class="sd">            contacts are deemed any atoms within radius [8.0 A]</span>
@@ -636,6 +987,7 @@
 <span class="sd">        the attribute :attr:`ContactAnalysis1.timeseries`.</span>
 
 <span class="sd">        .. deprecated: 0.14.0</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># XX or should I use as input</span>
@@ -648,8 +1000,9 @@
         <span class="c1"># - make this selection based on qavg</span>
         <span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">splitext</span>
 
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;ContactAnalysis1 is deprecated and will be removed in 1.0. &quot;</span>
-                      <span class="s2">&quot;Use Contacts instead.&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;ContactAnalysis1 is deprecated and will be removed &quot;</span>
+                      <span class="s2">&quot;in 1.0. Use Contacts instead.&quot;</span><span class="p">,</span>
+                      <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">selection_strings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_return_tuple2</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span>
             <span class="s1">&#39;selection&#39;</span><span class="p">,</span> <span class="s2">&quot;name CA or name B*&quot;</span><span class="p">),</span> <span class="s2">&quot;selection&quot;</span><span class="p">)</span>
@@ -666,16 +1019,19 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">filenames</span> <span class="o">=</span> <span class="n">args</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">universe</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">as_Universe</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">selections</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection_strings</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">selections</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+                           <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection_strings</span><span class="p">]</span>
 
         <span class="c1"># sanity checkes</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">references</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;a reference AtomGroup must be supplied&quot;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">ref</span><span class="p">,</span> <span class="n">sel</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">references</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">selections</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">selection_strings</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">ref</span><span class="p">,</span> <span class="n">sel</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">references</span><span class="p">,</span>
+                               <span class="bp">self</span><span class="o">.</span><span class="n">selections</span><span class="p">,</span>
+                               <span class="bp">self</span><span class="o">.</span><span class="n">selection_strings</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">ref</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">n_atoms</span> <span class="o">!=</span> <span class="n">sel</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;selection=</span><span class="si">%r</span><span class="s2">: Number of atoms differ between &quot;</span>
-                                 <span class="s2">&quot;reference (</span><span class="si">%d</span><span class="s2">) and trajectory (</span><span class="si">%d</span><span class="s2">)&quot;</span> <span class="o">%</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;selection=</span><span class="si">%r</span><span class="s2">: Number of atoms differ &quot;</span>
+                                 <span class="s2">&quot;between reference (</span><span class="si">%d</span><span class="s2">) and trajectory (</span><span class="si">%d</span><span class="s2">)&quot;</span> <span class="o">%</span>
                                  <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">ref</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">,</span> <span class="n">sel</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">))</span>
 
         <span class="c1"># compute reference contacts</span>
@@ -701,8 +1057,8 @@
         <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%(name)s</span><span class="s2"> must be a single object or a tuple/list with two objects &quot;</span>
-                             <span class="s2">&quot;and not </span><span class="si">%(x)r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">vars</span><span class="p">())</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%(name)s</span><span class="s2"> must be a single object or a &quot;</span>
+                             <span class="s2">&quot;tuple/list with two objects and not </span><span class="si">%(x)r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">vars</span><span class="p">())</span>
 
 <div class="viewcode-block" id="ContactAnalysis1.output_exists"><a class="viewcode-back" href="../../../documentation_pages/analysis/contacts.html#MDAnalysis.analysis.contacts.ContactAnalysis1.output_exists">[docs]</a>    <span class="k">def</span> <span class="nf">output_exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return True if default output file already exists.</span>
@@ -711,38 +1067,47 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">force</span> <span class="ow">or</span> <span class="n">force</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ContactAnalysis1.run"><a class="viewcode-back" href="../../../documentation_pages/analysis/contacts.html#MDAnalysis.analysis.contacts.ContactAnalysis1.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="ContactAnalysis1.run"><a class="viewcode-back" href="../../../documentation_pages/analysis/contacts.html#MDAnalysis.analysis.contacts.ContactAnalysis1.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Analyze trajectory and produce timeseries.</span>
 
 <span class="sd">        Stores results in :attr:`ContactAnalysis1.timeseries` (if store=True)</span>
 <span class="sd">        and writes them to a data file. The average q is written to a second</span>
 <span class="sd">        data file.</span>
 <span class="sd">        *start*</span>
-<span class="sd">            The value of the first frame index in the trajectory to be used (default: index 0)</span>
+<span class="sd">            The value of the first frame index in the trajectory to be used</span>
+<span class="sd">            (default: index 0)</span>
 <span class="sd">        *stop*</span>
-<span class="sd">            The value of the last frame index in the trajectory to be used (default: None -- use all frames)</span>
+<span class="sd">            The value of the last frame index in the trajectory to be used</span>
+<span class="sd">            (default: None -- use all frames)</span>
 <span class="sd">        *step*</span>
-<span class="sd">            The number of frames to skip during trajectory iteration (default: use every frame)</span>
+<span class="sd">            The number of frames to skip during trajectory iteration (default:</span>
+<span class="sd">            use every frame)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="s1">&#39;start_frame&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;start_frame argument has been deprecated, use start instead --&quot;</span>
-                           <span class="s2">&quot;removal targeted for version 0.15.0&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;start_frame argument has been deprecated, use &quot;</span>
+                          <span class="s2">&quot;start instead -- removal targeted for version &quot;</span>
+                          <span class="s2">&quot;0.15.0&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
             <span class="n">start</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;start_frame&#39;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="s1">&#39;end_frame&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;end_frame argument has been deprecated, use stop instead --&quot;</span>
-                           <span class="s2">&quot;removal targeted for version 0.15.0&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;end_frame argument has been deprecated, use &quot;</span>
+                          <span class="s2">&quot;stop instead -- removal targeted for version &quot;</span>
+                          <span class="s2">&quot;0.15.0&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
             <span class="n">stop</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;end_frame&#39;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="s1">&#39;step_value&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;step_value argument has been deprecated, use step instead --&quot;</span>
-                           <span class="s2">&quot;removal targeted for version 0.15.0&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;step_value argument has been deprecated, use &quot;</span>
+                          <span class="s2">&quot;step instead -- removal targeted for version &quot;</span>
+                          <span class="s2">&quot;0.15.0&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
             <span class="n">step</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;step_value&#39;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_exists</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="n">force</span><span class="p">):</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;File </span><span class="si">%r</span><span class="s2"> already exists, loading it INSTEAD of trajectory </span><span class="si">%r</span><span class="s2">. &quot;</span>
-                          <span class="s2">&quot;Use force=True to overwrite the output file. &quot;</span> <span class="o">%</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;File </span><span class="si">%r</span><span class="s2"> already exists, loading it INSTEAD of &quot;</span>
+                          <span class="s2">&quot;trajectory </span><span class="si">%r</span><span class="s2">. Use force=True to overwrite &quot;</span>
+                          <span class="s2">&quot;the output file. &quot;</span> <span class="o">%</span>
                           <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">filename</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">None</span>
@@ -756,7 +1121,9 @@
             <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">:</span><span class="n">step</span><span class="p">]:</span>
                 <span class="n">frame</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">frame</span>
                 <span class="c1"># use pre-allocated distance array to save a little bit of time</span>
-                <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">distances</span><span class="o">.</span><span class="n">distance_array</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">positions</span><span class="p">,</span> <span class="n">B</span><span class="o">.</span><span class="n">positions</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">)</span>
+                <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">distances</span><span class="o">.</span><span class="n">distance_array</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">coordinates</span><span class="p">(),</span>
+                                                        <span class="n">B</span><span class="o">.</span><span class="n">coordinates</span><span class="p">(),</span>
+                                                        <span class="n">result</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">qarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="p">)</span>
                 <span class="n">n1</span><span class="p">,</span> <span class="n">q1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qN</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_qtmp</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">qavg</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">q</span>
@@ -770,7 +1137,8 @@
         <span class="k">if</span> <span class="n">n_frames</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">qavg</span> <span class="o">/=</span> <span class="n">n_frames</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;No frames were analyzed. Check values of start, stop, step.&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;No frames were analyzed. &quot;</span>
+                        <span class="s2">&quot;Check values of start, stop, step.&quot;</span><span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;start={start} stop={stop} step={step}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">()))</span>
         <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outarray</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">qavg</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%8.6f</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span></div>
@@ -841,7 +1209,8 @@
         <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;color&#39;</span><span class="p">,</span> <span class="s1">&#39;black&#39;</span><span class="p">)</span>
         <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;linewidth&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No timeseries data; do &#39;ContactAnalysis.run(store=True)&#39; first.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No timeseries data; &quot;</span>
+                             <span class="s2">&quot;do &#39;ContactAnalysis.run(store=True)&#39; first.&quot;</span><span class="p">)</span>
         <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span>
         <span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="n">xlabel</span><span class="p">(</span><span class="s2">r&quot;frame number $t$&quot;</span><span class="p">)</span>
@@ -851,8 +1220,10 @@
             <span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_plot_qavg_pcolor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Plot :attr:`ContactAnalysis1.qavg`, the matrix of average native contacts.&quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">pylab</span> <span class="kn">import</span> <span class="n">pcolor</span><span class="p">,</span> <span class="n">gca</span><span class="p">,</span> <span class="n">meshgrid</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">,</span> <span class="n">colorbar</span><span class="p">,</span> <span class="n">savefig</span>
+        <span class="sd">&quot;&quot;&quot;Plot :attr:`ContactAnalysis1.qavg`, the matrix of average native</span>
+<span class="sd">        contacts.&quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">pylab</span> <span class="kn">import</span> <span class="p">(</span><span class="n">pcolor</span><span class="p">,</span> <span class="n">gca</span><span class="p">,</span> <span class="n">meshgrid</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">,</span>
+                           <span class="n">colorbar</span><span class="p">,</span> <span class="n">savefig</span><span class="p">)</span>
 
         <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selections</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">resids</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">selections</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">resids</span>
         <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
@@ -880,7 +1251,8 @@
 <span class="sd">        suffix determines the file type, e.g. pdf, png, eps, ...). All other</span>
 <span class="sd">        keyword arguments are passed on to :func:`pylab.imshow`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">pylab</span> <span class="kn">import</span> <span class="n">imshow</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">,</span> <span class="n">colorbar</span><span class="p">,</span> <span class="n">cm</span><span class="p">,</span> <span class="n">clf</span><span class="p">,</span> <span class="n">savefig</span>
+        <span class="kn">from</span> <span class="nn">pylab</span> <span class="kn">import</span> <span class="p">(</span><span class="n">imshow</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">,</span> <span class="n">colorbar</span><span class="p">,</span> <span class="n">cm</span><span class="p">,</span>
+                           <span class="n">clf</span><span class="p">,</span> <span class="n">savefig</span><span class="p">)</span>
 
         <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selections</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">resids</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">selections</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">resids</span>
 
@@ -904,374 +1276,7 @@
         <span class="n">colorbar</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></div></div>
-
-
-<span class="k">def</span> <span class="nf">best_hummer_q</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">lambda_constant</span><span class="o">=</span><span class="mf">1.8</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Calculate the Best-Hummer fraction of native contacts (Q)</span>
-
-<span class="sd">    A soft-cutoff contacts analysis</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    r: array</span>
-<span class="sd">      Contact distances at time t</span>
-<span class="sd">    r0: array</span>
-<span class="sd">      Contact distances at time t=0, reference distances</span>
-<span class="sd">    beta: float (default 5.0 Angstrom)</span>
-<span class="sd">      Softness of the switching function</span>
-<span class="sd">    lambda_constant: float (default 1.8, unitless)</span>
-<span class="sd">      Reference distance tolerance</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    Q : float</span>
-<span class="sd">      Fraction of native contacts</span>
-<span class="sd">    result : array</span>
-<span class="sd">      Intermediate, r-r0 array transformed by the switching function</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">beta</span><span class="o">*</span><span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">lambda_constant</span> <span class="o">*</span> <span class="n">r0</span><span class="p">)))</span>
-
-    <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">r0</span><span class="p">),</span> <span class="n">result</span>
-
-
-<div class="viewcode-block" id="Contacts"><a class="viewcode-back" href="../../../documentation_pages/analysis/contacts.html#MDAnalysis.analysis.contacts.Contacts">[docs]</a><span class="k">class</span> <span class="nc">Contacts</span><span class="p">(</span><span class="n">AnalysisBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Calculate fraction of native contacts (Q) from a trajectory</span>
-
-<span class="sd">    Inputs</span>
-<span class="sd">    ------</span>
-<span class="sd">    Two string selections for the contacting AtomGroups,</span>
-<span class="sd">    the groups could be protein-lipid or protein-protein.</span>
-
-<span class="sd">    Use two reference AtomGroups to obtain reference distances (r0)</span>
-<span class="sd">    for the cotacts.</span>
-
-<span class="sd">    Methods available</span>
-<span class="sd">    -----------------</span>
-<span class="sd">    Supports either hard-cutoff or soft-cutoff (Best-Hummer like [1]_)</span>
-<span class="sd">    contacts.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    list</span>
-<span class="sd">        Returns a list of following structure::</span>
-<span class="sd">            {</span>
-<span class="sd">                [[t1, q1], [t2, q2], ... [tn, qn]]</span>
-<span class="sd">            }</span>
-<span class="sd">        where t is time in ps and q is the fraction of native contacts</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-
-<span class="sd">    1. Protein folding::</span>
-
-<span class="sd">        ref = Universe(&quot;villin.gro&quot;)</span>
-<span class="sd">        u = Universe(&quot;conf_protein.gro&quot;, &quot;traj_protein.xtc&quot;)</span>
-<span class="sd">        Q = calculate_contacts(u, ref, &quot;protein and not name H*&quot;, &quot;protein and not name H*&quot;)</span>
-
-<span class="sd">    2. A pair of helices::</span>
-
-<span class="sd">        ref = Universe(&quot;glycophorin_dimer.pdb&quot;)</span>
-<span class="sd">        u = Universe(&quot;conf_protein.gro&quot;, &quot;traj_protein.xtc&quot;)</span>
-<span class="sd">        Q = calculate_contacts(u, ref, \</span>
-<span class="sd">            &quot;protein and resid 75-92 and not name H* and segid A&quot;, \</span>
-<span class="sd">            &quot;protein and resid 75-92 and not name H* and segid B&quot;)</span>
-
-<span class="sd">    Parameter choices</span>
-<span class="sd">    -----------------</span>
-<span class="sd">    There are recommendations and not strict orders.</span>
-<span class="sd">    These parameters should be insensitive to small changes.</span>
-<span class="sd">    * For all-atom simulations, radius = 4.5 A and lambda_constant = 1.8 (unitless)</span>
-<span class="sd">    * For coarse-grained simulations, radius = 6.0 A and lambda_constant = 1.5 (unitless)</span>
-
-<span class="sd">    Additional</span>
-<span class="sd">    ----------</span>
-<span class="sd">    Supports writing and reading the analysis results to and from a text file.</span>
-<span class="sd">    Supports simple plotting operations, for exploratory data analysis.</span>
-
-<span class="sd">    Notes</span>
-<span class="sd">    -----</span>
-<span class="sd">    We use the definition of Best et al [1]_, namely Eq. (1) of the SI</span>
-<span class="sd">    defines the expression for the fraction of native contacts,</span>
-<span class="sd">    $Q(X)$:</span>
-
-<span class="sd">    .. math::</span>
-
-<span class="sd">        Q(X) = \frac{1}{|S|} \sum_{(i,j) \in S}</span>
-<span class="sd">               \frac{1}{1 + \exp[\beta(r_{ij}(X) - \lambda r_{ij}^0)]}</span>
-
-<span class="sd">    where:</span>
-
-<span class="sd">    * :math:`X` is a conformation,</span>
-<span class="sd">    * :math:`r_{ij}(X)` is the distance between atoms $i$ and $j$ in</span>
-<span class="sd">      conformation $X$,</span>
-<span class="sd">    * :math:`r^0_{ij}` is the distance from heavy atom i to j in the</span>
-<span class="sd">      native state conformation,</span>
-<span class="sd">    * :math:`S` is the set of all pairs of heavy atoms $(i,j)$</span>
-<span class="sd">      belonging to residues $\theta_i$ and $\theta_j$ such that</span>
-<span class="sd">      $|\theta_i - \theta_j| &gt; 3$ and $r^0_{i,} &lt; 4.5</span>
-<span class="sd">      \unicode{x212B}$,</span>
-<span class="sd">    * :math:`\beta=5 \unicode{x212B}^{-1},</span>
-<span class="sd">    * :math:`\lambda=1.8` for all-atom simulations</span>
-
-<span class="sd">    References</span>
-<span class="sd">    ----------</span>
-
-<span class="sd">    .. [1] RB Best, G Hummer, and WA Eaton, &quot;Native contacts determine</span>
-<span class="sd">       protein folding mechanisms in atomistic simulations&quot; _PNAS_</span>
-<span class="sd">       **110** (2013), 17874–17879.  `10.1073/pnas.1311599110</span>
-<span class="sd">       &lt;http://doi.org/10.1073/pnas.1311599110&gt;`_.</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="n">refgroup</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;cutoff&quot;</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">4.5</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                 <span class="n">start</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Calculate the persistence length for polymer chains</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        u: Universe</span>
-<span class="sd">            trajectory</span>
-<span class="sd">        selection: tuple(string, string)</span>
-<span class="sd">            two contacting groups that change over time</span>
-<span class="sd">        refgroup: tuple(AtomGroup, AtomGroup)</span>
-<span class="sd">            two contacting groups in their reference conformation</span>
-<span class="sd">        radius: float, optional (4.5 Angstroms)</span>
-<span class="sd">            radius within which contacts exist</span>
-<span class="sd">        method: string</span>
-<span class="sd">            either &#39;cutoff&#39; or &#39;best-hummer&#39;</span>
-
-<span class="sd">        start : int, optional</span>
-<span class="sd">            First frame of trajectory to analyse, Default: 0</span>
-<span class="sd">        stop : int, optional</span>
-<span class="sd">            Last frame of trajectory to analyse, Default: -1</span>
-<span class="sd">        step : int, optional</span>
-<span class="sd">            Step between frames to analyse, Default: 1</span>
-
-<span class="sd">        Parameters for &#39;best-hummer&#39; method</span>
-<span class="sd">        -----------------------------------</span>
-<span class="sd">        lambda_constant: float, optional (1.8 unitless)</span>
-<span class="sd">            contact is considered formed between (lambda*r0,r0)</span>
-<span class="sd">        beta: float, optional (5 Angstroms^-1)</span>
-<span class="sd">            softness of the switching function, the lower the softer</span>
-
-<span class="sd">        Attributes</span>
-<span class="sd">        ----------</span>
-<span class="sd">        results: list</span>
-<span class="sd">            Fraction of native contacts for each frame</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="c1"># check method</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;cutoff&quot;</span><span class="p">,</span> <span class="s2">&quot;best-hummer&quot;</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;method has to be &#39;cutoff&#39; or &#39;best-hummer&#39;&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_method</span> <span class="o">=</span> <span class="n">method</span>
-
-        <span class="c1"># method-specific parameters</span>
-        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;best-hummer&quot;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;beta&#39;</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">lambda_constant</span>  <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;lambda_constant&#39;</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">)</span>
-
-        <span class="c1"># steup boilerplate</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">u</span> <span class="o">=</span> <span class="n">u</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_setup_frames</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">,</span>
-                           <span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span>
-                           <span class="n">stop</span><span class="o">=</span><span class="n">stop</span><span class="p">,</span>
-                           <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">selection</span> <span class="o">=</span> <span class="n">selection</span>
-        <span class="n">grA</span><span class="p">,</span> <span class="n">grB</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">selection</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">selection</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">grA</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">grB</span> <span class="o">=</span> <span class="n">grA</span><span class="p">,</span> <span class="n">grB</span>
-        <span class="n">refA</span><span class="p">,</span> <span class="n">refB</span> <span class="o">=</span> <span class="n">refgroup</span>
-
-        <span class="c1"># contacts formed in reference</span>
-        <span class="n">r0</span> <span class="o">=</span> <span class="n">distance_array</span><span class="p">(</span><span class="n">refA</span><span class="o">.</span><span class="n">positions</span><span class="p">,</span> <span class="n">refB</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">r0</span> <span class="o">=</span> <span class="n">r0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mask</span> <span class="o">=</span> <span class="n">r0</span> <span class="o">&lt;</span> <span class="n">radius</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">contact_matrix</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">outfile</span> <span class="o">=</span> <span class="n">outfile</span>
-
-<div class="viewcode-block" id="Contacts.load"><a class="viewcode-back" href="../../../documentation_pages/analysis/contacts.html#MDAnalysis.analysis.contacts.Contacts.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Load the data file.</span>
-
-<span class="sd">        Arguments</span>
-<span class="sd">        ---------</span>
-<span class="sd">        filename : string</span>
-<span class="sd">            name of the data file to be read (can be compressed</span>
-<span class="sd">            or a stream, see :func:`~MDAnalysis.lib.util.openany`</span>
-<span class="sd">            for what is possible)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">records</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">with</span> <span class="n">openany</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">data</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">):</span> <span class="k">continue</span>
-                <span class="n">records</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">records</span><span class="p">)</span></div>
-
-    <span class="k">def</span> <span class="nf">_single_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">grA</span><span class="p">,</span> <span class="n">grB</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">mask</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grA</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">grB</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">r0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask</span>
-
-        <span class="c1"># compute distance array for a frame</span>
-        <span class="n">d</span> <span class="o">=</span> <span class="n">distance_array</span><span class="p">(</span><span class="n">grA</span><span class="o">.</span><span class="n">positions</span><span class="p">,</span> <span class="n">grB</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
-
-        <span class="c1"># select only the contacts that were formed in the reference state</span>
-        <span class="c1"># r, r0 are 1D array</span>
-        <span class="n">r</span><span class="p">,</span> <span class="n">r0</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span> <span class="n">r0</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_method</span> <span class="o">==</span> <span class="s2">&quot;cutoff&quot;</span><span class="p">:</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="n">r</span> <span class="o">&lt;=</span> <span class="n">r0</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="o">/</span><span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_method</span> <span class="o">==</span> <span class="s2">&quot;best-hummer&quot;</span><span class="p">:</span>
-            <span class="n">y</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">best_hummer_q</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lambda_constant</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown method type, has to be &#39;cutoff&#39; or &#39;best-hummer&#39;&quot;</span><span class="p">)</span>
-
-        <span class="n">cm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">grA</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">grB</span><span class="o">.</span><span class="n">positions</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-        <span class="n">cm</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">contact_matrix</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cm</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_ts</span><span class="o">.</span><span class="n">frame</span> <span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
-
-    <span class="k">def</span> <span class="nf">_conclude</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Finalise the timeseries you&#39;ve gathered.</span>
-
-<span class="sd">        Called at the end of the run() method to finish everything up.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># write output</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">outfile</span><span class="p">:</span> <span class="k">return</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outfile</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;# q1 analysis</span><span class="se">\n</span><span class="s2"># nref = {0:d}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;# frame  q1  n1</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">frame</span><span class="p">,</span> <span class="n">q1</span><span class="p">,</span> <span class="n">n1</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span><span class="p">:</span>
-                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;{frame:4d}  {q1:8.6f} {n1:5d}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">()))</span>
-
-<div class="viewcode-block" id="Contacts.contact_matrix"><a class="viewcode-back" href="../../../documentation_pages/analysis/contacts.html#MDAnalysis.analysis.contacts.Contacts.contact_matrix">[docs]</a>    <span class="k">def</span> <span class="nf">contact_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return distance array with True for contacts.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        d : array</span>
-<span class="sd">            is the matrix of distances. The method uses the value of</span>
-<span class="sd">            `ContactAnalysis1.radius` to determine if a ``distance &lt; radius``</span>
-<span class="sd">            is considered a contact.</span>
-<span class="sd">        out: array (optional)</span>
-<span class="sd">            If `out` is supplied as a pre-allocated array of the correct</span>
-<span class="sd">            shape then it is filled instead of allocating a new one in</span>
-<span class="sd">            order to increase performance.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        array</span>
-<span class="sd">            boolean array of which contacts are formed</span>
-
-<span class="sd">        Note</span>
-<span class="sd">        ----</span>
-<span class="sd">        This method is typically only used internally.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">out</span><span class="p">:</span>
-            <span class="n">out</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">(</span><span class="n">d</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">out</span> <span class="o">=</span> <span class="p">(</span><span class="n">d</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">out</span></div>
-
-<div class="viewcode-block" id="Contacts.fraction_native"><a class="viewcode-back" href="../../../documentation_pages/analysis/contacts.html#MDAnalysis.analysis.contacts.Contacts.fraction_native">[docs]</a>    <span class="k">def</span> <span class="nf">fraction_native</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Calculate native contacts relative to reference state.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        q: array</span>
-<span class="sd">            is the matrix of contacts (e.g. `ContactAnalysis1.q`).</span>
-<span class="sd">        out: array</span>
-<span class="sd">            If *out* is supplied as a pre-allocated array of the correct</span>
-<span class="sd">            shape then it is filled instead of allocating a new one in</span>
-<span class="sd">            order to increase performance.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        contacts : integer</span>
-<span class="sd">           total number of contacts</span>
-<span class="sd">        fraction : float</span>
-<span class="sd">           Fraction of native contacts (Q) calculated from a contact matrix</span>
-
-<span class="sd">        Note</span>
-<span class="sd">        ----</span>
-<span class="sd">        This method is typically only used internally.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">out</span><span class="p">:</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask</span><span class="p">)</span>
-        <span class="n">contacts</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">contacts</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">contacts</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span></div>
-
-<div class="viewcode-block" id="Contacts.plot"><a class="viewcode-back" href="../../../documentation_pages/analysis/contacts.html#MDAnalysis.analysis.contacts.Contacts.plot">[docs]</a>    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Plot q(t).</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        filename : str</span>
-<span class="sd">            If `filename` is supplied then the figure is also written to file (the</span>
-<span class="sd">            suffix determines the file type, e.g. pdf, png, eps, ...). All other</span>
-<span class="sd">            keyword arguments are passed on to `pylab.plot`.</span>
-<span class="sd">        **kwargs</span>
-<span class="sd">            Arbitrary keyword arguments for the plotting function</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span> <span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No timeseries data; do &#39;Contacts.run()&#39; first.&quot;</span><span class="p">)</span>
-        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">timeseries</span><span class="p">)</span>
-
-        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-        <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;color&#39;</span><span class="p">,</span> <span class="s1">&#39;black&#39;</span><span class="p">)</span>
-        <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;linewidth&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-
-        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">r&quot;frame number $t$&quot;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">r&quot;contacts $q_1$&quot;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">filename</span><span class="p">:</span>
-            <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
-
-<div class="viewcode-block" id="Contacts.plot_qavg"><a class="viewcode-back" href="../../../documentation_pages/analysis/contacts.html#MDAnalysis.analysis.contacts.Contacts.plot_qavg">[docs]</a>    <span class="k">def</span> <span class="nf">plot_qavg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Plot `Contacts.qavg`, the matrix of average contacts.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        filename : str</span>
-<span class="sd">            If `filename` is supplied then the figure is also written to file (the</span>
-<span class="sd">            suffix determines the file type, e.g. pdf, png, eps, ...). All other</span>
-<span class="sd">            keyword arguments are passed on to `pylab.imshow`.</span>
-<span class="sd">        **kwargs</span>
-<span class="sd">            Arbitrary keyword arguments for the plotting function</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">contact_matrix</span> <span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No timeseries data; do &#39;Contacts.run()&#39; first.&quot;</span><span class="p">)</span>
-        <span class="c1"># collapse on the time-axis</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">contact_matrix</span><span class="p">)</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-        <span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="kn">as</span> <span class="nn">cm</span>
-
-        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;origin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;lower&#39;</span>
-        <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;aspect&#39;</span><span class="p">,</span> <span class="s1">&#39;equal&#39;</span><span class="p">)</span>
-        <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;interpolation&#39;</span><span class="p">,</span> <span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
-        <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;vmin&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;vmax&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;cmap&#39;</span><span class="p">,</span> <span class="n">cm</span><span class="o">.</span><span class="n">hot</span><span class="p">)</span>
-
-        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
-        <span class="n">cax</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-        <span class="n">cbar</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cax</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">filename</span><span class="p">:</span>
-            <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div></div>
+            <span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></div>
 </pre></div>
 
           </div>
