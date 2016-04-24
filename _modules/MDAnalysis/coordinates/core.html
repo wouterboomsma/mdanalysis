@@ -116,16 +116,13 @@
 <span class="kn">from</span> <span class="nn">..lib.mdamath</span> <span class="kn">import</span> <span class="n">triclinic_box</span><span class="p">,</span> <span class="n">triclinic_vectors</span><span class="p">,</span> <span class="n">box_volume</span>
 
 
-<div class="viewcode-block" id="get_reader_for"><a class="viewcode-back" href="../../../documentation_pages/coordinates/core.html#MDAnalysis.coordinates.core.get_reader_for">[docs]</a><span class="k">def</span> <span class="nf">get_reader_for</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">permissive</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="get_reader_for"><a class="viewcode-back" href="../../../documentation_pages/coordinates/core.html#MDAnalysis.coordinates.core.get_reader_for">[docs]</a><span class="k">def</span> <span class="nf">get_reader_for</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return the appropriate trajectory reader class for *filename*.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    filename : str</span>
 <span class="sd">        filename of the input trajectory or coordinate file</span>
-<span class="sd">    permissive : bool</span>
-<span class="sd">        If set to ``True``, a reader is selected that is more tolerant of the</span>
-<span class="sd">        input (currently only implemented for PDB). [``False``]</span>
 <span class="sd">    kwargs</span>
 <span class="sd">        Keyword arguments for the selected Reader class.</span>
 
@@ -141,8 +138,6 @@
     <span class="k">if</span> <span class="n">format</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">format</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">guess_format</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
     <span class="n">format</span> <span class="o">=</span> <span class="n">format</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">permissive</span> <span class="ow">and</span> <span class="n">format</span> <span class="o">==</span> <span class="s1">&#39;PDB&#39;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">_READERS</span><span class="p">[</span><span class="s1">&#39;Permissive_PDB&#39;</span><span class="p">]</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">_READERS</span><span class="p">[</span><span class="n">format</span><span class="p">]</span>
     <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
@@ -163,9 +158,7 @@
 <span class="sd">    This function guesses the file format from the extension of *filename* and</span>
 <span class="sd">    it will throw a :exc:`TypeError` if the extension is not recognized.</span>
 
-<span class="sd">    In most cases, no special keyword arguments are necessary. For PDB readers</span>
-<span class="sd">    it might be useful to set the *permissive* = ``True`` flag to</span>
-<span class="sd">    select a simpler but faster reader.</span>
+<span class="sd">    In most cases, no special keyword arguments are necessary.</span>
 
 <span class="sd">    All other keywords are passed on to the underlying Reader classes; see</span>
 <span class="sd">    their documentation for details.</span>
@@ -174,9 +167,6 @@
 <span class="sd">    ----------</span>
 <span class="sd">    filename : str or tuple</span>
 <span class="sd">        filename (or tuple of filenames) of the input coordinate file</span>
-<span class="sd">    permissive : bool</span>
-<span class="sd">        If set to ``True``, a reader is selected that is more tolerant of the</span>
-<span class="sd">        input (currently only implemented for PDB). [``False``]</span>
 <span class="sd">    kwargs</span>
 <span class="sd">        Keyword arguments for the selected Reader class.</span>
 
@@ -187,17 +177,19 @@
 <span class="sd">    .. SeeAlso:: For trajectory formats: :class:`~DCD.DCDReader`,</span>
 <span class="sd">       :class:`~XTC.XTCReader`, :class:`~TRR.TRRReader`,</span>
 <span class="sd">       :class:`~XYZ.XYZReader`.  For single frame formats:</span>
-<span class="sd">       :class:`~CRD.CRDReader`, :class:`~PDB.PDBReader` and</span>
-<span class="sd">       :class:`~PDB.PrimitivePDBReader`, :class:`~GRO.GROReader`,</span>
+<span class="sd">       :class:`~CRD.CRDReader`, and</span>
+<span class="sd">       :class:`~PDB.PDBReader`, :class:`~GRO.GROReader`,</span>
+
+<span class="sd">    .. deprecated:: 0.15.0</span>
+<span class="sd">    The &quot;permissive&quot; flag is not used anymore (and effectively</span>
+<span class="sd">    defaults to True); it will be completely removed in 0.16.0.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
         <span class="n">Reader</span> <span class="o">=</span> <span class="n">get_reader_for</span><span class="p">(</span><span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                                <span class="n">permissive</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;permissive&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
                                 <span class="n">format</span><span class="o">=</span><span class="n">filename</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">Reader</span><span class="p">(</span><span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">Reader</span> <span class="o">=</span> <span class="n">get_reader_for</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span>
-                                <span class="n">permissive</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;permissive&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">))</span>
+        <span class="n">Reader</span> <span class="o">=</span> <span class="n">get_reader_for</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">Reader</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 

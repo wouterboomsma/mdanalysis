@@ -218,25 +218,7 @@ and <a class="reference internal" href="AtomGroup.html#MDAnalysis.core.AtomGroup
 </div></blockquote>
 <p><strong>permissive_pdb_reader</strong> = <em>True</em></p>
 <blockquote>
-<div><p>Select the default reader for PDB Brookhaven databank files.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">flags</span><span class="p">[</span><span class="s1">&#39;permissive_pdb_reader&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-</pre></div>
-</div>
-<p>The Bio.PDB reader (value=``False``) can deal with &#8216;proper&#8217; PDB
-files from the Protein Databank that contain special PDB features
-such as insertion codes and it can auto-correct some common
-mistakes; see <code class="xref py py-mod docutils literal"><span class="pre">Bio.PDB</span></code> for details. However, Bio.PDB has been
-known to read some simulation system PDB files <strong>incompletely</strong>; a
-sure sign of problems is a warning that an atom has appeared twice
-in a residue.</p>
-<p>Therefore, the default for the PDB reader is <code class="docutils literal"><span class="pre">True</span></code>, which
-selects the &#8220;primitive&#8221; (or &#8220;permissive&#8221;) reader
-<a class="reference internal" href="../coordinates/PDB.html#MDAnalysis.coordinates.PDB.PrimitivePDBReader" title="MDAnalysis.coordinates.PDB.PrimitivePDBReader"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.coordinates.PDB.PrimitivePDBReader</span></code></a>, which
-essentially just reads ATOM and HETATM lines and puts atoms in a
-list.</p>
-<p>One can manually switch between the two by providing the <em>permissive</em>
-keyword to <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code>.</p>
-</div></blockquote>
+<div>This flag is deprecated and will be removed in 0.16.0.</div></blockquote>
 <p><strong>convert_lengths</strong> = <em>True</em></p>
 <blockquote>
 <div><p>Determine if trajectory reader and writer converts length units between native and MDAnalysis default.</p>

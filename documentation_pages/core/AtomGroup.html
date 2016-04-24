@@ -392,7 +392,7 @@ information needed.</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.7.5: </span>Can also read multi-frame PDB files with the
-<a class="reference internal" href="../coordinates/PDB.html#MDAnalysis.coordinates.PDB.PrimitivePDBReader" title="MDAnalysis.coordinates.PDB.PrimitivePDBReader"><code class="xref py py-class docutils literal"><span class="pre">PrimitivePDBReader</span></code></a>.</p>
+<code class="xref py py-class docutils literal"><span class="pre">PrimitivePDBReader</span></code>.</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.8: </span>Parse arbitrary number of arguments as a single topology file and a
@@ -412,6 +412,12 @@ Universe cache</p>
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>.
 Deprecated <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Universe.selectAtoms" title="MDAnalysis.core.AtomGroup.Universe.selectAtoms"><code class="xref py py-meth docutils literal"><span class="pre">selectAtoms()</span></code></a> in favour of <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Universe.select_atoms" title="MDAnalysis.core.AtomGroup.Universe.select_atoms"><code class="xref py py-meth docutils literal"><span class="pre">select_atoms()</span></code></a>.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.15.0: </span>Can read multi-frame PDB files with the :class:
+<cite>~MDAnalysis.coordinates.PDB.PDBReader</cite>.
+Deprecated <code class="xref py py-class docutils literal"><span class="pre">PrimitivePDBReader</span></code> in
+favor of <a class="reference internal" href="../coordinates/PDB.html#MDAnalysis.coordinates.PDB.PDBReader" title="MDAnalysis.coordinates.PDB.PDBReader"><code class="xref py py-class docutils literal"><span class="pre">PDBReader</span></code></a>.</p>
+</div>
 <p>Initialize the central MDAnalysis Universe object.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -424,12 +430,6 @@ list of atoms. If the file includes bond information, partial
 charges, atom masses, ... then these data will be available to
 MDAnalysis. A &#8220;structure&#8221; file (PSF, PDB or GRO, in the sense of a
 topology) is always required.</p>
-</dd>
-<dt><em>permissive</em></dt>
-<dd><p class="first last">currently only relevant for PDB files: Set to <code class="docutils literal"><span class="pre">True</span></code> in order to ignore most errors
-and read typical MD simulation PDB files; set to <code class="docutils literal"><span class="pre">False</span></code> to read with the Bio.PDB reader,
-which can be useful for real Protein Databank PDB files. <code class="docutils literal"><span class="pre">None</span></code>  selects the
-MDAnalysis default (which is set in <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.flags</span></code>) [<code class="docutils literal"><span class="pre">None</span></code>]</p>
 </dd>
 <dt><em>topology_format</em></dt>
 <dd><p class="first last">provide the file format of the topology file; <code class="docutils literal"><span class="pre">None</span></code> guesses it from the file
@@ -505,6 +505,10 @@ Deprecated <code class="docutils literal"><span class="pre">'bonds'</span></code
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Added the <em>is_anchor</em> and <em>anchor_name</em> keywords for finer behavior
 control when unpickling instances of <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.AtomGroup.AtomGroup</span></code></a>.</p>
+</div>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.15.0: </span>The &#8220;permissive&#8221; flag is not used anymore (and effectively defaults
+ to True); it will be completely removed in 0.16.0.</p>
 </div>
 <dl class="attribute">
 <dt id="MDAnalysis.core.AtomGroup.Universe.angles">
@@ -622,12 +626,6 @@ of all improper dihedrals in the Universe</p>
 <dd><p class="first last">the coordinate file (single frame or trajectory) <em>or</em> a list of
 filenames, which are read one after another.</p>
 </dd>
-<dt><em>permissive</em></dt>
-<dd><p class="first last">currently only relevant for PDB files: Set to <code class="docutils literal"><span class="pre">True</span></code> in order to ignore most errors
-and read typical MD simulation PDB files; set to <code class="docutils literal"><span class="pre">False</span></code> to read with the Bio.PDB reader,
-which can be useful for real Protein Databank PDB files. <code class="docutils literal"><span class="pre">None</span></code>  selects the
-MDAnalysis default (which is set in <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.flags</span></code>) [<code class="docutils literal"><span class="pre">None</span></code>]</p>
-</dd>
 <dt><em>format</em></dt>
 <dd><p class="first last">provide the file format of the coordinate or trajectory file;
 <code class="docutils literal"><span class="pre">None</span></code> guesses it from the file extension. Note that this
@@ -658,6 +656,10 @@ then it is treated as single coordinate file. This has the consequence that it i
 not read by the <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.ChainReader" title="MDAnalysis.coordinates.base.ChainReader"><code class="xref py py-class docutils literal"><span class="pre">ChainReader</span></code></a> but directly by
 its specialized file format reader, which typically has more features than the
 <a class="reference internal" href="../coordinates/base.html#MDAnalysis.coordinates.base.ChainReader" title="MDAnalysis.coordinates.base.ChainReader"><code class="xref py py-class docutils literal"><span class="pre">ChainReader</span></code></a>.</p>
+</div>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.15.0: </span>The &#8220;permissive&#8221; flag is not used anymore (and effectively
+defaults to True); it will be completely removed in 0.16.0.</p>
 </div>
 </dd></dl>
 

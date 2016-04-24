@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>4.6. PDB topology parser &mdash; MDAnalysis 0.14.1-dev0 documentation</title>
+    <title>4.6. PDB Topology Parser &mdash; MDAnalysis 0.14.1-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -60,7 +60,7 @@
             </a></p>
   <h3><a href="../../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">4.6. PDB topology parser</a><ul>
+<li><a class="reference internal" href="#">4.6. PDB Topology Parser</a><ul>
 <li><a class="reference internal" href="#classes">4.6.1. Classes</a></li>
 </ul>
 </li>
@@ -101,30 +101,38 @@
           <div class="body" role="main">
             
   <span class="target" id="module-MDAnalysis.topology.PDBParser"></span><div class="section" id="pdb-topology-parser">
-<h1>4.6. PDB topology parser<a class="headerlink" href="#pdb-topology-parser" title="Permalink to this headline">¶</a></h1>
-<p>Use a PDB file to build a minimum internal structure representation.</p>
+<h1>4.6. PDB Topology Parser<a class="headerlink" href="#pdb-topology-parser" title="Permalink to this headline">¶</a></h1>
+<p>This topology parser uses a standard PDB file to build a minimum
+internal structure representation (list of atoms).</p>
+<p>The topology reader reads a PDB file line by line and ignores atom
+numbers but only reads residue numbers up to 9,999 correctly. If you
+have systems containing at least 10,000 residues then you need to use
+a different file format (e.g. the &#8220;extended&#8221; PDB, <em>XPDB</em> format, see
+<a class="reference internal" href="ExtendedPDBParser.html#module-MDAnalysis.topology.ExtendedPDBParser" title="MDAnalysis.topology.ExtendedPDBParser"><code class="xref py py-mod docutils literal"><span class="pre">ExtendedPDBParser</span></code></a>) that can handle residue
+numbers up to 99,999.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Only atoms and their names are read; no bond connectivity of
-(partial) charges are deduced. Masses are guessed and set to
-0 if unknown.</p>
+<p class="last">The parser processes atoms and their names. Masses are guessed and set to 0
+if unknown. Partial charges are not set.</p>
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="../coordinates/PDB.html#module-MDAnalysis.coordinates.PDB" title="MDAnalysis.coordinates.PDB"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.coordinates.PDB</span></code></a> and <code class="xref py py-mod docutils literal"><span class="pre">Bio.PDB</span></code></p>
-</div>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="PrimitivePDBParser.html#module-MDAnalysis.topology.PrimitivePDBParser" title="MDAnalysis.topology.PrimitivePDBParser"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.topology.PrimitivePDBParser</span></code></a> (which
-<em>can</em> guess conectivity but does not support all subleties of the full
-PDB format)</p>
+<ul class="last simple">
+<li><a class="reference internal" href="ExtendedPDBParser.html#module-MDAnalysis.topology.ExtendedPDBParser" title="MDAnalysis.topology.ExtendedPDBParser"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.topology.ExtendedPDBParser</span></code></a></li>
+<li><a class="reference internal" href="../coordinates/PDB.html#MDAnalysis.coordinates.PDB.PDBReader" title="MDAnalysis.coordinates.PDB.PDBReader"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.coordinates.PDB.PDBReader</span></code></a></li>
+<li><a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.Universe" title="MDAnalysis.core.AtomGroup.Universe"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.AtomGroup.Universe</span></code></a></li>
+</ul>
 </div>
 <div class="section" id="classes">
 <h2>4.6.1. Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="MDAnalysis.topology.PDBParser.PDBParser">
 <em class="property">class </em><code class="descclassname">MDAnalysis.topology.PDBParser.</code><code class="descname">PDBParser</code><span class="sig-paren">(</span><em>filename</em>, <em>universe=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/topology/PDBParser.html#PDBParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.topology.PDBParser.PDBParser" title="Permalink to this definition">¶</a></dt>
-<dd><p>Read minimum topology information from a PDB file.</p>
+<dd><p>Parser that obtains a list of atoms from a standard PDB file.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../coordinates/PDB.html#MDAnalysis.coordinates.PDB.PDBReader" title="MDAnalysis.coordinates.PDB.PDBReader"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.coordinates.PDB.PDBReader</span></code></a>, <code class="xref py py-class docutils literal"></code></p>
+</div>
 <dl class="attribute">
 <dt id="MDAnalysis.topology.PDBParser.PDBParser.__delattr__">
 <code class="descname">__delattr__</code><a class="headerlink" href="#MDAnalysis.topology.PDBParser.PDBParser.__delattr__" title="Permalink to this definition">¶</a></dt>
@@ -409,21 +417,20 @@ returned.</p>
 <dl class="method">
 <dt id="MDAnalysis.topology.PDBParser.PDBParser.parse">
 <code class="descname">parse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/topology/PDBParser.html#PDBParser.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.topology.PDBParser.PDBParser.parse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parse atom information from PDB file <em>pdbfile</em>.</p>
-<p>Only reads the list of atoms.</p>
-<p>This functions uses the <code class="xref py py-class docutils literal"><span class="pre">Bio.PDB.PDBParser</span></code> as used by
-<a class="reference internal" href="../coordinates/pdbextensions.html#MDAnalysis.coordinates.pdb.extensions.get_structure" title="MDAnalysis.coordinates.pdb.extensions.get_structure"><code class="xref py py-func docutils literal"><span class="pre">MDAnalysis.coordinates.pdb.extensions.get_structure()</span></code></a>.</p>
+<dd><p>Parse atom information from PDB file <em>filename</em>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">MDAnalysis internal <em>structure</em> dict</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">MDAnalysis internal <em>structure</em> dict</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last">The <em>structure</em> dict is defined in <cite>MDAnalysis.topology</cite>.</p>
+<p class="last"><code class="xref py py-meth docutils literal"><span class="pre">The()</span></code>, <code class="xref py py-meth docutils literal"><span class="pre">is()</span></code></p>
 </div>
 </dd></dl>
 

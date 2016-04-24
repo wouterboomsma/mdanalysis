@@ -384,7 +384,7 @@ F.E. Cohen. Hydrogen bonds involving sulfur atoms in proteins. Proteins,
 <p>All protein-water hydrogen bonds can be analysed with</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">MDAnalysis.analysis.hbonds</span>
 
-<span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">PDB</span><span class="p">,</span> <span class="n">permissive</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">PDB</span><span class="p">)</span>
 <span class="n">h</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">hbonds</span><span class="o">.</span><span class="n">HydrogenBondAnalysis</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="s1">&#39;protein&#39;</span><span class="p">,</span> <span class="s1">&#39;resname TIP3&#39;</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mf">120.0</span><span class="p">)</span>
 <span class="n">h</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre></div>
@@ -833,7 +833,7 @@ with e.g. <a class="reference external" href="http://pypi.python.org/pypi/RecSQL
 
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.r_cov">
-<code class="descname">r_cov</code><em class="property"> = defaultdict(&lt;function &lt;lambda&gt; at 0x2b850a3a92a8&gt;, {'P': 1.58, 'S': 1.55, 'O': 1.31, 'N': 1.31})</em><a class="headerlink" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.r_cov" title="Permalink to this definition">¶</a></dt>
+<code class="descname">r_cov</code><em class="property"> = defaultdict(&lt;function &lt;lambda&gt; at 0x2b0cb75abb90&gt;, {'P': 1.58, 'S': 1.55, 'O': 1.31, 'N': 1.31})</em><a class="headerlink" href="#MDAnalysis.analysis.hbonds.hbond_analysis.HydrogenBondAnalysis.r_cov" title="Permalink to this definition">¶</a></dt>
 <dd><p>A <a class="reference external" href="http://docs.python.org/library/collections.html#collections.defaultdict" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">collections.defaultdict</span></code></a> of covalent radii of common donors
 (used in :meth`_get_bonded_hydrogens_list` to check if a hydrogen is
 sufficiently close to its donor heavy atom). Values are stored for

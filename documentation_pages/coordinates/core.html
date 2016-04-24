@@ -101,9 +101,7 @@
 <dd><p>Provide a trajectory reader instance for <em>filename</em>.</p>
 <p>This function guesses the file format from the extension of <em>filename</em> and
 it will throw a <code class="xref py py-exc docutils literal"><span class="pre">TypeError</span></code> if the extension is not recognized.</p>
-<p>In most cases, no special keyword arguments are necessary. For PDB readers
-it might be useful to set the <em>permissive</em> = <code class="docutils literal"><span class="pre">True</span></code> flag to
-select a simpler but faster reader.</p>
+<p>In most cases, no special keyword arguments are necessary.</p>
 <p>All other keywords are passed on to the underlying Reader classes; see
 their documentation for details.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -112,8 +110,6 @@ their documentation for details.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>filename</strong> (<em>str or tuple</em>) &#8211; filename (or tuple of filenames) of the input coordinate file</li>
-<li><strong>permissive</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If set to <code class="docutils literal"><span class="pre">True</span></code>, a reader is selected that is more tolerant of the
-input (currently only implemented for PDB). [<code class="docutils literal"><span class="pre">False</span></code>]</li>
 <li><strong>kwargs</strong> &#8211; Keyword arguments for the selected Reader class.</li>
 </ul>
 </td>
@@ -123,8 +119,11 @@ input (currently only implemented for PDB). [<code class="docutils literal"><spa
 <li><strong>.. SeeAlso</strong> (: For trajectory formats: <code class="xref py py-class docutils literal"><span class="pre">DCDReader</span></code>,) &#8211;
 <code class="xref py py-class docutils literal"><span class="pre">XTCReader</span></code>, <code class="xref py py-class docutils literal"><span class="pre">TRRReader</span></code>,
 <code class="xref py py-class docutils literal"><span class="pre">XYZReader</span></code>.  For single frame formats:
-<code class="xref py py-class docutils literal"><span class="pre">CRDReader</span></code>, <code class="xref py py-class docutils literal"><span class="pre">PDBReader</span></code> and
-<code class="xref py py-class docutils literal"><span class="pre">PrimitivePDBReader</span></code>, <code class="xref py py-class docutils literal"><span class="pre">GROReader</span></code>,</li>
+<code class="xref py py-class docutils literal"><span class="pre">CRDReader</span></code>, and
+<code class="xref py py-class docutils literal"><span class="pre">PDBReader</span></code>, <code class="xref py py-class docutils literal"><span class="pre">GROReader</span></code>,</li>
+<li><strong>.. deprecated</strong> (<em>: 0.15.0</em>)</li>
+<li><em>The &#8220;permissive&#8221; flag is not used anymore (and effectively</em></li>
+<li><em>defaults to True); it will be completely removed in 0.16.0.</em></li>
 </ul>
 </p>
 </td>
@@ -188,7 +187,7 @@ Added <em>multiframe</em> keyword. See also <a class="reference internal" href="
 <p>Helper functions:</p>
 <dl class="function">
 <dt id="MDAnalysis.coordinates.core.get_reader_for">
-<code class="descclassname">MDAnalysis.coordinates.core.</code><code class="descname">get_reader_for</code><span class="sig-paren">(</span><em>filename</em>, <em>permissive=False</em>, <em>format=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/core.html#get_reader_for"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.core.get_reader_for" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">MDAnalysis.coordinates.core.</code><code class="descname">get_reader_for</code><span class="sig-paren">(</span><em>filename</em>, <em>format=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/core.html#get_reader_for"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.core.get_reader_for" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the appropriate trajectory reader class for <em>filename</em>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -196,8 +195,6 @@ Added <em>multiframe</em> keyword. See also <a class="reference internal" href="
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; filename of the input trajectory or coordinate file</li>
-<li><strong>permissive</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If set to <code class="docutils literal"><span class="pre">True</span></code>, a reader is selected that is more tolerant of the
-input (currently only implemented for PDB). [<code class="docutils literal"><span class="pre">False</span></code>]</li>
 <li><strong>kwargs</strong> &#8211; Keyword arguments for the selected Reader class.</li>
 </ul>
 </td>

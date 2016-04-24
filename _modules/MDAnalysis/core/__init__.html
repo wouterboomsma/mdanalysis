@@ -73,7 +73,7 @@
             
   <h1>Source code for MDAnalysis.core.__init__</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- Mode: python; tab-width: 4; indent-tabs-mode:nil; coding:utf-8 -*-</span>
-<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 </span>
+<span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
 <span class="c1">#</span>
 <span class="c1"># MDAnalysis --- http://www.MDAnalysis.org</span>
 <span class="c1"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
@@ -460,26 +460,7 @@
             <span class="s1">&#39;Bio.PDB&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s1">&#39;biopython&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">           Select the default reader for PDB Brookhaven databank files.</span>
-
-<span class="sd">           &gt;&gt;&gt; flags[&#39;%(name)s&#39;] = value</span>
-
-<span class="sd">           The Bio.PDB reader (value=``False``) can deal with &#39;proper&#39; PDB</span>
-<span class="sd">           files from the Protein Databank that contain special PDB features</span>
-<span class="sd">           such as insertion codes and it can auto-correct some common</span>
-<span class="sd">           mistakes; see :mod:`Bio.PDB` for details. However, Bio.PDB has been</span>
-<span class="sd">           known to read some simulation system PDB files **incompletely**; a</span>
-<span class="sd">           sure sign of problems is a warning that an atom has appeared twice</span>
-<span class="sd">           in a residue.</span>
-
-<span class="sd">           Therefore, the default for the PDB reader is ``True``, which</span>
-<span class="sd">           selects the &quot;primitive&quot; (or &quot;permissive&quot;) reader</span>
-<span class="sd">           :class:`MDAnalysis.coordinates.PDB.PrimitivePDBReader`, which</span>
-<span class="sd">           essentially just reads ATOM and HETATM lines and puts atoms in a</span>
-<span class="sd">           list.</span>
-
-<span class="sd">           One can manually switch between the two by providing the *permissive*</span>
-<span class="sd">           keyword to :class:`MDAnalysis.Universe`.</span>
+<span class="sd">          This flag is deprecated and will be removed in 0.16.0.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
     <span class="p">),</span>
     <span class="n">_Flag</span><span class="p">(</span>

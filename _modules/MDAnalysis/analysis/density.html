@@ -154,6 +154,10 @@
 <span class="sd">   :members:</span>
 <span class="sd">   :inherited-members:</span>
 
+<span class="sd">.. deprecated:: 0.15.0</span>
+<span class="sd">    The &quot;permissive&quot; flag is not used anymore (and effectively</span>
+<span class="sd">    defaults to True); it will be completely removed in 0.16.0.</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
 <span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">range</span>
@@ -575,7 +579,7 @@
     <span class="n">pm</span> <span class="o">=</span> <span class="n">ProgressMeter</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">n_frames</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="n">interval</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="n">quiet</span><span class="p">,</span>
                        <span class="n">format</span><span class="o">=</span><span class="s2">&quot;Histogramming </span><span class="si">%(n_atoms)6d</span><span class="s2"> atoms in frame &quot;</span>
                        <span class="s2">&quot;</span><span class="si">%(step)5d</span><span class="s2">/</span><span class="si">%(numsteps)d</span><span class="s2">  [</span><span class="si">%(percentage)5.1f%%</span><span class="s2">]</span><span class="se">\r</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">check_slice_indices</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>                    
+    <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">check_slice_indices</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">:</span><span class="n">step</span><span class="p">]:</span>
         <span class="k">if</span> <span class="n">update_selection</span><span class="p">:</span>
            <span class="n">group</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">atomselection</span><span class="p">)</span>
@@ -589,8 +593,8 @@
 
         <span class="n">h</span><span class="p">[:],</span> <span class="n">edges</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogramdd</span><span class="p">(</span><span class="n">coord</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="n">arange</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
         <span class="n">grid</span> <span class="o">+=</span> <span class="n">h</span>  <span class="c1"># accumulate average histogram</span>
-   
-    
+
+
     <span class="n">n_frames</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">))</span>
     <span class="n">grid</span> <span class="o">/=</span> <span class="nb">float</span><span class="p">(</span><span class="n">n_frames</span><span class="p">)</span>
 
@@ -801,11 +805,7 @@
 <span class="sd">        :Arguments:</span>
 
 <span class="sd">          pdb</span>
-<span class="sd">            PDB file or :class:`MDAnalysis.Universe`; a PDB is read with the</span>
-<span class="sd">            simpl PDB reader. If the Bio.PDB reader is required, either set</span>
-<span class="sd">            the *permissive_pdb_reader* flag to ``False`` in</span>
-<span class="sd">            :data:`MDAnalysis.core.flags` or supply a Universe</span>
-<span class="sd">            that was created with the `permissive` = ``False`` keyword.</span>
+<span class="sd">            PDB file or :class:`MDAnalysis.Universe`;</span>
 <span class="sd">          atomselection</span>
 <span class="sd">            selection string (MDAnalysis syntax) for the species to be analyzed</span>
 <span class="sd">          delta</span>

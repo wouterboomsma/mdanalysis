@@ -723,11 +723,7 @@ sigma is taken as sqrt(3.*B/8.)/pi (see <code class="xref py py-func docutils li
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first last docutils">
 <dt>pdb</dt>
-<dd><p class="first last">PDB file or <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code>; a PDB is read with the
-simpl PDB reader. If the Bio.PDB reader is required, either set
-the <em>permissive_pdb_reader</em> flag to <code class="docutils literal"><span class="pre">False</span></code> in
-<code class="xref py py-data docutils literal"><span class="pre">MDAnalysis.core.flags</span></code> or supply a Universe
-that was created with the <cite>permissive</cite> = <code class="docutils literal"><span class="pre">False</span></code> keyword.</p>
+<dd><p class="first last">PDB file or <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code>;</p>
 </dd>
 <dt>atomselection</dt>
 <dd><p class="first last">selection string (MDAnalysis syntax) for the species to be analyzed</p>
@@ -978,6 +974,10 @@ regenerated from the saved data with</p>
 
 </dd></dl>
 
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version 0.15.0: </span>The &#8220;permissive&#8221; flag is not used anymore (and effectively
+defaults to True); it will be completely removed in 0.16.0.</p>
+</div>
 </div>
 </div>
 

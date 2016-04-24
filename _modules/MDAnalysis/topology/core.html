@@ -186,7 +186,7 @@
     <span class="k">return</span> <span class="n">residues</span></div>
 
 
-<div class="viewcode-block" id="get_parser_for"><a class="viewcode-back" href="../../../documentation_pages/topology/core.html#MDAnalysis.topology.core.get_parser_for">[docs]</a><span class="k">def</span> <span class="nf">get_parser_for</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">permissive</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="get_parser_for"><a class="viewcode-back" href="../../../documentation_pages/topology/core.html#MDAnalysis.topology.core.get_parser_for">[docs]</a><span class="k">def</span> <span class="nf">get_parser_for</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return the appropriate topology parser for *filename*.</span>
 
 <span class="sd">    Automatic detection is disabled when an explicit *format* is</span>
@@ -199,9 +199,6 @@
     <span class="k">if</span> <span class="n">format</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">format</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">guess_format</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
     <span class="n">format</span> <span class="o">=</span> <span class="n">format</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">format</span> <span class="o">==</span> <span class="s1">&#39;PDB&#39;</span> <span class="ow">and</span> <span class="n">permissive</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">_PARSERS</span><span class="p">[</span><span class="s1">&#39;Permissive_PDB&#39;</span><span class="p">]</span>
-
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">_PARSERS</span><span class="p">[</span><span class="n">format</span><span class="p">]</span>
     <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>

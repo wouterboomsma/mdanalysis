@@ -1503,7 +1503,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">atom</span><span class="o">.</span><span class="n">serial</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atoms</span><span class="p">])</span>
-        
+
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">out</span><span class="p">):</span>
             <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">atom</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_atoms</span><span class="p">])</span>
 
@@ -3408,7 +3408,7 @@
             <span class="k">return</span> <span class="p">[</span><span class="n">AtomGroup</span><span class="p">([</span><span class="n">a</span><span class="p">])</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="n">level</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;resid&#39;</span><span class="p">,</span> <span class="s1">&#39;segid&#39;</span><span class="p">):</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;&#39;resid&#39; or &#39;segid&#39; are no longer allowed levels &quot;</span> 
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;&#39;resid&#39; or &#39;segid&#39; are no longer allowed levels &quot;</span>
                           <span class="s2">&quot;in version 0.16.0; instead give &quot;</span>
                           <span class="s2">&quot;&#39;residue&#39; or &#39;segment&#39;, respectively.&quot;</span><span class="p">,</span>
                           <span class="ne">DeprecationWarning</span><span class="p">)</span>
@@ -4255,6 +4255,14 @@
 <span class="sd">       :attr:`anchor_name` were added to support the pickling/unpickling of</span>
 <span class="sd">       :class:`AtomGroup`.</span>
 <span class="sd">       Deprecated :meth:`selectAtoms` in favour of :meth:`select_atoms`.</span>
+
+<span class="sd">    .. versionchanged:: 0.15.0</span>
+<span class="sd">        Can read multi-frame PDB files with the :class:</span>
+<span class="sd">        `~MDAnalysis.coordinates.PDB.PDBReader`.</span>
+<span class="sd">        Deprecated :class:`~MDAnalysis.coordinates.PDB.PrimitivePDBReader` in</span>
+<span class="sd">        favor of :class:`~MDAnalysis.coordinates.PDB.PDBReader`.</span>
+
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -4268,11 +4276,6 @@
 <span class="sd">             MDAnalysis. A &quot;structure&quot; file (PSF, PDB or GRO, in the sense of a</span>
 <span class="sd">             topology) is always required.</span>
 
-<span class="sd">          *permissive*</span>
-<span class="sd">             currently only relevant for PDB files: Set to ``True`` in order to ignore most errors</span>
-<span class="sd">             and read typical MD simulation PDB files; set to ``False`` to read with the Bio.PDB reader,</span>
-<span class="sd">             which can be useful for real Protein Databank PDB files. ``None``  selects the</span>
-<span class="sd">             MDAnalysis default (which is set in :class:`MDAnalysis.core.flags`) [``None``]</span>
 <span class="sd">          *topology_format*</span>
 <span class="sd">             provide the file format of the topology file; ``None`` guesses it from the file</span>
 <span class="sd">             extension [``None``]</span>
@@ -4334,6 +4337,9 @@
 <span class="sd">        .. versionchanged:: 0.11.0</span>
 <span class="sd">           Added the *is_anchor* and *anchor_name* keywords for finer behavior</span>
 <span class="sd">           control when unpickling instances of :class:`MDAnalysis.core.AtomGroup.AtomGroup`.</span>
+<span class="sd">        .. deprecated:: 0.15.0</span>
+<span class="sd">          The &quot;permissive&quot; flag is not used anymore (and effectively defaults</span>
+<span class="sd">           to True); it will be completely removed in 0.16.0.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="kn">from</span> <span class="nn">..topology.core</span> <span class="kn">import</span> <span class="n">get_parser_for</span>
@@ -4357,7 +4363,7 @@
         <span class="c1"># Cached stuff is handled using util.cached decorator</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
 
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="p">:</span>
             <span class="c1"># create an empty universe</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_topology</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span> <span class="o">=</span> <span class="n">AtomGroup</span><span class="p">([])</span>
@@ -4401,7 +4407,6 @@
             <span class="n">perm</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;permissive&#39;</span><span class="p">,</span>
                               <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">flags</span><span class="p">[</span><span class="s1">&#39;permissive_pdb_reader&#39;</span><span class="p">])</span>
             <span class="n">parser</span> <span class="o">=</span> <span class="n">get_parser_for</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span>
-                                    <span class="n">permissive</span><span class="o">=</span><span class="n">perm</span><span class="p">,</span>
                                     <span class="n">format</span><span class="o">=</span><span class="n">topology_format</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">with</span> <span class="n">parser</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">universe</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span> <span class="k">as</span> <span class="n">p</span><span class="p">:</span>
@@ -4891,11 +4896,6 @@
 <span class="sd">             *filename*</span>
 <span class="sd">                 the coordinate file (single frame or trajectory) *or* a list of</span>
 <span class="sd">                 filenames, which are read one after another.</span>
-<span class="sd">             *permissive*</span>
-<span class="sd">                 currently only relevant for PDB files: Set to ``True`` in order to ignore most errors</span>
-<span class="sd">                 and read typical MD simulation PDB files; set to ``False`` to read with the Bio.PDB reader,</span>
-<span class="sd">                 which can be useful for real Protein Databank PDB files. ``None``  selects the</span>
-<span class="sd">                 MDAnalysis default (which is set in :class:`MDAnalysis.core.flags`) [``None``]</span>
 <span class="sd">             *format*</span>
 <span class="sd">                 provide the file format of the coordinate or trajectory file;</span>
 <span class="sd">                 ``None`` guesses it from the file extension. Note that this</span>
@@ -4917,6 +4917,10 @@
 <span class="sd">           not read by the :class:`~MDAnalysis.coordinates.base.ChainReader` but directly by</span>
 <span class="sd">           its specialized file format reader, which typically has more features than the</span>
 <span class="sd">           :class:`~MDAnalysis.coordinates.base.ChainReader`.</span>
+
+<span class="sd">        .. deprecated:: 0.15.0</span>
+<span class="sd">           The &quot;permissive&quot; flag is not used anymore (and effectively</span>
+<span class="sd">           defaults to True); it will be completely removed in 0.16.0.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">return</span>
@@ -4931,7 +4935,6 @@
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Universe.load_new(): loading {0}...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
 
         <span class="n">reader_format</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;format&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-        <span class="n">perm</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;permissive&#39;</span><span class="p">,</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">flags</span><span class="p">[</span><span class="s1">&#39;permissive_pdb_reader&#39;</span><span class="p">])</span>
         <span class="n">reader</span> <span class="o">=</span> <span class="bp">None</span>
 
         <span class="c1"># Check if we were passed a Reader to use</span>
@@ -4949,7 +4952,6 @@
                 <span class="n">reader_format</span><span class="o">=</span><span class="s1">&#39;CHAIN&#39;</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">reader</span> <span class="o">=</span> <span class="n">get_reader_for</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span>
-                                        <span class="n">permissive</span><span class="o">=</span><span class="n">perm</span><span class="p">,</span>
                                         <span class="n">format</span><span class="o">=</span><span class="n">reader_format</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>

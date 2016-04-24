@@ -31,7 +31,7 @@
     <link rel="top" title="MDAnalysis 0.14.1-dev0 documentation" href="../../index.html" />
     <link rel="up" title="4. Topology modules" href="../topology_modules.html" />
     <link rel="next" title="4.8. Extended PDB topology parser" href="ExtendedPDBParser.html" />
-    <link rel="prev" title="4.6. PDB topology parser" href="PDBParser.html" /> 
+    <link rel="prev" title="4.6. PDB Topology Parser" href="PDBParser.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -47,7 +47,7 @@
           <a href="ExtendedPDBParser.html" title="4.8. Extended PDB topology parser"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="PDBParser.html" title="4.6. PDB topology parser"
+          <a href="PDBParser.html" title="4.6. PDB Topology Parser"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.14.1-dev0 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../topology_modules.html" accesskey="U">4. Topology modules</a> &raquo;</li> 
@@ -68,7 +68,7 @@
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="PDBParser.html"
-                        title="previous chapter">4.6. PDB topology parser</a></p>
+                        title="previous chapter">4.6. PDB Topology Parser</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="ExtendedPDBParser.html"
                         title="next chapter">4.8. Extended PDB topology parser</a></p>
@@ -119,7 +119,7 @@ if unknown. Partial charges are not set.</p>
 <p class="first admonition-title">See also</p>
 <ul class="last simple">
 <li><a class="reference internal" href="ExtendedPDBParser.html#module-MDAnalysis.topology.ExtendedPDBParser" title="MDAnalysis.topology.ExtendedPDBParser"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.topology.ExtendedPDBParser</span></code></a></li>
-<li><a class="reference internal" href="../coordinates/PDB.html#MDAnalysis.coordinates.PDB.PrimitivePDBReader" title="MDAnalysis.coordinates.PDB.PrimitivePDBReader"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.coordinates.PDB.PrimitivePDBReader</span></code></a></li>
+<li><a class="reference internal" href="../coordinates/PDB.html#MDAnalysis.coordinates.PDB.PDBReader" title="MDAnalysis.coordinates.PDB.PDBReader"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.coordinates.PDB.PDBReader</span></code></a></li>
 <li><a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.Universe" title="MDAnalysis.core.AtomGroup.Universe"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.AtomGroup.Universe</span></code></a></li>
 </ul>
 </div>
@@ -127,13 +127,8 @@ if unknown. Partial charges are not set.</p>
 <h2>4.7.1. Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="MDAnalysis.topology.PrimitivePDBParser.PrimitivePDBParser">
-<em class="property">class </em><code class="descclassname">MDAnalysis.topology.PrimitivePDBParser.</code><code class="descname">PrimitivePDBParser</code><span class="sig-paren">(</span><em>filename</em>, <em>universe=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/topology/PrimitivePDBParser.html#PrimitivePDBParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.topology.PrimitivePDBParser.PrimitivePDBParser" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parser that obtains a list of atoms from a standard PDB file.</p>
-<div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="../coordinates/PDB.html#MDAnalysis.coordinates.PDB.PrimitivePDBReader" title="MDAnalysis.coordinates.PDB.PrimitivePDBReader"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.coordinates.PDB.PrimitivePDBReader</span></code></a>, <code class="xref py py-class docutils literal"></code></p>
-</div>
-<dl class="attribute">
+<em class="property">class </em><code class="descclassname">MDAnalysis.topology.PrimitivePDBParser.</code><code class="descname">PrimitivePDBParser</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/topology/PrimitivePDBParser.html#PrimitivePDBParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.topology.PrimitivePDBParser.PrimitivePDBParser" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
 <dt id="MDAnalysis.topology.PrimitivePDBParser.PrimitivePDBParser.__delattr__">
 <code class="descname">__delattr__</code><a class="headerlink" href="#MDAnalysis.topology.PrimitivePDBParser.PrimitivePDBParser.__delattr__" title="Permalink to this definition">¶</a></dt>
 <dd><p>x.__delattr__(&#8216;name&#8217;) &lt;==&gt; del x.name</p>
@@ -416,7 +411,7 @@ returned.</p>
 
 <dl class="method">
 <dt id="MDAnalysis.topology.PrimitivePDBParser.PrimitivePDBParser.parse">
-<code class="descname">parse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/topology/PrimitivePDBParser.html#PrimitivePDBParser.parse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.topology.PrimitivePDBParser.PrimitivePDBParser.parse" title="Permalink to this definition">¶</a></dt>
+<code class="descname">parse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.topology.PrimitivePDBParser.PrimitivePDBParser.parse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse atom information from PDB file <em>filename</em>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -436,6 +431,10 @@ returned.</p>
 
 </dd></dl>
 
+<dl class="docutils">
+<dt>..deprecated:: 0.15.0</dt>
+<dd>PDBParser has been replaced with PrimitivePDBParser.</dd>
+</dl>
 </div>
 </div>
 
@@ -458,7 +457,7 @@ returned.</p>
           <a href="ExtendedPDBParser.html" title="4.8. Extended PDB topology parser"
              >next</a> |</li>
         <li class="right" >
-          <a href="PDBParser.html" title="4.6. PDB topology parser"
+          <a href="PDBParser.html" title="4.6. PDB Topology Parser"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.14.1-dev0 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../topology_modules.html" >4. Topology modules</a> &raquo;</li> 

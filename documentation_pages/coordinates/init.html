@@ -316,10 +316,8 @@ velocities). Module <a class="reference internal" href="TRJ.html#module-MDAnalys
 <a class="footnote-reference" href="#a" id="id4">[1]</a></td>
 <td>pdb</td>
 <td>r/w</td>
-<td>a simplified PDB format (as used in MD simulations)
-is read by default; the full format can be read by
-supplying the <cite>permissive=False</cite> flag to
-<code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code>. Multiple frames (MODEL)
+<td>a relaxed PDB format (as used in MD simulations)
+is read by default; Multiple frames (MODEL)
 are supported but require the <em>multiframe</em> keyword.
 Module <a class="reference internal" href="PDB.html#module-MDAnalysis.coordinates.PDB" title="MDAnalysis.coordinates.PDB"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.coordinates.PDB</span></code></a></td>
 </tr>
@@ -431,6 +429,7 @@ I/O code can be written in C or python or a mixture thereof.</p>
 <li>2015-01-15 Timestep._init_unitcell() method added</li>
 <li>2015-06-11 Reworked Timestep init.  Base Timestep now does Vels &amp; Forces</li>
 <li>2015-07-21 Major changes to Timestep and Reader API (release 0.11.0)</li>
+<li>2016-04-03 Removed references to Strict Readers for PDBS [jdetle]</li>
 </ul>
 </div>
 <div class="section" id="registry">
