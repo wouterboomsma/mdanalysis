@@ -293,7 +293,7 @@
 <span class="sd">       * New :attr:`title` (list with all TITLE lines).</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">format</span> <span class="o">=</span> <span class="s1">&#39;PDB&#39;</span>
+    <span class="n">format</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PDB&#39;</span><span class="p">,</span> <span class="s1">&#39;ENT&#39;</span><span class="p">]</span>
     <span class="n">units</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="s1">&#39;Angstrom&#39;</span><span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -545,7 +545,7 @@
                    <span class="s2">&quot;{spacegroup:&lt;11s}{zvalue:4d}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">),</span>
         <span class="s1">&#39;CONECT&#39;</span><span class="p">:</span> <span class="s2">&quot;CONECT{0}</span><span class="se">\n</span><span class="s2">&quot;</span>
     <span class="p">}</span>
-    <span class="n">format</span> <span class="o">=</span> <span class="s1">&#39;PDB&#39;</span>
+    <span class="n">format</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PDB&#39;</span><span class="p">,</span> <span class="s1">&#39;ENT&#39;</span><span class="p">]</span>
     <span class="n">units</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="s1">&#39;Angstrom&#39;</span><span class="p">}</span>
     <span class="n">pdb_coor_limits</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">999.9995</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mf">9999.9995</span><span class="p">}</span>
     <span class="c1">#: wrap comments into REMARK records that are not longer than</span>
