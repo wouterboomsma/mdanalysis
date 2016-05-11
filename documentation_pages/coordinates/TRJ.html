@@ -181,8 +181,8 @@ only available if the trajectory contains forces or if the
 <p>ASCII <a class="reference external" href="http://ambermd.org">AMBER</a> TRJ coordinate files (as defined in <a class="reference external" href="http://ambermd.org/formats.html#trajectory">AMBER TRJ format</a>)
 are handled by the <a class="reference internal" href="#MDAnalysis.coordinates.TRJ.TRJReader" title="MDAnalysis.coordinates.TRJ.TRJReader"><code class="xref py py-class docutils literal"><span class="pre">TRJReader</span></code></a>. It is also possible to directly
 read <em>bzip2</em> or <em>gzip</em> compressed files.</p>
-<p>AMBER ASCII trajectories are recognised by the suffix &#8216;.trj&#8217; or
-&#8216;.mdcrd&#8217; (possibly with an additional &#8216;.gz&#8217; or &#8216;.bz2&#8217;).</p>
+<p>AMBER ASCII trajectories are recognised by the suffix &#8216;.trj&#8217;,
+&#8216;.mdcrd&#8217; or &#8216;.crdbox (possibly with an additional &#8216;.gz&#8217; or &#8216;.bz2&#8217;).</p>
 <p class="rubric">Limitations</p>
 <ul class="simple">
 <li>Periodic boxes are only stored as box lengths A, B, C in an AMBER
@@ -401,7 +401,8 @@ selects the value of <code class="xref py py-data docutils literal"><span class=
 <dl class="method">
 <dt id="MDAnalysis.coordinates.TRJ.NCDFWriter.is_periodic">
 <code class="descname">is_periodic</code><span class="sig-paren">(</span><em>ts=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/TRJ.html#NCDFWriter.is_periodic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.TRJ.NCDFWriter.is_periodic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return <code class="docutils literal"><span class="pre">True</span></code> if <a class="reference internal" href="#MDAnalysis.coordinates.TRJ.Timestep" title="MDAnalysis.coordinates.TRJ.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a> <em>ts</em> contains a valid simulation box</p>
+<dd><p>Return <code class="docutils literal"><span class="pre">True</span></code> if <a class="reference internal" href="#MDAnalysis.coordinates.TRJ.Timestep" title="MDAnalysis.coordinates.TRJ.Timestep"><code class="xref py py-class docutils literal"><span class="pre">Timestep</span></code></a> <em>ts</em> contains a valid
+simulation box</p>
 </dd></dl>
 
 <dl class="method">
