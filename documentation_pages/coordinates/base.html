@@ -743,7 +743,8 @@ returned.</p>
 <dl class="class">
 <dt id="MDAnalysis.coordinates.base.Reader">
 <em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.base.</code><code class="descname">Reader</code><span class="sig-paren">(</span><em>filename</em>, <em>convert_units=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#Reader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.Reader" title="Permalink to this definition">¶</a></dt>
-<dd><p>Base class for trajectory readers that extends <code class="xref py py-class docutils literal"><span class="pre">ProtoReader</span></code> with a <code class="xref py py-meth docutils literal"><span class="pre">__del__()</span></code> method.</p>
+<dd><p>Base class for trajectory readers that extends <code class="xref py py-class docutils literal"><span class="pre">ProtoReader</span></code> with a
+<code class="xref py py-meth docutils literal"><span class="pre">__del__()</span></code> method.</p>
 <p>New Readers should subclass <a class="reference internal" href="#MDAnalysis.coordinates.base.Reader" title="MDAnalysis.coordinates.base.Reader"><code class="xref py py-class docutils literal"><span class="pre">Reader</span></code></a> and properly implement a
 <code class="xref py py-meth docutils literal"><span class="pre">close()</span></code> method, to ensure proper release of resources (mainly file
 handles). Readers that are inherently safe in this regard should subclass
@@ -843,6 +844,12 @@ trajectory reader unchanged</p>
 <dt id="MDAnalysis.coordinates.base.ChainReader.frame">
 <code class="descname">frame</code><a class="headerlink" href="#MDAnalysis.coordinates.base.ChainReader.frame" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cumulative frame number of the current time step.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.coordinates.base.ChainReader.get_flname">
+<code class="descname">get_flname</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#ChainReader.get_flname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.ChainReader.get_flname" title="Permalink to this definition">¶</a></dt>
+<dd><p>retrieve the actual filename of the list element</p>
 </dd></dl>
 
 <dl class="method">
