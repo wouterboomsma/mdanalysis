@@ -759,7 +759,7 @@ that can be easily matched to a broader density distribution.</p>
 
 <dl class="class">
 <dt id="MDAnalysis.analysis.density.Grid">
-<em class="property">class </em><code class="descclassname">MDAnalysis.analysis.density.</code><code class="descname">Grid</code><span class="sig-paren">(</span><em>grid=None</em>, <em>edges=None</em>, <em>origin=None</em>, <em>delta=None</em>, <em>metadata={}</em>, <em>interpolation_spline_order=3</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gridData/core.html#Grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.density.Grid" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">MDAnalysis.analysis.density.</code><code class="descname">Grid</code><span class="sig-paren">(</span><em>grid=None</em>, <em>edges=None</em>, <em>origin=None</em>, <em>delta=None</em>, <em>metadata={}</em>, <em>interpolation_spline_order=3</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.analysis.density.Grid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to manage a multidimensional grid object.</p>
 <p>The export(format=&#8217;dx&#8217;) method always exports a 3D object, the
 rest should work for an array of any dimension.</p>
@@ -866,14 +866,14 @@ metadata[] but stores it with save()</p>
 
 <dl class="method">
 <dt id="MDAnalysis.analysis.density.Grid.centers">
-<code class="descname">centers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gridData/core.html#Grid.centers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.density.Grid.centers" title="Permalink to this definition">¶</a></dt>
+<code class="descname">centers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.analysis.density.Grid.centers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the coordinates of the centers of all grid cells as an
 iterator.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.analysis.density.Grid.check_compatible">
-<code class="descname">check_compatible</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gridData/core.html#Grid.check_compatible"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.density.Grid.check_compatible" title="Permalink to this definition">¶</a></dt>
+<code class="descname">check_compatible</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.analysis.density.Grid.check_compatible" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if <em>other</em> can be used in an arithmetic operation.</p>
 <ol class="arabic simple">
 <li><em>other</em> is a scalar</li>
@@ -891,7 +891,7 @@ iterator.</p>
 
 <dl class="method">
 <dt id="MDAnalysis.analysis.density.Grid.export">
-<code class="descname">export</code><span class="sig-paren">(</span><em>filename</em>, <em>file_format=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gridData/core.html#Grid.export"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.density.Grid.export" title="Permalink to this definition">¶</a></dt>
+<code class="descname">export</code><span class="sig-paren">(</span><em>filename</em>, <em>file_format=None</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.analysis.density.Grid.export" title="Permalink to this definition">¶</a></dt>
 <dd><p>export density to file using the given format.</p>
 <p>The format can also be deduced from the suffix of the filename
 though the <em>format</em> keyword takes precedence.</p>
@@ -931,7 +931,7 @@ modified, <a class="reference internal" href="#MDAnalysis.analysis.density.Grid.
 
 <dl class="method">
 <dt id="MDAnalysis.analysis.density.Grid.load">
-<code class="descname">load</code><span class="sig-paren">(</span><em>filename</em>, <em>file_format=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gridData/core.html#Grid.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.density.Grid.load" title="Permalink to this definition">¶</a></dt>
+<code class="descname">load</code><span class="sig-paren">(</span><em>filename</em>, <em>file_format=None</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.analysis.density.Grid.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load saved (pickled or dx) grid and edges from &lt;filename&gt;.pickle</p>
 <blockquote>
 <div>Grid.load(&lt;filename&gt;.pickle)
@@ -942,7 +942,7 @@ completely resets all values, based on the loaded data.</p>
 
 <dl class="method">
 <dt id="MDAnalysis.analysis.density.Grid.resample">
-<code class="descname">resample</code><span class="sig-paren">(</span><em>edges</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gridData/core.html#Grid.resample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.density.Grid.resample" title="Permalink to this definition">¶</a></dt>
+<code class="descname">resample</code><span class="sig-paren">(</span><em>edges</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.analysis.density.Grid.resample" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resample data to a new grid with edges <em>edges</em>.</p>
 <blockquote>
 <div>resample(edges) &#8211;&gt; Grid</div></blockquote>
@@ -955,14 +955,14 @@ completely resets all values, based on the loaded data.</p>
 
 <dl class="method">
 <dt id="MDAnalysis.analysis.density.Grid.resample_factor">
-<code class="descname">resample_factor</code><span class="sig-paren">(</span><em>factor</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gridData/core.html#Grid.resample_factor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.density.Grid.resample_factor" title="Permalink to this definition">¶</a></dt>
+<code class="descname">resample_factor</code><span class="sig-paren">(</span><em>factor</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.analysis.density.Grid.resample_factor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resample to a new regular grid with factor*oldN cells along
 each dimension.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="MDAnalysis.analysis.density.Grid.save">
-<code class="descname">save</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/gridData/core.html#Grid.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.density.Grid.save" title="Permalink to this definition">¶</a></dt>
+<code class="descname">save</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#MDAnalysis.analysis.density.Grid.save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save a grid object to &lt;filename&gt;.pickle</p>
 <blockquote>
 <div>Grid.save(filename)</div></blockquote>
