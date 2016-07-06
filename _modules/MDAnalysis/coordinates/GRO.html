@@ -371,9 +371,10 @@
             <span class="c1"># Atom descriptions and coords</span>
             <span class="k">for</span> <span class="n">atom_index</span><span class="p">,</span> <span class="n">atom</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">atoms</span><span class="p">):</span>
                 <span class="n">truncated_atom_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">atom_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)[</span><span class="o">-</span><span class="mi">5</span><span class="p">:])</span>
+                <span class="n">truncated_resid</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">resid</span><span class="p">)[:</span><span class="mi">5</span><span class="p">])</span>
                 <span class="k">if</span> <span class="n">has_velocities</span><span class="p">:</span>
                     <span class="n">output_gro</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">[</span><span class="s1">&#39;xyz_v&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                        <span class="n">resid</span><span class="o">=</span><span class="n">atom</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span>
+                        <span class="n">resid</span><span class="o">=</span><span class="n">truncated_resid</span><span class="p">,</span>
                         <span class="n">resname</span><span class="o">=</span><span class="n">atom</span><span class="o">.</span><span class="n">resname</span><span class="p">,</span>
                         <span class="n">index</span><span class="o">=</span><span class="n">truncated_atom_index</span><span class="p">,</span>
                         <span class="n">name</span><span class="o">=</span><span class="n">atom</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
@@ -382,7 +383,7 @@
                     <span class="p">))</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">output_gro</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fmt</span><span class="p">[</span><span class="s1">&#39;xyz&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                        <span class="n">resid</span><span class="o">=</span><span class="n">atom</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span>
+                        <span class="n">resid</span><span class="o">=</span><span class="n">truncated_resid</span><span class="p">,</span>
                         <span class="n">resname</span><span class="o">=</span><span class="n">atom</span><span class="o">.</span><span class="n">resname</span><span class="p">,</span>
                         <span class="n">index</span><span class="o">=</span><span class="n">truncated_atom_index</span><span class="p">,</span>
                         <span class="n">name</span><span class="o">=</span><span class="n">atom</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
