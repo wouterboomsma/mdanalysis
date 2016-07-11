@@ -847,10 +847,12 @@
     <span class="k">return</span> <span class="n">filename</span>
 
 
-<span class="k">def</span> <span class="nf">sequence_alignment</span><span class="p">(</span><span class="n">mobile</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Generate a global sequence alignment between residues in *reference* and *mobile*.</span>
+<span class="k">def</span> <span class="nf">sequence_alignment</span><span class="p">(</span><span class="n">mobile</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">match_score</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">mismatch_penalty</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+                       <span class="n">gap_penalty</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">gapextension_penalty</span><span class="o">=-</span><span class="mf">0.1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate a global sequence alignment between two residue groups.</span>
 
-<span class="sd">    The global alignment uses the Needleman-Wunsch algorith as</span>
+<span class="sd">    The residues in `reference` and `mobile` will be globally aligned.</span>
+<span class="sd">    The global alignment uses the Needleman-Wunsch algorithm as</span>
 <span class="sd">    implemented in :mod:`Bio.pairwise2`. The parameters of the dynamic</span>
 <span class="sd">    programming algorithm can be tuned with the keywords. The defaults</span>
 <span class="sd">    should be suitable for two similar sequences. For sequences with</span>
@@ -863,39 +865,40 @@
 <span class="sd">        Atom group to be aligned</span>
 <span class="sd">    reference : AtomGroup</span>
 <span class="sd">        Atom group to be aligned against</span>
-<span class="sd">    ** kwargs</span>
-<span class="sd">      *match_score*</span>
-<span class="sd">         score for matching residues, default :2</span>
-<span class="sd">      *mismatch_penalty*</span>
+<span class="sd">    match_score : float, optional, default 2</span>
+<span class="sd">         score for matching residues, default 2</span>
+<span class="sd">    mismatch_penalty : float, optional, default -1</span>
 <span class="sd">         penalty for residues that do not match , default : -1</span>
-<span class="sd">      *gap_penalty*</span>
+<span class="sd">    gap_penalty : float, optional, default -2</span>
 <span class="sd">         penalty for opening a gap; the high default value creates compact</span>
 <span class="sd">         alignments for highly identical sequences but might not be suitable</span>
 <span class="sd">         for sequences with low identity, default : -2</span>
-<span class="sd">      *gapextension_penalty*</span>
+<span class="sd">    gapextension_penalty : float, optional, default -0.1</span>
 <span class="sd">         penalty for extending a gap, default: -0.1</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    aln[0]</span>
-<span class="sd">        Tuple of top sequence matching output (&#39;Sequence A&#39;, &#39;Sequence B&#39;, score,</span>
-<span class="sd">        begin, end ,prev_pos, nex_pos)</span>
+<span class="sd">        Tuple of top sequence matching output `(&#39;Sequence A&#39;, &#39;Sequence B&#39;, score,</span>
+<span class="sd">        begin, end)`</span>
 
-<span class="sd">    BioPython documentation:</span>
-<span class="sd">        http://biopython.org/DIST/docs/api/Bio.pairwise2-module.html</span>
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    BioPython documentation for `pairwise2`_. Alternatively, use</span>
+<span class="sd">    :func:`fasta2select` with :program:`clustalw2` and the option</span>
+<span class="sd">    ``is_aligned=False``.</span>
+
+<span class="sd">    .. _`pairwise2`: http://biopython.org/DIST/docs/api/Bio.pairwise2-module.html</span>
 
 <span class="sd">    .. versionadded:: 0.10.0</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">Bio.pairwise2</span>
-    <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;match_score&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;mismatch_penalty&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;gap_penalty&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;gapextension_penalty&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">)</span>
 
     <span class="n">aln</span> <span class="o">=</span> <span class="n">Bio</span><span class="o">.</span><span class="n">pairwise2</span><span class="o">.</span><span class="n">align</span><span class="o">.</span><span class="n">globalms</span><span class="p">(</span>
-        <span class="n">reference</span><span class="o">.</span><span class="n">sequence</span><span class="p">(</span><span class="n">format</span><span class="o">=</span><span class="s2">&quot;string&quot;</span><span class="p">),</span> <span class="n">mobile</span><span class="o">.</span><span class="n">sequence</span><span class="p">(</span><span class="n">format</span><span class="o">=</span><span class="s2">&quot;string&quot;</span><span class="p">),</span>
-        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;match_score&#39;</span><span class="p">],</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;mismatch_penalty&#39;</span><span class="p">],</span>
-        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;gap_penalty&#39;</span><span class="p">],</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;gapextension_penalty&#39;</span><span class="p">])</span>
+        <span class="n">reference</span><span class="o">.</span><span class="n">residues</span><span class="o">.</span><span class="n">sequence</span><span class="p">(</span><span class="n">format</span><span class="o">=</span><span class="s2">&quot;string&quot;</span><span class="p">),</span>
+        <span class="n">mobile</span><span class="o">.</span><span class="n">residues</span><span class="o">.</span><span class="n">sequence</span><span class="p">(</span><span class="n">format</span><span class="o">=</span><span class="s2">&quot;string&quot;</span><span class="p">),</span>
+        <span class="n">match_score</span><span class="p">,</span> <span class="n">mismatch_penalty</span><span class="p">,</span> <span class="n">gap_penalty</span><span class="p">,</span> <span class="n">gapextension_penalty</span><span class="p">)</span>
     <span class="c1"># choose top alignment</span>
     <span class="k">return</span> <span class="n">aln</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
@@ -966,10 +969,16 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    select_dict</span>
+<span class="sd">    select_dict : dict</span>
 <span class="sd">        dictionary with &#39;reference&#39; and &#39;mobile&#39; selection string</span>
 <span class="sd">        that can be used immediately in :func:`rms_fit_trj` as</span>
 <span class="sd">        ``select=select_dict``.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :func:`sequence_alignment`, which does not require external</span>
+<span class="sd">    programs.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">Bio.SeqIO</span>
     <span class="kn">import</span> <span class="nn">Bio.AlignIO</span>
