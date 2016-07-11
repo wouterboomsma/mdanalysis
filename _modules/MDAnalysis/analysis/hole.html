@@ -88,57 +88,70 @@
 <span class="c1"># J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787</span>
 <span class="c1">#</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Generation and Analysis of HOLE pore profiles --- :mod:`MDAnalysis.analysis.hole`</span>
+<span class="sd">r&quot;&quot;&quot;Generation and Analysis of HOLE pore profiles --- :mod:`MDAnalysis.analysis.hole`</span>
 <span class="sd">=================================================================================</span>
 
 <span class="sd">:Author: Lukas Stelzl, Oliver Beckstein</span>
 <span class="sd">:Year: 2011-2012</span>
 <span class="sd">:Copyright: GNU Public License v2</span>
 
-<span class="sd">With the help of this module, HOLE_ can be run on frames in a trajectory. Data</span>
-<span class="sd">can be combined and analyzed. HOLE_ [Smart1993]_ [Smart1996]_ must be installed</span>
-<span class="sd">separately and can be obtained from http://www.smartsci.uk/hole/.</span>
+<span class="sd">With the help of this module, the :program:`hole` program from the HOLE_ suite</span>
+<span class="sd">of tools [Smart1993]_ [Smart1996]_ can be run on frames in a trajectory. Data</span>
+<span class="sd">can be combined and analyzed.  </span>
 
 
-<span class="sd">.. rubric:: References</span>
-
-<span class="sd">.. [Smart1993] O.S. Smart, J.M. Goodfellow and B.A. Wallace.</span>
-<span class="sd">               The Pore Dimensions of Gramicidin A. Biophysical Journal 65:2455-2460, 1993.</span>
-<span class="sd">.. [Smart1996] O.S. Smart, J.G. Neduvelil, X. Wang, B.A. Wallace, and M.S.P. Sansom.</span>
-<span class="sd">               HOLE: A program for the analysis of the pore dimensions of ion channel</span>
-<span class="sd">               structural models. J.Mol.Graph., 14:354–360, 1996.</span>
-<span class="sd">               URL http://www.smartsci.uk/hole/</span>
+<span class="sd">HOLE_ must be installed separately and can be obtained in binary form from</span>
+<span class="sd">http://www.smartsci.uk/hole/. (HOLE is not open source and must be used under</span>
+<span class="sd">licence but for academic work, a free (as in &quot;no costs&quot;) version is available.)</span>
 
 <span class="sd">.. _HOLE: http://www.smartsci.uk/hole/</span>
 
 
-<span class="sd">Examples</span>
-<span class="sd">--------</span>
+<span class="sd">Examples for using HOLE</span>
+<span class="sd">-----------------------</span>
+
+<span class="sd">The two classes :class:`HOLE` and :class:`HOLEtraj` in this module primarily</span>
+<span class="sd">act as wrappers around the :program:`hole` program from the HOLE_ suite of</span>
+<span class="sd">tools. They contain many options to set options of :program:`hole`. However,</span>
+<span class="sd">the defaults often work well and the following examples should be good starting</span>
+<span class="sd">points for applying HOLE_ to other problems.</span>
+
 
 <span class="sd">Single structure</span>
 <span class="sd">~~~~~~~~~~~~~~~~</span>
 
-<span class="sd">Gramicidin A (gA) channel::</span>
+<span class="sd">The following example runs :program:`hole` on the experimental</span>
+<span class="sd">structure of the Gramicidin A (gA) channel. We use the :class:`HOLE`</span>
+<span class="sd">class, which acts as a wrapper around :program:`hole`. It therefore</span>
+<span class="sd">shares some of the limitations of HOLE_, namely, that it can only</span>
+<span class="sd">process PDB files [#HOLEDCD]_. ::</span>
 
-<span class="sd">   from MDAnalysis.analysis.hole import HOLE, HOLEtraj</span>
+<span class="sd">   from MDAnalysis.analysis.hole import HOLE</span>
 <span class="sd">   from MDAnalysis.tests.datafiles import PDB_HOLE</span>
 
-<span class="sd">   H = HOLE(PDB_HOLE, executable=&quot;~/hole2/bin/hole&quot;)  # set path to your hole binary</span>
+<span class="sd">   H = HOLE(PDB_HOLE, executable=&quot;~/hole2/exe/hole&quot;)  # set path to your hole binary</span>
 <span class="sd">   H.run()</span>
 <span class="sd">   H.collect()</span>
 <span class="sd">   H.plot(linewidth=3, color=&quot;black&quot;, label=False)</span>
 
+<span class="sd">The example assumes that :program:`hole` was installed as</span>
+<span class="sd">``~/hole2/exe/hole``)</span>
 
 <span class="sd">Trajectory</span>
 <span class="sd">~~~~~~~~~~</span>
 
-<span class="sd">Analyzing a trajectory::</span>
+<span class="sd">One can also run :program:`hole` on frames in a trajectory with</span>
+<span class="sd">:class:`HOLEtraj`. In this case, provide a</span>
+<span class="sd">:class:`~MDAnalysis.core.AtomGroup.Universe`::</span>
 
-<span class="sd">  u = MDAnalysis.Universe(psf, trajectory)</span>
-<span class="sd">  H = HOLEtraj(u, ...)</span>
-<span class="sd">  H.run()</span>
-<span class="sd">  H.plot3D()</span>
+<span class="sd">   import MDAnalysis as mda   </span>
+<span class="sd">   from MDAnalysis.analysis.hole import HOLEtraj</span>
+<span class="sd">   from MDAnalysis.tests.datafiles import MULTIPDB_HOLE</span>
+<span class="sd">   </span>
+<span class="sd">   u = mda.Universe(MULTIPDB_HOLE)</span>
+<span class="sd">   H = HOLEtraj(u, executable=&quot;~/hole2/exe/hole&quot;)</span>
+<span class="sd">   H.run()</span>
+<span class="sd">   H.plot3D()</span>
 
 <span class="sd">The profiles are available as the attribute :attr:`HOLEtraj.profiles`</span>
 <span class="sd">(``H.profiles`` in the example) and are indexed by frame number but</span>
@@ -149,34 +162,55 @@
 <span class="sd">Trajectory with RMSD as order parameter</span>
 <span class="sd">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
 
-<span class="sd">In order to classify the HOLE profiles the RMSD to a reference</span>
-<span class="sd">structure is calculated for each trajectory frame (e.g. using the</span>
-<span class="sd">:class:`MDAnalysis.analysis.rms.RMSD` analysis class). Then the HOLE</span>
-<span class="sd">profiles can be ordered by the RMSD, which acts as an order</span>
-<span class="sd">parameter. ::</span>
+<span class="sd">In order to classify the HOLE profiles :math:`R(\zeta)` the RMSD :math:`\rho`</span>
+<span class="sd">to a reference structure is calculated for each trajectory frame (e.g. using</span>
+<span class="sd">the :class:`MDAnalysis.analysis.rms.RMSD` analysis class). Then the HOLE</span>
+<span class="sd">profiles :math:`R_\rho(\zeta)` can be ordered by the RMSD, which acts as an</span>
+<span class="sd">order parameter :math:`\rho`. ::</span>
 
-<span class="sd">  import MDAnalysis.analysis.hole</span>
-<span class="sd">  import MDAnalysis.analysis.rms</span>
-<span class="sd">  MDAnalysis.start_logging()</span>
-<span class="sd">  ref = MDAnalysis.Universe(&quot;ref.psf&quot;, &quot;ref.pdb&quot;)         # reference structure</span>
-<span class="sd">  u = MDAnalysis.Universe(&quot;ref.psf&quot;, &quot;traj.xtc&quot;)          # trajectory</span>
+<span class="sd">   import MDAnalysis as mda</span>
+<span class="sd">   from MDAnalysis.analysis.hole import HOLEtraj</span>
+<span class="sd">   from MDAnalysis.analysis.rms import RMSD</span>
 
-<span class="sd">  # calculate RMSD</span>
-<span class="sd">  R = MDAnalysis.analysis.rms.RMSD(u, reference=ref, select=&quot;protein&quot;, mass_weighted=True)</span>
-<span class="sd">  R.run()</span>
-
-<span class="sd">  # HOLE analysis with order parameters</span>
-<span class="sd">  H = MDAnalysis.analysis.hole.HOLEtraj(u, cvect=[0,0,1], orderparameters=R.rmsd[:,2])</span>
-<span class="sd">  H.run()</span>
+<span class="sd">   from MDAnalysis.tests.datafiles import PDB_HOLE, MULTIPDB_HOLE</span>
+<span class="sd">   </span>
+<span class="sd">   mda.start_logging()</span>
+<span class="sd">   ref = mda.Universe(PDB_HOLE)    # reference structure</span>
+<span class="sd">   u = mda.Universe(MULTIPDB_HOLE) # trajectory</span>
+<span class="sd">   </span>
+<span class="sd">   # calculate RMSD</span>
+<span class="sd">   R = RMSD(u, reference=ref, select=&quot;protein&quot;, mass_weighted=True)</span>
+<span class="sd">   R.run()</span>
+<span class="sd">   </span>
+<span class="sd">   # HOLE analysis with order parameters</span>
+<span class="sd">   H = HOLEtraj(u, orderparameters=R.rmsd[:,2], </span>
+<span class="sd">                executable=&quot;~/hole2/exe/hole&quot;)</span>
+<span class="sd">   H.run()</span>
 
 <span class="sd">The :attr:`HOLEtraj.profiles` dictionary will have the order parameter as key</span>
 <span class="sd">for each frame. The plot functions will automatically sort the profiles by</span>
 <span class="sd">ascending order parameter. To access the individual profiles one can simply</span>
-<span class="sd">iterate over the sorted profiles (see :meth:`HOLEtraj.sorted_profiles_iter`) ::</span>
+<span class="sd">iterate over the sorted profiles (see</span>
+<span class="sd">:meth:`HOLEtraj.sorted_profiles_iter`). For example, in order to plot the</span>
+<span class="sd">minimum radius as function of order parameter</span>
 
-<span class="sd">  for q, profile in H:</span>
-<span class="sd">     print(&quot;orderparameter = %g&quot; % q)</span>
-<span class="sd">     print(&quot;min(R) = %g&quot; % profile.radius.min())</span>
+<span class="sd">.. math::</span>
+<span class="sd"> </span>
+<span class="sd">   r(\rho) = \min_\zeta R_\rho(\zeta)</span>
+
+<span class="sd">we iterate over the profiles and process them in turn::</span>
+
+<span class="sd">  import numpy as np</span>
+<span class="sd">  import matplotlib.pyplot as plt</span>
+
+<span class="sd">  r_rho = np.array([[rho, profile.radius.min()] for rho, profile in H])</span>
+
+<span class="sd">  ax = plt.subplot(111)</span>
+<span class="sd">  ax.plot(r_rho[:, 0], r_rho[:, 1], lw=2)</span>
+<span class="sd">  ax.set_xlabel(r&quot;order parameter RMSD $\rho$ ($\AA$)&quot;)</span>
+<span class="sd">  ax.set_ylabel(r&quot;minimum HOLE pore radius $r$ ($\AA$)&quot;)</span>
+
+<span class="sd">(The graph shows that the pore opens up with increasing order parameter.)</span>
 
 
 <span class="sd">Data structures</span>
@@ -207,7 +241,6 @@
 <span class="sd">   be stored in the dict.</span>
 
 
-
 <span class="sd">Analysis</span>
 <span class="sd">--------</span>
 
@@ -222,6 +255,10 @@
 <span class="sd">      frame was analyzed then this will be ``HOLE.profiles[0]``. Note</span>
 <span class="sd">      that the order is random; one needs to sort the keys first.</span>
 
+<span class="sd">      .. Note:: </span>
+<span class="sd">         Duplicate keys are not possible. The last key overwrites</span>
+<span class="sd">         previous values. This is arguably a bug.</span>
+
 <span class="sd">.. autoclass:: HOLEtraj</span>
 <span class="sd">   :members:</span>
 <span class="sd">   :inherited-members:</span>
@@ -233,18 +270,44 @@
 <span class="sd">      parameter (if *orderparameters* was supplied). Note that the</span>
 <span class="sd">      order is random; one needs to sort the keys first.</span>
 
-<span class="sd">.. autodata:: SIMPLE2_RAD</span>
-
+<span class="sd">      .. Note:: </span>
+<span class="sd">         Duplicate keys are not possible. The last key overwrites</span>
+<span class="sd">         previous values. This is arguably a bug.</span>
 
 <span class="sd">Utilities</span>
 <span class="sd">---------</span>
 
 <span class="sd">.. autofunction:: write_simplerad2</span>
+<span class="sd">.. autodata:: SIMPLE2_RAD</span>
 <span class="sd">.. autofunction:: seq2str</span>
 <span class="sd">.. autoclass:: ApplicationError</span>
 
 
+<span class="sd">References</span>
+<span class="sd">----------</span>
+
+<span class="sd">.. [Smart1993] O.S. Smart, J.M. Goodfellow and B.A. Wallace.</span>
+<span class="sd">               The Pore Dimensions of Gramicidin A. Biophysical Journal 65:2455-2460, 1993.</span>
+<span class="sd">.. [Smart1996] O.S. Smart, J.G. Neduvelil, X. Wang, B.A. Wallace, and M.S.P. Sansom.</span>
+<span class="sd">               HOLE: A program for the analysis of the pore dimensions of ion channel</span>
+<span class="sd">               structural models. J.Mol.Graph., 14:354–360, 1996.</span>
+<span class="sd">               URL http://www.smartsci.uk/hole/</span>
+
+<span class="sd">.. Footnotes</span>
+
+<span class="sd">.. [#HOLEDCD] PDB files are not the only files that :program:`hole` can</span>
+<span class="sd">              read. In principle, it is also able to read CHARMM DCD</span>
+<span class="sd">              trajectories and generate a hole profile for each frame. However,</span>
+<span class="sd">              native support for DCD in :program:`hole` is patchy and not every</span>
+<span class="sd">              DCD is recognized. In particular, At the moment, DCDs generated</span>
+<span class="sd">              with MDAnalysis are not accepted by HOLE. If DCDs do not work,</span>
+<span class="sd">              use :class:`HOLEtraj`, which converts any of the :ref:`any</span>
+<span class="sd">              trajectory that MDAnalysis can read &lt;Supported coordinate</span>
+<span class="sd">              formats&gt;` into a sequence of PDB files and runs :class:`HOLE` on</span>
+<span class="sd">              each of them in turn.</span>
 <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">with_statement</span>
 
 <span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">zip</span><span class="p">,</span> <span class="n">cPickle</span>
 <span class="kn">import</span> <span class="nn">six</span>
@@ -263,7 +326,7 @@
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">cycle</span>
 
 <span class="kn">from</span> <span class="nn">MDAnalysis</span> <span class="kn">import</span> <span class="n">Universe</span>
-<span class="kn">from</span> <span class="nn">MDAnalysis</span> <span class="kn">import</span> <span class="n">ApplicationError</span>
+<span class="kn">from</span> <span class="nn">MDAnalysis.exceptions</span> <span class="kn">import</span> <span class="n">ApplicationError</span>
 <span class="kn">from</span> <span class="nn">MDAnalysis.lib.util</span> <span class="kn">import</span> <span class="n">which</span><span class="p">,</span> <span class="n">realpath</span><span class="p">,</span> <span class="n">asiterable</span>
 <span class="kn">from</span> <span class="nn">MDAnalysis.lib.util</span> <span class="kn">import</span> <span class="n">FORTRANReader</span>
 
@@ -316,10 +379,21 @@
 
 
 <div class="viewcode-block" id="write_simplerad2"><a class="viewcode-back" href="../../../documentation_pages/analysis/hole.html#MDAnalysis.analysis.hole.write_simplerad2">[docs]</a><span class="k">def</span> <span class="nf">write_simplerad2</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;simple2.rad&quot;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Write the built-in radii in :data:`SIMPLE2_RAD` to *filename*.</span>
+    <span class="sd">&quot;&quot;&quot;Write the built-in radii in :data:`SIMPLE2_RAD` to `filename`.</span>
 
-<span class="sd">    Does nothing if *filename* already exists.</span>
+<span class="sd">    Does nothing if `filename` already exists.</span>
+
+<span class="sd">    Parameters </span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename : string, optional</span>
+<span class="sd">       output file name; the default is &quot;simple2.rad&quot;</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    filename : string</span>
+<span class="sd">       returns the name of the data file</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">rad</span><span class="p">:</span>
             <span class="n">rad</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">SIMPLE2_RAD</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -328,10 +402,20 @@
 
 
 <div class="viewcode-block" id="seq2str"><a class="viewcode-back" href="../../../documentation_pages/analysis/hole.html#MDAnalysis.analysis.hole.seq2str">[docs]</a><span class="k">def</span> <span class="nf">seq2str</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return sequence *v* as a string of numbers with spaces as separators.</span>
+    <span class="sd">&quot;&quot;&quot;Return sequence as a string of numbers with spaces as separators.</span>
 
 <span class="sd">    In the special case of ``None``, the empty string &quot;&quot; is returned.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    v : sequence or array_like</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    string</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="s2">&quot;&quot;</span>
     <span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">v</span><span class="p">])</span></div>
@@ -349,6 +433,7 @@
 <span class="sd">           profiles = cPickle.load(open(filename))</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="n">cPickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">profiles</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">),</span> <span class="n">cPickle</span><span class="o">.</span><span class="n">HIGHEST_PROTOCOL</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_process_plot_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
@@ -370,8 +455,9 @@
             <span class="n">kw</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
         <span class="n">color</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;color&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">color</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">cmap</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;cmap&#39;</span><span class="p">,</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">jet</span><span class="p">)</span>
-            <span class="n">normalize</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">frames</span><span class="p">),</span> <span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">frames</span><span class="p">))</span>
+            <span class="n">cmap</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;cmap&#39;</span><span class="p">,</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">viridis</span><span class="p">)</span>
+            <span class="n">normalize</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">frames</span><span class="p">),</span> 
+                                                    <span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">frames</span><span class="p">))</span>
             <span class="n">colors</span> <span class="o">=</span> <span class="n">cmap</span><span class="p">(</span><span class="n">normalize</span><span class="p">(</span><span class="n">frames</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">colors</span> <span class="o">=</span> <span class="n">cycle</span><span class="p">(</span><span class="n">asiterable</span><span class="p">(</span><span class="n">color</span><span class="p">))</span>
@@ -380,44 +466,66 @@
         <span class="k">return</span> <span class="n">kw</span><span class="p">,</span> <span class="n">kwargs</span>
 
     <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Plot profiles in a 1D graph.</span>
+        <span class="sd">r&quot;&quot;&quot;Plot HOLE profiles :math:`R(\zeta)` in a 1D graph.</span>
 
-<span class="sd">        Lines are coloured according to the colour map *cmap*.</span>
+<span class="sd">        Lines are colored according to the color map *cmap*. One graph is</span>
+<span class="sd">        plotted for each trajectory frame (unless `step` is changed).</span>
 
-<span class="sd">        :Keywords:</span>
-<span class="sd">           *step*</span>
-<span class="sd">              only plot every *step* profile [1]</span>
-<span class="sd">           *cmap*</span>
-<span class="sd">              matplotlib color map to continuously color graphs [jet]</span>
-<span class="sd">           *color*</span>
-<span class="sd">              color or iterable of colors to specify graph colors;</span>
-<span class="sd">              ``None`` will use *cmap* instead [``None``]</span>
-<span class="sd">           *linestyle*</span>
-<span class="sd">              linestyle supported by :func:`matplotlib.pyplot.plot`;</span>
-<span class="sd">              an iterable will be applied in turn [&#39;-&#39;]</span>
-<span class="sd">           *yshift*</span>
-<span class="sd">              displace each R(zeta) profile by *yshift* in the</span>
-<span class="sd">              y-direction [0]</span>
-<span class="sd">           *frames*</span>
-<span class="sd">              integer or list: only plot these specific frame(s);</span>
-<span class="sd">              the default is to plot everything (see also *step*).</span>
-<span class="sd">              [``None``]</span>
-<span class="sd">           *label*</span>
-<span class="sd">              ignored and replaced with the frame number; if it</span>
-<span class="sd">              is set to &quot;_nolegend_&quot; or ``False`` then no</span>
-<span class="sd">              legend is displayed</span>
-<span class="sd">           *ax*</span>
-<span class="sd">              :class:`matplotlib.axes.Axes` instance to plot into</span>
-<span class="sd">              [``None``]</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        step : integer, optional</span>
+<span class="sd">              only plot every `step` profiles; default is 1.</span>
+<span class="sd">        color : string or iterable, optional</span>
+<span class="sd">              color or iterable of colors to specify graph colors; The default</span>
+<span class="sd">              ``None`` will use the color map `cmap` instead.</span>
+<span class="sd">        cmap : :class:`matplotlib.colors.Colormap`</span>
+<span class="sd">               Pick colors from the matplotlib color map `cmap`; the default is</span>
+<span class="sd">               *viridis*.</span>
+<span class="sd">        linestyle : string or iterable, optional</span>
+<span class="sd">              linestyle supported by :func:`matplotlib.pyplot.plot`; an</span>
+<span class="sd">              iterable that is not a string (e.g., ``(&#39;-&#39;, &#39;--&#39;, &#39;.&#39;)``) will</span>
+<span class="sd">              be applied in turn. The default is &#39;-&#39; to draw a simple line.</span>
+<span class="sd">        yshift : float, optional</span>
+<span class="sd">              displace each :math:`R(\zeta)` profile by `yshift` in the</span>
+<span class="sd">              :math:`y`-direction for clearer visualization. The default is 0,</span>
+<span class="sd">              i.e., not to shift any graph.        </span>
+<span class="sd">        frames : integer or array_like, optional</span>
+<span class="sd">              only plot these specific frame(s); the default ``None`` is to</span>
+<span class="sd">              plot everything (see also `step`)</span>
+<span class="sd">        label : bool or string, optional</span>
+<span class="sd">              If it is set to &quot;_nolegend_&quot; or ``False`` then no legend is</span>
+<span class="sd">              displayed. Any other value is ignored and the frame number is</span>
+<span class="sd">              used as a label. The default is ``True`` to plot the legend even</span>
+<span class="sd">              though this can become rather messy.</span>
+<span class="sd">        ax : :class:`matplotlib.axes.Axes`</span>
+<span class="sd">              If no `ax` is supplied or set to ``None`` then the plot will</span>
+<span class="sd">              be added to the current active axes.</span>
 
-<span class="sd">        All other *kwargs* are passed to :func:`matplotlib.pyplot.plot`.</span>
+<span class="sd">        kwargs :  `**kwargs`</span>
+<span class="sd">             All other `kwargs` are passed to :func:`matplotlib.pyplot.plot`.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        ax : :class:`~matplotlib.axes.Axes`</span>
+<span class="sd">             Axes with the plot, either `ax` or the current axes.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        .. versionchanged:: 0.16.0</span>
+<span class="sd">           Returns ``ax``.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
         <span class="n">kw</span><span class="p">,</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_plot_kwargs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
 
-        <span class="n">ax</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;ax&#39;</span><span class="p">,</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">))</span>
-        <span class="k">for</span> <span class="n">iplot</span><span class="p">,</span> <span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">linestyle</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">kw</span><span class="p">[</span><span class="s1">&#39;frames&#39;</span><span class="p">],</span> <span class="n">kw</span><span class="p">[</span><span class="s1">&#39;colors&#39;</span><span class="p">],</span> <span class="n">kw</span><span class="p">[</span><span class="s1">&#39;linestyles&#39;</span><span class="p">])):</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;ax&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">iplot</span><span class="p">,</span> <span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">linestyle</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
+                <span class="nb">zip</span><span class="p">(</span><span class="n">kw</span><span class="p">[</span><span class="s1">&#39;frames&#39;</span><span class="p">],</span> <span class="n">kw</span><span class="p">[</span><span class="s1">&#39;colors&#39;</span><span class="p">],</span> <span class="n">kw</span><span class="p">[</span><span class="s1">&#39;linestyles&#39;</span><span class="p">])):</span>
             <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">color</span>
             <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;linestyle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">linestyle</span>
             <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;zorder&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">frame</span>
@@ -425,42 +533,70 @@
             <span class="n">dy</span> <span class="o">=</span> <span class="n">iplot</span> <span class="o">*</span> <span class="n">kw</span><span class="p">[</span><span class="s1">&#39;yshift&#39;</span><span class="p">]</span>
             <span class="n">profile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span><span class="p">[</span><span class="n">frame</span><span class="p">]</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">profile</span><span class="o">.</span><span class="n">rxncoord</span><span class="p">,</span> <span class="n">profile</span><span class="o">.</span><span class="n">radius</span> <span class="o">+</span> <span class="n">dy</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-            <span class="c1">#logger.debug(&quot;Plotted frame %d with color %r and linestyle %r&quot;, frame, color, linestyle)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">r&quot;pore coordinate $\zeta$ ($\AA$)&quot;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">r&quot;HOLE radius $r$ ($\AA$)&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">r&quot;HOLE radius $R$ ($\AA$)&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">kw</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]:</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ax</span>
 
     <span class="k">def</span> <span class="nf">plot3D</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Stacked graph of profiles.</span>
+        <span class="sd">r&quot;&quot;&quot;Stacked 3D graph of profiles :math:`R(\zeta)`.</span>
 
-<span class="sd">        Lines are coloured according to the colour map *cmap*.</span>
+<span class="sd">        Lines are coloured according to the colour map `cmap`.</span>
 
-<span class="sd">        :Keywords:</span>
-<span class="sd">           *step*</span>
-<span class="sd">              only plot every *step* profile [1]</span>
-<span class="sd">           *cmap*</span>
-<span class="sd">              matplotlib color map [jet]</span>
-<span class="sd">           *rmax*</span>
-<span class="sd">              only display radii up to *rmax* [``None``]</span>
-<span class="sd">           *ylabel*</span>
-<span class="sd">              label of the reaction coordinate axis [&quot;frames&quot;]</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        step : int, optional</span>
+<span class="sd">               only plot every *step* profile; default: 1</span>
+<span class="sd">        cmap : :class:`matplotlib.colors.Colormap`, optional</span>
+<span class="sd">               matplotlib color map ;  the default is *viridis*</span>
+<span class="sd">        rmax : float, optional</span>
+<span class="sd">               only display radii up to `rmax`; the default is ``None``, which</span>
+<span class="sd">               means to show all radii.</span>
+<span class="sd">        ylabel : string, optional</span>
+<span class="sd">               label of the reaction coordinate axis; the default is &quot;frames&quot;</span>
+<span class="sd">        ax : :class:`matplotlib.axes.Axes`</span>
+<span class="sd">               axes instance to plot into, which *must* have been generated</span>
+<span class="sd">               with the `projection=&#39;3d&#39;` keyword set (see</span>
+<span class="sd">               :mod:`mpl_toolkits.mplot3d.axes3d` and the `mplot3d tutorial`_</span>
+<span class="sd">               for details)</span>
 
-<span class="sd">        Based on Stack Overflow post `3d plots using matplotlib`_.</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        ax : :class:`~matplotlib.axes.Axes`</span>
+<span class="sd">             Axes with the plot, either `ax` or the current axes.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+
+<span class="sd">        Based on StackOverflow post `3d plots using matplotlib`_. Masking of</span>
+<span class="sd">        the data above `rmax` implements the StackOverflow hack `How do I set a</span>
+<span class="sd">        maximum value for the z axis`_.</span>
 
 <span class="sd">        .. _`3d plots using matplotlib`:</span>
 <span class="sd">           http://stackoverflow.com/questions/9053255/3d-plots-using-matplotlib</span>
+<span class="sd">        .. _`How do I set a maximum value for the z axis`:</span>
+<span class="sd">           http://stackoverflow.com/questions/4913306/python-matplotlib-mplot3d-how-do-i-set-a-maximum-value-for-the-z-axis</span>
+<span class="sd">        .. _`mplot3d tutorial`:</span>
+<span class="sd">           http://matplotlib.org/mpl_toolkits/mplot3d/tutorial.html</span>
+
+<span class="sd">        .. versionchanged:: 0.16.0</span>
+<span class="sd">           Returns ``ax``.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-        <span class="kn">import</span> <span class="nn">mpl_toolkits.mplot3d.axes3d</span> <span class="kn">as</span> <span class="nn">axes3d</span>
+        <span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
 
         <span class="n">kw</span><span class="p">,</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_plot_kwargs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="n">rmax</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;rmax&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
         <span class="n">ylabel</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;ylabel&#39;</span><span class="p">,</span> <span class="s2">&quot;frames&quot;</span><span class="p">)</span>
 
-        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;figsize&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">)))</span>
-        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;ax&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()</span>
+            <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+
         <span class="k">for</span> <span class="n">frame</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">linestyle</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">kw</span><span class="p">[</span><span class="s1">&#39;frames&#39;</span><span class="p">],</span> <span class="n">kw</span><span class="p">[</span><span class="s1">&#39;colors&#39;</span><span class="p">],</span> <span class="n">kw</span><span class="p">[</span><span class="s1">&#39;linestyles&#39;</span><span class="p">]):</span>
             <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">color</span>
             <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;linestyle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">linestyle</span>
@@ -480,17 +616,15 @@
                 <span class="n">radius</span><span class="p">[</span><span class="n">radius</span> <span class="o">&gt;</span> <span class="n">rmax</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rxncoord</span><span class="p">,</span> <span class="n">frame</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">rxncoord</span><span class="p">),</span> <span class="n">radius</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">r&quot;pore coordinate $z$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">r&quot;pore coordinate $\zeta$ ($\AA$)&quot;</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s2">r&quot;HOLE radius $r$&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s2">r&quot;HOLE radius $R$ ($\AA$)&quot;</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">ax</span>
 
     <span class="k">def</span> <span class="nf">min_radius</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the minimum radius over all profiles as a function of q&quot;&quot;&quot;</span>
-        <span class="n">f</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">q</span><span class="p">,</span> <span class="n">profile</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">q</span><span class="p">,</span> <span class="n">profile</span><span class="o">.</span><span class="n">radius</span><span class="o">.</span><span class="n">min</span><span class="p">()])</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">q</span><span class="p">,</span> <span class="n">profile</span><span class="o">.</span><span class="n">radius</span><span class="o">.</span><span class="n">min</span><span class="p">()]</span> <span class="k">for</span> <span class="n">q</span><span class="p">,</span> <span class="n">profile</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">sorted_profiles_iter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return an iterator over profiles sorted by frame/order parameter *q*.</span>
@@ -506,21 +640,24 @@
 
 
 <div class="viewcode-block" id="HOLE"><a class="viewcode-back" href="../../../documentation_pages/analysis/hole.html#MDAnalysis.analysis.hole.HOLE">[docs]</a><span class="k">class</span> <span class="nc">HOLE</span><span class="p">(</span><span class="n">BaseHOLE</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Run HOLE on a single frame or a DCD trajectory.</span>
+    <span class="sd">&quot;&quot;&quot;Run :program:`hole` on a single frame or a DCD trajectory.</span>
+
+<span class="sd">    :program:`hole` is part of the HOLE_ suite of programs. It is used to</span>
+<span class="sd">    analyze channels and cavities in proteins, especially ion channels.</span>
 
 <span class="sd">    Only a subset of all `HOLE control parameters`_ is supported and can be set</span>
 <span class="sd">    with keyword arguments.</span>
 
-<span class="sd">    HOLE (as a FORTRAN77 program) has a number of limitations when it comes to</span>
+<span class="sd">    :program:`hole` (as a FORTRAN77 program) has a number of limitations when it comes to</span>
 <span class="sd">    filename lengths (must be shorter than the empirically found</span>
 <span class="sd">    :attr:`HOLE.HOLE_MAX_LENGTH`). This class tries to work around them by</span>
 <span class="sd">    creating temporary symlinks to files when needed but this can still fail</span>
 <span class="sd">    when permissions are not correctly set on the current directory.</span>
 
-<span class="sd">    Running HOLE with the :class:`HOLE` class is a 3-step process:</span>
+<span class="sd">    Running :program:`hole` with the :class:`HOLE` class is a 3-step process:</span>
 
 <span class="sd">     1. set up the class with all desired parameters</span>
-<span class="sd">     2. run HOLE with :meth:`HOLE.run`</span>
+<span class="sd">     2. run :program:`hole` with :meth:`HOLE.run`</span>
 <span class="sd">     3. collect the data from the output file with :meth:`HOLE.collect`</span>
 
 <span class="sd">    The class also provides some simple plotting functions of the collected</span>
@@ -528,8 +665,12 @@
 
 <span class="sd">    .. versionadded:: 0.7.7</span>
 
+<span class="sd">    .. versionchanged:: 0.16.0</span>
+<span class="sd">           Added `raseed` keyword argument.</span>
+
 <span class="sd">    .. _`HOLE control parameters`:</span>
 <span class="sd">       http://s3.smartsci.uk/hole2/doc/old/hole_d03.html</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">#: Maximum number of characters in a filename (limitation of HOLE)</span>
     <span class="n">HOLE_MAX_LENGTH</span> <span class="o">=</span> <span class="mi">70</span>
@@ -541,204 +682,197 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set up parameters to run HOLE_ on PDB *filename*.</span>
 
-<span class="sd">        :Arguments:</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filename : string</span>
+<span class="sd">            The `filename` is used as input for HOLE in the &quot;COORD&quot; card of the</span>
+<span class="sd">            input file.  It specifies the name of a PDB co-ordinate file to be</span>
+<span class="sd">            used. This must be in Brookhaven protein databank format or</span>
+<span class="sd">            something closely approximating this. Both ATOM and HETATM records</span>
+<span class="sd">            are read. Note that if water molecules or ions are present in the</span>
+<span class="sd">            channel these can be ignored on read by the use of the</span>
+<span class="sd">            `ignore_residues` keyword.</span>
 
-<span class="sd">          *filename*</span>
+<span class="sd">            **Wildcard pattern**. A new feature (in release 2.1 of HOLE) was</span>
+<span class="sd">            the option to include a wild card (``*``) in the filename. e.g.,</span>
+<span class="sd">            ``filename=&quot;ab*.pdb&quot;`` will apply hole to all files in the</span>
+<span class="sd">            directory whose name starts with ``ab`` and ends with</span>
+<span class="sd">            ``.pdb``. This is intended to aid the analysis of multiple copies</span>
+<span class="sd">            of the same molecule - produced during molecular dynamics or other</span>
+<span class="sd">            method. The hole procedure will be applied to each file in turn</span>
+<span class="sd">            with the same setup conditions (initial point, sampling distance</span>
+<span class="sd">            etc.). Graphics files will contain a combination of the individual</span>
+<span class="sd">            runs, one after another. Note that the pdb files are read</span>
+<span class="sd">            independently so that they need not have an identical number of</span>
+<span class="sd">            atoms or atom order etc. (though they should be sufficiently</span>
+<span class="sd">            similar for a HOLE run from identical starting conditions to be</span>
+<span class="sd">            useful).</span>
 
-<span class="sd">               The *filename* is used as input for HOLE in the &quot;COORD&quot; card of</span>
-<span class="sd">               the input file.  It specifies the name of a PDB co-ordinate file</span>
-<span class="sd">               to be used. This must be in Brookhaven protein databank format</span>
-<span class="sd">               or something closely approximating this. Both ATOM and HETATM</span>
-<span class="sd">               records are read. Note that if water molecules or ions are</span>
-<span class="sd">               present in the channel these can be ignored on read by the use</span>
-<span class="sd">               of the *ignore_residues* keyword.</span>
+<span class="sd">            .. SeeAlso::</span>
 
-<span class="sd">               **Wildcard pattern**. A new feature (in release 2.1 of HOLE) was</span>
-<span class="sd">               the option to include a wild card (``*``) in the filename. e.g.,</span>
-<span class="sd">               *filename* = `&quot;ab*.pdb&quot;` will apply hole to all files in the</span>
-<span class="sd">               directory whose name starts with ``ab`` and ends with</span>
-<span class="sd">               ``.pdb``. This is intended to aid the analysis of multiple</span>
-<span class="sd">               copies of the same molecule - produced during molecular dynamics</span>
-<span class="sd">               or other method. The hole procedure will be applied to each file</span>
-<span class="sd">               in turn with the same setup conditions (initial point, sampling</span>
-<span class="sd">               distance etc.). Graphics files will contain a combination of the</span>
-<span class="sd">               individual runs, one after another. Note that the pdb files are</span>
-<span class="sd">               read independently so that they need not have an identical</span>
-<span class="sd">               number of atoms or atom order etc. (though they should be</span>
-<span class="sd">               sufficiently similar for a HOLE run from identical starting</span>
-<span class="sd">               conditions to be useful).</span>
+<span class="sd">               An alternative way to load in multiple files is a direct read</span>
+<span class="sd">               from a CHARMM binary dynamics DCD coordinate file - using the</span>
+<span class="sd">               `dcd` keyword or use :class:`HOLEtraj`.</span>
 
-<span class="sd">               .. SeeAlso::</span>
+<span class="sd">        dcd : string, optional</span>
+<span class="sd">            File name of DCD trajectory (must be supplied together with a</span>
+<span class="sd">            matching PDB file `filename`) and then HOLE runs its analysis on</span>
+<span class="sd">            each frame.</span>
 
-<span class="sd">                  An alternative way to load in multiple files is a direct read</span>
-<span class="sd">                  from a CHARMM binary dynamics DCD coordinate file - using the</span>
-<span class="sd">                  *dcd* keyword or use :class:`HOLEtraj`.</span>
+<span class="sd">            It does multiple HOLE runs on positions taken from a CHARMM binary</span>
+<span class="sd">            dynamics format DCD trajectory file. The `dcd` file must have</span>
+<span class="sd">            exactly the same number of atoms in exactly the same order as the</span>
+<span class="sd">            pdb file specified by `filename`. Note that if this option is used</span>
+<span class="sd">            the pdb file is used as a template only - the coordinates are</span>
+<span class="sd">            ignored. Note that structural parameters determined for each</span>
+<span class="sd">            individual structure are written in a tagged format so that it is</span>
+<span class="sd">            possible to extract the information from the text output file using</span>
+<span class="sd">            a :program:`grep` command. The reading of the file can be</span>
+<span class="sd">            controlled by the `step` keyword and/or setting</span>
+<span class="sd">            :attr:`HOLE.dcd_iniskip` to the number of frames to be skipped</span>
+<span class="sd">            initially.</span>
 
+<span class="sd">            .. Note::</span>
 
-<span class="sd">        :Keywords:</span>
+<span class="sd">               HOLE is very picky and does not read all DCD-like</span>
+<span class="sd">               formats [#HOLEDCD]_. If in doubt, look into the `logfile` for</span>
+<span class="sd">               error diagnostics.</span>
 
-<span class="sd">          *dcd*</span>
-<span class="sd">               DCD trajectory (must be supplied together with a matching</span>
-<span class="sd">               PDB file *filename*) and then HOLE runs its analysis on each frame.</span>
+<span class="sd">        logfile : string, optional</span>
+<span class="sd">            file name of the file collecting HOLE&#39;s output (which can be</span>
+<span class="sd">            parsed using :meth:`HOLE.collect`);  the default is &quot;hole.out&quot;.</span>
 
-<span class="sd">               It does multiple HOLE runs on positions taken from a CHARMM binary</span>
-<span class="sd">               dynamics format .DCD trajectory file. The *dcd* file must have</span>
-<span class="sd">               exactly the same number of atoms in exactly the same order as</span>
-<span class="sd">               the pdb file specified by *filename*. Note that if this option</span>
-<span class="sd">               is used the pdb file is used as a template only - the</span>
-<span class="sd">               coordinates are ignored. Note that structural parameters</span>
-<span class="sd">               determined for each individual structure are written in a tagged</span>
-<span class="sd">               format so that it is possible to extract the information from</span>
-<span class="sd">               the text output file using a :program:`grep` command. The</span>
-<span class="sd">               reading of the file can be controlled by the *step* keyword</span>
-<span class="sd">               and/or setting :attr:`HOLE.dcd_iniskip` to the number of frames</span>
-<span class="sd">               to be skipped initially.</span>
+<span class="sd">        sphpdb : string, optional</span>
+<span class="sd">            path to the HOLE sph file, a PDB-like file containig the</span>
+<span class="sd">            coordinates of the pore centers; the default is &quot;hole.sph&quot;.</span>
 
-<span class="sd">               .. Note::</span>
+<span class="sd">            This keyword specifies the filename for output of the sphere centre</span>
+<span class="sd">            information in pdb form. Its typical suffix is &quot;.sph&quot;. The</span>
+<span class="sd">            co-ordinates are set to the sphere centres and the occupancies are</span>
+<span class="sd">            the sphere radii. All centres are assigned the atom name QSS and</span>
+<span class="sd">            residue name SPH and the residue number is set to the storage</span>
+<span class="sd">            number of the centre. The file can be imported into molecular</span>
+<span class="sd">            graphics programs but are likely to be bonded together in a awful</span>
+<span class="sd">            manner - as the points are very close to one another. In VMD sph</span>
+<span class="sd">            objects are best displayed as &quot;Points&quot;. Displaying .sph objects</span>
+<span class="sd">            rather than rendered or dot surfaces can be useful to analyze the</span>
+<span class="sd">            distance of particular atoms from the sphere-centre line.</span>
 
-<span class="sd">                  HOLE is very picky and does not read all DCD-like formats. If</span>
-<span class="sd">                  in doubt, look into the *logfile* for error diagnostics.</span>
+<span class="sd">            Most usefully .sph files can be used to produce molecular graphical</span>
+<span class="sd">            output from a hole run. This is achieved by using the</span>
+<span class="sd">            :program:`sph_process` program to read the .sph file.</span>
 
-<span class="sd">                  At the moment, DCDs generated with MDAnalysis are not</span>
-<span class="sd">                  accepted by HOLE — use :class:`HOLEtraj`, which works with</span>
-<span class="sd">                  anything that MDAnalysis can read.</span>
+<span class="sd">        step : int, optional</span>
+<span class="sd">             step size for going through the trajectory (skips `step` - 1</span>
+<span class="sd">             frames); the default is 1.</span>
 
-<span class="sd">          *logfile*</span>
+<span class="sd">        cpoint : array_like, optional</span>
+<span class="sd">             coordinates of a point inside the pore, e.g. ``[12.3, 0.7,</span>
+<span class="sd">             18.55]``. If set to ``None`` (the default) then HOLE&#39;s own search</span>
+<span class="sd">             algorithm is used.</span>
 
-<span class="sd">               name of the file collecting HOLE&#39;s output (which can be parsed</span>
-<span class="sd">               using :meth:`HOLE.collect` [&quot;hole.out&quot;]</span>
+<span class="sd">             `cpoint` specifies a point which lies within the channel. For</span>
+<span class="sd">             simple channels such as gramicidin results do not show great</span>
+<span class="sd">             sensitivity to the exact point taken. An easy way to produce an</span>
+<span class="sd">             initial point is to use molecular graphics to find two atoms which</span>
+<span class="sd">             lie either side of the pore and to average their co-ordinates. Or</span>
+<span class="sd">             if the channel structure contains water molecules or counter ions</span>
+<span class="sd">             then take the coordinates of one of these (and use the</span>
+<span class="sd">             `ignore_residues` keyword to ignore them in the pore radius</span>
+<span class="sd">             calculation).</span>
 
-<span class="sd">          *sphpdb*</span>
+<span class="sd">             If this card is not specified then HOLE now (from version 2.2)</span>
+<span class="sd">             attempts to make a guess where the channel will be. The procedure</span>
+<span class="sd">             assumes the channel is reasonably symmetric. The initial guess on</span>
+<span class="sd">             cpoint will be the centroid of all alpha carbon atoms (name &#39;CA&#39;</span>
+<span class="sd">             in pdb file). This is then refined by a crude grid search up to 5</span>
+<span class="sd">             Å from the original position. This procedure works most of the</span>
+<span class="sd">             time but is clearly far from infallible — results should be</span>
+<span class="sd">             careful checked (with molecular graphics) if it is used.</span>
 
-<span class="sd">               name of the HOLE sph file, a PDB-like file containig the coordinates</span>
-<span class="sd">               of the pore centers [&quot;hole.sph&quot;]</span>
+<span class="sd">        cvect : array_like, optional</span>
+<span class="sd">             Search direction, should be parallel to the pore axis,</span>
+<span class="sd">             e.g. ``[0,0,1]`` for the z-axis. The default is ``None`` so that</span>
+<span class="sd">             HOLE&#39;s built-in procedure is used.</span>
 
-<span class="sd">          *step*</span>
+<span class="sd">             If this keyword is ``None`` then HOLE attempts to make a guess</span>
+<span class="sd">             where the channel will be. The procedure assumes the channel is</span>
+<span class="sd">             reasonably symmetric. The guess will be either along the X axis</span>
+<span class="sd">             (1,0,0), Y axis (0,1,0) or Z axis (0,0,1). If the structure is not</span>
+<span class="sd">             aligned on one of these axis the results will clearly be</span>
+<span class="sd">             approximate. If a guess is used then results should be carefully</span>
+<span class="sd">             checked.</span>
 
-<span class="sd">               step size for going through the trajectory (skips *step* - 1</span>
-<span class="sd">               frames) [1]</span>
+<span class="sd">        sample : float, optional</span>
+<span class="sd">             distance of sample points in Å; the default is 0.2 Å.</span>
 
-<span class="sd">          *cpoint*</span>
+<span class="sd">             Specifies the distance between the planes used in the HOLE</span>
+<span class="sd">             procedure. The default value should be reasonable for most</span>
+<span class="sd">             purposes. However, if you wish to visualize a very tight</span>
+<span class="sd">             constriction then specify a smaller value.</span>
 
-<span class="sd">               coordinates of a point inside the pore, e.g. ``[12.3, 0.7,</span>
-<span class="sd">               18.55]``. If ``None`` then HOLE&#39;s own simple search algorithm is</span>
-<span class="sd">               used.</span>
+<span class="sd">             This value determines how many points in the pore profile are</span>
+<span class="sd">             calculated.</span>
 
-<span class="sd">               This specifies a point which lies within the channel, for simple</span>
-<span class="sd">               channels such as gramicidin results do not show great</span>
-<span class="sd">               sensitivity to the exact point taken. An easy way to produce an</span>
-<span class="sd">               initial point is to use molecular graphics to find two atoms</span>
-<span class="sd">               which lie either side of the pore and to average their</span>
-<span class="sd">               co-ordinates. Or if the channel structure contains water</span>
-<span class="sd">               molecules or counter ions then take the coordinates of one of</span>
-<span class="sd">               these (and use the *ignore_residues* keyword to ignore them in</span>
-<span class="sd">               the pore radius calculation).</span>
+<span class="sd">        dotden : int, optional</span>
+<span class="sd">             density of facettes for generating a 3D pore representation;</span>
+<span class="sd">             default is 15.</span>
 
-<span class="sd">               If this card is not specified then HOLE now (from version 2.2)</span>
-<span class="sd">               attempts to make a guess where the channel will be. The</span>
-<span class="sd">               procedure assumes the channel is reasonably symmetric. The</span>
-<span class="sd">               initial guess on cpoint will be the centroid of all alpha carbon</span>
-<span class="sd">               atoms (name &#39;CA&#39; in pdb file). This is then refined by a crude</span>
-<span class="sd">               grid search up to 5 Å from the original position. This procedure</span>
-<span class="sd">               works most of the time but is clearly far from infallible —</span>
-<span class="sd">               results should be careful checked (with molecular graphics) if</span>
-<span class="sd">               it is used. [``None``]</span>
+<span class="sd">             This number controls the density of dots which will be used by</span>
+<span class="sd">             the program. A sphere of dots is placed on each centre</span>
+<span class="sd">             determined in the Monte Carlo procedure. Only dots which do not</span>
+<span class="sd">             lie within any other sphere are considered. The actual number of</span>
+<span class="sd">             dots written is therefore controlled by `dotden` and</span>
+<span class="sd">             `sample`. `dotden` should be set to between 5 (few dots per</span>
+<span class="sd">             sphere) and 35 (large number of dots per sphere).</span>
 
-<span class="sd">          *cvect*</span>
+<span class="sd">        endrad : float, optional</span>
+<span class="sd">             Radius which is considered to be the end of the pore. This</span>
+<span class="sd">             keyword can be used to specify the radius above which the</span>
+<span class="sd">             program regards a result as indicating that the end of the pore</span>
+<span class="sd">             has been reached. The default value is 22.0 Å. This may need to</span>
+<span class="sd">             be increased for large channels or reduced for small.</span>
 
-<span class="sd">               Search direction, should be parallel to the pore axis,</span>
-<span class="sd">               e.g. ``[0,0,1]`` for the z-axis.</span>
+<span class="sd">        shorto : int, optional</span>
+<span class="sd">             Determines the output of output in the `logfile`; for automated processing</span>
+<span class="sd">             this must be &lt; 3. The default is 0, which shows all output.</span>
 
-<span class="sd">               If this keyword is ``None`` then HOLE now attempts to make a</span>
-<span class="sd">               guess where the channel will be. The procedure assumes the</span>
-<span class="sd">               channel is reasonably symmetric. The guess will be either along</span>
-<span class="sd">               the X axis (1,0,0), Y axis (0,1,0) or Z axis (0,0,1). If the</span>
-<span class="sd">               structure is not aligned on one of these axis the results will</span>
-<span class="sd">               clearly be approximate. If a guess is used then results should</span>
-<span class="sd">               be carefully checked. [``None``]</span>
+<span class="sd">             - 0: Full text output</span>
+<span class="sd">             - 1: All text output given except &quot;run in progress&quot; (i.e.,</span>
+<span class="sd">               detailed contemporary description of what HOLE is doing).</span>
+<span class="sd">             - 2: Ditto plus no graph type output - only leaving minimum</span>
+<span class="sd">               radius and conductance calculations.</span>
+<span class="sd">             - 3: All text output other than input card mirroring and error messages</span>
+<span class="sd">               turned off.</span>
 
-<span class="sd">          *sample*</span>
-<span class="sd">               distance of sample points in Å</span>
+<span class="sd">        ignore_residues : array_like, optional</span>
+<span class="sd">             sequence of three-letter residues that are not taken into</span>
+<span class="sd">             account during the calculation; wildcards are *not*</span>
+<span class="sd">             supported. The default is ``[&quot;SOL&quot;,&quot;WAT&quot;, &quot;TIP&quot;, &quot;HOH&quot;, &quot;K &quot;,</span>
+<span class="sd">             &quot;NA &quot;, &quot;CL &quot;]``.</span>
 
-<span class="sd">               Specifies the distance between the planes used in the HOLE</span>
-<span class="sd">               procedure. The default value is 0.2 Å, this should be reasonable</span>
-<span class="sd">               for most purposes. However, if you wish to visualize a very</span>
-<span class="sd">               tight constriction then specify a smaller value.  [0.2]</span>
+<span class="sd">        radius : string, optional</span>
+<span class="sd">             path to the file specifying van der Waals radii for each atom. If</span>
+<span class="sd">             set to ``None`` (the default) then a set of default radii,</span>
+<span class="sd">             :data:`SIMPLE2_RAD`, is used (an extension of ``simple.rad`` from</span>
+<span class="sd">             the HOLE distribution)</span>
 
-<span class="sd">          *dotden*</span>
-<span class="sd">               density of facettes for generating a 3D pore representation</span>
+<span class="sd">        executable : string, optional</span>
+<span class="sd">             Path to the :program:`hole` executable</span>
+<span class="sd">             (e.g. ``~/hole2/exe/hole``); the other programs</span>
+<span class="sd">             :program:`sph_process` and :program:`sos_triangle` are assumed</span>
+<span class="sd">             to live in the same directory as :program:`hole`. If</span>
+<span class="sd">             :program:`hole` is found on the :envvar:`PATH` then the bare</span>
+<span class="sd">             executable name is sufficient. The default is &quot;hole&quot;.</span>
 
-<span class="sd">               This number controls the density of dots which will be used by</span>
-<span class="sd">               the program. A sphere of dots is placed on each centre</span>
-<span class="sd">               determined in the Monte Carlo procedure. Only dots which do not</span>
-<span class="sd">               lie within any other sphere are considered. The actual number of</span>
-<span class="sd">               dots written is therefore controlled by *dotden* and</span>
-<span class="sd">               *sample*. *dotden* should be set to between 5 (few dots per</span>
-<span class="sd">               sphere) and 35 (large number of dots per sphere). [15]</span>
+<span class="sd">        raseed : int, optional</span>
+<span class="sd">             integer number to start the random number generator; by default,</span>
+<span class="sd">             :program:`hole` will use the time of the day (default value</span>
+<span class="sd">             ``None``) but for reproducible runs (e.g., for testing) set it to</span>
+<span class="sd">             an integer.</span>
 
-<span class="sd">          *endrad*</span>
-<span class="sd">               Radius which is considered to be the end of the pore. This</span>
-<span class="sd">               keyword can be used to specify the radius above which the</span>
-<span class="sd">               program regards a result as indicating that the end of the pore</span>
-<span class="sd">               has been reached. The default value is 22.0 Å. This may need to</span>
-<span class="sd">               be increased for large channels or reduced for small. [22.0]</span>
-
-<span class="sd">          *shorto*</span>
-
-<span class="sd">               Determines the output of output in the *logfile*; for automated processing</span>
-<span class="sd">               this must be &lt; 3.</span>
-
-<span class="sd">               - 0: Full text output</span>
-<span class="sd">               - 1: All text output given except &quot;run in progress&quot; (i.e.,</span>
-<span class="sd">                 detailed contemporary description of what HOLE is doing).</span>
-<span class="sd">               - 2: Ditto plus no graph type output - only leaving minimum</span>
-<span class="sd">                 radius and conductance calculations.</span>
-<span class="sd">               - 3: All text output other than input card mirroring and error messages</span>
-<span class="sd">                 turned off.</span>
-
-<span class="sd">          *ignore_residues*</span>
-
-<span class="sd">               sequence of three-letter residues that are not taken into account during the</span>
-<span class="sd">               calculation; wildcards are *not* supported</span>
-<span class="sd">               [ ``[&quot;SOL&quot;,&quot;WAT&quot;, &quot;TIP&quot;, &quot;HOH&quot;, &quot;K  &quot;, &quot;NA &quot;, &quot;CL &quot;]`` ]</span>
-
-<span class="sd">          *radius*</span>
-<span class="sd">               Path to the radii; if set to None then a set of default radii, :data:`SIMPLE2_RAD`,</span>
-<span class="sd">               is used (an extension of ``simple.rad`` from the HOLE distribution)</span>
-
-<span class="sd">               This specifies the name for the file specifying van der Waals</span>
-<span class="sd">               radii for each atom. A number of files with different values are</span>
-<span class="sd">               supplied with HOLE.</span>
-
-<span class="sd">          *sphpdb*</span>
-
-<span class="sd">               This keyword specifies the filename for output of the sphere</span>
-<span class="sd">               centre information in pdb form. Its typical suffix is</span>
-<span class="sd">               &quot;.sph&quot;. The co-ordinates are set to the sphere centres and the</span>
-<span class="sd">               occupancies are the sphere radii. All centres are assigned the</span>
-<span class="sd">               atom name QSS and residue name SPH and the residue number is set</span>
-<span class="sd">               to the storage number of the centre. The file can be imported</span>
-<span class="sd">               into molecular graphics programs but are likely to be bonded</span>
-<span class="sd">               together in a awful manner - as the points are very close to one</span>
-<span class="sd">               another. In VMD sph objects are best displayed as</span>
-<span class="sd">               &quot;Points&quot;. Displaying .sph objects rather than rendered or dot</span>
-<span class="sd">               surfaces can be useful to analyze the distance of particular</span>
-<span class="sd">               atoms from the sphere-centre line.</span>
-
-<span class="sd">               Most usefully .sph files can be used to produce molecular</span>
-<span class="sd">               graphical output from a hole run. This is achieved by using the</span>
-<span class="sd">               :program:`sph_process` program to read the .sph</span>
-<span class="sd">               file. [&quot;hole.sph&quot;]</span>
-
-<span class="sd">          *executable*</span>
-
-<span class="sd">               Path to the :program:`hole` executable</span>
-<span class="sd">               (e.g. ``/opt/hole/exe/hole``); the other programs</span>
-<span class="sd">               :program:`sph_process` and :program:`sos_triangle` are assumed</span>
-<span class="sd">               to live in the same directory as :program:`hole`. If</span>
-<span class="sd">               :program:`hole` is found on the :envvar:`PATH` then the bare</span>
-<span class="sd">               executable name is sufficient.  [&quot;hole&quot;]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="c1"># list of temporary files, to be cleaned up on __del__</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tempfiles</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tempdirs</span> <span class="o">=</span> <span class="p">[]</span>
@@ -759,6 +893,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ignore_residues</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;ignore_residues&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_ignore_residues</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_and_fix_long_filename</span><span class="p">(</span>
             <span class="n">realpath</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;radius&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">or</span> <span class="n">write_simplerad2</span><span class="p">()))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">raseed</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;raseed&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
 
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Setting up HOLE analysis for </span><span class="si">%(filename)r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Using radius file </span><span class="si">%(radius)r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
@@ -792,11 +927,18 @@
 <span class="s2">            IGNORE </span><span class="si">%(ignore)s</span><span class="s2"></span>
 <span class="s2">            SHORTO </span><span class="si">%(shorto)d</span><span class="s2"></span>
 <span class="s2">            &quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">raseed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">raseed</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">raseed</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">template</span> <span class="o">+=</span> <span class="s2">&quot;RASEED </span><span class="si">%(raseed)d</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Fixed random number seed {} for reproducible &quot;</span>
+                        <span class="s2">&quot;runs.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">raseed</span><span class="p">))</span>
+
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpoint</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="c1"># note: if it is None then we can&#39;t change this with a kw for run() !!</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">template</span> <span class="o">+=</span> <span class="s2">&quot;CPOINT </span><span class="si">%(cpoint_xyz)s</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;HOLE will guess CPOINT&quot;</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cvect</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="c1"># note: if it is None then we can&#39;t change this with a kw for run() !!</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">template</span> <span class="o">+=</span> <span class="s2">&quot;CVECT  </span><span class="si">%(cvect_xyz)s</span><span class="se">\n</span><span class="s2">&quot;</span>
@@ -821,22 +963,41 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span> <span class="o">=</span> <span class="p">{}</span>
 
 <div class="viewcode-block" id="HOLE.check_and_fix_long_filename"><a class="viewcode-back" href="../../../documentation_pages/analysis/hole.html#MDAnalysis.analysis.hole.HOLE.check_and_fix_long_filename">[docs]</a>    <span class="k">def</span> <span class="nf">check_and_fix_long_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">tmpdir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">curdir</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return *filename* suitable for HOLE.</span>
+        <span class="sd">&quot;&quot;&quot;Return a file name suitable for HOLE.</span>
 
 <span class="sd">        HOLE is limited to filenames &lt;= :attr:`HOLE.HOLE_MAX_LENGTH`. This method</span>
 
-<span class="sd">        1. returns *filename* if HOLE can process it</span>
+<span class="sd">        1. returns `filename` if HOLE can process it</span>
 <span class="sd">        2. returns a relative path (see :func:`os.path.relpath`) if that shortens the</span>
 <span class="sd">           path sufficiently</span>
-<span class="sd">        3. creates a symlink to *filename* (:func:`os.symlink`) in a safe temporary</span>
+<span class="sd">        3. creates a symlink to `filename` (:func:`os.symlink`) in a safe temporary</span>
 <span class="sd">           directory and returns the path of the symlink. The temporary directory and</span>
 <span class="sd">           the symlink are stored in :attr:`HOLE.tempfiles` and :attr:`HOLE.tempdirs`</span>
 <span class="sd">           and deleted when the :class:`HOLE` instance is deleted or garbage collected.</span>
 
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filename : string</span>
+<span class="sd">           file name to be processed</span>
+<span class="sd">        tmpdir : string, optional</span>
 <span class="sd">           By default the temporary directory is created inside the current</span>
 <span class="sd">           directory in order to keep that path name short. This can be changed</span>
-<span class="sd">           with the *tmpdir* keyword (e.g. one can use &quot;/tmp&quot;).</span>
+<span class="sd">           with the `tmpdir` keyword (e.g. one can use &quot;/tmp&quot;). The default is</span>
+<span class="sd">           the current directory :data:`os.path.curdir`.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        string</span>
+<span class="sd">          path to the file that has a length less than</span>
+<span class="sd">          :attr:`HOLE.HOLE_MAX_LENGTH`</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        RuntimeError</span>
+<span class="sd">          If none of the tricks for filename shortening worked. In this case,</span>
+<span class="sd">          manually rename the file or recompile your version of HOLE.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">HOLE_MAX_LENGTH</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">filename</span>
 
@@ -863,6 +1024,7 @@
 
 <div class="viewcode-block" id="HOLE.run"><a class="viewcode-back" href="../../../documentation_pages/analysis/hole.html#MDAnalysis.analysis.hole.HOLE.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Run HOLE on the input file.&quot;&quot;&quot;</span>
+
         <span class="n">inpname</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;inpfile&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
         <span class="n">outname</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;outfile&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">logfile</span><span class="p">)</span>
         <span class="c1"># NOTE: If cvect and cpoint had been None in the constructor then they are</span>
@@ -945,9 +1107,11 @@
         <span class="k">return</span> <span class="n">filename</span></div>
 
 <div class="viewcode-block" id="HOLE.collect"><a class="viewcode-back" href="../../../documentation_pages/analysis/hole.html#MDAnalysis.analysis.hole.HOLE.collect">[docs]</a>    <span class="k">def</span> <span class="nf">collect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Parse the output from a HOLE run into numpy recarrays.</span>
+        <span class="sd">&quot;&quot;&quot;Parse the output from a :class:`HOLE` run into numpy recarrays.</span>
 
-<span class="sd">        Can deal with outputs containing multiple frames. Output format::</span>
+<span class="sd">        It can process outputs containing multiple frames (when a DCD was supplied to :program:`hole`). </span>
+
+<span class="sd">        Output format::</span>
 
 <span class="sd">            frame  rxncoord   radius</span>
 
@@ -955,15 +1119,16 @@
 <span class="sd">        indexed by the frame number. Each entry is a</span>
 <span class="sd">        :class:`numpy.recarray`.</span>
 
-<span class="sd">        If the keyword *outdir* is supplied (e.g. &quot;.&quot;) then each profile is</span>
+<span class="sd">        If the keyword `outdir` is supplied (e.g. &quot;.&quot;) then each profile is</span>
 <span class="sd">        saved to a gzipped data file.</span>
 
-<span class="sd">        :Keywords:</span>
-<span class="sd">           *run*</span>
-<span class="sd">              identifier, free form [1]</span>
-<span class="sd">           *outdir*</span>
-<span class="sd">              save output data under *outdir*/*run* if set to any other</span>
-<span class="sd">              value but ``None`` [``None``]</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        run : int or string, optional</span>
+<span class="sd">            identifier, free form; default is 1</span>
+<span class="sd">        outdir : string, optional</span>
+<span class="sd">            save output data under `outdir`/`run` if set to any other value but</span>
+<span class="sd">            ``None``; the default is ``None``.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># cenxyz.cvec      radius  cen_line_D sum{s/(area point sourc</span>
@@ -1069,48 +1234,57 @@
 <span class="sd">    The :class:`HOLE` class provides a direct interface to HOLE. HOLE itself</span>
 <span class="sd">    has limited support for analysing trajectories but cannot deal with all the</span>
 <span class="sd">    trajectory formats understood by MDAnalysis. This class can take any</span>
-<span class="sd">    universe and feed it to HOLE. By default it sequentially creates a PDB for</span>
+<span class="sd">    universe and feed it to HOLE. It sequentially creates a temporary PDB for</span>
 <span class="sd">    each frame and runs HOLE on the frame.</span>
+
+<span class="sd">    The trajectory can be sliced with the `start`, `stop`, and `step`</span>
+<span class="sd">    keywords. (:program:`hole` is not fast so slicing a trajectory is</span>
+<span class="sd">    recommended.)</span>
+
+<span class="sd">    Frames of the trajectory can be associated with order parameters (e.g.,</span>
+<span class="sd">    RMSD) in order to group the HOLE profiles by order parameter (see the</span>
+<span class="sd">    `orderparameters` keyword).</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set up the class.</span>
+        <span class="sd">&quot;&quot;&quot;Set up the HOLE analysis over a trajectory.</span>
 
-<span class="sd">        :Arguments:</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        universe : :class:`~MDAnalysis.core.AtomGroup.Universe`</span>
+<span class="sd">             The input trajectory is taken from a</span>
+<span class="sd">             :class:`~MDAnalysis.core.AtomGroup.Universe`. The trajectory is</span>
+<span class="sd">             converted to a sequence of PDB files and :class:`HOLE` is run on</span>
+<span class="sd">             each individual file.</span>
+<span class="sd">        orderparameters : array_like or string, optional</span>
+<span class="sd">             Sequence or text file containing order parameters (float</span>
+<span class="sd">             numbers) corresponding to the frames in the trajectory.</span>
+<span class="sd">        start, stop, step : int, optional</span>
+<span class="sd">             slice the trajectory as</span>
+<span class="sd">             ``universe.trajectory[start:stop:step]``. The default is ``None``</span>
+<span class="sd">             so that the whole trajectory is analyzed</span>
+<span class="sd">        selection : string, optional</span>
+<span class="sd">             selection string for</span>
+<span class="sd">             :meth:`~MDAnalysis.core.AtomGroup.Universe.select_atoms` to select</span>
+<span class="sd">             the group of atoms that is to be analysed by HOLE. The default is</span>
+<span class="sd">             &quot;protein&quot; to include all protein residues.</span>
+<span class="sd">        cpoint : bool or array_like, optional</span>
+<span class="sd">             Point inside the pore to start the HOLE search procedure. The</span>
+<span class="sd">             default is ``None`` to select HOLE&#39;s internal search procedure.</span>
 
-<span class="sd">          *universe*</span>
-<span class="sd">               The input trajectory as part of a</span>
-<span class="sd">               :class:`~MDAnalysis.core.AtomGroup.Universe`. trajectory is</span>
-<span class="sd">               converted to a sequence of PDB files and HOLE is run on each</span>
-<span class="sd">               individual file. (Use the *start*, *stop*, and *step* keywords</span>
-<span class="sd">               to slice the trajectory.)</span>
+<span class="sd">             If set to ``True`` then *cpoint* is guessed as the</span>
+<span class="sd">             :meth:`~MDAnalysis.core.AtomGroup.AtomGroup.center_of_geometry` of</span>
+<span class="sd">             the `selection` from the first frame of the trajectory.</span>
 
-<span class="sd">          *orderparameters*</span>
-<span class="sd">               Sequence or text file with list of numbers corresponding to the</span>
-<span class="sd">               frames in the trajectory.</span>
-
-<span class="sd">          *start*, *stop*, *step*</span>
-<span class="sd">               frame indices to slice the trajectory as</span>
-<span class="sd">               ``universe.trajectory[start, stop, step]``</span>
-
-<span class="sd">          *selection*</span>
-<span class="sd">               selection string for :meth:`~MDAnalysis.core.AtomGroup.Universe.select_atoms` to select</span>
-<span class="sd">               the group of atoms that is to be analysed by HOLE [&quot;protein&quot;]</span>
-
-<span class="sd">          *cpoint*</span>
-<span class="sd">               Point inside the pore.</span>
-
-<span class="sd">               If set to ``True`` then *cpoint* is guessed as the</span>
-<span class="sd">               :meth:`~MDAnalysis.core.AtomGroup.AtomGroup.center_of_geometry` of</span>
-<span class="sd">               the *selection* from the first frame of the trajectory.</span>
-
-<span class="sd">               If *cpoint* is not set or set to ``None`` then HOLE guesses it</span>
-<span class="sd">               with its own algorithm (for each individual frame). [``None``]</span>
-
-<span class="sd">          *kwargs*</span>
-<span class="sd">               All other keywords are passed on to :class:`HOLE` (see there for description).</span>
+<span class="sd">             If `cpoint` is not set or set to ``None`` then HOLE guesses it</span>
+<span class="sd">             with its own algorithm (for each individual frame).</span>
+<span class="sd">        kwargs : `**kwargs`</span>
+<span class="sd">             All other keywords are passed on to :class:`HOLE` (see there for</span>
+<span class="sd">             description).</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">universe</span> <span class="o">=</span> <span class="n">universe</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">selection</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;selection&quot;</span><span class="p">,</span> <span class="s2">&quot;protein&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">orderparametersfile</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;orderparameters&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
@@ -1130,26 +1304,30 @@
         <span class="c1"># processing</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">orderparameters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_orderparameters</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">orderparametersfile</span><span class="p">)</span>
 
-<div class="viewcode-block" id="HOLEtraj.guess_cpoint"><a class="viewcode-back" href="../../../documentation_pages/analysis/hole.html#MDAnalysis.analysis.hole.HOLEtraj.guess_cpoint">[docs]</a>    <span class="k">def</span> <span class="nf">guess_cpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="HOLEtraj.guess_cpoint"><a class="viewcode-back" href="../../../documentation_pages/analysis/hole.html#MDAnalysis.analysis.hole.HOLEtraj.guess_cpoint">[docs]</a>    <span class="k">def</span> <span class="nf">guess_cpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selection</span><span class="o">=</span><span class="s2">&quot;protein&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Guess a point inside the pore.</span>
 
-<span class="sd">        This method simply uses the center of geometry of the protein selection</span>
-<span class="sd">        as a guess. *selection* is &quot;protein&quot; by default.</span>
+<span class="sd">        This method simply uses the center of geometry of the selection as a</span>
+<span class="sd">        guess. `selection` is &quot;protein&quot; by default.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;selection&quot;</span><span class="p">,</span> <span class="s2">&quot;protein&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">center_of_geometry</span><span class="p">()</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="n">selection</span><span class="p">)</span><span class="o">.</span><span class="n">center_of_geometry</span><span class="p">()</span></div>
 
     <span class="k">def</span> <span class="nf">_process_orderparameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Read orderparameters from *data*</span>
+        <span class="sd">&quot;&quot;&quot;Read orderparameters.</span>
 
-<span class="sd">        * If *data* is a string: Read orderparameters from *filename*.</span>
-<span class="sd">        * If data is a array/list: use as is</span>
-<span class="sd">        * If ``None``: assign frame numbers from trajectory</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : string or array_like or ``None``</span>
+<span class="sd">           * string: Read orderparameters from *filename*.</span>
+<span class="sd">           * array/list: use as is</span>
+<span class="sd">           * ``None``: assign frame numbers from trajectory</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">string_types</span><span class="p">):</span>
             <span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">data</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="c1"># frame numbers</span>
-            <span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">n_frames</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="c1"># frame numbers (starting with 0, convention in MDAnalysis &gt;= 0.11.0)</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">n_frames</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
@@ -1165,7 +1343,7 @@
 <div class="viewcode-block" id="HOLEtraj.run"><a class="viewcode-back" href="../../../documentation_pages/analysis/hole.html#MDAnalysis.analysis.hole.HOLEtraj.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Run HOLE on the whole trajectory and collect profiles.</span>
 
-<span class="sd">        Keyword arguments *start*, *stop*, and *step* can be used to only</span>
+<span class="sd">        Keyword arguments `start`, `stop`, and `step` can be used to only</span>
 <span class="sd">        analyse part of the trajectory.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">start</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
