@@ -99,7 +99,7 @@ cartesian axes of the simulation cell. Works only for orthorombic,
 fixed volume cells (thus for simulations in canonical NVT ensemble).</p>
 <dl class="class">
 <dt id="MDAnalysis.analysis.lineardensity.LinearDensity">
-<em class="property">class </em><code class="descclassname">MDAnalysis.analysis.lineardensity.</code><code class="descname">LinearDensity</code><span class="sig-paren">(</span><em>selection</em>, <em>grouping='atoms'</em>, <em>binsize=0.25</em>, <em>start=None</em>, <em>stop=None</em>, <em>step=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/lineardensity.html#LinearDensity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.lineardensity.LinearDensity" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">MDAnalysis.analysis.lineardensity.</code><code class="descname">LinearDensity</code><span class="sig-paren">(</span><em>selection</em>, <em>grouping='atoms'</em>, <em>binsize=0.25</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/lineardensity.html#LinearDensity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.lineardensity.LinearDensity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Linear density profile
 LinearDensity(selection, grouping=&#8217;atoms&#8217;, binsize=0.25)</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -150,12 +150,12 @@ with the name of the trajectory file.</p>
 <dt>description <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
 <dd>An arbitrary description added to the output filename. Can be useful</dd>
 <dt>form <span class="classifier-delimiter">:</span> <span class="classifier">str {&#8216;txt&#8217;, &#8216;npz&#8217;}</span></dt>
-<dd>Format of the output. &#8216;txt&#8217; will generate an ASCII text file while &#8216;npz&#8217;
-will produce a numpy binary file.</dd>
+<dd>Format of the output. &#8216;txt&#8217; will generate an ASCII text file while
+&#8216;npz&#8217; will produce a numpy binary file.</dd>
 </dl>
 <p class="rubric">Example</p>
-<p>After initializing and running a <cite>LinearDensity</cite> object, results can be written
-to file as follows:</p>
+<p>After initializing and running a <cite>LinearDensity</cite> object, results can be
+written to file as follows:</p>
 <blockquote>
 <div>ldens.save(description=&#8217;mydensprof&#8217;, form=&#8217;txt&#8217;)</div></blockquote>
 <p>which will output the linear density profiles in a file named

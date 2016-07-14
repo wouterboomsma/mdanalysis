@@ -76,8 +76,8 @@
 <span class="c1"># vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4</span>
 <span class="c1">#</span>
 <span class="c1"># MDAnalysis --- http://www.MDAnalysis.org</span>
-<span class="c1"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver Beckstein</span>
-<span class="c1"># and contributors (see AUTHORS for the full list)</span>
+<span class="c1"># Copyright (c) 2006-2015 Naveen Michaud-Agrawal, Elizabeth J. Denning, Oliver</span>
+<span class="c1"># Beckstein and contributors (see AUTHORS for the full list)</span>
 <span class="c1">#</span>
 <span class="c1"># Released under the GNU Public Licence, v2 or any higher version</span>
 <span class="c1">#</span>
@@ -98,7 +98,6 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">range</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">MDAnalysis.lib.log</span> <span class="kn">import</span> <span class="n">ProgressMeter</span>
 
@@ -106,39 +105,85 @@
 
 
 <div class="viewcode-block" id="AnalysisBase"><a class="viewcode-back" href="../../../documentation_pages/analysis/base.html#MDAnalysis.analysis.base.AnalysisBase">[docs]</a><span class="k">class</span> <span class="nc">AnalysisBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Base class for defining multi frame analysis</span>
+    <span class="sd">&quot;&quot;&quot;Base class for defining multi frame analysis, it is designed as a</span>
+<span class="sd">    template for creating multiframe analysis. This class will automatically</span>
+<span class="sd">    take care of setting up the trajectory reader for iterating and offers to</span>
+<span class="sd">    show a progress meter.</span>
 
-<span class="sd">    The analysis base class is designed as a template for creating</span>
-<span class="sd">    multiframe analysis.</span>
+<span class="sd">    To define a new Analysis, `AnalysisBase` needs to be subclassed</span>
+<span class="sd">    `_single_frame` must be defined. It is also possible to define</span>
+<span class="sd">    `_prepare` and `_conclude` for pre and post processing. See the example</span>
+<span class="sd">    below.</span>
 
-<span class="sd">    The class implements the following methods:</span>
+<span class="sd">    .. code-block:: python</span>
+<span class="sd">       class NewAnalysis(AnalysisBase):</span>
+<span class="sd">           def __init__(self, atomgroup, parameter, **kwargs):</span>
+<span class="sd">               super(NewAnalysis, self).__init__(atomgroup.universe.trajectory,</span>
+<span class="sd">                                                 **kwargs)</span>
+<span class="sd">               self._parameter = parameter</span>
+<span class="sd">               self._ag = atomgroup</span>
 
-<span class="sd">    _setup_frames(trajectory, start=None, stop=None, step=None)</span>
-<span class="sd">      Pass a Reader object and define the desired iteration pattern</span>
-<span class="sd">      through the trajectory</span>
+<span class="sd">           def _prepare(self):</span>
+<span class="sd">               # OPTIONAL</span>
+<span class="sd">               # Called before iteration on the trajectory has begun.</span>
+<span class="sd">               # Data structures can be set up at this time</span>
+<span class="sd">               self.result = []</span>
 
-<span class="sd">    run</span>
-<span class="sd">      The user facing run method.  Calls the analysis methods</span>
-<span class="sd">      defined below</span>
+<span class="sd">           def _single_frame(self):</span>
+<span class="sd">               # REQUIRED</span>
+<span class="sd">               # Called after the trajectory is moved onto each new frame.</span>
+<span class="sd">               # store result of `some_function` for a single frame</span>
+<span class="sd">               self.result.append(some_function(self._ag, self._parameter))</span>
 
-<span class="sd">    Your analysis can implement the following methods, which are</span>
-<span class="sd">    called from run:</span>
+<span class="sd">           def _conclude(self):</span>
+<span class="sd">               # OPTIONAL</span>
+<span class="sd">               # Called once iteration on the trajectory is finished.</span>
+<span class="sd">               # Apply normalisation and averaging to results here.</span>
+<span class="sd">               self.result = np.asarray(self.result) / np.sum(self.result)</span>
 
-<span class="sd">    _prepare</span>
-<span class="sd">      Called before iteration on the trajectory has begun.</span>
-<span class="sd">      Data structures can be set up at this time, however most</span>
-<span class="sd">      error checking should be done in the __init__</span>
+<span class="sd">    Afterwards the new analysis can be run like this.</span>
 
-<span class="sd">    _single_frame</span>
-<span class="sd">      Called after the trajectory is moved onto each new frame.</span>
-
-<span class="sd">    _conclude</span>
-<span class="sd">      Called once iteration on the trajectory is finished.</span>
-<span class="sd">      Apply normalisation and averaging to results here.</span>
+<span class="sd">    .. code-block:: python</span>
+<span class="sd">       na = NewAnalysis(u.select_atoms(&#39;name CA&#39;), 35).run()</span>
+<span class="sd">       print(na.result)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trajectory</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">stop</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        trajectory : mda.Reader</span>
+<span class="sd">            A trajectory Reader</span>
+<span class="sd">        start : int, optional</span>
+<span class="sd">            start frame of analysis</span>
+<span class="sd">        stop : int, optional</span>
+<span class="sd">            stop frame of analysis</span>
+<span class="sd">        step : int, optional</span>
+<span class="sd">            number of frames to skip between each analysed frame</span>
+<span class="sd">        quiet : bool, optional</span>
+<span class="sd">            Turn off verbosity</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_quiet</span> <span class="o">=</span> <span class="n">quiet</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_setup_frames</span><span class="p">(</span><span class="n">trajectory</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+
     <span class="k">def</span> <span class="nf">_setup_frames</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trajectory</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                       <span class="n">stop</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Pass a Reader object and define the desired iteration pattern</span>
+<span class="sd">        through the trajectory</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        trajectory : mda.Reader</span>
+<span class="sd">            A trajectory Reader</span>
+<span class="sd">        start : int, optional</span>
+<span class="sd">            start frame of analysis</span>
+<span class="sd">        stop : int, optional</span>
+<span class="sd">            stop frame of analysis</span>
+<span class="sd">        step : int, optional</span>
+<span class="sd">            number of frames to skip between each analysed frame</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_trajectory</span> <span class="o">=</span> <span class="n">trajectory</span>
         <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="n">trajectory</span><span class="o">.</span><span class="n">check_slice_indices</span><span class="p">(</span>
             <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
@@ -146,13 +191,23 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">stop</span> <span class="o">=</span> <span class="n">stop</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">step</span> <span class="o">=</span> <span class="n">step</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">))</span>
+        <span class="n">interval</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span> <span class="o">//</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">interval</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">interval</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="c1"># ensure _quiet is set when __init__ wasn&#39;t called, this is to not</span>
+        <span class="c1"># break pre 0.16.0 API usage of AnalysisBase</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_quiet&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_quiet</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pm</span> <span class="o">=</span> <span class="n">ProgressMeter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span> <span class="k">else</span> <span class="mi">1</span><span class="p">,</span>
+                                 <span class="n">interval</span><span class="o">=</span><span class="n">interval</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_quiet</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_single_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Calculate data from a single frame of trajectory</span>
 
 <span class="sd">        Don&#39;t worry about normalising, just deal with a single frame.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Only implemented in child classes&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set things up before the analysis loop begins&quot;&quot;&quot;</span>
@@ -165,7 +220,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span>
 
-<div class="viewcode-block" id="AnalysisBase.run"><a class="viewcode-back" href="../../../documentation_pages/analysis/base.html#MDAnalysis.analysis.base.AnalysisBase.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="AnalysisBase.run"><a class="viewcode-back" href="../../../documentation_pages/analysis/base.html#MDAnalysis.analysis.base.AnalysisBase.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Perform the calculation&quot;&quot;&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Starting preparation&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_prepare</span><span class="p">()</span>
@@ -175,8 +230,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_ts</span> <span class="o">=</span> <span class="n">ts</span>
             <span class="c1"># logger.info(&quot;--&gt; Doing frame {} of {}&quot;.format(i+1, self.n_frames))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_single_frame</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pm</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frame_index</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Finishing up&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_conclude</span><span class="p">()</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_conclude</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span></div></div>
 </pre></div>
 
           </div>
