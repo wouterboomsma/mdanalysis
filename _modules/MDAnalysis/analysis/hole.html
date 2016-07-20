@@ -97,7 +97,7 @@
 
 <span class="sd">With the help of this module, the :program:`hole` program from the HOLE_ suite</span>
 <span class="sd">of tools [Smart1993]_ [Smart1996]_ can be run on frames in a trajectory. Data</span>
-<span class="sd">can be combined and analyzed.  </span>
+<span class="sd">can be combined and analyzed.</span>
 
 
 <span class="sd">HOLE_ must be installed separately and can be obtained in binary form from</span>
@@ -144,10 +144,10 @@
 <span class="sd">:class:`HOLEtraj`. In this case, provide a</span>
 <span class="sd">:class:`~MDAnalysis.core.AtomGroup.Universe`::</span>
 
-<span class="sd">   import MDAnalysis as mda   </span>
+<span class="sd">   import MDAnalysis as mda</span>
 <span class="sd">   from MDAnalysis.analysis.hole import HOLEtraj</span>
 <span class="sd">   from MDAnalysis.tests.datafiles import MULTIPDB_HOLE</span>
-<span class="sd">   </span>
+
 <span class="sd">   u = mda.Universe(MULTIPDB_HOLE)</span>
 <span class="sd">   H = HOLEtraj(u, executable=&quot;~/hole2/exe/hole&quot;)</span>
 <span class="sd">   H.run()</span>
@@ -173,17 +173,17 @@
 <span class="sd">   from MDAnalysis.analysis.rms import RMSD</span>
 
 <span class="sd">   from MDAnalysis.tests.datafiles import PDB_HOLE, MULTIPDB_HOLE</span>
-<span class="sd">   </span>
+
 <span class="sd">   mda.start_logging()</span>
 <span class="sd">   ref = mda.Universe(PDB_HOLE)    # reference structure</span>
 <span class="sd">   u = mda.Universe(MULTIPDB_HOLE) # trajectory</span>
-<span class="sd">   </span>
+
 <span class="sd">   # calculate RMSD</span>
 <span class="sd">   R = RMSD(u, reference=ref, select=&quot;protein&quot;, mass_weighted=True)</span>
 <span class="sd">   R.run()</span>
-<span class="sd">   </span>
+
 <span class="sd">   # HOLE analysis with order parameters</span>
-<span class="sd">   H = HOLEtraj(u, orderparameters=R.rmsd[:,2], </span>
+<span class="sd">   H = HOLEtraj(u, orderparameters=R.rmsd[:,2],</span>
 <span class="sd">                executable=&quot;~/hole2/exe/hole&quot;)</span>
 <span class="sd">   H.run()</span>
 
@@ -195,7 +195,7 @@
 <span class="sd">minimum radius as function of order parameter</span>
 
 <span class="sd">.. math::</span>
-<span class="sd"> </span>
+
 <span class="sd">   r(\rho) = \min_\zeta R_\rho(\zeta)</span>
 
 <span class="sd">we iterate over the profiles and process them in turn::</span>
@@ -255,7 +255,7 @@
 <span class="sd">      frame was analyzed then this will be ``HOLE.profiles[0]``. Note</span>
 <span class="sd">      that the order is random; one needs to sort the keys first.</span>
 
-<span class="sd">      .. Note:: </span>
+<span class="sd">      .. Note::</span>
 <span class="sd">         Duplicate keys are not possible. The last key overwrites</span>
 <span class="sd">         previous values. This is arguably a bug.</span>
 
@@ -270,7 +270,7 @@
 <span class="sd">      parameter (if *orderparameters* was supplied). Note that the</span>
 <span class="sd">      order is random; one needs to sort the keys first.</span>
 
-<span class="sd">      .. Note:: </span>
+<span class="sd">      .. Note::</span>
 <span class="sd">         Duplicate keys are not possible. The last key overwrites</span>
 <span class="sd">         previous values. This is arguably a bug.</span>
 
@@ -383,7 +383,7 @@
 
 <span class="sd">    Does nothing if `filename` already exists.</span>
 
-<span class="sd">    Parameters </span>
+<span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    filename : string, optional</span>
 <span class="sd">       output file name; the default is &quot;simple2.rad&quot;</span>
@@ -456,7 +456,7 @@
         <span class="n">color</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;color&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">color</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">cmap</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;cmap&#39;</span><span class="p">,</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">viridis</span><span class="p">)</span>
-            <span class="n">normalize</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">frames</span><span class="p">),</span> 
+            <span class="n">normalize</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">colors</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">frames</span><span class="p">),</span>
                                                     <span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">frames</span><span class="p">))</span>
             <span class="n">colors</span> <span class="o">=</span> <span class="n">cmap</span><span class="p">(</span><span class="n">normalize</span><span class="p">(</span><span class="n">frames</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
@@ -488,7 +488,7 @@
 <span class="sd">        yshift : float, optional</span>
 <span class="sd">              displace each :math:`R(\zeta)` profile by `yshift` in the</span>
 <span class="sd">              :math:`y`-direction for clearer visualization. The default is 0,</span>
-<span class="sd">              i.e., not to shift any graph.        </span>
+<span class="sd">              i.e., not to shift any graph.</span>
 <span class="sd">        frames : integer or array_like, optional</span>
 <span class="sd">              only plot these specific frame(s); the default ``None`` is to</span>
 <span class="sd">              plot everything (see also `step`)</span>
@@ -619,7 +619,7 @@
         <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">r&quot;pore coordinate $\zeta$ ($\AA$)&quot;</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s2">r&quot;HOLE radius $R$ ($\AA$)&quot;</span><span class="p">)</span>
-        
+
         <span class="k">return</span> <span class="n">ax</span>
 
     <span class="k">def</span> <span class="nf">min_radius</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1089,27 +1089,37 @@
         <span class="n">fd</span><span class="p">,</span> <span class="n">tmp_sos</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkstemp</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;.sos&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
         <span class="n">os</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">rc</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">([</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">exe</span><span class="p">[</span><span class="s2">&quot;sph_process&quot;</span><span class="p">],</span> <span class="s2">&quot;-sos&quot;</span><span class="p">,</span> <span class="s2">&quot;-dotden&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;dotden&#39;</span><span class="p">]),</span>
-                <span class="s2">&quot;-color&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sphpdb</span><span class="p">,</span> <span class="n">tmp_sos</span><span class="p">])</span>
-            <span class="k">if</span> <span class="n">rc</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s2">&quot;sph_process failed (</span><span class="si">%d</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">rc</span><span class="p">)</span>
-                <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="n">rc</span><span class="p">,</span> <span class="s2">&quot;sph_process failed&quot;</span><span class="p">)</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">tmp_sos</span><span class="p">)</span> <span class="k">as</span> <span class="n">sos</span><span class="p">:</span>
-                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">triangles</span><span class="p">:</span>
-                    <span class="n">rc</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">exe</span><span class="p">[</span><span class="s2">&quot;sos_triangle&quot;</span><span class="p">],</span> <span class="s2">&quot;-s&quot;</span><span class="p">],</span> <span class="n">stdin</span><span class="o">=</span><span class="n">sos</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">triangles</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">rc</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s2">&quot;sos_triangle failed (</span><span class="si">%d</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">rc</span><span class="p">)</span>
-                <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="n">rc</span><span class="p">,</span> <span class="s2">&quot;sos_triangle failed&quot;</span><span class="p">)</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">exe</span><span class="p">[</span><span class="s2">&quot;sph_process&quot;</span><span class="p">],</span> <span class="s2">&quot;-sos&quot;</span><span class="p">,</span> <span class="s2">&quot;-dotden&quot;</span><span class="p">,</span>
+                                              <span class="nb">str</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;dotden&#39;</span><span class="p">]),</span> <span class="s2">&quot;-color&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sphpdb</span><span class="p">,</span>
+                                              <span class="n">tmp_sos</span><span class="p">],</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">STDOUT</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">tmp_sos</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s2">&quot;sph_process failed ({0})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err</span><span class="o">.</span><span class="n">returncode</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="n">err</span><span class="o">.</span><span class="n">returncode</span><span class="p">,</span> <span class="s2">&quot;sph_process failed&quot;</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">tmp_sos</span><span class="p">)</span>
             <span class="k">raise</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Could check: os.devnull if subprocess.DEVNULL not available (&gt;3.3)</span>
+            <span class="c1"># Suppress stderr messages of sos_triangle</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">tmp_sos</span><span class="p">)</span> <span class="k">as</span> <span class="n">sos</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">triangles</span><span class="p">,</span> \
+                 <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">devnull</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">FNULL</span><span class="p">:</span>
+                <span class="n">subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">(</span>
+                    <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">exe</span><span class="p">[</span><span class="s2">&quot;sos_triangle&quot;</span><span class="p">],</span> <span class="s2">&quot;-s&quot;</span><span class="p">],</span> <span class="n">stdin</span><span class="o">=</span><span class="n">sos</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">triangles</span><span class="p">,</span>
+                    <span class="n">stderr</span><span class="o">=</span><span class="n">FNULL</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s2">&quot;sos_triangle failed ({0})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err</span><span class="o">.</span><span class="n">returncode</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="n">err</span><span class="o">.</span><span class="n">returncode</span><span class="p">,</span> <span class="s2">&quot;sos_triangle failed&quot;</span><span class="p">)</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">tmp_sos</span><span class="p">)</span>
+
         <span class="k">return</span> <span class="n">filename</span></div>
 
 <div class="viewcode-block" id="HOLE.collect"><a class="viewcode-back" href="../../../documentation_pages/analysis/hole.html#MDAnalysis.analysis.hole.HOLE.collect">[docs]</a>    <span class="k">def</span> <span class="nf">collect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Parse the output from a :class:`HOLE` run into numpy recarrays.</span>
 
-<span class="sd">        It can process outputs containing multiple frames (when a DCD was supplied to :program:`hole`). </span>
+<span class="sd">        It can process outputs containing multiple frames (when a DCD was supplied to :program:`hole`).</span>
 
 <span class="sd">        Output format::</span>
 
