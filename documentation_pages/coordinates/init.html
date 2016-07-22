@@ -573,13 +573,19 @@ implementation example.</p>
 <div><dl class="docutils">
 <dt><code class="docutils literal"><span class="pre">__init__(filename,</span> <span class="pre">**kwargs)</span></code></dt>
 <dd><p class="first">open <em>filename</em>; other <em>kwargs</em> are processed as needed and the
-Reader is free to ignore them. Typically, MDAnalysis supplies as
-much information as possible to the Reader in <cite>kwargs</cite>; at the moment the
-following data are supplied in keywords when a trajectory is loaded from
-within <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code>:</p>
+Reader is free to ignore them. Typically, when MDAnalysis creates
+a Reader from <code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.Universe</span></code> it supplies as much
+information as possible in <cite>kwargs</cite>; at the moment the following
+data are supplied:</p>
 <blockquote class="last">
-<div><ul class="simple">
-<li><em>n_atoms</em>: the number of atoms (known from the topology)</li>
+<div><ul>
+<li><dl class="first docutils">
+<dt><em>n_atoms</em>: the number of atoms from the supplied topology.  This is</dt>
+<dd><p class="first last">not required for all readers and can be ignored if not
+required.</p>
+</dd>
+</dl>
+</li>
 </ul>
 </div></blockquote>
 </dd>
