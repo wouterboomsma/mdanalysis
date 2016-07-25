@@ -189,18 +189,24 @@
     <span class="sd">&quot;&quot;&quot;Take a box input and deduce what type of system it represents based</span>
 <span class="sd">    on the shape of the array and whether all angles are 90.</span>
 
-<span class="sd">    :Arguments:</span>
-<span class="sd">      *box*</span>
-<span class="sd">          box information of unknown format</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    box : array</span>
+<span class="sd">        Box information of unknown format.</span>
 
-<span class="sd">    :Returns:</span>
-<span class="sd">      * ``ortho`` orthogonal box</span>
-<span class="sd">      * ``tri_vecs`` triclinic box vectors</span>
-<span class="sd">      * ``tri_box`` triclinic box lengths and angles</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    boxtype : str</span>
+<span class="sd">        * ``ortho`` orthogonal box</span>
+<span class="sd">        * ``tri_vecs`` triclinic box vectors</span>
+<span class="sd">        * ``tri_box`` triclinic box lengths and angles</span>
 
-<span class="sd">    :Raises:</span>
-<span class="sd">      * ``TypeError`` if box is not float32</span>
-<span class="sd">      * ``ValueError`` if box type not detected</span>
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If box is not float32.</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If box type not detected.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">box</span><span class="o">.</span><span class="n">dtype</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Box must be of type float32&quot;</span><span class="p">)</span>
@@ -277,34 +283,38 @@
 <span class="sd">    len(configuration))`` is provided in *result* then this preallocated array is</span>
 <span class="sd">    filled. This can speed up calculations.</span>
 
-<span class="sd">    d = distance_array(reference, configuration[,box[,result=d]])</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    reference : numpy.array of numpy.float32</span>
+<span class="sd">        Reference coordinate array.</span>
+<span class="sd">    configuration : numpy.array of numpy.float32</span>
+<span class="sd">        Configuration coordinate array.</span>
+<span class="sd">    box : numpy.array or None</span>
+<span class="sd">        Dimensions of the cell; if provided, the minimum image convention is</span>
+<span class="sd">        applied. The dimensions must be provided in the same format as returned</span>
+<span class="sd">        by by :attr:`MDAnalysis.coordinates.base.Timestep.dimensions`: ``[lx,</span>
+<span class="sd">        ly, lz, alpha, beta, gamma]``.</span>
+<span class="sd">    result : numpy.array of numpy.float64, optional</span>
+<span class="sd">        Preallocated result array which must have the</span>
+<span class="sd">        shape ``(len(ref), len(conf))`` and ``dtype=numpy.float64``.</span>
+<span class="sd">        Avoids creating the array which saves time when the function</span>
+<span class="sd">        is called repeatedly. [``None``]</span>
+<span class="sd">    backend</span>
+<span class="sd">        Select the type of acceleration; &quot;serial&quot; is always available. Other</span>
+<span class="sd">        possibilities are &quot;OpenMP&quot; (OpenMP).</span>
 
-<span class="sd">    :Arguments:</span>
-<span class="sd">        *reference*</span>
-<span class="sd">             reference coordinate array (must be numpy.float32)</span>
-<span class="sd">        *configuration*</span>
-<span class="sd">             configuration coordinate array (must be numpy.float32)</span>
-<span class="sd">        *box*</span>
-<span class="sd">             cell dimensions (minimum image convention is applied)</span>
-<span class="sd">             or None [``None``].</span>
-<span class="sd">             Cell dimensions must be in an identical to format to those returned</span>
-<span class="sd">             by :attr:`MDAnalysis.coordinates.base.Timestep.dimensions`,</span>
-<span class="sd">             [lx, ly, lz, alpha, beta, gamma]</span>
-<span class="sd">        *result*</span>
-<span class="sd">             optional preallocated result array which must have the</span>
-<span class="sd">             shape (len(ref), len(conf)) and dtype=numpy.float64.</span>
-<span class="sd">             Avoids creating the array which saves time when the function</span>
-<span class="sd">             is called repeatedly. [``None``]</span>
-<span class="sd">        *backend*</span>
-<span class="sd">             select the type of acceleration; &quot;serial&quot; is always available. Other</span>
-<span class="sd">             possibilities are &quot;OpenMP&quot; (OpenMP).</span>
-<span class="sd">    :Returns:</span>
-<span class="sd">         *d*</span>
-<span class="sd">             (len(reference),len(configuration)) numpy array with the distances d[i,j]</span>
-<span class="sd">             between reference coordinates i and configuration coordinates j</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    d : numpy.array</span>
+<span class="sd">        ``(len(reference),len(configuration))`` numpy array with the distances</span>
+<span class="sd">        ``d[i,j]`` between reference coordinates `i` and configuration</span>
+<span class="sd">        coordinates `j`.</span>
 
-<span class="sd">    .. Note:: This method is slower than it could be because internally we need to</span>
-<span class="sd">              make copies of the ref and conf arrays.</span>
+<span class="sd">    Note</span>
+<span class="sd">    ----</span>
+<span class="sd">    This method is slower than it could be because internally we need to make</span>
+<span class="sd">    copies of the ref and conf arrays.</span>
+
 
 <span class="sd">    .. versionchanged:: 0.13.0</span>
 <span class="sd">       Added *backend* keyword.</span>
@@ -359,35 +369,42 @@
 <span class="sd">    ``(N*(N-1)/2)`` is provided in *result* then this preallocated array</span>
 <span class="sd">    is filled. This can speed up calculations.</span>
 
-<span class="sd">    :Arguments:</span>
-<span class="sd">        *ref*</span>
-<span class="sd">             reference coordinate array with N=len(ref) coordinates</span>
-<span class="sd">        *box*</span>
-<span class="sd">             cell dimensions (minimum image convention is applied)</span>
-<span class="sd">             or None [``None``]</span>
-<span class="sd">             Cell dimensions must be in an identical to format to those returned</span>
-<span class="sd">             by :attr:`MDAnalysis.coordinates.base.Timestep.dimensions`,</span>
-<span class="sd">             [lx, ly, lz, alpha, beta, gamma]</span>
-<span class="sd">        *result*</span>
-<span class="sd">             optional preallocated result array which must have the shape</span>
-<span class="sd">             (N*(N-1)/2,) and dtype ``numpy.float64``. Avoids creating</span>
-<span class="sd">             the array which saves time when the function is called</span>
-<span class="sd">             repeatedly. [``None``]</span>
-<span class="sd">        *backend*</span>
-<span class="sd">             select the type of acceleration; &quot;serial&quot; is always available. Other</span>
-<span class="sd">             possibilities are &quot;OpenMP&quot; (OpenMP).</span>
-<span class="sd">    :Returns:</span>
-<span class="sd">        *d*</span>
-<span class="sd">             N*(N-1)/2 numpy 1D array with the distances dist[i,j] between ref</span>
-<span class="sd">             coordinates i and j at position d[k]. Loop through d::</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    reference : array</span>
+<span class="sd">        Reference coordinate array with ``N=len(ref)`` coordinates.</span>
+<span class="sd">    box : array or None</span>
+<span class="sd">        Dimensions of the cell; if provided, the minimum image convention is</span>
+<span class="sd">        applied. The dimensions must be provided in the same format as returned</span>
+<span class="sd">        by :attr:`MDAnalysis.coordinates.base.Timestep.dimensions`: ``[lx,</span>
+<span class="sd">        ly, lz, alpha, beta, gamma]``.</span>
+<span class="sd">    result : array, optional</span>
+<span class="sd">        Preallocated result array which must have the shape</span>
+<span class="sd">        ``(N*(N-1)/2,)`` and dtype ``numpy.float64``. Avoids creating</span>
+<span class="sd">        the array which saves time when the function is called</span>
+<span class="sd">        repeatedly. [``None``]</span>
+<span class="sd">    backend</span>
+<span class="sd">        Select the type of acceleration; &quot;serial&quot; is always available. Other</span>
+<span class="sd">        possibilities are &quot;OpenMP&quot; (OpenMP).</span>
 
-<span class="sd">                 for i in range(N):</span>
-<span class="sd">                     for j in range(i+1, N):</span>
-<span class="sd">                         k += 1</span>
-<span class="sd">                         dist[i,j] = d[k]</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    d : array</span>
+<span class="sd">        ``N*(N-1)/2`` numpy 1D array with the distances dist[i,j] between ref</span>
+<span class="sd">        coordinates i and j at position d[k]. Loop through d:</span>
 
-<span class="sd">    .. Note:: This method is slower than it could be because internally we need to</span>
-<span class="sd">              make copies of the coordinate arrays.</span>
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            for i in range(N):</span>
+<span class="sd">                for j in range(i+1, N):</span>
+<span class="sd">                    k += 1</span>
+<span class="sd">                    dist[i,j] = d[k]</span>
+
+<span class="sd">    Note</span>
+<span class="sd">    ----</span>
+<span class="sd">    This method is slower than it could be because internally we need to make</span>
+<span class="sd">    copies of the coordinate arrays.</span>
+
 
 <span class="sd">    .. versionchanged:: 0.13.0</span>
 <span class="sd">       Added *backend* keyword.</span>
@@ -438,21 +455,23 @@
 
 <span class="sd">    Reciprocal operation to :meth:`transform_StoR`</span>
 
-<span class="sd">    :Arguments:</span>
-<span class="sd">      *inputcoords*</span>
-<span class="sd">          An n x 3 array of coordinate data, of type np.float32</span>
-<span class="sd">      *box*</span>
-<span class="sd">          The unitcell dimesions for this system</span>
-<span class="sd">          Cell dimensions must be in an identical to format to those returned</span>
-<span class="sd">          by :attr:`MDAnalysis.coordinates.base.Timestep.dimensions`,</span>
-<span class="sd">          [lx, ly, lz, alpha, beta, gamma]</span>
-<span class="sd">      *backend*</span>
-<span class="sd">          select the type of acceleration; &quot;serial&quot; is always available. Other</span>
-<span class="sd">          possibilities are &quot;OpenMP&quot; (OpenMP).</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    inputcoords : array</span>
+<span class="sd">        A n x 3 array of coordinate data, of type ``np.float32``.</span>
+<span class="sd">    box : array</span>
+<span class="sd">        The unitcell dimesions for this system.</span>
+<span class="sd">        The dimensions must be provided in the same format as returned</span>
+<span class="sd">        by :attr:`MDAnalysis.coordinates.base.Timestep.dimensions`: ``[lx,</span>
+<span class="sd">        ly, lz, alpha, beta, gamma]``.</span>
+<span class="sd">    backend</span>
+<span class="sd">        Select the type of acceleration; &quot;serial&quot; is always available. Other</span>
+<span class="sd">        possibilities are &quot;OpenMP&quot; (OpenMP).</span>
 
-<span class="sd">    :Returns:</span>
-<span class="sd">       *outcoords*</span>
-<span class="sd">          An n x 3 array of fractional coordiantes</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    outcoords : array</span>
+<span class="sd">        A n x 3 array of fractional coordiantes.</span>
 
 <span class="sd">    .. versionchanged:: 0.13.0</span>
 <span class="sd">       Added *backend* keyword.</span>
@@ -489,21 +508,24 @@
 
 <span class="sd">    Reciprocal operation to :meth:`transform_RtoS`</span>
 
-<span class="sd">    :Arguments:</span>
-<span class="sd">      *inputcoords*</span>
-<span class="sd">           An n x 3 array of coordinate data, of type np.float32</span>
-<span class="sd">      *box*</span>
-<span class="sd">           The unitcell dimesions for this system</span>
-<span class="sd">           Cell dimensions must be in an identical to format to those returned</span>
-<span class="sd">           by :attr:`MDAnalysis.coordinates.base.Timestep.dimensions`,</span>
-<span class="sd">           [lx, ly, lz, alpha, beta, gamma]</span>
-<span class="sd">      *backend*</span>
-<span class="sd">          select the type of acceleration; &quot;serial&quot; is always available. Other</span>
-<span class="sd">          possibilities are &quot;OpenMP&quot; (OpenMP).</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    inputcoords : array</span>
+<span class="sd">        A n x 3 array of coordinate data, of type np.float32</span>
+<span class="sd">    box : array</span>
+<span class="sd">        The unitcell dimesions for this system.</span>
+<span class="sd">        The dimensions must be provided in the same format as returned</span>
+<span class="sd">        by :attr:`MDAnalysis.coordinates.base.Timestep.dimensions`: ``[lx,</span>
+<span class="sd">        ly, lz, alpha, beta, gamma]``.</span>
+<span class="sd">    backend</span>
+<span class="sd">        Select the type of acceleration; &quot;serial&quot; is always available. Other</span>
+<span class="sd">        possibilities are &quot;OpenMP&quot; (OpenMP).</span>
 
-<span class="sd">    :Returns:</span>
-<span class="sd">       *outcoords*</span>
-<span class="sd">            An n x 3 array of fracional coordiantes</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    outcoords : array</span>
+<span class="sd">        A n x 3 array of fracional coordiantes.</span>
+
 
 <span class="sd">    .. versionchanged:: 0.13.0</span>
 <span class="sd">       Added *backend* keyword.</span>
@@ -547,27 +569,30 @@
 
 <span class="sd">    bondlengths = calc_bonds(coords1, coords2 [, box [,result=bondlengths]])</span>
 
-<span class="sd">    :Arguments:</span>
-<span class="sd">       *coords1*</span>
-<span class="sd">          An array of coordinates for one half of the bond</span>
-<span class="sd">       *coords2*</span>
-<span class="sd">          An array of coordinates for the other half of bond</span>
-<span class="sd">       *box*</span>
-<span class="sd">          Unit cell information if periodic boundary conditions are required [None]</span>
-<span class="sd">          Cell dimensions must be in an identical to format to those returned</span>
-<span class="sd">          by :attr:`MDAnalysis.coordinates.base.Timestep.dimensions`,</span>
-<span class="sd">          [lx, ly, lz, alpha, beta, gamma]</span>
-<span class="sd">       *result*</span>
-<span class="sd">          optional preallocated result array which must be same length as coord</span>
-<span class="sd">          arrays and dtype=numpy.float64. Avoids creating the</span>
-<span class="sd">          array which saves time when the function is called repeatedly. [None]</span>
-<span class="sd">       *backend*</span>
-<span class="sd">          select the type of acceleration; &quot;serial&quot; is always available. Other</span>
-<span class="sd">          possibilities are &quot;OpenMP&quot; (OpenMP).</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    coords1 : array</span>
+<span class="sd">        An array of coordinates for one half of the bond.</span>
+<span class="sd">    coords2 : array</span>
+<span class="sd">        An array of coordinates for the other half of bond</span>
+<span class="sd">    box : array</span>
+<span class="sd">        The unitcell dimesions for this system.</span>
+<span class="sd">        The dimensions must be provided in the same format as returned</span>
+<span class="sd">        by :attr:`MDAnalysis.coordinates.base.Timestep.dimensions`: ``[lx,</span>
+<span class="sd">        ly, lz, alpha, beta, gamma]``.</span>
+<span class="sd">    result : array, optional</span>
+<span class="sd">        Preallocated result array which must be same length as coord</span>
+<span class="sd">        arrays and ``dtype=numpy.float64``. Avoids creating the</span>
+<span class="sd">        array which saves time when the function is called repeatedly. [None]</span>
+<span class="sd">    backend</span>
+<span class="sd">        Select the type of acceleration; &quot;serial&quot; is always available. Other</span>
+<span class="sd">        possibilities are &quot;OpenMP&quot; (OpenMP).</span>
 
-<span class="sd">    :Returns:</span>
-<span class="sd">       *bondlengths*</span>
-<span class="sd">          numpy array with the length between each pair in coords1 and coords2</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bondlengths : array</span>
+<span class="sd">        The length between each pair in coords1 and coords2</span>
+
 
 <span class="sd">    .. versionadded:: 0.8</span>
 <span class="sd">    .. versionchanged:: 0.13.0</span>
@@ -629,30 +654,32 @@
 
 <span class="sd">    angles = calc_angles(coords1, coords2, coords3, [[box=None],result=angles])</span>
 
-<span class="sd">    :Arguments:</span>
-<span class="sd">        *coords1*</span>
-<span class="sd">            coordinate array of one side of angles</span>
-<span class="sd">        *coords2*</span>
-<span class="sd">            coordinate array of apex of angles</span>
-<span class="sd">        *coords3*</span>
-<span class="sd">            coordinate array of other side of angles</span>
-<span class="sd">        *box*</span>
-<span class="sd">            optional unit cell information.  This ensures that the connecting vectors between</span>
-<span class="sd">            atoms respect minimum image convention.  This is import when the angle might</span>
-<span class="sd">            be between atoms in different images.</span>
-<span class="sd">            Cell dimensions must be in an identical to format to those returned</span>
-<span class="sd">            by :attr:`MDAnalysis.coordinates.base.Timestep.dimensions`,</span>
-<span class="sd">            [lx, ly, lz, alpha, beta, gamma]</span>
-<span class="sd">        *result*</span>
-<span class="sd">            optional preallocated results array which must have same length as coordinate</span>
-<span class="sd">            array and dtype=numpy.float64.</span>
-<span class="sd">        *backend*</span>
-<span class="sd">            select the type of acceleration; &quot;serial&quot; is always available. Other</span>
-<span class="sd">            possibilities are &quot;OpenMP&quot; (OpenMP).</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    coords1 : array</span>
+<span class="sd">        Coordinate array of one side of angles.</span>
+<span class="sd">    coords2 : array</span>
+<span class="sd">        Coordinate array of apex of angles.</span>
+<span class="sd">    coords3 : array</span>
+<span class="sd">        Coordinate array of other side of angles.</span>
+<span class="sd">    box : array</span>
+<span class="sd">        The unitcell dimesions for this system.</span>
+<span class="sd">        The dimensions must be provided in the same format as returned</span>
+<span class="sd">        by :attr:`MDAnalysis.coordinates.base.Timestep.dimensions`: ``[lx,</span>
+<span class="sd">        ly, lz, alpha, beta, gamma]``.</span>
+<span class="sd">    result : array, optional</span>
+<span class="sd">        Preallocated result array which must be same length as coord</span>
+<span class="sd">        arrays and ``dtype=numpy.float64``. Avoids creating the</span>
+<span class="sd">        array which saves time when the function is called repeatedly. [None]</span>
+<span class="sd">    backend</span>
+<span class="sd">        Select the type of acceleration; &quot;serial&quot; is always available. Other</span>
+<span class="sd">        possibilities are &quot;OpenMP&quot; (OpenMP).</span>
 
-<span class="sd">    :Returns:</span>
-<span class="sd">        *angles*</span>
-<span class="sd">            A numpy.array of angles in radians</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    angles : array</span>
+<span class="sd">        A numpy.array of angles in radians.</span>
+
 
 <span class="sd">    .. versionadded:: 0.8</span>
 <span class="sd">    .. versionchanged:: 0.9.0</span>
@@ -715,42 +742,45 @@
 <span class="sd">           /</span>
 <span class="sd">          0</span>
 
-<span class="sd">    If a 1D numpy array of dtype ``numpy.float64`` with ``len(atom1)`` elements is</span>
-<span class="sd">    provided in *result* then this preallocated array is filled. This can speed</span>
-<span class="sd">    up calculations.</span>
+<span class="sd">    If a 1D numpy array of dtype ``numpy.float64`` with ``len(atom1)`` elements</span>
+<span class="sd">    is provided in *result* then this preallocated array is filled. This can</span>
+<span class="sd">    speed up calculations.</span>
 
-<span class="sd">    The optional argument ``box`` ensures that periodic boundaries are taken into</span>
-<span class="sd">    account when constructing the connecting vectors between atoms, ie that the vector</span>
-<span class="sd">    between atoms 1 &amp; 2 goes between coordinates in the same image::</span>
+<span class="sd">    The optional argument ``box`` ensures that periodic boundaries are taken</span>
+<span class="sd">    into account when constructing the connecting vectors between atoms, ie</span>
+<span class="sd">    that the vector between atoms 1 &amp; 2 goes between coordinates in the same</span>
+<span class="sd">    image::</span>
 
-<span class="sd">      angles = calc_dihedrals(coords1, coords2, coords3, coords4 [,box=box, result=angles])</span>
+<span class="sd">        angles = calc_dihedrals(coords1, coords2, coords3, coords4 [,box=box, result=angles])</span>
 
-<span class="sd">    :Arguments:</span>
-<span class="sd">        *coords1*</span>
-<span class="sd">            coordinate array of 1st atom in dihedrals</span>
-<span class="sd">        *coords2*</span>
-<span class="sd">            coordinate array of 2nd atom in dihedrals</span>
-<span class="sd">        *coords3*</span>
-<span class="sd">            coordinate array of 3rd atom in dihedrals</span>
-<span class="sd">        *coords4*</span>
-<span class="sd">            coordinate array of 4th atom in dihedrals</span>
-<span class="sd">        *box*</span>
-<span class="sd">            optional unit cell information.  This ensures that the connecting vectors</span>
-<span class="sd">            between atoms respect minimum image convention.  This is import when the</span>
-<span class="sd">            angle might be between atoms in different images.</span>
-<span class="sd">            Cell dimensions must be in an identical to format to those returned</span>
-<span class="sd">            by :attr:`MDAnalysis.coordinates.base.Timestep.dimensions`,</span>
-<span class="sd">            [lx, ly, lz, alpha, beta, gamma]</span>
-<span class="sd">        *result*</span>
-<span class="sd">            optional preallocated results array which must have same length as</span>
-<span class="sd">            coordinate array and dtype=numpy.float64.</span>
-<span class="sd">        *backend*</span>
-<span class="sd">            select the type of acceleration; &quot;serial&quot; is always available. Other</span>
-<span class="sd">            possibilities are &quot;OpenMP&quot; (OpenMP).</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    coords1 : array</span>
+<span class="sd">        Coordinate array of 1st atom in dihedrals.</span>
+<span class="sd">    coords2 : array</span>
+<span class="sd">        Coordinate array of 2nd atom in dihedrals.</span>
+<span class="sd">    coords3 : array</span>
+<span class="sd">        Coordinate array of 3rd atom in dihedrals.</span>
+<span class="sd">    coords4 : array</span>
+<span class="sd">        Coordinate array of 4th atom in dihedrals.</span>
+<span class="sd">    box : array</span>
+<span class="sd">        The unitcell dimesions for this system.</span>
+<span class="sd">        The dimensions must be provided in the same format as returned</span>
+<span class="sd">        by :attr:`MDAnalysis.coordinates.base.Timestep.dimensions`: ``[lx,</span>
+<span class="sd">        ly, lz, alpha, beta, gamma]``.</span>
+<span class="sd">    result : array, optional</span>
+<span class="sd">        Preallocated result array which must be same length as coord</span>
+<span class="sd">        arrays and ``dtype=numpy.float64``. Avoids creating the</span>
+<span class="sd">        array which saves time when the function is called repeatedly. [None]</span>
+<span class="sd">    backend</span>
+<span class="sd">        Select the type of acceleration; &quot;serial&quot; is always available. Other</span>
+<span class="sd">        possibilities are &quot;OpenMP&quot; (OpenMP).</span>
 
-<span class="sd">    :Returns:</span>
-<span class="sd">        *angles*</span>
-<span class="sd">            A numpy.array of angles in radians</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    angles : array</span>
+<span class="sd">        A numpy.array of angles in radians.</span>
+
 
 <span class="sd">    .. versionadded:: 0.8</span>
 <span class="sd">    .. versionchanged:: 0.9.0</span>
@@ -803,6 +833,7 @@
 
     <span class="k">return</span> <span class="n">angles</span></div>
 
+
 <span class="n">calc_torsions</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">calc_dihedrals</span><span class="p">,</span>
                           <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;calc_torsions&#39;</span><span class="p">,</span>
                           <span class="n">new_name</span><span class="o">=</span><span class="s1">&#39;calc_dihedrals&#39;</span><span class="p">,</span>
@@ -814,22 +845,26 @@
 
 <span class="sd">    newcoords = apply_PBC(coords, box)</span>
 
-<span class="sd">    :Arguments:</span>
-<span class="sd">        *coords*</span>
-<span class="sd">           coordinate array (of type numpy.float32)</span>
-<span class="sd">        *box*</span>
-<span class="sd">           box dimensions, can be either orthogonal or triclinic information</span>
-<span class="sd">           Cell dimensions must be in an identical to format to those returned</span>
-<span class="sd">           by :attr:`MDAnalysis.coordinates.base.Timestep.dimensions`,</span>
-<span class="sd">           [lx, ly, lz, alpha, beta, gamma]</span>
-<span class="sd">        *backend*</span>
-<span class="sd">           select the type of acceleration; &quot;serial&quot; is always available. Other</span>
-<span class="sd">           possibilities are &quot;OpenMP&quot; (OpenMP).</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    coords : array</span>
+<span class="sd">        Coordinate array (of type numpy.float32).</span>
+<span class="sd">    box : array</span>
+<span class="sd">        The unitcell dimesions for this system; can be either orthogonal or</span>
+<span class="sd">        triclinic information. The dimensions must be provided in the same</span>
+<span class="sd">        format as returned by</span>
+<span class="sd">        :attr:`MDAnalysis.coordinates.base.Timestep.dimensions`: ``[lx, ly, lz,</span>
+<span class="sd">        alpha, beta, gamma]``.</span>
+<span class="sd">    backend</span>
+<span class="sd">        Select the type of acceleration; &quot;serial&quot; is always available. Other</span>
+<span class="sd">        possibilities are &quot;OpenMP&quot; (OpenMP).</span>
 
-<span class="sd">    :Returns:</span>
-<span class="sd">        *newcoords*</span>
-<span class="sd">           coordinates that are now all within the primary unit cell,</span>
-<span class="sd">           as defined by box</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    newcoords : array</span>
+<span class="sd">        Coordinates that are now all within the primary unit cell, as defined</span>
+<span class="sd">        by box.</span>
+
 
 <span class="sd">    .. versionadded:: 0.8</span>
 <span class="sd">    .. versionchanged:: 0.13.0</span>
@@ -866,6 +901,7 @@
                <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">coords</span></div>
+
 
 <span class="n">applyPBC</span> <span class="o">=</span> <span class="n">deprecate</span><span class="p">(</span><span class="n">apply_PBC</span><span class="p">,</span>
                      <span class="n">old_name</span><span class="o">=</span><span class="s1">&#39;applyPBC&#39;</span><span class="p">,</span>

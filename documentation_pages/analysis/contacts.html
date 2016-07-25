@@ -175,8 +175,8 @@ opens. They open in a step-wise fashion (made more clear by the movie
 <p class="rubric">Notes</p>
 <p>Suggested cutoff distances for different simulations</p>
 <ul class="simple">
-<li>For all-atom simulations, cutoff = 4.5 A</li>
-<li>For coarse-grained simulations, cutoff = 6.0 A</li>
+<li>For all-atom simulations, cutoff = 4.5 Å</li>
+<li>For coarse-grained simulations, cutoff = 6.0 Å</li>
 </ul>
 </div>
 <div class="section" id="two-dimensional-contact-analysis-q1-q2">
@@ -440,7 +440,6 @@ argument <cite>method</cite>.</p>
 <p>list containing <em>Q</em> for all refgroup pairs and analyzed frames</p>
 </dd></dl>
 
-<p>Initialization</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -626,12 +625,7 @@ the attribute <code class="xref py py-attr docutils literal"><span class="pre">C
 <dt id="MDAnalysis.analysis.contacts.ContactAnalysis1.plot">
 <code class="descname">plot</code><span class="sig-paren">(</span><em>filename=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/contacts.html#ContactAnalysis1.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.contacts.ContactAnalysis1.plot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plot q(t).</p>
-<dl class="function">
-<dt>
-<code class="descname">plot</code><span class="sig-paren">(</span><span class="optional">[</span><em>filename</em>, <em>...</em><span class="optional">]</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/contacts.html#ContactAnalysis1.plot"><span class="viewcode-link">[source]</span></a></dt>
-<dd></dd></dl>
-
-<p>If <em>filename</em> is supplied then the figure is also written to file (the
+<p>If <cite>filename</cite> is supplied then the figure is also written to file (the
 suffix determines the file type, e.g. pdf, png, eps, ...). All other
 keyword arguments are passed on to <code class="xref py py-func docutils literal"><span class="pre">pylab.plot()</span></code>.</p>
 </dd></dl>
@@ -640,11 +634,6 @@ keyword arguments are passed on to <code class="xref py py-func docutils literal
 <dt id="MDAnalysis.analysis.contacts.ContactAnalysis1.plot_qavg">
 <code class="descname">plot_qavg</code><span class="sig-paren">(</span><em>filename=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/contacts.html#ContactAnalysis1.plot_qavg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.contacts.ContactAnalysis1.plot_qavg" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plot <code class="xref py py-attr docutils literal"><span class="pre">ContactAnalysis1.qavg</span></code>, the matrix of average native contacts.</p>
-<dl class="function">
-<dt>
-<code class="descname">plot_qavg</code><span class="sig-paren">(</span><span class="optional">[</span><em>filename</em>, <em>...</em><span class="optional">]</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/contacts.html#ContactAnalysis1.plot_qavg"><span class="viewcode-link">[source]</span></a></dt>
-<dd></dd></dl>
-
 <p>If <em>filename</em> is supplied then the figure is also written to file (the
 suffix determines the file type, e.g. pdf, png, eps, ...). All other
 keyword arguments are passed on to <code class="xref py py-func docutils literal"><span class="pre">pylab.imshow()</span></code>.</p>
@@ -680,12 +669,11 @@ order to increase performance.</p>
 <dd><p>Analyze trajectory and produce timeseries.</p>
 <p>Stores results in <code class="xref py py-attr docutils literal"><span class="pre">ContactAnalysis1.timeseries</span></code> (if store=True)
 and writes them to a data file. The average q is written to a second
-data file.
-<em>start</em></p>
-<blockquote>
-<div>The value of the first frame index in the trajectory to be used
-(default: index 0)</div></blockquote>
+data file.</p>
 <dl class="docutils">
+<dt><em>start</em></dt>
+<dd>The value of the first frame index in the trajectory to be used
+(default: index 0)</dd>
 <dt><em>stop</em></dt>
 <dd>The value of the last frame index in the trajectory to be used
 (default: None &#8211; use all frames)</dd>
@@ -729,14 +717,13 @@ accessible as the attribute
 <p><span class="versionmodified">Deprecated since version 0.15.0.</span></p>
 </div>
 </div></blockquote>
-<p>Calculate native contacts from two reference structures.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>topology</strong> (<a class="reference internal" href="../lib/util.html#MDAnalysis.lib.util.filename" title="MDAnalysis.lib.util.filename"><em>filename</em></a>) &#8211; topology file</li>
-<li><strong>trajectory</strong> (<a class="reference internal" href="../lib/util.html#MDAnalysis.lib.util.filename" title="MDAnalysis.lib.util.filename"><em>filename</em></a>) &#8211; trajectory</li>
+<li><strong>topology</strong> (<em>filename as str</em>) &#8211; topology file</li>
+<li><strong>trajectory</strong> (<em>filename as str</em>) &#8211; trajectory</li>
 <li><strong>ref1</strong> (filename or <code class="docutils literal"><span class="pre">None</span></code>, optional) &#8211; structure of the reference conformation 1 (pdb); if <code class="docutils literal"><span class="pre">None</span></code> the
 <em>first</em> frame of the trajectory is chosen</li>
 <li><strong>ref2</strong> (filename or <code class="docutils literal"><span class="pre">None</span></code>, optional) &#8211; structure of the reference conformation 2 (pdb); if <code class="docutils literal"><span class="pre">None</span></code> the

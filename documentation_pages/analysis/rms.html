@@ -266,8 +266,8 @@ all frames in the trajectory in <em>universe</em>.</p>
 <a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.select_atoms" title="MDAnalysis.core.AtomGroup.AtomGroup.select_atoms"><code class="xref py py-meth docutils literal"><span class="pre">select_atoms()</span></code></a> that
 produces identical selections in <em>mobile</em> and <em>reference</em>; or</li>
 <li>a dictionary <code class="docutils literal"><span class="pre">{'mobile':sel1,</span> <span class="pre">'reference':sel2}</span></code> (the
-<code class="xref py py-func docutils literal"><span class="pre">MDAnalysis.analysis.align.fasta2select()</span></code> function returns
-such a dictionary based on a <a href="#id6"><span class="problematic" id="id7">ClustalW_</span></a> or <a href="#id8"><span class="problematic" id="id9">STAMP_</span></a> sequence
+<a class="reference internal" href="align.html#MDAnalysis.analysis.align.fasta2select" title="MDAnalysis.analysis.align.fasta2select"><code class="xref py py-func docutils literal"><span class="pre">MDAnalysis.analysis.align.fasta2select()</span></code></a> function returns
+such a dictionary based on a <a class="reference external" href="http://www.clustal.org/">ClustalW</a> or <a class="reference external" href="http://www.compbio.dundee.ac.uk/manuals/stamp.4.2/">STAMP</a> sequence
 alignment); or</li>
 <li>a tuple <code class="docutils literal"><span class="pre">(sel1,</span> <span class="pre">sel2)</span></code></li>
 </ol>
@@ -291,15 +291,17 @@ implemented.</p>
 <li><strong>tol_mass</strong> (<em>float (optional)</em>) &#8211; Reject match if the atomic masses for matched atoms differ by more
 than <cite>tol_mass</cite></li>
 <li><strong>ref_frame</strong> (<em>int (optional)</em>) &#8211; frame index to select frame from <cite>reference</cite></li>
-<li><strong>_ClustalW</strong> (<em>.</em>) &#8211; </li>
-<li><strong>_STAMP</strong> (<em>.</em>) &#8211; </li>
-<li><strong>versionadded</strong> (<em>.</em>) &#8211; </li>
-<li><strong>versionchanged</strong> (<em>.</em>) &#8211; <em>groupselections</em> added</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.7.7.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.8: </span><em>groupselections</em> added</p>
+</div>
 <dl class="attribute">
 <dt id="MDAnalysis.analysis.rms.RMSD.rmsd">
 <code class="descname">rmsd</code><a class="headerlink" href="#MDAnalysis.analysis.rms.RMSD.rmsd" title="Permalink to this definition">¶</a></dt>
@@ -379,7 +381,7 @@ giving RMSFs for each of the given atoms.</p>
 <code class="descname">run</code><span class="sig-paren">(</span><em>start=0</em>, <em>stop=-1</em>, <em>step=1</em>, <em>progout=10</em>, <em>quiet=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/rms.html#RMSF.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.rms.RMSF.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate RMSF of given atoms across a trajectory.</p>
 <p>This method implements an algorithm for computing sums of squares while
-avoiding overflows and underflows [Welford1962].</p>
+avoiding overflows and underflows <a class="reference internal" href="#welford1962" id="id5">[Welford1962]</a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -398,10 +400,14 @@ output; <code class="docutils literal"><span class="pre">None</span></code> for 
 </tbody>
 </table>
 <p class="rubric">References</p>
-<dl class="docutils">
-<dt>[Welford1962] B. P. Welford (1962). &#8220;Note on a Method for Calculating</dt>
-<dd>Corrected Sums of Squares and Products.&#8221; Technometrics 4(3):419-420.</dd>
-</dl>
+<table class="docutils citation" frame="void" id="welford1962" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[Welford1962]</a></td><td>B. P. Welford (1962). &#8220;Note on a Method for
+Calculating Corrected Sums of Squares and Products.&#8221; Technometrics
+4(3):419-420.</td></tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>

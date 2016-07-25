@@ -239,6 +239,7 @@
 <span class="sd">The following functions are used by the other functions in this</span>
 <span class="sd">module. They are probably of more interest to developers than to</span>
 <span class="sd">normal users.</span>
+
 <span class="sd">.. autofunction:: _fit_to</span>
 <span class="sd">.. autofunction:: fasta2select</span>
 <span class="sd">.. autofunction:: get_matching_atoms</span>
@@ -272,6 +273,7 @@
 <span class="sd">    reference structure):</span>
 
 <span class="sd">    .. math::</span>
+
 <span class="sd">        \vec{b} = \bold{R} \dot \vec{a}</span>
 
 <span class="sd">    Parameters</span>
@@ -313,9 +315,10 @@
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
-<span class="sd">    :func:`rmsd` calculates the RMSD between *a* and *b*; for fitting a whole</span>
-<span class="sd">    trajectory it is more efficient to use :func:`rms_fit_trj`. A complete fit</span>
-<span class="sd">    of two structures can be done with :func:`alignto`. &quot;&quot;&quot;</span>
+<span class="sd">    MDAnalysis.analysis.rms.rmsd: Calculates the RMSD between *a* and *b*.</span>
+<span class="sd">    alignto: A complete fit of two structures.</span>
+<span class="sd">    AlignTraj: Fit a whole trajectory.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
     <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
@@ -336,7 +339,7 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">rot</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span> <span class="n">rmsd</span></div>
 
 
-<span class="k">def</span> <span class="nf">_fit_to</span><span class="p">(</span><span class="n">mobile_coordinates</span><span class="p">,</span> <span class="n">ref_coordinates</span><span class="p">,</span> <span class="n">mobile_atoms</span><span class="p">,</span>
+<div class="viewcode-block" id="_fit_to"><a class="viewcode-back" href="../../../documentation_pages/analysis/align.html#MDAnalysis.analysis.align._fit_to">[docs]</a><span class="k">def</span> <span class="nf">_fit_to</span><span class="p">(</span><span class="n">mobile_coordinates</span><span class="p">,</span> <span class="n">ref_coordinates</span><span class="p">,</span> <span class="n">mobile_atoms</span><span class="p">,</span>
             <span class="n">mobile_com</span><span class="p">,</span> <span class="n">ref_com</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Perform an rmsd-fitting to determine rotation matrix and align atoms</span>
 
@@ -369,7 +372,7 @@
     <span class="n">mobile_atoms</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
     <span class="n">mobile_atoms</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">ref_com</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">mobile_atoms</span><span class="p">,</span> <span class="n">min_rmsd</span>
+    <span class="k">return</span> <span class="n">mobile_atoms</span><span class="p">,</span> <span class="n">min_rmsd</span></div>
 
 
 <div class="viewcode-block" id="alignto"><a class="viewcode-back" href="../../../documentation_pages/analysis/align.html#MDAnalysis.analysis.align.alignto">[docs]</a><span class="k">def</span> <span class="nf">alignto</span><span class="p">(</span><span class="n">mobile</span><span class="p">,</span> <span class="n">reference</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="n">mass_weighted</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
@@ -456,8 +459,10 @@
 <span class="sd">    new_rmsd</span>
 <span class="sd">        RMSD after spatial alignment.</span>
 
-<span class="sd">    .. SeeAlso:: For RMSD-fitting trajectories it is more efficient to</span>
-<span class="sd">                 use :class:`AlignTraj`.</span>
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    AlignTraj: More efficient method for RMSD-fitting trajectories.</span>
+
 
 <span class="sd">    .. versionchanged:: 0.8</span>
 <span class="sd">       Added check that the two groups describe the same atoms including</span>
@@ -467,7 +472,6 @@
 <span class="sd">       Uses :func:`get_matching_atoms` to work with incomplete selections</span>
 <span class="sd">       and new *strict* keyword. The new default is to be lenient whereas</span>
 <span class="sd">       the old behavior was the equivalent of *strict* = ``True``.</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">select</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">):</span>
         <span class="c1"># keep the EXACT order in the input AtomGroups; select_atoms(&#39;all&#39;)</span>
@@ -900,7 +904,7 @@
     <span class="k">return</span> <span class="n">aln</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">fasta2select</span><span class="p">(</span><span class="n">fastafilename</span><span class="p">,</span> <span class="n">is_aligned</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+<div class="viewcode-block" id="fasta2select"><a class="viewcode-back" href="../../../documentation_pages/analysis/align.html#MDAnalysis.analysis.align.fasta2select">[docs]</a><span class="k">def</span> <span class="nf">fasta2select</span><span class="p">(</span><span class="n">fastafilename</span><span class="p">,</span> <span class="n">is_aligned</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
                  <span class="n">ref_resids</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">target_resids</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                  <span class="n">ref_offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">target_offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">verbosity</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
                  <span class="n">alnfilename</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">treefilename</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">clustalw</span><span class="o">=</span><span class="s2">&quot;clustalw2&quot;</span><span class="p">):</span>
@@ -1123,10 +1127,10 @@
 
     <span class="n">ref_selection</span> <span class="o">=</span> <span class="s2">&quot; or &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sel</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
     <span class="n">target_selection</span> <span class="o">=</span> <span class="s2">&quot; or &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sel</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;reference&#39;</span><span class="p">:</span> <span class="n">ref_selection</span><span class="p">,</span> <span class="s1">&#39;mobile&#39;</span><span class="p">:</span> <span class="n">target_selection</span><span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;reference&#39;</span><span class="p">:</span> <span class="n">ref_selection</span><span class="p">,</span> <span class="s1">&#39;mobile&#39;</span><span class="p">:</span> <span class="n">target_selection</span><span class="p">}</span></div>
 
 
-<span class="k">def</span> <span class="nf">get_matching_atoms</span><span class="p">(</span><span class="n">ag1</span><span class="p">,</span> <span class="n">ag2</span><span class="p">,</span> <span class="n">tol_mass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="get_matching_atoms"><a class="viewcode-back" href="../../../documentation_pages/analysis/align.html#MDAnalysis.analysis.align.get_matching_atoms">[docs]</a><span class="k">def</span> <span class="nf">get_matching_atoms</span><span class="p">(</span><span class="n">ag1</span><span class="p">,</span> <span class="n">ag2</span><span class="p">,</span> <span class="n">tol_mass</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return two atom groups with one-to-one matched atoms.</span>
 
 <span class="sd">    The function takes two :class:`~MDAnalysis.core.AtomGroup.AtomGroup`</span>
@@ -1331,7 +1335,7 @@
                   <span class="s2">&quot;mis-matching atoms are shown above.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tol_mass</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">errmsg</span><span class="p">)</span>
         <span class="k">raise</span> <span class="n">SelectionError</span><span class="p">(</span><span class="n">errmsg</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">ag1</span><span class="p">,</span> <span class="n">ag2</span>
+    <span class="k">return</span> <span class="n">ag1</span><span class="p">,</span> <span class="n">ag2</span></div>
 </pre></div>
 
           </div>

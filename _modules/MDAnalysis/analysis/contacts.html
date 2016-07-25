@@ -88,7 +88,7 @@
 <span class="c1"># J. Comput. Chem. 32 (2011), 2319--2327, doi:10.1002/jcc.21787</span>
 <span class="c1">#</span>
 
-<span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">================================================================</span>
 <span class="sd">Native contacts analysis --- :mod:`MDAnalysis.analysis.contacts`</span>
 <span class="sd">================================================================</span>
@@ -171,8 +171,8 @@
 
 <span class="sd">Suggested cutoff distances for different simulations</span>
 
-<span class="sd">* For all-atom simulations, cutoff = 4.5 A</span>
-<span class="sd">* For coarse-grained simulations, cutoff = 6.0 A</span>
+<span class="sd">* For all-atom simulations, cutoff = 4.5 Å</span>
+<span class="sd">* For coarse-grained simulations, cutoff = 6.0 Å</span>
 
 
 <span class="sd">Two-dimensional contact analysis (q1-q2)</span>
@@ -451,8 +451,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">selection</span><span class="p">,</span> <span class="n">refgroup</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;hard_cut&quot;</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">4.5</span><span class="p">,</span>
                  <span class="n">kwargs</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">basekwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Initialization</span>
-
+        <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        u : Universe</span>
@@ -639,13 +638,12 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topology</span><span class="p">,</span> <span class="n">trajectory</span><span class="p">,</span> <span class="n">ref1</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">ref2</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">8.0</span><span class="p">,</span>
                  <span class="n">targetdir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span> <span class="n">infix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
                  <span class="n">selection</span><span class="o">=</span><span class="s2">&quot;name CA&quot;</span><span class="p">,</span> <span class="n">centroids</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Calculate native contacts from two reference structures.</span>
-
+        <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        topology : filename</span>
+<span class="sd">        topology : filename as str</span>
 <span class="sd">            topology file</span>
-<span class="sd">        trajectory : filename</span>
+<span class="sd">        trajectory : filename as str</span>
 <span class="sd">            trajectory</span>
 <span class="sd">        ref1 : filename or ``None``, optional</span>
 <span class="sd">            structure of the reference conformation 1 (pdb); if ``None`` the</span>
@@ -1100,6 +1098,7 @@
 <span class="sd">        Stores results in :attr:`ContactAnalysis1.timeseries` (if store=True)</span>
 <span class="sd">        and writes them to a data file. The average q is written to a second</span>
 <span class="sd">        data file.</span>
+
 <span class="sd">        *start*</span>
 <span class="sd">            The value of the first frame index in the trajectory to be used</span>
 <span class="sd">            (default: index 0)</span>
@@ -1224,9 +1223,7 @@
 <div class="viewcode-block" id="ContactAnalysis1.plot"><a class="viewcode-back" href="../../../documentation_pages/analysis/contacts.html#MDAnalysis.analysis.contacts.ContactAnalysis1.plot">[docs]</a>    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Plot q(t).</span>
 
-<span class="sd">        .. function:: ContactAnalysis1.plot([filename, ...])</span>
-
-<span class="sd">        If *filename* is supplied then the figure is also written to file (the</span>
+<span class="sd">        If `filename` is supplied then the figure is also written to file (the</span>
 <span class="sd">        suffix determines the file type, e.g. pdf, png, eps, ...). All other</span>
 <span class="sd">        keyword arguments are passed on to :func:`pylab.plot`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1270,8 +1267,6 @@
 
 <div class="viewcode-block" id="ContactAnalysis1.plot_qavg"><a class="viewcode-back" href="../../../documentation_pages/analysis/contacts.html#MDAnalysis.analysis.contacts.ContactAnalysis1.plot_qavg">[docs]</a>    <span class="k">def</span> <span class="nf">plot_qavg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Plot :attr:`ContactAnalysis1.qavg`, the matrix of average native contacts.</span>
-
-<span class="sd">        .. function:: ContactAnalysis1.plot_qavg([filename, ...])</span>
 
 <span class="sd">        If *filename* is supplied then the figure is also written to file (the</span>
 <span class="sd">        suffix determines the file type, e.g. pdf, png, eps, ...). All other</span>

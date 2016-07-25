@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>&lt;no title&gt; &mdash; MDAnalysis 0.15.1-dev0 documentation</title>
+    <title>5.16. XTC trajectory files — MDAnalysis.coordinates.XTC &mdash; MDAnalysis 0.15.1-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -30,8 +30,8 @@
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
     <link rel="top" title="MDAnalysis 0.15.1-dev0 documentation" href="../../index.html" />
     <link rel="up" title="5. Coordinates modules" href="../coordinates_modules.html" />
-    <link rel="next" title="5.15. XYZ trajectory reader — MDAnalysis.coordinates.XYZ" href="XYZ.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="TRR.html" /> 
+    <link rel="next" title="5.17. XYZ trajectory reader — MDAnalysis.coordinates.XYZ" href="XYZ.html" />
+    <link rel="prev" title="5.15. TRR trajectory files — MDAnalysis.coordinates.TRR" href="TRR.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -44,10 +44,10 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="XYZ.html" title="5.15. XYZ trajectory reader — MDAnalysis.coordinates.XYZ"
+          <a href="XYZ.html" title="5.17. XYZ trajectory reader — MDAnalysis.coordinates.XYZ"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="TRR.html" title="&lt;no title&gt;"
+          <a href="TRR.html" title="5.15. TRR trajectory files — MDAnalysis.coordinates.TRR"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.15.1-dev0 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../coordinates_modules.html" accesskey="U">5. Coordinates modules</a> &raquo;</li> 
@@ -60,10 +60,10 @@
             </a></p>
   <h4>Previous topic</h4>
   <p class="topless"><a href="TRR.html"
-                        title="previous chapter">&lt;no title&gt;</a></p>
+                        title="previous chapter">5.15. TRR trajectory files &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.TRR</span></code></a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="XYZ.html"
-                        title="next chapter">5.15. XYZ trajectory reader &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.XYZ</span></code></a></p>
+                        title="next chapter">5.17. XYZ trajectory reader &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.XYZ</span></code></a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -92,7 +92,86 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <span class="target" id="module-MDAnalysis.coordinates.XTC"></span>
+  <span class="target" id="module-MDAnalysis.coordinates.XTC"></span><div class="section" id="xtc-trajectory-files-mdanalysis-coordinates-xtc">
+<h1>5.16. XTC trajectory files &#8212; <a class="reference internal" href="#module-MDAnalysis.coordinates.XTC" title="MDAnalysis.coordinates.XTC"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.coordinates.XTC</span></code></a><a class="headerlink" href="#xtc-trajectory-files-mdanalysis-coordinates-xtc" title="Permalink to this headline">¶</a></h1>
+<p>Read and write GROMACS XTC trajectories.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="TRR.html#module-MDAnalysis.coordinates.TRR" title="MDAnalysis.coordinates.TRR"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.coordinates.TRR</span></code></a></dt>
+<dd>Read and write GROMACS TRR trajectory files.</dd>
+</dl>
+</div>
+<dl class="class">
+<dt id="MDAnalysis.coordinates.XTC.XTCReader">
+<em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.XTC.</code><code class="descname">XTCReader</code><span class="sig-paren">(</span><em>filename</em>, <em>convert_units=True</em>, <em>sub=None</em>, <em>refresh_offsets=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/XTC.html#XTCReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.XTC.XTCReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>XTC is a compressed trajectory format from Gromacs. The trajectory is saved
+with reduced precision (3 decimal places) compared to other lossless
+formarts like TRR and DCD. The main advantage of XTC files is that they
+require significantly less disk space and the loss of precision is usually
+not a problem.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; filename of the trajectory</li>
+<li><strong>convert_units</strong> (<em>bool (optional)</em>) &#8211; convert into MDAnalysis units</li>
+<li><strong>sub</strong> (<em>atomgroup (optional)</em>) &#8211; Yeah what is that exactly</li>
+<li><strong>refresh_offsets</strong> (<em>bool (optional)</em>) &#8211; Recalculate offsets for random access from file. If <code class="docutils literal"><span class="pre">False</span></code> try to
+retrieve offsets from hidden offsets file.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="MDAnalysis.coordinates.XTC.XTCWriter">
+<em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.XTC.</code><code class="descname">XTCWriter</code><span class="sig-paren">(</span><em>filename</em>, <em>n_atoms</em>, <em>convert_units=True</em>, <em>precision=3</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/XTC.html#XTCWriter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.XTC.XTCWriter" title="Permalink to this definition">¶</a></dt>
+<dd><p>XTC is a compressed trajectory format from Gromacs. The trajectory is saved
+with reduced precision (3 decimal places by default) compared to other
+lossless formarts like TRR and DCD. The main advantage of XTC files is that
+they require significantly less disk space and the loss of precision is
+usually not a problem.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; filename of the trajectory</li>
+<li><strong>n_atoms</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; number of atoms to write</li>
+<li><strong>convert_units</strong> (<em>bool (optional)</em>) &#8211; convert into MDAnalysis units</li>
+<li><strong>precision</strong> (<em>float (optional)</em>) &#8211; set precision of saved trjactory to this number of decimal places.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="MDAnalysis.coordinates.XTC.XTCWriter.write_next_timestep">
+<code class="descname">write_next_timestep</code><span class="sig-paren">(</span><em>ts</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/XTC.html#XTCWriter.write_next_timestep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.XTC.XTCWriter.write_next_timestep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write timestep object into trajectory.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ts</strong> (<em>TimeStep</em>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">&lt;FormatWriter&gt;.write(AtomGroup/Universe/TimeStep)
+The normal write() method takes a more general input</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
 
           </div>
         </div>
@@ -109,10 +188,10 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="XYZ.html" title="5.15. XYZ trajectory reader — MDAnalysis.coordinates.XYZ"
+          <a href="XYZ.html" title="5.17. XYZ trajectory reader — MDAnalysis.coordinates.XYZ"
              >next</a> |</li>
         <li class="right" >
-          <a href="TRR.html" title="&lt;no title&gt;"
+          <a href="TRR.html" title="5.15. TRR trajectory files — MDAnalysis.coordinates.TRR"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.15.1-dev0 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="../coordinates_modules.html" >5. Coordinates modules</a> &raquo;</li> 

@@ -105,10 +105,11 @@
 
 
 <div class="viewcode-block" id="AnalysisBase"><a class="viewcode-back" href="../../../documentation_pages/analysis/base.html#MDAnalysis.analysis.base.AnalysisBase">[docs]</a><span class="k">class</span> <span class="nc">AnalysisBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Base class for defining multi frame analysis, it is designed as a</span>
-<span class="sd">    template for creating multiframe analysis. This class will automatically</span>
-<span class="sd">    take care of setting up the trajectory reader for iterating and offers to</span>
-<span class="sd">    show a progress meter.</span>
+    <span class="sd">&quot;&quot;&quot;Base class for defining multi frame analysis</span>
+<span class="sd">    </span>
+<span class="sd">    The class it is designed as a template for creating multiframe analyses.</span>
+<span class="sd">    This class will automatically take care of setting up the trajectory</span>
+<span class="sd">    reader for iterating, and it offers to show a progress meter.</span>
 
 <span class="sd">    To define a new Analysis, `AnalysisBase` needs to be subclassed</span>
 <span class="sd">    `_single_frame` must be defined. It is also possible to define</span>
@@ -116,6 +117,7 @@
 <span class="sd">    below.</span>
 
 <span class="sd">    .. code-block:: python</span>
+
 <span class="sd">       class NewAnalysis(AnalysisBase):</span>
 <span class="sd">           def __init__(self, atomgroup, parameter, **kwargs):</span>
 <span class="sd">               super(NewAnalysis, self).__init__(atomgroup.universe.trajectory,</span>
@@ -144,6 +146,7 @@
 <span class="sd">    Afterwards the new analysis can be run like this.</span>
 
 <span class="sd">    .. code-block:: python</span>
+
 <span class="sd">       na = NewAnalysis(u.select_atoms(&#39;name CA&#39;), 35).run()</span>
 <span class="sd">       print(na.result)</span>
 

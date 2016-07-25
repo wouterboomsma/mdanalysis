@@ -106,7 +106,8 @@
 <span class="sd">then the lifetime of these bonds is monitored over time.  Multiple passes</span>
 <span class="sd">through the trajectory are used to build an average of the behaviour.</span>
 
-<span class="sd">    :math:`C_x(t) = \\left \\langle \\frac{h_{ij}(t_0) h_{ij}(t_0 + t)}{h_{ij}(t_0)^2} \\right\\rangle`</span>
+<span class="sd">.. math::</span>
+<span class="sd">   C_x(t) = \\left \\langle \\frac{h_{ij}(t_0) h_{ij}(t_0 + t)}{h_{ij}(t_0)^2} \\right\\rangle</span>
 
 <span class="sd">The subscript :math:`x` refers to the definition of lifetime being used, either</span>
 <span class="sd">continuous or intermittent.  The continuous definition measures the time that</span>
@@ -115,7 +116,8 @@
 <span class="sd">be counted again.  The relevent lifetime, :math:`\\tau_x`, can then be found</span>
 <span class="sd">via integration of this function</span>
 
-<span class="sd">    :math:`\\tau_x = \\int_0^\\infty C_x(t) dt`</span>
+<span class="sd">.. math::</span>
+<span class="sd">   \\tau_x = \\int_0^\\infty C_x(t) dt`</span>
 
 <span class="sd">For this, the observed behaviour is fitted to a multi exponential function,</span>
 <span class="sd">using 2 exponents for the continuous lifetime and 3 for the intermittent</span>
@@ -351,8 +353,8 @@
 <div class="viewcode-block" id="HydrogenBondAutoCorrel.run"><a class="viewcode-back" href="../../../../documentation_pages/analysis/hbond_autocorrel.html#MDAnalysis.analysis.hbonds.hbond_autocorrel.HydrogenBondAutoCorrel.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Run all the required passes</span>
 
-<span class="sd">        Parameters:</span>
-<span class="sd">        -----------</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
 <span class="sd">        force : bool, optional</span>
 <span class="sd">            Will overwrite previous results if they exist</span>
 <span class="sd">        &quot;&quot;&quot;</span>

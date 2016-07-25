@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>&lt;no title&gt; &mdash; MDAnalysis 0.15.1-dev0 documentation</title>
+    <title>5.15. TRR trajectory files — MDAnalysis.coordinates.TRR &mdash; MDAnalysis 0.15.1-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -30,7 +30,7 @@
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
     <link rel="top" title="MDAnalysis 0.15.1-dev0 documentation" href="../../index.html" />
     <link rel="up" title="5. Coordinates modules" href="../coordinates_modules.html" />
-    <link rel="next" title="&lt;no title&gt;" href="XTC.html" />
+    <link rel="next" title="5.16. XTC trajectory files — MDAnalysis.coordinates.XTC" href="XTC.html" />
     <link rel="prev" title="5.14. AMBER trajectories — MDAnalysis.coordinates.TRJ" href="TRJ.html" /> 
   </head>
   <body role="document">
@@ -44,7 +44,7 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="XTC.html" title="&lt;no title&gt;"
+          <a href="XTC.html" title="5.16. XTC trajectory files — MDAnalysis.coordinates.XTC"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="TRJ.html" title="5.14. AMBER trajectories — MDAnalysis.coordinates.TRJ"
@@ -63,7 +63,7 @@
                         title="previous chapter">5.14. AMBER trajectories &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.TRJ</span></code></a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="XTC.html"
-                        title="next chapter">&lt;no title&gt;</a></p>
+                        title="next chapter">5.16. XTC trajectory files &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.coordinates.XTC</span></code></a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -92,7 +92,88 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <span class="target" id="module-MDAnalysis.coordinates.TRR"></span>
+  <span class="target" id="module-MDAnalysis.coordinates.TRR"></span><div class="section" id="trr-trajectory-files-mdanalysis-coordinates-trr">
+<h1>5.15. TRR trajectory files &#8212; <a class="reference internal" href="#module-MDAnalysis.coordinates.TRR" title="MDAnalysis.coordinates.TRR"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.coordinates.TRR</span></code></a><a class="headerlink" href="#trr-trajectory-files-mdanalysis-coordinates-trr" title="Permalink to this headline">¶</a></h1>
+<p>Read and write GROMACS TRR trajectories.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="XTC.html#module-MDAnalysis.coordinates.XTC" title="MDAnalysis.coordinates.XTC"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.coordinates.XTC</span></code></a></dt>
+<dd>Read and write GROMACS XTC trajectory files.</dd>
+</dl>
+</div>
+<dl class="class">
+<dt id="MDAnalysis.coordinates.TRR.TRRReader">
+<em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.TRR.</code><code class="descname">TRRReader</code><span class="sig-paren">(</span><em>filename</em>, <em>convert_units=True</em>, <em>sub=None</em>, <em>refresh_offsets=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/TRR.html#TRRReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.TRR.TRRReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Gromacs TRR trajectory format is a lossless format. The TRR format can
+store <em>velocoties</em> and <em>forces</em> in addition to the coordinates. It is also
+used by other Gromacs tools to store and process other data such as modes
+from a principal component analysis.</p>
+<p>The lambda value is written in the data dictionary of the returned TimeStep</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; filename of the trajectory</li>
+<li><strong>convert_units</strong> (<em>bool (optional)</em>) &#8211; convert into MDAnalysis units</li>
+<li><strong>sub</strong> (<em>atomgroup (optional)</em>) &#8211; Yeah what is that exactly</li>
+<li><strong>refresh_offsets</strong> (<em>bool (optional)</em>) &#8211; Recalculate offsets for random access from file. If <code class="docutils literal"><span class="pre">False</span></code> try to
+retrieve offsets from hidden offsets file.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="MDAnalysis.coordinates.TRR.TRRWriter">
+<em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.TRR.</code><code class="descname">TRRWriter</code><span class="sig-paren">(</span><em>filename</em>, <em>n_atoms</em>, <em>convert_units=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/TRR.html#TRRWriter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.TRR.TRRWriter" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Gromacs TRR trajectory format is a lossless format. The TRR format can
+store <em>velocoties</em> and <em>forces</em> in addition to the coordinates. It is also
+used by other Gromacs tools to store and process other data such as modes
+from a principal component analysis.</p>
+<p>If the data dictionary of a TimeStep contains the key &#8216;lambda&#8217; the
+corresponding value will be used as the lambda value for written TRR file.
+If None is found the lambda is set to 0.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; filename of the trajectory</li>
+<li><strong>n_atoms</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; number of atoms to write</li>
+<li><strong>convert_units</strong> (<em>bool (optional)</em>) &#8211; convert into MDAnalysis units</li>
+<li><strong>precision</strong> (<em>float (optional)</em>) &#8211; set precision of saved trjactory to this number of decimal places.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="MDAnalysis.coordinates.TRR.TRRWriter.write_next_timestep">
+<code class="descname">write_next_timestep</code><span class="sig-paren">(</span><em>ts</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/TRR.html#TRRWriter.write_next_timestep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.TRR.TRRWriter.write_next_timestep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write timestep object into trajectory.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ts</strong> (<em>TimeStep</em>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">&lt;FormatWriter&gt;.write(AtomGroup/Universe/TimeStep)
+The normal write() method takes a more general input</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
 
           </div>
         </div>
@@ -109,7 +190,7 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="XTC.html" title="&lt;no title&gt;"
+          <a href="XTC.html" title="5.16. XTC trajectory files — MDAnalysis.coordinates.XTC"
              >next</a> |</li>
         <li class="right" >
           <a href="TRJ.html" title="5.14. AMBER trajectories — MDAnalysis.coordinates.TRJ"

@@ -126,16 +126,16 @@ bonds in the selections passed to it.  The population of hydrogen bonds at a
 given startpoint, <span class="math">\(t_0\)</span>, is evaluated based on geometric criteria and
 then the lifetime of these bonds is monitored over time.  Multiple passes
 through the trajectory are used to build an average of the behaviour.</p>
-<blockquote>
-<div><span class="math">\(C_x(t) = \left \langle \frac{h_{ij}(t_0) h_{ij}(t_0 + t)}{h_{ij}(t_0)^2} \right\rangle\)</span></div></blockquote>
+<div class="math">
+\[C_x(t) = \left \langle \frac{h_{ij}(t_0) h_{ij}(t_0 + t)}{h_{ij}(t_0)^2} \right\rangle\]</div>
 <p>The subscript <span class="math">\(x\)</span> refers to the definition of lifetime being used, either
 continuous or intermittent.  The continuous definition measures the time that
 a particular hydrogen bond remains continuously attached, whilst the
 intermittent definition allows a bond to break and then subsequently reform and
 be counted again.  The relevent lifetime, <span class="math">\(\tau_x\)</span>, can then be found
 via integration of this function</p>
-<blockquote>
-<div><span class="math">\(\tau_x = \int_0^\infty C_x(t) dt\)</span></div></blockquote>
+<div class="math">
+\[\tau_x = \int_0^\infty C_x(t) dt`\]</div>
 <p>For this, the observed behaviour is fitted to a multi exponential function,
 using 2 exponents for the continuous lifetime and 3 for the intermittent
 lifetime.</p>
@@ -263,10 +263,14 @@ to use [1]</li>
 <dt id="MDAnalysis.analysis.hbonds.hbond_autocorrel.HydrogenBondAutoCorrel.run">
 <code class="descname">run</code><span class="sig-paren">(</span><em>force=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/analysis/hbonds/hbond_autocorrel.html#HydrogenBondAutoCorrel.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.analysis.hbonds.hbond_autocorrel.HydrogenBondAutoCorrel.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run all the required passes</p>
-<dl class="docutils">
-<dt>force <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
-<dd>Will overwrite previous results if they exist</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>force</strong> (<em>bool, optional</em>) &#8211; Will overwrite previous results if they exist</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">

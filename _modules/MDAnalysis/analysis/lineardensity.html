@@ -109,20 +109,15 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    selection : `AtomGroup` object</span>
+<span class="sd">    selection : AtomGroup</span>
 <span class="sd">      Any atomgroup</span>
-
-<span class="sd">    Keywords</span>
-<span class="sd">    --------</span>
 <span class="sd">    grouping : str {&#39;atoms&#39;, &#39;residues&#39;, &#39;segments&#39;, &#39;fragments&#39;}</span>
 <span class="sd">          Density profiles will be computed on the center of geometry</span>
 <span class="sd">          of a selected group of atoms [&#39;atoms&#39;]</span>
-
 <span class="sd">    binsize : float</span>
 <span class="sd">          Bin width in Angstrom used to build linear density</span>
 <span class="sd">          histograms. Defines the resolution of the resulting density</span>
 <span class="sd">          profile (smaller --&gt; higher resolution) [0.25]</span>
-
 <span class="sd">    start : int</span>
 <span class="sd">          The frame to start at [0]</span>
 <span class="sd">    stop : int</span>
@@ -133,14 +128,17 @@
 <span class="sd">    Example</span>
 <span class="sd">    -------</span>
 <span class="sd">    First create a LinearDensity object by supplying a selection,</span>
-<span class="sd">    then use the `run` method:</span>
+<span class="sd">    then use the :meth:`run` method::</span>
+
 <span class="sd">      ldens = LinearDensity(selection)</span>
 <span class="sd">      ldens.run()</span>
 
-<span class="sd">    Density profiles can be written to file through the `save` method:</span>
+<span class="sd">    Density profiles can be written to file through the `save` method::</span>
+
 <span class="sd">      ldens.save(description=&#39;mydensprof&#39;, form=&#39;txt&#39;)</span>
+
 <span class="sd">    which will output the density profiles in a file named</span>
-<span class="sd">    &lt;trajectory_filename&gt;.mydensprof_&lt;grouping&gt;.ldens</span>
+<span class="sd">    `&lt;trajectory_filename&gt;.mydensprof_&lt;grouping&gt;.ldens`.</span>
 <span class="sd">    Results can be saved in npz format by specifying `form=&#39;npz&#39;`</span>
 
 <span class="sd">    .. versionadded:: 0.14.0</span>
@@ -262,8 +260,8 @@
 <span class="sd">        binary numpy npz file. Output file has extension &#39;ldens&#39; and begins</span>
 <span class="sd">        with the name of the trajectory file.</span>
 
-<span class="sd">        Keywords</span>
-<span class="sd">        --------</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
 <span class="sd">        description : str</span>
 <span class="sd">          An arbitrary description added to the output filename. Can be useful</span>
 <span class="sd">        form : str {&#39;txt&#39;, &#39;npz&#39;}</span>
@@ -273,10 +271,12 @@
 <span class="sd">        Example</span>
 <span class="sd">        -------</span>
 <span class="sd">        After initializing and running a `LinearDensity` object, results can be</span>
-<span class="sd">        written to file as follows:</span>
+<span class="sd">        written to file as follows::</span>
+
 <span class="sd">          ldens.save(description=&#39;mydensprof&#39;, form=&#39;txt&#39;)</span>
+
 <span class="sd">        which will output the linear density profiles in a file named</span>
-<span class="sd">        &lt;trajectory_filename&gt;.mydensprof_&lt;grouping&gt;.ldens</span>
+<span class="sd">        `&lt;trajectory_filename&gt;.mydensprof_&lt;grouping&gt;.ldens`.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Take root of trajectory filename for output file naming</span>

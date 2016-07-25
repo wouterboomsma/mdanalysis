@@ -99,10 +99,11 @@
 <span class="sd">:func:`dist` and :func:`between` can take atom groups that do not even</span>
 <span class="sd">have to be from the same :class:`~MDAnalysis.core.AtomGroup.Universe`.</span>
 
-<span class="sd">.. SeeAlso:: :mod:`MDAnalysis.lib.distances` </span>
+<span class="sd">.. SeeAlso:: :mod:`MDAnalysis.lib.distances`</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;distance_array&#39;</span><span class="p">,</span> <span class="s1">&#39;self_distance_array&#39;</span><span class="p">,</span> <span class="s1">&#39;contact_matrix&#39;</span><span class="p">,</span> <span class="s1">&#39;dist&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;distance_array&#39;</span><span class="p">,</span> <span class="s1">&#39;self_distance_array&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;contact_matrix&#39;</span><span class="p">,</span> <span class="s1">&#39;dist&#39;</span><span class="p">,</span> <span class="s1">&#39;between&#39;</span><span class="p">]</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
@@ -158,12 +159,12 @@
 
 <span class="sd">    Note</span>
 <span class="sd">    ----</span>
-<span class="sd">    :module:`scipy.sparse` is require for using *sparse* matrices; if it cannot</span>
+<span class="sd">    :mod:`scipy.sparse` is require for using *sparse* matrices; if it cannot</span>
 <span class="sd">    be imported then an `ImportError` is raised.</span>
+
 
 <span class="sd">    .. versionchanged:: 0.11.0</span>
 <span class="sd">       Keyword *suppress_progmet* and *progress_meter_freq* were removed.</span>
-
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="k">if</span> <span class="n">returntype</span> <span class="o">==</span> <span class="s2">&quot;numpy&quot;</span><span class="p">:</span>
@@ -198,8 +199,7 @@
 
 <span class="sd">    Arguments</span>
 <span class="sd">    ---------</span>
-
-<span class="sd">    A, B: AtomGroup instances</span>
+<span class="sd">    A, B : AtomGroup</span>
 <span class="sd">       :class:`~MDAnalysis.core.AtomGroup.AtomGroup` with the</span>
 <span class="sd">       same number of atoms</span>
 <span class="sd">    offset : integer or tuple, optional, default 0</span>
@@ -219,7 +219,6 @@
 <span class="sd">       residue ids of the `B` group (possibly changed with `offset`)</span>
 <span class="sd">    distances : array</span>
 <span class="sd">       distances between the atoms</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">n_atoms</span> <span class="o">!=</span> <span class="n">B</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;AtomGroups A and B do not have the same number of atoms&quot;</span><span class="p">)</span>
@@ -234,7 +233,7 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">residues_A</span><span class="p">,</span> <span class="n">residues_B</span><span class="p">,</span> <span class="n">d</span><span class="p">])</span></div>
 
 
-<span class="k">def</span> <span class="nf">between</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">distance</span><span class="p">):</span>
+<div class="viewcode-block" id="between"><a class="viewcode-back" href="../../../documentation_pages/analysis/distances.html#MDAnalysis.analysis.distances.between">[docs]</a><span class="k">def</span> <span class="nf">between</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">distance</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return sub group of `group` that is within `distance` of both `A` and `B`</span>
 
 <span class="sd">    This function is not aware of periodic boundary conditions.</span>
@@ -245,7 +244,6 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-
 <span class="sd">    group : AtomGroup</span>
 <span class="sd">        Find members of `group` that are between `A` and `B`</span>
 <span class="sd">    A, B : AtomGroups</span>
@@ -259,18 +257,18 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    AtomGroup</span>
-<span class="sd">       :class:`~MDAnalysis.core.AtomGroup.AtomGroup` of atoms that</span>
-<span class="sd">       fulfill the criterion</span>
+<span class="sd">        :class:`~MDAnalysis.core.AtomGroup.AtomGroup` of atoms that</span>
+<span class="sd">        fulfill the criterion</span>
+
 
 <span class="sd">    .. versionadded: 0.7.5</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">MDAnalysis.core.AtomGroup</span> <span class="kn">import</span> <span class="n">AtomGroup</span>
 
     <span class="n">ns_group</span> <span class="o">=</span> <span class="n">AtomNeighborSearch</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
     <span class="n">resA</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">ns_group</span><span class="o">.</span><span class="n">search_list</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">distance</span><span class="p">))</span>
     <span class="n">resB</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">ns_group</span><span class="o">.</span><span class="n">search_list</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">distance</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">AtomGroup</span><span class="p">(</span><span class="n">resB</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">resA</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">AtomGroup</span><span class="p">(</span><span class="n">resB</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">resA</span><span class="p">))</span></div>
 </pre></div>
 
           </div>

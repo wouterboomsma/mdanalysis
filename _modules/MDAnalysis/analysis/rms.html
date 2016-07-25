@@ -170,7 +170,6 @@
 <span class="sd">   fig.savefig(&quot;rmsd_all_CORE_LID_NMP_ref1AKE.pdf&quot;)</span>
 
 
-
 <span class="sd">Functions</span>
 <span class="sd">---------</span>
 
@@ -399,13 +398,13 @@
 <span class="sd">        ref_frame : int (optional)</span>
 <span class="sd">             frame index to select frame from `reference`</span>
 
+
 <span class="sd">        .. _ClustalW: http://www.clustal.org/</span>
 <span class="sd">        .. _STAMP: http://www.compbio.dundee.ac.uk/manuals/stamp.4.2/</span>
 
 <span class="sd">        .. versionadded:: 0.7.7</span>
 <span class="sd">        .. versionchanged:: 0.8</span>
 <span class="sd">           *groupselections* added</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">universe</span> <span class="o">=</span> <span class="n">traj</span>
         <span class="k">if</span> <span class="n">reference</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
@@ -654,8 +653,9 @@
 
 <span class="sd">        References</span>
 <span class="sd">        ----------</span>
-<span class="sd">        [Welford1962] B. P. Welford (1962). &quot;Note on a Method for Calculating</span>
-<span class="sd">           Corrected Sums of Squares and Products.&quot; Technometrics 4(3):419-420.</span>
+<span class="sd">        .. [Welford1962] B. P. Welford (1962). &quot;Note on a Method for</span>
+<span class="sd">           Calculating Corrected Sums of Squares and Products.&quot; Technometrics</span>
+<span class="sd">           4(3):419-420.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">sumsquares</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">atomgroup</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
         <span class="n">means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sumsquares</span><span class="p">)</span>
