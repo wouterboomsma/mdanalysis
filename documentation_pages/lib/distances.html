@@ -106,7 +106,9 @@
 <h1>9.2.1. Fast distance array computation &#8212; <a class="reference internal" href="#module-MDAnalysis.lib.distances" title="MDAnalysis.lib.distances"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.lib.distances</span></code></a><a class="headerlink" href="#fast-distance-array-computation-mdanalysis-lib-distances" title="Permalink to this headline">¶</a></h1>
 <p>Fast C-routines to calculate distance arrays from coordinate
 arrays. Many of the functions also exist in parallel versions, that
-typically provide higher performance than the serial code.</p>
+typically provide higher performance than the serial code.
+The boolean attribute MDAnalysis.lib.distances.USED_OPENMP can be
+checked to see if OpenMP was used in the compilation of MDAnalysis.</p>
 <div class="section" id="selection-of-acceleration-backend">
 <h2>9.2.1.1. Selection of acceleration (&#8220;backend&#8221;)<a class="headerlink" href="#selection-of-acceleration-backend" title="Permalink to this headline">¶</a></h2>
 <p>All functions take the optional keyword <em>backend</em>, which determines

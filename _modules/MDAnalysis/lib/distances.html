@@ -95,6 +95,8 @@
 <span class="sd">Fast C-routines to calculate distance arrays from coordinate</span>
 <span class="sd">arrays. Many of the functions also exist in parallel versions, that</span>
 <span class="sd">typically provide higher performance than the serial code.</span>
+<span class="sd">The boolean attribute MDAnalysis.lib.distances.USED_OPENMP can be</span>
+<span class="sd">checked to see if OpenMP was used in the compilation of MDAnalysis.</span>
 
 <span class="sd">Selection of acceleration (&quot;backend&quot;)</span>
 <span class="sd">-------------------------------------</span>
@@ -183,6 +185,8 @@
                           <span class="n">calc_dihedral_triclinic</span><span class="p">,</span>
                           <span class="n">ortho_pbc</span><span class="p">,</span>
                           <span class="n">triclinic_pbc</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">c_distances_openmp</span> <span class="kn">import</span> <span class="n">OPENMP_ENABLED</span> <span class="k">as</span> <span class="n">USED_OPENMP</span>
 
 
 <span class="k">def</span> <span class="nf">_box_check</span><span class="p">(</span><span class="n">box</span><span class="p">):</span>
