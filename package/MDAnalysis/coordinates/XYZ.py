@@ -371,19 +371,6 @@ class XYZReader(base.NewReader):
         self._update_last_fh_position(0)
         self.ts.frame = -1
 
-    def open_trajectory(self):
-        if self.xyzfile is not None:
-            raise IOError(
-                errno.EALREADY, 'XYZ file already opened', self.filename)
-
-        self.xyzfile = util.anyopen(self.filename, "r")
-
-        # reset ts
-        ts = self.ts
-        ts.frame = -1
-
-        return self.xyzfile
-
     def Writer(self, filename, n_atoms=None, **kwargs):
         """Returns a XYZWriter for *filename* with the same parameters as this
         XYZ.
@@ -409,10 +396,3 @@ class XYZReader(base.NewReader):
         if n_atoms is None:
             n_atoms = self.n_atoms
         return XYZWriter(filename, n_atoms=n_atoms, **kwargs)
-
-    def close(self):
-        """Close xyz trajectory file if it was open."""
-        if self.xyzfile is None:
-            return
-        self.xyzfile.close()
-        self.xyzfile = None

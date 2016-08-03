@@ -156,12 +156,14 @@ class FH(object):
         self.fh = None
 
     @contextmanager
-    def from_last_position(self):
+    def from_last_position(self, remember_last=False):
         fh = self.fh = util.anyopen(self.filename, 'r')
         fh.seek(self.last_pos)
         try:
             yield fh
         finally:
+            if remember_last:
+                self.last_pos = fh.tell()
             fh.close()
 
     @contextmanager
@@ -1395,6 +1397,7 @@ class NewReader(ProtoReader):
         self.next()
 
     def _full_iter(self):
+        self._reopen()
         with self._fh.from_start() as self.xyzfile:
             while True:
                 try:
@@ -1418,8 +1421,17 @@ class NewReader(ProtoReader):
         return self._full_iter()
 
     def __getitem__(self, item):
+        def apply_limits(frame):
+            if frame < 0:
+                frame += len(self)
+            if frame < 0 or frame >= len(self):
+                raise IndexError("Index {} exceeds length of trajectory ({})."
+                                 "".format(frame, len(self)))
+            return frame
+
+
         if isinstance(item, int):
-            return self._goto_frame(item)
+            return self._goto_frame(apply_limits(item))
         elif isinstance(item, (list, np.ndarray)):
             return self._sliced_iter(item)
         elif isinstance(item, slice):  # TODO Fix me!
@@ -1429,8 +1441,16 @@ class NewReader(ProtoReader):
         return self.next()
 
     def next(self):
-        with self._fh.from_last_position() as self.xyzfile:
-            return self._read_next_timestep()
+        try:
+            with self._fh.from_last_position(remember_last=True) as self.xyzfile:
+                return self._read_next_timestep()
+        except (EOFError, IOError):
+            self.rewind()
+            raise StopIteration
+
+    def close(self):
+        # "close" by moving last position to start
+        self._fh.last_pos = 0
 
 
 class ChainReader(ProtoReader):
