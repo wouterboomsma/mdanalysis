@@ -454,9 +454,11 @@ can also be a list of tuples containing different atom groups</li>
 with call signature <code class="docutils literal"><span class="pre">func(r,</span> <span class="pre">r0,</span> <span class="pre">**kwargs)</span></code> (the &#8220;Contacts API&#8221;).</li>
 <li><strong>kwargs</strong> (<em>dict, optional</em>) &#8211; dictionary of additional kwargs passed to <cite>method</cite>. Check
 respective functions for reasonable values.</li>
-<li><strong>start</strong> (<em>int, optional</em>) &#8211; First frame of trajectory to analyse, Default: 0</li>
-<li><strong>stop</strong> (<em>int, optional</em>) &#8211; Last frame of trajectory to analyse, Default: -1</li>
-<li><strong>step</strong> (<em>int, optional</em>) &#8211; Step between frames to analyse, Default: 1</li>
+<li><strong>start</strong> (<em>int, optional</em>) &#8211; First frame of trajectory to analyse, Default: None becomes 0.</li>
+<li><strong>stop</strong> (<em>int, optional</em>) &#8211; Frame index to stop analysis. Default: None becomes
+n_frames. Iteration stops <em>before</em> this frame number,
+which means that the trajectory would be read until the end.</li>
+<li><strong>step</strong> (<em>int, optional</em>) &#8211; Step between frames to analyse, Default: None becomes 1.</li>
 </ul>
 </td>
 </tr>

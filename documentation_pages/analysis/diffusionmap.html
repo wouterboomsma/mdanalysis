@@ -312,9 +312,11 @@ set to rms.rmsd().</li>
 <li><strong>cutoff</strong> (<em>float, optional</em>) &#8211; Specify a given cutoff for metric values to be considered equal,
 Default: 1EO-5</li>
 <li><strong>weights</strong> (<em>array, optional</em>) &#8211; Weights to be given to coordinates for metric calculation</li>
-<li><strong>start</strong> (<em>int, optional</em>) &#8211; First frame of trajectory to analyse, Default: 0</li>
-<li><strong>stop</strong> (<em>int, optional</em>) &#8211; Last frame of trajectory to analyse, Default: -1</li>
-<li><strong>step</strong> (<em>int, optional</em>) &#8211; Step between frames to analyse, Default: 1</li>
+<li><strong>start</strong> (<em>int, optional</em>) &#8211; First frame of trajectory to analyse, Default: None becomes 0.</li>
+<li><strong>stop</strong> (<em>int, optional</em>) &#8211; Frame index to stop analysis. Default: None becomes
+n_frames. Iteration stops <em>before</em> this frame number,
+which means that the trajectory would be read until the end.</li>
+<li><strong>step</strong> (<em>int, optional</em>) &#8211; Step between frames to analyse, Default: None becomes 1.</li>
 </ul>
 </td>
 </tr>

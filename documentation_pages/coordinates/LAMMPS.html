@@ -282,7 +282,7 @@ according to the CHARMM format. The time between two frames would be
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>stop, step</strong> (<em>start,</em>) &#8211; Values representing the slice indices.
-Can use <cite>None</cite> to use defaults of (0, -1, and 1)
+Can use <cite>None</cite> to use defaults of (0, n_frames, and 1)
 respectively.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>start, stop, step</strong> &#8211;
@@ -514,18 +514,26 @@ returned.</p>
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDReader.correl">
-<code class="descname">correl</code><span class="sig-paren">(</span><em>timeseries</em>, <em>start=0</em>, <em>stop=-1</em>, <em>skip=1</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/DCD.html#DCDReader.correl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDReader.correl" title="Permalink to this definition">¶</a></dt>
+<code class="descname">correl</code><span class="sig-paren">(</span><em>timeseries</em>, <em>start=None</em>, <em>stop=None</em>, <em>step=None</em>, <em>skip=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/DCD.html#DCDReader.correl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDReader.correl" title="Permalink to this definition">¶</a></dt>
 <dd><p>Populate a TimeseriesCollection object with timeseries computed from the trajectory</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first last docutils">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
 <dt><em>timeseries</em></dt>
 <dd><p class="first last"><a class="reference internal" href="../core/Timeseries.html#MDAnalysis.core.Timeseries.TimeseriesCollection" title="MDAnalysis.core.Timeseries.TimeseriesCollection"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.core.Timeseries.TimeseriesCollection</span></code></a></p>
 </dd>
-<dt><em>start, stop, skip</em></dt>
-<dd><p class="first last">subset of trajectory to use, with start and stop being inclusive</p>
+<dt><em>start, stop, step</em></dt>
+<dd><p class="first last">A subset of the trajectory to use, with start being inclusive
+and stop being exclusive.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Deprecated:</th><td class="field-body"><dl class="first last docutils">
+<dt><em>skip</em></dt>
+<dd><p class="first last">Skip has been deprecated in favor of the standard keyword step.</p>
 </dd>
 </dl>
 </td>
@@ -569,18 +577,19 @@ time = <code class="xref py py-attr docutils literal"><span class="pre">Timestep
 
 <dl class="method">
 <dt id="MDAnalysis.coordinates.LAMMPS.DCDReader.timeseries">
-<code class="descname">timeseries</code><span class="sig-paren">(</span><em>asel</em>, <em>start=0</em>, <em>stop=-1</em>, <em>skip=1</em>, <em>format=u'afc'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/DCD.html#DCDReader.timeseries"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDReader.timeseries" title="Permalink to this definition">¶</a></dt>
+<code class="descname">timeseries</code><span class="sig-paren">(</span><em>asel</em>, <em>start=None</em>, <em>stop=None</em>, <em>step=None</em>, <em>skip=None</em>, <em>format=u'afc'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/DCD.html#DCDReader.timeseries"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.LAMMPS.DCDReader.timeseries" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a subset of coordinate data for an AtomGroup</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first last docutils">
+<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
 <dt><em>asel</em></dt>
 <dd><p class="first last"><a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a> object</p>
 </dd>
-<dt><em>start, stop, skip</em></dt>
-<dd><p class="first last">range of trajectory to access, start and stop are inclusive</p>
+<dt><em>start, stop, step</em></dt>
+<dd><p class="first last">A range of the trajectory to access, with start being inclusive
+and stop being exclusive.</p>
 </dd>
 <dt><em>format</em></dt>
 <dd><p class="first last">the order/shape of the return data array, corresponding
@@ -588,6 +597,13 @@ to (a)tom, (f)rame, (c)oordinates all six combinations
 of &#8216;a&#8217;, &#8216;f&#8217;, &#8216;c&#8217; are allowed ie &#8220;fac&#8221; - return array
 where the shape is (frame, number of atoms,
 coordinates)</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Deprecated:</th><td class="field-body"><dl class="first last docutils">
+<dt><em>skip</em></dt>
+<dd><p class="first last">Skip has been deprecated in favor of the standard keyword step.</p>
 </dd>
 </dl>
 </td>
@@ -1042,7 +1058,7 @@ available). <em>n_atoms</em> is always set from <code class="xref py py-attr doc
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>stop, step</strong> (<em>start,</em>) &#8211; Values representing the slice indices.
-Can use <cite>None</cite> to use defaults of (0, -1, and 1)
+Can use <cite>None</cite> to use defaults of (0, n_frames, and 1)
 respectively.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>start, stop, step</strong> &#8211;

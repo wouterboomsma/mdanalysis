@@ -630,7 +630,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">atomgroup</span> <span class="o">=</span> <span class="n">atomgroup</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_rmsf</span> <span class="o">=</span> <span class="bp">None</span>
 
-<div class="viewcode-block" id="RMSF.run"><a class="viewcode-back" href="../../../documentation_pages/analysis/rms.html#MDAnalysis.analysis.rms.RMSF.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">stop</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">progout</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="RMSF.run"><a class="viewcode-back" href="../../../documentation_pages/analysis/rms.html#MDAnalysis.analysis.rms.RMSF.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">progout</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Calculate RMSF of given atoms across a trajectory.</span>
 
 <span class="sd">        This method implements an algorithm for computing sums of squares while</span>
@@ -639,11 +639,13 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        start : int (optional)</span>
-<span class="sd">            starting frame [0]</span>
+<span class="sd">            starting frame, default None becomes 0.</span>
 <span class="sd">        stop : int (optional)</span>
-<span class="sd">            stopping frame [-1]</span>
+<span class="sd">            Frame index to stop analysis. Default: None becomes</span>
+<span class="sd">            n_frames. Iteration stops *before* this frame number,</span>
+<span class="sd">            which means that the trajectory would be read until the end.</span>
 <span class="sd">        step : int (optional)</span>
-<span class="sd">            step between frames [1]</span>
+<span class="sd">            step between frames, default None becomes 1.</span>
 <span class="sd">        progout : int (optional)</span>
 <span class="sd">            number of frames to iterate through between updates to progress</span>
 <span class="sd">            output; ``None`` for no updates [10]</span>
@@ -657,6 +659,8 @@
 <span class="sd">           Calculating Corrected Sums of Squares and Products.&quot; Technometrics</span>
 <span class="sd">           4(3):419-420.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">traj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">atomgroup</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span>
+        <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="n">traj</span><span class="o">.</span><span class="n">check_slice_indices</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
         <span class="n">sumsquares</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">atomgroup</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
         <span class="n">means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sumsquares</span><span class="p">)</span>
 

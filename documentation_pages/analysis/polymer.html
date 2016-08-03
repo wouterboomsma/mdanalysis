@@ -126,9 +126,11 @@ chain become decorrelated.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>atomgroups</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; List of atomgroups.  Each atomgroup should represent a single
 polymer chain, ordered in the correct order.</li>
-<li><strong>start</strong> (<em>int, optional</em>) &#8211; First frame of trajectory to analyse, Default: 0</li>
-<li><strong>stop</strong> (<em>int, optional</em>) &#8211; Last frame of trajectory to analyse, Default: -1</li>
-<li><strong>step</strong> (<em>int, optional</em>) &#8211; Step between frames to analyse, Default: 1</li>
+<li><strong>start</strong> (<em>int, optional</em>) &#8211; First frame of trajectory to analyse, Default: None becomes 0.</li>
+<li><strong>stop</strong> (<em>int, optional</em>) &#8211; Last frame of trajectory to analyse, Default: None becomes
+n_frames.</li>
+<li><strong>step</strong> (<em>int, optional</em>) &#8211; Frame index to stop analysis. Default: None becomes
+n_frames. Iteration stops <em>before</em> this frame number.</li>
 </ul>
 </td>
 </tr>

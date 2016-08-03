@@ -161,7 +161,9 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">rdf_settings</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bins&#39;</span><span class="p">:</span> <span class="n">nbins</span><span class="p">,</span>
                              <span class="s1">&#39;range&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_exclusion_block</span> <span class="o">=</span> <span class="n">exclusion_block</span>
 
+    <span class="k">def</span> <span class="nf">_prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Empty histogram to store the RDF</span>
         <span class="n">count</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">rdf_settings</span><span class="p">)</span>
         <span class="n">count</span> <span class="o">=</span> <span class="n">count</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
@@ -177,12 +179,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">g1</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">g2</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="c1"># If provided exclusions, create a mask of _result which</span>
         <span class="c1"># lets us take these out</span>
-        <span class="k">if</span> <span class="n">exclusion_block</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_exclusion_block</span> <span class="o">=</span> <span class="n">exclusion_block</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_exclusion_mask</span> <span class="o">=</span> <span class="n">blocks_of</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_result</span><span class="p">,</span> <span class="o">*</span><span class="n">exclusion_block</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_maxrange</span> <span class="o">=</span> <span class="nb">range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1.0</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exclusion_block</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_exclusion_mask</span> <span class="o">=</span> <span class="n">blocks_of</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_result</span><span class="p">,</span>
+                                             <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_exclusion_block</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_maxrange</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rdf_settings</span><span class="p">[</span><span class="s1">&#39;range&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1.0</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_exclusion_block</span> <span class="o">=</span> <span class="bp">None</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_exclusion_mask</span> <span class="o">=</span> <span class="bp">None</span>
 
     <span class="k">def</span> <span class="nf">_single_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

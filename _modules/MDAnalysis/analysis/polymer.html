@@ -133,11 +133,13 @@
 <span class="sd">            List of atomgroups.  Each atomgroup should represent a single</span>
 <span class="sd">            polymer chain, ordered in the correct order.</span>
 <span class="sd">        start : int, optional</span>
-<span class="sd">            First frame of trajectory to analyse, Default: 0</span>
+<span class="sd">            First frame of trajectory to analyse, Default: None becomes 0.</span>
 <span class="sd">        stop : int, optional</span>
-<span class="sd">            Last frame of trajectory to analyse, Default: -1</span>
+<span class="sd">            Last frame of trajectory to analyse, Default: None becomes</span>
+<span class="sd">            n_frames.</span>
 <span class="sd">        step : int, optional</span>
-<span class="sd">            Step between frames to analyse, Default: 1</span>
+<span class="sd">            Frame index to stop analysis. Default: None becomes</span>
+<span class="sd">            n_frames. Iteration stops *before* this frame number.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">PersistenceLength</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span>
             <span class="n">atomgroups</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">universe</span><span class="o">.</span><span class="n">trajectory</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>

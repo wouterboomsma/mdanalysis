@@ -470,11 +470,13 @@
 <span class="sd">            dictionary of additional kwargs passed to `method`. Check</span>
 <span class="sd">            respective functions for reasonable values.</span>
 <span class="sd">        start : int, optional</span>
-<span class="sd">            First frame of trajectory to analyse, Default: 0</span>
+<span class="sd">            First frame of trajectory to analyse, Default: None becomes 0.</span>
 <span class="sd">        stop : int, optional</span>
-<span class="sd">            Last frame of trajectory to analyse, Default: -1</span>
+<span class="sd">            Frame index to stop analysis. Default: None becomes</span>
+<span class="sd">            n_frames. Iteration stops *before* this frame number,</span>
+<span class="sd">            which means that the trajectory would be read until the end.</span>
 <span class="sd">        step : int, optional</span>
-<span class="sd">            Step between frames to analyse, Default: 1</span>
+<span class="sd">            Step between frames to analyse, Default: None becomes 1.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">u</span> <span class="o">=</span> <span class="n">u</span>

@@ -147,6 +147,7 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">struct</span>
 <span class="kn">import</span> <span class="nn">types</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">from</span> <span class="nn">..core</span> <span class="kn">import</span> <span class="n">flags</span>
 <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">mdaunits</span>  <span class="c1"># use mdaunits instead of units to avoid a clash</span>
@@ -157,6 +158,7 @@
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">_dcdmodule</span>
 <span class="c1"># dcdtimeseries is implemented with Pyrex - hopefully all dcd reading functionality can move to pyrex</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">dcdtimeseries</span>
+
 
 
 <div class="viewcode-block" id="Timestep"><a class="viewcode-back" href="../../../documentation_pages/coordinates/DCD.html#MDAnalysis.coordinates.DCD.Timestep">[docs]</a><span class="k">class</span> <span class="nc">Timestep</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">Timestep</span><span class="p">):</span>
@@ -572,22 +574,33 @@
         <span class="n">ts</span><span class="o">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">frame</span>
         <span class="k">return</span> <span class="n">ts</span>
 
-<div class="viewcode-block" id="DCDReader.timeseries"><a class="viewcode-back" href="../../../documentation_pages/coordinates/LAMMPS.html#MDAnalysis.coordinates.DCD.DCDReader.timeseries">[docs]</a>    <span class="k">def</span> <span class="nf">timeseries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asel</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">stop</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s1">&#39;afc&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="DCDReader.timeseries"><a class="viewcode-back" href="../../../documentation_pages/coordinates/LAMMPS.html#MDAnalysis.coordinates.DCD.DCDReader.timeseries">[docs]</a>    <span class="k">def</span> <span class="nf">timeseries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asel</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                   <span class="n">format</span><span class="o">=</span><span class="s1">&#39;afc&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return a subset of coordinate data for an AtomGroup</span>
 
 <span class="sd">        :Arguments:</span>
 <span class="sd">            *asel*</span>
 <span class="sd">               :class:`~MDAnalysis.core.AtomGroup.AtomGroup` object</span>
-<span class="sd">            *start, stop, skip*</span>
-<span class="sd">               range of trajectory to access, start and stop are inclusive</span>
+<span class="sd">            *start, stop, step*</span>
+<span class="sd">               A range of the trajectory to access, with start being inclusive</span>
+<span class="sd">               and stop being exclusive.</span>
 <span class="sd">            *format*</span>
 <span class="sd">               the order/shape of the return data array, corresponding</span>
 <span class="sd">               to (a)tom, (f)rame, (c)oordinates all six combinations</span>
 <span class="sd">               of &#39;a&#39;, &#39;f&#39;, &#39;c&#39; are allowed ie &quot;fac&quot; - return array</span>
 <span class="sd">               where the shape is (frame, number of atoms,</span>
 <span class="sd">               coordinates)</span>
+<span class="sd">        :Deprecated:</span>
+<span class="sd">            *skip*</span>
+<span class="sd">                Skip has been deprecated in favor of the standard keyword step.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">skip</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_slice_indices</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">skip</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">skip</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">step</span> <span class="o">=</span> <span class="n">skip</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Skip is deprecated and will be removed in&quot;</span>
+                          <span class="s2">&quot;in 1.0. Use step instead.&quot;</span><span class="p">,</span>
+                          <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
+
+        <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_slice_indices</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">asel</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">NoDataError</span><span class="p">(</span><span class="s2">&quot;Timeseries requires at least one atom to analyze&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">format</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">format</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;afc&#39;</span><span class="p">,</span> <span class="s1">&#39;acf&#39;</span><span class="p">,</span> <span class="s1">&#39;caf&#39;</span><span class="p">,</span> <span class="s1">&#39;cfa&#39;</span><span class="p">,</span> <span class="s1">&#39;fac&#39;</span><span class="p">,</span> <span class="s1">&#39;fca&#39;</span><span class="p">]:</span>
@@ -596,18 +609,28 @@
         <span class="c1"># Check if the atom numbers can be grouped for efficiency, then we can read partial buffers</span>
         <span class="c1"># from trajectory file instead of an entire timestep</span>
         <span class="c1"># XXX needs to be implemented</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_timeseries</span><span class="p">(</span><span class="n">atom_numbers</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">skip</span><span class="p">,</span> <span class="n">format</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_timeseries</span><span class="p">(</span><span class="n">atom_numbers</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">format</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DCDReader.correl"><a class="viewcode-back" href="../../../documentation_pages/coordinates/LAMMPS.html#MDAnalysis.coordinates.DCD.DCDReader.correl">[docs]</a>    <span class="k">def</span> <span class="nf">correl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeseries</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">stop</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class="viewcode-block" id="DCDReader.correl"><a class="viewcode-back" href="../../../documentation_pages/coordinates/LAMMPS.html#MDAnalysis.coordinates.DCD.DCDReader.correl">[docs]</a>    <span class="k">def</span> <span class="nf">correl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeseries</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Populate a TimeseriesCollection object with timeseries computed from the trajectory</span>
 
 <span class="sd">        :Arguments:</span>
 <span class="sd">            *timeseries*</span>
 <span class="sd">               :class:`MDAnalysis.core.Timeseries.TimeseriesCollection`</span>
-<span class="sd">            *start, stop, skip*</span>
-<span class="sd">               subset of trajectory to use, with start and stop being inclusive</span>
+<span class="sd">            *start, stop, step*</span>
+<span class="sd">               A subset of the trajectory to use, with start being inclusive</span>
+<span class="sd">               and stop being exclusive.</span>
+<span class="sd">        :Deprecated:</span>
+<span class="sd">            *skip*</span>
+<span class="sd">                Skip has been deprecated in favor of the standard keyword step.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">skip</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_slice_indices</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">skip</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">skip</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">step</span> <span class="o">=</span> <span class="n">skip</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Skip is deprecated and will be removed in&quot;</span>
+                          <span class="s2">&quot;in 1.0. Use step instead.&quot;</span><span class="p">,</span>
+                          <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
+
+        <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_slice_indices</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
         <span class="n">atomlist</span> <span class="o">=</span> <span class="n">timeseries</span><span class="o">.</span><span class="n">_getAtomList</span><span class="p">()</span>
         <span class="n">format</span> <span class="o">=</span> <span class="n">timeseries</span><span class="o">.</span><span class="n">_getFormat</span><span class="p">()</span>
         <span class="n">lowerb</span><span class="p">,</span> <span class="n">upperb</span> <span class="o">=</span> <span class="n">timeseries</span><span class="o">.</span><span class="n">_getBounds</span><span class="p">()</span>
@@ -615,7 +638,7 @@
         <span class="n">atomcounts</span> <span class="o">=</span> <span class="n">timeseries</span><span class="o">.</span><span class="n">_getAtomCounts</span><span class="p">()</span>
         <span class="n">auxdata</span> <span class="o">=</span> <span class="n">timeseries</span><span class="o">.</span><span class="n">_getAuxData</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_timecorrel</span><span class="p">(</span><span class="n">atomlist</span><span class="p">,</span> <span class="n">atomcounts</span><span class="p">,</span> <span class="n">format</span><span class="p">,</span> <span class="n">auxdata</span><span class="p">,</span>
-                                     <span class="n">sizedata</span><span class="p">,</span> <span class="n">lowerb</span><span class="p">,</span> <span class="n">upperb</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">skip</span><span class="p">)</span></div>
+                                     <span class="n">sizedata</span><span class="p">,</span> <span class="n">lowerb</span><span class="p">,</span> <span class="n">upperb</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dcdfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>

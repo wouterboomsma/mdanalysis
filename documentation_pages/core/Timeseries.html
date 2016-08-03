@@ -156,14 +156,21 @@ len(collection)                                - return the number of Timeseries
 
 <dl class="method">
 <dt id="MDAnalysis.core.Timeseries.TimeseriesCollection.compute">
-<code class="descname">compute</code><span class="sig-paren">(</span><em>trj</em>, <em>start=0</em>, <em>stop=-1</em>, <em>skip=1</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/Timeseries.html#TimeseriesCollection.compute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.Timeseries.TimeseriesCollection.compute" title="Permalink to this definition">¶</a></dt>
+<code class="descname">compute</code><span class="sig-paren">(</span><em>trj</em>, <em>start=None</em>, <em>stop=None</em>, <em>skip=None</em>, <em>step=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/Timeseries.html#TimeseriesCollection.compute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.Timeseries.TimeseriesCollection.compute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Iterate through the trajectory <em>trj</em> and compute the time series.</p>
 <dl class="docutils">
 <dt><em>trj</em></dt>
 <dd>dcd trajectory object (i.e. <code class="xref py py-attr docutils literal"><span class="pre">Universe.trajectory</span></code>)</dd>
-<dt><em>start, stop, skip</em></dt>
-<dd>Frames to calculate parts of the trajectory. It is important to
-note that <em>start</em> and <em>stop</em> are inclusive</dd>
+<dt><em>start</em></dt>
+<dd>First frame of trajectory to analyse, Default: None becomes 0.</dd>
+<dt><em>stop</em></dt>
+<dd>Frame index to stop analysis. Default: None becomes
+n_frames. Iteration stops <em>before</em> this frame number,
+which means that the trajectory would be read until the end.</dd>
+<dt><em>step</em></dt>
+<dd>Step between frames to analyse, Default: None becomes 1.</dd>
+<dt><em>Deprecated</em></dt>
+<dd>Skip is deprecated in favor of step.</dd>
 </dl>
 </dd></dl>
 
