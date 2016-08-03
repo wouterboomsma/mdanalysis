@@ -1398,7 +1398,7 @@ class NewReader(ProtoReader):
 
     def _full_iter(self):
         self._reopen()
-        with self._fh.from_start() as self.xyzfile:
+        with self._fh.from_start() as self._file:
             while True:
                 try:
                     yield self._read_next_timestep()
@@ -1407,14 +1407,14 @@ class NewReader(ProtoReader):
                     raise StopIteration
 
     def _sliced_iter(self, frames):
-        with self._fh.from_start() as self.xyzfile:
+        with self._fh.from_start() as self._file:
             for f in frames:
                 yield self._read_frame(f)
                 self.rewind()
                 raise StopIteration
 
     def _goto_frame(self, i):
-        with self._fh.from_start() as self.xyzfile:
+        with self._fh.from_start() as self._file:
             return self._read_frame(i)
 
     def __iter__(self):
@@ -1442,7 +1442,7 @@ class NewReader(ProtoReader):
 
     def next(self):
         try:
-            with self._fh.from_last_position(remember_last=True) as self.xyzfile:
+            with self._fh.from_last_position(remember_last=True) as self._file:
                 return self._read_next_timestep()
         except (EOFError, IOError):
             self.rewind()

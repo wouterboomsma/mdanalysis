@@ -295,7 +295,7 @@ class XYZReader(base.NewReader):
         # coordinates::core.py so the last file extension will tell us if it is
         # bzipped or not
         root, ext = os.path.splitext(self.filename)
-        #self.xyzfile = util.anyopen(self.filename, "r")
+
         self.compression = ext[1:] if ext[1:] != "xyz" else None
         self._cache = dict()
 
@@ -344,7 +344,7 @@ class XYZReader(base.NewReader):
         return n_frames
 
     def _read_frame(self, frame):
-        self.xyzfile.seek(self._offsets[frame])
+        self._file.seek(self._offsets[frame])
         self.ts.frame = frame - 1  # gets +1'd in next
         return self._read_next_timestep()
 
@@ -353,7 +353,7 @@ class XYZReader(base.NewReader):
         if ts is None:
             ts = self.ts
 
-        f = self.xyzfile
+        f = self._file
 
         try:
             # we assume that there are only two header lines per frame
