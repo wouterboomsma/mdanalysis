@@ -117,7 +117,7 @@ module. The derived classes must follow the Trajectory API in
 
 from six.moves import range
 import six
-
+from contextlib import contextmanager
 import itertools
 import os.path
 import warnings
@@ -133,9 +133,44 @@ from . import (
 )
 from ..core import flags
 from .. import units
+from ..lib import util
 from ..lib.util import asiterable
 from . import core
 from .. import NoDataError
+
+
+class FH(object):
+    """Smart file handle object
+
+    Remembers last known position as `last_pos`
+
+    Provides two context managers:
+      - from_start
+      - from_last_position
+    """
+    def __init__(self, filename):
+        self.filename = filename
+        # last known position of the file handle
+        self.last_pos = 0
+        # where we store the file handle
+        self.fh = None
+
+    @contextmanager
+    def from_last_position(self):
+        fh = self.fh = util.anyopen(self.filename, 'r')
+        fh.seek(self.last_pos)
+        try:
+            yield fh
+        finally:
+            fh.close()
+
+    @contextmanager
+    def from_start(self):
+        fh = self.fh = util.anyopen(self.filename, 'r')
+        try:
+            yield fh
+        finally:
+            fh.close()
 
 
 class Timestep(object):
@@ -1328,6 +1363,74 @@ class Reader(ProtoReader):
 
     def __del__(self):
         self.close()
+
+
+class NewReader(ProtoReader):
+    """Super top secret magical class that fixes all known (and unknown) bugs"""
+    def __init__(self, filename, convert_units=None, **kwargs):
+        self.filename = filename
+        self._fh = FH(filename)
+
+        if convert_units is None:
+            convert_units = flags['convert_lengths']
+        self.convert_units = convert_units
+
+        ts_kwargs = {}
+        for att in ('dt', 'time_offset'):
+            try:
+                val = kwargs[att]
+            except KeyError:
+                pass
+            else:
+                ts_kwargs[att] = val
+
+        self._ts_kwargs = ts_kwargs
+
+    def _update_last_fh_position(self, pos):
+        """Update the last known position of the file handle"""
+        self._fh.last_pos = pos
+
+    def rewind(self):
+        self._reopen()
+        self.next()
+
+    def _full_iter(self):
+        with self._fh.from_start() as self.xyzfile:
+            while True:
+                try:
+                    yield self._read_next_timestep()
+                except (EOFError, IOError):
+                    self.rewind()
+                    raise StopIteration
+
+    def _sliced_iter(self, frames):
+        with self._fh.from_start() as self.xyzfile:
+            for f in frames:
+                yield self._read_frame(f)
+                self.rewind()
+                raise StopIteration
+
+    def _goto_frame(self, i):
+        with self._fh.from_start() as self.xyzfile:
+            return self._read_frame(i)
+
+    def __iter__(self):
+        return self._full_iter()
+
+    def __getitem__(self, item):
+        if isinstance(item, int):
+            return self._goto_frame(item)
+        elif isinstance(item, (list, np.ndarray)):
+            return self._sliced_iter(item)
+        elif isinstance(item, slice):  # TODO Fix me!
+            return self._sliced_iter(item)
+
+    def __next__(self):
+        return self.next()
+
+    def next(self):
+        with self._fh.from_last_position() as self.xyzfile:
+            return self._read_next_timestep()
 
 
 class ChainReader(ProtoReader):

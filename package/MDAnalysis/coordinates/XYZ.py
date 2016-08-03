@@ -251,7 +251,7 @@ class XYZWriter(base.Writer):
                             "".format(atom, x, y, z))
 
 
-class XYZReader(base.Reader):
+class XYZReader(base.NewReader):
     """Reads from an XYZ file
 
     :Data:
@@ -295,7 +295,7 @@ class XYZReader(base.Reader):
         # coordinates::core.py so the last file extension will tell us if it is
         # bzipped or not
         root, ext = os.path.splitext(self.filename)
-        self.xyzfile = util.anyopen(self.filename, "r")
+        #self.xyzfile = util.anyopen(self.filename, "r")
         self.compression = ext[1:] if ext[1:] != "xyz" else None
         self._cache = dict()
 
@@ -304,7 +304,7 @@ class XYZReader(base.Reader):
         # etc.
         # (Also cannot just use seek() or reset() because that would break
         # with urllib2.urlopen() streams)
-        self._read_next_timestep()
+        self.next()
 
     @property
     @cached('n_atoms')
@@ -367,8 +367,9 @@ class XYZReader(base.Reader):
             raise EOFError(err)
 
     def _reopen(self):
-        self.close()
-        self.open_trajectory()
+        """Reposition (the virtual fh) to just before first frame"""
+        self._update_last_fh_position(0)
+        self.ts.frame = -1
 
     def open_trajectory(self):
         if self.xyzfile is not None:
