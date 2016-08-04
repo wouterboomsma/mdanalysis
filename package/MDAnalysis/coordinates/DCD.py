@@ -356,7 +356,7 @@ class DCDWriter(base.Writer):
             self.dcdfile = None
 
 
-class DCDReader(base.Reader):
+class DCDReader(base.NewReader):
     """Reads from a DCD file
 
     :Data:
@@ -419,22 +419,25 @@ class DCDReader(base.Reader):
         if stats.st_size == 0:
             raise IOError(errno.EIO, "DCD file is zero size", self.filename)
 
-        self.dcdfile = open(self.filename, 'rb')
+            #self.dcdfile = open(self.filename, 'rb')
+        self.dcdfile = self._fh.fh  # pointer to file handle
         self.n_atoms = 0
         self.n_frames = 0
         self.fixed = 0
         self.periodic = False
 
         # This reads skip_timestep and delta from header
-        self._read_dcd_header()
+        with self._fh.from_last_position(remember_last=True):
+            self._read_dcd_header()
+            self._header_pos = self._fh.fh.tell()  # make _fh.tell() == fh.fh.tell()
 
-        # Convert delta to ps
-        delta = mdaunits.convert(self.delta, self.units['time'], 'ps')
+            # Convert delta to ps
+            delta = mdaunits.convert(self.delta, self.units['time'], 'ps')
 
-        self._ts_kwargs.setdefault('dt', self.skip_timestep * delta)
-        self.ts = self._Timestep(self.n_atoms, **self._ts_kwargs)
-        # Read in the first timestep
-        self._read_next_timestep()
+            self._ts_kwargs.setdefault('dt', self.skip_timestep * delta)
+            self.ts = self._Timestep(self.n_atoms, **self._ts_kwargs)
+            # Read in the first timestep
+            self._read_next_timestep()
 
     def _dcd_header(self):  # pragma: no cover
         """Returns contents of the DCD header C structure::
@@ -474,7 +477,7 @@ class DCDReader(base.Reader):
 
     def _reopen(self):
         self.ts.frame = -1
-        self._reset_dcd_read()
+        self._fh.fh.last_pos = self._header_pos
 
     def _read_next_timestep(self, ts=None):
         """Read the next frame
