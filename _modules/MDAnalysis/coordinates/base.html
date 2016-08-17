@@ -178,6 +178,9 @@
 <span class="sd">.. autoclass:: IObase</span>
 <span class="sd">   :members:</span>
 
+<span class="sd">.. autoclass:: ProtoReader</span>
+<span class="sd">   :members:</span>
+
 <span class="sd">.. autoclass:: Reader</span>
 <span class="sd">   :members:</span>
 
@@ -207,10 +210,12 @@
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">..core</span> <span class="kn">import</span> <span class="n">flags</span>
 <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">units</span>
-<span class="kn">from</span> <span class="nn">..lib.util</span> <span class="kn">import</span> <span class="n">asiterable</span>
+<span class="kn">from</span> <span class="nn">..lib.util</span> <span class="kn">import</span> <span class="n">asiterable</span><span class="p">,</span> <span class="n">Namespace</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">core</span>
 <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">NoDataError</span>
 
+<span class="kn">from</span> <span class="nn">..auxiliary.base</span> <span class="kn">import</span> <span class="n">AuxReader</span>
+<span class="kn">from</span> <span class="nn">..auxiliary.core</span> <span class="kn">import</span> <span class="n">auxreader</span>
 
 <div class="viewcode-block" id="Timestep"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.Timestep">[docs]</a><span class="k">class</span> <span class="nc">Timestep</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Timestep data for one frame</span>
@@ -289,7 +294,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">has_velocities</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;velocities&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">has_forces</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;forces&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_unitcell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_unitcell</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_unitcell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_init_unitcell</span><span class="p">()</span>
+        
+        <span class="c1"># set up aux namespace for adding auxiliary data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aux</span> <span class="o">=</span> <span class="n">Namespace</span><span class="p">()</span></div>
 
     <span class="nd">@classmethod</span>
 <div class="viewcode-block" id="Timestep.from_timestep"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.Timestep.from_timestep">[docs]</a>    <span class="k">def</span> <span class="nf">from_timestep</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -1107,7 +1115,7 @@
                 <span class="n">_READERS</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">cls</span>
 
 
-<span class="k">class</span> <span class="nc">ProtoReader</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">_Readermeta</span><span class="p">,</span> <span class="n">IObase</span><span class="p">)):</span>
+<div class="viewcode-block" id="ProtoReader"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.ProtoReader">[docs]</a><span class="k">class</span> <span class="nc">ProtoReader</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">_Readermeta</span><span class="p">,</span> <span class="n">IObase</span><span class="p">)):</span>
     <span class="sd">&quot;&quot;&quot;Base class for Readers, without a :meth:`__del__` method.</span>
 
 <span class="sd">    Extends :class:`IObase` with most attributes and methods of a generic</span>
@@ -1129,26 +1137,34 @@
     <span class="c1">#: :class:`MDAnalysis.coordinates.xdrfile.XTC.Timestep` for XTC.</span>
     <span class="n">_Timestep</span> <span class="o">=</span> <span class="n">Timestep</span>
 
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># initialise list to store added auxiliary readers in</span>
+        <span class="c1"># subclasses should now call super</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_auxs</span> <span class="o">=</span> <span class="p">{}</span>
+
     <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span>
 
-    <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ProtoReader.next"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.ProtoReader.next">[docs]</a>    <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Forward one step to next frame.&quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_next_timestep</span><span class="p">()</span>
+            <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_next_timestep</span><span class="p">()</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">EOFError</span><span class="p">,</span> <span class="ne">IOError</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rewind</span><span class="p">()</span>
             <span class="k">raise</span> <span class="ne">StopIteration</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">auxname</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">aux_list</span><span class="p">:</span>
+                <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auxs</span><span class="p">[</span><span class="n">auxname</span><span class="p">]</span><span class="o">.</span><span class="n">update_ts</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ts</span></div>
 
-
-    <span class="k">def</span> <span class="nf">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ProtoReader.__next__"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.ProtoReader.__next__">[docs]</a>    <span class="k">def</span> <span class="nf">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Forward one step to next frame when using the `next` builtin.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span></div>
 
-    <span class="k">def</span> <span class="nf">rewind</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ProtoReader.rewind"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.ProtoReader.rewind">[docs]</a>    <span class="k">def</span> <span class="nf">rewind</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Position at beginning of trajectory&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_reopen</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1177,14 +1193,14 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">time</span>
 
-    <span class="k">def</span> <span class="nf">Writer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="ProtoReader.Writer"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.ProtoReader.Writer">[docs]</a>    <span class="k">def</span> <span class="nf">Writer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;A trajectory writer with the same properties as this trajectory.&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
             <span class="s2">&quot;Sorry, there is no Writer for this format in MDAnalysis. &quot;</span>
             <span class="s2">&quot;Please file an enhancement request at &quot;</span>
-            <span class="s2">&quot;https://github.com/MDAnalysis/mdanalysis/issues&quot;</span><span class="p">)</span>
+            <span class="s2">&quot;https://github.com/MDAnalysis/mdanalysis/issues&quot;</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">OtherWriter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="ProtoReader.OtherWriter"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.ProtoReader.OtherWriter">[docs]</a>    <span class="k">def</span> <span class="nf">OtherWriter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns a writer appropriate for *filename*.</span>
 
 <span class="sd">        Sets the default keywords *start*, *step* and *dt* (if</span>
@@ -1198,7 +1214,7 @@
             <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;dt&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dt</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="k">pass</span>
-        <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_read_next_timestep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ts</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
         <span class="c1"># Example from DCDReader:</span>
@@ -1209,9 +1225,10 @@
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
             <span class="s2">&quot;BUG: Override _read_next_timestep() in the trajectory reader!&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ProtoReader.__iter__"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.ProtoReader.__iter__">[docs]</a>    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Iterate over trajectory frames. &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_reopen</span><span class="p">()</span>
-        <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
     <span class="k">def</span> <span class="nf">_reopen</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Should position Reader to just before first frame</span>
@@ -1220,7 +1237,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span>
 
-    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
+<div class="viewcode-block" id="ProtoReader.__getitem__"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.ProtoReader.__getitem__">[docs]</a>    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return the Timestep corresponding to *frame*.</span>
 
 <span class="sd">        If *frame* is a integer then the corresponding frame is</span>
@@ -1243,7 +1260,7 @@
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="n">frame</span> <span class="o">=</span> <span class="n">apply_limits</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_frame</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_frame_with_aux</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">frame</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">bool_</span><span class="p">)):</span>
                 <span class="c1"># Avoid having list of bools</span>
@@ -1255,7 +1272,7 @@
                 <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">frames</span><span class="p">:</span>
                     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">integer</span><span class="p">)):</span>
                         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Frames indices must be integers&quot;</span><span class="p">)</span>
-                    <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_frame</span><span class="p">(</span><span class="n">apply_limits</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+                    <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_frame_with_aux</span><span class="p">(</span><span class="n">apply_limits</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
             <span class="k">return</span> <span class="n">listiter</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
             <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_slice_indices</span><span class="p">(</span>
@@ -1266,7 +1283,7 @@
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sliced_iter</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Trajectories must be an indexed using an integer,&quot;</span>
-                            <span class="s2">&quot; slice or list of indices&quot;</span><span class="p">)</span>
+                            <span class="s2">&quot; slice or list of indices&quot;</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_read_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Move to *frame* and fill timestep with data.&quot;&quot;&quot;</span>
@@ -1278,6 +1295,13 @@
         <span class="c1"># ts.frame = self._read_next_frame(ts._x, ts._y, ts._z,</span>
         <span class="c1">#                                  ts._unitcell, 1)</span>
         <span class="c1"># return ts</span>
+
+    <span class="k">def</span> <span class="nf">_read_frame_with_aux</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Move to *frame*, updating ts with trajectory and auxiliary data.&quot;&quot;&quot;</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_frame</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">aux</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">aux_list</span><span class="p">:</span>
+            <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auxs</span><span class="p">[</span><span class="n">aux</span><span class="p">]</span><span class="o">.</span><span class="n">update_ts</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> 
+        <span class="k">return</span> <span class="n">ts</span>
 
     <span class="k">def</span> <span class="nf">_sliced_iter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Generator for slicing a trajectory.</span>
@@ -1292,12 +1316,12 @@
         <span class="c1"># be much slower than skipping steps in a next() loop</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
-                <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_frame</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_frame_with_aux</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>  <span class="c1"># if _read_frame not implemented</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;{0} does not support slicing.&quot;</span>
                             <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">check_slice_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+<div class="viewcode-block" id="ProtoReader.check_slice_indices"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.ProtoReader.check_slice_indices">[docs]</a>    <span class="k">def</span> <span class="nf">check_slice_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Check frame indices are valid and clip to fit trajectory</span>
 
 <span class="sd">        Parameters</span>
@@ -1346,7 +1370,7 @@
             <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span>
                 <span class="s2">&quot;Frame start/stop outside of the range of the trajectory.&quot;</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span>
+        <span class="k">return</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span></div>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;&lt;{cls} {fname} with {nframes} frames of {natoms} atoms&gt;&quot;</span>
@@ -1356,6 +1380,268 @@
                     <span class="n">nframes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_frames</span><span class="p">,</span>
                     <span class="n">natoms</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_atoms</span>
                 <span class="p">))</span>
+                
+<div class="viewcode-block" id="ProtoReader.add_auxiliary"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.ProtoReader.add_auxiliary">[docs]</a>    <span class="k">def</span> <span class="nf">add_auxiliary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">auxname</span><span class="p">,</span> <span class="n">auxdata</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add auxiliary data to be read alongside trajectory.</span>
+
+<span class="sd">        Auxiliary data may be any data timeseries from the trajectory additional</span>
+<span class="sd">        to that read in by the trajectory reader. *auxdata* can be an </span>
+<span class="sd">        :class:`~MDAnalysis.auxiliary.base.AuxReader` instance, or the data </span>
+<span class="sd">        itself as e.g. a filename; in the latter case an appropriate </span>
+<span class="sd">        :class:`~MDAnalysis.auxiliary.base.AuxReader` is guessed from the </span>
+<span class="sd">        data/file format. An appropriate *format* may also be directly provided </span>
+<span class="sd">        as a key word argument.</span>
+
+<span class="sd">        On adding, the AuxReader is initially matched to the current timestep</span>
+<span class="sd">        of the trajectory, and will be updated when the trajectory timestep</span>
+<span class="sd">        changes (through a call to :meth:`next()` or jumping timesteps with </span>
+<span class="sd">        ``trajectory[i]``).</span>
+
+<span class="sd">        The representative value(s) of the auxiliary data for each timestep (as</span>
+<span class="sd">        calculated by the :class:`~MDAnalysis.auxiliary.base.AuxReader`) are </span>
+<span class="sd">        stored in the current timestep in the ``ts.aux`` namespace under *auxname*; </span>
+<span class="sd">        e.g. to add additional pull force data stored in pull-force.xvg::</span>
+
+<span class="sd">            u = MDAnalysis.Universe(PDB, XTC)</span>
+<span class="sd">            u.trajectory.add_auxiliary(&#39;pull&#39;, &#39;pull-force.xvg&#39;)</span>
+
+<span class="sd">        The representative value for the current timestep may then be accessed </span>
+<span class="sd">        as ``u.trajectory.ts.aux.pull`` or ``u.trajectory.ts.aux[&#39;pull&#39;]``.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        :meth:`remove_auxiliary`</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">        Auxiliary data is assumed to be time-ordered, with no duplicates. See </span>
+<span class="sd">        the :ref:`Auxiliary API`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">auxname</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">aux_list</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Auxiliary data with name {name} already &quot;</span>
+                             <span class="s2">&quot;exists&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">auxname</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">auxdata</span><span class="p">,</span> <span class="n">AuxReader</span><span class="p">):</span>
+            <span class="n">aux</span> <span class="o">=</span> <span class="n">auxdata</span>
+            <span class="n">aux</span><span class="o">.</span><span class="n">auxname</span> <span class="o">=</span> <span class="n">auxname</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">aux</span> <span class="o">=</span> <span class="n">auxreader</span><span class="p">(</span><span class="n">auxdata</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="n">format</span><span class="p">,</span> <span class="n">auxname</span><span class="o">=</span><span class="n">auxname</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_auxs</span><span class="p">[</span><span class="n">auxname</span><span class="p">]</span> <span class="o">=</span> <span class="n">aux</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ts</span> <span class="o">=</span> <span class="n">aux</span><span class="o">.</span><span class="n">update_ts</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="ProtoReader.remove_auxiliary"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.ProtoReader.remove_auxiliary">[docs]</a>    <span class="k">def</span> <span class="nf">remove_auxiliary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">auxname</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Clear data and close the :class:`~MDAnalysis.auxiliary.base.AuxReader`</span>
+<span class="sd">        for the auxiliary *auxname*.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        :meth:`add_auxiliary`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">aux</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_for_aux</span><span class="p">(</span><span class="n">auxname</span><span class="p">)</span>
+        <span class="n">aux</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>            
+        <span class="k">del</span> <span class="n">aux</span>
+        <span class="nb">delattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">aux</span><span class="p">,</span> <span class="n">auxname</span><span class="p">)</span></div>
+            
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">aux_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Lists the names of added auxiliary data. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auxs</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_check_for_aux</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">auxname</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Check for the existance of an auxiliary *auxname*. If present,</span>
+<span class="sd">        return the AuxReader; if not, raise ValueError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">auxname</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">aux_list</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auxs</span><span class="p">[</span><span class="n">auxname</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No auxiliary named {name}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">auxname</span><span class="p">))</span>
+
+<div class="viewcode-block" id="ProtoReader.next_as_aux"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.ProtoReader.next_as_aux">[docs]</a>    <span class="k">def</span> <span class="nf">next_as_aux</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">auxname</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Move to the next timestep for which there is at least one step from</span>
+<span class="sd">        the auxiliary *auxname* within the cutoff specified in *auxname*.</span>
+
+<span class="sd">        This allows progression through the trajectory without encountering</span>
+<span class="sd">        ``NaN`` representative values (unless these are specifically part of the</span>
+<span class="sd">        auxiliary data). </span>
+
+<span class="sd">        If the auxiliary cutoff is not set, where auxiliary steps are less frequent </span>
+<span class="sd">        (``auxiliary.dt &gt; trajectory.dt``), this allows progression at the </span>
+<span class="sd">        auxiliary pace (rounded to nearest timestep); while if the auxiliary </span>
+<span class="sd">        steps are more frequent, this will work the same as calling </span>
+<span class="sd">        :meth:`next()`. </span>
+
+<span class="sd">        See the :ref:`Auxiliary API`.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        :meth:`iter_as_aux`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">aux</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_for_aux</span><span class="p">(</span><span class="n">auxname</span><span class="p">)</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ts</span>
+        <span class="c1"># catch up auxiliary if it starts earlier than trajectory</span>
+        <span class="k">while</span> <span class="n">aux</span><span class="o">.</span><span class="n">step_to_frame</span><span class="p">(</span><span class="n">aux</span><span class="o">.</span><span class="n">step</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">ts</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">next</span><span class="p">(</span><span class="n">aux</span><span class="p">)</span>
+        <span class="c1"># find the next frame that&#39;ll have a representative value</span>
+        <span class="n">next_frame</span> <span class="o">=</span> <span class="n">aux</span><span class="o">.</span><span class="n">next_nonempty_frame</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">next_frame</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c1"># no more frames with corresponding auxiliary values; stop iteration</span>
+            <span class="k">raise</span> <span class="ne">StopIteration</span>
+        <span class="c1"># some readers set self._frame to -1, rather than self.frame, on </span>
+        <span class="c1"># _reopen; catch here or doesn&#39;t read first frame</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">frame</span> <span class="o">!=</span> <span class="n">next_frame</span> <span class="ow">or</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_frame&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># iterate trajectory until frame is reached</span>
+            <span class="n">ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>       
+        <span class="k">return</span> <span class="n">ts</span> </div>
+
+<div class="viewcode-block" id="ProtoReader.iter_as_aux"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.ProtoReader.iter_as_aux">[docs]</a>    <span class="k">def</span> <span class="nf">iter_as_aux</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">auxname</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Iterate through timesteps for which there is at least one assigned </span>
+<span class="sd">        step from the auxiliary *auxname* within the cutoff specified in *auxname*.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        :meth:`next_as_aux`</span>
+<span class="sd">        :meth:`iter_auxiliary`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">aux</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_for_aux</span><span class="p">(</span><span class="n">auxname</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_reopen</span><span class="p">()</span>
+        <span class="n">aux</span><span class="o">.</span><span class="n">_restart</span><span class="p">()</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_as_aux</span><span class="p">(</span><span class="n">auxname</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ProtoReader.iter_auxiliary"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.ProtoReader.iter_auxiliary">[docs]</a>    <span class="k">def</span> <span class="nf">iter_auxiliary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">auxname</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> 
+                       <span class="n">selected</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Iterate through the auxiliary *auxname* independently of the trajectory. </span>
+
+<span class="sd">        Will iterate over the specified steps of the auxiliary (defaults to all</span>
+<span class="sd">        steps). Allows to access all values in an auxiliary, including those out</span>
+<span class="sd">        of the time range of the trajectory, without having to also iterate</span>
+<span class="sd">        through the trajectory.</span>
+
+<span class="sd">        After interation, the auxiliary will be repositioned at the current step.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        auxname : str</span>
+<span class="sd">            Name of the auxiliary to iterate over.</span>
+<span class="sd">        (start, stop, step) : optional</span>
+<span class="sd">            Options for iterating over a slice of the auxiliary.</span>
+<span class="sd">        selected : lst | ndarray, optional</span>
+<span class="sd">            List of steps to iterate over.</span>
+
+<span class="sd">        Yields</span>
+<span class="sd">        ------</span>
+<span class="sd">        :class:`~MDAnalysis.auxiliary.base.AuxStep` object</span>
+<span class="sd">             </span>
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        :meth:`iter_as_aux`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">aux</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_for_aux</span><span class="p">(</span><span class="n">auxname</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">selected</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">selection</span> <span class="o">=</span> <span class="n">selected</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">selection</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">aux</span><span class="p">[</span><span class="n">selection</span><span class="p">]:</span>
+            <span class="k">yield</span> <span class="n">i</span>
+        <span class="n">aux</span><span class="o">.</span><span class="n">read_ts</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ProtoReader.get_aux_attribute"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.ProtoReader.get_aux_attribute">[docs]</a>    <span class="k">def</span> <span class="nf">get_aux_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">auxname</span><span class="p">,</span> <span class="n">attrname</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the value of *attrname* from the auxiliary *auxname* </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        auxname : str</span>
+<span class="sd">            Name of the auxiliary to get value for</span>
+<span class="sd">        attrname : str</span>
+<span class="sd">            Name of gettable attribute in the auxiliary reader</span>
+<span class="sd"> </span>
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        :meth:`set_aux_attribute`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">aux</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_for_aux</span><span class="p">(</span><span class="n">auxname</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">aux</span><span class="p">,</span> <span class="n">attrname</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ProtoReader.set_aux_attribute"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.ProtoReader.set_aux_attribute">[docs]</a>    <span class="k">def</span> <span class="nf">set_aux_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">auxname</span><span class="p">,</span> <span class="n">attrname</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Set the value of *attrname* in the auxiliary *auxname*. </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        auxname : str</span>
+<span class="sd">            Name of the auxiliary to alter</span>
+<span class="sd">        attrname : str</span>
+<span class="sd">            Name of settable attribute in the auxiliary reader</span>
+<span class="sd">        new</span>
+<span class="sd">            New value to try set *attrname* to</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------</span>
+<span class="sd">        :meth:`get_aux_attribute`</span>
+<span class="sd">        :meth:`rename_aux` - to change the *auxname* attribute</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">aux</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_for_aux</span><span class="p">(</span><span class="n">auxname</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">attrname</span> <span class="o">==</span> <span class="s1">&#39;auxname&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rename_aux</span><span class="p">(</span><span class="n">auxname</span><span class="p">,</span> <span class="n">new</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">aux</span><span class="p">,</span> <span class="n">attrname</span><span class="p">,</span> <span class="n">new</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ProtoReader.rename_aux"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.ProtoReader.rename_aux">[docs]</a>    <span class="k">def</span> <span class="nf">rename_aux</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">auxname</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Change the name of the auxiliary *auxname* to *new*.</span>
+
+<span class="sd">        Provided there is not already an auxiliary named *new*, the auxiliary </span>
+<span class="sd">        name will be changed in ts.aux namespace, the trajectory&#39;s</span>
+<span class="sd">        list of added auxiliaries, and in the auxiliary reader itself.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        auxname : str</span>
+<span class="sd">             Name of the auxiliary to rename</span>
+<span class="sd">        new : str</span>
+<span class="sd">             New name to try set</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">             If the name *new* is already in use by an existing auxiliary.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">aux</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_for_aux</span><span class="p">(</span><span class="n">auxname</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">new</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">aux_list</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Auxiliary data with name {name} already &quot;</span>
+                             <span class="s2">&quot;exists&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">new</span><span class="p">))</span>
+        <span class="n">aux</span><span class="o">.</span><span class="n">auxname</span> <span class="o">=</span> <span class="n">new</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_auxs</span><span class="p">[</span><span class="n">new</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auxs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">auxname</span><span class="p">)</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">aux</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">aux</span><span class="p">[</span><span class="n">auxname</span><span class="p">])</span>
+        <span class="nb">delattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">aux</span><span class="p">,</span> <span class="n">auxname</span><span class="p">)</span></div>
+    
+
+<div class="viewcode-block" id="ProtoReader.get_aux_descriptions"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.ProtoReader.get_aux_descriptions">[docs]</a>    <span class="k">def</span> <span class="nf">get_aux_descriptions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">auxnames</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get descriptions to allow reloading the specified auxiliaries.</span>
+
+<span class="sd">        If no auxnames are provided, defaults to the full list of added </span>
+<span class="sd">        auxiliaries.</span>
+
+<span class="sd">        Passing the resultant description to ``add_auxiliary()`` will allow</span>
+<span class="sd">        recreation of the auxiliary. e.g., to duplicate all auxiliaries into a </span>
+<span class="sd">        second trajectory::</span>
+<span class="sd">            </span>
+<span class="sd">           descriptions = trajectory_1.get_aux_descriptions()</span>
+<span class="sd">           for aux in descriptions:</span>
+<span class="sd">               trajectory_2.add_auxiliary(**aux)</span>
+
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list</span>
+<span class="sd">            List of dictionaries of the args/kwargs describing each auxiliary.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        --------  </span>
+<span class="sd">        :meth:`MDAnalysis.auxiliary.base.AuxReader.get_description`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">auxnames</span><span class="p">:</span>
+            <span class="n">auxnames</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">aux_list</span>
+        <span class="n">descriptions</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_auxs</span><span class="p">[</span><span class="n">aux</span><span class="p">]</span><span class="o">.</span><span class="n">get_description</span><span class="p">()</span> <span class="k">for</span> <span class="n">aux</span> <span class="ow">in</span> <span class="n">auxnames</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">descriptions</span></div></div>
+
 
 
 <div class="viewcode-block" id="Reader"><a class="viewcode-back" href="../../../documentation_pages/coordinates/base.html#MDAnalysis.coordinates.DCD.Reader">[docs]</a><span class="k">class</span> <span class="nc">Reader</span><span class="p">(</span><span class="n">ProtoReader</span><span class="p">):</span>
@@ -1383,6 +1669,8 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">convert_units</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Reader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
 
         <span class="k">if</span> <span class="n">convert_units</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
@@ -1401,6 +1689,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_ts_kwargs</span> <span class="o">=</span> <span class="n">ts_kwargs</span>
 
     <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">aux</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">aux_list</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_auxs</span><span class="p">[</span><span class="n">aux</span><span class="p">]</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
 
@@ -1460,6 +1750,8 @@
 <span class="sd">        .. versionchanged:: 0.13</span>
 <span class="sd">           The *delta* keyword was deprecated in favor of using *dt*.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ChainReader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+
         <span class="k">if</span> <span class="s1">&#39;delta&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Keyword &#39;delta&#39; is now deprecated &quot;</span>
                           <span class="s2">&quot;(from version 0.13); &quot;</span>
@@ -1814,6 +2106,8 @@
     <span class="n">_err</span> <span class="o">=</span> <span class="s2">&quot;{0} only contains a single frame&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">convert_units</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SingleFrameReader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
         <span class="k">if</span> <span class="n">convert_units</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">convert_units</span> <span class="o">=</span> <span class="n">flags</span><span class="p">[</span><span class="s1">&#39;convert_lengths&#39;</span><span class="p">]</span>

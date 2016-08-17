@@ -167,6 +167,10 @@ automatically when creating a <a class="reference internal" href="../core/AtomGr
 the appropriate reader for the file type is selected (typically by the file
 extension but this choice can be overriden with the <code class="docutils literal"><span class="pre">format</span></code> argument to
 <a class="reference internal" href="../core/AtomGroup.html#MDAnalysis.core.AtomGroup.Universe" title="MDAnalysis.core.AtomGroup.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a>).</p>
+<p>If additional simulation data is available, it may be added to and read
+alongside a trajectory using
+<a class="reference internal" href="base.html#MDAnalysis.coordinates.base.ProtoReader.add_auxiliary" title="MDAnalysis.coordinates.base.ProtoReader.add_auxiliary"><code class="xref py py-meth docutils literal"><span class="pre">add_auxiliary()</span></code></a>. See the
+<a class="reference internal" href="../auxiliary/init.html#auxiliary-api"><span>Auxiliary API</span></a>.</p>
 </div>
 <div class="section" id="writers">
 <h2>5.1.2. Writers<a class="headerlink" href="#writers" title="Permalink to this headline">¶</a></h2>
@@ -437,7 +441,7 @@ I/O code can be written in C or python or a mixture thereof.</p>
 <p>In various places, MDAnalysis tries to automatically select appropriate formats
 (e.g. by looking at file extensions). In order to allow it to choose the
 correct format, all I/O classes must subclass either
-<code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.coordinates.base.ProtoReader</span></code> or
+<a class="reference internal" href="base.html#MDAnalysis.coordinates.base.ProtoReader" title="MDAnalysis.coordinates.base.ProtoReader"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.coordinates.base.ProtoReader</span></code></a> or
 <a class="reference internal" href="base.html#MDAnalysis.coordinates.base.Writer" title="MDAnalysis.coordinates.base.Writer"><code class="xref py py-class docutils literal"><span class="pre">MDAnalysis.coordinates.base.Writer</span></code></a> and set the <cite>format</cite> attribute
 with a string defining the expected suffix.
 To assign multiple suffixes to an I/O class, a list of suffixes
@@ -528,6 +532,8 @@ in <code class="xref py py-attr docutils literal"><span class="pre">Timestep._un
 </dd>
 <dt><code class="docutils literal"><span class="pre">volume</span></code></dt>
 <dd>system box volume (derived as the determinant of the box vectors of <code class="docutils literal"><span class="pre">dimensions</span></code>)</dd>
+<dt><code class="docutils literal"><span class="pre">aux</span></code></dt>
+<dd>namespace for the representative values of any added auxiliary data.</dd>
 </dl>
 </div></blockquote>
 </div>
@@ -706,6 +712,11 @@ unit for time (pico seconds by default)</dd>
 <dd>time of the current time step, in MDAnalysis time units (ps)</dd>
 <dt><code class="docutils literal"><span class="pre">frame</span></code></dt>
 <dd>frame number of the current time step (0-based)</dd>
+<dt><code class="docutils literal"><span class="pre">aux_list</span></code></dt>
+<dd>list of the names of any added auxiliary data.</dd>
+<dt><code class="docutils literal"><span class="pre">_auxs</span></code></dt>
+<dd>dictionary of the <a class="reference internal" href="../auxiliary/base.html#MDAnalysis.auxiliary.base.AuxReader" title="MDAnalysis.auxiliary.base.AuxReader"><code class="xref py py-class docutils literal"><span class="pre">AuxReader</span></code></a>
+instances for any added auxiliary data.</dd>
 </dl>
 </div></blockquote>
 <p><strong>Optional attributes</strong></p>

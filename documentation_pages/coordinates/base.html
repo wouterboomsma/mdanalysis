@@ -741,24 +741,363 @@ returned.</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="MDAnalysis.coordinates.base.Reader">
-<em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.base.</code><code class="descname">Reader</code><span class="sig-paren">(</span><em>filename</em>, <em>convert_units=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#Reader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.Reader" title="Permalink to this definition">¶</a></dt>
-<dd><p>Base class for trajectory readers that extends <code class="xref py py-class docutils literal"><span class="pre">ProtoReader</span></code> with a
-<code class="xref py py-meth docutils literal"><span class="pre">__del__()</span></code> method.</p>
-<p>New Readers should subclass <a class="reference internal" href="#MDAnalysis.coordinates.base.Reader" title="MDAnalysis.coordinates.base.Reader"><code class="xref py py-class docutils literal"><span class="pre">Reader</span></code></a> and properly implement a
-<code class="xref py py-meth docutils literal"><span class="pre">close()</span></code> method, to ensure proper release of resources (mainly file
-handles). Readers that are inherently safe in this regard should subclass
-<code class="xref py py-class docutils literal"><span class="pre">ProtoReader</span></code> instead.</p>
+<dt id="MDAnalysis.coordinates.base.ProtoReader">
+<em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.base.</code><code class="descname">ProtoReader</code><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#ProtoReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.ProtoReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for Readers, without a <code class="xref py py-meth docutils literal"><span class="pre">__del__()</span></code> method.</p>
+<p>Extends <a class="reference internal" href="#MDAnalysis.coordinates.base.IObase" title="MDAnalysis.coordinates.base.IObase"><code class="xref py py-class docutils literal"><span class="pre">IObase</span></code></a> with most attributes and methods of a generic
+Reader, with the exception of a <code class="xref py py-meth docutils literal"><span class="pre">__del__()</span></code> method. It should be used
+as base for Readers that do not need <code class="xref py py-meth docutils literal"><span class="pre">__del__()</span></code>, especially since
+having even an empty <code class="xref py py-meth docutils literal"><span class="pre">__del__()</span></code> might lead to memory leaks.</p>
 <p>See the <a class="reference internal" href="init.html#trajectory-api"><span>Trajectory API</span></a> definition in
 <a class="reference internal" href="init.html#module-MDAnalysis.coordinates.__init__" title="MDAnalysis.coordinates.__init__"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.coordinates.__init__</span></code></a> for the required attributes and
 methods.</p>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><code class="xref py py-class docutils literal"><span class="pre">ProtoReader</span></code></p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.coordinates.base.Reader" title="MDAnalysis.coordinates.base.Reader"><code class="xref py py-class docutils literal"><span class="pre">Reader</span></code></a></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 0.11.0: </span>Frames now 0-based instead of 1-based</p>
+</div>
+<dl class="method">
+<dt id="MDAnalysis.coordinates.base.ProtoReader.OtherWriter">
+<code class="descname">OtherWriter</code><span class="sig-paren">(</span><em>filename</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#ProtoReader.OtherWriter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.ProtoReader.OtherWriter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a writer appropriate for <em>filename</em>.</p>
+<p>Sets the default keywords <em>start</em>, <em>step</em> and <em>dt</em> (if
+available). <em>n_atoms</em> is always set from <code class="xref py py-attr docutils literal"><span class="pre">Reader.n_atoms</span></code>.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-meth docutils literal"><span class="pre">Reader.Writer()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">MDAnalysis.Writer()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.coordinates.base.ProtoReader.Writer">
+<code class="descname">Writer</code><span class="sig-paren">(</span><em>filename</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#ProtoReader.Writer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.ProtoReader.Writer" title="Permalink to this definition">¶</a></dt>
+<dd><p>A trajectory writer with the same properties as this trajectory.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.coordinates.base.ProtoReader.__getitem__">
+<code class="descname">__getitem__</code><span class="sig-paren">(</span><em>frame</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#ProtoReader.__getitem__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.ProtoReader.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the Timestep corresponding to <em>frame</em>.</p>
+<p>If <em>frame</em> is a integer then the corresponding frame is
+returned. Negative numbers are counted from the end.</p>
+<p>If frame is a <a class="reference external" href="http://docs.python.org/library/functions.html#slice" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">slice</span></code></a> then an iterator is returned that
+allows iteration over that part of the trajectory.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><em>frame</em> is a 0-based frame index.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.coordinates.base.ProtoReader.__iter__">
+<code class="descname">__iter__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#ProtoReader.__iter__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.ProtoReader.__iter__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterate over trajectory frames.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.coordinates.base.ProtoReader.__next__">
+<code class="descname">__next__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#ProtoReader.__next__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.ProtoReader.__next__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward one step to next frame when using the <cite>next</cite> builtin.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.coordinates.base.ProtoReader.add_auxiliary">
+<code class="descname">add_auxiliary</code><span class="sig-paren">(</span><em>auxname</em>, <em>auxdata</em>, <em>format=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#ProtoReader.add_auxiliary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.ProtoReader.add_auxiliary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add auxiliary data to be read alongside trajectory.</p>
+<p>Auxiliary data may be any data timeseries from the trajectory additional
+to that read in by the trajectory reader. <em>auxdata</em> can be an
+<a class="reference internal" href="../auxiliary/base.html#MDAnalysis.auxiliary.base.AuxReader" title="MDAnalysis.auxiliary.base.AuxReader"><code class="xref py py-class docutils literal"><span class="pre">AuxReader</span></code></a> instance, or the data
+itself as e.g. a filename; in the latter case an appropriate
+<a class="reference internal" href="../auxiliary/base.html#MDAnalysis.auxiliary.base.AuxReader" title="MDAnalysis.auxiliary.base.AuxReader"><code class="xref py py-class docutils literal"><span class="pre">AuxReader</span></code></a> is guessed from the
+data/file format. An appropriate <em>format</em> may also be directly provided
+as a key word argument.</p>
+<p>On adding, the AuxReader is initially matched to the current timestep
+of the trajectory, and will be updated when the trajectory timestep
+changes (through a call to <a class="reference internal" href="#MDAnalysis.coordinates.base.ProtoReader.next" title="MDAnalysis.coordinates.base.ProtoReader.next"><code class="xref py py-meth docutils literal"><span class="pre">next()</span></code></a> or jumping timesteps with
+<code class="docutils literal"><span class="pre">trajectory[i]</span></code>).</p>
+<p>The representative value(s) of the auxiliary data for each timestep (as
+calculated by the <a class="reference internal" href="../auxiliary/base.html#MDAnalysis.auxiliary.base.AuxReader" title="MDAnalysis.auxiliary.base.AuxReader"><code class="xref py py-class docutils literal"><span class="pre">AuxReader</span></code></a>) are
+stored in the current timestep in the <code class="docutils literal"><span class="pre">ts.aux</span></code> namespace under <em>auxname</em>;
+e.g. to add additional pull force data stored in pull-force.xvg:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PDB</span><span class="p">,</span> <span class="n">XTC</span><span class="p">)</span>
+<span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">add_auxiliary</span><span class="p">(</span><span class="s1">&#39;pull&#39;</span><span class="p">,</span> <span class="s1">&#39;pull-force.xvg&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The representative value for the current timestep may then be accessed
+as <code class="docutils literal"><span class="pre">u.trajectory.ts.aux.pull</span></code> or <code class="docutils literal"><span class="pre">u.trajectory.ts.aux['pull']</span></code>.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.coordinates.base.ProtoReader.remove_auxiliary" title="MDAnalysis.coordinates.base.ProtoReader.remove_auxiliary"><code class="xref py py-meth docutils literal"><span class="pre">remove_auxiliary()</span></code></a></p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Auxiliary data is assumed to be time-ordered, with no duplicates. See
+the <a class="reference internal" href="../auxiliary/init.html#auxiliary-api"><span>Auxiliary API</span></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="MDAnalysis.coordinates.base.ProtoReader.aux_list">
+<code class="descname">aux_list</code><a class="headerlink" href="#MDAnalysis.coordinates.base.ProtoReader.aux_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lists the names of added auxiliary data.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.coordinates.base.ProtoReader.check_slice_indices">
+<code class="descname">check_slice_indices</code><span class="sig-paren">(</span><em>start</em>, <em>stop</em>, <em>step</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#ProtoReader.check_slice_indices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.ProtoReader.check_slice_indices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check frame indices are valid and clip to fit trajectory</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>stop, step</strong> (<em>start,</em>) &#8211; Values representing the slice indices.
+Can use <cite>None</cite> to use defaults of (0, n_frames, and 1)
+respectively.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>start, stop, step</strong> &#8211;
+Integers representing the slice</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="MDAnalysis.coordinates.base.ProtoReader.dt">
+<code class="descname">dt</code><a class="headerlink" href="#MDAnalysis.coordinates.base.ProtoReader.dt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time between two trajectory frames in picoseconds.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="MDAnalysis.coordinates.base.ProtoReader.frame">
+<code class="descname">frame</code><a class="headerlink" href="#MDAnalysis.coordinates.base.ProtoReader.frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Frame number of the current time step.</p>
+<p>This is a simple short cut to <code class="xref py py-attr docutils literal"><span class="pre">Timestep.frame</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.coordinates.base.ProtoReader.get_aux_attribute">
+<code class="descname">get_aux_attribute</code><span class="sig-paren">(</span><em>auxname</em>, <em>attrname</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#ProtoReader.get_aux_attribute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.ProtoReader.get_aux_attribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the value of <em>attrname</em> from the auxiliary <em>auxname</em></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>auxname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the auxiliary to get value for</li>
+<li><strong>attrname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of gettable attribute in the auxiliary reader</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.coordinates.base.ProtoReader.set_aux_attribute" title="MDAnalysis.coordinates.base.ProtoReader.set_aux_attribute"><code class="xref py py-meth docutils literal"><span class="pre">set_aux_attribute()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.coordinates.base.ProtoReader.get_aux_descriptions">
+<code class="descname">get_aux_descriptions</code><span class="sig-paren">(</span><em>auxnames=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#ProtoReader.get_aux_descriptions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.ProtoReader.get_aux_descriptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get descriptions to allow reloading the specified auxiliaries.</p>
+<p>If no auxnames are provided, defaults to the full list of added
+auxiliaries.</p>
+<p>Passing the resultant description to <code class="docutils literal"><span class="pre">add_auxiliary()</span></code> will allow
+recreation of the auxiliary. e.g., to duplicate all auxiliaries into a
+second trajectory:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">descriptions</span> <span class="o">=</span> <span class="n">trajectory_1</span><span class="o">.</span><span class="n">get_aux_descriptions</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">aux</span> <span class="ow">in</span> <span class="n">descriptions</span><span class="p">:</span>
+    <span class="n">trajectory_2</span><span class="o">.</span><span class="n">add_auxiliary</span><span class="p">(</span><span class="o">**</span><span class="n">aux</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of dictionaries of the args/kwargs describing each auxiliary.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)">list</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="../auxiliary/base.html#MDAnalysis.auxiliary.base.AuxReader.get_description" title="MDAnalysis.auxiliary.base.AuxReader.get_description"><code class="xref py py-meth docutils literal"><span class="pre">MDAnalysis.auxiliary.base.AuxReader.get_description()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.coordinates.base.ProtoReader.iter_as_aux">
+<code class="descname">iter_as_aux</code><span class="sig-paren">(</span><em>auxname</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#ProtoReader.iter_as_aux"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.ProtoReader.iter_as_aux" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterate through timesteps for which there is at least one assigned
+step from the auxiliary <em>auxname</em> within the cutoff specified in <em>auxname</em>.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.coordinates.base.ProtoReader.next_as_aux" title="MDAnalysis.coordinates.base.ProtoReader.next_as_aux"><code class="xref py py-meth docutils literal"><span class="pre">next_as_aux()</span></code></a>, <a class="reference internal" href="#MDAnalysis.coordinates.base.ProtoReader.iter_auxiliary" title="MDAnalysis.coordinates.base.ProtoReader.iter_auxiliary"><code class="xref py py-meth docutils literal"><span class="pre">iter_auxiliary()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.coordinates.base.ProtoReader.iter_auxiliary">
+<code class="descname">iter_auxiliary</code><span class="sig-paren">(</span><em>auxname</em>, <em>start=None</em>, <em>stop=None</em>, <em>step=None</em>, <em>selected=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#ProtoReader.iter_auxiliary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.ProtoReader.iter_auxiliary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterate through the auxiliary <em>auxname</em> independently of the trajectory.</p>
+<p>Will iterate over the specified steps of the auxiliary (defaults to all
+steps). Allows to access all values in an auxiliary, including those out
+of the time range of the trajectory, without having to also iterate
+through the trajectory.</p>
+<p>After interation, the auxiliary will be repositioned at the current step.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>auxname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the auxiliary to iterate over.</li>
+<li><strong>stop, step)</strong> (<em>(start,</em>) &#8211; Options for iterating over a slice of the auxiliary.</li>
+<li><strong>selected</strong> (<em>lst | ndarray, optional</em>) &#8211; List of steps to iterate over.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><p class="first last"><a class="reference internal" href="../auxiliary/base.html#MDAnalysis.auxiliary.base.AuxStep" title="MDAnalysis.auxiliary.base.AuxStep"><code class="xref py py-class docutils literal"><span class="pre">AuxStep</span></code></a> object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.coordinates.base.ProtoReader.iter_as_aux" title="MDAnalysis.coordinates.base.ProtoReader.iter_as_aux"><code class="xref py py-meth docutils literal"><span class="pre">iter_as_aux()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.coordinates.base.ProtoReader.next">
+<code class="descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#ProtoReader.next"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.ProtoReader.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward one step to next frame.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.coordinates.base.ProtoReader.next_as_aux">
+<code class="descname">next_as_aux</code><span class="sig-paren">(</span><em>auxname</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#ProtoReader.next_as_aux"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.ProtoReader.next_as_aux" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move to the next timestep for which there is at least one step from
+the auxiliary <em>auxname</em> within the cutoff specified in <em>auxname</em>.</p>
+<p>This allows progression through the trajectory without encountering
+<code class="docutils literal"><span class="pre">NaN</span></code> representative values (unless these are specifically part of the
+auxiliary data).</p>
+<p>If the auxiliary cutoff is not set, where auxiliary steps are less frequent
+(<code class="docutils literal"><span class="pre">auxiliary.dt</span> <span class="pre">&gt;</span> <span class="pre">trajectory.dt</span></code>), this allows progression at the
+auxiliary pace (rounded to nearest timestep); while if the auxiliary
+steps are more frequent, this will work the same as calling
+<a class="reference internal" href="#MDAnalysis.coordinates.base.ProtoReader.next" title="MDAnalysis.coordinates.base.ProtoReader.next"><code class="xref py py-meth docutils literal"><span class="pre">next()</span></code></a>.</p>
+<p>See the <a class="reference internal" href="../auxiliary/init.html#auxiliary-api"><span>Auxiliary API</span></a>.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.coordinates.base.ProtoReader.iter_as_aux" title="MDAnalysis.coordinates.base.ProtoReader.iter_as_aux"><code class="xref py py-meth docutils literal"><span class="pre">iter_as_aux()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.coordinates.base.ProtoReader.remove_auxiliary">
+<code class="descname">remove_auxiliary</code><span class="sig-paren">(</span><em>auxname</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#ProtoReader.remove_auxiliary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.ProtoReader.remove_auxiliary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clear data and close the <a class="reference internal" href="../auxiliary/base.html#MDAnalysis.auxiliary.base.AuxReader" title="MDAnalysis.auxiliary.base.AuxReader"><code class="xref py py-class docutils literal"><span class="pre">AuxReader</span></code></a>
+for the auxiliary <em>auxname</em>.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.coordinates.base.ProtoReader.add_auxiliary" title="MDAnalysis.coordinates.base.ProtoReader.add_auxiliary"><code class="xref py py-meth docutils literal"><span class="pre">add_auxiliary()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.coordinates.base.ProtoReader.rename_aux">
+<code class="descname">rename_aux</code><span class="sig-paren">(</span><em>auxname</em>, <em>new</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#ProtoReader.rename_aux"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.ProtoReader.rename_aux" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the name of the auxiliary <em>auxname</em> to <em>new</em>.</p>
+<p>Provided there is not already an auxiliary named <em>new</em>, the auxiliary
+name will be changed in ts.aux namespace, the trajectory&#8217;s
+list of added auxiliaries, and in the auxiliary reader itself.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>auxname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the auxiliary to rename</li>
+<li><strong>new</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; New name to try set</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> &#8211;
+If the name <em>new</em> is already in use by an existing auxiliary.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.coordinates.base.ProtoReader.rewind">
+<code class="descname">rewind</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#ProtoReader.rewind"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.ProtoReader.rewind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Position at beginning of trajectory</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="MDAnalysis.coordinates.base.ProtoReader.set_aux_attribute">
+<code class="descname">set_aux_attribute</code><span class="sig-paren">(</span><em>auxname</em>, <em>attrname</em>, <em>new</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#ProtoReader.set_aux_attribute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.ProtoReader.set_aux_attribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the value of <em>attrname</em> in the auxiliary <em>auxname</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>auxname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the auxiliary to alter</li>
+<li><strong>attrname</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of settable attribute in the auxiliary reader</li>
+<li><strong>new</strong> &#8211; New value to try set <em>attrname</em> to</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.coordinates.base.ProtoReader.get_aux_attribute" title="MDAnalysis.coordinates.base.ProtoReader.get_aux_attribute"><code class="xref py py-meth docutils literal"><span class="pre">get_aux_attribute()</span></code></a>, <a class="reference internal" href="#MDAnalysis.coordinates.base.ProtoReader.rename_aux" title="MDAnalysis.coordinates.base.ProtoReader.rename_aux"><code class="xref py py-meth docutils literal"><span class="pre">rename_aux()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="MDAnalysis.coordinates.base.ProtoReader.time">
+<code class="descname">time</code><a class="headerlink" href="#MDAnalysis.coordinates.base.ProtoReader.time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time of the current frame in MDAnalysis time units (typically ps).</p>
+<p>This is either read straight from the Timestep, or calculated as
+time = <code class="xref py py-attr docutils literal"><span class="pre">Timestep.frame</span></code> * <a class="reference internal" href="#MDAnalysis.coordinates.base.Timestep.dt" title="MDAnalysis.coordinates.base.Timestep.dt"><code class="xref py py-attr docutils literal"><span class="pre">Timestep.dt</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="MDAnalysis.coordinates.base.ProtoReader.totaltime">
+<code class="descname">totaltime</code><a class="headerlink" href="#MDAnalysis.coordinates.base.ProtoReader.totaltime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total length of the trajectory n_frames * dt.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="MDAnalysis.coordinates.base.Reader">
+<em class="property">class </em><code class="descclassname">MDAnalysis.coordinates.base.</code><code class="descname">Reader</code><span class="sig-paren">(</span><em>filename</em>, <em>convert_units=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/coordinates/base.html#Reader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.coordinates.base.Reader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for trajectory readers that extends <a class="reference internal" href="#MDAnalysis.coordinates.base.ProtoReader" title="MDAnalysis.coordinates.base.ProtoReader"><code class="xref py py-class docutils literal"><span class="pre">ProtoReader</span></code></a> with a
+<code class="xref py py-meth docutils literal"><span class="pre">__del__()</span></code> method.</p>
+<p>New Readers should subclass <a class="reference internal" href="#MDAnalysis.coordinates.base.Reader" title="MDAnalysis.coordinates.base.Reader"><code class="xref py py-class docutils literal"><span class="pre">Reader</span></code></a> and properly implement a
+<code class="xref py py-meth docutils literal"><span class="pre">close()</span></code> method, to ensure proper release of resources (mainly file
+handles). Readers that are inherently safe in this regard should subclass
+<a class="reference internal" href="#MDAnalysis.coordinates.base.ProtoReader" title="MDAnalysis.coordinates.base.ProtoReader"><code class="xref py py-class docutils literal"><span class="pre">ProtoReader</span></code></a> instead.</p>
+<p>See the <a class="reference internal" href="init.html#trajectory-api"><span>Trajectory API</span></a> definition in
+<a class="reference internal" href="init.html#module-MDAnalysis.coordinates.__init__" title="MDAnalysis.coordinates.__init__"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.coordinates.__init__</span></code></a> for the required attributes and
+methods.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#MDAnalysis.coordinates.base.ProtoReader" title="MDAnalysis.coordinates.base.ProtoReader"><code class="xref py py-class docutils literal"><span class="pre">ProtoReader</span></code></a></p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified">Changed in version 0.11.0: </span>Most of the base Reader class definitions were offloaded to
-<code class="xref py py-class docutils literal"><span class="pre">ProtoReader</span></code> so as to allow the subclassing of Readers without a
+<a class="reference internal" href="#MDAnalysis.coordinates.base.ProtoReader" title="MDAnalysis.coordinates.base.ProtoReader"><code class="xref py py-class docutils literal"><span class="pre">ProtoReader</span></code></a> so as to allow the subclassing of Readers without a
 <code class="xref py py-meth docutils literal"><span class="pre">__del__()</span></code> method.  Created init method to create common
 functionality, all Reader subclasses must now <a class="reference external" href="http://docs.python.org/library/functions.html#super" title="(in Python v2.7)"><code class="xref py py-func docutils literal"><span class="pre">super()</span></code></a> through this
 class.  Added attribute <code class="xref py py-attr docutils literal"><span class="pre">_ts_kwargs</span></code>, which is created in init.

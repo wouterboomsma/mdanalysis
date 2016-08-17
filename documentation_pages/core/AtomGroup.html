@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>7.2. Fundamental building blocks — MDAnalysis.core.AtomGroup &mdash; MDAnalysis 0.15.1-dev0 documentation</title>
+    <title>8.2. Fundamental building blocks — MDAnalysis.core.AtomGroup &mdash; MDAnalysis 0.15.1-dev0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -29,9 +29,9 @@
           href="../../_static/opensearch.xml"/>
     <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
     <link rel="top" title="MDAnalysis 0.15.1-dev0 documentation" href="../../index.html" />
-    <link rel="up" title="7. Core modules" href="../core_modules.html" />
-    <link rel="next" title="7.3. Atom selection Hierarchy — MDAnalysis.core.Selection" href="Selection.html" />
-    <link rel="prev" title="7.1. Core functions of MDAnalysis" href="init.html" /> 
+    <link rel="up" title="8. Core modules" href="../core_modules.html" />
+    <link rel="next" title="8.3. Atom selection Hierarchy — MDAnalysis.core.Selection" href="Selection.html" />
+    <link rel="prev" title="8.1. Core functions of MDAnalysis" href="init.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -44,13 +44,13 @@
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="Selection.html" title="7.3. Atom selection Hierarchy — MDAnalysis.core.Selection"
+          <a href="Selection.html" title="8.3. Atom selection Hierarchy — MDAnalysis.core.Selection"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="init.html" title="7.1. Core functions of MDAnalysis"
+          <a href="init.html" title="8.1. Core functions of MDAnalysis"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.15.1-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../core_modules.html" accesskey="U">7. Core modules</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="../core_modules.html" accesskey="U">8. Core modules</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -60,26 +60,26 @@
             </a></p>
   <h3><a href="../../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">7.2. Fundamental building blocks &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.core.AtomGroup</span></code></a><ul>
-<li><a class="reference internal" href="#class-hierarchy">7.2.1. Class Hierarchy</a></li>
-<li><a class="reference internal" href="#manipulating-atoms-residues-and-segments">7.2.2. Manipulating atoms, residues, and segments</a></li>
-<li><a class="reference internal" href="#working-with-topologies">7.2.3. Working with Topologies</a></li>
-<li><a class="reference internal" href="#combining-objects-system-building">7.2.4. Combining objects: system building</a><ul>
-<li><a class="reference internal" href="#merging">7.2.4.1. Merging</a></li>
-<li><a class="reference internal" href="#replicating">7.2.4.2. Replicating</a></li>
+<li><a class="reference internal" href="#">8.2. Fundamental building blocks &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.core.AtomGroup</span></code></a><ul>
+<li><a class="reference internal" href="#class-hierarchy">8.2.1. Class Hierarchy</a></li>
+<li><a class="reference internal" href="#manipulating-atoms-residues-and-segments">8.2.2. Manipulating atoms, residues, and segments</a></li>
+<li><a class="reference internal" href="#working-with-topologies">8.2.3. Working with Topologies</a></li>
+<li><a class="reference internal" href="#combining-objects-system-building">8.2.4. Combining objects: system building</a><ul>
+<li><a class="reference internal" href="#merging">8.2.4.1. Merging</a></li>
+<li><a class="reference internal" href="#replicating">8.2.4.2. Replicating</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#classes-and-functions">7.2.5. Classes and functions</a></li>
+<li><a class="reference internal" href="#classes-and-functions">8.2.5. Classes and functions</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="init.html"
-                        title="previous chapter">7.1. Core functions of MDAnalysis</a></p>
+                        title="previous chapter">8.1. Core functions of MDAnalysis</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="Selection.html"
-                        title="next chapter">7.3. Atom selection Hierarchy &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.core.Selection</span></code></a></p>
+                        title="next chapter">8.3. Atom selection Hierarchy &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.core.Selection</span></code></a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -109,7 +109,7 @@
           <div class="body" role="main">
             
   <span class="target" id="module-MDAnalysis.core.AtomGroup"></span><div class="section" id="fundamental-building-blocks-mdanalysis-core-atomgroup">
-<h1>7.2. Fundamental building blocks &#8212; <a class="reference internal" href="#module-MDAnalysis.core.AtomGroup" title="MDAnalysis.core.AtomGroup"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.core.AtomGroup</span></code></a><a class="headerlink" href="#fundamental-building-blocks-mdanalysis-core-atomgroup" title="Permalink to this headline">¶</a></h1>
+<h1>8.2. Fundamental building blocks &#8212; <a class="reference internal" href="#module-MDAnalysis.core.AtomGroup" title="MDAnalysis.core.AtomGroup"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.core.AtomGroup</span></code></a><a class="headerlink" href="#fundamental-building-blocks-mdanalysis-core-atomgroup" title="Permalink to this headline">¶</a></h1>
 <p>The most important data structure in MDAnalysis is the
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>, which contains <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom" title="MDAnalysis.core.AtomGroup.Atom"><code class="xref py py-class docutils literal"><span class="pre">Atom</span></code></a> instances.</p>
 <p>A <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Universe" title="MDAnalysis.core.AtomGroup.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> is the user-visible entry point and collects all
@@ -120,7 +120,7 @@ molecule, ion, or ligand. A <a class="reference internal" href="#MDAnalysis.core
 residues such as a whole protein or a chain in a protein or all the
 water in the system.</p>
 <div class="section" id="class-hierarchy">
-<h2>7.2.1. Class Hierarchy<a class="headerlink" href="#class-hierarchy" title="Permalink to this headline">¶</a></h2>
+<h2>8.2.1. Class Hierarchy<a class="headerlink" href="#class-hierarchy" title="Permalink to this headline">¶</a></h2>
 <p>A <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Universe" title="MDAnalysis.core.AtomGroup.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> contains Segments, which contain Residues, which
 contain Atoms; all containers are derived from <a class="reference internal" href="#MDAnalysis.core.AtomGroup.AtomGroup" title="MDAnalysis.core.AtomGroup.AtomGroup"><code class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></code></a>, and
 thus one can always analyze them as a collection of atoms, independent
@@ -141,7 +141,7 @@ belongs. Each object provides three attributes (<a class="reference internal" hr
 that the object belongs to.</p>
 </div>
 <div class="section" id="manipulating-atoms-residues-and-segments">
-<h2>7.2.2. Manipulating atoms, residues, and segments<a class="headerlink" href="#manipulating-atoms-residues-and-segments" title="Permalink to this headline">¶</a></h2>
+<h2>8.2.2. Manipulating atoms, residues, and segments<a class="headerlink" href="#manipulating-atoms-residues-and-segments" title="Permalink to this headline">¶</a></h2>
 <p>When working with MDAnalysis it is useful to remember that the fundamental
 object is the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom" title="MDAnalysis.core.AtomGroup.Atom"><code class="xref py py-class docutils literal"><span class="pre">Atom</span></code></a>. Each particle in the topology is represented by
 exactly one <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom" title="MDAnalysis.core.AtomGroup.Atom"><code class="xref py py-class docutils literal"><span class="pre">Atom</span></code></a> instance. One <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Atom" title="MDAnalysis.core.AtomGroup.Atom"><code class="xref py py-class docutils literal"><span class="pre">Atom</span></code></a>, however, can be a member
@@ -217,7 +217,7 @@ the canonical residue id 42 (instead of <code class="docutils literal"><span cla
 </div>
 </div>
 <div class="section" id="working-with-topologies">
-<h2>7.2.3. Working with Topologies<a class="headerlink" href="#working-with-topologies" title="Permalink to this headline">¶</a></h2>
+<h2>8.2.3. Working with Topologies<a class="headerlink" href="#working-with-topologies" title="Permalink to this headline">¶</a></h2>
 <p>If the topology file given to the Universe had bonding information then this
 will have been loaded into the Universe as <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Universe.bonds" title="MDAnalysis.core.AtomGroup.Universe.bonds"><code class="xref py py-attr docutils literal"><span class="pre">Universe.bonds</span></code></a>
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Universe.angles" title="MDAnalysis.core.AtomGroup.Universe.angles"><code class="xref py py-attr docutils literal"><span class="pre">Universe.angles</span></code></a> <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Universe.dihedrals" title="MDAnalysis.core.AtomGroup.Universe.dihedrals"><code class="xref py py-attr docutils literal"><span class="pre">Universe.dihedrals</span></code></a> and <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Universe.impropers" title="MDAnalysis.core.AtomGroup.Universe.impropers"><code class="xref py py-attr docutils literal"><span class="pre">Universe.impropers</span></code></a>.</p>
@@ -272,14 +272,14 @@ determine bond lengths and angle sizes:</p>
 </div>
 </div>
 <div class="section" id="combining-objects-system-building">
-<h2>7.2.4. Combining objects: system building<a class="headerlink" href="#combining-objects-system-building" title="Permalink to this headline">¶</a></h2>
+<h2>8.2.4. Combining objects: system building<a class="headerlink" href="#combining-objects-system-building" title="Permalink to this headline">¶</a></h2>
 <p>It is often convenient to combined multiple groups of atoms into a single
 object. If they are contained in a single <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Universe" title="MDAnalysis.core.AtomGroup.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> then the methods
 described above (especially manipulating the segments) might be
 useful. However, if the atoms reside in different universes, the <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Merge" title="MDAnalysis.core.AtomGroup.Merge"><code class="xref py py-func docutils literal"><span class="pre">Merge()</span></code></a>
 function can be used.</p>
 <div class="section" id="merging">
-<h3>7.2.4.1. Merging<a class="headerlink" href="#merging" title="Permalink to this headline">¶</a></h3>
+<h3>8.2.4.1. Merging<a class="headerlink" href="#merging" title="Permalink to this headline">¶</a></h3>
 <p>In the following example for <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Merge" title="MDAnalysis.core.AtomGroup.Merge"><code class="xref py py-func docutils literal"><span class="pre">Merge()</span></code></a>, protein, ligand, and solvent were
 externally prepared in three different PDB files. They are loaded into separate
 <a class="reference internal" href="#MDAnalysis.core.AtomGroup.Universe" title="MDAnalysis.core.AtomGroup.Universe"><code class="xref py py-class docutils literal"><span class="pre">Universe</span></code></a> objects (where they could be further manipulated,
@@ -296,7 +296,7 @@ combine all of them together:</p>
 <p>The complete system is then written out to a new PDB file.</p>
 </div>
 <div class="section" id="replicating">
-<h3>7.2.4.2. Replicating<a class="headerlink" href="#replicating" title="Permalink to this headline">¶</a></h3>
+<h3>8.2.4.2. Replicating<a class="headerlink" href="#replicating" title="Permalink to this headline">¶</a></h3>
 <p>It is also possible to replicate a molecule to build a system with
 multiple copies of the same molecule. In the example, we replicate an
 AdK molecule and then translate and rotate the second copy:</p>
@@ -335,7 +335,7 @@ in the new merged universe.</p>
 </div>
 </div>
 <div class="section" id="classes-and-functions">
-<h2>7.2.5. Classes and functions<a class="headerlink" href="#classes-and-functions" title="Permalink to this headline">¶</a></h2>
+<h2>8.2.5. Classes and functions<a class="headerlink" href="#classes-and-functions" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="MDAnalysis.core.AtomGroup.Universe">
 <em class="property">class </em><code class="descclassname">MDAnalysis.core.AtomGroup.</code><code class="descname">Universe</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/core/AtomGroup.html#Universe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.core.AtomGroup.Universe" title="Permalink to this definition">¶</a></dt>
@@ -4535,13 +4535,13 @@ as_Universe(*args, **kwargs) --&gt; Universe(*args, **kwargs)
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="Selection.html" title="7.3. Atom selection Hierarchy — MDAnalysis.core.Selection"
+          <a href="Selection.html" title="8.3. Atom selection Hierarchy — MDAnalysis.core.Selection"
              >next</a> |</li>
         <li class="right" >
-          <a href="init.html" title="7.1. Core functions of MDAnalysis"
+          <a href="init.html" title="8.1. Core functions of MDAnalysis"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.15.1-dev0 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="../core_modules.html" >7. Core modules</a> &raquo;</li> 
+          <li class="nav-item nav-item-1"><a href="../core_modules.html" >8. Core modules</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

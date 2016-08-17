@@ -1,0 +1,297 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>7.4. XVG auxiliary reader — MDAnalysis.auxiliary.XVG &mdash; MDAnalysis 0.15.1-dev0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.15.1-dev0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within MDAnalysis 0.15.1-dev0 documentation"
+          href="../../_static/opensearch.xml"/>
+    <link rel="shortcut icon" href="../../_static/mdanalysis-logo.ico"/>
+    <link rel="top" title="MDAnalysis 0.15.1-dev0 documentation" href="../../index.html" />
+    <link rel="up" title="7. Auxiliary modules" href="../auxiliary_modules.html" />
+    <link rel="next" title="8. Core modules" href="../core_modules.html" />
+    <link rel="prev" title="7.3. Common functions for auxiliary reading — MDAnalysis.auxiliary.core" href="core.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../core_modules.html" title="8. Core modules"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="core.html" title="7.3. Common functions for auxiliary reading — MDAnalysis.auxiliary.core"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.15.1-dev0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../auxiliary_modules.html" accesskey="U">7. Auxiliary modules</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/mdanalysis-logo-200x150.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">7.4. XVG auxiliary reader &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.auxiliary.XVG</span></code></a><ul>
+<li><a class="reference internal" href="#xvg-readers">7.4.1. XVG Readers</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="core.html"
+                        title="previous chapter">7.3. Common functions for auxiliary reading &#8212; <code class="docutils literal"><span class="pre">MDAnalysis.auxiliary.core</span></code></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../core_modules.html"
+                        title="next chapter">8. Core modules</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/documentation_pages/auxiliary/XVG.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="module-MDAnalysis.auxiliary.XVG"></span><div class="section" id="xvg-auxiliary-reader-mdanalysis-auxiliary-xvg">
+<h1>7.4. XVG auxiliary reader &#8212; <a class="reference internal" href="#module-MDAnalysis.auxiliary.XVG" title="MDAnalysis.auxiliary.XVG"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.auxiliary.XVG</span></code></a><a class="headerlink" href="#xvg-auxiliary-reader-mdanalysis-auxiliary-xvg" title="Permalink to this headline">¶</a></h1>
+<p>xvg files are produced by Gromacs during simulation or analysis, formatted
+for plotting data with Grace.</p>
+<p>Data is column-formatted; time/data selection is enabled by providing column
+indices.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By default, the time of each step is assumed to be stored in the first column,
+in units of ps.</p>
+</div>
+<dl class="class">
+<dt id="MDAnalysis.auxiliary.XVG.XVGStep">
+<em class="property">class </em><code class="descclassname">MDAnalysis.auxiliary.XVG.</code><code class="descname">XVGStep</code><span class="sig-paren">(</span><em>time_selector=0</em>, <em>data_selector=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/auxiliary/XVG.html#XVGStep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.auxiliary.XVG.XVGStep" title="Permalink to this definition">¶</a></dt>
+<dd><p>AuxStep class for .xvg file format.</p>
+<p>Extends the base AuxStep class to allow selection of time and
+data-of-interest fields (by column index) from the full set of data read
+each step.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>time_selector</strong> (<em>int | None, optional</em>) &#8211; Index of column in .xvg file storing time, assumed to be in ps. Default
+value is 0 (i.e. first column).</li>
+<li><strong>data_selector</strong> (<em>list of int | None, optional</em>) &#8211; List of indices of columns in .xvg file containing data of interest to
+be stored in <code class="docutils literal"><span class="pre">data</span></code>. Default value is <code class="docutils literal"><span class="pre">None</span></code>.</li>
+<li><strong>**kwargs</strong> &#8211; <p>Other AuxStep options.</p>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="base.html#MDAnalysis.auxiliary.base.AuxStep" title="MDAnalysis.auxiliary.base.AuxStep"><code class="xref py py-class docutils literal"><span class="pre">AuxStep</span></code></a></p>
+</div>
+</dd></dl>
+
+<div class="section" id="xvg-readers">
+<h2>7.4.1. XVG Readers<a class="headerlink" href="#xvg-readers" title="Permalink to this headline">¶</a></h2>
+<p>The default <a class="reference internal" href="#MDAnalysis.auxiliary.XVG.XVGReader" title="MDAnalysis.auxiliary.XVG.XVGReader"><code class="xref py py-class docutils literal"><span class="pre">XVGReader</span></code></a> reads and stores the full contents of the .xvg
+file on initialisation, while a second reader (<a class="reference internal" href="#MDAnalysis.auxiliary.XVG.XVGFileReader" title="MDAnalysis.auxiliary.XVG.XVGFileReader"><code class="xref py py-class docutils literal"><span class="pre">XVGFileReader</span></code></a>) that
+reads steps one at a time as required is also provided for when a lower memory
+footprint is desired.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Data is assumed to be time-ordered.</p>
+<p class="last">Multiple datasets, separated in the .xvg file by &#8216;&amp;&#8217;, are currently not
+supported (the readers will stop at the first line starting &#8216;&amp;&#8217;).</p>
+</div>
+<dl class="class">
+<dt id="MDAnalysis.auxiliary.XVG.XVGReader">
+<em class="property">class </em><code class="descclassname">MDAnalysis.auxiliary.XVG.</code><code class="descname">XVGReader</code><span class="sig-paren">(</span><em>filename</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/auxiliary/XVG.html#XVGReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.auxiliary.XVG.XVGReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Auxiliary reader to read data from an .xvg file.</p>
+<p>Detault reader for .xvg files. All data from the file will be read and stored
+on initialisation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Location of the file containing the auxiliary data.</li>
+<li><strong>**kwargs</strong> &#8211; <p>Other AuxReader options.</p>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="base.html#MDAnalysis.auxiliary.base.AuxReader" title="MDAnalysis.auxiliary.base.AuxReader"><code class="xref py py-class docutils literal"><span class="pre">AuxReader</span></code></a></p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The file is assumed to be of a size such that reading and storing the full
+contents is practical.</p>
+</div>
+<dl class="method">
+<dt id="MDAnalysis.auxiliary.XVG.XVGReader.read_all_times">
+<code class="descname">read_all_times</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/auxiliary/XVG.html#XVGReader.read_all_times"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.auxiliary.XVG.XVGReader.read_all_times" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get list of time at each step.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Time at each step.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list of float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="MDAnalysis.auxiliary.XVG.XVGFileReader">
+<em class="property">class </em><code class="descclassname">MDAnalysis.auxiliary.XVG.</code><code class="descname">XVGFileReader</code><span class="sig-paren">(</span><em>filename</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/auxiliary/XVG.html#XVGFileReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.auxiliary.XVG.XVGFileReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Auxiliary reader to read (step at a time) from an .xvg file.</p>
+<p>An alternative XVG reader which reads each step from the .xvg file as
+needed (rather than reading and storing all from the start), for a lower
+memory footprint.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>filename</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Location of the file containing the auxiliary data.</li>
+<li><strong>**kwargs</strong> &#8211; <p>Other AuxReader options.</p>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="base.html#MDAnalysis.auxiliary.base.AuxFileReader" title="MDAnalysis.auxiliary.base.AuxFileReader"><code class="xref py py-class docutils literal"><span class="pre">AuxFileReader</span></code></a></p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The default reader for .xvg files is <a class="reference internal" href="#MDAnalysis.auxiliary.XVG.XVGReader" title="MDAnalysis.auxiliary.XVG.XVGReader"><code class="xref py py-class docutils literal"><span class="pre">XVGReader</span></code></a>.</p>
+</div>
+<dl class="method">
+<dt id="MDAnalysis.auxiliary.XVG.XVGFileReader.read_all_times">
+<code class="descname">read_all_times</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/auxiliary/XVG.html#XVGFileReader.read_all_times"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.auxiliary.XVG.XVGFileReader.read_all_times" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterate through all steps to build times list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Time of each step</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list of float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="MDAnalysis.auxiliary.XVG.uncomment">
+<code class="descclassname">MDAnalysis.auxiliary.XVG.</code><code class="descname">uncomment</code><span class="sig-paren">(</span><em>lines</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/auxiliary/XVG.html#uncomment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.auxiliary.XVG.uncomment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove comments from lines in an .xvg file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>lines</strong> (<em>list of str</em>) &#8211; Lines as directly read from .xvg file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><em>str</em> &#8211;
+The next non-comment line, with any trailing comments removed</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../core_modules.html" title="8. Core modules"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="core.html" title="7.3. Common functions for auxiliary reading — MDAnalysis.auxiliary.core"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">MDAnalysis 0.15.1-dev0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../auxiliary_modules.html" >7. Auxiliary modules</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2005-2015, Naveen Michaud-Agrawal, Elizabeth J. Denning, Christian Beckstein (logo), Joshua L. Adelman, Balasubramanian, Jonathan Barnoud, Alejandro Bernardin, Bart Bruininks, Sébastien Buchoux, David Caplan, Matthieu Chavent, Robert Delgado, John Detlefs, Xavier Deupi, Jan Domanski, David L. Dotson, Lennard van der Feltz, Philip Fowler, Joseph Goose, Richard J. Gowers, Lukas Grossar, Abhinav Gupta, Benjamin Hall, Eugen Hruska, Kyle J. Huston, Joe Jordan, Max Linke, Jinju Lu, Robert McGibbon, Manuel Nuno Melo, Fiona Naughton, Alex Nesterenko, Hai Nguyen, Mattia F. Palermo, Danny Parton, Joshua L. Phillips, Tyler Reddy, Paul Rigor, Carlos Yanez S., Utkarsh Saxena, Sean L. Seyler, Andy Somogyi, Caio S. Souza, Lukas Stelzl, Gorman Stock, Isaac Virshup, Zhuyi Xue, and Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.
+    </div>
+  </body>
+</html>
