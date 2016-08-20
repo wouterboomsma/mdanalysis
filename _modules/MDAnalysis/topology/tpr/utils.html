@@ -121,6 +121,20 @@
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">obj</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">setting</span> <span class="k">as</span> <span class="n">S</span>
 
+
+<div class="viewcode-block" id="do_string"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.utils.do_string">[docs]</a><span class="k">def</span> <span class="nf">do_string</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Emulate gmx_fio_do_string</span>
+
+<span class="sd">    gmx_fio_do_string reads a string from a XDR file. On the contraty to the</span>
+<span class="sd">    python unpack_string, gmx_fio_do_string reads the size as an unsigned</span>
+<span class="sd">    interger before reading the actual string.</span>
+
+<span class="sd">    See &lt;gromacs-2016-src&gt;/src/gromacs/fileio/gmx_system_xdr.c:454</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_string</span><span class="p">()</span></div>
+
+
 <div class="viewcode-block" id="ndo_int"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.utils.ndo_int">[docs]</a><span class="k">def</span> <span class="nf">ndo_int</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;mimic of gmx_fio_ndo_real in gromacs&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span></div>
@@ -145,7 +159,7 @@
     <span class="k">return</span> <span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">unpack_farray</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">DIM</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span></div>
 
 
-<div class="viewcode-block" id="fver_err"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.utils.fver_err">[docs]</a><span class="k">def</span> <span class="nf">fver_err</span><span class="p">(</span><span class="n">fver</span><span class="p">):</span>
+<div class="viewcode-block" id="fileVersion_err"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.utils.fileVersion_err">[docs]</a><span class="k">def</span> <span class="nf">fileVersion_err</span><span class="p">(</span><span class="n">fver</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">fver</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">S</span><span class="o">.</span><span class="n">SUPPORTED_VERSIONS</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
             <span class="s2">&quot;Your tpx version is {0}, which this parser does not support, yet &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -163,38 +177,39 @@
 
 
 <div class="viewcode-block" id="read_tpxheader"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.utils.read_tpxheader">[docs]</a><span class="k">def</span> <span class="nf">read_tpxheader</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;this function is now compatible with do_tpxheader in tpxio.c&quot;&quot;&quot;</span>
-    <span class="n">number</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">()</span>  <span class="c1"># ?</span>
-    <span class="n">ver_str</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_string</span><span class="p">()</span>  <span class="c1"># version string e.g. VERSION 4.0.5</span>
+    <span class="sd">&quot;&quot;&quot;this function is now compatible with do_tpxheader in tpxio.cpp</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Last compatibility check with gromacs-2016</span>
+    <span class="n">ver_str</span> <span class="o">=</span> <span class="n">do_string</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># version string e.g. VERSION 4.0.5</span>
     <span class="n">precision</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">()</span>  <span class="c1"># e.g. 4</span>
     <span class="n">define_unpack_real</span><span class="p">(</span><span class="n">precision</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-    <span class="n">fver</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">()</span>  <span class="c1"># version of tpx file</span>
-    <span class="n">fver_err</span><span class="p">(</span><span class="n">fver</span><span class="p">)</span>
+    <span class="n">fileVersion</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">()</span>  <span class="c1"># version of tpx file</span>
+    <span class="n">fileVersion_err</span><span class="p">(</span><span class="n">fileVersion</span><span class="p">)</span>
 
-    <span class="n">fgen</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">()</span> <span class="k">if</span> <span class="n">fver</span> <span class="o">&gt;=</span> <span class="mi">26</span> <span class="k">else</span> <span class="mi">0</span>  <span class="c1"># generation of tpx file, e.g. 17</span>
+    <span class="c1"># This is for backward compatibility with development version 77-79 where</span>
+    <span class="c1"># the tag was, mistakenly, placed before the generation.</span>
+    <span class="k">if</span> <span class="mi">77</span> <span class="o">&lt;=</span> <span class="n">fileVersion</span> <span class="o">&lt;=</span> <span class="mi">79</span><span class="p">:</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">()</span>  <span class="c1"># the value is 8, but haven&#39;t found the</span>
+        <span class="n">file_tag</span> <span class="o">=</span> <span class="n">do_string</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="n">fileGeneration</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">()</span> <span class="k">if</span> <span class="n">fileVersion</span> <span class="o">&gt;=</span> <span class="mi">26</span> <span class="k">else</span> <span class="mi">0</span>  <span class="c1"># generation of tpx file, e.g. 17</span>
 
     <span class="c1"># Versions before 77 don&#39;t have the tag, set it to TPX_TAG_RELEASE file_tag</span>
     <span class="c1"># file_tag is used for comparing with tpx_tag. Only tpr files with a</span>
     <span class="c1"># tpx_tag from a lower or the same version of gromacs code can be parsed by</span>
     <span class="c1"># the tpxio.c</span>
 
-    <span class="k">if</span> <span class="n">fver</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
-        <span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">()</span>  <span class="c1"># the value is 8, but haven&#39;t found the</span>
-        <span class="c1"># corresponding code in the</span>
-        <span class="c1"># &lt;gromacs-4.6.1-dir&gt;/src/gmxlib/tpxio.c yet.</span>
-        <span class="n">file_tag</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_string</span><span class="p">()</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">file_tag</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">TPX_TAG_RELEASE</span>
+    <span class="n">file_tag</span> <span class="o">=</span> <span class="n">do_string</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="k">if</span> <span class="n">fileVersion</span> <span class="o">&gt;=</span> <span class="mi">81</span> <span class="k">else</span> <span class="n">S</span><span class="o">.</span><span class="n">TPX_TAG_RELEASE</span>
 
     <span class="n">natoms</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">()</span>  <span class="c1"># total number of atoms</span>
-    <span class="n">ngtc</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">()</span> <span class="k">if</span> <span class="n">fver</span> <span class="o">&gt;=</span> <span class="mi">28</span> <span class="k">else</span> <span class="mi">0</span>  <span class="c1"># number of groups for T-coupling</span>
+    <span class="n">ngtc</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">()</span> <span class="k">if</span> <span class="n">fileVersion</span> <span class="o">&gt;=</span> <span class="mi">28</span> <span class="k">else</span> <span class="mi">0</span>  <span class="c1"># number of groups for T-coupling</span>
 
-    <span class="k">if</span> <span class="n">fver</span> <span class="o">&lt;</span> <span class="mi">62</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">fileVersion</span> <span class="o">&lt;</span> <span class="mi">62</span><span class="p">:</span>
         <span class="c1"># not sure what these two are for.</span>
         <span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">()</span>  <span class="c1"># idum</span>
         <span class="n">data</span><span class="o">.</span><span class="n">unpack_real</span><span class="p">()</span>  <span class="c1"># rdum</span>
 
-    <span class="n">fep_state</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">()</span> <span class="k">if</span> <span class="n">fver</span> <span class="o">&gt;=</span> <span class="mi">79</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="n">fep_state</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">()</span> <span class="k">if</span> <span class="n">fileVersion</span> <span class="o">&gt;=</span> <span class="mi">79</span> <span class="k">else</span> <span class="mi">0</span>
 
     <span class="c1"># actually, it&#39;s lambda, not sure what is it. us lamb because lambda is a</span>
     <span class="c1"># keywod in python</span>
@@ -206,17 +221,17 @@
     <span class="n">bF</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">()</span>  <span class="c1"># has force or not</span>
     <span class="n">bBox</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">()</span>  <span class="c1"># has box or not</span>
 
-    <span class="n">th</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">TpxHeader</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">ver_str</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span>
-                       <span class="n">fver</span><span class="p">,</span> <span class="n">fgen</span><span class="p">,</span> <span class="n">file_tag</span><span class="p">,</span> <span class="n">natoms</span><span class="p">,</span> <span class="n">ngtc</span><span class="p">,</span> <span class="n">fep_state</span><span class="p">,</span> <span class="n">lamb</span><span class="p">,</span>
+    <span class="n">th</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">TpxHeader</span><span class="p">(</span><span class="n">ver_str</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">fileVersion</span><span class="p">,</span> <span class="n">fileGeneration</span><span class="p">,</span>
+                       <span class="n">file_tag</span><span class="p">,</span> <span class="n">natoms</span><span class="p">,</span> <span class="n">ngtc</span><span class="p">,</span> <span class="n">fep_state</span><span class="p">,</span> <span class="n">lamb</span><span class="p">,</span>
                        <span class="n">bIr</span><span class="p">,</span> <span class="n">bTop</span><span class="p">,</span> <span class="n">bX</span><span class="p">,</span> <span class="n">bV</span><span class="p">,</span> <span class="n">bF</span><span class="p">,</span> <span class="n">bBox</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">th</span></div>
 
 
-<div class="viewcode-block" id="extract_box_info"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.utils.extract_box_info">[docs]</a><span class="k">def</span> <span class="nf">extract_box_info</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">fver</span><span class="p">):</span>
+<div class="viewcode-block" id="extract_box_info"><a class="viewcode-back" href="../../../../documentation_pages/topology/tpr_util.html#MDAnalysis.topology.tpr.utils.extract_box_info">[docs]</a><span class="k">def</span> <span class="nf">extract_box_info</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">fileVersion</span><span class="p">):</span>
     <span class="n">box</span> <span class="o">=</span> <span class="n">ndo_rvec</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">DIM</span><span class="p">)</span>
-    <span class="n">box_rel</span> <span class="o">=</span> <span class="n">ndo_rvec</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">DIM</span><span class="p">)</span> <span class="k">if</span> <span class="n">fver</span> <span class="o">&gt;=</span> <span class="mi">51</span> <span class="k">else</span> <span class="mi">0</span>
-    <span class="n">box_v</span> <span class="o">=</span> <span class="n">ndo_rvec</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">DIM</span><span class="p">)</span> <span class="k">if</span> <span class="n">fver</span> <span class="o">&gt;=</span> <span class="mi">28</span> <span class="k">else</span> <span class="bp">None</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">fver</span> <span class="o">&lt;</span> <span class="mi">56</span><span class="p">):</span>
+    <span class="n">box_rel</span> <span class="o">=</span> <span class="n">ndo_rvec</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">DIM</span><span class="p">)</span> <span class="k">if</span> <span class="n">fileVersion</span> <span class="o">&gt;=</span> <span class="mi">51</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="n">box_v</span> <span class="o">=</span> <span class="n">ndo_rvec</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">DIM</span><span class="p">)</span> <span class="k">if</span> <span class="n">fileVersion</span> <span class="o">&gt;=</span> <span class="mi">28</span> <span class="k">else</span> <span class="bp">None</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">fileVersion</span> <span class="o">&lt;</span> <span class="mi">56</span><span class="p">):</span>
         <span class="n">ndo_rvec</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">DIM</span><span class="p">)</span>  <span class="c1"># mdum?</span>
 
     <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span><span class="n">box</span><span class="p">,</span> <span class="n">box_rel</span><span class="p">,</span> <span class="n">box_v</span><span class="p">)</span></div>
@@ -290,8 +305,7 @@
     <span class="n">symtab_nr</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_int</span><span class="p">()</span>  <span class="c1"># number of symbols</span>
     <span class="n">symtab</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">symtab_nr</span><span class="p">):</span>
-        <span class="n">j</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_fstring</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># strings are separated by void</span>
-        <span class="n">j</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">unpack_string</span><span class="p">()</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">do_string</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="n">symtab</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">symtab</span></div>
 
