@@ -117,7 +117,6 @@ module. The derived classes must follow the Trajectory API in
 
 from six.moves import range
 import six
-from contextlib import contextmanager
 import itertools
 import os.path
 import warnings
@@ -137,42 +136,6 @@ from ..lib import util
 from ..lib.util import asiterable
 from . import core
 from .. import NoDataError
-
-
-class FH(object):
-    """Smart file handle object
-
-    Remembers last known position as `last_pos`
-
-    Provides two context managers:
-      - from_start
-      - from_last_position
-    """
-    def __init__(self, filename):
-        self.filename = filename
-        # last known position of the file handle
-        self.last_pos = 0
-        # where we store the file handle
-        self.fh = None
-
-    @contextmanager
-    def from_last_position(self, remember_last=False):
-        fh = self.fh = util.anyopen(self.filename, 'r')
-        fh.seek(self.last_pos)
-        try:
-            yield fh
-        finally:
-            if remember_last:
-                self.last_pos = fh.tell()
-            fh.close()
-
-    @contextmanager
-    def from_start(self):
-        fh = self.fh = util.anyopen(self.filename, 'r')
-        try:
-            yield fh
-        finally:
-            fh.close()
 
 
 class Timestep(object):
@@ -1371,7 +1334,7 @@ class NewReader(ProtoReader):
     """Super top secret magical class that fixes all known (and unknown) bugs"""
     def __init__(self, filename, convert_units=None, **kwargs):
         self.filename = filename
-        self._fh = FH(filename)
+        self._last_fh_pos = 0  # last known position of file handle
 
         if convert_units is None:
             convert_units = flags['convert_lengths']
@@ -1390,7 +1353,7 @@ class NewReader(ProtoReader):
 
     def _update_last_fh_position(self, pos):
         """Update the last known position of the file handle"""
-        self._fh.last_pos = pos
+        self._last_fh_pos = pos
 
     def rewind(self):
         self._reopen()
@@ -1398,7 +1361,7 @@ class NewReader(ProtoReader):
 
     def _full_iter(self):
         self._reopen()
-        with self._fh.from_start() as self._file:
+        with util.openany(self.filename, 'r') as self._file:
             while True:
                 try:
                     yield self._read_next_timestep()
@@ -1407,15 +1370,16 @@ class NewReader(ProtoReader):
                     raise StopIteration
 
     def _sliced_iter(self, frames):
-        with self._fh.from_start() as self._file:
+        with util.openany(self.filename, 'r') as self._file:
             for f in frames:
                 yield self._read_frame(f)
-                self.rewind()
-                raise StopIteration
+        self.rewind()
+        raise StopIteration
 
     def _goto_frame(self, i):
-        with self._fh.from_start() as self._file:
-            return self._read_frame(i)
+        with util.openany(self.filename, 'r') as self._file:
+            ts = self._read_frame(i)
+        return ts
 
     def __iter__(self):
         return self._full_iter()
@@ -1429,7 +1393,6 @@ class NewReader(ProtoReader):
                                  "".format(frame, len(self)))
             return frame
 
-
         if isinstance(item, int):
             return self._goto_frame(apply_limits(item))
         elif isinstance(item, (list, np.ndarray)):
@@ -1438,19 +1401,22 @@ class NewReader(ProtoReader):
             return self._sliced_iter(item)
 
     def __next__(self):
-        return self.next()
+        with util.openany(self.filename, 'r') as self._file:
+            try:
+                self._file.seek(self._last_fh_pos)
+                ts = self._read_next_timestep()
+            except (EOFError, IOError):
+                self.rewind()
+                raise StopIteration
+            else:
+                self._last_fh_pos = self._file.tell()
+                return ts
 
-    def next(self):
-        try:
-            with self._fh.from_last_position(remember_last=True) as self._file:
-                return self._read_next_timestep()
-        except (EOFError, IOError):
-            self.rewind()
-            raise StopIteration
+    next = __next__
 
     def close(self):
         # "close" by moving last position to start
-        self._fh.last_pos = 0
+        self._last_fh_pos = 0
 
 
 class ChainReader(ProtoReader):
