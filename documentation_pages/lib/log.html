@@ -173,7 +173,7 @@ and the filter list to empty.</p>
 
 <dl class="class">
 <dt id="MDAnalysis.lib.log.ProgressMeter">
-<em class="property">class </em><code class="descclassname">MDAnalysis.lib.log.</code><code class="descname">ProgressMeter</code><span class="sig-paren">(</span><em>numsteps</em>, <em>format=None</em>, <em>interval=10</em>, <em>offset=1</em>, <em>quiet=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/log.html#ProgressMeter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.log.ProgressMeter" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">MDAnalysis.lib.log.</code><code class="descname">ProgressMeter</code><span class="sig-paren">(</span><em>numsteps</em>, <em>format=None</em>, <em>interval=10</em>, <em>offset=1</em>, <em>quiet=False</em>, <em>dynamic=True</em>, <em>format_handling='auto'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/log.html#ProgressMeter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.log.ProgressMeter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simple progress meter</p>
 <p>Usage:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">)</span>
@@ -190,77 +190,71 @@ Step   200/10000 [  2.0%]
 ...
 </pre></div>
 </div>
-<p>Because the default <em>format</em> string</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="s2">&quot;Step </span><span class="si">%(step)5d</span><span class="s2">/</span><span class="si">%(numsteps)d</span><span class="s2"> [</span><span class="si">%(percentage)5.1f%%</span><span class="s2">]</span><span class="se">\r</span><span class="s2">&quot;</span>
+<p>The default <em>format</em> string is:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>Step {step:5d}/{numsteps} [{percentage:5.1f}%]
 </pre></div>
 </div>
-<p>ends with a carriage return <code class="docutils literal"><span class="pre">\r</span></code> and not a newline <code class="docutils literal"><span class="pre">\n</span></code>, the
-lines will be printed on top of each other.</p>
+<p>By default, each line of the progress meter is displayed on top of the
+previous one. To prevent this behaviour, set the <em>dynamic</em> keyword to
+<code class="docutils literal"><span class="pre">False</span></code>.</p>
 <p>It is possible to embed (almost) arbitrary additional data in the
 format string, for example a current RMSD value:</p>
-<blockquote>
-<div><dl class="docutils">
-<dt>pm = ProgressMeter(u.trajectory.n_frames, interval=100,</dt>
-<dd>&#8220;RMSD %(rmsd)5.2f at %(step)5d/%(numsteps)d [%(percentage)5.1f%%]r&#8221;)</dd>
-<dt>for ts in u.trajectory:</dt>
-<dd>pm.echo(ts.frame, rmsd=current_rmsd)
-...</dd>
-</dl>
-</div></blockquote>
-<dl class="docutils">
-<dt>This will print something like</dt>
-<dd>RMSD   1.02 at  100/10000 [  1.0%]
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">format_line</span> <span class="o">=</span> <span class="s2">&quot;RMSD {rmsd:5.2f} at {step:5d}/{numsteps} [{percentage:5.1f}%]&quot;</span>
+<span class="n">pm</span> <span class="o">=</span> <span class="n">ProgressMeter</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">n_frames</span><span class="p">,</span>
+                   <span class="n">interval</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="n">format_line</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">:</span>
+   <span class="n">pm</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span><span class="p">,</span> <span class="n">rmsd</span><span class="o">=</span><span class="n">current_rmsd</span><span class="p">)</span>
+   <span class="o">...</span>
+</pre></div>
+</div>
+<p>This will print something like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>RMSD   1.02 at  100/10000 [  1.0%]
 RMSD   1.89 at  200/10000 [  2.0%]
-...</dd>
-</dl>
-<p>Set up the ProgressMeter</p>
+...
+</pre></div>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Arguments:</th><td class="field-body"><dl class="first docutils">
-<dt><em>numsteps</em></dt>
-<dd><p class="first last">total number of steps</p>
-</dd>
-</dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Keywords:</th><td class="field-body"><dl class="first last docutils">
-<dt><em>interval</em></dt>
-<dd><p class="first last">only calculate progress every <em>interval</em> steps [10]</p>
-</dd>
-<dt><em>format</em></dt>
-<dd><p class="first">a format string with Python variable interpolation. Allowed
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>numsteps</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; total number of steps</li>
+<li><strong>interval</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; only calculate progress every <em>interval</em> steps [10]</li>
+<li><strong>format</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; <p>a format string with Python variable interpolation. Allowed
 values:</p>
-<blockquote>
-<div><ul class="simple">
+<ul>
 <li><em>step</em>: current step</li>
 <li><em>numsteps</em>: total number of steps as supplied in <em>numsteps</em></li>
 <li><em>percentage</em>: percentage of total</li>
 </ul>
-</div></blockquote>
 <p>The last call to <code class="xref py py-meth docutils literal"><span class="pre">ProgressMeter.print()</span></code> will automatically
-issue a newline <code class="docutils literal"><span class="pre">\n</span></code> if the last character is the carriage
-return <code class="docutils literal"><span class="pre">\r</span></code>.</p>
-<p class="last">If <em>format</em> is <code class="docutils literal"><span class="pre">None</span></code> then the default is used.
-[&#8220;Step %(step)5d/%(numsteps)d [%(percentage)5.1f%%]r&#8221;]</p>
-</dd>
-<dt><em>offset</em></dt>
-<dd><p class="first last">number to add to <em>step</em>; e.g. if <em>step</em> is 0-based (as in MDAnalysis)
-then one should set <em>offset</em> = 1; for 1-based steps, choose 0. [1]</p>
-</dd>
-<dt><em>quiet</em></dt>
-<dd><p class="first last">If <code class="docutils literal"><span class="pre">True</span></code>, disable all output, <code class="docutils literal"><span class="pre">False</span></code> print all messages as
-specified, [<code class="docutils literal"><span class="pre">False</span></code>]</p>
-</dd>
-</dl>
+issue a newline <code class="docutils literal"><span class="pre">\n</span></code>.</p>
+<p>If <em>format</em> is <code class="docutils literal"><span class="pre">None</span></code> then the default is used:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>Step {step:5d}/{numsteps} [{percentage:5.1f}%]
+</pre></div>
+</div>
+</li>
+<li><strong>offset</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; number to add to <em>step</em>; e.g. if <em>step</em> is 0-based (as in MDAnalysis)
+then one should set <em>offset</em> = 1; for 1-based steps, choose 0. [1]</li>
+<li><strong>quiet</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, disable all output, <code class="docutils literal"><span class="pre">False</span></code> print all messages as
+specified, [<code class="docutils literal"><span class="pre">False</span></code>]</li>
+<li><strong>dynamic</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, each line will be printed on top of the previous one.
+This is done by prepedind the format with <code class="docutils literal"><span class="pre">\r</span></code>. [<code class="docutils literal"><span class="pre">True</span></code>]</li>
+<li><strong>format_handling</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; <p>how to handle the format string. Allowed values are:</p>
+<ul>
+<li><em>new</em>: the format string uses {}-based formating</li>
+<li><em>legacy</em>: the format string uses %-basedd formating</li>
+<li><em>auto</em>: default, try to guess how the format string should be
+handled</li>
+</ul>
+</li>
+<li><strong>versionchanged</strong> (<em>.</em>) &#8211; Keyword argument <em>quiet</em> was added.</li>
+<li><strong>versionchanged</strong> &#8211; Keyword argument <em>dynamic</em> replaces <code class="docutils literal"><span class="pre">\r</span></code> in the format.</li>
+</ul>
 </td>
 </tr>
 </tbody>
 </table>
-<div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.8: </span>Keyword argument <em>quiet</em> was added.</p>
-</div>
 <dl class="method">
 <dt id="MDAnalysis.lib.log.ProgressMeter.echo">
 <code class="descname">echo</code><span class="sig-paren">(</span><em>step</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/log.html#ProgressMeter.echo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.log.ProgressMeter.echo" title="Permalink to this definition">¶</a></dt>
@@ -318,8 +312,25 @@ console.</p>
 
 <dl class="function">
 <dt id="MDAnalysis.lib.log.echo">
-<code class="descclassname">MDAnalysis.lib.log.</code><code class="descname">echo</code><span class="sig-paren">(</span><em>s=''</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/log.html#echo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.log.echo" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">MDAnalysis.lib.log.</code><code class="descname">echo</code><span class="sig-paren">(</span><em>s=''</em>, <em>replace=False</em>, <em>newline=True</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/MDAnalysis/lib/log.html#echo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MDAnalysis.lib.log.echo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simple string output that immediately prints to the console.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>s: str</dt>
+<dd>The string to output.</dd>
+<dt>replace: bool</dt>
+<dd>If <code class="docutils literal"><span class="pre">True</span></code>, the string will be printed on top of the current line. In
+practice, ``</dd>
+</dl>
+</div></blockquote>
+<dl class="docutils">
+<dt>`` is added at the beginning og the string.</dt>
+<dd><dl class="first last docutils">
+<dt>newline: bool</dt>
+<dd>If <code class="docutils literal"><span class="pre">True</span></code>, a new line id added at the end of the string.</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
