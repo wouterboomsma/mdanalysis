@@ -2126,8 +2126,7 @@ class TestUniverse(TestCase):
         assert_(u2.kwargs['fake_kwarg'] is True)
         assert_equal(u.kwargs, u2.kwargs)
 
-# INVALID: no flags in new system
-@skip
+
 class TestPBCFlag(TestCase):
     @dec.skipif(parser_not_found('TRZ'),
                 'TRZ parser not available. Are you using python 3?')
@@ -2171,7 +2170,6 @@ class TestPBCFlag(TestCase):
         }
         self.ag = self.universe.residues[0:3]
 
-    # INVALID: no flags in new system
     def tearDown(self):
         MDAnalysis.core.flags['use_pbc'] = False
         del self.universe
@@ -2179,12 +2177,11 @@ class TestPBCFlag(TestCase):
         del self.ref_PBC
         del self.ag
 
-    # INVALID: no flags in new system
     def test_flag(self):
         # Test default setting of flag
         assert_equal(MDAnalysis.core.flags['use_pbc'], False)
 
-    # VALID
+    @skip
     def test_default(self):
         # Test regular behaviour
         assert_almost_equal(self.ag.center_of_geometry(), self.ref_noPBC['COG'], self.prec)
@@ -2198,7 +2195,7 @@ class TestPBCFlag(TestCase):
         assert_almost_equal(self.ag.bsphere()[1], self.ref_noPBC['BSph'][1], self.prec)
         assert_almost_equal(self.ag.principal_axes(), self.ref_noPBC['PAxes'], self.prec)
 
-    # VALID
+    @skip
     def test_pbcflag(self):
         # Test using ag method flag
         assert_almost_equal(self.ag.center_of_geometry(pbc=True), self.ref_PBC['COG'], self.prec)
@@ -2212,7 +2209,7 @@ class TestPBCFlag(TestCase):
         assert_almost_equal(self.ag.bsphere(pbc=True)[1], self.ref_PBC['BSph'][1], self.prec)
         assert_almost_equal(self.ag.principal_axes(pbc=True), self.ref_PBC['PAxes'], self.prec)
 
-    # INVALID: no flags in new system
+    @skip
     def test_usepbc_flag(self):
         # Test using the core.flags flag
         MDAnalysis.core.flags['use_pbc'] = True
@@ -2228,7 +2225,7 @@ class TestPBCFlag(TestCase):
         assert_almost_equal(self.ag.principal_axes(), self.ref_PBC['PAxes'], self.prec)
         MDAnalysis.core.flags['use_pbc'] = False
 
-    # INVALID: no flags in new system
+    @skip
     def test_override_flag(self):
         # Test using the core.flags flag, then overriding
         MDAnalysis.core.flags['use_pbc'] = True
